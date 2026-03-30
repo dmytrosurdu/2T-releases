@@ -1,0 +1,208 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+% Chapter-specific theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+
+\title{\textbf{Chapter 3: The Formalism of Belief-State Metrology}}
+\author{Dmytro Surdu}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{quote}
+\textit{The ORKF primer in the previous chapter provided a concrete example of a measurement system driven by non-statistical (Type B) information. To build a general theory, we must now abstract the key components from that example into a universal, formal framework. This chapter introduces the core concepts of our theory: the \textbf{Belief-State} as the carrier of all Type B knowledge, and the deterministic \textbf{Emit} and \textbf{Update} maps that govern its evolution. We will then provide a rigorous, multi-faceted definition of the per-step \textbf{information loss} that is the prerequisite for all subsequent certification.}
+\end{quote}
+
+\section{The Belief-State: A Formal Representation of Knowledge}
+
+In our framework for Type B certification, we shift perspective from a raw stream of data to the metrologist's evolving state of knowledge. We encapsulate all non-statistical information available at a given time $t$ into a single mathematical object.
+
+\begin{definition}[Belief-State]
+\label{def:belief-state}
+A \textbf{belief-state}, denoted $\Theta_t$, is an element of a space $\mathcal{M}$ that represents the complete summary of all non-statistical (Type B) information at time $t$. This includes, but is not limited to:
+\begin{itemize}
+    \item Calibration parameters (e.g., offsets, scale factors, polynomial coefficients).
+    \item Manufacturer specifications (e.g., tolerance intervals).
+    \item Constraints derived from physical laws (e.g., conservation principles).
+    \item Parameters of prior distributions from expert judgment (e.g., the hyperparameters of a Wishart prior).
+\end{itemize}
+\end{definition}
+
+To ensure this object is amenable to finite certification, we impose a crucial structural requirement on the space it inhabits.
+
+\begin{definition}[Belief-State Space]
+\label{def:belief-state-space}
+The belief-state space, $\mathcal{M}$, is a **finite-dimensional, compact** metric space, typically a compact subset of $\mathbb{R}^d$ for some integer $d$. The space of input measurements, $\mathcal{Z}^{\text{in}}$, and the space of output measurements, $\mathcal{Z}^{\text{out}}$, are also assumed to be compact.
+\end{definition}
+
+The compactness condition is essential. It ensures that the space is totally bounded, meaning any belief-state $\Theta_t$ can be encoded with a finite number of bits to any desired precision. This is a necessary precondition for constructing a finite witness.
+
+\section{The Deterministic Two-Step Cycle}
+
+Our model assumes that all new randomness enters the system exclusively through an observable measurement $z_{t+1}$. The evolution of the belief-state is then governed by a deterministic two-step cycle.
+
+\begin{definition}[Emit and Update Maps]
+\label{def:emit-update-maps}
+The evolution of the belief-state is defined by two deterministic maps:
+\begin{enumerate}
+    \item The \textbf{Emit Map}, $E: \mathcal{M} \to \mathcal{Z}^{\text{out}}$, which deterministically produces the system's "ideal" or predicted output $z^{\text{out}}_{t+1} = E(\Theta_t)$ based on the current belief-state $\Theta_t$. We assume $E$ is Lipschitz continuous.
+    \item The \textbf{Update Map}, $U: \mathcal{M} \times \mathcal{Z}^{\text{in}} \to \mathcal{M}$, which deterministically assimilates the newly observed input measurement $z^{\text{in}}_{t+1}$ to produce the next belief-state: $\Theta_{t+1} = U(\Theta_t, z^{\text{in}}_{t+1})$. We assume $U$ is also Lipschitz continuous.
+\end{enumerate}
+\end{definition}
+
+As established in Chapter 1, a key requirement for certification is that the Update map must be **information-losing**. This update map must compress the information contained in the pair $(\Theta_t, z^{\text{in}}_{t+1})$ into a new state $\Theta_{t+1}$ that resides in the same compact, finite-dimensional space $\mathcal{M}$.
+
+\section{Geometry of Per-Step Information Loss}
+\subsection{Overview of Per-Step Information Loss}
+
+Per-step information loss is the phenomenon by which an update map
+\[
+U: \mathcal{M} \times \mathcal{Z}^{\mathrm{in}} \to \mathcal{M}
+\]
+fails to preserve all distinguishability or degrees of freedom of its input when producing its output belief state.  Different mathematical manifestations of this failure coexist; they are neither identical nor interchangeable without additional structure.  In this section we define four distinct notions of per-step information loss, exhibit their intended meanings, and analyze their interrelations.  The goal is to (i) make precise what it means for a step to ``lose information,'' (ii) isolate the assumptions under which one form implies another, and (iii) expose the limits and pathologies—especially in the continuous, infinite-precision setting—so that later results can be stated with the minimal necessary hypotheses.
+
+We will work throughout with compact metric spaces \(\mathcal{M}\) (belief space) and \(\mathcal{Z}^{\mathrm{in}}\) (input space), equipped with a metric \(d\).  When needed, finite-resolution quantizations will be introduced explicitly; nothing in this section presumes an a priori discretization except when stated.  
+
+\subsection{Exact Non-Injectivity}
+
+\begin{definition}[Exact Non-Injectivity]
+The update map \(U: \mathcal{M} \times \mathcal{Z}^{\mathrm{in}} \to \mathcal{M}\) exhibits \emph{exact non-injectivity} if there exist two distinct inputs \((\theta,z^{\mathrm{in}}) \neq (\theta',z'^{\mathrm{in}})\) such that
+\[
+U(\theta,z^{\mathrm{in}})\;=\;U(\theta',z'^{\mathrm{in}}).
+\]
+Equivalently, \(U\) is not one-to-one.
+\end{definition}
+
+This is the most literal and algebraic form of information loss: different joint input pairs are mapped to the same belief state, causing irrecoverable collapse of distinctions.  It underlies classical certificate constructions where a single coarse label (the image) admits multiple preimages, and the ambiguity is the resource enabling succinct witnessing.
+
+\paragraph{Example.} Let \(\mathcal{M} = [0,1]\), \(\mathcal{Z}^{\mathrm{in}}=\{0,1\}\), and define
+\[
+U(\theta, z^{\mathrm{in}}) = 
+\begin{cases}
+\theta/2, & z^{\mathrm{in}}=0,\\
+\theta/2, & z^{\mathrm{in}}=1.
+\end{cases}
+\]
+Then \((\theta,0)\) and \((\theta,1)\) are distinct but have the same image, so the map is exactly non-injective.  The loss is maximal in the sense that the input measurement \(z^{\mathrm{in}}\) is completely erased by \(U\).
+
+\paragraph{Remark.} Exact non-injectivity is a binary property; it does not quantify the ``amount'' of loss or relate it to scales of indistinguishability.  Those refinements appear in the subsequent subsections.  
+
+\subsection{\(\varepsilon\)-Collapse: Finite-Resolution Indistinguishability}
+
+\begin{definition}[\(\varepsilon\)-Collapse]
+Fix a resolution parameter \(\varepsilon>0\).  The update map \(U\) exhibits an \(\varepsilon\)-collapse if there exist two inputs \((\theta,z^{\mathrm{in}}), (\theta',z'^{\mathrm{in}})\) with \(d(\theta,\theta') \ge \delta\) for some fixed \(\delta>0\) (i.e., they are distinguishable at scale \(\delta\)) but whose outputs are within \(\varepsilon\):
+\[
+d\bigl(U(\theta,z^{\mathrm{in}}),\,U(\theta',z'^{\mathrm{in}})\bigr) \le \varepsilon.
+\]
+\end{definition}
+
+Intuitively, \(\varepsilon\)-collapse captures the idea that even though two inputs were meaningfully different, the update map crushes their distinction below the resolution threshold \(\varepsilon\), rendering them effectively indistinguishable to any observer limited to that precision.
+
+\paragraph{Local versus uniform collapse.} One can further distinguish:
+\begin{itemize}
+    \item \emph{Existential \(\varepsilon\)-collapse:} There exists at least one pair of well-separated inputs whose images are \(\varepsilon\)-close.
+    \item \emph{Uniform \(\varepsilon\)-collapse:} There is a nontrivial volume of input pairs \((\theta,z^{\mathrm{in}})\), \((\theta',z'^{\mathrm{in}})\) with \(d(\theta,\theta')\ge \delta\) whose outputs fall into the same \(\varepsilon\)-ball; this supports metric-entropy lower bounds.
+\end{itemize}
+
+\paragraph{Example.} Let \(\mathcal{M} = \mathbb{R}\), \(U(\theta,z^{\mathrm{in}}) = \theta + z^{\mathrm{in}}\), with \(z^{\mathrm{in}}\in[-\varepsilon,\varepsilon]\) drawn from a continuous interval. Then any two inputs \((\theta,z^{\mathrm{in}})\) and \((\theta',z'^{\mathrm{in}})\) satisfying \(\theta'=\theta + (z^{\mathrm{in}}-z'^{\mathrm{in}})\) produce identical outputs; in particular, distinct \(\theta\) separated by \(\delta\) can have output difference arbitrarily small (depending on choices of \(z\)), so an \(\varepsilon\)-collapse occurs for any fixed \(\varepsilon>0\).
+
+\paragraph{Relation to exact non-injectivity.} Exact non-injectivity implies \(\varepsilon\)-collapse for every \(\varepsilon\), but the converse need not hold: two distinct inputs may map to outputs within \(\varepsilon\) without coinciding exactly.  Thus \(\varepsilon\)-collapse is a \emph{quantitative, approximate} weakening of exact non-injectivity.
+
+\subsection{Mutual Information Drop at Finite Resolution}
+
+We now introduce an information-theoretic measure of per-step loss that operates at finite resolution via quantization.
+
+\begin{definition}[Finite-Resolution Mutual Information Drop]
+Let \((\Theta, Z^{\mathrm{in}})\) be treated as a joint random variable supported on a finite quantization of \(\mathcal{M} \times \mathcal{Z}^{\mathrm{in}}\), induced by a partition into cells of diameter at most \(\varepsilon\).  Let \(\Theta_{t+1} := U(\Theta_t, Z^{\mathrm{in}}_{t+1})\) be the resulting (quantized) output.  Define the finite-resolution mutual information drop as the gap
+\[
+\Delta_I^{(\varepsilon)} := H(\Theta_t, Z^{\mathrm{in}}_{t+1}) - I\bigl((\Theta_t, Z^{\mathrm{in}}_{t+1}); \Theta_{t+1}\bigr)
+= H\bigl((\Theta_t, Z^{\mathrm{in}}_{t+1}) \,\big|\, \Theta_{t+1}\bigr),
+\]
+where entropies and mutual informations are computed with respect to the chosen finite alphabet arising from the \(\varepsilon\)-quantization.
+\end{definition}
+
+The quantity \(\Delta_I^{(\varepsilon)}\) is nonnegative, and \(\Delta_I^{(\varepsilon)}>0\) signifies that knowledge of the output \(\Theta_{t+1}\) does not fully determine the input pair \((\Theta_t, Z^{\mathrm{in}}_{t+1})\): some uncertainty remains, i.e., information is lost.
+
+\paragraph{Interpretation.} This form of loss is graded and sensitive to resolution: coarse quantizations may hide fine distinctions (making \(\Delta_I^{(\varepsilon)}\) large) while refining \(\varepsilon\) decreases the artificial loss introduced by quantization.  It subsumes \(\varepsilon\)-collapse in the following loose sense: if two well-separated inputs are mapped to outputs within the same \(\varepsilon\)-cell (i.e., an \(\varepsilon\)-collapse), then the fiber over that cell contains multiple quantized preimages, inflating the conditional entropy and hence \(\Delta_I^{(\varepsilon)}\).
+
+\paragraph{Example.} Suppose \(\Theta_t\) is uniform over \(N\) states and \(Z^{\mathrm{in}}_{t+1}\) is independent, but \(U\) maps all of them to \(M < N\) distinct outputs due to many-to-one collapse within the quantization. Then the total entropy in the input exceeds that in the output, and \(\Delta_I^{(\varepsilon)} \ge \log_2(N/M) > 0\).
+
+\paragraph{Caveat in continuous limit.} If the underlying spaces are continuous and we attempt to let \(\varepsilon \to 0\) without care, the discrete entropies may diverge and mutual information can become infinite or ill-defined.  The correct procedure is always to fix a finite \(\varepsilon\), compute \(\Delta_I^{(\varepsilon)}\), and then control its behavior as \(\varepsilon\to0\) under additional assumptions (see Section~\ref{subsec:uniform-control} below).  
+
+\subsection{Strict Contraction and Its Consequences}
+
+\begin{definition}[Strict Contraction on Belief States]
+Let \(U: \mathcal{M}\times\mathcal{Z}^{\mathrm{in}}\to\mathcal{M}\).  We say \(U\) is a \emph{strict contraction} on the belief-state component uniformly in the input if there exists \(\rho\in[0,1)\) such that for all \(z^{\mathrm{in}}\in\mathcal{Z}^{\mathrm{in}}\) and all \(\theta, \theta'\in\mathcal{M}\):
+\[
+d\bigl(U(\theta,z^{\mathrm{in}}),\, U(\theta',z^{\mathrm{in}})\bigr)
+\;\le\; \rho\cdot d(\theta,\theta').
+\]
+\end{definition}
+
+Strict contraction is a geometric form of information collapse: it forces orbits to come closer, shrinking distinctions exponentially over repeated application.  However, on a complete metric space, a strict contraction in the classical sense (mapping \(\mathcal{M}\) to itself for fixed \(z\)) is injective; hence it cannot create exact non-injectivity.  This tension is central to what we later call the \emph{epistemic losslessness} phenomenon on basins.
+
+\paragraph{Consequences.}  
+\begin{itemize}
+    \item \emph{Stability of small differences:} If two beliefs start close, their images remain controlled and even closer, with ratio bounded by \(\rho\).  
+    \item \emph{Damping of perturbations:} Iterating the contraction on belief alone diminishes any initial discrepancy geometrically, which in a finite-resolution approximation can make distinguishability arbitrarily small.  
+    \item \emph{Non-creation of new distinctions:} Contraction cannot separate previously indistinguishable inputs; it only collapses.
+\end{itemize}
+
+\paragraph{Example.} Take \(\mathcal{M}=[0,1]\), \(\mathcal{Z}^{\mathrm{in}}\) arbitrary, and define \(U(\theta,z^{\mathrm{in}})=\frac{1}{2}\theta + h(z^{\mathrm{in}})\) where \(h\) is any bounded function. Then \(\rho=1/2\) works, and for fixed \(z^{\mathrm{in}}\), the map in \(\theta\) is a strict contraction.
+
+\paragraph{Remark on injectivity vs. effective collapse.} Although strict contraction does not induce exact non-injectivity, it can—when composed with finite-resolution observation—make formerly distinguishable beliefs indistinguishable at any desired scale.  This discrepancy between \emph{global injectivity} and \emph{practical indistinguishability} motivates the later notion of \emph{epistemic losslessness}.  
+
+\subsection*{1.7 Pathologies and the Continuous Limit}
+
+When the belief and input spaces are continuous (e.g., manifolds or subsets of Euclidean space), naive extensions of discrete-information notions can fail or become ill-behaved. This subsection isolates the key pitfalls and specifies what is required to avoid them.
+
+\paragraph{Infinite mutual information.}  
+In the continuous setting, differential entropy and mutual information can be infinite or undefined unless one fixes a quantization or imposes strong regularity.  For example, if the joint distribution of \((\Theta_t, Z^{\mathrm{in}}_{t+1})\) concentrates on a lower-dimensional manifold, the Shannon mutual information in any limiting sense may diverge.  Therefore, all statements involving information drop must be understood as statements about \emph{finite-resolution approximations} first, with limits taken only under controlled assumptions.
+
+\paragraph{Degeneration without control.}  
+Let \(U\) be a strict contraction.  Absent uniform continuity controls, arbitrarily small differences in input beliefs could be magnified in their effect on finite-resolution statistics after many steps, or conversely, meaningful structural differences could hide under pathological coordinate distortions.  Similarly, if the quantization cells are not chosen with respect to the topology induced by \(d\), one might observe spurious \(\varepsilon\)-collapse artifacts that are purely discretization effects.
+
+\paragraph{Nonuniform behavior.}  
+Without uniformity assumptions (e.g., uniform continuity of \(U\) in both arguments or compactness of domains), the rate at which \(\Delta_I^{(\varepsilon)}\) vanishes as \(\varepsilon \to 0\) can vary wildly across the space, precluding any global statement about effective losslessness.  This motivates the introduction, in Section~\ref{subsec:uniform-control}, of conditions that ensure uniform control over the quantization-induced loss.
+
+\paragraph{Summary of required safeguards.} To avoid these pathologies in subsequent limit arguments we will impose:
+\begin{itemize}
+  \item Compactness of \(\mathcal{M}\) and \(\mathcal{Z}^{\mathrm{in}}\),
+  \item Uniform continuity (or Lipschitz bounds) of \(U\) in both arguments,
+  \item Explicit finite-resolution quantizations with diameters tied to \(\varepsilon\),
+  \item Consistent refinements (nested covers) so that passing to the limit \(\varepsilon\to0\) can be made coherent.
+\end{itemize}
+These prerequisites are minimal in the sense that dropping any of them makes the limiting behavior fragile or ill-defined.
+
+\subsection{Summary of the Geometry of Per-Step Loss}
+
+We defined four distinct formal manifestations of per-step information loss:
+\begin{itemize}
+  \item \textbf{Exact Non-Injectivity:} algebraic identification of distinct inputs;
+  \item \(\mathbf{\varepsilon}\)\textbf{-Collapse:} approximate loss at finite resolution;
+  \item \textbf{Mutual Information Drop:} graded, quantitative uncertainty remaining in the input after observing the output, defined via finite-resolution quantization;
+  \item \textbf{Strict Contraction:} geometric shrinkage of belief distinctions that, while globally injective on a complete space, can render differences epistemically negligible at finite resolution.
+\end{itemize}
+
+Their interrelations are nuanced: exact non-injectivity implies collapse and information drop, but not vice versa; strict contraction does not inherently introduce exact non-injectivity yet—under uniform control—can drive the observable loss to zero as resolution refines, giving rise to the useful conceptual notion of epistemic losslessness.  We also highlighted the necessary technical safeguards in the continuous setting to make limit statements meaningful.
+
+These distinctions and quantified behaviors provide the foundation for the per-step testability results to follow and, in particular, set the stage for the \emph{double-bound} analysis in Chapter 4: one bound numerical (vanishing finite-resolution loss under contraction) and one complexity-theoretic (semi-decidability via enumeration of refinements), which together reconcile the apparent tensions between contraction-based stability and the necessity of information loss for certification.
+
+
+\section{The Path Forward: From Steps to Tails}
+
+This chapter has laid the formal groundwork for our theory. We have a **Belief-State $\Theta_t$** that lives in a compact space, an **Update map $U$** that must be information-losing, and an **Emit map $E$** that connects belief to observation.
+
+In the next chapter, we will combine these ingredients to prove our first major result: that these conditions are necessary and sufficient to make the certification of each individual step of a Type B measurement a computationally tractable problem. We will then see in the final part of this book how this per-step certifiability is a crucial prerequisite for the much harder problem of certifying properties of the infinite tail.
+
+\end{document}

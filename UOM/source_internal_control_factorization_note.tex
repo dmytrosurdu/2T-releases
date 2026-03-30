@@ -1,0 +1,577 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools,enumitem,cleveref,xr}
+
+\externaldocument[uommain-]{main}
+\externaldocument[stack-]{odd_characterization_transport_stack_note}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand{\Pacc}{\mathsf P^{\mathrm{acc}}}
+\newcommand{\Tr}{\operatorname{Tr}}
+
+\title{Accepted-Record Reduction and Pulse-Rigid Ambiguity}
+\date{2026-03-19}
+
+\begin{document}
+\maketitle
+
+This note records the accepted-record reduction theorem together with the pulse-rigid ambiguity
+supplement
+\(
+\mathbf{2T}_{\mathrm{char\!-\!amb}}
+\).
+No Gaussian-completion premise is used.
+
+\section{Accepted-Record Reduction}
+
+\begin{definition}[Accepted-record history]
+\label{def:accepted-record-history}
+On an accepted welded branch, the accepted-record history of a welded source realization is the ordered
+family
+\[
+\Big(
+\mathcal P^{\mathrm{acc}}_{\Lambda_0}[\tau],\,
+\mathcal P^{\mathrm{acc}}_{\Lambda_1}[\tau],\,
+\ldots
+\Big)
+\]
+over accepted ticks.
+\end{definition}
+
+\begin{definition}[Reduced receiver datum]
+\label{def:reduced-datum}
+Fix an accepted tick \(k\).
+A \emph{reduced receiver datum} is any datum \(D_k[\tau]\) of the receiver state
+\(\rho_{\Lambda_k}[\tau]\) that factors through the accepted-record reduction
+\[
+\mathcal P^{\mathrm{acc}}_{\Lambda_k}[\tau]
+=
+\Pi_{\Delta(\Lambda_k)}\!\big(\rho_{\Lambda_k}[\tau]\big).
+\]
+Equivalently, \(D_k\) is read through the accepted RG state or through accepted-record-visible
+observables on the commuting pointer algebra, together with fixed accepted-branch geometric/cutoff
+data already fixed independently of the seam/completion realization.
+\end{definition}
+
+\begin{theorem}[Accepted-Record Reduction]
+\label{thm:accepted-record-reduction}
+Let \(\tau\) and \(\widetilde\tau\) be two live seam/completion realizations on the same accepted welded
+branch.
+Assume that they induce the same accepted-record history:
+\[
+\mathcal P^{\mathrm{acc}}_{\Lambda_j}[\tau]
+=
+\mathcal P^{\mathrm{acc}}_{\Lambda_j}[\widetilde\tau]
+\qquad
+\text{for every accepted tick } j.
+\]
+Then:
+\begin{enumerate}[leftmargin=2em,label=(R\arabic*)]
+\item every reduced receiver datum agrees:
+  \[
+  D_j[\tau]=D_j[\widetilde\tau]
+  \qquad
+  \text{for every } D_j \text{ as in \cref{def:reduced-datum}};
+  \]
+\item the accepted RG states agree exactly:
+  \[
+  \mathcal R_{\rm acc}(u_j,\rho[\tau])
+  =
+  \mathcal R_{\rm acc}(u_j,\rho[\widetilde\tau]);
+  \]
+\item every accepted-record-visible observable has the same value on the two realizations:
+  \[
+  \Tr\!\big(\rho[\tau]A\big)
+  =
+  \Tr\!\big(\rho[\widetilde\tau]A\big)
+  \qquad
+  \forall A\in\mathfrak A_{\Delta(u_j)};
+  \]
+\item any remaining realization dependence is pushed out of the reduced receiver object and can live
+  only in:
+  \begin{enumerate}[leftmargin=2em,label=(\alph*)]
+  \item the off-diagonal complement of \(\Pi_{\Delta(u_j)}\),
+  \item a leakage/slack branch separated by the admissible-bridge bookkeeping.
+  \end{enumerate}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By \cref{def:accepted-record-history}, equality of accepted-record history is exactly equality of the
+accepted-record reductions
+\[
+\Pi_{\Delta(\Lambda_j)}\!\big(\rho_{\Lambda_j}[\tau]\big)
+=
+\Pi_{\Delta(\Lambda_j)}\!\big(\rho_{\Lambda_j}[\widetilde\tau]\big)
+\]
+at each accepted tick.
+By \cref{uommain-prop:semiclassical-diag}, the accepted RG state is precisely
+\[
+\mathcal R_{\rm acc}(u,\rho)=\Pi_{\Delta(u)}(\rho),
+\]
+so equal accepted-record reductions imply equal accepted RG states.
+By \cref{uommain-prop:semiclassical-diag,uommain-rem:uom-main-004}, record expectations are
+determined by the accepted RG state, and residual coherences lie entirely in the complement of
+\(\Pi_{\Delta(u)}\).
+Therefore every accepted-record-visible observable has the same value on the two realizations.
+Any reduced receiver datum \(D_j\) that factors through the accepted-record reduction, in the sense of
+\cref{def:reduced-datum}, therefore agrees on the two realizations.
+Finally, \cref{uommain-prop:semiclassical-diag,uommain-def:eta-bridge-leak} shows that any remaining
+realization dependence can survive only outside the reduced receiver object: either in the complement
+of \(\Pi_{\Delta(u_j)}\) or in a separate leakage/slack branch.
+\end{proof}
+
+\begin{remark}[Scope of the reduction theorem]
+\label{rem:accepted-record-reduction-physical}
+The theorem fixes, at each accepted tick, the reduced receiver object determined by accepted-record
+history.
+It does \emph{not} identify the full odd completion datum with that reduced receiver object.
+Any residual odd dependence therefore lies outside that reduced receiver object.
+\end{remark}
+
+\begin{corollary}[Witness-indexed filler toggle is invisible after reduction]
+\label{cor:filler-toggle-invisible}
+Fix an accepted tick \(k\), and let
+\(
+\tau^{\mathrm{bridge},y}_{\Lambda_k}
+\)
+and
+\(
+\tau^{\mathrm{diag},y}_{\Lambda_k}
+\)
+be the witness-indexed seam realizations of \cref{stack-def:witness-seam-realization}.
+Then
+\[
+D_k\!\big[\tau^{\mathrm{bridge},y}_{\Lambda_k}\big]
+=
+D_k\!\big[\tau^{\mathrm{diag},y}_{\Lambda_k}\big]
+\]
+for every reduced receiver datum \(D_k\) in the sense of \cref{def:reduced-datum}.
+\end{corollary}
+
+\begin{proof}
+The defining filler-toggle clause gives equality of accepted-record payload, so the claim is an
+immediate application of \cref{thm:accepted-record-reduction}.
+\end{proof}
+
+\begin{corollary}[Accepted-record-preserving perturbations]
+\label{cor:conditional-differential}
+Assume that a reduced receiver datum \(D_k\) in the sense of \cref{def:reduced-datum} depends
+differentiably on accepted-record history.
+Let \(\delta \tau\) be a source perturbation preserving accepted-record history to first order:
+\[
+D_\tau \mathcal P^{\mathrm{acc}}_{\Lambda_j}[\tau][\delta\tau]=0
+\qquad
+\text{for all accepted ticks } j \le k.
+\]
+Then the reduced response vanishes to first order:
+\[
+D_\tau D_k[\tau][\delta\tau]=0.
+\]
+In particular, if \(D_k[\tau]=\Pacc(\rho'_A[\tau])\), then
+\[
+D_\tau \Pacc(\rho'_A[\tau])[\delta\tau]=0.
+\]
+\end{corollary}
+
+\begin{proof}
+By \cref{thm:accepted-record-reduction}, any reduced receiver datum depends on \(\tau\) only through
+accepted-record history.
+If that history is fixed to first order and the datum depends differentiably on it, the first
+variation vanishes.
+\end{proof}
+
+\section{Pulse-Rigid Ambiguity}
+
+\begin{proposition}[Reduced welded-image ambiguity-triviality]
+\label{prop:reduced-welded-ambiguity-trivial}
+Fix an accepted tick \(k\).
+Define the reduced welded image of an odd generator \(F\in E^-_{\Lambda_k}\) by
+\[
+\mathsf W^{\mathrm{red}}_{\Lambda_k}(F)
+:=
+\rho^{\mathrm{dom}}_{\Lambda_k}(F)\,P_{-,\Lambda_k}^{\mathrm{LoG}},
+\]
+where \(\rho^{\mathrm{dom}}_{\Lambda_k}\) is the dominant-response coefficient from
+\cref{stack-def:dominant-response-functional} and
+\(P_{-,\Lambda_k}^{\mathrm{LoG}}\) is the canonical compressed odd projector from
+\cref{stack-cor:compressed-export-selection}.
+Then
+\[
+\mathsf W^{\mathrm{red}}_{\Lambda_k}(F+A)
+=
+\mathsf W^{\mathrm{red}}_{\Lambda_k}(F)
+\qquad
+\forall F\in E^-_{\Lambda_k},\ \forall A\in\mathcal A^-_{\Lambda_k}.
+\]
+In particular, the reduced welded image attached to the transported descendant class
+\([\Xi^{(1)}_{\Lambda_k}]\) is representative-independent.
+\end{proposition}
+
+\begin{proof}
+By \cref{stack-thm:active-response-transport-minimal},
+\[
+\mathcal A^-_{\Lambda_k}\subset\ker\rho^{\mathrm{dom}}_{\Lambda_k},
+\]
+so
+\[
+\rho^{\mathrm{dom}}_{\Lambda_k}(F+A)
+=
+\rho^{\mathrm{dom}}_{\Lambda_k}(F)
+\qquad
+\forall F\in E^-_{\Lambda_k},\ \forall A\in\mathcal A^-_{\Lambda_k}.
+\]
+By \cref{stack-cor:compressed-export-selection},
+\(
+P_{-,\Lambda_k}^{\mathrm{LoG}}
+\)
+is canonically fixed on the co-centered, band-locked welded channel.
+Hence
+\[
+\mathsf W^{\mathrm{red}}_{\Lambda_k}(F+A)
+=
+\rho^{\mathrm{dom}}_{\Lambda_k}(F+A)\,P_{-,\Lambda_k}^{\mathrm{LoG}}
+=
+\rho^{\mathrm{dom}}_{\Lambda_k}(F)\,P_{-,\Lambda_k}^{\mathrm{LoG}}
+=
+\mathsf W^{\mathrm{red}}_{\Lambda_k}(F).
+\]
+If \(J_2-J_1\in\mathcal A^-_{\Lambda_k}\), apply the same identity with \(F=J_1\) and
+\(A=J_2-J_1\).
+\end{proof}
+
+\begin{definition}[Pulse-rigid welded package]
+\label{def:pulse-rigid-package}
+Fix an accepted tick \(k\).
+The \emph{pulse-rigid welded package} consists of the following data:
+\begin{enumerate}[leftmargin=2em,label=(P\arabic*)]
+\item exact accepted-record preservation on the reduced receiver, in the sense of
+  \cref{thm:accepted-record-reduction,uommain-lem:tick-fixes-record-algebra,uommain-prop:semiclassical-diag};
+\item receiver band-lock, unique co-centering, and one-dimensionality of the admissible compressed
+  welded LoG source line, supplied by \cref{stack-prop:compressed-log-lock};
+\item the canonical compressed welded odd projector
+  \(P^{\mathrm{LoG}}_{-,\Lambda_k}\), supplied by
+  \cref{stack-cor:compressed-export-selection};
+\item descended dominant-scalar factorization of the transported descendant class, supplied by
+  \cref{stack-thm:active-response-transport-minimal,stack-thm:dominant-quotient-descent};
+\item characterization-layer ambiguity compatibility, supplied by
+  \cref{stack-cor:ambiguity-char}.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[Ambiguity directions are trivial on the pulse-rigid characterization sector]
+\label{prop:pulse-rigid-char-triviality}
+Assume the pulse-rigid welded package of \cref{def:pulse-rigid-package}.
+Then
+\[
+\mathcal A^-_{\Lambda_k}\subset \mathcal T^{\mathrm{op}}_{\Lambda_k},
+\]
+so every ambiguity direction \(A\in\mathcal A^-_{\Lambda_k}\) acts trivially on the
+characterization algebra \(\mathcal O^{\mathrm{char}}_{\Lambda_k}\):
+\[
+\{A,O\}_{\mathrm P,\Lambda_k}=0
+\qquad
+\forall A\in\mathcal A^-_{\Lambda_k},\ \forall O\in\mathcal O^{\mathrm{char}}_{\Lambda_k}.
+\]
+\end{proposition}
+
+\begin{proof}
+By \cref{stack-cor:ambiguity-char}, the three generating ambiguity families
+\[
+\big(Q_tX+Q_uY\big)^-,\qquad
+\big(\partial_\mu K^\mu\big)^-,\qquad
+\Delta^-_{\rm ct}
+\]
+lie in \(\mathcal T^{\mathrm{op}}_{\Lambda_k}\) on the characterization layer.
+By \cref{stack-def:transport-ambiguity-subspace},
+\(\mathcal A^-_{\Lambda_k}\) is the closed linear span of those generating families.
+By \eqref{stack-eq:Tchar-def}, \(\mathcal T^{\mathrm{op}}_{\Lambda_k}\) is itself closed.
+Hence \(\mathcal A^-_{\Lambda_k}\subset\mathcal T^{\mathrm{op}}_{\Lambda_k}\), which is exactly the
+stated Peierls-triviality on \(\mathcal O^{\mathrm{char}}_{\Lambda_k}\).
+\end{proof}
+
+\begin{corollary}[Pulse-rigid representative-independence]
+\label{cor:pulse-rigid-representative-independence}
+Assume the pulse-rigid welded package of \cref{def:pulse-rigid-package}.
+Let \(J_1,J_2\in[\Xi^{(1)}_{\Lambda_k}]\), so \(J_2-J_1\in\mathcal A^-_{\Lambda_k}\).
+Then:
+\begin{enumerate}[leftmargin=2em,label=(\roman*)]
+\item \(J_1\) and \(J_2\) have the same Peierls action on the characterization algebra
+  \(\mathcal O^{\mathrm{char}}_{\Lambda_k}\);
+\item they have the same reduced welded image
+  \(
+  \mathsf W^{\mathrm{red}}_{\Lambda_k}(J_1)=
+  \mathsf W^{\mathrm{red}}_{\Lambda_k}(J_2)
+  \);
+\item any imported datum that is read only through
+  \(\mathcal O^{\mathrm{char}}_{\Lambda_k}\) together with the reduced welded image is
+  representative-independent on \([\Xi^{(1)}_{\Lambda_k}]\).
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Item (i) is \cref{prop:pulse-rigid-char-triviality}.
+Item (ii) is \cref{prop:reduced-welded-ambiguity-trivial}.
+Item (iii) is immediate from (i) and (ii): if the datum is defined only through those two channels,
+ambiguity moves cannot change it.
+\end{proof}
+
+\begin{definition}[Pulse-rigid ambiguity supplement package \(\mathbf{2T}_{\mathrm{char\!-\!amb}}\)]
+\label{def:2T-char-amb}
+Fix an accepted tick \(k\).
+Assume the weak Main-facing characterization interface furnished by
+\cref{stack-thm:char-weak-interface}.
+The supplement package
+\(
+\mathbf{2T}_{\mathrm{char\!-\!amb}}
+\)
+consists of:
+\begin{enumerate}[leftmargin=2em,label=(A\arabic*)]
+\item the characterization-layer ambiguity inclusion
+  \[
+  \mathcal A^-_{\Lambda_k}\subset\mathcal T^{\mathrm{op}}_{\Lambda_k},
+  \]
+  equivalently the statement that ambiguity directions act trivially on
+  \(\mathcal O^{\mathrm{char}}_{\Lambda_k}\);
+\item the canonical reduced welded image
+  \[
+  \mathsf W^{\mathrm{red}}_{\Lambda_k}(F)
+  :=
+  \rho^{\mathrm{dom}}_{\Lambda_k}(F)\,P_{-,\Lambda_k}^{\mathrm{LoG}}
+  \]
+  factoring through the ambiguity quotient \(E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}\);
+\item representative-independence of any imported datum that is read only through
+  \(\mathcal O^{\mathrm{char}}_{\Lambda_k}\) together with
+  \(\mathsf W^{\mathrm{red}}_{\Lambda_k}\).
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[Pulse-rigid package implies \(\mathbf{2T}_{\mathrm{char\!-\!amb}}\)]
+\label{prop:char-ambiguity-supplement-export}
+Assume the pulse-rigid welded package of \cref{def:pulse-rigid-package}.
+Then the package \(\mathbf{2T}_{\mathrm{char\!-\!amb}}\) of \cref{def:2T-char-amb} holds.
+\end{proposition}
+
+\begin{proof}
+Item (A1) is \cref{prop:pulse-rigid-char-triviality}.
+Item (A2) is \cref{prop:reduced-welded-ambiguity-trivial}.
+Item (A3) is \cref{cor:pulse-rigid-representative-independence}(iii).
+\end{proof}
+
+\begin{remark}[Relation to the weak interface]
+\label{rem:char-ambiguity-supplement-separate}
+The package \(\mathbf{2T}_{\mathrm{char\!-\!amb}}\) is an additional supplement over the weak
+characterization interface furnished by \cref{stack-thm:char-weak-interface}.
+It does not alter the definition of that weak interface.
+\end{remark}
+
+\section{Reduced Physical Null-Ideal Descent}
+
+\begin{definition}[Reduced package map]
+\label{def:reduced-physical-package}
+Fix an accepted tick \(k\).
+For a live seam/completion realization \(\tau\) and a representative
+\(
+J\in[\Xi^{(1)}_{\Lambda_k}]
+\),
+define the reduced package
+\[
+\mathcal Q_k(\tau,J)
+:=
+\Big(
+\mathcal P^{\mathrm{acc}}_{\Lambda_k}[\tau],\,
+\delta^{\mathrm{char}}_{J,\Lambda_k},\,
+\mathsf W^{\mathrm{red}}_{\Lambda_k}(J),\,
+\mathfrak g^{\mathrm{acc}}_{\Lambda_k}
+\Big),
+\]
+where
+\[
+\delta^{\mathrm{char}}_{J,\Lambda_k}(O)
+:=
+\{J,O\}_{\mathrm P,\Lambda_k}
+\qquad
+\big(O\in\mathcal O^{\mathrm{char}}_{\Lambda_k}\big),
+\]
+\(\mathsf W^{\mathrm{red}}_{\Lambda_k}\) is the reduced welded image from
+\cref{prop:reduced-welded-ambiguity-trivial},
+and \(\mathfrak g^{\mathrm{acc}}_{\Lambda_k}\) denotes the fixed accepted-branch geometric/cutoff
+data already held fixed independently of the seam/completion realization.
+Thus \(\mathcal Q_k\) records exactly the reduced receiver datum, the induced action on
+\(\mathcal O^{\mathrm{char}}_{\Lambda_k}\), the reduced welded image, and the fixed accepted-branch
+geometry.
+\end{definition}
+
+\begin{definition}[Upstream reduced physical sector]
+\label{def:theorem-facing-reduced-physical-sector}
+Fix an accepted tick \(k\).
+An imported datum/observable \(F_{\Lambda_k}\) belongs to the upstream reduced physical sector
+\[
+\mathcal O^{\mathrm{phys,red}}_{\Lambda_k}
+\]
+if it is taken from a class of imported observables stable under the Peierls derivations under
+consideration, and if there exists a function
+\[
+Q_k(F_{\Lambda_k})
+:
+\operatorname{im}\mathcal Q_k
+\longrightarrow
+V_{F_{\Lambda_k}}
+\]
+such that for every live realization \(\tau\) and every representative
+\(
+J\in[\Xi^{(1)}_{\Lambda_k}]
+\),
+\[
+F_{\Lambda_k}[\tau;J]
+=
+Q_k(F_{\Lambda_k})\!\big(\mathcal Q_k(\tau,J)\big).
+\]
+The assignment \(F_{\Lambda_k}\mapsto Q_k(F_{\Lambda_k})\) is the reduced physical factorization map.
+Its kernel
+\[
+\mathcal N^{\mathrm{phys,red}}_{\Lambda_k}
+:=
+\ker Q_k
+=
+\big\{
+F\in\mathcal O^{\mathrm{phys,red}}_{\Lambda_k}
+:
+Q_k(F)=0
+\big\}
+\]
+is the reduced physical null ideal.
+Equivalently, \(\mathcal N^{\mathrm{phys,red}}_{\Lambda_k}\) is the ideal of imported data that
+become invisible after passage to the reduced package \(\mathcal Q_k\).
+\end{definition}
+
+\begin{proposition}[Reduced physical null-ideal descent]
+\label{prop:full-ambiguity-narrowed-bridge}
+Assume the pulse-rigid welded package of \cref{def:pulse-rigid-package}.
+Fix an accepted tick \(k\).
+Then the reduced package \(\mathcal Q_k\) of \cref{def:reduced-physical-package} is
+representative-independent on ambiguity classes:
+\[
+\mathcal Q_k(\tau,J_1)
+=
+\mathcal Q_k(\tau,J_2)
+\]
+for every live realization \(\tau\) and every pair
+\(
+J_1,J_2\in[\Xi^{(1)}_{\Lambda_k}]
+\).
+Consequently:
+\begin{enumerate}[leftmargin=2em,label=(\roman*)]
+\item every \(F\in\mathcal O^{\mathrm{phys,red}}_{\Lambda_k}\) is determined modulo the reduced
+  physical null ideal \(\mathcal N^{\mathrm{phys,red}}_{\Lambda_k}\) by the tuple
+  \[
+  \Big(
+  \mathcal P^{\mathrm{acc}}_{\Lambda_k},\,
+  \delta^{\mathrm{char}}_{\Lambda_k},\,
+  \mathsf W^{\mathrm{red}}_{\Lambda_k},\,
+  \mathfrak g^{\mathrm{acc}}_{\Lambda_k}
+  \Big);
+  \]
+\item for every \(F\in\mathcal O^{\mathrm{phys,red}}_{\Lambda_k}\),
+  \[
+  \{J_2,F\}_{\mathrm P,\Lambda_k}
+  -
+  \{J_1,F\}_{\mathrm P,\Lambda_k}
+  \in
+  \mathcal N^{\mathrm{phys,red}}_{\Lambda_k};
+  \]
+\item equivalently, the induced physical Peierls derivation depends only on the transported
+  descendant class on the quotient
+  \[
+  \mathcal O^{\mathrm{phys,red}}_{\Lambda_k}/\mathcal N^{\mathrm{phys,red}}_{\Lambda_k}.
+  \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Let \(J_1,J_2\in[\Xi^{(1)}_{\Lambda_k}]\) and write
+\(
+A:=J_2-J_1\in\mathcal A^-_{\Lambda_k}
+\).
+By \cref{thm:accepted-record-reduction}, the receiver component of \(\mathcal Q_k\) depends only on
+\(\mathcal P^{\mathrm{acc}}_{\Lambda_k}[\tau]\), so there is no additional representative dependence on
+the reduced receiver side.
+By \cref{prop:pulse-rigid-char-triviality},
+\[
+\delta^{\mathrm{char}}_{J_2,\Lambda_k}(O)
+-\delta^{\mathrm{char}}_{J_1,\Lambda_k}(O)
+=
+\{A,O\}_{\mathrm P,\Lambda_k}
+=
+0
+\qquad
+\forall O\in\mathcal O^{\mathrm{char}}_{\Lambda_k},
+\]
+hence
+\(
+\delta^{\mathrm{char}}_{J_2,\Lambda_k}
+=
+\delta^{\mathrm{char}}_{J_1,\Lambda_k}
+\).
+By \cref{prop:reduced-welded-ambiguity-trivial},
+\[
+\mathsf W^{\mathrm{red}}_{\Lambda_k}(J_2)
+=
+\mathsf W^{\mathrm{red}}_{\Lambda_k}(J_1).
+\]
+The accepted-branch geometric/cutoff datum \(\mathfrak g^{\mathrm{acc}}_{\Lambda_k}\) is fixed
+independently of the seam/completion realization and independently of the choice of representative in
+\([\Xi^{(1)}_{\Lambda_k}]\).
+Therefore
+\[
+\mathcal Q_k(\tau,J_1)
+=
+\mathcal Q_k(\tau,J_2).
+\]
+
+Now let \(F\in\mathcal O^{\mathrm{phys,red}}_{\Lambda_k}\).
+By \cref{def:theorem-facing-reduced-physical-sector},
+\[
+F_{\Lambda_k}[\tau;J]
+=
+Q_k(F_{\Lambda_k})\!\big(\mathcal Q_k(\tau,J)\big).
+\]
+Since \(\mathcal Q_k(\tau,J_1)=\mathcal Q_k(\tau,J_2)\), the class of \(F\) modulo
+\(\mathcal N^{\mathrm{phys,red}}_{\Lambda_k}\) is the same for \(J_1\) and \(J_2\).
+Because the defining observable class is stable under the Peierls derivations under consideration,
+both \(\{J_1,F\}_{\mathrm P,\Lambda_k}\) and \(\{J_2,F\}_{\mathrm P,\Lambda_k}\) again belong to
+\(\mathcal O^{\mathrm{phys,red}}_{\Lambda_k}\).
+Applying the same factorization relation to those two outputs and using bilinearity,
+\[
+\{J_2,F\}_{\mathrm P,\Lambda_k}
+-\{J_1,F\}_{\mathrm P,\Lambda_k}
+=
+\{A,F\}_{\mathrm P,\Lambda_k},
+\]
+shows that the difference becomes zero after passage through \(Q_k\).
+By definition of the kernel, this is exactly the statement that
+\[
+\{J_2,F\}_{\mathrm P,\Lambda_k}
+-\{J_1,F\}_{\mathrm P,\Lambda_k}
+\in
+\mathcal N^{\mathrm{phys,red}}_{\Lambda_k}.
+\]
+Therefore the induced physical Peierls derivation depends only on the class
+\([\Xi^{(1)}_{\Lambda_k}]\) on the reduced quotient.
+\end{proof}
+
+\begin{remark}[Scope of the reduced physical sector]
+\label{rem:full-sector-gap}
+This proposition applies only to the reduced physical sector
+\(\mathcal O^{\mathrm{phys,red}}_{\Lambda_k}\).
+It does \emph{not} identify that reduced sector with any larger physical sector or quotient.
+Such an identification would require an additional theorem.
+\end{remark}
+
+\end{document}

@@ -1,0 +1,7 @@
+Closedness of Aminus and closed-affine-subspace statements are not independently tested; they are automatic in the finite-dimensional surrogate used for def:2T-char and thm:finite-cutoff-Jcan.
+
+Continuity and branchwise connectedness in thm:active-response-transport-minimal are machine-audited only on the explicit exact model family in Task 3.5, not for every admissible UOM branch.
+
+Hilbertizability/coercivity are represented by exact positive-definite matrices on ker chi and on Eminus; no infinite-dimensional completion is constructed.
+
+AQFT/HLS semantics, locality/closability of the Peierls derivation, LoG spectral selection, and the three deferred UOM transport closures remain imported or deferred in this sprint.

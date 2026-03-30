@@ -1,0 +1,694 @@
+\section{Completion-sector leak model and split criterion}
+\label{sec:resolution}
+
+This section separates what is directly derived from UOM from the additional hypotheses required to turn those ingredients
+into a concrete split-driving leak model. The new organizing principle is:
+the primary hidden variable is a \emph{signed odd split amplitude} \(a_k\), while the positive stock
+\(S_k:=a_k^2\) is the quantity that can enter scalar observables and leak laws.
+We reserve \(R_k^{\rm abs}\) for the remaining curvature budget and
+\[
+\mathfrak r_k:=\min_{\Lambda\ge \Lambda_k} f_k(\Lambda)
+\]
+for the minimized one-wall residual.
+
+\subsection{Odd split mode, output parity, and the rank-one normal form}
+\label{subsec:leak-solution}
+
+The only ``leak'' that directly competes with wall work in the \(\Lambda\)-solver is the open-system modification of the
+wall energy balance allowed explicitly in UOM's SK/HJ wall equation:
+\begin{equation}
+\Delta E_{{\rm geom},k}\ =\ J_{{\rm wall},k}\ +\ Q_{{\rm leak},k},
+\qquad Q_{{\rm leak},k}\ge 0,
+\label{eq:resolution-wall-leak}
+\end{equation}
+This is the welded wall-balance form used in the earlier summability analysis.
+This is a \emph{receiver-side energy complement} term. It must not be conflated with UOM's information-theoretic
+bridge/leak instrument from the UOM main manuscript.
+
+\paragraph{What is already derived in UOM.}
+Four ingredients are fixed by the manuscript:
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Wall balance.} The reduced one-wall description may contain a nonnegative complement \(Q_{\rm leak}\) as in
+\eqref{eq:resolution-wall-leak}.
+\item \textbf{Quadratic welded SK data.} In the Gaussian sector,
+\[
+W_\Lambda[J]=\frac12\int J\,(G_{R,\Lambda}+i\,\mathcal N_\Lambda)\,J+O(J^3),
+\qquad \mathcal N_\Lambda\ge 0.
+\]
+\item \textbf{Healthy receiver.} The active KR receiver has vanishing welded RP block, so a receiver-tangent RP penalty is
+not the fundamental home of split-driving oddness.
+\item \textbf{Continued RP defect.} The analytic-continued covariance has a negative OS mode with
+\[
+\lambda_{\min}(\mu_{ps},\Lambda)
+=
+-\alpha(\Lambda)\mu_{ps}^2+O(\mu_{ps}^4),
+\qquad
+\alpha(\Lambda)\sim \kappa_d\,\Lambda^{d+2}H^{-d}.
+\]
+\end{enumerate}
+
+\begin{assumption}[Split-mode observability]
+\label{ass:wall-match}
+Near split onset there exists a one-dimensional odd line \(L_k\) with local coordinate \(a_k\in\mathbb R\) such that the
+split involution acts by
+\[
+a_k\longmapsto -a_k.
+\]
+The true two-wall advantage
+\[
+\Delta F_k:=\Delta\mathcal F_{2{\rm w}-1{\rm w},k}
+\]
+and the minimized one-wall residual
+\[
+\mathfrak r_k:=\min_{\Lambda\ge \Lambda_k} f_k(\Lambda)
+\]
+are smooth even scalar outputs of this same local mode.
+Equivalently, the 2T \(\Gamma\)-odd descendant direction and the UOM continued negative mode \(u_-(\Lambda_k)\) are
+assumed to represent the same active split mode up to a smooth local identification.
+\end{assumption}
+
+\begin{lemma}[Evenness of the minimized residual]
+\label{lem:residual-even}
+Suppose the pre-minimized one-wall residual is a smooth function \(f_k(\Lambda,a)\) satisfying
+\[
+f_k(\Lambda,-a)=f_k(\Lambda,a),
+\]
+and suppose there is a unique local minimizer \(\Lambda_\ast(a)\) near \(a=0\) such that
+\[
+\partial_\Lambda f_k(\Lambda_\ast(a),a)=0,
+\qquad
+\partial_\Lambda^2 f_k(\Lambda_\ast(0),0)>0.
+\]
+Then
+\[
+\mathfrak r_k(a):=f_k(\Lambda_\ast(a),a)
+\]
+is a smooth even function of \(a\).
+\end{lemma}
+
+\begin{proof}
+By the implicit function theorem, \(\Lambda_\ast(a)\) is smooth near \(a=0\).
+Since \(f_k(\Lambda,a)\) is even in \(a\), the stationarity equation for \(a\) and \(-a\) is identical; uniqueness of the
+local minimizer gives
+\[
+\Lambda_\ast(-a)=\Lambda_\ast(a).
+\]
+Therefore
+\[
+\mathfrak r_k(-a)=f_k(\Lambda_\ast(-a),-a)=f_k(\Lambda_\ast(a),a)=\mathfrak r_k(a),
+\]
+so \(\mathfrak r_k\) is smooth and even.
+\end{proof}
+
+\begin{proposition}[Rank-one normal form near split onset]
+\label{prop:rank-one-wall-match}
+Under \cref{ass:wall-match}, the two scalar outputs admit local even expansions
+\begin{equation}
+\Delta F_k(a)
+=
+\mu_k^{(2{\rm w})}+h_k a^2+O(a^4),
+\label{eq:DeltaF-detuned}
+\end{equation}
+\begin{equation}
+\mathfrak r_k(a)
+=
+\mu_k^{(1{\rm w})}+m_k a^2+O(a^4),
+\label{eq:rres-detuned}
+\end{equation}
+with \(h_k,m_k>0\) on the active split line.
+\end{proposition}
+
+\begin{proof}
+Smooth even functions of one real variable have Taylor series containing only even powers.
+The constants \(\mu_k^{(2{\rm w})}\) and \(\mu_k^{(1{\rm w})}\) are the baseline detunings of the two-wall and one-wall
+channels. Positivity of \(h_k\) and \(m_k\) expresses that the selected mode is active in both outputs.
+\end{proof}
+
+\begin{corollary}[Onset wall-match in rank one]
+\label{cor:rank-one-wall-match}
+On the onset manifold,
+\[
+\mu_k^{(1{\rm w})}=\mu_k^{(2{\rm w})}=0,
+\]
+so
+\[
+\Delta F_k=h_k a_k^2+O(a_k^4),
+\qquad
+\mathfrak r_k=m_k a_k^2+O(a_k^4).
+\]
+Eliminating \(a_k^2\) gives
+\begin{equation}
+\Delta F_k
+=
+\frac{h_k}{m_k}\,\mathfrak r_k+O(\mathfrak r_k^2).
+\label{eq:rank-one-wall-match}
+\end{equation}
+\end{corollary}
+
+\subsection{Low-rank generalization}
+\label{subsec:alpha-derived}
+
+If the active split sector is \(m\)-dimensional, with odd amplitude vector \(a_k\in\mathbb R^m\), parity gives quadratic
+normal forms
+\begin{equation}
+\Delta F_k(a)
+=
+\mu_k^{(2{\rm w})}+a^\top H_k a+O(\|a\|^4),
+\label{eq:DeltaF-lowrank}
+\end{equation}
+\begin{equation}
+\mathfrak r_k(a)
+=
+\mu_k^{(1{\rm w})}+a^\top M_k a+O(\|a\|^4),
+\label{eq:rres-lowrank}
+\end{equation}
+with \(H_k,M_k\succeq 0\) on the active split subspace.
+
+\begin{assumption}[Low-rank comparability]
+\label{ass:low-rank-comp}
+On the active split subspace there exist \(c_k^-,c_k^+>0\) such that
+\[
+c_k^- M_k \preceq H_k \preceq c_k^+ M_k.
+\]
+\end{assumption}
+
+\begin{proposition}[Low-rank wall-match comparability]
+\label{prop:low-rank-wall-match}
+Assume \cref{ass:wall-match,ass:low-rank-comp} and restrict to the onset manifold
+\(\mu_k^{(1{\rm w})}=\mu_k^{(2{\rm w})}=0\).
+Then for sufficiently small \(\mathfrak r_k\) there exists \(C_k>0\) such that
+\begin{equation}
+c_k^-\,\mathfrak r_k-C_k\mathfrak r_k^2
+\le
+\Delta F_k
+\le
+c_k^+\,\mathfrak r_k+C_k\mathfrak r_k^2.
+\label{eq:low-rank-wall-match}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+On onset,
+\[
+\Delta F_k=a_k^\top H_k a_k+O(\|a_k\|^4),
+\qquad
+\mathfrak r_k=a_k^\top M_k a_k+O(\|a_k\|^4).
+\]
+The quadratic-form comparison gives
+\[
+c_k^- a_k^\top M_k a_k\le a_k^\top H_k a_k\le c_k^+ a_k^\top M_k a_k.
+\]
+Since \(\mathfrak r_k\) is itself quadratic in \(a_k\) to leading order, the quartic remainders are \(O(\mathfrak r_k^2)\),
+which yields \eqref{eq:low-rank-wall-match}.
+\end{proof}
+
+\subsection{Gaussian realization of the odd mode and the leak stock law}
+\label{subsec:B-gaussian}
+
+The theorem path above does \emph{not} rely on a KMS-subtracted matrix.
+In particular, we do not use
+\[
+\Sigma_{B,k}:=\bigl(C_{B,k}-C^{\rm KMS}_{\Lambda_k}\bigr)+m_{B,k}m_{B,k}^\top
+\]
+as a positive object, because it need not be positive semidefinite.
+When a safe matrix observable is needed in the realization layer, the natural PSD quantity is
+\begin{equation}
+M_{B,k}:=C_{B,k}+m_{B,k}m_{B,k}^\top\succeq 0.
+\label{eq:MB-def}
+\end{equation}
+
+\begin{assumption}[Gaussian completion realization]
+\label{ass:gaussian-completion}
+For each admissible cutoff \(\Lambda\) in the welded regime, the quadratic influence functional \(W_\Lambda[J]\) admits a
+Gaussian dilation, unique up to symplectic equivalence, by a bosonic completion sector \(B_\Lambda\) with canonical
+quadratures \(X_\Lambda\) and positive quadratic Hamiltonian
+\[
+H_{B,\Lambda}=\frac12 X_\Lambda^\top h_\Lambda X_\Lambda,
+\qquad h_\Lambda\succeq 0.
+\]
+\end{assumption}
+
+\begin{assumption}[Dominant odd-mode projection]
+\label{ass:export-selection}
+Inside the Gaussian completion of \cref{ass:gaussian-completion}, there exists a smooth unit vector
+\[
+u_k:=u_-(\Lambda_k)
+\]
+spanning the active odd line and separated from the orthogonal sector by a local spectral gap.
+We write
+\[
+P_k^\perp:=I-u_k u_k^\top
+\]
+for the orthogonal projector.
+\end{assumption}
+
+\begin{assumption}[Classical-control gate]
+\label{ass:classical-gate}
+There exists a scalar gate \(g_{\rm cl}(k)\in[0,1]\), determined by the accessible classicality defect
+\(\mathrm{cl}_k\) or \(\mathrm{Off}_k\), such that \(g_{\rm cl}(k)\ll 1\) at a fresh-aeon start and
+\(g_{\rm cl}(k)\to 1\) late in the aeon.
+\end{assumption}
+
+\begin{proposition}[Projected Gaussian affine dynamics]
+\label{prop:projected-affine}
+Under \cref{ass:gaussian-completion,ass:export-selection}, one may choose a finite effective completion-mode basis in which
+the completion quadratures obey a linear-Gaussian recursion
+\begin{equation}
+X_{k+1}=A_k X_k+B_k j_k^{\rm ctl}+\nu_k,
+\label{eq:X-recursion}
+\end{equation}
+with
+\[
+\mathbb E[\nu_k\mid\mathcal F_k]=0,
+\qquad
+\mathbb E[\nu_k\nu_k^\top\mid\mathcal F_k]=Q_k\succeq 0.
+\]
+Consequently the PSD second moment
+\[
+M_{B,k}=C_{B,k}+m_{B,k}m_{B,k}^\top
+\]
+obeys
+\begin{equation}
+M_{B,k+1}=A_k M_{B,k}A_k^\top+Q_k+\text{drift terms}.
+\label{eq:MB-recursion}
+\end{equation}
+Projecting onto the odd line via
+\[
+a_k:=u_k^\top X_k
+\]
+gives the scalar affine law
+\begin{equation}
+a_{k+1}
+=
+\rho_k a_k+\beta_k+\xi_k+\varepsilon_k^{\rm mix},
+\label{eq:B-recursion-general}
+\end{equation}
+where
+\[
+\rho_k:=u_{k+1}^\top A_k u_k,\qquad
+\beta_k:=u_{k+1}^\top B_k j_k^{\rm ctl},
+\]
+\[
+\xi_k:=u_{k+1}^\top \nu_k,\qquad
+\varepsilon_k^{\rm mix}:=u_{k+1}^\top A_k P_k^\perp X_k.
+\]
+Moreover,
+\[
+\mathbb E[\xi_k\mid\mathcal F_k]=0,
+\qquad
+\mathbb E[\xi_k^2\mid\mathcal F_k]=u_{k+1}^\top Q_k u_{k+1}\ge 0.
+\]
+If \cref{ass:classical-gate} also holds and the welded shape family is fixed, then
+\begin{equation}
+\mathbb E[\xi_k^2\mid\mathcal F_k]
+=
+\eta_k\,g_{\rm cl}(k)\,\Delta I_k+O(\Delta I_k^2,\delta\Lambda_k^2),
+\label{eq:Zk-linear}
+\end{equation}
+with \(\eta_k\ge 0\).
+\end{proposition}
+
+\begin{proof}
+The quadratic SK influence functional determines a Gaussian CPTP map on the finite active completion-mode sector, hence a
+linear-Gaussian state-space realization of the form \eqref{eq:X-recursion}; \eqref{eq:MB-recursion} is the standard update
+for the PSD second moment.
+Decompose \(X_k=u_k a_k+P_k^\perp X_k\), apply \(\ip{u_{k+1}}{\cdot}\) to \eqref{eq:X-recursion}, and collect the projected
+transport, deterministic drive, noise, and orthogonal-mode contamination to obtain \eqref{eq:B-recursion-general}.
+The mean-zero and positive-variance statements for \(\xi_k\) follow directly from the projected Gaussian noise covariance
+\(
+u_{k+1}^\top Q_k u_{k+1}\ge 0
+\).
+Finally, at fixed welded shape family one has \(A_{{\rm eff},k}^2\propto \Delta I_k\), so the fresh covariance injection
+into the odd mode is linear in the current payload at leading order; the gate \(g_{\rm cl}(k)\) suppresses this injection
+near a fresh-aeon start and yields \eqref{eq:Zk-linear}.
+\end{proof}
+
+\begin{assumption}[Centered odd preparation]
+\label{ass:centered-odd}
+Near split onset, the active odd mode is prepared either branch-symmetrically or in a squeeze-dominated regime, so the
+projected deterministic displacement vanishes and orthogonal-mode contamination is higher order:
+\[
+\beta_k=0,
+\qquad
+\varepsilon_k^{\rm mix}=O_2.
+\]
+\end{assumption}
+
+\begin{corollary}[Centered odd-mode law]
+\label{cor:centered-odd-mode}
+Under
+\cref{ass:gaussian-completion,ass:export-selection,ass:classical-gate,ass:centered-odd},
+the projected affine law \eqref{eq:B-recursion-general} reduces to
+\begin{equation}
+a_{k+1}=\rho_k a_k+\xi_k+O_2,
+\label{eq:B-recursion}
+\end{equation}
+with \(\mathbb E[\xi_k\mid\mathcal F_k]=0\) and variance scaling \eqref{eq:Zk-linear}.
+\end{corollary}
+
+\paragraph{Stochastic/Gaussian realization layer.}
+At theorem level the positive stock is simply
+\[
+S_k:=a_k^2.
+\]
+The general projected Gaussian dynamics need not be centered.
+Under \cref{ass:centered-odd}, however, the physically relevant late-time regime is the one in which the odd mode carries no
+leading deterministic displacement and the fresh effect enters through its variance.
+In that centered specialization it is natural to use the conditional second moment
+\[
+S_k:=\mathbb E[a_k^2\mid\mathcal F_k].
+\]
+
+\begin{proposition}[Odd-mode stock law]
+\label{prop:odd-mode-stock}
+Under
+\cref{ass:gaussian-completion,ass:export-selection,ass:classical-gate,ass:centered-odd},
+the conditional stock
+\[
+S_k:=\mathbb E[a_k^2\mid\mathcal F_k]
+\]
+satisfies
+\begin{equation}
+S_{k+1}
+=
+t_k\,S_k+\eta_k\,g_{\rm cl}(k)\,\Delta I_k
++O(S_k\Delta I_k,\Delta I_k^2,\delta\Lambda_k^2),
+\qquad t_k=\rho_k^2.
+\label{eq:Sk-update}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Square \eqref{eq:B-recursion}:
+\[
+a_{k+1}^2=\rho_k^2 a_k^2+2\rho_k a_k\xi_k+\xi_k^2+O_2.
+\]
+Taking conditional expectation and using \(\mathbb E[\xi_k\mid\mathcal F_k]=0\) removes the mixed term.
+Substituting \eqref{eq:Zk-linear} gives \eqref{eq:Sk-update}.
+\end{proof}
+
+\begin{assumption}[UV comparability of energetic stiffness]
+\label{ass:uv-match}
+There exist constants \(c_-,c_+>0\) and a monotone increasing energetic stiffness \(\widetilde\alpha(\Lambda)\) of the
+active odd mode such that, for all sufficiently large \(\Lambda\),
+\begin{equation}
+c_-\,\alpha(\Lambda)\le \widetilde\alpha(\Lambda)\le c_+\,\alpha(\Lambda).
+\label{eq:alpha-comparable}
+\end{equation}
+\end{assumption}
+
+This is the precise place where the note passes from what is derived in UOM to a physical hypothesis.
+The coefficient \(\alpha(\Lambda)\) is derived from the continued OS problem; the statement that the energetic stiffness of
+the split mode is comparable to it is not yet a theorem.
+
+With the stock \(S_k\) as the actual state variable, the positive split-driving export flux is modeled by
+\begin{equation}
+Q_{{\rm leak},k}^{\rm model}
+=
+\widetilde\alpha'(\Lambda_k)\,\delta\Lambda_k\,S_k
+\;+\;
+\widetilde\alpha(\Lambda_k)\,\eta_k\,g_{\rm cl}(k)\,\Delta I_k
+\;+\; O_2,
+\label{eq:Qleak-effective}
+\end{equation}
+where \(\delta\Lambda_k:=\Lambda_{k+1}-\Lambda_k\).
+The first term is the transport cost of carrying already-prepared odd stock to larger cutoff; the second is the fresh
+injection due to the current payload.
+Under \cref{ass:uv-match}, this gives the scaling comparison
+\begin{equation}
+Q_{{\rm leak},k}^{\rm model}
+\asymp
+\alpha'(\Lambda_k)\,\delta\Lambda_k\,S_k
+\;+\;
+\alpha(\Lambda_k)\,\eta_k\,g_{\rm cl}(k)\,\Delta I_k.
+\label{eq:Qleak-alpha}
+\end{equation}
+
+\paragraph{Current RP proxy reinterpreted.}
+The quantity
+\[
+Q_{\rm rg}=\chi J_{\rm RP}/\beta_{\rm dS}
+\]
+therefore remains useful only as a phenomenological probe. It may correlate with \(a_k^2\) or with the stock \(S_k\), but
+it is not the fundamental leak law because the healthy receiver itself has no quadratic RP block on the welded family.
+
+\subsection{Approximate split condition from the odd-stock leak law}
+\label{subsec:split-threshold}
+
+Let \(R_k^{\rm abs}:=|R_k|\). In the micro-step regime the geometry-side surrogate gives
+\[
+\Delta E_{{\rm geom},k}
+\approx
+\frac{\zeta\,(A+c_\Lambda \Lambda_k^2)}{2\sqrt{12\,R_k^{\rm abs}}}\;\Theta_k
+\;-\;
+\frac{2\zeta\,c_\Lambda \Lambda_k\sqrt{R_k^{\rm abs}}}{\sqrt{12}}\;\delta\Lambda,
+\]
+while
+\[
+J_{{\rm wall},k}\approx \mu_{\rm RG}(\Lambda_k)\,\delta\Lambda,
+\qquad
+\mu_{\rm RG}(\Lambda)\simeq \mu_0+\mu_2\Lambda^2>0.
+\]
+Hence the local one-wall threshold remains
+\begin{equation}
+Q_{{\rm leak},k}
+\gtrsim
+\frac{\zeta\,(A+c_\Lambda \Lambda_k^2)}{2\sqrt{12\,R_k^{\rm abs}}}\;\Theta_k.
+\label{eq:split-threshold-base}
+\end{equation}
+Since
+\[
+\Theta_k
+=
+K(\Lambda_k)\,\Delta I_k
+\sim
+K_0\,\Lambda_k^{-p}\,e^{-2d_{\rm sep}(\Lambda_k)\Lambda_k}\,\Delta I_k,
+\qquad p\in\{10,14\},
+\]
+substituting \eqref{eq:Qleak-effective} gives
+\begin{equation}
+\widetilde\alpha'(\Lambda_k)\,\delta\Lambda_k\,S_k
+\;+\;
+\widetilde\alpha(\Lambda_k)\,\eta_k\,g_{\rm cl}(k)\,\Delta I_k
+\gtrsim
+\frac{\zeta\,(A+c_\Lambda \Lambda_k^2)}{2\sqrt{12\,R_k^{\rm abs}}}\,
+K(\Lambda_k)\,\Delta I_k.
+\label{eq:split-threshold-effective}
+\end{equation}
+This is the corrected split threshold. It shows the two late-time branches transparently:
+\begin{enumerate}[leftmargin=2em]
+\item if \(S_k\) remains negligible, only the fresh term remains, and the exhaustion branch can survive;
+\item if \(S_k\) has accumulated, the transport term can dominate even when \(\Delta I_k\) is already tiny.
+\end{enumerate}
+Under \cref{ass:uv-match} and \(\alpha(\Lambda)\sim \kappa_d\Lambda^{d+2}H^{-d}\), the transport term scales like
+\[
+\widetilde\alpha'(\Lambda_k)\,\delta\Lambda_k\,S_k
+\asymp
+\Lambda_k^{d+1}\,\delta\Lambda_k\,S_k,
+\]
+which is exactly the mechanism by which late split can beat the shrinking fresh payload.
+
+\subsection{Nondegeneracy clause for the normalized seam coefficient}
+\label{subsec:separate-c-nondegeneracy}
+
+The split threshold \eqref{eq:split-threshold-effective} is a statement about when the late-time
+odd stock can overcome the shrinking fresh payload.
+It is \emph{not} by itself a theorem that the normalized seam coefficient \(c_{\Lambda_k}\) on the
+canonical compressed welded LoG line is nonzero.
+Any theorem proving \(c_{\Lambda_k}\neq 0\) must therefore come from a separate overlap or transport
+hypothesis, not from the threshold inequality alone.
+Downstream, this clause is absorbed into the delayed selected-line package rather than carried as a
+separate package summand.
+
+\begin{definition}[Unit-source seam overlap scalar and no-destructive-cancellation margin]
+\label{def:unit-source-overlap-margin}
+Fix an accepted tick \(k\).
+Assume the canonical compressed welded LoG line is defined and let
+\[
+\tau^{\mathrm{unit}}_{\Lambda_k}
+\]
+be a detector-factorized unit welded odd source.
+Define the raw unit-source seam overlap scalar by
+\begin{equation}
+\widetilde c_{\Lambda_k}
+:=
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}\!\big[\tau^{\mathrm{unit}}_{\Lambda_k}\big],\,
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}.
+\label{eq:unit-source-overlap-scalar}
+\end{equation}
+A \emph{no-destructive-cancellation margin} at \(\Lambda_k\) is any real number
+\[
+\mu_{\Lambda_k}>0
+\]
+such that
+\begin{equation}
+\abs{\widetilde c_{\Lambda_k}}\ge \mu_{\Lambda_k}.
+\label{eq:no-destr-cancel-margin}
+\end{equation}
+On a connected accepted-branch segment \(I\), a \emph{branchwise no-destructive-cancellation
+margin} is a constant \(\mu_I>0\) such that
+\begin{equation}
+\abs{\widetilde c_{\Lambda}}\ge \mu_I
+\qquad
+\forall\,\Lambda\in I.
+\label{eq:no-destr-cancel-margin-branch}
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Nondegeneracy criterion for \texorpdfstring{\(c_{\Lambda_k}\)}{c_Lambda_k}]
+\label{thm:separate-c-nondegeneracy}
+Fix an accepted tick \(k\).
+Assume:
+\begin{enumerate}[leftmargin=2em]
+\item a detector-factorized unit welded odd source at \(\Lambda_k\);
+\item the unit-source seam-faithfulness package, namely:
+  \begin{enumerate}[label=(\alph*),leftmargin=2em]
+  \item the raw seam pairing factorizes as
+    \begin{equation}
+    \widetilde s_{\Lambda_k}(f,y)
+    =
+    \sigma_{\mathrm{fill}}(f)\,
+    \widetilde c_{\Lambda_k}\,
+    \overline{\mathrm{obs}}(y)
+    \qquad
+    \forall f,\forall y;
+    \label{eq:unit-source-seam-factorization}
+    \end{equation}
+  \item whenever
+    \(
+    \widetilde c_{\Lambda_k}\neq 0
+    \)
+    and
+    \(
+    \overline{\mathrm{obs}}(y)\neq 0
+    \),
+    the compressed welded LoG line is transversely physical, dominant-line realization holds, and
+    the normalized seam coefficient
+    \begin{equation}
+    c_{\Lambda_k}
+    :=
+    \kappa_{\Lambda_k}^{-1/2}\,\widetilde c_{\Lambda_k}
+    \label{eq:unit-source-normalized-c}
+    \end{equation}
+    is defined;
+  \end{enumerate}
+\item a no-destructive-cancellation margin at \(\Lambda_k\) in the sense of
+  \cref{def:unit-source-overlap-margin};
+\item a witness \(y\) with
+  \[
+  \overline{\mathrm{obs}}(y)\neq 0.
+  \]
+\end{enumerate}
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item the raw seam pairing is nonzero for every filler tag \(f\):
+  \[
+  \widetilde s_{\Lambda_k}(f,y)\neq 0;
+  \]
+\item the canonical compressed welded LoG line is transversely physical at \(\Lambda_k\);
+\item dominant-line realization holds at \(\Lambda_k\);
+\item the normalized seam coefficient is defined and nonzero:
+  \[
+  c_{\Lambda_k}\neq 0.
+  \]
+\end{enumerate}
+If, in addition, for some filler tag \(f\) the source \(\tau^{f,y}_{\Lambda_k}\) is representable on
+the characterization layer and admits a source-compatible descendant realization, then the
+corresponding descendant representative satisfies
+\[
+\rho^{\mathrm{dom}}_{\Lambda_k}\!\big(J^{f,y}_{\Lambda_k}\big)\neq 0.
+\]
+\end{theorem}
+
+\begin{proof}
+The margin \eqref{eq:no-destr-cancel-margin} implies
+\(
+\widetilde c_{\Lambda_k}\neq 0
+\).
+Together with
+\(
+\overline{\mathrm{obs}}(y)\neq 0
+\),
+the factorization \eqref{eq:unit-source-seam-factorization} gives
+\(
+\widetilde s_{\Lambda_k}(f,y)\neq 0
+\)
+for every filler tag \(f\), proving item (1).
+Item (2), item (3), and the definition and nonvanishing of
+\(
+c_{\Lambda_k}
+\)
+are exactly the remaining conclusions of the assumed unit-source seam-faithfulness package under the
+same nondegeneracy hypothesis.
+The final sentence is the corresponding witness-to-descendant comparison step under representability
+and source-compatible descendant realization.
+\end{proof}
+
+\begin{corollary}[Branchwise sign-stable nondegeneracy]
+\label{cor:branchwise-c-nondegeneracy}
+Let \(I\) be a connected accepted-branch segment.
+Assume:
+\begin{enumerate}[leftmargin=2em]
+\item the branchwise normalized seam coefficient
+  \[
+  \Lambda\mapsto c_{\Lambda}
+  \]
+  is continuous on \(I\);
+\item a branchwise no-destructive-cancellation margin on \(I\) in the sense of
+  \cref{def:unit-source-overlap-margin}.
+\end{enumerate}
+Then
+\[
+c_{\Lambda}\neq 0
+\qquad
+\forall\,\Lambda\in I.
+\]
+In particular, the sign of \(c_{\Lambda}\) is constant on \(I\).
+If there also exist a fixed LS witness \(y\) with
+\(
+\overline{\mathrm{obs}}(y)\neq 0
+\)
+and a branchwise source-compatible descendant realization satisfying
+\[
+\rho^{\mathrm{dom}}_{\Lambda}\!\big(J^{f,y}_{\Lambda}\big)
+=
+\sigma_{\mathrm{fill}}(f)\,
+c_{\Lambda}\,
+\overline{\mathrm{obs}}(y),
+\]
+then the sign of
+\(
+\rho^{\mathrm{dom}}_{\Lambda}(J^{f,y}_{\Lambda})
+\)
+is constant on \(I\) as well.
+\end{corollary}
+
+\begin{proof}
+By \eqref{eq:no-destr-cancel-margin-branch}, the scalar
+\(
+\widetilde c_{\Lambda}
+\)
+never vanishes on \(I\).
+Hence neither does
+\(
+c_{\Lambda}
+\),
+because the normalization only rescales the raw overlap scalar by a positive branchwise factor.
+A continuous nonzero real-valued function on a connected segment cannot change sign, proving the
+constancy of \(\operatorname{sgn}(c_{\Lambda})\).
+The final statement follows immediately from the displayed branchwise comparison identity and the
+fixed nonzero scalar \(\overline{\mathrm{obs}}(y)\).
+\end{proof}
+
+\begin{remark}[Logical separation from the split threshold]
+\label{rem:separate-c-nondegeneracy}
+The hypotheses of \cref{thm:separate-c-nondegeneracy,cor:branchwise-c-nondegeneracy} are
+intentionally separate from \eqref{eq:split-threshold-effective}.
+The threshold governs the emergence of split-side stock; the no-destructive-cancellation margin
+governs overlap of the unit welded odd source with the canonical compressed dominant line.
+Accordingly, the present note treats \(c_{\Lambda}\neq 0\) as the transport/overlap clause later
+imported into the delayed selected-line package rather than as a consequence of the split
+threshold.
+\end{remark}

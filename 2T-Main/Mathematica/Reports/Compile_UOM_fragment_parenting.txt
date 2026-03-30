@@ -1,0 +1,9 @@
+The edited UOM files `active_response_transport_program_note.tex` and
+`canonical_odd_interface_note.tex` are section-level fragments, not standalone parent documents.
+
+Their parent build in the current repo lane is:
+
+- `UOM/summability_split_note.tex`
+
+That parent document inputs both fragments and compiled successfully; see
+`Main/Mathematica/Reports/Compile_UOM_summability_split_note.log`.

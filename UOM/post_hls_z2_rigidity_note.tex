@@ -1,0 +1,187 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools,enumitem,cleveref,xr}
+
+\externaldocument[uomsrc-]{source_internal_control_factorization_note}
+\externaldocument[uommain-]{main}
+\externaldocument[stack-]{odd_characterization_transport_stack_note}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\newcommand{\Hacc}{\mathcal H_{\mathrm{acc}}}
+\newcommand{\SPhys}{\mathcal S_{\mathrm{phys}}}
+
+\title{Post-HLS $\mathbb Z_2$ Rigidity Over Accepted-Record History}
+\date{2026-03-19}
+
+\begin{document}
+\maketitle
+
+\section*{Purpose}
+
+This note isolates the downstream post-Main lane that begins only after the UOM\(\to\)Main export
+boundary.
+It is not part of the weak Main-facing characterization interface and it does not modify the base
+\(\mathbf{2T}_{\mathrm{char}}\) contract.
+Its purpose is to package the remaining broad sign-obstruction evidence and the post-HLS
+\(\mathbb Z_2\)-rigidity target over accepted-record history.
+
+The Main-facing base used here is imported from
+the UOM Reduction and Pulse-Rigid Ambiguity Supplement note:
+\begin{enumerate}[leftmargin=2em]
+\item the accepted-record reduction theorem
+  \textup{(\cref{uomsrc-thm:accepted-record-reduction})};
+\item the reduced welded-image ambiguity theorem
+  \textup{(\cref{uomsrc-prop:reduced-welded-ambiguity-trivial})};
+\item the pulse-rigid ambiguity package
+  \(
+  \mathbf{2T}_{\mathrm{char\!-\!amb}}
+  \)
+  and its UOM export theorem
+  \textup{(\cref{uomsrc-def:2T-char-amb,uomsrc-prop:char-ambiguity-supplement-export})};
+\item the reduced physical null-ideal descent theorem
+  \textup{(\cref{uomsrc-prop:full-ambiguity-narrowed-bridge})};
+\item the exact remaining full-sector identification boundary
+  \textup{(\cref{uomsrc-rem:full-sector-gap})}.
+\end{enumerate}
+The bounded completion-side lane from the Split-Controlled Completion Lift note is an additional
+downstream input, not part of the upstream Main-facing supplement; status clarifications for that
+optional lane are archived in
+\texttt{UOM/post\_hls\_z2\_route\_status\_memo.md}.
+
+\section{Broad Sign Obstruction}
+
+\begin{proposition}[Seam/filler sign obstruction on the broad realization class]
+\label{prop:broad-tau-obstruction}
+If one identifies the unreduced welded control with the full admissible welded odd trace-channel
+source class \(\tau\), then
+\[
+\tau^{\mathrm{bridge},y}_{\Lambda_k}
+=
+-\,\tau^{\mathrm{diag},y}_{\Lambda_k}
+\]
+is compatible with identical accepted-record history while still flipping the unreduced projected
+trace-channel sign data.
+\end{proposition}
+
+\begin{proof}
+\noindent\textbf{Step 1 [definition-level].}
+By the Active Response Transport note \textup{(\cref{stack-def:witness-seam-realization})}, there
+are live accepted-tick realizations with
+\[
+\tau^{\mathrm{bridge},y}_{\Lambda_k}
+=
+-\,\tau^{\mathrm{diag},y}_{\Lambda_k}
+\]
+and identical accepted-record payload.
+
+\noindent\textbf{Step 2 [definition-level plus theorem-backed already].}
+By the UOM main manuscript \textup{(paragraph~\ref{uommain-par:uom-main-081})}, the linearized Gaussian
+receiver response is
+\[
+\delta C=\mathsf T_\Lambda \tau.
+\]
+By the Active Response Transport note \textup{(\cref{stack-prop:seam-scalar-signs})}, the projected
+trace-channel data satisfy
+\[
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}\!\big[\tau^{\mathrm{bridge},y}_{\Lambda_k}\big]
+=
+-\,\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}\!\big[\tau^{\mathrm{diag},y}_{\Lambda_k}\big].
+\]
+
+\noindent\textbf{Step 3 [conclusion].}
+Therefore equal accepted-record history does not determine the full broad unreduced realization
+data. This is not a Main-facing export theorem; it is source-backed evidence for a surviving hidden
+sign involution on the broad realization class.
+\end{proof}
+
+\begin{remark}[Physical meaning of the obstruction]
+\label{rem:broad-tau-obstruction-physical}
+The obstruction is naturally read as an interleaved history effect rather than a same-aeon receiver
+ambiguity.
+Equal accepted-record history fixes the current reduced receiver object, but it does not fix the
+upstairs odd completion datum that survives across the split and can reappear only through later
+downstream readout.
+That is why the present proposition is evidence for a post-HLS \(\mathbb Z_2\) lift over
+accepted-record history rather than evidence for a same-aeon factorization theorem on the broad
+source class.
+\end{remark}
+
+\section{Post-HLS Target Package}
+
+\begin{definition}[Physical-quotient post-HLS odd package]
+\label{def:post-hls-package}
+Fix an accepted welded branch \(\beta\).
+A \emph{physical-quotient post-HLS odd package} over \(\beta\) consists of the data actually used by
+the downstream Main post-HLS lane:
+\begin{enumerate}[leftmargin=2em,label=(Z\arabic*)]
+\item the physical odd derivation descending from the UOM-fed Main input;
+\item its UV spinorial realization \(Q\);
+\item the UV dilatation action from Subprogram~4a;
+\item the \(S\)-partner structure generated from \(K_\mu\) in Subprogram~4b;
+\item the superconformal closure data used in Subprograms~4a--4c, up to the level actually invoked.
+\end{enumerate}
+Write \(\SPhys(\beta)\) for the set of such physical-quotient packages on a fixed Main background
+stratum, and \(\Hacc(\beta)\) for the accepted-record histories on that same stratum.
+\end{definition}
+
+\begin{remark}[Retargeted downstream theorem]
+\label{rem:z2-lift-target}
+The active downstream theorem target is no longer:
+\begin{enumerate}[leftmargin=2em]
+\item a secondary compression from weak odd-lane data back to full accepted-record history, or
+\item an unreduced compiled-control factorization theorem on the broad welded realization class.
+\end{enumerate}
+The correct downstream target is instead the post-HLS \(\mathbb Z_2\)-rigidity problem over
+accepted-record history:
+
+\medskip
+\noindent\emph{construct a surjective map}
+\[
+\pi_{\mathrm{lift}}:\SPhys(\beta)\to\Hacc(\beta)
+\]
+\emph{whose fibers are singleton or free orbits of a canonical involution \(\iota\), with}
+\(\iota\) \emph{acting trivially on accepted-record history and on the reduced welded receiver image.}
+\medskip
+
+The broad sign obstruction of \cref{prop:broad-tau-obstruction} supplies the candidate hidden
+involution upstairs.
+The imported Main-facing base from the UOM Reduction and Pulse-Rigid Ambiguity Supplement note
+\textup{(\cref{uomsrc-thm:accepted-record-reduction,uomsrc-def:2T-char-amb,uomsrc-prop:full-ambiguity-narrowed-bridge,uomsrc-rem:full-sector-gap})}
+provides the theorem-visible reduction result, the narrow ambiguity package, the reduced null-ideal
+descent theorem, and the exact remaining full-sector boundary.
+What remains genuinely new is the post-HLS rigidity step excluding any hidden modulus beyond that
+candidate sign sheet.
+\end{remark}
+
+\section{Dependency Boundary}
+
+\begin{remark}[What belongs upstream and what belongs here]
+The pulse-rigid ambiguity supplement belongs upstream of Main as an imported UOM-specific theorem on
+one realization of the weak interface.
+The present note starts strictly downstream of that boundary.
+For the reduced theorem-facing route, the relevant transfer step is already closed by
+\textup{\cref{uomsrc-prop:full-ambiguity-narrowed-bridge}}.
+If one wants the literal full physical-observable formulation of the post-HLS package, the
+remaining upstream task is instead the broader AQFT/HLS identification boundary isolated in
+\textup{\cref{uomsrc-rem:full-sector-gap}}.
+The present \(\mathbb Z_2\)-rigidity problem is therefore already the correct next downstream target
+on the reduced route, while the full-sector formulation still waits on that one later identification
+theorem.
+\end{remark}
+
+\begin{remark}[Completion-side lane stays separate]
+The bounded completion-side package of the Split-Controlled Completion Lift note is a downstream
+proving lane for this rigidity problem.
+Its explicit split-data blocker is not part of the weak Main-facing ambiguity supplement and should
+not be folded back into \(\mathbf{2T}_{\mathrm{char}}\).
+The archived status boundary for that optional lane is recorded in
+\texttt{UOM/post\_hls\_z2\_route\_status\_memo.md}.
+\end{remark}
+
+\end{document}

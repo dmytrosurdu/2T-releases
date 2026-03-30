@@ -1,0 +1,668 @@
+\ifdefined\UOMTransportFragmentLoaded\else
+\documentclass[11pt]{article}
+\input{UOM/odd_transport_fragment_standalone_preamble.tex}
+\externaldocument{UOM/compressed_log_spectral_selection_note}
+\externaldocument{UOM/canonical_odd_interface_note}
+\externaldocument{UOM/active_response_transport_program_note}
+\title{Raw Odd Selector and Scheme-Stable Affine Output}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\fi
+
+\section{Raw Odd Selector and Scheme-Stable Affine Output}
+\label{sec:odd-selector}
+
+This section isolates the raw selector step on the odd descendant side of the UOM-to-Main
+interface used in Definition~\ref{main-def:uom-main-theorem-assumptions}.
+At fixed finite cutoff, it records the \(\Gamma\)-odd affine output determined by a chosen
+sufficiently local anomaly representative and its same-scheme and inter-scheme translation laws.
+
+\paragraph{Convention on the two \texorpdfstring{\(\mathbb Z_2\)}{Z2} gradings.}
+The cohomological degree for the \(Q_t\)-complex is written with bars:
+\[
+(\cdot)_{\bar 0},
+\qquad
+(\cdot)_{\bar 1}.
+\]
+Physical parity refers to the swap involution \(\Gamma\), with eigenspaces
+\[
+\Gamma F=\pm F.
+\]
+Thus the selector output constructed below is cohomologically degree \(0\) but physically odd.
+Unless bar-degree notation is used explicitly, ``odd'' below means \(\Gamma\)-odd rather than
+\(Q_t\)-degree \(1\).
+
+Work at one accepted tick \(k\) and one branch value \(u\) at cutoff \(\Lambda_k\).
+Use the raw UOM descendant package of
+\cref{uomdesc-thm:uomdesc-raw-package,uomdesc-thm:uomdesc-conditional-odd-package}.
+In particular:
+\begin{enumerate}[leftmargin=2em]
+\item a sufficiently local good monotone representative
+  \[
+  \mathcal O^{(0)}_{\Lambda_k}(u);
+  \]
+\item its canonical anomaly representative
+  \[
+  \mathcal A^{(1)}_{\Lambda_k}(u)
+  :=
+  Q^{\rm phys}_{u,\Lambda_k}\mathcal O^{(0)}_{\Lambda_k}(u);
+  \]
+\item a swap involution
+  \[
+  \Gamma:
+  \big(\mathcal F_{\rm s.loc}^{\Lambda_k}(\mathcal X_k)\big)_{\bar\imath}
+  \to
+  \big(\mathcal F_{\rm s.loc}^{\Lambda_k}(\mathcal X_k)\big)_{\bar\imath}
+  \qquad
+  (\bar\imath\in\{\bar 0,\bar 1\})
+  \]
+  preserving sufficient locality and cohomological degree, and commuting with \(Q_t\):
+  \[
+  \Gamma Q_t=Q_t\Gamma;
+  \]
+\item swap-evenness of the canonical core,
+  \[
+  \Gamma\mathcal O^{(0)}_{\Lambda_k}(u)=\mathcal O^{(0)}_{\Lambda_k}(u),
+  \qquad
+  \Gamma\mathcal A^{(1)}_{\Lambda_k}(u)=\mathcal A^{(1)}_{\Lambda_k}(u);
+  \]
+\item swap covariance of the fixed-scheme physical radial differential on the chosen monotone
+  sector,
+  \[
+  \Gamma Q^{\rm phys}_{u,\Lambda_k}
+  =
+  Q^{\rm phys}_{u,\Lambda_k}\Gamma;
+  \]
+\end{enumerate}
+Items (1) and (2) are contained in \cref{uomdesc-thm:uomdesc-raw-package};
+item (3) uses \cref{uomdesc-def:uomdesc-gamma,uomdesc-lem:uomdesc-gamma-comm};
+item (4) uses \cref{uomdesc-prop:uomdesc-gamma-even-core}; and item (5) uses
+\cref{uomdesc-prop:uomdesc-swap-split}.
+
+Fix a chosen \(\Gamma\)-stable selector class of sufficiently local odd representatives of the same
+\(Q_t\)-cohomology class as \(\mathcal A^{(1)}_{\Lambda_k}(u)\), and restrict to representatives
+for which the exact descent equation
+\begin{equation}
+Q^{\rm phys}_{u,\Lambda_k}\mathcal O^{(0)}_{\Lambda_k}(u)
++
+Q_t\widetilde{\Xi}^{(1)}_{\Lambda_k}(u)
+=
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k}(u)
+\label{eq:selector-full-descent}
+\end{equation}
+admits at least one sufficiently local even solution
+\(
+\widetilde{\Xi}^{(1)}_{\Lambda_k}(u)
+\in
+\big(\mathcal F_{\rm s.loc}^{\Lambda_k}(\mathcal X_k)\big)_{\bar 0}
+\).
+
+\begin{definition}[Selector class and canonical odd kernel channel]
+\label{def:selector-class}
+Let
+\[
+\mathcal C_{{\rm sel},\Lambda_k}(u)
+\subset
+\big(\mathcal F_{\rm s.loc}^{\Lambda_k}(\mathcal X_k)\big)_{\bar 1}
+\]
+be the chosen \(\Gamma\)-stable class of sufficiently local odd representatives of the same
+degree-one \(Q_t\)-cohomology class as \(\mathcal A^{(1)}_{\Lambda_k}(u)\) for which
+\eqref{eq:selector-full-descent} admits a sufficiently local even solution.
+For
+\(
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k}(u)\in\mathcal C_{{\rm sel},\Lambda_k}(u)
+\),
+define its swap-even and swap-odd parts by
+\[
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k,\pm}(u)
+:=
+\frac12\Big(
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k}(u)
+\pm
+\Gamma\widetilde{\mathcal A}^{(1)}_{\Lambda_k}(u)
+\Big).
+\]
+Define the canonical odd kernel channel by
+\[
+\mathcal K^-_{\Lambda_k}
+:=
+\ker(Q_t)
+\cap
+\big(\mathcal F_{\rm s.loc}^{\Lambda_k}(\mathcal X_k)\big)_{\bar 0}
+\cap
+\ker(\Gamma+\mathrm{id}).
+\]
+\end{definition}
+
+\begin{proposition}[Odd defect of a selector representative is always \(Q_t\)-exact]
+\label{prop:selector-odd-defect}
+Let
+\(
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k}(u)\in\mathcal C_{{\rm sel},\Lambda_k}(u)
+\).
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item
+  \(
+  \widetilde{\mathcal A}^{(1)}_{\Lambda_k,+}(u)
+  \)
+  and
+  \(
+  \widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u)
+  \)
+  are sufficiently local;
+\item
+  \(
+  \widetilde{\mathcal A}^{(1)}_{\Lambda_k,+}(u)
+  \)
+  is a swap-even representative of the same \(Q_t\)-cohomology class as
+  \(\mathcal A^{(1)}_{\Lambda_k}(u)\);
+\item
+  \[
+  \widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u)
+  \in
+  \operatorname{im}(Q_t)
+  \cap
+  \big(\mathcal F_{\rm s.loc}^{\Lambda_k}(\mathcal X_k)\big)_{\bar 1}
+  \cap
+  \ker(\Gamma+\mathrm{id}).
+  \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Sufficient locality is preserved by linear combinations, proving item (1).
+
+Because
+\(
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k}(u)
+\)
+and
+\(
+\mathcal A^{(1)}_{\Lambda_k}(u)
+\)
+represent the same \(Q_t\)-cohomology class, there exists
+\(
+Y_{\Lambda_k}(u)\in
+\big(\mathcal F_{\rm s.loc}^{\Lambda_k}(\mathcal X_k)\big)_{\bar 0}
+\)
+such that
+\[
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k}(u)
+-
+\mathcal A^{(1)}_{\Lambda_k}(u)
+=
+Q_tY_{\Lambda_k}(u).
+\]
+Taking the swap-even part and using
+\(
+\Gamma Q_t=Q_t\Gamma
+\)
+and
+\(
+\Gamma\mathcal A^{(1)}_{\Lambda_k}(u)=\mathcal A^{(1)}_{\Lambda_k}(u)
+\),
+we obtain
+\[
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k,+}(u)
+-
+\mathcal A^{(1)}_{\Lambda_k}(u)
+=
+Q_tY_{\Lambda_k,+}(u),
+\]
+so item (2) follows.
+
+Taking the swap-odd part of the same identity gives
+\[
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u)
+=
+Q_tY_{\Lambda_k,-}(u).
+\]
+By construction,
+\(
+\Gamma\widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u)
+=
+-\widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u)
+\),
+which proves item (3).
+\end{proof}
+
+\begin{definition}[Selected odd descendant affine class]
+\label{def:selector-affine-class}
+For
+\(
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k}(u)\in\mathcal C_{{\rm sel},\Lambda_k}(u)
+\),
+define the associated raw odd selector output by
+\[
+\mathfrak X_{\Lambda_k}^{{\rm sel},-}
+\big(u;\widetilde{\mathcal A}^{(1)}_{\Lambda_k}\big)
+:=
+\left\{
+\Xi^-_{\Lambda_k}(u)
+\in
+\big(\mathcal F_{\rm s.loc}^{\Lambda_k}(\mathcal X_k)\big)_{\bar 0}
+\;\middle|\;
+\Gamma\Xi^-_{\Lambda_k}(u)=-\Xi^-_{\Lambda_k}(u),
+\quad
+Q_t\Xi^-_{\Lambda_k}(u)
+=
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u)
+\right\}.
+\]
+\end{definition}
+
+\begin{remark}[Dependence only on the swap-odd defect]
+\label{rem:selector-odd-defect-only}
+By \cref{thm:selector-decomposition}, the affine class
+\(
+\mathfrak X_{\Lambda_k}^{{\rm sel},-}
+\big(u;\widetilde{\mathcal A}^{(1)}_{\Lambda_k}\big)
+\)
+depends only on the swap-odd defect
+\(
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u)
+\).
+\end{remark}
+
+\begin{theorem}[Selector decomposition into even representative channel and odd output]
+\label{thm:selector-decomposition}
+Let
+\(
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k}(u)\in\mathcal C_{{\rm sel},\Lambda_k}(u)
+\),
+and let
+\(
+\widetilde{\Xi}^{(1)}_{\Lambda_k}(u)
+\)
+be any sufficiently local even solution of \eqref{eq:selector-full-descent}.
+Define
+\[
+\widetilde{\Xi}^{(1)}_{\Lambda_k,\pm}(u)
+:=
+\frac12\Big(
+\widetilde{\Xi}^{(1)}_{\Lambda_k}(u)
+\pm
+\Gamma\widetilde{\Xi}^{(1)}_{\Lambda_k}(u)
+\Big).
+\]
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item the swap-even and swap-odd channels decouple as
+  \begin{align}
+  Q^{\rm phys}_{u,\Lambda_k}\mathcal O^{(0)}_{\Lambda_k}(u)
+  +
+  Q_t\widetilde{\Xi}^{(1)}_{\Lambda_k,+}(u)
+  &=
+  \widetilde{\mathcal A}^{(1)}_{\Lambda_k,+}(u),
+  \label{eq:selector-even-channel}
+  \\
+  Q_t\widetilde{\Xi}^{(1)}_{\Lambda_k,-}(u)
+  &=
+  \widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u);
+  \label{eq:selector-odd-channel}
+  \end{align}
+\item the raw odd selector output
+  \(
+  \mathfrak X_{\Lambda_k}^{{\rm sel},-}
+  \big(u;\widetilde{\mathcal A}^{(1)}_{\Lambda_k}\big)
+  \)
+  contains the odd projection of any full solution; in particular it is nonempty;
+\item it is an affine space over the canonical odd kernel channel:
+  \[
+  \mathfrak X_{\Lambda_k}^{{\rm sel},-}
+  \big(u;\widetilde{\mathcal A}^{(1)}_{\Lambda_k}\big)
+  =
+  \widetilde{\Xi}^{(1)}_{\Lambda_k,-}(u)
+  +
+  \mathcal K^-_{\Lambda_k}.
+  \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Apply \(\Gamma\) to \eqref{eq:selector-full-descent}.
+Using
+\(
+\Gamma Q^{\rm phys}_{u,\Lambda_k}
+=
+Q^{\rm phys}_{u,\Lambda_k}\Gamma
+\)
+on the chosen monotone sector and
+\(
+\Gamma\mathcal O^{(0)}_{\Lambda_k}(u)=\mathcal O^{(0)}_{\Lambda_k}(u)
+\),
+we obtain
+\[
+Q^{\rm phys}_{u,\Lambda_k}\mathcal O^{(0)}_{\Lambda_k}(u)
++
+Q_t\Gamma\widetilde{\Xi}^{(1)}_{\Lambda_k}(u)
+=
+\Gamma\widetilde{\mathcal A}^{(1)}_{\Lambda_k}(u).
+\]
+Adding and subtracting this equation from \eqref{eq:selector-full-descent} yields
+\eqref{eq:selector-even-channel} and \eqref{eq:selector-odd-channel}, proving item (1).
+
+Item (2) is immediate from item (1): the odd projection
+\(
+\widetilde{\Xi}^{(1)}_{\Lambda_k,-}(u)
+\)
+of any full solution belongs to the set in
+\cref{def:selector-affine-class}.
+
+Now let
+\(
+\Xi^-_{\Lambda_k,1}(u)
+\)
+and
+\(
+\Xi^-_{\Lambda_k,2}(u)
+\)
+lie in
+\(
+\mathfrak X_{\Lambda_k}^{{\rm sel},-}
+\big(u;\widetilde{\mathcal A}^{(1)}_{\Lambda_k}\big)
+\).
+Subtracting their defining equations gives
+\[
+Q_t\big(
+\Xi^-_{\Lambda_k,1}(u)-\Xi^-_{\Lambda_k,2}(u)
+\big)
+=
+0.
+\]
+Because both are \(\Gamma\)-odd, their difference lies in
+\(
+\mathcal K^-_{\Lambda_k}
+\).
+Conversely, if
+\(
+K^-_{\Lambda_k}\in\mathcal K^-_{\Lambda_k}
+\),
+then
+\[
+Q_t\big(
+\widetilde{\Xi}^{(1)}_{\Lambda_k,-}(u)+K^-_{\Lambda_k}
+\big)
+=
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u),
+\]
+and the sum remains \(\Gamma\)-odd.
+This proves item (3).
+\end{proof}
+
+\begin{corollary}[The two selector channels]
+\label{cor:selector-two-channels}
+At fixed cutoff, the selector problem splits into exactly two channels.
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Kernel channel.}
+  If
+  \(
+  \widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u)=0
+  \),
+  then
+  \[
+  \mathfrak X_{\Lambda_k}^{{\rm sel},-}
+  \big(u;\widetilde{\mathcal A}^{(1)}_{\Lambda_k}\big)
+  =
+  \mathcal K^-_{\Lambda_k}.
+  \]
+  In particular, the canonical anomaly representative
+  \(
+  \widetilde{\mathcal A}^{(1)}_{\Lambda_k}(u)=\mathcal A^{(1)}_{\Lambda_k}(u)
+  \)
+  produces only the canonical odd kernel sector.
+\item \textbf{Representative channel.}
+  If
+  \(
+  \widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u)\neq 0
+  \),
+  then the raw odd selector output is the translated affine space
+  \[
+  \widetilde{\Xi}^{(1)}_{\Lambda_k,-}(u)+\mathcal K^-_{\Lambda_k}
+  \]
+  solving
+  \[
+  Q_t\Xi^-_{\Lambda_k}(u)
+  =
+  \widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u).
+  \]
+\end{enumerate}
+Thus the selector output is determined by the canonical odd kernel channel together with the
+swap-odd part of the chosen anomaly representative.
+\end{corollary}
+
+\begin{proof}
+This is an immediate specialization of \cref{thm:selector-decomposition}.
+\end{proof}
+
+\begin{remark}[Kernel activity versus representative-driven activity]
+\label{rem:selector-two-sources}
+By \cref{cor:selector-two-channels}, the selector output is either the canonical odd kernel channel
+\(\mathcal K^-_{\Lambda_k}\) or a translate of that channel by a particular solution of
+\(
+Q_t\Xi^-_{\Lambda_k}(u)=\widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u)
+\).
+\end{remark}
+
+\begin{proposition}[Same-scheme affine translation of selector outputs]
+\label{prop:selector-same-scheme}
+Let
+\[
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k}(u),
+\qquad
+\widehat{\mathcal A}^{(1)}_{\Lambda_k}(u)
+\in
+\mathcal C_{{\rm sel},\Lambda_k}(u)
+\]
+be selector representatives in the same finite-cutoff scheme, and suppose there exists an even
+sufficiently local cochain \(Y_{\Lambda_k}(u)\) such that
+\begin{equation}
+\widehat{\mathcal A}^{(1)}_{\Lambda_k}(u)
+-
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k}(u)
+=
+Q_tY_{\Lambda_k}(u).
+\label{eq:selector-same-scheme}
+\end{equation}
+Define
+\[
+Y^-_{\Lambda_k}(u)
+:=
+\frac12\Big(
+Y_{\Lambda_k}(u)-\Gamma Y_{\Lambda_k}(u)
+\Big).
+\]
+Then
+\[
+\mathfrak X_{\Lambda_k}^{{\rm sel},-}
+\big(u;\widehat{\mathcal A}^{(1)}_{\Lambda_k}\big)
+=
+\mathfrak X_{\Lambda_k}^{{\rm sel},-}
+\big(u;\widetilde{\mathcal A}^{(1)}_{\Lambda_k}\big)
++
+Y^-_{\Lambda_k}(u).
+\]
+If \(Y'_{\Lambda_k}(u)\) is another primitive satisfying
+\eqref{eq:selector-same-scheme}, then
+\[
+Y_{\Lambda_k}^{\prime -}(u)-Y^-_{\Lambda_k}(u)\in \mathcal K^-_{\Lambda_k}.
+\]
+In particular, if
+\(
+\widehat{\mathcal A}^{(1)}_{\Lambda_k,-}(u)
+=
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u)
+\),
+then
+\[
+\mathfrak X_{\Lambda_k}^{{\rm sel},-}
+\big(u;\widehat{\mathcal A}^{(1)}_{\Lambda_k}\big)
+=
+\mathfrak X_{\Lambda_k}^{{\rm sel},-}
+\big(u;\widetilde{\mathcal A}^{(1)}_{\Lambda_k}\big).
+\]
+\end{proposition}
+
+\begin{proof}
+Taking swap-odd parts of \eqref{eq:selector-same-scheme} gives
+\[
+\widehat{\mathcal A}^{(1)}_{\Lambda_k,-}(u)
+-
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u)
+=
+Q_tY^-_{\Lambda_k}(u).
+\]
+Let
+\(
+\Xi^-_{\Lambda_k}(u)
+\in
+\mathfrak X_{\Lambda_k}^{{\rm sel},-}
+\big(u;\widetilde{\mathcal A}^{(1)}_{\Lambda_k}\big)
+\).
+Then
+\[
+Q_t\Xi^-_{\Lambda_k}(u)
+=
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u),
+\]
+so
+\[
+Q_t\big(
+\Xi^-_{\Lambda_k}(u)+Y^-_{\Lambda_k}(u)
+\big)
+=
+\widehat{\mathcal A}^{(1)}_{\Lambda_k,-}(u).
+\]
+Because both terms are \(\Gamma\)-odd, the sum lies in
+\(
+\mathfrak X_{\Lambda_k}^{{\rm sel},-}
+\big(u;\widehat{\mathcal A}^{(1)}_{\Lambda_k}\big)
+\).
+This proves one inclusion, and the reverse inclusion follows by symmetry with \(-Y^-_{\Lambda_k}(u)\).
+
+If \(Y'_{\Lambda_k}(u)\) is another primitive, then
+\(
+Q_t(Y'_{\Lambda_k}(u)-Y_{\Lambda_k}(u))=0
+\).
+Taking swap-odd parts yields
+\[
+Q_t\big(
+Y_{\Lambda_k}^{\prime -}(u)-Y^-_{\Lambda_k}(u)
+\big)=0.
+\]
+Since the difference is also \(\Gamma\)-odd, it lies in \(\mathcal K^-_{\Lambda_k}\).
+If
+\(
+\widehat{\mathcal A}^{(1)}_{\Lambda_k,-}(u)
+=
+\widetilde{\mathcal A}^{(1)}_{\Lambda_k,-}(u)
+\),
+then one may choose \(Y^-_{\Lambda_k}(u)=0\), and the last claim follows.
+\end{proof}
+
+\begin{theorem}[Scheme-stable affine translation of the odd selector output]
+\label{thm:selector-scheme-stability}
+Let \(S\) and \(S'\) be cohomologically admissibly comparable finite-cutoff schemes on the same
+chosen monotone sector.
+Assume in addition that:
+\begin{enumerate}[leftmargin=2em]
+\item the canonical anomaly representatives
+  \(
+  \mathcal A^{(1)}_{k,S}(u)
+  \)
+  and
+  \(
+  \mathcal A^{(1)}_{k,S'}(u)
+  \)
+  are swap-even;
+\item there exist chosen \(\Gamma\)-stable selector classes
+  \[
+  \mathcal C_{{\rm sel},\Lambda_k}^{S}(u),
+  \qquad
+  \mathcal C_{{\rm sel},\Lambda_k}^{S'}(u),
+  \]
+  and chosen selector representatives
+  \[
+  \widehat{\mathcal A}^{(1)}_{k,S}(u)\in\mathcal C_{{\rm sel},\Lambda_k}^{S}(u),
+  \qquad
+  \widehat{\mathcal A}^{(1)}_{k,S'}(u)\in\mathcal C_{{\rm sel},\Lambda_k}^{S'}(u),
+  \]
+  and an even sufficiently local cochain \(Y_k(u)\) such that
+  \begin{equation}
+  \widehat{\mathcal A}^{(1)}_{k,S'}(u)
+  -
+  \widehat{\mathcal A}^{(1)}_{k,S}(u)
+  =
+  \mathcal A^{(1)}_{k,S'}(u)
+  -
+  \mathcal A^{(1)}_{k,S}(u)
+  +
+  Q_tY_k(u).
+  \label{eq:selector-exact-comparison}
+  \end{equation}
+\end{enumerate}
+Define the odd comparison primitive
+\[
+Y^-_k(u)
+:=
+\frac12\Big(
+Y_k(u)-\Gamma Y_k(u)
+\Big).
+\]
+Then
+\[
+\mathfrak X_{{\Lambda_k},S'}^{{\rm sel},-}
+\big(u;\widehat{\mathcal A}^{(1)}_{k,S'}\big)
+=
+\mathfrak X_{{\Lambda_k},S}^{{\rm sel},-}
+\big(u;\widehat{\mathcal A}^{(1)}_{k,S}\big)
++
+Y^-_k(u).
+\]
+If \(Y'_k(u)\) is another comparison primitive satisfying
+\eqref{eq:selector-exact-comparison} for the same chosen pair of representatives, then
+\[
+Y_k^{\prime -}(u)-Y^-_k(u)\in \mathcal K^-_{\Lambda_k}.
+\]
+\end{theorem}
+
+\begin{proof}
+Taking swap-odd parts of \eqref{eq:selector-exact-comparison} and using the swap-evenness of the
+canonical anomaly representatives gives
+\[
+\widehat{\mathcal A}^{(1)}_{k,S',-}(u)
+- 
+\widehat{\mathcal A}^{(1)}_{k,S,-}(u)
+=
+Q_tY^-_k(u).
+\]
+The same affine-fiber argument as in \cref{prop:selector-same-scheme} therefore gives the
+translation statement by \(Y^-_k(u)\), and the same odd-kernel argument gives the ambiguity claim
+for alternative primitives.
+\end{proof}
+
+\begin{remark}[Selector output handed to the downstream notes]
+\label{rem:selector-handoff}
+The raw selector datum is the affine class
+\[
+\mathfrak X_{\Lambda_k}^{{\rm sel},-}
+\big(u;\widetilde{\mathcal A}^{(1)}_{\Lambda_k}\big)
+\]
+attached to the chosen selector representative.
+Its ambiguity descent, transported dominant-response value, and weak-interface image are treated in
+\cref{thm:dominant-quotient-descent,thm:active-response-transport-minimal,thm:char-weak-interface}.
+\end{remark}
+
+\begin{remark}[Relation to the Hodge-normalized layer]
+\label{rem:selector-vs-hodge}
+The Hodge-normalized comparison layer for admissible alternative representatives is treated in
+\cref{uomdesc-thm:uomdesc-conditional-hodge-package}.
+The present section uses only raw sufficiently local selector classes.
+\end{remark}
+
+\ifdefined\UOMTransportFragmentLoaded\else
+\end{document}
+\fi

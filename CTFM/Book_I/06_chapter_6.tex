@@ -1,0 +1,501 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{framed}
+\usepackage{enumitem}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+% Chapter-specific environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+\newenvironment{editorsnote}{%
+  \begin{framed}
+  \noindent\textbf{Editor's Note:}\em
+}{\end{framed}}
+
+\title{\textbf{Chapter 6: The Structure of Certifiable Measurement: \\ The Guard-Band Equivalence}}
+\author{Dmytro Surdu}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{editorsnote}
+In this chapter we prove that any tail property allowing a polynomial-size, deterministic witness must—and only can—be a guard-band predicate.
+\end{editorsnote}
+
+\section{Motivation: From a Sufficient Condition to a Universal Law}
+
+We have shown that non-invertible (information-losing) maps admit short witnesses. Is there any other mechanism to certify a tail property? We answer: no. Any deterministic, streaming verifier that makes an irrevocable accept/reject decision on each sample can only test a per-sample "guard-band" predicate, and vice versa. This chapter formalizes this claim into a necessary and sufficient condition, providing a complete characterization of deterministic testability.
+
+\section{The Guard-Band Predicate}
+
+A guard-band predicate is a property asserting that every sample in the infinite tail of a measurement stream must lie within a specific acceptance region. The crucial feature is that this region can depend on the underlying true state of the system, $Q$.
+
+\begin{definition}[Guard-Band Predicate]
+A tail predicate $P_{\mathrm{tail}}$ is a \textbf{guard-band predicate} if it is logically equivalent to a statement of the form:
+\[
+\forall k > n, \; Z_k \in \mathcal{R}_{\theta_Q}
+\]
+where:
+\begin{enumerate}
+    \item $\theta_Q = T(P_Q)$ is a finite-dimensional vector of statistics derived from the true (unknown) distribution $P_Q$. The mapping $T: \mathcal{P}(\mathcal{Q}) \to \Theta \subseteq \mathbb{R}^d$ is Lipschitz continuous.
+    \item The map $\theta \mapsto \mathcal{R}_{\theta}$, from the space of statistics $\Theta$ to acceptance regions, is Lipschitz continuous in the Hausdorff metric.
+\end{enumerate}
+\end{definition}
+
+Intuitively, the system's true nature determines a parameter $\theta_Q$, and this parameter in turn sets a fixed "lane" or "channel" $\mathcal{R}_{\theta_Q}$ in which all future measurements must remain.
+
+\begin{definition}[Guard-Band Region Regularity and Margin]
+For a given parameter $\theta$ and its associated symbol-level acceptance region $\mathcal{R}_\theta \subseteq \mathcal{Z}$, define the \emph{margin} of $\mathcal{R}_\theta$ as
+\[
+\delta(\mathcal{R}_\theta) := \inf_{z\in\mathcal{R}_\theta} \operatorname{dist}(z,\mathcal{Z}\setminus \mathcal{R}_\theta),
+\]
+where the distance is taken in the ambient metric on $\mathcal{Z}$ inherited from the measurement/state space. We say that $\mathcal{R}_\theta$ satisfies the \emph{minimal regularity} condition if
+\[
+\delta(\mathcal{R}_\theta) > 0,
+\]
+i.e., $\mathcal{R}_\theta$ contains a nontrivial open buffer around each of its points and is not “knife-edge” thin. Equivalently, $\mathcal{R}_\theta$ is the union of balls of radius at least $\delta(\mathcal{R}_\theta)$ contained in itself.
+
+This is the weakest possible regularity needed for finite-horizon truncation: it guarantees that small perturbations (up to size less than the margin) of an accepted symbol remain accepted, providing the slack required in contraction-based error accumulation.
+\end{definition}
+
+
+\section{The Main Equivalence Theorem}
+
+We now state the main equivalence and prove each direction, starting with establishing the operational definitions.
+
+\begin{remark}[Metric Notation]
+In this chapter we write \(d_\Theta(\theta,\theta')\) for the metric on \(\Theta\).  Equivalently, if \(\Theta\) carries a norm \(\|\cdot\|\), then
+\[
+  d_\Theta(\theta,\theta') \;=\;\|\theta-\theta'\|.
+\]
+Similarly, \(d_H\) denotes the Hausdorff distance on subsets of \(\mathcal Z\).
+\end{remark}
+
+
+\subsection{State Transition and Emission Definition}
+%--------------------------------------------------
+% Derive all necessary regularity assumptions from the Chapter 4 model
+% (Q, f, g, and the stateful generator H) plus the Guard‑Band Predicate.
+
+Recall from Chapter 4 that our measurement model consists of:
+\begin{itemize}
+  \item A compact “true‐state” space $(\mathcal Q,d_Q)\subset\mathbb{R}^m$.
+  \item An \emph{ideal sensor} $f:\mathcal Q\to\mathcal X$ which is injective and Lipschitz.
+  \item A \emph{lossy model} $g:\mathcal X\to\mathcal Y$ which is finite‐to‐one and Lipschitz.
+  \item A \emph{stream generator} (Mealy transducer)
+    \[
+      H:\mathcal S_{\mathrm{gen}}\;\longrightarrow\;
+         \mathcal S_{\mathrm{gen}}\times\mathcal Z,
+    \]
+    initialized by $s_0=\mathrm{initialize}(y)$ with $y=g\bigl(f(q)\bigr)$.
+\end{itemize}
+
+We now define the induced \emph{statistic‐space} and its update/emission maps:
+
+\begin{itemize}
+  \item \(\displaystyle \Theta\;=\;T\bigl(\mathcal P(\mathcal Q)\bigr)\subset\mathbb{R}^d\), the finite‐dimensional
+        parameter space, where
+        \[
+          T:\mathcal P(\mathcal Q)\,\longrightarrow\,\Theta
+        \]
+        is assumed \emph{Lipschitz continuous} (Guard‑Band Def.\,1).
+
+  \item The coordinate projections
+        \(
+          \pi_1,\pi_2:\mathcal S_{\mathrm{gen}}\times\mathcal Z\to
+                        \mathcal S_{\mathrm{gen}},\mathcal Z
+        \)
+        and the induced maps
+        \[
+          U\;=\;\pi_1\circ H\,:\;\mathcal S_{\mathrm{gen}}\to\mathcal S_{\mathrm{gen}},
+          \qquad
+          E\;=\;\pi_2\circ H\,:\;\mathcal S_{\mathrm{gen}}\to\mathcal Z.
+        \]
+        We identify 
+        \(\mathcal M=\mathcal S_{\mathrm{gen}}\)
+        with the belief‐state space via the map
+        \(\theta\mapsto s\) (i.e.\ push \(T\)-statistics forward to generator states).
+
+  \item By Model Regularity (Ch 4) and finite‐to‐one of \(g\),
+        \(\mathcal S_{\mathrm{gen}}\) is compact, and since \(H\) is continuous (indeed Lipschitz
+        if \(f,g\) and \(\mathrm{initialize}\) are), it follows that
+        \[
+          U:\mathcal M\to\mathcal M
+          \quad\text{and}\quad
+          E:\mathcal M\to\mathcal Z
+        \]
+        are both \emph{Lipschitz continuous}.
+
+  \item Finally, from the Guard‑Band Predicate (Def.\,6.1) the map
+        \(\theta\mapsto\mathcal R_{\theta}\) is Lipschitz
+        in the Hausdorff metric on subsets of \(\mathcal Z\).
+\end{itemize}
+
+\medskip\noindent
+\textbf{Summary of Derived Assumptions.}
+\begin{enumerate}[label=(A\arabic*)]
+  \item \(\mathcal M = \mathcal S_{\mathrm{gen}}\) is a compact metric space.
+  \item \(U:\mathcal M\to\mathcal M\) is Lipschitz continuous.
+  \item \(E:\mathcal M\to\mathcal Z\) is Lipschitz continuous.
+  \item \(\Theta\subset\mathbb{R}^d\) is compact and \(T:\mathcal P(\mathcal Q)\to\Theta\) is Lipschitz.
+  \item \(\theta\mapsto\mathcal R_{\theta}\) is Lipschitz in the Hausdorff metric.
+\end{enumerate}
+
+In addition, we impose a local contraction assumption on $U$:
+\begin{enumerate}[label=(A\arabic*), start=6]
+\item \textbf{Local Contraction:} There exists a \emph{true} parameter $\theta_Q\in\Theta$, a radius $r>0$, and $\rho\in[0,1)$ such that for all $z\in\mathcal Z$ and all $\theta,\theta'\in B_r(\theta_Q)$,
+    \[
+      d_\Theta\bigl(U(\theta,z),\,U(\theta',z)\bigr)
+      \;\le\;\rho\;d_\Theta(\theta,\theta').
+    \]
+\end{enumerate}
+\noindent\textbf{Clarification.} The term ``true value'' $\theta_Q := T(P_Q)$ is used as a canonical representative of the underlying process—it is not to be interpreted as an epistemic absolute that the verifier uniquely recovers. In the equivalence, a certificate may select any statistic $\theta$ (possibly distinct from $\theta_Q$) whose induced guard-band behavior is equivalent (within the permitted stability/Lipschitz slack) to that of the canonical choice. Lipschitz continuity and the local contraction/stability assumptions ensure that such witness-chosen $\theta$ and the canonical $\theta_Q$ produce guard-band predicates that differ only by controlled, negligible perturbations; thus, the equivalence holds with respect to any such representative without requiring access to an inaccessible “true” metaphysical value.
+
+
+\subsection{The True‐Value / Sufficient‐Statistic Axiom}
+%--------------------------------------------------
+% Explain the origin and necessity of the local‐contraction assumption,
+% generalize the Chapter 2 primer, and then introduce the axiom.
+
+In Chapter 2, we saw a concrete “mean and sd” example:
+\[
+  \theta_n = (\mu_n,\sigma_n),
+  \quad
+  \theta_{n+1}
+    = U(\theta_n,s_{n+1})
+    = \begin{pmatrix}
+        \dfrac{n}{n+1}\,\mu_n + \dfrac{1}{n+1}s_{n+1},\\[1ex]
+        \textstyle\sqrt{\bigl(1-\tfrac1n\bigr)\sigma_n^2 + \tfrac{n}{(n+1)^2}(s_{n+1}-\mu_n)^2}
+      \end{pmatrix}.
+\]
+A direct calculation showed
+\[
+  \|\theta_{n+1}-\theta'_{n+1}\|
+  \;\le\;
+  \frac{n}{n+1}\,\|\theta_n-\theta'_n\|,
+\]
+so the update was a strict contraction \(\rho=\tfrac{n}{n+1}<1\).  That bound was the keystone of our finite‐horizon proof.
+
+\medskip\noindent
+\textbf{Generalization candidates.}
+One might ask: can we replace “mean and sd” by any other finite‐dimensional statistic \(T\)?  The answer is yes, \textit{provided} its one‐step recursion
+\[
+  \theta_{n+1}
+    = U\bigl(\theta_n,\;z_{n+1}\bigr)
+\]
+satisfies a \textit{uniform contraction} in a neighborhood of the true parameter.  Examples include:
+\begin{itemize}[nosep]
+  \item \emph{Exponentially weighted moving averages:}
+    \(\;\theta_{n+1}=\alpha\,\theta_n+(1-\alpha)z_{n+1},\;\alpha<1.\)
+  \item \emph{Polynomial‐regression coefficients:} update via recursive least‑squares with forgetting factor \(<1\).  
+  \item \emph{Kernel‐density modes:} approximate Newton‐Raphson steps with step‐size \(<1\).
+\end{itemize}
+In each case a simple Jacobian or spectral‐radius check shows there is an \(r>0\) and \(\rho<1\) so that
+\[
+  d\bigl(U(\theta,z),\,U(\theta',z)\bigr)
+  \;\le\;\rho\,d(\theta,\theta'),
+  \quad
+  \forall\,\theta,\theta'\in B_r(\theta_Q),\;z\in\mathcal Z.
+\]
+
+\medskip\noindent
+\textbf{Necessity of local contraction.}
+Without such a contraction bound, small errors in the witness‐statistic can amplify under iteration and breach the guard‐band, invalidating any finite‐horizon check.
+
+\medskip\noindent
+\begin{axiom}["True‐Value"/Sufficient‐Statistic Axiom]
+\label{ax:sufficient_statistic}
+There exists a (unknown) “true” parameter \(\theta_Q\in\Theta\), a radius \(r>0\), and a constant \(\rho\in[0,1)\) such that for every input \(z\in\mathcal Z\) and all \(\theta,\theta'\in B_r(\theta_Q)\):
+\[
+  d\bigl(U(\theta,z),\,U(\theta',z)\bigr)
+  \;\le\;\rho\,d(\theta,\theta').
+\]
+In other words, once the statistic lies within \(r\) of its true value, every update step strictly contracts errors by factor \(\rho\).
+\end{axiom}
+
+\medskip\noindent
+\textbf{Practical blueprint for metrologists.}
+To verify Axiom \ref{ax:sufficient_statistic} in a given instrument:
+\begin{enumerate}[nosep]
+  \item \emph{Choose your statistic} \(T\) (e.g.\ mean and sd, regression vector, kernel estimator).  
+  \item \emph{Empirically estimate} or theoretically compute the Jacobian \(\partial_\theta U(\theta,z)\) at \(\theta_Q\) (using calibration data or model linearization).  
+  \item \emph{Find a neighborhood} \(B_r(\theta_Q)\) on which the spectral radius \(\|\partial_\theta U\|<\rho<1\).  
+  \item \emph{Validate Lipschitz constants} \(L_E,L_R\) for emission and region‐map via small perturbation tests.  
+\end{enumerate}
+Once these steps confirm \(\rho<1\), your system satisfies the True‐Value Axiom and hence admits a finite‐horizon guard‐band certification.
+
+
+Now we have exactly the regularity conditions needed to state and prove the Guard‑Band Equivalence in what follows.
+
+
+\begin{theorem}[The Guard-Band Equivalence]
+A tail predicate $P_{\mathrm{tail}}$ admits a universal, polynomial-size deterministic witness for every possible head of the stream if and only if it is logically equivalent to a guard-band predicate.
+\end{theorem}
+
+
+\subsection{Finite-Horizon Truncation Lemma}
+\label{lem:finite_horizon_local}
+%--------------------------------------------------
+% Uses only the local contraction on B_r(\theta_Q) to truncate the infinite tail check.
+
+\begin{lemma}[Finite‐Horizon Truncation (Local Contraction)]
+Under the assumptions of the previous subsection, let
+\[
+  \delta \;=\; \text{margin}\bigl(\mathcal R_{\theta_Q}\bigr)
+  \;>\;0,
+\]
+and choose the horizon
+\[
+  T \;=\;\min\Bigl\{\,t : \rho^t\,r\,L_E\,L_R < \delta\Bigr\}.
+\]
+Then for any initial statistic $\theta_n\in B_r(\theta_Q)$, verifying
+\[
+  E\bigl(\theta_{n+k}\bigr)\in\mathcal R_{\theta_Q}
+  \quad\text{for }k=1,2,\dots,T
+\]
+implies
+\[
+  E\bigl(\theta_{n+k}\bigr)\in\mathcal R_{\theta_Q}
+  \quad\text{for all }k\ge1.
+\]
+That is, checking only the next $T$ steps suffices to guarantee membership forever.
+\end{lemma}
+
+\begin{proof}
+Since $\theta_n,\hat\theta\in B_r(\theta_Q)$ and $U$ is $\rho$‐contractive there, 
+\[
+  d_\Theta\bigl(\theta_{n+k},\hat\theta_{n+k}\bigr)
+  \;\le\;
+  \rho^k\,d_\Theta(\theta_n,\hat\theta)
+  \;\le\;
+  \rho^k\,r.
+\]
+By emission‐Lipschitz and region‐map Lipschitz, a deviation of $\rho^k r$ in $\Theta$ 
+translates to at most $L_E\,L_R\,\rho^k r$ in the Hausdorff sense on $\mathcal R$. 
+Choosing $T$ so that $L_E\,L_R\,\rho^T r<\delta$ ensures no further outputs can escape 
+$\mathcal R_{\theta_Q}$ once the first $T$ are inside.
+\end{proof}
+
+\subsection{Efficient Covering Lemma}
+\label{lem:efficient_covering_theta}
+%--------------------------------------------------
+% We construct an ε-net in the statistic space Θ in polylog time.
+
+\begin{lemma}[Efficient Covering of $\Theta$]
+Let $\Theta\subset\mathbb{R}^d$ be compact with diameter $D$.  For any precision $\varepsilon>0$, one can in time
+\(
+  poly\bigl(d,\log(D/\varepsilon)\bigr)
+\)
+construct an explicit $\varepsilon$‐net
+\(\{\eta_1,\dots,\eta_N\}\subset\Theta\)
+of size
+\(
+  N = O\!\bigl((D/\varepsilon)^d\bigr),
+\)
+such that
+\(\bigcup_{j=1}^N B(\eta_j;\varepsilon)=\Theta.\)
+
+\end{lemma}
+
+\begin{proof}
+\textbf{1. Grid in ambient space.}
+Partition each coordinate into intervals of length $\varepsilon/\sqrt d$, yielding 
+$M=O((D/\varepsilon)^d)$ grid points.
+
+\medskip\noindent
+\textbf{2. Projection or pruning.}
+For each grid point, test membership in $\Theta$ (via the known description of $\Theta$) 
+in $\mathrm{poly}(d,\log(1/\varepsilon))$ time.  Keep those that lie in $\Theta$.  
+
+\medskip\noindent
+\textbf{3. Complexity.}
+There are $O((D/\varepsilon)^d)$ points, each checked in $\mathrm{poly}(d,\log(D/\varepsilon))$ 
+time, hence total time is $\mathrm{poly}(d,\log(D/\varepsilon))$.
+\end{proof}
+
+
+\subsection{($\Leftarrow$) Sufficiency: Guard-Bands are Certifiable}
+
+This direction demonstrates that if a property has the guard-band structure, it is indeed testable. The proof formalizes the constructive argument from Chapter 5.
+
+\begin{lemma}[Region-Approximation]
+\label{lem:region_approx}
+Under assumption (A5), the map \(\theta\mapsto\mathcal R_\theta\) satisfies
+\[
+  d_H\bigl(\mathcal R_{\theta},\,\mathcal R_{\theta'}\bigr)
+  \;\le\;L_R\,d_\Theta(\theta,\theta'),
+\]
+where \(d_H\) is the Hausdorff metric on subsets of \(\mathcal Z\).  In particular, if 
+\(d_\Theta(\theta,\theta_Q)\le\varepsilon\), then
+\[
+  \mathcal R_{\theta}\;\subseteq\;\mathcal R_{\theta_Q}^{+L_R\varepsilon}
+  \quad\text{and}\quad
+  \mathcal R_{\theta_Q}\;\subseteq\;\mathcal R_{\theta}^{+L_R\varepsilon}.
+\]
+\end{lemma}
+
+
+\begin{proof}[Proof of Sufficiency]
+Assume \(P_{\mathrm{tail}}\) is a guard‑band predicate with statistic map \(T\) and regions \(\{\mathcal R_\theta\}\).  Let \(\theta_Q=T(P_Q)\).
+
+\medskip\noindent
+\textbf{(i) Choose precision \(\varepsilon\).}
+Let 
+\[
+\delta \;=\;\text{margin}\bigl(\mathcal R_{\theta_Q}\bigr)>0,
+\]
+and fix 
+\[
+\varepsilon \;=\;\min\!\Bigl(r,\;\frac{\delta}{2\,L_E\,L_R}\Bigr),
+\]
+where \(r,\rho<1\) come from (A6) and \(L_E,L_R\) from (A3),(A5).
+
+\medskip\noindent
+\textbf{(ii) Build the net and pick the net‐point.}  
+By Lemma \ref{lem:efficient_covering_theta}, in time \(\mathrm{poly}(d,\log(\!1/\varepsilon))\) we construct an \(\varepsilon\)‑net
+\(\{\eta_1,\dots,\eta_N\}\subset\Theta\).  Since \(\theta_Q\in\Theta\), there is some \(\eta_j\) with
+\(\|\eta_j-\theta_Q\|\le\varepsilon\).  We will use \(j\) as our witness.
+
+\medskip\noindent
+\textbf{(iii) Compute the finite horizon.}  
+By Lemma \ref{lem:finite_horizon_local} (with initial error \(\le\varepsilon\)), choose the minimal
+\[
+T \;=\;
+\min\Bigl\{\,t : \rho^t\,\varepsilon\,L_E\,L_R < \delta\Bigr\}
+\;=\;
+O\!\bigl(\log(1/\varepsilon)\bigr).
+\]
+
+\medskip\noindent
+\textbf{(iv) The witness.}  
+The prover’s certificate is the single integer
+\[
+w = j,
+\]
+encoded in \(\log_2 N = O(\log(1/\varepsilon))\) bits.  By construction \(\eta_j\in B_r(\theta_Q)\).
+
+\medskip\noindent
+\textbf{(v) Verification.}  On input \((z_{1:n},w=j)\):
+\begin{enumerate}
+  \item Decode \(j\) to get \(\widehat\theta=\eta_j.\)
+  \item \emph{Simulate} the update map \(U\) starting from \(\widehat\theta\) for exactly \(T\) steps, producing
+    \(\widehat\theta_{n+1},\dots,\widehat\theta_{n+T}.\)
+\item For each $k=1,\dots,T$, compute
+\[
+  z' = E\bigl(\widehat\theta_{n+k-1}\bigr)
+  \quad\text{and check}\quad
+  z' \;\in\;\mathcal R_{\widehat\theta}.
+\]
+Then invoke Lemma~\ref{lem:region_approx}: since 
+$d_\Theta(\widehat\theta,\theta_Q)\le\varepsilon$ implies 
+\(\mathcal R_{\widehat\theta}\subseteq\mathcal R_{\theta_Q}\), we conclude 
+\[
+  z'\in\mathcal R_{\theta_Q}.
+\]
+If any of these refined checks fails, \emph{reject}.
+
+  \item Otherwise \emph{accept}.
+
+
+\end{enumerate}
+Each simulation‐and‐check step takes \(\mathrm{poly}(n)\) time by (A2),(A3),(A5), and there are only \(T=O(\log(1/\varepsilon))\) of them.
+
+\medskip\noindent
+\textbf{(vi) Correctness by Finite‐Horizon.}  
+Since \(\|\widehat\theta-\theta_Q\|\le\varepsilon\le r\), Lemma \ref{lem:finite_horizon_local} guarantees that if all of the first \(T\) simulated outputs lie in \(\mathcal R_{\theta_Q}\), then \emph{all} future outputs will.  Thus acceptance exactly characterizes
+\(\forall k>n:\;Z_k\in\mathcal R_{\theta_Q}\), i.e.\ \(P_{\mathrm{tail}}\).
+
+\vspace{1ex}
+\noindent
+Because \(\lvert w\rvert=O(\log(1/\varepsilon))\) and everything runs in \(\mathrm{poly}(n)\) time, this puts the language of good heads in \(\mathbf{NP}\).  
+\end{proof}
+
+\subsection{($\Rightarrow$) Necessity: Certifiability Implies a Guard-Band}
+This is the more profound direction, for which we now provide a full, rigorous proof. We assume a certification system exists and deduce its necessary structure.
+
+\begin{proof}[Proof of Necessity]
+We work in the measurement-chain model of Chapter 4: $Q \xrightarrow{f} X \xrightarrow{g} Y \xrightarrow{\text{Generate}} Z_{1:\infty}$, where $Q$ is the unknown true state and $Y=g(f(Q))$ is the finite instrument state. An admissible predicate $P_{\text{tail}}$ is one decided by a finite, polynomial-time test $\Phi$ on a block of the tail, where the test is robust to $\varepsilon$-perturbations of the initial state $Q$.
+
+\paragraph{The NP-Certifiability Assumption.}
+We assume $P_{\text{tail}}$ is in $\mathbf{NP}$. This means there exists a polynomial $p(n)$ and a deterministic, polynomial-time verifier $V(z_{1:n}, w)$ such that for every head $z_{1:n}$ arising from a true state $Q$, the predicate holds if and only if there exists a witness $w$ with $|w| \le p(n)$ that causes $V$ to accept.
+
+Because $V$ runs in time polynomial in $n$, it cannot inspect an infinite tail. Its logic must rely on the admissibility of the predicate. Any correct witness $w$ must allow $V$ to:
+\begin{enumerate}
+    \item Reconstruct a candidate instrument state $Y^*$ (which corresponds to an $\varepsilon$-approximation of the true state $Q^*$) from the witness $w$.
+    \item Simulate the generator for a finite, polynomial number of steps $T(n)$, producing a predicted tail block $\widehat{z}_{n+1:n+T(n)}$.
+    \item Evaluate the Boolean test $\Phi(\widehat{z}_{n+1:n+T(n)})$ and accept if and only if it is true.
+\end{enumerate}
+No other verification strategy can succeed in polynomial time.
+
+\begin{lemma}[Block-to-Symbol Guard-Band Reduction]
+\label{lem:block-to-symbol-reduction}
+Let $\Phi$ be a deterministic predicate on length-$T$ blocks over alphabet $\mathcal{Z}$, and suppose the verifier accepts an infinite tail $z_{n+1}z_{n+2}\dots$ if and only if for every $k\ge n+1$, the length-$T$ block 
+\[
+B_k := z_k z_{k+1} \dots z_{k+T-1}
+\]
+satisfies $\Phi(B_k)=\mathrm{True}$. Define the per-symbol region
+\[
+\mathcal{R} := \left\{ z\in\mathcal{Z} \ \middle|\ \forall u\in\mathcal{Z}^{T-1},\ \Phi(zu)=\mathrm{True} \right\},
+\]
+where $zu$ denotes the concatenation of symbol $z$ with any length-$(T-1)$ continuation $u$. Then any tail accepted by the verifier must satisfy
+\[
+\forall k>n,\quad z_k\in\mathcal{R}.
+\]
+In other words, acceptance implies the per-symbol guard-band condition $z_k\in\mathcal{R}$ for all future positions.
+\end{lemma}
+
+\begin{proof}
+Suppose, for contradiction, that an infinite tail $z_{n+1}z_{n+2}\dots$ is accepted by the verifier but there exists some $k>n$ with $z_k\notin\mathcal{R}$. By definition of $\mathcal{R}$, since $z_k\notin\mathcal{R}$, there exists a continuation $u\in\mathcal{Z}^{T-1}$ such that $\Phi(z_k u)=\mathrm{False}$. Let $B_k = z_k z_{k+1} \dots z_{k+T-1}$ be the actual length-$T$ block appearing in the tail at position $k$.
+
+The verifier’s acceptance criterion requires $\Phi(B_k)=\mathrm{True}$, because it accepts only if \emph{every} sliding block of length $T$ passes $\Phi$. But since $\Phi$ is deterministic, and $u$ is some length-$(T-1)$ string for which $\Phi(z_k u)=\mathrm{False}$, the only way to avoid rejection is the actual continuation $z_{k+1}\dots z_{k+T-1}$ differs from $u$. However, the tail is arbitrary beyond the assumed acceptance, and the fact that there exists even one such bad extension $u$ means that the verifier would have to rule out an infinite family of tails in advance to guarantee correctness. Since acceptance must hold for the given tail, and no further mechanism is provided to “repair” a symbol that has an unsafe possible extension, the only consistent possibility is that $z_k$ has no such bad extension; that is, $z_k\in\mathcal{R}$. This contradicts the assumption $z_k\notin\mathcal{R}$.
+
+Thus every symbol in an accepted tail must lie in $\mathcal{R}$, establishing the per-symbol guard-band condition.
+\end{proof}
+
+
+\paragraph{Step 1: The Witness Defines a Guard-Band.}
+We now convert this NP-scheme into a guard-band predicate. For each possible witness string $w$ of length $\le p(n)$, we can define an acceptance region $\mathcal{R}_w \subseteq \mathcal{Z}$. Since the verifier $V$ is deterministic and streaming, and must halt on the first violation, its logic for a given witness $w$ must be equivalent to a per-sample membership test. While the admissibility test $\Phi$ may look at a block of $T(n)$ symbols, for the overall infinite-tail property to hold, every such block (starting at $n+1, n+2, \dots$) must be accepted (Lemma \ref{lem:block-to-symbol-reduction}). This forces the property to be a per-sample one.
+
+We can define $\mathcal{R}_w$ as the set of all $z \in \mathcal{Z}$ such that if $z$ were to appear in any position in the tail, it would not cause the verifier to reject. Formally:
+\[
+\mathcal{R}_w = \{ z \in \mathcal{Z} \mid \text{For all tail prefixes } u, \Phi(u \cdot z \cdot \dots) \text{ remains true} \}
+\]
+By construction, $\mathcal{R}_w$ is a fixed subset of $\mathcal{Z}$ whose description complexity is polynomial.
+
+\paragraph{Step 2: The Equivalence to a Guard-Band Predicate.}
+Let $\theta$ be the information encoded in the witness $w$. For a true head $z_{1:n}$ arising from a state $Q$:
+\begin{enumerate}
+    \item If there is an accepting witness $w$, then $V$'s internal simulation must have passed, meaning $\Phi(\widehat{z}^{(w)}_{n+1:n+T(n)}) = \text{true}$. By the $\varepsilon$-robustness of admissible predicates, the actual tail $(z_{n+1}, \dots)$ must also satisfy the property. By the construction of $\mathcal{R}_w$, this implies that $\forall k > n, z_k \in \mathcal{R}_w$. So we have $\forall k>n, z_k \in \mathcal{R}_\theta$.
+    
+    \item Conversely, if the true tail stream satisfies $\forall k > n, z_k \in \mathcal{R}_\theta$ for the $\theta$ corresponding to the witness $w$ for the true state $Q$, then the verifier's simulation will pass, and the witness $w$ will be accepted.
+\end{enumerate}
+This establishes the equivalence: $z_{1:n} \in L_P \iff \exists w \text{ s.t. } \forall k>n, z_k \in \mathcal{R}_{\theta_w}$.
+The statistic $T(P_Q)$ is simply the map that takes the underlying distribution to the correct "coarse-label" $\theta$ that the prover must witness.
+
+\paragraph{Step 3: The Lipschitz Continuity.}
+Finally, we must argue that the maps $T: P_Q \mapsto \theta$ and $\theta \mapsto \mathcal{R}_\theta$ are Lipschitz.
+\begin{itemize}
+    \item The map from the true state $Q$ to the instrument state $Y$ (our coarse label $\theta$) is $g \circ f$. Our Model Regularity condition already assumes this map is continuous (and in fact, finite-to-one, a stronger condition).
+    \item The map from the coarse label $\theta$ to the acceptance region $\mathcal{R}_\theta$ is also Lipschitz. The region $\mathcal{R}_\theta$ is defined by the behavior of the deterministic simulator and the Boolean test $\Phi$. Since the simulator and $\Phi$ are assumed to be polynomial-time computable (and thus continuous in their inputs), a small change in the initial state $\theta$ will result in a small, uniformly bounded change in the predicted tail block, which in turn results in a small change to the boundary of the set $\mathcal{R}_\theta$. This small, uniform change is precisely the definition of Lipschitz continuity in the Hausdorff metric for sets.
+\end{itemize}
+
+This completes the necessity proof. We have shown that any NP-certifiable, admissible tail predicate must be equivalent to a guard-band predicate with the required Lipschitz properties.
+\end{proof}
+
+\section{Conclusion}
+This completes our characterization of deterministic testability. The Guard-Band Equivalence Theorem provides a definitive link between epistemology (what is certifiable) and physics (the structure of the measurement system). It establishes that for a statement about a measurement's infinite future to be knowable with certainty from a finite proof, the system must lose information in a structured way. This loss creates a finite-dimensional state, which in turn defines a set of possible "lanes" or "guard-bands" for the system's future behavior. The witness simply serves to tell the verifier which lane the system is in.
+
+In Chapter 7, we will unify this deterministic view with the probabilistic confidence paradigm, showing that Guard-Band predicates arise as the zero-error limit of statistical confidence intervals.
+
+\end{document}

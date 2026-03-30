@@ -1,0 +1,40 @@
+{
+	"Name":"Lane2NondegeneracyAudit",
+	"Date":"2026-03-29",
+	"Mission":"Separate nondegeneracy theorem lane for c_{Lambda_{k+1}} != 0, kept distinct from the split-threshold lane.",
+	"SourceUpdate":"UOM\/completion_sector_split_model_body.tex now contains a separate overlap-lower-bound theorem lane for c_Lambda != 0.",
+	"Claims":{
+		"Threshold alone forces c_Lambda != 0":{
+			"Status":"counterexample found",
+			"ScopeClass":"exact-model-certificate",
+			"Acceptance":"The effective split threshold does not force c_Lambda != 0; nonvanishing remains an extra assumption.",
+			"CounterexampleArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/DelayedDescendantReentryAudit_Certificates.wl::Audit.ThresholdAudit.Witness",
+			"Source":"UOM\/completion_sector_split_model_body.tex:430-478"
+		},
+		"No-destructive-cancellation lower bound implies c_Lambda != 0":{
+			"Status":"exact finite-dimensional certificate",
+			"Assumptions":"Real ct, real mu > 0, real kappa > 0, and |ct| >= mu.",
+			"Method":"Exact Resolve\/FindInstance audit of the normalized relation cnorm Sqrt[kappa] == ct with kappa > 0.",
+			"Counterexample":[],
+			"Acceptance":"A positive lower bound on the raw unit-source overlap scalar forces nonvanishing of the normalized seam coefficient."
+		},
+		"Lower bound plus nonzero witness implies nonzero raw seam pairing":{
+			"Status":"exact finite-dimensional certificate",
+			"Assumptions":"Real ct, real mu > 0, real obs != 0, and |ct| >= mu.",
+			"Method":"Exact Resolve\/FindInstance audit of the factorized pairing ct * obs.",
+			"Counterexample":[],
+			"Acceptance":"Under detector factorization, a positive lower bound on the unit-source overlap and a nonzero LS witness force nonzero seam pairing."
+		},
+		"Positive normalization preserves the sign of the raw overlap scalar":{
+			"Status":"exact finite-dimensional certificate",
+			"Assumptions":"Real ct != 0 and real kappa > 0.",
+			"Method":"Exact Resolve\/FindInstance audit of Sign[cnorm] == Sign[ct] under cnorm Sqrt[kappa] == ct and kappa > 0.",
+			"Counterexample":[],
+			"Acceptance":"The normalized seam coefficient has the same sign as the raw overlap scalar whenever the normalization factor is positive."
+		}
+	},
+	"TopLine":{
+		"ThresholdBoundary":"The effective split threshold does not force c_Lambda != 0; nonvanishing remains an extra assumption.",
+		"SeparateLaneVerdict":"A unit-source overlap lower bound is exactly sufficient for a separate honest nondegeneracy theorem; the split threshold is not."
+	}
+}

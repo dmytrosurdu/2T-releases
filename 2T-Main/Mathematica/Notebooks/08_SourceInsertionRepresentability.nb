@@ -1,0 +1,248 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     10025,        239]
+NotebookOptionsPosition[      7524,        203]
+NotebookOutlinePosition[      7838,        217]
+CellTagsIndexPosition[      7795,        214]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["08 Source Insertion Representability", "Title",ExpressionUUID->"7dfcdf53-9384-4cbc-bf0c-d1e849f3bb4d"],
+
+Cell["Scope", "Section",ExpressionUUID->"33fb1b15-219f-419a-92f0-455c87e5c9ef"],
+
+Cell["\<\
+This notebook treats source-insertion representability as the exact linear \
+problem \
+\>", "Text",ExpressionUUID->"144074b1-0270-411e-81a6-1538c5a2bd86"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PiPhysR", " ", ".", " ", "Ftau"}], "==", "PiPhysT"}]], "Input",Expr\
+essionUUID->"3d1346a4-11e7-4a94-9b5c-7be68453074f"],
+
+Cell["at fixed cutoff. ", "Text",ExpressionUUID->"98beaa3c-cffd-4409-84c9-871242cda278"],
+
+Cell["Exact solver model", "Section",ExpressionUUID->"d92dc071-de5e-44a5-9d43-35a7d48802fe"],
+
+Cell["Representable family example: ", "CodeText",ExpressionUUID->"346c387b-f3d5-442e-ad72-cf4bc4eba2e8"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"R", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1", ",", "1"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"target", "=", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "3"}], "}"}]}], ";"}]}], "Input",ExpressionUUID->\
+"3f91b526-ed60-4623-97d4-9b58a98bae48"],
+
+Cell["Exact outputs: ", "Text",ExpressionUUID->"eee0bad7-7685-4c3b-bdc1-a52bd1b16f98"],
+
+Cell[TextData[{
+ "one exact solution: ",
+ Cell[BoxData[Cell["{2, 3, 0}",
+   Background->None,ExpressionUUID->"bf056bb4-473f-4be2-9acf-d0806b6021ab"]], 
+  "InlineCode",ExpressionUUID->"354d9d2b-a46e-4344-bf3f-08adb67a7907"]
+}], "Item",ExpressionUUID->"b2f11133-2868-49e9-a4d6-359cdca3d359"],
+
+Cell[TextData[{
+ "gauge space basis: ",
+ Cell[BoxData[Cell["{{-1, -1, 1}}",
+   Background->None,ExpressionUUID->"7cddd1bd-18d7-4950-ad55-22c4d798f457"]], 
+  "InlineCode",ExpressionUUID->"f18b6eb3-0329-45ae-9617-a4156903db7e"]
+}], "Item",ExpressionUUID->"99f56a19-dabd-4e0b-adf6-b2a41b61ddd1"],
+
+Cell[TextData[{
+ "solution family: ",
+ Cell[BoxData[Cell["F = {2, 3, 0} + t {-1, -1, 1}",
+   Background->None,ExpressionUUID->"3e272f95-d589-4ca7-b442-637e4f007d0d"]], 
+  "InlineCode",ExpressionUUID->"8eed53e3-12f3-4580-acae-c526f86f134d"]
+}], "Item",ExpressionUUID->"70806f78-d89e-46be-8d00-4f3083f14c3d"],
+
+Cell["Unique-solution example: ", "CodeText",ExpressionUUID->"cc50d8b8-fc24-45ec-acd2-0e93d58adf1d"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"R", "=", 
+   RowBox[{"IdentityMatrix", "[", "2", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"target", "=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     RowBox[{"-", "1"}]}], "}"}]}], ";"}]}], "Input",ExpressionUUID->\
+"e8830b05-bc0d-46fa-88cf-74d8297a34cf"],
+
+Cell["Broken example: ", "CodeText",ExpressionUUID->"e42c5e7e-b1fc-43df-8395-71dc97d24a9c"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"R", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"target", "=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1"}], "}"}]}], ";"}]}], "Input",ExpressionUUID->\
+"3685ca35-efdf-4a80-a309-4738825b88b2"],
+
+Cell["Exact obstruction witness: ", "CodeText",ExpressionUUID->"a037a75d-bfce-491f-bf07-782d0da67d9d"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"obstruction", "=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"obstruction", " ", ".", " ", "target"}], "=", 
+   RowBox[{"1", "!=", "0"}]}], ";"}]}], "Input",ExpressionUUID->"469150c6-\
+25db-4a0c-a880-d15a169f8af3"],
+
+Cell["So the target lies outside the realizable image. ", "Text",ExpressionUUID->"74d155dd-89c6-4065-bc1b-ea71c370f093"],
+
+Cell["Interpretation boundary", "Section",ExpressionUUID->"4a5c1ec2-b356-4efd-b7ae-4b6ca21e0751"],
+
+Cell[TextData[{
+ "This notebook certifies algebraic realizability only. ",
+ Cell[BoxData[Cell["Sufficient locality",
+   Background->None,ExpressionUUID->"b229b7bb-35ed-4ba5-8d79-d7993e47d896"]], 
+  "InlineCode",ExpressionUUID->"c6fc61b0-f22b-4e99-bd66-7240243330b8"],
+ " is kept explicitly imported and is not identified with image membership. "
+}], "Text",ExpressionUUID->"6a952475-5a0f-4598-a847-05bd5331569b"],
+
+Cell["Re-run", "Section",ExpressionUUID->"1ae7cf50-3ade-457c-b704-d9efccd5aff7"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"MainProof`Representability`RunRepresentabilityExampleSuite", "[", 
+  "]"}]}], "Input",ExpressionUUID->"f30cef3b-f6ac-4679-a10f-0499b9321d3e"],
+
+Cell["Status", "Section",ExpressionUUID->"22ecfae1-d2b5-4c0b-accf-78ee8e440653"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Claim\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm], 
+         TagBox["\<\"ScopeClass\"\>",
+          HoldForm]},
+        {Cell[TextData[{
+          "Exact solver for ",
+          Cell[BoxData[Cell["Pi_phys R(F_tau) = Pi_phys T[tau]",
+            Background->None,ExpressionUUID->
+            "f0a0fd8c-0f55-44b9-93f8-0ab4cbb9b1f3"]], "InlineCode",
+           ExpressionUUID->"a0c265c3-dce6-41f6-b5aa-fa11acdc9865"]
+         }],ExpressionUUID->
+          "974b6c8b-f5ba-489d-a79d-468f62b33b8a"], \
+"\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Exact obstruction report from the left-kernel space\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Exact gauge / nonuniqueness family when solutions exist\"\>", "\
+\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Broken example with physical target outside the realizable \
+image\"\>", "\<\"counterexample found\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Sufficient locality\"\>", "\<\"deferred\"\>", \
+"\<\"abstract-imported-assumptions\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[
+      BoxForm`e$, 
+       TableHeadings -> {None, {"Claim", "Status", "ScopeClass"}}]]], "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"d6f37051-5cb1-4074-8100-c0f589ef8d18"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9fb98179-9cdd-493e-8616-b4f0b8195a60"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 108, 0, 70, "Title",ExpressionUUID->"7dfcdf53-9384-4cbc-bf0c-d1e849f3bb4d"],
+Cell[665, 22, 79, 0, 70, "Section",ExpressionUUID->"33fb1b15-219f-419a-92f0-455c87e5c9ef"],
+Cell[747, 24, 164, 3, 70, "Text",ExpressionUUID->"144074b1-0270-411e-81a6-1538c5a2bd86"],
+Cell[914, 29, 155, 3, 70, "Input",ExpressionUUID->"3d1346a4-11e7-4a94-9b5c-7be68453074f"],
+Cell[1072, 34, 88, 0, 70, "Text",ExpressionUUID->"98beaa3c-cffd-4409-84c9-871242cda278"],
+Cell[1163, 36, 92, 0, 70, "Section",ExpressionUUID->"d92dc071-de5e-44a5-9d43-35a7d48802fe"],
+Cell[1258, 38, 105, 0, 70, "CodeText",ExpressionUUID->"346c387b-f3d5-442e-ad72-cf4bc4eba2e8"],
+Cell[1366, 40, 423, 13, 70, "Input",ExpressionUUID->"3f91b526-ed60-4623-97d4-9b58a98bae48"],
+Cell[1792, 55, 86, 0, 70, "Text",ExpressionUUID->"eee0bad7-7685-4c3b-bdc1-a52bd1b16f98"],
+Cell[1881, 57, 289, 5, 70, "Item",ExpressionUUID->"b2f11133-2868-49e9-a4d6-359cdca3d359"],
+Cell[2173, 64, 292, 5, 70, "Item",ExpressionUUID->"99f56a19-dabd-4e0b-adf6-b2a41b61ddd1"],
+Cell[2468, 71, 306, 5, 70, "Item",ExpressionUUID->"70806f78-d89e-46be-8d00-4f3083f14c3d"],
+Cell[2777, 78, 100, 0, 70, "CodeText",ExpressionUUID->"cc50d8b8-fc24-45ec-acd2-0e93d58adf1d"],
+Cell[2880, 80, 314, 10, 70, "Input",ExpressionUUID->"e8830b05-bc0d-46fa-88cf-74d8297a34cf"],
+Cell[3197, 92, 91, 0, 70, "CodeText",ExpressionUUID->"e42c5e7e-b1fc-43df-8395-71dc97d24a9c"],
+Cell[3291, 94, 423, 13, 70, "Input",ExpressionUUID->"3685ca35-efdf-4a80-a309-4738825b88b2"],
+Cell[3717, 109, 102, 0, 70, "CodeText",ExpressionUUID->"a037a75d-bfce-491f-bf07-782d0da67d9d"],
+Cell[3822, 111, 327, 9, 70, "Input",ExpressionUUID->"469150c6-25db-4a0c-a880-d15a169f8af3"],
+Cell[4152, 122, 120, 0, 70, "Text",ExpressionUUID->"74d155dd-89c6-4065-bc1b-ea71c370f093"],
+Cell[4275, 124, 97, 0, 70, "Section",ExpressionUUID->"4a5c1ec2-b356-4efd-b7ae-4b6ca21e0751"],
+Cell[4375, 126, 412, 6, 70, "Text",ExpressionUUID->"6a952475-5a0f-4598-a847-05bd5331569b"],
+Cell[4790, 134, 80, 0, 70, "Section",ExpressionUUID->"1ae7cf50-3ade-457c-b704-d9efccd5aff7"],
+Cell[4873, 136, 308, 6, 70, "Input",ExpressionUUID->"f30cef3b-f6ac-4679-a10f-0499b9321d3e"],
+Cell[5184, 144, 80, 0, 70, "Section",ExpressionUUID->"22ecfae1-d2b5-4c0b-accf-78ee8e440653"],
+Cell[5267, 146, 2253, 55, 70, "TextTableForm",ExpressionUUID->"d6f37051-5cb1-4074-8100-c0f589ef8d18"]
+}
+]
+*)
+
+(* End of internal cache information *)

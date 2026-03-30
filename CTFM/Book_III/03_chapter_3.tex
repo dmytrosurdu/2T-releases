@@ -1,0 +1,991 @@
+\documentclass[12pt]{article}
+\usepackage{xr}
+\externaldocument{"../Book_II/chapter_3"}
+\externaldocument{"../Book_II/chapter_5"}
+\externaldocument{"../Book_II/chapter_6"}
+\externaldocument{"../Book_II/chapter_8"}
+\externaldocument{chapter_1}
+\externaldocument{chapter_2}
+\externaldocument{appendix}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\algnewcommand\algorithmicforeach{\textbf{for each}}
+\algdef{S}[FOR]{ForEach}[1]{\algorithmicforeach\ #1\ \algorithmicdo}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, decorations.pathreplacing, calc, backgrounds}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{pdflscape} % For the landscape environment
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist[enumerate]{align=left,labelindent=0pt}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+% Chapter-specific theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+\title{\textbf{Chapter 3: Fundamental Test Equivalence}}
+\author{Dmytro Surdu}
+\begin{document}
+\maketitle
+
+\section{Fundamental Equivalence: NP–Certifiability $\;\Longleftrightarrow\;$ Polynomial–Time Halting of a Guarded Program}
+\label{sec:fundamental-equivalence-clean}
+
+We now tie together all ingredients—minimal Certification Standard, open-preimage (In-
+put Traceability), inductive guarded decomposition, Loop-Until, and Time-Irreversible ranking—to obtain
+the central equivalence of this chapter.
+
+\medskip
+\subsection{Setup}
+\noindent\textbf{Standing hypotheses}  
+Let 
+\[
+  \mathfrak T=(\mathcal M,\mathcal Z^{\rm in},\mathcal Z^{\rm out},U,E,\mathcal S)
+\]
+be a \emph{Simple Test} (Def.~\ref{def:simple-test} from Book II, Chapter 8) built upon the axioms:
+\paragraph{Gnosis Axioms:}
+\begin{itemize}
+  \item[(F)] \textbf{Invariant basin.} There exists a reachable, invariant attractor basin $\mathcal B\subseteq\mathcal M$ (Deff. \ref{def:basin-axiom-R},\ref{def:basin-axiom-L},\ref{def:basin-axiom-C} from Book II, Chapter 5). \emph{(There is a fact that remain)}
+  \item[(S)] \textbf{Certification  standard.} $\exists \mathcal{S} = \{\varepsilon_n\}_{n=1}^\infty: \forall \varepsilon_n \in (0, 1]\; \exists\; verifier \; V: V(z^{\text{out}}_{1:n}, w)=accept \Longrightarrow \forall z: d(z,z^{\text{out}}_{1:n}, w))<\varepsilon_n\; V(z)=accept$ (Def. \ref{def:certification-standard} from Book II, Chapter 6). \emph{(The statement can be made about the fact)} 
+\end{itemize}
+\paragraph{Structural Axioms:}
+\begin{itemize}
+    \item[(C)] \textbf{Compact continuity.} $\mathcal M,\mathcal Z^{\rm in}$ are compact metric spaces; $U,E$ are continuous (Deff. \ref{def:belief-state},\ref{def:belief-state-space},\ref{def:emit-update-maps} from Book II, Chapter 3). \emph{(There are finite total degrees of freedom under any finite resolution)}
+    \item[(T)] \textbf{Open‑preimage (PL-traceability).} For every $n\ge1$ and $\Theta\in\mathcal M$, the set $U(\Theta,\cdot)^{-1}(\mathcal B_n)$ is open and nonempty (Def. \ref{ax:open-preimage} from Chapter 1). \emph{(The fact is traceable)}
+\end{itemize}
+
+Note that these hypotheses put assumptions onto the general knowability or the structure of the Simple Test only.
+
+Consider the Simple Test 0-Tick decomposition built from the primitives we described in Chapter 1 and Chapter 2. We further put assumptions on the process of decomposed measurement.
+\paragraph{Process axiom}
+\label{def:ti-wf-fair-execution}
+\begin{itemize}
+    \item[(I)] There exists the finite decomposition of the test $\mathfrak T$ into guarded program \(\Pi\), built from the primitives \textsc{Sequential}, \textsc{Conditional}, \textsc{Loop} and equipped with a \emph{ranking function} \(f\) that satisfies TI/WF Axiom~\ref{ax:ti-wf-subsec} from Chapter 2 on program runs named in further \emph{TI/WF-fair executions}. \emph{(Execution time is irreversible)}
+\end{itemize}
+
+
+\begin{theorem}[Fundamental Equivalence]
+\label{thm:fundamental-equivalence-clean}
+Under gnosis and structural axioms, the following are equivalent:
+
+\begin{enumerate}[label=(\alph*), itemsep=4pt]
+  \item \textbf{NP–Certifiability.}  
+        The tail predicate of \(\mathfrak T\) admits a polynomial-size deterministic certificate; equivalently, the language of “good heads’’ is in \(\mathbf{NP}\).
+  \item \textbf{Existence of a Polynomial–Time Halting Guarded Program.}          
+        Finite guarded program \(\Pi\) halts on accepting state of entering the basin \(\mathcal B\) in at most \(p(|\mathrm{input}|)\) steps for some polynomial \(p\) for every TI/WF-fair execution (Def.~\ref{def:ti-wf-fair-execution}) of \(\Pi\).
+\end{enumerate}
+\end{theorem}
+
+\section{Valid test assumptions hold}
+
+We establish that we have a valid test (Def. \ref{def:valid-test}) under our axioms. Valid test assumptions VT1 and VT2 are just restated from C and F axioms respectively.
+
+Axiom VT3 follows from axioms as decribed in the following subsection.
+
+\subsection{Existence of a Minimal Certification Standard (VT3) from C, F, and T}
+
+\begin{theorem}[Minimal Certification Standard]\label{thm:minimal-standard-existence}
+Let a measurement model satisfy axioms C, F, and T.
+Define, for each \(n\ge1\),
+\[
+  \varepsilon_n \;=\;\frac1n,
+  \qquad
+  \mathcal B_n \;=\;\bigl\{\Theta\in\mathcal M : dist\bigl(\Theta,\mathcal B\bigr)\le\tfrac1n\bigr\}.
+\]
+Then \(\mathcal S=\{\varepsilon_n\}_{n\ge1}\) is a Minimal Certification Standard in the sense of Definition \ref{def:minimal-standard}.  In particular:
+\begin{enumerate}[label=(\roman*),itemsep=2pt]
+  \item \(\varepsilon_n\downarrow0\) and \(\mathcal B_1\supseteq\mathcal B_2\supseteq\cdots\supseteq\mathcal B\) with \(\bigcap_n\mathcal B_n=\mathcal B\).
+  \item Each \(\mathcal B_n\) is closed (hence compact), and by (T) the sets 
+  \(\;U(\cdot,z)^{-1}(\mathcal B_n)\) 
+  are open, so membership in \(\mathcal B_n\) is testable up to tolerance \(\varepsilon_n\).
+  \item No strictly smaller choice \(\varepsilon'_n<\varepsilon_n\) can preserve both soundness and completeness at the boundary: by continuity of \(\Theta\mapsto dist(\Theta,\mathcal B)\), any decrease would violate soundness or completeness of the \(n\)-th certification test.
+\end{enumerate}
+Hence the valid test assumption VT3 holds.
+\end{theorem}
+
+\begin{proof}
+\textbf{(i) Nested shells and convergence.}
+Since \(\mathcal B\) is closed in the compact space \(\mathcal M\), the distance function
+\(\Theta\mapsto d(\Theta,\mathcal B)\) is continuous and attains its maximum.  For each \(n\),
+\[
+  \mathcal B_n = \{\Theta: d(\Theta,\mathcal B)\le1/n\}
+\]
+is a closed sublevel set of a continuous map, hence compact.  Clearly
+\(\varepsilon_{n+1}=1/(n+1)<1/n=\varepsilon_n\) and \(\lim_{n\to\infty}\varepsilon_n=0\),
+and \(\bigcap_n\mathcal B_n=\mathcal B\).
+
+\medskip\noindent
+\textbf{(ii) Testability (open-preimage).}
+By (T), for each \(z\in\mathcal Z^{\rm in}\) the set
+\[
+  U(\cdot,z)^{-1}(\mathcal B_n)
+  = \{\Theta: U(\Theta,z)\in\mathcal B_n\}
+\]
+is open.  Thus one can robustly test membership in \(\mathcal B_n\) up to any desired finite precision: any point within distance \(\varepsilon_n\) of the true shell boundary still lies in the same preimage or its complement.
+
+\medskip\noindent
+\item[(iii)] (\emph{Local minimality})  
+For each $n$ there exists $\delta_n>0$ such that decreasing $\varepsilon_n$ by any
+amount greater than $\delta_n$ would cause the resulting sequence
+to violate at least one of the soundness or completeness properties.
+In particular, let $g(\Theta):=\mathrm{dist}(\Theta,\mathcal B)$.
+The map $g$ is continuous on the compact set $\mathcal M$,
+so $g^{-1}([0,\varepsilon_n])=\mathcal B_n$ is closed.
+
+Right–continuity of the sublevel sets of $g$ ensures that for sufficiently small
+$\delta>0$ we still have 
+
+\[\mathcal B \subseteq \{\Theta : g(\Theta)\le \varepsilon_n-\delta\}
+\subseteq \mathcal B_n\]
+
+but once $\delta>\delta_n$ this inclusion fails and
+either completeness or soundness is lost.
+
+Thus $\varepsilon_n$ is minimal up to the tolerance $\delta_n$, without assuming the infimum is attained.
+
+
+\medskip
+Having verified the nesting, convergence, testability and minimality properties, we conclude that \(\mathcal S\) is indeed the Minimal Certification Standard required by (VT3).
+\end{proof}
+\medskip
+Next, we prove that VT4 (Shell invariance) assumption of valid test is also satisfied.
+
+
+\subsection{Shell Invariance Lemma}
+
+\begin{lemma}[Shell Invariance / Finite Guarded Cover]\label{lem:shell-invariance}
+Assume a measurement model satisfies axioms C, F, and T.
+Then for each \(n\ge1\) there exist:
+\begin{itemize}
+  \item a compact subset \(\mathcal{K}_n \subseteq \mathcal{B}_n\) containing the target basin \(\mathcal{B}\),
+  \item finitely many open patches \(V_{n,1},\dots,V_{n,J} \subseteq \mathcal{M}\) covering \(\mathcal{K}_n\),
+  \item corresponding nonempty open \emph{guard cells} \(N_{n,1},\dots,N_{n,J} \subseteq \mathcal{Z}^{\mathrm{in}}\),
+\end{itemize}
+such that
+\[
+   U(V_{n,j} \times N_{n,j}) \subseteq \mathcal{B}_n
+   \quad\text{for all } j=1,\dots,J.
+\]
+In other words, the relevant portion \(\mathcal{K}_n\) of the shell \(\mathcal{B}_n\) is forward-invariant under the finite guarded cover \(\{V_{n,j}\times N_{n,j}\}_{j=1}^J\); no invariance is claimed for states outside \(\mathcal{K}_n\).
+\end{lemma}
+
+\begin{proof}
+Fix \(n\ge1\).  Since \(\mathcal B\) is invariant and \(\mathcal B_n\) is a closed neighbourhood of \(\mathcal B\), we know
+\(\mathcal B_n\neq\varnothing\).  We will construct a single open set \(N_n\subseteq\mathcal Z^{\rm in}\) that works uniformly for every \(\Theta\in\mathcal B_n\).
+
+\medskip\noindent
+\textbf{1. Local guards around each \(\Theta\).}  
+By (T), for each \(\Theta\in\mathcal B_n\) there is at least one input \(z_\Theta\in\mathcal Z^{\rm in}\) with
+\[
+  U(\Theta,z_\Theta)\;\in\;\mathcal B_n,
+\]
+and moreover the preimage
+\(\{\,z:U(\Theta,z)\in\mathcal B_n\}\)
+is an open neighbourhood of \(z_\Theta\).  Also, continuity of \(U\) implies that there is an open neighbourhood \(V_\Theta\subseteq\mathcal M\) of \(\Theta\) and an open neighbourhood \(W_\Theta\subseteq\mathcal Z^{\rm in}\) of \(z_\Theta\) such that
+\[
+  \forall\,\Theta'\in V_\Theta,\;
+  \forall\,z\in W_\Theta:
+  \quad U(\Theta',z)\;\in\;\mathcal B_n.
+\]
+(Indeed, the map \((\Theta,z)\mapsto dist\bigl(U(\Theta,z),\mathcal B\bigr)\)
+is continuous on the compact \(\mathcal M\times\mathcal Z^{\rm in}\).)
+
+\medskip\noindent
+\textbf{2. Finite subcover of the shell.}  
+The collection \(\{V_\Theta:\Theta\in\mathcal B_n\}\) is an open cover of the compact set \(\mathcal B_n\).  Extract a finite subcover
+\[
+  \mathcal B_n \;\subseteq\; V_{\Theta_1}\;\cup\;\cdots\;\cup\;V_{\Theta_k}.
+\]
+Corresponding to these finitely many patches we have open input‐sets \(W_{\Theta_1},\dots,W_{\Theta_k}\).
+
+\medskip\noindent
+\textbf{3. Uniform guard cell.}  
+Define
+\[
+  N_n \;=\;\bigcap_{i=1}^k W_{\Theta_i}.
+\]
+As a finite intersection of nonempty open sets, \(N_n\) is itself nonempty and open.  
+
+\medskip\noindent
+\textbf{4. Verification of invariance.}  
+By continuity of $U$ and the definition of $\mathcal B_n$, for each $\Theta\in\mathcal B_n$
+there exist open sets $V_\Theta\subset\mathcal M$ and $W_\Theta\subset\mathcal Z^{\mathrm{in}}$
+such that $\Theta\in V_\Theta$ and
+\[
+U(V_\Theta\times W_\Theta) \subseteq \mathcal B_n .
+\]
+Since $\mathcal B_n$ is compact, finitely many of the $V_\Theta$ cover $\mathcal B_n$:
+\[
+\mathcal B_n \subset \bigcup_{j=1}^k V_{\Theta_j}.
+\]
+Define $N_{n,j} := W_{\Theta_j}$ and $V_{n,j} := V_{\Theta_j}$. Then for each $j$ we have
+$U(V_{n,j} \times N_{n,j}) \subseteq \mathcal B_n$ as required.
+This establishes the finite guarded cover without requiring any global intersection of the $W_{\Theta_j}$.
+
+This completes the proof. (VT4) holds.
+\end{proof}
+
+\subsection{State encoding is polynomial}
+\noindent\textbf{Assumption on dimension.} In what follows we assume that the dimension \(d\) of \(\mathcal X\) is either constant or bounded by a polynomial in the bit-length of the measurement input (so that \(d=O(\mathrm{poly}(n))\)); otherwise the bit-length bound \(O(d\log(1/\varepsilon))\) must be interpreted with the explicit dependence on \(d\).
+
+%==================== Polynomial State Encoding Lemma =====================
+\begin{lemma}[Polynomial State Encoding]
+\label{lem:poly-encoding}
+Let \(\mathcal X\subset[0,1]^d\) be a compact metric space equipped with the sup–norm \(\|\cdot\|_\infty\) (cf.\ C axiom).  Then for any \(\varepsilon>0\) and any \(\Theta\in\mathcal X\), there exists a rational vector
+\[
+  \mathrm{enc}_{\varepsilon}(\Theta)\;=\;\bigl(r_1,\dots,r_d\bigr)\;\in\;\mathbb Q^d\cap[0,1]^d
+\]
+such that
+\[
+  \bigl\|\Theta - \mathrm{enc}_{\varepsilon}(\Theta)\bigr\|_\infty \;\le\;\varepsilon,
+\]
+and the total bit‑length of the encoding \(\mathrm{enc}_{\varepsilon}(\Theta)\) is
+\[
+  O\!\bigl(d\;\log(1/\varepsilon)\bigr).
+\]
+In particular, if at time \(T\le p(n)\) we require precision
+\(\varepsilon_T = 2^{-r(n)}\) with \(r(n)=O(\mathrm{poly}(n))\), then
+\(\mathrm{enc}_{\varepsilon_T}(\Theta_T)\) can be written in
+\(O\bigl(d\,r(n)\bigr)=\mathrm{poly}(n)\) bits.
+\end{lemma}
+
+\begin{proof}
+\textbf{1.\ Coordinate‑wise binary approximation.}  
+Each coordinate \(\Theta_i\in[0,1]\) of \(\Theta=(\Theta_1,\dots,\Theta_d)\)
+can be approximated by a binary rational
+\[
+  r_i = \frac{m_i}{2^k}, 
+  \quad
+  0 \le m_i \le 2^k,
+\]
+chosen so that \(\lvert \Theta_i - r_i\rvert \le \varepsilon\).  Concretely, pick
+\[
+  k \;=\;\bigl\lceil\log_2(1/\varepsilon)\bigr\rceil,
+\]
+and let \(m_i=\lfloor 2^k\Theta_i\rfloor\).  Then
+\[
+  0 \;\le\;\Theta_i - \frac{m_i}{2^k}
+  \;<\;\frac{1}{2^k}
+  \;\le\;\varepsilon,
+\]
+so \(\lvert\Theta_i - r_i\rvert\le\varepsilon\).
+
+\medskip\noindent
+\textbf{2.\ Uniform sup‑norm bound.}  
+Setting
+\(\mathrm{enc}_{\varepsilon}(\Theta)=(r_1,\dots,r_d)\), we get
+\[
+  \bigl\|\Theta - \mathrm{enc}_{\varepsilon}(\Theta)\bigr\|_\infty
+  = \max_{1\le i\le d}\! \lvert\Theta_i - r_i\rvert
+  \;\le\;\varepsilon.
+\]
+
+\medskip\noindent
+\textbf{3.\ Bit‑length estimate.}  
+Each binary rational \(r_i=m_i/2^k\) can be represented by the pair
+\((m_i,k)\).  Since \(0\le m_i<2^k\), the binary expansion of \(m_i\)
+requires at most \(k+1\) bits.  Storing \(k\) itself takes \(O(\log k)\)
+bits, which is \(O(\log\log(1/\varepsilon))\) and absorbed into
+\(O(\log(1/\varepsilon))\).  Hence each coordinate uses
+\(O(k)=O(\log(1/\varepsilon))\) bits, and all \(d\) coordinates use
+\(O\bigl(d\,\log(1/\varepsilon)\bigr)\) bits in total.
+
+\medskip\noindent
+\textbf{4.\ Polynomial bound for verifier precision.}  
+If at step \(T\le p(n)\) the verifier needs precision
+\(\varepsilon_T=2^{-r(n)}\) with \(r(n)=O(\mathrm{poly}(n))\), then
+\[
+  \log\bigl(1/\varepsilon_T\bigr)
+  = r(n)
+  = O\bigl(\mathrm{poly}(n)\bigr).
+\]
+Since \(d\) is either fixed or itself polynomially bounded in \(n\),
+the total bit‑length
+\(\;O(d\,\log(1/\varepsilon_T))=O(d\,r(n))\)
+remains polynomial in \(n\).  Thus, the witness encoding at time \(T\)
+is of size \(\mathrm{poly}(n)\), as required. 
+\end{proof}
+%==========================================================================
+
+%==================== PTIME Simulability of Primitives ====================
+
+\subsection{Effective Measurability Axioms}
+\label{subsec:effective-measurability-axioms}
+At this point, we are almost ready to prove the fundamental equivalence. However, there is one more missing piece in our assumptions. Here it is: is it even possible to operate with our physical inputs in a tractable way? 
+
+Having no certifiability as a goal, we would invoke the Carathéodory criterion for Lebesgue measurability here or restrict the input space to a Borel space if we want to build further constructions on it. But these definitions does not tell us anything about the amount of work needed to process and compare an input with a standard.
+
+Hence, we introduce the \emph{constructive} axioms of measurability. They can be thought of as a Carathéodory criterion plus requirements of the primitive operation to fall into the desired complexity class. Below is the version of the axioms for the class $\mathbf{P}$.
+
+\begin{enumerate}[label=(EM\arabic*), leftmargin=2em]
+  \item \textbf{Effective Representation.}
+        Each \(U_j\) and \(E_j\) is given by a rational arithmetic circuit (or equivalent) of size \(\mathrm{poly}(n)\), where \(n\) is the bit–length of the external input description.  All constant coefficients are rationals of bit–length \(\mathrm{poly}(n)\).
+
+  \item \textbf{Polynomial Modulus of Continuity.}
+        For each \(j\), there is a known polynomial \(m_j(k)\) such that to compute
+        \(\,U_j(x,z)\,\) (resp.\ \(E_j(x)\)) to \(k\) bits of output precision requires at most
+        \(m_j(k)\) arithmetic operations on rationals of bit–length \(O(k + n)\).
+        Where needed, we will discriminate (EM2) into two sub-axioms:
+        \begin{enumerate}[label=(EM2\alph*)]
+            \item \textbf{Analytic modulus:}                     
+                For each primitive map $U_j$ and $E_j$, there exists a known, effectively computable modulus of continuity $\omega_j : \mathbb{Q}_+ \to \mathbb{Q}_+$ with $\omega_j(0)=0$, such that
+                \[
+                \|x - y\| \le \delta \quad\Rightarrow\quad \|F_j(x) - F_j(y)\| \le \omega_j(\delta),
+                \]
+                where $F_j$ denotes $U_j$ or $E_j$.
+            \item \textbf{Cost modulus:}            
+                There exists a polynomial $p_j$ such that, given a rational input $x$ and a desired accuracy of $k$ bits, the value $F_j(x)$ can be computed to that accuracy in at most $p_j(k+n)$ steps, where $n$ encodes the problem size.
+        \end{enumerate}
+
+  \item \textbf{Polynomial Guard/Basin Tests.}
+        For each guard cell \(N_i\subset\mathcal Z\) or basin shell \(\mathcal B_n\subset\mathcal X\),
+        membership can be decided up to tolerance \(\varepsilon\) in time
+        \(\mathrm{poly}(n,\log(1/\varepsilon))\).
+\end{enumerate}
+
+\begin{remark}
+    At this point, we can observe that we never made a reference to the complexity class of the input processing in all the previous work, and all our constructions were built with only an \emph{intrinsic} polynomial resource bound in mind.
+    
+    Therefore, nothing prevents us from weakening the restrictions for our certifiable measurement to belong to a wider complexity class: $\mathbf{P} \longrightarrow \mathbf{BQP}$ with the corresponding promotion of the verification $\mathbf{NP} \longrightarrow \mathbf{QMA}$, or even $\mathbf{P} \longrightarrow \mathbf{PSPACE}$ with the corresponding $\mathbf{NP} \longrightarrow \mathbf{IP}$.
+    
+    The only modification that such a change requires is the modification of the Effective Measurability Axioms (Section-\ref{subsec:effective-measurability-axioms}) so they remain friendly to the basic complexity class invoked.
+\end{remark}
+
+\subsection{Adaptive Traceability Resolution Theorem}
+
+We know that we can provide certification over Tick-0 decomposition and this is the base of the Fundamental Test Equivalence Theorem. However, until now, we have assumed UI traceability, or, in other words, the universality of "good" inputs.
+
+\medskip\noindent\textbf{Baseline complexity without ATRT.}  
+Deciding non-traceability for a given input \(z\) in the full generality—over a continuous (or an a priori non-compact or high-dimensional) belief/state space—is, in the limit, a hard problem (one can view the unbounded version as having \(\Pi^0_2\)-type difficulty because it asks to rule out the existence of a witness to arbitrary precision).  If we abandon any adaptive focus and instead perform a naive finite-resolution brute-force exploration, the cost is dominated by covering the entire relevant state space at resolution \(\varepsilon>0\).
+
+Concretely, let \(d\) be the ambient (or effective) dimension of the belief/state manifold being searched, and let \(n\) denote the bit-length of the external input description (so that all quantities derived from it—precision targets \(\log(1/\varepsilon)\), region representations, arithmetic costs—are \(O(\mathrm{poly}(n))\)).  A uniform grid of diameter \(\varepsilon\) requires \(\Theta(\varepsilon^{-d})\) regions to cover the space.  Performing a full search over all such regions with a naive per-region verification (membership, evaluation of \(f(\Theta)\), and threshold tests) costs
+\[
+O\!\left(
+  \varepsilon^{-d} \cdot \mathrm{poly}(n,\log(1/\varepsilon))
+\right).
+\]
+If the bookkeeping or region selection is done poorly, that per-region overhead can be as bad as \(O(n^2)\), giving the oft-quoted worst-case bound \(O(n^2\varepsilon^{-d})\).  With modest algorithmic refinement—e.g., maintaining priority queues for region refinement, caching bound computations, and incrementally updating covers—the per-region overhead can be reduced to \(O(n\log n\cdot \mathrm{poly}(\log(1/\varepsilon)))\), yielding
+\[
+O\!\left(
+  \varepsilon^{-d} \cdot n\log n \cdot \mathrm{poly}(\log(1/\varepsilon))
+\right)
+\]
+for this non-adaptive, global procedure.
+
+\medskip\noindent\textbf{What ATRT buys.}  
+The Adaptive Traceability Resolution Theorem replaces the crude \(\varepsilon^{-d}\) full-space factor with the \emph{ambiguous boundary} covering number \(\mathcal N(d_{\mathrm{target}},\mathcal B_{\varepsilon})\), which can be dramatically smaller than \(\varepsilon^{-d}\) when most of the state space is decisively traceable or excludable.  In other words, ATRT concentrates effort only where the decision is genuinely uncertain, avoiding the full exponential blowup in ambient volume and restoring practical tractability under structural regularity.
+
+We can further utilize the guarded program structure and improve the computational cost further by combining the iterative resolution refinement with an SMT theorem prover to exclude large chunks of state space unreachable from $z$.
+
+\subsection{Adaptive Traceability Resolution Theorem}
+\label{thm:ATRT}
+
+\paragraph{Setup and notation.}  
+Let \(\mathfrak T\) satisfy axioms gnosis and structural axioms, (EM1–EM3), and (I). Fix an input \(z\in\mathcal Z^{\mathrm{in}}\) and precision threshold \(\varepsilon>0\). Define
+\[
+f(\Theta):=\operatorname{dist}(U(\Theta,z), \mathcal B), 
+\qquad
+f^* := \min_{\Theta\in\mathcal M} f(\Theta).
+\]
+We say \(z\) is \emph{traceable at precision \(\varepsilon\)} iff \(f^*\le \varepsilon\). 
+
+\medskip Under Promise Verification via Effective Measurability Lemma (Lem.-\ref{lem:promise-verification}, Appendix) and its corollary (Cor.-\ref{cor:promise-gate}) we assume a known \emph{gap} \(\gamma>0\) separating the two cases:
+\[
+\text{either } f^* \le \varepsilon \quad\text{(traceable)} 
+\quad\text{or}\quad 
+f^* \ge \varepsilon+\gamma \quad\text{(non-traceable with margin).}
+\]
+Let \(\omega:\mathbb R_+\to\mathbb R_+\) be the modulus of continuity from Lemma~\ref{lem:modulus-bound}, Appendix for \(f\), and pick a target refinement diameter \(d_{\mathrm{target}}>0\) such that
+\[
+\omega(d_{\mathrm{target}}) < \frac{\gamma}{2}.
+\]
+Define the \emph{ambiguous boundary set}
+\[
+\mathcal B_{\varepsilon} := \{\Theta\in\mathcal M:\ f(\Theta)\in[0,2\varepsilon]\},
+\]
+and let \(\mathcal N(d_{\mathrm{target}},\mathcal B_{\varepsilon})\) be its covering number at scale \(d_{\mathrm{target}}\). Finally, let \(n\) denote the bit-length of the external input description (so that all derived parameters—including required precision \(\log(1/\varepsilon)\), descriptions of regions, and arithmetic costs—are \(O(\mathrm{poly}(n))\)).
+
+\paragraph{Algorithm.}  
+Run the adaptive refinement procedure (Algorithm~\ref{alg:adaptive-trace}, Appendix) which:
+\begin{enumerate}[label=(\alph*)]
+  \item Maintains a cover of \(\mathcal M\) by regions \(R\), refining any active region until \(\operatorname{diam}(R)\le d_{\mathrm{target}}\).
+  \item On each region performs an \emph{existential check}: attempts to find \(\Theta\in R\) with \(f(\Theta)\le \varepsilon + \frac{\gamma}{2}\).
+  \item Uses the modulus \(\omega\) to perform \emph{universal exclusion}: if a representative \(\Theta_0\in R\) satisfies \(f(\Theta_0) - \omega(\operatorname{diam}(R)) > \varepsilon\), declares \(R\) excluded.
+\end{enumerate}
+
+\begin{theorem}[ATRT: Correctness and Termination]
+\label{thm:ATRT-refined-main}
+Under the above setup and gap assumption, the adaptive refinement procedure:
+\begin{itemize}
+  \item Correctly declares \(z\) \emph{traceable} by producing \(\Theta^*\) with \(f(\Theta^*) \le \varepsilon + \frac{\gamma}{2}\) when \(f^*\le \varepsilon\).
+  \item Correctly declares \(z\) \emph{non-traceable} with a quantitative gap certificate when \(f^*\ge \varepsilon+\gamma\).
+  \item Terminates in finite time in both cases.
+\end{itemize}
+\end{theorem}
+
+\begin{corollary}[Adaptive Complexity of Traceability Resolution]
+\label{cor:ATRT-complexity}
+Let \(C(n,\log(1/\varepsilon))\) denote the cost to perform the existential or universal check on a single region at the required precision (including evaluation of \(U\), distance computations, and guard logic), which under (EM1–EM3) is \(\mathrm{poly}(n,\log(1/\varepsilon))\). Then the total work before termination is
+\[
+O\!\left(
+  \mathcal N(d_{\mathrm{target}},\mathcal B_{\varepsilon})
+  \cdot C(n,\log(1/\varepsilon))
+\right).
+\]
+In a naive implementation \(C(n,\log(1/\varepsilon))\) may be \(O(n^2)\) (e.g., due to repeated full scans or unwieldy bookkeeping), but with appropriate data structures—priority refinement scheduling, cached bounds, incremental region updates—this can be reduced to \(O(n\log n\cdot \mathrm{poly}(\log(1/\varepsilon)))\), giving
+\[
+O\!\left(
+  \mathcal N(d_{\mathrm{target}},\mathcal B_{\varepsilon})
+  \cdot n\log n \cdot \mathrm{poly}(\log(1/\varepsilon))
+\right).
+\]
+The dependence on the ambient or effective dimension is encapsulated in \(\mathcal N(d_{\mathrm{target}},\mathcal B_{\varepsilon})\); practical tractability requires that this covering number not grow too rapidly (e.g., small intrinsic dimension or structure induced by the guarded decomposition).
+\end{corollary}
+
+\begin{corollary}[Worst-case (upper) bound]
+The adaptive complexity bound in Corollary~\ref{cor:ATRT-complexity} is \emph{instance-sensitive}: it scales with the covering number \(\mathcal N(d_{\mathrm{target}},\mathcal B_{\varepsilon})\) of the ambiguous boundary. In the pathological worst case—when the ambiguity set \(\mathcal B_{\varepsilon}\) is large (e.g., occupies a full-dimensional region) and its covering number at scale \(d_{\mathrm{target}}\) is \(\Theta(d_{\mathrm{target}}^{-d})\)—the cost degenerates to
+\[
+O\!\left(
+  d_{\mathrm{target}}^{-d}\cdot C(n,\log(1/\varepsilon))
+\right),
+\]
+which is asymptotically no better than the naive exhaustive resolution search (up to the choice of \(d_{\mathrm{target}}\), itself determined by the gap \(\gamma\) via \(\omega(d_{\mathrm{target}})<\gamma/2\)). Thus ATRT never costs more (up to constant/polynomial factors) than the non-adaptive brute force baseline, but can be much cheaper when the true ambiguity is localized. The “improvement” is a reduction from the full ambient-volume factor \(\varepsilon^{-d}\) to the typically smaller \(\mathcal N(d_{\mathrm{target}},\mathcal B_{\varepsilon})\).
+\end{corollary}
+
+\begin{remark}[Gap-driven dichotomy]
+Under Promise Verification via Effective Measurability Lemma (Lem.-\ref{lem:promise-verification}, Appendix) and its corollary (Cor.-\ref{cor:promise-gate}), the choice \(\omega(d_{\mathrm{target}})<\gamma/2\) ensures that once regions are refined to diameter \(d_{\mathrm{target}}\), their classification (traceable witness vs excluded) is unambiguous and no “undecided” limit behavior remains. Axiom (I) prevents indefinite avoidance of the successful branch in the traceable case.
+\end{remark}
+
+\begin{lemma}[Local Decomposition from PL-Traceability via ATRT]
+\label{lem:local-decomposition-pl}
+Suppose \(\mathfrak T\) satisfies gnosis and structural axioms (note that only PL-traceability, the existence of an open-preimage per shell, is needed) and (EM1--EM3). Let \(z\in\mathcal Z^{\mathrm{in}}\) be an input for which the promise of Lemma~\ref{lem:promise-verification} has been verified, yielding a local witness \(\Theta^*\) with \(f(\Theta^*)\le \varepsilon\). Then, using only the local open-preimage information along the sequence of shells encountered from \(\Theta^*\) to the basin \(\mathcal B\) and the refinement-extension machinery (Theorem~\ref{thm:refinement-extension}, Chapter 2), one can construct a finite guarded program \(\Pi\) that realizes the halting trajectory corresponding to \(\Theta^*\), without invoking uniform global UI-traceability.
+\end{lemma}
+
+\begin{proof}
+Since \(f(\Theta^*)\le \varepsilon\), \(\Theta^*\) lies within the acceptance region for the traceability of \(z\). The goal is to build \(\Pi\) step-by-step along the path from \(\Theta^*\) toward the basin \(\mathcal B\), using only local decomposition at each shell.
+
+Let the shells induced by the minimal certification standard be \(\mathcal B_1,\mathcal B_2,\dots\), and suppose the halting trajectory traverses a sequence of states \(\Theta^* = \Theta_{t_0}, \Theta_{t_1}, \dots,\Theta_T\in\mathcal B\). At each intermediate state \(\Theta_{t_k}\), consider the corresponding shell \(\mathcal B_{n_k}\) containing it. By PL-traceability (open-preimage for that shell), the preimage \(U(\Theta_{t_k},\cdot)^{-1}(\mathcal B_{n_{k+1}})\) is open and nonempty. Applying Theorem~\ref{thm:op-iff-finite} (Chapter 1) to this local preimage yields a finite guarded partition of the relevant input neighborhood and continuous branch maps \(U^{(k)}_i\) that cover the local behavior.
+
+Proceed inductively: starting from \(\Theta^*\), for each subsequent shell along the witnessed halting path, refine the guarded decomposition to resolve any ambiguities via the ranking/tie-breaking mechanism, using Theorem~\ref{thm:refinement-extension} from Chapter 2 to lift coarser decisions to the needed precision and ensure stability (interior margins prevent reversal of earlier choices). Because only the shells actually encountered are used, no global uniform decomposition of the entire input space is required—each construction is localized along the trace.
+
+Concatenating these per-shell finite guarded decompositions yields a finite guarded program \(\Pi\) that, when fed the appropriate inputs (as witnessed), drives the state from \(\Theta^*\) into \(\mathcal B\) in the same number of steps as the original trajectory. Continuity, compactness, and the constructive nature of the refinements ensure \(\Pi\) can be realized with polynomially bounded resources (since the trajectory itself is of polynomial length under the ranking bound), and each step is justified solely by local PL-traceability and the refinement-extension. Therefore \(\Pi\) is built without invoking any global UI-traceability, completing the construction. \(\blacksquare\)
+\end{proof}
+
+
+
+\begin{proof}[Proof of ATRT]
+We break the argument into three parts: (I) correctness of classification under the gap assumption, (II) finite termination, and (III) adaptive work concentration.
+
+\textbf{(I) Correctness.} Define \(f(\Theta)=\operatorname{dist}(U(\Theta,z),\mathcal B)\), which is continuous on compact \(\mathcal M\) by C; hence \(f^*=\min_\Theta f(\Theta)\) is attained. The margin assumption gives two mutually exclusive cases:
+
+\emph{Case 1: \(f^*\le \varepsilon\).}  
+There exists \(\Theta^*\) with \(f(\Theta^*)\le \varepsilon\). The algorithm refines until some region \(R^*\ni \Theta^*\) has \(\operatorname{diam}(R^*)\le d_{\mathrm{target}}\). Let \(\Theta_0\in R^*\) be the representative sample; by Lemma~\ref{lem:modulus-bound}, Appendix and Corollary~\ref{cor:region-lower}, Appendix,
+\[
+f(\Theta_0)\le f(\Theta^*) + \omega(\operatorname{diam}(R^*)) \le \varepsilon + \omega(d_{\mathrm{target}}) < \varepsilon + \frac{\gamma}{2}.
+\]
+Thus the existential region check will succeed on \(R^*\), yielding a witness \(\Theta^*\) (or equivalent) with \(f(\Theta^*)\le \varepsilon + \frac{\gamma}{2}\). The procedure correctly declares traceability.
+
+\emph{Case 2: \(f^* \ge \varepsilon + \gamma\).}  
+For any region \(R\) with \(\operatorname{diam}(R)\le d_{\mathrm{target}}\) and representative \(\Theta_0\),
+\[
+f(\Theta_0) \ge f^* \ge \varepsilon + \gamma,
+\]
+and using the modulus,
+\[
+f(\Theta) \ge f(\Theta_0) - \omega(\operatorname{diam}(R)) \ge (\varepsilon + \gamma) - \omega(d_{\mathrm{target}}) > \varepsilon + \frac{\gamma}{2} > \varepsilon
+\]
+for all \(\Theta\in R\). Therefore each such region can be excluded by the certified lower bound check. Once all regions are excluded, the algorithm correctly concludes non-traceability, with a quantitative gap (at least \(\gamma/2\)).
+
+\textbf{(II) Termination.}  
+Because refinement is by subdividing regions to reduce diameter and \(\mathcal M\) is compact, finitely many subdivisions suffice to ensure all active regions have \(\operatorname{diam}\le d_{\mathrm{target}}\). At that point, by the dichotomy above, either a witness is found (Case 1) or all regions are excluded (Case 2). Hence termination is guaranteed in finite steps. Axiom (I) ensures that if \(f^*\le \varepsilon\), the descent direction toward a successful branch cannot be indefinitely postponed, so the existential discovery is achievable in finite progress.
+
+\textbf{(III) Adaptive complexity.}  
+Define the ambiguous set \(\mathcal B_{\varepsilon} := \{\Theta : f(\Theta)\in[0,2\varepsilon]\}\). Regions whose interiors lie sufficiently far from \(\mathcal B_{\varepsilon}\) are resolved immediately: either they contain a witness (if near the \(f\le\varepsilon\) side) or are excluded by lower-bound reasoning (if safely above \(\varepsilon\)). Only regions that intersect the neighborhood of \(\mathcal B_{\varepsilon}\) require refinement. Thus the number of regions that must be subdivided down to diameter \(d_{\mathrm{target}}\) is \(O(\mathcal N(d_{\mathrm{target}}, \mathcal B_{\varepsilon}))\), the covering number of \(\mathcal B_{\varepsilon}\) at scale \(d_{\mathrm{target}}\). Each region’s existential/universal checks and bound computations incur only polynomial overhead via (EM1–EM3). Therefore total work prior to resolution is bounded by \(O\!\left(\mathcal N(d_{\mathrm{target}}, \mathcal B_{\varepsilon})\cdot \mathrm{poly}(n,\log(1/\varepsilon))\right)\).
+
+This completes the proof: the algorithm always produces a correct, definitive classification (traceable vs non-traceable) without fallback indeterminacy, respecting the stated complexity adaptation and relying only on PL-traceability (T) for per-\(z\) decisions. \hfill\(\blacksquare\)
+\end{proof}
+
+
+\paragraph{Remark.} This replaces any appeal to UI-Traceability in determining the status of a given \(z\); only PL-Traceability (axiom T) is required for the correctness of the resolution of individual inputs.
+
+
+\paragraph{PL vs UI Traceability: Role of ATRT.}  
+In Chapters 1 and 2 we temporarily assumed UI-traceability (uniform open-preimage for all shells globally) to ease the construction of guarded decompositions and to expose the structural anatomy of reachability and ranking. That assumption hides a latent reachability oracle: one does not yet know, for an arbitrary input \(z\), whether it participates in a halting trajectory. 
+
+The Adaptive Traceability Resolution Theorem (ATRT) is the mechanism that dissolves this hidden assumption. It shows that for each individual input \(z\), one can \emph{effectively} (and with quantitative control) decide its traceability or non-traceability by spatially refining candidate preimage states \(\Theta\), without invoking any global UI guarantee. Thus ATRT reduces the structural reliance from UI down to PL-traceability: the per-\(z\) decision procedure recovers the necessary localized reachability information, enabling the Fundamental Test Equivalence to be stated with only PL-traceability as a standing hypothesis. 
+
+In this light, ATRT is the cornerstone that converts the provisional structural strength of UI into an algorithmically verifiable local condition and thereby justifies the weakening of the global traceability axiom without loss of formal power.
+
+
+
+\subsection{Other prerequisites}
+
+\subsubsection{Error Budget Composition Lemma}
+\begin{lemma}[Error Budget Composition]
+\label{lem:error-budget-full}
+Suppose \(\mathfrak T=(\mathcal M,\mathcal Z^{\rm in},\mathcal Z^{\rm out},U,E,\mathcal S)\) satisfies (C) (compactness/continuity), and its primitive guarded decomposition is equipped with the Effective Measurability Axioms EM1–EM3. Let \(\Pi\) be a finite guarded program of \(T\) steps that claims to drive an initial state \(\Theta_0\) into the basin \(\mathcal B\) by producing a sequence \((\Theta_t,z_t)_{t=0}^T\), where each step involves evaluating a primitive update \(U_{i_t}\) and optionally a guard/membership test. Assume the minimal standard requires precision \(\varepsilon_T\) at the final step (i.e., membership in the target shell \(\mathcal B_{n(T)}\) is to tolerance \(\varepsilon_T\)).
+
+Then there exists a computable precision schedule \(\{\delta_t\}_{t=1}^T\) with \(\delta_t>0\), such that if each primitive evaluation at step \(t\) is performed to accuracy \(\delta_t\) and all guard/basin tests are resolved with their own compatible margins, the following holds:
+\[
+\text{The accumulated deviation of the claimed trajectory from the true ideal trajectory is at most } \varepsilon_T,
+\]
+and hence the terminal check \(\Theta_T\in\mathcal B_{n(T)}\) remains sound despite finite precision. In particular, by choosing \(\delta_t\) according to the backwards propagation of continuity moduli, the error does not blow up and can be bounded in closed form as a composition of the primitive moduli, yielding a reliable certificate.
+
+\end{lemma}
+
+\begin{proof}
+We view the guarded program as a composition of \(T\) successive primitive maps \(U_{i_1},U_{i_2},\dots,U_{i_T}\), where at each step \(t\) the intended exact update would produce \(\Theta_t^{\mathrm{true}} = U_{i_t}(\Theta_{t-1}^{\mathrm{true}}, z_t)\). In the verifier’s finite-precision execution we instead obtain approximate states \(\widehat\Theta_t\), where the per-step approximation introduces an error. Our goal is to choose per-step tolerances \(\delta_t\) so that the cumulative deviation \(\|\widehat\Theta_T - \Theta_T^{\mathrm{true}}\|\) is bounded by \(\varepsilon_T\), compatible with the minimal standard’s shell width.
+
+By (EM2) each primitive \(U_{i_t}\) admits a known modulus of continuity \( \omega_t(\cdot)\) (computable in polytime) in the sense that for any two inputs \(x,x'\),
+\[
+\| U_{i_t}(x,z_t) - U_{i_t}(x',z_t) \| \le \omega_t(\|x - x'\|).
+\]
+Similarly, membership tests (guards or basin shell checks) are robust interior tests: if the approximate state lies within a margin safely inside the decision region, perturbations up to the chosen precision do not flip the predicate.
+
+We proceed inductively from the final step backwards to allocate error budget. Let \(\Delta_T := \varepsilon_T\) be the maximum allowed deviation at the terminal state so that the shell membership check remains valid. Suppose at step \(t\) the true state is \(\Theta_t^{\mathrm{true}}\) and the approximate state is \(\widehat\Theta_t\); define the forward propagated error after step \(t\) as
+\[
+e_t := \|\widehat\Theta_t - \Theta_t^{\mathrm{true}}\|.
+\]
+We want \(e_T \le \Delta_T\).
+
+The approximation at step \(t\) arises from two sources:
+\begin{enumerate}
+  \item The error carried from the previous step \(e_{t-1}\), propagated through the continuity of \(U_{i_t}\), bounded by \(\omega_t(e_{t-1})\).
+  \item The fresh rounding/truncation error of evaluating \(U_{i_t}\) to finite precision, which we denote by \(\delta_t\); by construction via (EM2) we can enforce that the evaluation error (for correct inputs) is at most \(\delta_t\).
+\end{enumerate}
+Thus the total error satisfies
+\[
+e_t \le \omega_t(e_{t-1}) + \delta_t.
+\]
+Unrolling this recursion gives
+\[
+e_T \le \omega_T\bigl(\omega_{T-1}(\cdots \omega_2(\omega_1(e_0) + \delta_1) + \delta_2\cdots )\bigr) + \delta_T,
+\]
+where \(e_0=0\) since \(\Theta_0\) is assumed given at sufficient precision (or its encoding error is folded into \(\delta_0\)).
+
+Define backwards error targets \(\Delta_t\) for \(t=0,\dots,T\) via:
+\[
+\Delta_T := \varepsilon_T,\quad 
+\Delta_{t-1} := \omega_t^{-1}(\Delta_t - \delta_t),
+\]
+where \(\omega_t^{-1}\) is an (effective) right-inverse on the relevant range—this is well-defined because each \(\omega_t\) is continuous with \(\omega_t(0)=0\), and by choosing \(\delta_t\) small enough we ensure \(\Delta_t - \delta_t\) lies in the image of \(\omega_t\). We can select a decreasing sequence \(\delta_t\) (for example, geometrically scaled) so that each \(\Delta_{t-1}\) is positive and finite.
+
+By induction, if \(e_{t-1} \le \Delta_{t-1}\) and we evaluate \(U_{i_t}\) to precision \(\delta_t\), then
+\[
+e_t \le \omega_t(e_{t-1}) + \delta_t \le \omega_t(\Delta_{t-1}) + \delta_t = \Delta_t.
+\]
+Starting with \(e_0=0\le \Delta_0\), the chain guarantees \(e_T\le \Delta_T=\varepsilon_T\). Therefore the cumulative error budget stays within the allowable tolerance, and the final check \(\widehat\Theta_T\in\mathcal B_{n(T)}\) is sound: even with finite precision, the approximate trajectory cannot deviate outside the intended shell.
+
+All quantities \(\omega_t\), the inverses (computed via continuity and compactness), and the \(\delta_t\)-schedule are effective and computable in time polynomial in the relevant precision parameters by (EM2). Thus the lemma’s precision schedule exists and is implementable, completing the proof.
+\end{proof}
+
+\subsubsection{Effective Inversion of Continuity Moduli Lemma}
+\begin{lemma}[Effective Inversion of Continuity Moduli]
+\label{lem:moduli-inversion}
+Let \(\omega:\mathbb R_+\to\mathbb R_+\) be a known continuous, strictly nondecreasing modulus function with \(\omega(0)=0\), computable to arbitrary precision in time polynomial in the bit-length of its argument (as supplied or derived via EM2 / Lemma~\ref{lem:modulus-bound}, Appendix). Then for any target forward error budget \(\Delta>0\) and any chosen fresh per-step allowance \(\delta\) with \(0<\delta<\Delta\), one can compute in time polynomial in the precision parameters a preceding error threshold \(\Delta_{\mathrm{prev}}>0\) such that
+\[
+\omega(\Delta_{\mathrm{prev}}) + \delta \le \Delta.
+\]
+Moreover, this inversion can be carried out effectively (e.g., by binary search on \([0,\Delta]\)) using the monotonicity of \(\omega\), yielding a backward error schedule consistent with the recursive error propagation in Lemma~\ref{lem:error-budget-full}.
+\end{lemma}
+
+\begin{proof}
+Because \(\omega\) is continuous, strictly nondecreasing, and \(\omega(0)=0\), the map \(r\mapsto \omega(r)\) is invertible on its image, and for any \(\Delta' := \Delta - \delta > 0\) there exists a maximal \(\Delta_{\mathrm{prev}}\) such that \(\omega(\Delta_{\mathrm{prev}}) \le \Delta'\). Define \(\Delta_{\mathrm{prev}} := \sup\{r\ge0:\ \omega(r)\le \Delta'\}\); continuity ensures this supremum is attained and satisfies \(\omega(\Delta_{\mathrm{prev}})\le \Delta'\).
+
+To compute \(\Delta_{\mathrm{prev}}\) to desired precision, perform a binary search on the interval \([0,\Delta]\): at each iteration evaluate \(\omega\) at the midpoint \(r\), compare \(\omega(r)\) to \(\Delta'\), and narrow the interval accordingly. Since \(\omega\) is computable in polynomial time in the bit-length of \(r\), and the required number of bisections to achieve \(k\)-bit precision is \(O(k)\), the overall inversion process remains polynomial-time in the precision parameters. Once \(\Delta_{\mathrm{prev}}\) satisfying \(\omega(\Delta_{\mathrm{prev}})\le \Delta-\delta\) is found, we have
+\[
+\omega(\Delta_{\mathrm{prev}}) + \delta \le \Delta,
+\]
+as desired.
+
+This computed \(\Delta_{\mathrm{prev}}\) can be used as the backward target in the construction of the sequence \(\{\Delta_t\}\) in Lemma~\ref{lem:error-budget-full}: given a desired terminal allowance \(\Delta_T\), one iteratively inverts each continuity modulus with the corresponding fresh \(\delta_t\) to obtain \(\Delta_{t-1}\), guaranteeing cumulative error control. \(\blacksquare\)
+\end{proof}
+
+
+\subsubsection{Polytime Verifier Construction Lemma}
+Let's observe that the existence of the Polytime Verifier, used in important PUB result (Corollary-\ref{cor:poly-uniform-entry-bound}, Book II, Chapter 6) is now merely a consequence of the Effective Measurability and per-step certifiability:
+
+\begin{lemma}[Polytime Verifier Construction]
+\label{lem:polytime_verifier}
+Under the Effective Measurability Axioms EM1–EM3 and the per‑step testability result of Book II, Chapter 4, there exists a deterministic polynomial‑time algorithm 
+\[
+  V\;:\;\{\text{measurement input }I\}\times\{\text{capture certificate }W\}\;\to\;\{\text{accept, reject}\}
+\]
+and a polynomial \(q(n)\) such that for every input \(I\) of bit‑length \(n\) and every capture certificate
+\[
+  W \;=\; \underbrace{\mathrm{bin}(T)}_{\substack{\text{binary encoding}\\\text{of the step count}}}
+         \;\|\;
+         \underbrace{w_1\;\|\;\cdots\;\|\;w_T}_{\substack{\text{concatenation of per‑step}\\\text{witnesses }|w_t|\le b}}
+\]
+the following hold:
+\begin{enumerate}
+  \item \(V(I,W)\) runs in time \(\le q(n)\).
+  \item \(V(I,W)\) accepts if and only if \(W\) correctly encodes a trajectory of length \(T\)
+        whose states \(\Theta_t\) satisfy \(\Theta_{t} = U(\Theta_{t-1},z^{\mathrm{in}}_{t})\)
+        and \(\Theta_T\in\mathcal B\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+% Parse the certificate:
+\textbf{1.}  On input \((I,W)\), first scan the prefix \(\mathrm{bin}(T)\) in \(O(n)\) time to recover the integer \(T\).  The remaining bits are parsed into \(T\) blocks \(w_1,\dots,w_T\), each of size \(\le b\).
+
+% Per‑step verification loop:
+\textbf{2.}  Initialize \(\Theta_0\) from the measurement input \(I\).  
+For \(t=1\) to \(T\):
+\begin{enumerate}
+  \item Using (EM1–EM3), compute \(\widehat\Theta_t = U(\Theta_{t-1},z^{\mathrm{in}}_t)\) in time \(poly(n)\). At each replay step the verifier evaluates $U$ and $E$ only to the $k$ bits of precision prescribed by the global error budget from Lemma~\ref{lem:error-budget-full}, using the polytime evaluators guaranteed by EM2. This suffices to determine guard outcomes and to ensure that the simulated trajectory remains within the allowed tolerance~$\varepsilon_T$ at the terminal step.
+
+  \item Decode the net‑point \(\eta_{j_t}\) from \(w_t\) (constant‑time since \(|w_t|\le b\)).
+  \item Compute \(d(\widehat\Theta_t,\eta_{j_t})\) by (EM2) in \(poly(n)\) time.
+  \item If \(d(\widehat\Theta_t,\eta_{j_t})>\delta\), \textbf{reject}.
+  \item Otherwise set \(\Theta_t \leftarrow \widehat\Theta_t\) and continue.
+\end{enumerate}
+
+% Final basin membership check:
+\textbf{3.}  After \(T\) steps, check membership \(\Theta_T\in\mathcal B\) via EM3 in \(poly(n)\) time; \emph{reject} if false.
+
+% Accept if all checks pass:
+\textbf{4.}  If no rejection has occurred, \textbf{accept}.  
+
+\medskip\noindent\textbf{Fairness verification.}  
+The verifier need not perform any fairness checks: the NP witness is an actual accepting trajectory of polynomial length, so it suffices to replay it faithfully and verify that it reaches~$\mathcal{B}$ within the stated tolerance.
+
+
+\medskip\noindent\textbf{Error management.}  
+The per-step approximation errors and the cumulative deviations are controlled via Lemma~\ref{lem:error-budget-full}.  In particular, the verifier chooses the per-step precision targets \(\delta_t\) according to the backward error budget determined there so that, despite finite precision in the computation of each \(U(\Theta_{t-1},z^{\mathrm{in}}_t)\) and comparison with the witness net-points \(w_t\), the reconstructed trajectory stays within the basin shell tolerance at step \(T\).  Hence the final basin membership check is reliable, and no unchecked drift invalidates the certificate.
+
+
+% Runtime accounting:
+\medskip\noindent\textbf{Runtime:}  Each of the \(T\) iterations uses \(O(poly(n))\) time, so the total cost is
+\[
+  O\bigl(T\cdot poly(n)\bigr) \;+\; O(n)
+  \;=\;
+  O\bigl((n+T)\,poly(n)\bigr).
+\]
+Since by Chapter 4 and ABET we have \(T = O(poly(n))\), this overall cost is bounded by some polynomial \(q(n)\).
+
+\medskip\noindent\textbf{Correctness:}  By construction, \(V\) accepts exactly when each per‑step witness \(w_t\) correctly certifies the transition \(\Theta_{t-1}\to\Theta_t\) and the final state \(\Theta_T\) lies in \(\mathcal B\).  Hence \(V\) recognizes precisely the valid capture certificates.
+\end{proof}
+
+\subsubsection{Polytime Simulability of Primitives Lemma}
+The next important result is that, under Effective Measurability Axioms, the decomposed program is also polytime-verifiable.
+
+\begin{lemma}[Polytime Simulability of Primitives]
+\label{lem:pt-simulability}
+Let \(\Pi\) be a finite guarded program composed from primitive transition maps
+\[
+  U_j : \mathcal X \times \mathcal Z \;\to\;\mathcal X,
+  \qquad
+  E_j : \mathcal X \;\to\;\mathcal Z,
+  \quad
+  j = 1,\dots,K,
+\]
+over compact metric spaces \(\mathcal X,\mathcal Z\).  Suppose each primitive satisfies the Effective Measurability Axioms.
+
+
+Then, given an external input of length \(n\) and a claimed execution trace of \(\Pi\) of \(T\) steps,
+one can \emph{deterministically replay and verify} the entire trace in time
+\[
+  O\!\bigl(T\;\cdot\;\mathrm{poly}\bigl(n,\log(1/\varepsilon_T)\bigr)\bigr),
+\]
+where \(\varepsilon_T\) is the final precision required by the minimal standard at step \(T\).\end{lemma}
+
+\begin{proof}
+\textbf{Overview.}  We show that each of the \(T\) iterations of the guarded program can be checked in time polynomial in \(n\) and \(\log(1/\varepsilon_T)\).  Summing yields the claimed bound.
+
+\medskip\noindent\textbf{Controlled precision accumulation.}  
+To ensure that the repeated application of the primitive updates and guard/membership tests does not accumulate unbounded error, the verifier employs the precise scheduling from Lemma~\ref{lem:error-budget-full}. Each step’s output is computed to a preallocated precision \(\delta_t\) such that the propagated error remains below the minimal standard’s tolerance for the corresponding shell. Continuity (C) and the known moduli (EM2) guarantee that these \(\delta_t\) can be chosen effectively so the composed simulation stays faithful: the claimed trace can be replayed and checked with total deviation bounded, making the verification sound.
+
+
+\medskip
+\noindent\textbf{1. Encoding precision requirements.}
+By Lemma~\ref{lem:poly-encoding}, at step \(t\) the verifier needs only \(\varepsilon_t\)-precision, where \(\varepsilon_t\ge 2^{-\mathrm{poly}(n)}\).  Thus \(\log(1/\varepsilon_t)=\mathrm{poly}(n)\).
+
+\medskip
+\noindent\textbf{2. Evaluating a single update.}
+At iteration \(t\), suppose the current state is claimed to be \(x_t\in\mathcal X\) (represented to \(\varepsilon_t\) accuracy) and the guard identifier is \(i_t\).  The verifier must:
+
+\begin{enumerate}[label=(\alph*), leftmargin=2em]
+  \item \emph{Guard membership.}  Check \(\;z_t\in N_{i_t}\) to within \(\varepsilon_t\).  By (EM3) this takes \(\mathrm{poly}(n,\log(1/\varepsilon_t))\) time.
+
+  \item \emph{Compute update.}  Evaluate 
+  \(\;x_{t+1}' = U_{i_t}(x_t,\,z_t)\)
+  to \(\varepsilon_{t+1}\) precision.  By (EM2), this requires at most \(m_{i_t}(k)\) arithmetic steps, with \(k = O(\log(1/\varepsilon_{t+1})) = \mathrm{poly}(n)\).  Since each arithmetic step on \(O(n)\)-bit rationals costs \(\mathrm{poly}(n)\) time, the total is \(\mathrm{poly}(n)\).
+
+  \item \emph{Compare to claimed.}  Check that the prover’s claimed \(x_{t+1}\) matches \(x_{t+1}'\) within \(\varepsilon_{t+1}\).  This is a single subtraction and magnitude comparison in \(\mathrm{poly}(n)\) time.
+\end{enumerate}
+
+Each of (a)--(c) is polynomial in \(n\) and \(\log(1/\varepsilon_{t+1})\).
+
+\medskip
+\noindent\textbf{3. Verifying emission/halting.}
+If at step \(t\) the program emits \(y_t = E_{i_t}(x_t)\) or checks for basin membership, the same argument applies:
+
+\begin{enumerate}[label=(\alph*), leftmargin=2em]
+  \item Evaluate \(y_t' = E_{i_t}(x_t)\) to precision \(\varepsilon_t\) in \(\mathrm{poly}(n)\) time by (EM2).
+  \item Compare to the observed \(y_t\) (or test \(x_t\in\mathcal B_t\) by (EM3)).
+\end{enumerate}
+
+\medskip
+\noindent\textbf{4. Total cost.}
+Each of the \(T\) steps incurs at most \(\mathrm{poly}(n,\log(1/\varepsilon_T))\) work.  Summing yields
+\[
+  T \;\times\;\mathrm{poly}\bigl(n,\log(1/\varepsilon_T)\bigr)
+  \;=\;
+  O\!\bigl(T\cdot\mathrm{poly}(n)\bigr),
+\]
+as claimed.  
+\end{proof}
+
+%==========================================================================
+
+\subsection{Main fundamental equivalence proof}
+
+\begin{proof}[Fundamental Equivalence Proof]
+We prove $(a)\Rightarrow(b)$ and $(b)\Rightarrow(a)$.
+
+\medskip\noindent
+\emph{(a) $\Rightarrow$ (b).}  
+Assume NP–certifiability. By ABET (Book II, Chapter 6), we get \emph{finite} uniform entry time $T_{\max}$. Applying ABET Corollary \ref{cor:poly-uniform-entry-bound} (PUB) yields a \emph{polynomial} bound $T_{\max}\le p(n)$, so NP–certifiability entails:
+\begin{itemize}
+  \item the existence of a reachable, invariant basin $\mathcal B$ (so (F) is satisfied), and
+  \item a uniform \emph{polynomial} bound $T_{\max}\le p(|\mathrm{input}|)$ on the entry time into $\mathcal B$ for every accepted head (equivalently: a well‑founded ranking $f$ with $f(\Theta_0)\le p(|\mathrm{input}|)$).
+\end{itemize}
+Continuity and compactness (C) and the minimal standard (VT3) are part of the valid‑test setup. Axiom (T) (open‑preimage) is assumed.  
+
+By Theorem~\ref{thm:op-iff-finite} of Chapter 1 (Open-Preimage $\Leftrightarrow$ Finite Tick-0 Decomposition) together with Lemma~\ref{lem:local-decomposition-pl} (which shows how to assemble the guarded program from only shell-wise open-preimage / PL-traceability along the witnessed trajectory), we can finitely partition $\mathcal Z^{\rm in}$ into guarded cells and restrict $U$ to continuous branches $U_i$.
+
+Then, by Theorem~\ref{thm:inductive-decomposition} of Chapter 1 (Inductive Shell‑by‑Shell Decomposition) we refine these branches over the shells $\mathcal B_1,\dots,\mathcal B_{T_{\max}}$ and wrap them with a \textsc{Loop‑Until} primitive (Chapter 1, Def.~\ref{def:loop-until}), obtaining a single finite guarded program $\Pi$.
+
+Since $f(\Theta_0)\le T_{\max}\le p(|\mathrm{input}|)$ and Chapter 2 Lemma~\ref{lem:ranking-preserve} guarantees that each iteration can decrease $f$ by at least one, $\Pi$ halts in at most $p(|\mathrm{input}|)$ steps.  
+
+Finally, by Lemma~\ref{lem:poly-encoding}, encoding each $\Theta_t$ to the needed $\varepsilon_t$‐precision costs only $\mathrm{poly}(n)$ bits; and by Lemma~\ref{lem:pt-simulability}, each of the $T\le p(n)$ step‐simulations and guard checks runs in $\mathrm{poly}(n)$ time.  Therefore, the entire one‐tick composition halts in polynomial time. Thus (b) holds.
+
+\medskip\noindent
+\emph{(b) $\Rightarrow$ (a).}  
+Suppose such a finite guarded program $\Pi$ exists and halts within $p(|\mathrm{input}|)$ steps on every trajectory by entering $\mathcal B$.  
+Let $T$ be the halting step and $\Theta_T$ the halting state.  
+
+
+The NP witness is taken to be
+\[
+W := \bigl(\mathrm{bin}(T),\; (i_t, z_t, \mathrm{checkpoint}_t)_{t=1}^T \bigr),
+\]
+where:
+\begin{itemize}
+  \item $T$ is the claimed halting time in binary;
+  \item $i_t$ is the identifier of the guard or branch taken at step $t$ (omitted if deterministically implied);
+  \item $z_t$ is the input measurement supplied at step $t$ (if not fully determined by the guard);
+  \item $\mathrm{checkpoint}_t$ is a rational description of the state/output at step $t$ to accuracy $\varepsilon_t$ as in Lemma~\ref{lem:polytime_verifier}.
+\end{itemize}
+Given $W$, the verifier replays $\Pi$ for $T$ steps using the effective measurability axioms (EM1–EM3), checking at each step that the provided branch, input, and checkpoint are consistent with the dynamics up to the stated tolerance. Lemmas~\ref{lem:pt-simulability} and~\ref{lem:error-budget-full} guarantee this replay runs in time polynomial in~$n$.
+
+
+A polynomial‑time verifier does:
+\begin{enumerate}
+  \item Replay $\Pi$ for $T\le p(n)$ steps: by Lemma~\ref{lem:pt-simulability} this costs $O(p(n)\cdot\mathrm{poly}(n))=\mathrm{poly}(n)$, and by Lemma~\ref{lem:poly-encoding} it only needs polynomial‐size encodings at each step to check basin membership.  Thus, the certificate can be verified in $\mathrm{poly}(n)$ time.
+  \item Check $\Theta_T\in\mathcal B$ within the tolerance $\varepsilon_T$ (minimal standard).
+  \item By invariance, all subsequent outputs lie in the output guard‑band; accept iff all checks pass.
+\end{enumerate}
+Thus the language of good heads is in $\mathbf{NP}$, proving (a).
+\end{proof}
+
+\begin{remark}[Where the Polynomial Bound Lives]
+Condition (C5) (polytime reachability) from the earlier formulation has been \emph{internalized}:
+\begin{itemize}
+  \item In $(a)\Rightarrow(b)$ it is \emph{derived} from NP–certifiability (via the basin equivalence and ranking).
+  \item In $(b)\Rightarrow(a)$ it is part of the statement: we require the guarded program to halt in polynomial time to make the witness/verifier polynomial.
+\end{itemize}
+No separate axiom is needed.
+\end{remark}
+
+\begin{corollary}[Shell Ranking Realization]
+Let $f_{\rm shell}(\Theta)=\min\{n:\Theta\in\mathcal B_n\}$.  
+Then $f_{\rm shell}$ is a ranking, and if $(a)$ holds, $f_{\rm shell}(\Theta_0)\le p(|\mathrm{input}|)$ for some polynomial $p$.  Conversely, if a guarded program halts in $T$ steps, one can take $f_{\rm shell}(\Theta_0)=T$.
+\end{corollary}
+
+\begin{remark}[Universal vs.\ Existential Decrease]
+If a strict Lyapunov‑border function exists (universal decrease under all admissible inputs), the polynomial bound follows from its contraction rate.  The theorem shows this strong analytic structure is \emph{sufficient but not necessary}: the weaker existential ranking suffices once the gnosis and structural axioms are in place.
+\end{remark}
+
+\begin{remark}[Precision Targets]
+If the practical goal is entry into a target shell $\mathcal B_{N(\delta)}$ (finite precision $\delta$) rather than $\mathcal B$, the theorem holds verbatim with “halt” $\equiv$ “enter $\mathcal B_{N(\delta)}$,” and the witness records $N(\delta)$.
+\end{remark}
+\begin{remark}[Halting Problem]
+In accordance with the Universality Theorem \ref{thm:universality} from Chapter 2, guarded program decomposition is Turing-complete. Therefore, “halting of the guarded program” subsumes the classical halting problem; the Fundamental Equivalence Theorem then says: \emph{NP‑certifiability picks out exactly those such programs that halt in polynomial time.}
+    
+\end{remark}
+
+\section{Necessity of the decomposition we proposed}
+The last fundamental question is: was this way strictly necessary? We can't deviate once we have provided the decomposition; however, maybe our constructive approach to defining a good decomposition by 0-tick was too strict? 
+
+We introduced it to answer many deep, but rather informal questions listed in Section \ref{sec:deep-questions} of Chapter 1.
+
+Let's revisit these questions and formalize our requirements.
+
+\subsection{Decomposition Necessity}
+\label{sec:decomp-necessity}
+
+We now show that the finite guarded decomposition and Loop‑Until structure are not only \emph{sufficient} for NP‑certifiability, but in fact \emph{necessary}: any test meeting our axioms and admitting a polynomial‑size certificate \emph{must} decompose into the three primitives and loop as in Definition~\ref{def:loop-until}, Chapter 1.
+
+\begin{theorem}[Decomposition Necessity]
+\label{thm:decomp-necessity}
+Let 
+\[
+  \mathfrak T=(\mathcal M,\mathcal Z^{\rm in},\mathcal Z^{\rm out},U,E,\mathcal S)
+\]
+be a valid test (Def.~\ref{def:valid-test}, VT1–VT4, Chapter 1) whose tail predicate admits a polynomial‑size NP certificate.  Then:
+\begin{enumerate}[label=(\alph*)]
+  \item For each shell index \(n\), the preimage 
+    \(U(\Theta,\cdot)^{-1}(\mathcal B_n)\) must be open and nonempty (Input‑Traceability is forced).
+  \item Hence, by Theorem~\ref{thm:op-iff-finite}, Chapter 1, \(U\) admits a finite guarded decomposition at each shell \(n\).
+  \item Inductively refining these decompositions yields exactly the depth‑\(n\) Conditional maps \(U^{(n)}\) of Theorem~\ref{thm:inductive-decomposition}, Chapter 1.
+  \item Finally, the overall test is extensionally equal to the Loop‑Until Test of Definition~\ref{def:loop-until}, Chapter 1, i.e.\ the sequential iteration of those one‑tick Conditional tests until entry into \(\mathcal B\).
+\end{enumerate}
+In particular, no NP‑certifiable test can avoid the three primitives plus Loop‑Until structure.
+\end{theorem}
+
+\begin{proof}
+\textbf{(a) Necessity of Input-Traceability.}  
+By NP-certifiability and the PUB corollary (Cor.~\ref{cor:poly-uniform-entry-bound}, Book II, Chapter 6), there is a uniform finite bound on entry time into the basin, yielding a ranking and hence the ability to exhibit a halting trajectory for every accepted head.  
+
+Then Theorem~\ref{thm:primitive-global-equivalence} (Primitive–Global Certification Standard Equivalence, Chapter 1) implies that for each shell index \(n\), the preimage \(U(\Theta,\cdot)^{-1}(\mathcal B_n)\) must be open and nonempty; that is, input-traceability at shell level \(n\) is forced.
+
+\medskip\noindent
+\textbf{(b) Finite Guarded Decomposition at Each Shell.}  
+By (a) and compactness of \(\mathcal Z^{\rm in}\), Theorem~\ref{thm:op-iff-finite}, Chapter 1 applies at each level \(n\): one obtains a finite open partition 
+\(\mathcal Z^{\rm in}=\bigsqcup_{i=1}^{k_n} N^{(n)}_i\)
+and restricted maps \(U^{(n)}_i\) each admitting a nonempty guard‑band into \(\mathcal B_n\).
+
+\medskip\noindent
+\textbf{(c) Inductive Refinement to All Depths.}  
+Applying the same argument to each shell in turn, we build the full depth‑\(n\) Conditional map
+\[
+  U^{(n)} = \mathrm{Conditional}\bigl(\{\,U^{(n)}_{\mathbf i}\}_{\mathbf i\in I_n}\bigr)
+  \quad (\text{Thm.~\ref{thm:inductive-decomposition}, Chapter 1}).
+\]
+No alternative structure is possible without violating openness or finiteness.
+
+\medskip\noindent
+\textbf{(d) Loop‑Until Realizes the Original Test.}  
+Since by NP‑certifiability every fair run of \(\mathfrak T\) must enter \(\mathcal B\) in bounded time (PUB, Cor.~\ref{cor:poly-uniform-entry-bound}, Book II, Chapter 6), the behavior of \(\mathfrak T\) on any input stream \((z_t)\) is uniquely determined by applying, at each tick \(t\), the corresponding depth‑\(n_t\) Conditional update \(U^{(n_t)}\) and checking basin membership.  This is exactly the Loop‑Until Test (Def.~\ref{def:loop-until}, Chapter 1).  Extensionally, the two tests coincide.
+
+\medskip\noindent
+\textbf{Conclusion.}  
+No NP‑certifiable test can function without:
+\begin{enumerate}
+    \item finite guarded decomposition at every shell (by input‑traceability + compactness), and
+    \item sequential iteration of those one‑tick Conditional steps (Loop‑Until).
+\end{enumerate}
+Hence, the structure of three primitives, including Loop‑Until is not just sufficient but logically \textbf{\textit{necessary}}.
+\end{proof}
+
+
+\section{The final resolution of the information-loss paradox}
+
+\noindent\textbf{Formal grounding.}  
+The following interpretive summary builds on precise earlier results: the vanishing of non-ranking ambiguity and the push of residual uncertainty into the deterministic ranking are formalized in Theorem~\ref{thm:double-bound-decomp} (Chapter 2), the necessity of fair progress is captured in Proposition~\ref{prop:uniform-reachability-fair}, the preservation of existential decrease under decomposition appears in Lemma~\ref{lem:ranking-preserve}, and the main result of this chapter - the Fundamental Test Equivalence Theorem (Thm.-\ref{thm:fundamental-equivalence-clean}). What follows is an explanation of those phenomena in conceptual terms; the exact technical claims remain in the referenced theorems and lemmas.
+
+
+\paragraph{Time-irreversibility.} Our exploration of principles of certifiability finally came to an end with the discovery of the full analog of the Second Law of Thermodynamics - the minimal requirements of the time-irreversible execution of any guarded program run, our Weak Fairness axiom.
+
+WF imposes an arrow: once “progress-enabling” moves keep reappearing, progress must occur. That mirrors thermodynamics’ “if entropy‑increasing micropaths are overwhelmingly available, entropy won’t decrease forever.”
+
+\textit{Caveat:} The Second Law is statistical/measure‑theoretic; WF is a \emph{normative/semantic} constraint on admissible runs (fairness), not a counting argument. So it’s a \emph{deep analogy}, not an identity.
+\paragraph{Finite precision.} Our previous attempts to explain the information loss by a finite precision hit a wall: once we increase the resolution, we \emph{decrease} the loss.
+Let
+\begin{itemize}
+    \item $X_t:=\Theta_t$ be the full microstate at time $t$.
+    \item $R_t$ be the *recorded* symbol at that time (rank value, cell ID chosen for certification, etc.).
+\end{itemize}
+Define the instantaneous loss
+
+$$
+L_t \;:=\; H[X_t \mid R_t]
+$$
+
+\begin{itemize}
+    \item If we \textbf{refine} the partition, you can choose a \textit{refined} symbol $R_t'$ with more bits: then $H[X_t\mid R_t'] \le H[X_t\mid R_t]$. Loss \textit{decreases}.
+    \item If, instead, we \text{compress} to a coarser symbol (say, only the rank), we \text{increase} the loss.
+\end{itemize}
+Simply driving \(\epsilon \rightarrow 0\) drives the loss to $0$ as well. So why do we gain \emph{more} information in the statement accuracy \emph{as the loss decreases to an arbitrarily low threshold?}
+
+Deeper dive into this question is given in Double-Bound Decomposition Theorem in Chapter 2. It establishes the extremely important facts:
+\begin{enumerate}
+    \item Asymptotical losslessness of the update map is a fact not only over a some mathematical function of special kind; it is actually a property of a guarded program. We can refine a guarded program to an arbitrarily high precision of a result.
+    \item We can asymptotically certiffy a measurement with a decomposed test with infinite precision (given we have infinite-precision standards).
+    \item All the genuine information loss in decomposed test is pushed into TI/WF ranking function in a limit.
+\end{enumerate}
+Hence, a formally present information loss cause by a finite precision explains the certifiability ONLY in conjunction with the time irreversibility. We \emph{must} iteratively refine/confirm — hence \emph{to spend time}. Infinite precision just means, the \emph{infinite time}.
+
+Concretely, we \emph{must} introduce WF ranking function, which is bound not to the structure of the program or to physics (regardless of how it would depend on them), but to \emph{execution} of the program, i.e., precisely the process in time. And this ranking function \emph{is} the explicit information loss.
+
+An intriguing question is what would allow us to remove this loss? Only if we'd had an oracle (infinite precision or unbounded computational power) could we, in principle, collapse the process to one timeless step. We will revisit this in the next chapter.
+
+
+\section{Conclusion: From Certifiable Dynamics to Programmable Tests}
+\label{sec:ch1-conclusion}
+
+\subsection{What We Set Out to Do—and What We Found}
+
+We began exploring our Testable Measurement in Chapter 8 of Book II with a structural question: \emph{What is a certifiable measurement in essence?} How can we learn this from analyzing and opening its internal structure and behavior?
+
+Our chain of thoughts was as follows:
+
+\begin{enumerate}[label=\textbf{C\arabic*}. , leftmargin=2em]
+  \item \textbf{Introducing Time-Domains.}  
+        Observing the event map collapse, we complemented the \textit{output} Singular Time-Domain of the Simple Test by an explicit and, generally, multi-tick \textit{input} time-domain. It was already present by a map collapse; so nothing is introduced ad hoc here. But the result is decisive: without distinct input ticks, there is no space to decompose, schedule, or control anything.
+  \item \textbf{Exhibiting the Minimal Certification Standard.}  
+        The standard $\mathcal S=\{\varepsilon_n\}$ is not an add-on; it \emph{induces} state, input, and output guard-bands. It is the “knife” that slices the measurement into Observation, Adaptation, and Restitution.
+  \item \textbf{Proving Three-Aspects Uniqueness and the Simple Test.}  
+        Once $\mathcal S$ is in place, the three aspects are forced and unique (up to null sets). The Simple Test emerges as the canonical form: one certified tick, maximal index collapse, Singular Time-Domain.
+  \item \textbf{Deriving the Primitive Toolkit.}  
+        We showed that \textsc{Sequential}, \textsc{Conditional}, and \textsc{Loop} are necessary and sufficient to build any valid composite test.  Their use is \emph{not} arbitrary: open-preimage (input traceability) and minimal standards regulate every branch and loop.
+  \item \textbf{Open-Preimage $\Longleftrightarrow$ Finite Tick-0 Decomposition.}  
+        The “traceability axiom” is exactly the requirement that certification constraints lift to open, non-degenerate input sets.  With compactness, this gives a \emph{finite} guarded partition at tick~0.
+  \item \textbf{Inductive Shell Decomposition \& Loop-Until.}  
+        Shell-by-shell refinement—driven solely by $\mathcal S$—plus a terminating loop yields a total guarded program.  No extra geometry beyond continuity and compactness is needed.
+    
+  \item \textbf{Turing-Completeness of Guarded Tests.}  
+        We proved universality: any deterministic TM can be implemented as a valid test; halting $\iff$ basin entry.  
+  \item \textbf{Time-Irreversibility of any Guarded Test performing physical measurement.} We proved that endowing a Turing-complete decomposed structure with any kind of physical input and belief-state spaces requires the explicit time irreversibility in its weakest form - the Weak-Fairness axiom. We showed that this axiom is precisely necessary and sufficient for ANY measurement result to be produced, in a polynomial or non-polynomial time. 
+  \item \textbf{Ranking \& Reachability.}  
+        Then, we investigated the conditions for our program to provide a \emph{polynomial} reachability, thus making a base to create a \emph{certifiable} measurement. It is turned out that the requirement is precisely the same as above for \emph{general} termination: the program execution must be weakly fair, or, in terms involving physics of our metrology, the adaptation process \emph{must} be time-irreversible.      
+        
+        Axiom of I (Axiom-\ref{ax:ti-wf-subsec}) ranking function is \emph{necessary}; combined with gnosis and structural axioms, it is also \emph{sufficient} for uniform reachability.  
+        
+  \item \textbf{Effective Primitive Measurability.} We impose the requirements for the measurability, which are reducible to Lebesgue measurability of the input space, plus the polynomial information processing of subsets in the input space.
+
+  \item \textbf{Fundamental Equivalence.}  
+        Finally, we formulated the core equivalence: \emph{NP–certifiability} $\Longleftrightarrow$ \emph{existence of a finite guarded program that halts in polynomial time}.  The polynomial bound is no longer an axiom; it is the very complexity clause in the equivalence.
+  \item \textbf{Necessity of the decomposition.} We have already proved that our primitive set is necessary and sufficient for the chosen tick-0 way. This left a potential loophole - what is some other way of decomposition that yields a Simple Test?
+  
+  So finally, we proved that our decomposition (i.e., primitive set) is \emph{necessary} - no construction can ever avoid it.
+
+\end{enumerate}
+
+  Therefore, we finished the establishment of the fundamental result: 
+  
+  \begin{quote}
+      
+  \textbf{\textit{Every (certifiable) measurement (the term "certifiable" can be used interchangeably with the "one that states a fact") is equivalent to the TM-complete physical procedure of effectively measurable tests against finite-information standards executed irreversibly in (polynomial) time.}}
+    \end{quote}
+
+
+%==============================================================================
+\end{document}

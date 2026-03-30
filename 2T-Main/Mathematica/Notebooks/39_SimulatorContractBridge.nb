@@ -1,0 +1,119 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+Notebook[{
+Cell["Simulator Contract Bridge", "Title"],
+
+Cell["Date: 2026-03-16\nSchema companion: /home/kray-l8/work/2T/uom_simulator/SimulatorContractSchema.json\nNotebook ingest target: /home/kray-l8/work/2T/Main/Mathematica/Notebooks/39_SimulatorContractBridge.nb\nMarch 16 demo bundle: /home/kray-l8/work/2T/uom_simulator/outputs/bridge_demo_20260316_v2_alpha/aeon_bundle.json\nMarch 16 demo readout: /home/kray-l8/work/2T/uom_simulator/outputs/bridge_demo_20260316_v2_alpha/aeon_bridge_readout.json\nMarch 16 demo metadata: /home/kray-l8/work/2T/uom_simulator/outputs/bridge_demo_20260316_v2_alpha/aeon_metadata.json\nMarch 16 demo config: /home/kray-l8/work/2T/uom_simulator/outputs/bridge_demo_20260316_v2_alpha/config.json", "Text"],
+
+Cell["Goal", "Section"],
+
+Cell["Provide an honest simulator-to-WL bridge that is ingestible today without importing scientific authority that the simulator does not have. The March 16 bridge freezes v1 as an unsplit boundary baseline, keeps v1.1 as the narrow band-lock bridge pass, and lets v2-alpha expose explicit alpha split-state diagnostics as simulator-only scaffold data.", "Text"],
+
+Cell["Export Surface Freeze", "Section"],
+
+Cell["v1: surface_status = frozen-baseline. This lane is unsplit, boundary-only, and non-completion-aware.", "Item"],
+
+Cell["v1.1: surface_status = bridge-pass-only. This lane stays unsplit and only adds bridge metadata, band-lock policy output, and explicit unsupported statuses.", "Item"],
+
+Cell["v2-alpha: surface_status = simulator-side split scaffold only. This lane keeps the v1.1 boundary fields and adds explicit A|B split-state diagnostics for accepted-record plumbing.", "Item"],
+
+Cell["Bundle Shape", "Section"],
+
+Cell["The March 16 bundle exports five top-level objects:", "Text"],
+
+Cell["metadata", "Item"],
+Cell["summary", "Item"],
+Cell["bridge_readout", "Item"],
+Cell["history", "Item"],
+Cell["split_alpha_options", "Item"],
+
+Cell["The readout and metadata now carry surface_status. The v2-alpha readout also carries split_state_status and accepted_record_diagnostics with explicit alpha-scaffold claim-boundary language.", "Text"],
+
+Cell["Evidence Routing", "Section"],
+
+Cell["Every bridge diagnostic is separated into theorem-backed text, exact WL reports, and imported simulator assumptions. The simulator bridge is not a theorem witness and is not an exact WL certificate.", "Text"],
+
+Cell["Theorem-backed vocabulary for accepted-record and split-core language comes from the live UOM note stack, including the split-controlled completion lift note.", "Item"],
+
+Cell["Exact WL comparison material for the completion lane comes from /home/kray-l8/work/2T/Main/Mathematica/Reports/CompletionDecompositionAudit.md and companion reports, not from the simulator bundle itself.", "Item"],
+
+Cell["Simulator-side assumptions remain explicit: v2-alpha diagnostics are modeled from the explicit alpha split state and do not discharge the theorem or WL stack.", "Item"],
+
+Cell["Implementation Status", "Section"],
+
+Cell["accepted_record_diagnostics: available_in_v2_alpha via explicit alpha split-state readout", "Item"],
+
+Cell["band_lock_flag: available_in_v1_1_and_v2_alpha as a bridge heuristic from band_fraction", "Item"],
+
+Cell["boundary_phenomenology_status: available_in_v1_1_and_v2_alpha", "Item"],
+
+Cell["split_core_contract_status: available_in_v2_alpha", "Item"],
+
+Cell["active_image_rank: cheap_extension but still unsupported in the current simulator export", "Item"],
+
+Cell["co_centering_flag: needs_architectural_work", "Item"],
+
+Cell["descended_scalar_compatibility: needs_architectural_work", "Item"],
+
+Cell["gaussian_augmentation_status: fenced-off only", "Item"],
+
+Cell["March 16 Demo Readout", "Section"],
+
+Cell["The current demo readout in outputs/bridge_demo_20260316_v2_alpha/aeon_bridge_readout.json reports:", "Text"],
+
+Cell["surface_status = simulator-side split scaffold only", "Item"],
+
+Cell["split_state_status = explicit-alpha-modeled", "Item"],
+
+Cell["BoundaryPhenomenologyStatus = band-lock-bridge-pass", "Item"],
+
+Cell["SplitCoreContractStatus = split-core-alpha-preserved", "Item"],
+
+Cell["GaussianAugmentationStatus = fenced-off", "Item"],
+
+Cell["accepted_record_status = explicit-alpha-preserved", "Item"],
+
+Cell["accepted_record_diagnostics.mode = explicit-alpha-ledger-payload", "Item"],
+
+Cell["accepted_record_diagnostics.ledger_sector_label = A", "Item"],
+
+Cell["accepted_record_diagnostics.completion_sector_label = B", "Item"],
+
+Cell["accepted_record_diagnostics.accepted_payload_in = accepted-ledger", "Item"],
+
+Cell["accepted_record_diagnostics.accepted_payload_out = accepted-ledger", "Item"],
+
+Cell["accepted_record_diagnostics.preserved_exactly = True", "Item"],
+
+Cell["accepted_record_diagnostics.preservation_defect = 0.0", "Item"],
+
+Cell["accepted_record_diagnostics.recoherence_localized_in_B = True", "Item"],
+
+Cell["accepted_record_diagnostics.completion_sector_signal = 1.2634420257333469*^-6", "Item"],
+
+Cell["accepted_record_diagnostics.split_map_name = accepted-controlled-split-alpha", "Item"],
+
+Cell["accepted_record_diagnostics.ledger_projector_qnd = True", "Item"],
+
+Cell["accepted_record_diagnostics.ledger_projector_qnd_status = preserved", "Item"],
+
+Cell["accepted_record_diagnostics.claim_boundary = Explicit simulator alpha split scaffold only. It is suitable for bridge diagnostics, not for theorem or exact-WL certification.", "Item"],
+
+Cell["band_lock_threshold = 3.0*^-4 and tick_count = 5", "Item"],
+
+Cell["End-to-End Path", "Section"],
+
+Cell["1. Run python scripts/run_simulation.py --config configs/bridge_v2_alpha_demo.json --save-json --save-csv --no-plot --debug-ticks 0 --bridge-version v2-alpha --outdir outputs/bridge_demo_20260316_v2_alpha from the uom_simulator project root.\n2. Inspect aeon_metadata.json, aeon_bridge_readout.json, or aeon_bundle.json in that output directory.\n3. In WL, ingest the bundle or readout as simulator-side bridge data only.\n4. Preserve unsupported statuses instead of inferring missing diagnostics.\n5. Compare against the exact WL reports separately when boundary or completion claims need certificate-level support.", "Text"],
+
+Cell["Current Decision", "Section"],
+
+Cell["Notebook 39 now tracks the real March 16 simulator schema, code, and demo path. The bridge is operational but deliberately narrow: v1 stays frozen, v1.1 stays an unsplit band-lock bridge pass, and v2-alpha remains an explicit alpha scaffold for accepted-record diagnostics rather than a scientific split implementation or theorem-style witness.", "Text"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb"
+]

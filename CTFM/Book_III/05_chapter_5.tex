@@ -1,0 +1,987 @@
+\documentclass[12pt]{article}
+\usepackage{xr}
+\externaldocument{"../Book_II/chapter_6"}
+\externaldocument{"../Book_II/chapter_8"}
+\externaldocument{chapter_1}
+\externaldocument{chapter_2}
+\usepackage{amssymb}% For \checkmark
+\usepackage{pifont}% For dingbat symbols like X marks
+
+\newcommand{\cmark}{\ding{51}}% Defines a command for checkmark
+\newcommand{\xmark}{\ding{55}}% Defines a command for X mark
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, decorations.pathreplacing, calc, backgrounds}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{pdflscape} 
+\usepackage{braket}
+\newcommand{\ketbra}[2]{\mathinner{|{#1}\rangle\,\langle{#2}|}}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist[enumerate]{align=left,labelindent=0pt}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+% Chapter-specific theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+\title{\textbf{Chapter 5: Implications for Physics}}
+\author{Dmytro Surdu}
+\begin{document}
+\maketitle
+
+
+
+\section{Philosophical and Physical Implications}
+\label{sec:phys-implications}
+
+This chapter applies the Fact Decomposition-Independence (FDI) framework to quantum measurement. Our goal is not to adjudicate metaphysics, but to audit \emph{epistemic certifiability}: when can a single-shot measurement fact be certified by a finite guarded decomposition under the axioms introduced earlier? We first connect known physical resource bounds to our axiom failures, then draw out consequences for the measurement problem.
+
+\subsection{Why Physical Infinities Enforce the Turing Barrier}
+\label{subsec:phys-infinities}
+
+Realistic laboratory regimes enforce resource bounds (finite energy, finite spatial extent, finite bandwidth). These align precisely with the axioms that preclude hypercomputation in our framework:
+
+\begin{itemize}[itemsep=4pt]
+  \item \textbf{Finite information budget \& compactness (Axiom C).}
+  A bounded, effectively represented input slice $Z^{\mathrm{in}}$ (e.g.\ energy/particle cutoffs and localization windows) yields a compact metric domain where $U,E$ are continuous. Losing (C) re-opens the “infinite bandwidth / infinite state space’’ loophole.
+  
+  \item \textbf{No supertasks in verification (Axiom I).}
+  Verification protocols must be well-founded (no Zeno-like infinite test chains in finite time). Violating (I) is exactly the recipe for accelerating-machine embeddings.
+
+  \item \textbf{Traceable inputs (Axiom T) \& effective measurability (EM1–EM3).}
+  Physical tests must have open, reachable guard cells and effectively realisable primitives (representation, modulus, guard membership). Dropping (T) or EM1–EM3 blocks finite decompositions or their execution.
+\end{itemize}
+
+\noindent
+Conclusion: whenever a putative “hypercomputation’’ needs temporal or spatial infinities, it corresponds to a deliberate failure of (I) or (C), or of traceability/effectivity. Conversely, staying inside these axioms re-establishes the Turing barrier at the single-shot level.
+
+
+\subsection{Insight into the Quantum Measurement Problem}
+\label{subsec:quantum-meas}
+
+In our setting, a single outcome statement (“the pointer reads $e_k$’’) is a \emph{tail fact} on system–apparatus–environment dynamics. FDI separates two possibilities:
+
+\begin{enumerate}[itemsep=3pt]
+  \item \textbf{Decomposable measurement.} There exists a finite guarded decomposition that routes every admissible input slice to a guard cell whose branch proof certifies the tail fact. Then the corresponding certification language $L_\Phi$ lies in the chosen verification class (NP/QCMA/etc.).
+  \item \textbf{Decomposition-independent measurement.} No finite guarded decomposition exists under the available axioms. Then, by the embedding lemmas established in Chapter~4, $L_\Phi$ attains Turing degree $\ge 0'$ via a principled axiom failure (of $(I)$, $(C)$, $(T)$ or EM1–EM3).
+\end{enumerate}
+
+\noindent
+The “measurement problem’’ thus reframes as: given a collapse theory and a realistic input slice, do we obtain a finite guarded decomposition or are we forced—by a specific axiom failure—into the $0'$ frontier?
+
+\subsection{Roadmap: Comparing Collapse Theories}
+\label{subsec:roadmap-collapse}
+
+We audit major collapse pictures by three \emph{epistemic} categories:
+
+\begin{enumerate}[label={Category (\arabic*)},itemsep=3pt]
+  \item \emph{FDI out of scope.} One or more structural axioms (e.g.\ (C) or (T)) fail already on the intended input slice (e.g.\ global, non-compact state spaces); no formal verdict on decomposability can be issued.
+  \item \emph{FDI applicable, but decomposition-independent.} The axioms put the test within scope, yet no finite guarded decomposition exists (e.g.\ inherently stochastic selection, uncountable many-to-one fibres, or failed traceability/effectivity). Chapter~4 shows how this forces degree $\ge 0'$.
+  \item \emph{FDI applicable and decomposable.} A finite guard partition exists; outcome facts admit polynomial certificates (in NP/QCMA/\ldots), yielding strictly higher epistemic certifiability.
+\end{enumerate}
+
+\noindent
+With this rubric, we turn to the computational structure of single-shot collapse.
+
+\section{Uncomputability of a Single Measurement via Closed-Choice Principles}
+\label{sec:collapse-uncomputable}
+
+We formalise the non-computability inherent in single-outcome selection using Weihrauch reducibility. The collapse selector is at least as hard as classical closed choice on countable and real domains, hence admits no single Turing realiser even when pre-measurement data are given with arbitrary precision.
+
+
+
+\subsection{Represented Spaces for Pre-Measurement Data}
+\label{subsec:represented-spaces}
+
+Let $H$ be a separable complex Hilbert space with a \emph{computable} orthonormal basis $\{e_k\}_{k\in\mathbb{N}}$. We represent:
+
+\begin{itemize}[itemsep=2pt]
+  \item $\psi\in H$ by an oracle that on input $n$ outputs a rational vector $\psi^{(n)}$ with $\|\psi-\psi^{(n)}\|<2^{-n}$.
+  \item A bounded self-adjoint operator $A$ by an oracle for its spectral measure $E^A$: given a rational Borel set $B\subset\mathbb{R}$ and $n$, return $r_{B,n}\in\mathbb{Q}$ approximating $\langle \psi,E^A(B)\psi\rangle$ within $2^{-n}$ for each computable $\psi$.
+\end{itemize}
+
+\noindent
+Thus $\mathrm{dom}(\mathrm{Collapse})\subseteq H\times\mathcal{B}(H)$ is a represented space of pre-measurement data.
+
+
+\subsection{Weihrauch Closed-Choice Operators}
+\label{subsec:weihrauch-choice}
+
+For a represented space $X$, the \emph{closed-choice} multivalued map $\mathbf{C}_X:\mathcal{K}(X)\rightrightarrows X$ sends a nonempty closed set $A\subseteq X$ to an arbitrary point of $A$. We use:
+
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{Discrete choice} $\mathbf{C}_I$ on a finite or countably infinite index set $I\subseteq\mathbb{N}$.
+  \item \textbf{Real choice} $\mathbf{C}_{\mathbb{R}}$ on closed $A\subseteq\mathbb{R}$.
+\end{itemize}
+
+Both are known to be non-computable in the Weihrauch lattice for $|I|\ge 2$ and for $\mathbb{R}$, respectively.
+
+
+\subsection{Main Reduction Theorem}
+\label{subsec:main-choice-reduction}
+
+\begin{theorem}[Collapse dominates closed choice]
+\label{thm:collapse-choice}
+In the Weihrauch lattice one has
+\[
+  \mathbf{C}_I \;\le_W\; \mathrm{Collapse} \quad\text{for any finite or countable } I,
+  \qquad
+  \mathbf{C}_{\mathbb{R}} \;\le_W\; \mathrm{Collapse}.
+\]
+Consequently, no single Turing machine can \emph{select} the actually realised post-measurement eigenstate/eigenvalue from pre-measurement data alone.
+\end{theorem}
+
+\subsection{Proof of Theorem~\ref{thm:collapse-choice}}
+\label{subsec:proof-choice-reduction}
+
+Recall $f\le_W g$ iff there exist computable maps $K$ and $H$ such that for all $x$, every $v\in g(K(x))$ yields $H(x,v)\in f(x)$.
+
+\paragraph{Discrete case.} Given $I\subseteq\mathbb{N}$, define
+\[
+  \psi_I=\sqrt{3}\sum_{i\in I}2^{-i}\,e_i,\qquad
+  A_I=\sum_{i\in I}\lambda_i\,\ketbra{e_i}{e_i}
+\]
+with distinct rationals $\lambda_i$. Then $\mathrm{Collapse}(\psi_I,A_I)$ returns some $\ket{e_i}$ with $i\in I$. Set $K(I)=(\psi_I,A_I)$ and $H(I,\ket{e_i})=i$. Both $K,H$ are computable, hence $\mathbf{C}_I\le_W\mathrm{Collapse}$.
+
+\paragraph{Continuous case.} Let $A$ have purely continuous spectrum on a rational interval; prepare a computable $\psi$ with absolutely continuous spectral measure. Then $\mathrm{Collapse}(\psi,A)$ selects an eigenvalue $x$ in a nonempty closed $A\subset\mathbb{R}$. Choosing $K$ as the identity embedding and $H$ as projection realises $\mathbf{C}_{\mathbb{R}}\le_W\mathrm{Collapse}$.
+\qed
+
+
+\subsection{Interpretation}
+\label{subsec:choice-interpretation}
+
+\begin{itemize}[itemsep=2pt]
+  \item \textbf{Discrete spectra.} The set of possible post-measurement states $\{\ket{e_i}: i\in I\}$ is countable, but selecting the actually realised $\ket{e_i}$ as a function of $(\psi,A)$ is Weihrauch-hard for $\mathbf{C}_I$.
+  \item \textbf{Continuous spectra.} Any single Turing realiser can only enumerate countably many candidates, so choosing a realised $x$ from a closed set of positive measure is non-computable in the same sense.
+\end{itemize}
+
+Thus, even before invoking any axiom failure, \emph{selection} as a function is irreducibly non-computable. In the FDI framework, decomposition-independence arises precisely when this non-computability cannot be “pushed” into random bits or hidden parameters that restore a finite guard partition.
+
+
+\noindent
+Thus collapse selection is governed by non-computable closed-choice
+principles in the Weihrauch lattice, firmly placing it beyond any
+finite-step algorithmic decomposition.
+
+So far, the results are obvious for physicists; however, it is important to establish the fact of decomposition-independence formally.
+
+The big next question is as follows. Under the closer look, we observe that above proof 
+\emph{only} works in physically achievable measurements. Indeed, only in a physically real setup (finite energy bound, localization bound) can we claim $Z^{in}$ compactness.
+
+What will happen if we consider, for the sake of interest, a Universe's global pure state and its collapse by any observable?
+
+
+\section{Global Collapse: Out of Scope for FDI}
+\label{sec:global-collapse-out-of-scope}
+
+Consider collapsing a \emph{global} pure state of the Universe in an infinite-dimensional Hilbert space by an arbitrary observable. The natural input slice is non-compact (unbounded energy/particle number, unbounded spatial support); moreover, achieving continuity of $U,E$ on a compact metric subspace fails without severe truncations. Hence Axiom (C) is violated \emph{a priori}, and input traceability (T) typically fails as well.
+
+\medskip
+\noindent
+\textbf{Verdict.} The FDI framework is inapplicable to global collapse (Category~1): the Simple Test cannot even be posed. This does not resolve the metaphysical question of global outcomes; it states an epistemic limit of our complexity-theoretic machinery. Laboratory-scale truncations (finite energy/localisation cutoffs) re-enter the FDI domain.
+
+\section{Statement: Global Collapse Decomposition-Independence can't be resolved in the FDI framework}
+
+The logic of this statement is very simple: in our previous axiom violation examples, a violation arose \emph{in the measurement process}. This is exactly what allowed us to relate the uncomputability to decomposition independence.
+
+However, pure global state lives in an infinite-dimensional Hilbert space, therefore (C) is violated \emph{a priori}.
+
+Hence, all results of the work are inapplicable to a global state collapse. This is an epistemologically negative, but an important result: we can have decomposition-independent, hence undecidable problems, but there is a higher level of hardness inaccessible in our complexity-theoretic framework.
+
+Recalling a famous Einstein sentence, God may play dice or not. However, we will always be playing dice, and it doesn't allow us to say anything beyond that.
+
+At least, this is the epistemological result of the Copenhagen interpretation. Are other collapse theories different?
+
+%=============================================================
+\section{Epistemic Audit of Major Collapse Theories}
+\label{sec:fdi-audit-collapse}
+
+Before analyzing each theory from the FDI point of view, we can define possible outcomes. Note that we discuss nothing about the validity, physicality, maturity, evidence level for a theory, or even the ontological value of its results. 
+
+Instead, we discuss them from a purely epistemical view.
+
+\begin{enumerate}[label={Category (\arabic*)}]
+    \item "God-level theory". FDI is inapplicable outright, in the same (or equivalent) way as it is inapplicable for \emph{global} state collapse. However, in such a theory, the inapplicability holds even when the theory is considered with the typical physical restrictions (e.g., finite energy bound and/or localization bound), or at a maximal level of such restrictions theory supports.
+    \item "Copenhagen-level theory". FDI is applicable (with physical restrictions) and yields decomposition independence (e.g., by the stochastic process involved). The level is usual for us; if a theory also yields results indistinguishable from Copenhagen, we call it "interpretation".
+    \item "New-level theory". FDI is applicable, and the measurement test is decomposable. The theory claims to resolve the measurement problem in some constructive way; this yields a higher epistemological value than the currently accepted mainstream.
+\end{enumerate}
+
+We adopt a \emph{two-stage} audit that aligns precisely with the FDI framework and the role of ABET.
+
+\paragraph{Stage~0 (In-scope gate).}
+Work under realistic laboratory assumptions (finite energy and/or localisation bounds) so that the input slice $Z^{\mathrm{in}}$ is compact and effectively named. We require:
+\[
+\text{(F) Invariant basin},\qquad
+\text{(S) Certification standard},\qquad
+\text{(C) Compact continuity}.
+\]
+If \emph{any} of (F), (S), (C) fails on the laboratory slice, ABET cannot be formed and the Simple Test does not exist. \textbf{Outcome: Category~1 (FDI out of scope).}
+
+\paragraph{Stage~1 (Decomposition test).}
+Assuming Stage~0 passes, ABET and the Simple Test exist. We now ask whether the single-shot fact admits a \emph{finite guarded decomposition}. Here (T) and EM1–EM3 are the operative effectivity/traceability assumptions, and real-world protocols normally satisfy (I).
+\[
+\begin{cases}
+\text{Finite guarded decomposition exists} &\Rightarrow \textbf{Category~3} \ (\text{FDI-decomposable; certifiable});\\[2pt]
+\text{No finite guarded decomposition} &\Rightarrow \textbf{Category~2} \ (\text{FDI in scope but decomposition-independent}).
+\end{cases}
+\]
+\noindent
+In particular, failure of (T) or EM1–EM3 on the in-scope slice forces the \emph{absence} of a finite decomposition and thus Category~2.
+
+\subsection{Collapse Theories Audit}
+
+\subsubsection{Standard Born (Copenhagen)––Bohr \& von Neumann}
+\textbf{Stage~0 (In-scope gate).} With finite energy and localization cutoffs, axioms (F), (S), (C) hold on the laboratory slice; ABET and the Simple Test exist.\\
+\textbf{Stage~1 (Decomposition test).} Measurement collapse is implemented via an internal stochastic rule in \(U/E\); this internal randomness means PV fails, yet PL-Traceability still holds. No finite guarded decomposition isolating the \emph{realised} outcome exists.\\
+\textbf{FDI verdict.} \textbf{Category 2.} Lab-restricted complexity: the certification language is \(\Sigma^0_1\nobreak\text{-hard}\) (Turing-degree \(\geq 0'\)).  
+
+
+%-------------------------------------------------------------
+\subsubsection{GRW / CSL Objective Collapse––Ghirardi, Rimini, Weber; Pearle; Gisin}
+\textbf{Stage~0 (In-scope gate).} Under laboratory truncation, (F), (S), (C) are satisfied; ABET applies.\\
+\textbf{Stage~1 (Decomposition test).} Stochastic noise is internal to the collapse dynamics, breaking PV; PL-Traceability holds but no finite guard certification exists.\\
+\textbf{FDI verdict.} \textbf{Category 2.} Certification language is \(\Sigma^0_1\text{-hard}\).  
+
+%-------------------------------------------------------------
+\subsubsection{Bohmian Mechanics with Typicality––Bohm; Dürr, Goldstein \& Zanghì}
+\textbf{Stage~0 (In-scope gate).} With finite-energy/localization restrictions, (F), (S), (C) hold.\\
+\textbf{Stage~1 (Decomposition test).} The outcome depends on a continuum-valued hidden variable \(Q_0\); fibres over pointer outcomes are uncountable. UI-Traceability fails (though PL may hold along the realised branch).\\
+\textbf{FDI verdict.} \textbf{Category 2.} Certification language is \(\Sigma^0_1\text{-hard}\).  
+
+%-------------------------------------------------------------
+\subsubsection{Everett / Many-Worlds––Everett; DeWitt; Saunders}
+\textbf{Stage~0 (In-scope gate).} With lab truncations, axioms (F), (S), (C) hold.\\
+\textbf{Stage~1 (Decomposition test).} “This branch’s” outcome requires self-location among a continuum of decoherent branches. UI-Traceability fails; PL-Traceability is vacuous.\\
+\textbf{FDI verdict.} \textbf{Category 2.} Certification language is \(\Sigma^0_1\text{-hard}\).  
+
+
+%-------------------------------------------------------------
+\subsubsection{Convex–Quasi–Linear Deterministic Collapse––Rembieliński \& Caban}
+\textbf{Stage~0 (In-scope gate).} On finite-dimensional lab slice, (F), (S), (C) and EM1–EM3 (hence PV) hold.\\
+\textbf{Stage~1 (Decomposition test).} Collapse flow maps all states into a finite set of one-dimensional projectors; one constructs finite guards and polynomial verification.\\
+\textbf{FDI verdict.} \textbf{Category 3.} Certification language lies in NP/QCMA (not \(\Sigma^0_1\)-hard).  
+
+%-------------------------------------------------------------
+\subsubsection{Finite-World Many-Interacting-Worlds (MIW)––Hall, Deckert \& Wiseman}
+\textbf{Stage~0 (In-scope gate).} For fixed finite \(N<\infty\), the input slice is compact and (F), (S), (C), PV hold.\\
+\textbf{Stage~1 (Decomposition test).} Each world index is a finite operational input; pointer outcomes partition the index set. Finite guarded decomposition and polynomial‐time witness exist.\\
+\textbf{FDI verdict.} \textbf{Category 3.} Certification language in NP/QCMA.  
+
+
+%-------------------------------------------------------------
+\subsubsection{Superdeterministic Cellular‐Automaton Interpretation (CAI)––’t Hooft}
+\textbf{Stage~0 (In-scope gate).} Finite CA lattice meets (F), (S), (C), PV.\\
+\textbf{Stage~1 (Decomposition test).} The micro‐state index acts as operational input, deterministically yielding a pointer. Finite guarded decomposition exists and is polytime verifiable.\\
+\textbf{FDI verdict.} \textbf{Category 3.} Certification language in NP.  
+
+
+
+%-------------------------------------------------------------
+\subsubsection{Invariant-Set Theory––Palmer}
+\textbf{Stage~0 (In-scope gate).} Although \(I_U\) (the fractal invariant set) is mathematically compact, operational input slice fails UI-Traceability and PV; PL fails in operational Euclidean metric.\\
+\textbf{Stage~1 (Decomposition test).} Because no open guards exist for realisable inputs, ATRT does not halt; no finite guarded decomposition is possible.\\
+\textbf{FDI verdict.} \textbf{Category 1.} Certification language is undefined.  
+
+
+
+%-------------------------------------------------------------
+\subsubsection{Retro-causal Two-Time Boundary Models––Aharonov; Price; Wharton}
+\textbf{Stage~0 (In-scope gate).} With lab cutoffs, (F), (S), (C), PV hold.\\
+\textbf{Stage~1 (Decomposition test).} Dependence on future boundary conditions breaks UI-Traceability; PL may hold only once future data are known. No finite guard partition covers the realised fact.\\
+\textbf{FDI verdict.} \textbf{Category 2.} Certification language is \(\Sigma^0_1\text{-hard}\).  
+
+%-------------------------------------------------------------
+\subsubsection{Big-Bang Superdeterminism––’t Hooft et al.}
+\textbf{Stage~0 (In-scope gate).} If the primordial parameter space \(\Lambda\) is compact and computable, (F), (S), (C) hold; otherwise \((C)\) (or PV) fails and category is 1.\\
+\textbf{Stage~1 (Decomposition test) [compact \& effective \(\Lambda\)].} Operationally the pointer depends on hidden \(\lambda\); fibres are uncountable, breaking UI-Traceability.\\
+\textbf{FDI verdict.} \textbf{Category 2} (or Category 1 if \(\Lambda\) non-compact/effective). Certification language is \(\Sigma^0_1\text{-hard}\).  
+
+\subsubsection{Penrose OR (Objective Reduction)––Penrose}
+\textbf{Stage~0 (In-scope gate).} With laboratory cutoffs, (F), (S), (C) hold.\\
+\textbf{Stage~1 (Decomposition test).} Collapse driven by gravitational self-energy threshold is an internal stochastic mechanism. PV fails; PL holds. No finite guard isolates actual outcome.\\
+\textbf{FDI verdict.} \textbf{Category 2.} Certification language is \(\Sigma^0_1\text{-hard}\).  
+\subsubsection{Diósi–Penrose (DP) Model––Diósi \& Penrose}
+\textbf{Stage~0 (In-scope gate).} Under energy/localization constraints, (F), (S), (C) hold.\\
+\textbf{Stage~1 (Decomposition test).} Stochastic collapse via DP noise is internal; PV fails, PL holds. No finite decomposition for a realised outcome.\\
+\textbf{FDI verdict.} \textbf{Category 2.} Certification language is \(\Sigma^0_1\text{-hard}\).  
+\subsubsection{Quantum State Diffusion––Gisin \& Percival}
+\textbf{Stage~0 (In-scope gate).} With lab cutoffs, axioms \((F),(S),(C)\) hold.\\
+\textbf{Stage~1 (Decomposition test).} The stochastic Schrödinger evolution rests on an internal Wiener/Poisson process. PV fails; PL holds. No finite guard for realised sample outcome.\\
+\textbf{FDI verdict.} \textbf{Category 2.} Certification language is \(\Sigma^0_1\text{-hard}\).  
+\subsubsection{Transactional Interpretation––Cramer; Kastner}
+\textbf{Stage~0 (In-scope gate).} Finite lab slice ensures \((F),(S),(C)\).\\
+\textbf{Stage~1 (Decomposition test).} Outcome arises via internal 'handshake' between emitter and absorber; not open–preimage traceable at tick 0. UI fails, PL may hold.\\
+\textbf{FDI verdict.} \textbf{Category 2.} Certification language is \(\Sigma^0_1\text{-hard}\).  
+\subsubsection{Consistent Histories––Griffiths; Gell-Mann \& Hartle; Omnès}
+\textbf{Stage~0 (In-scope gate).} With bounded lab domain, \((F),(S),(C)\) hold.\\
+\textbf{Stage~1 (Decomposition test).} Selecting 'this' history among many requires self-location in a branching space; UI fails. PL holds only conditioned on actual branch.\\
+\textbf{FDI verdict.} \textbf{Category 2.} Certification language is \(\Sigma^0_1\text{-hard}\).  
+\subsubsection{Modal Interpretations––Dieks; Vermaas}
+\textbf{Stage~0 (In-scope gate).} Under cutoffs, \((F),(S),(C)\) valid.\\
+\textbf{Stage~1 (Decomposition test).} Actual definite property is selected from a continuum of possibilities; UI fails for a single outcome. PL holds if hidden variable is fixed.\\
+\textbf{FDI verdict.} \textbf{Category 2.} Certification language is \(\Sigma^0_1\text{-hard}\).  
+\subsubsection{Relational Quantum Mechanics––Rovelli}
+\textbf{Stage~0 (In-scope gate).} With lab constraints, \((F),(S),(C)\) hold.\\
+\textbf{Stage~1 (Decomposition test).} Outcome is relationally selected for an observer; there is no global guard in the lab input space. UI fails, PL holds per observer relative run.\\
+\textbf{FDI verdict.} \textbf{Category 2.} Certification language is \(\Sigma^0_1\text{-hard}\).  
+\subsubsection{QBism––Fuchs \& Schack}
+\textbf{Stage~0 (In-scope gate).} Operational lab slice satisfies \((F),(S),(C)\).\\
+\textbf{Stage~1 (Decomposition test).} Outcome is personal belief update, not open-preimage traceable; UI fails, PL holds within a personal run.\\
+\textbf{FDI verdict.} \textbf{Category 2.} Certification language is \(\Sigma^0_1\text{-hard}\).  
+\subsubsection{Nelson-type Stochastic Mechanics––Nelson}
+\textbf{Stage~0 (In-scope gate).} With lab-level constraints, \((F),(S),(C)\) hold.\\
+\textbf{Stage~1 (Decomposition test).} Hidden Brownian motion variable yields many-to-one outcome mapping; UI fails. PL holds for the realised sample path.\\
+\textbf{FDI verdict.} \textbf{Category 2.} Certification language is \(\Sigma^0_1\text{-hard}\).  
+\subsubsection{Summary table}
+
+\begin{table*}[ht]
+\centering
+\caption{Epistemic Audit of Major Collapse / Interpretation Theories}
+\label{tab:epistemic-audit-full}
+\setlength\tabcolsep{0pt} % Removes default column separation
+\footnotesize \tiny
+\begin{tabular*}{\textwidth}{|p{7cm}|p{1.5cm}|p{1cm}|p{2cm}|p{4.5cm}|}
+\hline
+\textbf{Theory (Author(s))} & \textbf{Stage 0 (F,S,C)} & \textbf{FDI Category} & \textbf{Language / Hardness} & \textbf{Failure Mode / Reason} \\
+\hline
+Born / Copenhagen (Bohr \& von Neumann) & Pass & 2 &  \(\Sigma^0_1\)-hard & Internal randomness $\Rightarrow$ PV fails \\
+\hline
+GRW / CSL (Ghirardi, Rimini, Weber; Pearle; Gisin) & Pass & 2 &  \(\Sigma^0_1\)-hard & Internal noise $\Rightarrow$ PV fails \\
+\hline
+Bohmian Mechanics (Bohm; Dürr, Goldstein \& Zanghì) & Pass & 2 &  \(\Sigma^0_1\)-hard & Continuum hidden variable; UI-T fails \\
+\hline
+Everett / Many-Worlds (Everett; DeWitt; Saunders) & Pass & 2 &  \(\Sigma^0_1\)-hard & Self-location among branches; UI-T fails \\
+\hline
+CQL Deterministic collapse (Rembieliński \& Caban) & Pass & 3 &  NP/QCMA & Finite projector basins; PV holds \\
+\hline
+Finite-World MIW (Hall, Deckert \& Wiseman) & Pass & 3 &  NP/QCMA & Finite world index as guard \\
+\hline
+Superdeterministic CAI (’t Hooft) & Pass & 3 &  NP & Finite micro-state index \\
+\hline
+Invariant-Set Theory (Palmer) & Fail & 1 & --- & Operational UI-T \& PV fail; fractal state space \\
+\hline
+Retro-causal Two-Time (Aharonov; Price; Wharton) & Pass & 2 &  \(\Sigma^0_1\)-hard & Future boundary breaks UI-T \\
+\hline
+Big-Bang Superdeterminism (’t Hooft et al.) & Pass / Fail & 2 / 1 & --- & Hidden \(\lambda\) index; UI-T / C or PV fail \\
+\hline
+Penrose OR (Penrose) & Pass & 2 &  \(\Sigma^0_1\)-hard & Gravitational collapse internal randomness \\
+\hline
+Diósi–Penrose (DP) model (Diósi; Penrose) & Pass & 2 &  \(\Sigma^0_1\)-hard & Stochastic DP noise internal to dynamics \\
+\hline
+Quantum State Diffusion (Gisin \& Percival)& Pass & 2 &  \(\Sigma^0_1\)-hard & Stochastic Schrödinger mechanism; PV fails \\
+\hline
+Transactional Interpretation (Cramer; Kastner) & Pass & 2 &  \(\Sigma^0_1\)-hard & Handshake selection; UI-T fails \\
+\hline
+Consistent Histories (Griffiths; Gell-Mann \& Hartle; Omnès) & Pass & 2 &  \(\Sigma^0_1\)-hard & Branch self-location; UI-T fails \\
+\hline
+Modal Interpretations (Dieks; Vermaas) & Pass & 2 &  \(\Sigma^0_1\)-hard & Property selection via hidden index; UI-T fails \\
+\hline
+Relational QM (Rovelli) & Pass & 2 &  \(\Sigma^0_1\)-hard & Relational self-location; UI-T fails \\
+\hline
+QBism (Fuchs \& Schack) & Pass & 2 &  \(\Sigma^0_1\)-hard & Personal belief update; UI-T fails \\
+\hline
+Nelson Stochastic Mechanics (Nelson) & Pass & 2 &  \(\Sigma^0_1\)-hard & Brownian hidden variable; UI-T fails \\
+\hline
+\end{tabular*}
+\end{table*}
+
+
+%=============================================================
+\section{Why an \emph{Epistemic--Complexity} Test-bed Is Needed}
+
+\subsection{A persistent split in foundational views}
+A recent international survey of more than one thousand physicists%
+\footnote{Nature survey, 2025; see \url{https://www.nature.com/articles/d41586-025-02342-y}} 
+highlights how little consensus exists on the foundations of quantum mechanics.  
+When asked about their preferred interpretation, 36\% chose Copenhagen,  
+15\% Many--Worlds, 7\% Bohmian mechanics, with the remainder scattered among  
+less common views.  On the reality of the wavefunction itself,  
+36\% regarded it as a real entity, 47\% as a calculation tool, and the rest were undecided.  
+Even the existence of a sharp quantum--classical boundary split opinion almost evenly (45\% yes, 45\% no).  
+
+These are not minor philosophical quibbles: each stance changes what the theory says about 
+what we can \emph{know} from an experiment.  
+If two interpretations make identical predictions for all laboratory outcomes but differ 
+on whether those outcomes can be verified in a single run,  
+that difference is operationally important.
+
+\subsection{The need for a neutral yardstick}
+At present, there is no widely--accepted way to compare interpretations on the 
+question of single--run verification.  
+Our aim is not to declare one interpretation ``true,''  
+but to develop a \emph{model--independent} test--bed that measures a simpler property:  
+whether, in principle, a single experimental outcome could be certified as correct  
+by a finite procedure.  
+
+We call this property \emph{epistemic complexity}:  
+the inherent difficulty, built into the theory, of confirming that a recorded result  
+matches reality, without relying on statistical repetition.  
+Different theories can share the same experimental predictions yet occupy  
+very different positions on the epistemic--complexity scale.
+
+\subsection{Three qualitative categories}
+Without technical detail, the possibilities fall into three broad categories:
+\begin{description}
+  \item[Category~1:] No verification procedure can even be \emph{defined}  
+  for the scenario under consideration; the setting is out of scope.
+  \item[Category~2:] A verification procedure can be defined, but no \emph{finite}  
+  procedure can guarantee correctness for a single outcome; infinite information would  
+  be required in principle.
+  \item[Category~3:] A finite procedure exists, in principle, that can certify  
+  the correctness of a single outcome.
+\end{description}
+The categories reflect fundamental limits, not experimental convenience.  
+Which category a theory occupies depends on how it treats state--space reachability,  
+input specification, and the internal structure of its measurement process.
+
+\subsection{Concrete illustrations}
+These abstract categories can be grounded in familiar examples:
+\begin{itemize}
+  \item \textbf{Category~1:} A hypothetical model in which a single laboratory experiment  
+  depends on infinitely many uncontrolled degrees of freedom.  
+  Because no starting point for a verification procedure can be defined,  
+  the question of correctness is out of scope.
+  \item \textbf{Category~2:} Standard Copenhagen collapse with purely internal randomness.  
+  The theory allows outcomes, but without access to the random seed there is no  
+  finite checklist that could, in principle, guarantee that the result recorded  
+  in one run is the ``correct'' one.
+  \item \textbf{Category~3:} A deterministic collapse model in which the governing  
+  equations and all required initial data are, in principle, finitely accessible.  
+  Here, a finite verification procedure for a single outcome exists.
+\end{itemize}
+
+\subsection{From intuition to audit}
+The categories above are qualitative; in our full framework~\cite{FullTheory2025}  
+they are made precise and tested via a finite checklist of mathematical  
+conditions on a theory's structure.  
+In this paper we apply that audit to major collapse and no--collapse interpretations,  
+providing a comparative map of their epistemic complexity in the laboratory regime.  
+The goal is to give physicists a neutral reference point for interpreting  
+what their favourite theory can---and cannot---promise about  
+the verifiability of the world revealed in a single experiment.
+
+
+\section{Measurement \texorpdfstring{$\Pi_2$}{Pi2}-Hardness}
+\label{sec:pi2-hardness}
+
+In this section we analyse when the certification decision problem 
+rises to at least Turing degree~$0''$ 
+(\(\Pi^0_2\)-hardness) \emph{within the FDI/FTE/ABET framework}. 
+We keep the axiomatic mode in which \((F)\) 
+(Reachable, Lyapunov-bounded, Contractive basin) 
+and \((S)\) (Certification Standard) hold. 
+Thus, the fact to be certified \emph{exists} and can be stated 
+as a definite mathematical property. 
+The jump in hardness comes entirely from 
+additional \emph{unknowability conditions} that enforce 
+a universal quantifier over an unbounded or uncontrolled space 
+in the very formulation of the certification property.
+
+\subsection{General conditions for \texorpdfstring{$\Pi_2$}{Pi2}-hardness}
+\label{subsec:pi2-general-conditions}
+
+Let \(\mathcal{P}\) be a certification property of the form
+\[
+\forall\, x\in X\ \exists\, t\in\mathbb{N}:\quad R(x,t)
+\]
+where \(R(x,t)\) is a decidable predicate in the inner variables 
+and \(X\) is an \emph{unknowable} or \emph{uncontrollable} parameter space 
+(as seen by the certifier at compile time).
+If \(X\) is infinite and rich enough to encode 
+all instances of the classical \(\mathrm{TOT}\) problem%
+\footnote{%
+The \(\mathrm{TOT}\) (totality) problem asks 
+whether a given Turing machine halts on all inputs, 
+and is complete for \(\Pi^0_2\) under many-one reductions.
+}, 
+then deciding \(\mathcal{P}\) is \(\Pi^0_2\)-hard.
+
+In our setting, \(\mathcal{P}\) arises when:
+\begin{itemize}[leftmargin=1.5em]
+\item We quantify over all admissible values of an \emph{unknown parameter} 
+  (initial state, environment policy, robustness budget, \ldots),
+  not fixed in advance.
+\item The inner \(\exists t\) asserts the existence of a finite bound 
+  (time-to-certify, ATRT halting step, decomposition size, \ldots) 
+  that works for that parameter value.
+\end{itemize}
+A single axiom failure never produces this \(\forall\exists\) pattern 
+for the core FDI/FTE/ABET decision problems on a fixed operational slice. 
+It emerges only when certain \emph{pairs} of assumptions are violated together 
+in such a way that a universal quantifier over an 
+\emph{uncontrollable} space is unavoidable.
+
+We distinguish three canonical \emph{bundles} of assumptions 
+whose joint failure leads to \(\Pi_2\)-hardness 
+while preserving \((F)\) and \((S)\).
+
+\subsection{The three bundles}
+\label{subsec:pi2-bundles}
+
+We formulate the bundles in abstract terms, 
+without committing to any particular physical realisation.
+
+\paragraph{Bundle A (Globalised state space with unknown initial state).}
+Assumptions:
+\begin{itemize}[leftmargin=1.5em]
+\item \((C)\) fails on the full admissible domain 
+  (state space is non-compact), but \((F)\) and \((S)\) hold.
+\item The \emph{actual} initial state \(\Theta_0\) is \emph{unknowable} 
+  at compile time.
+\end{itemize}
+Consequence:
+The property ``for all admissible initial states, 
+there exists a time bound after which the trajectory remains in~\(\mathcal{B}\)'' 
+has the quantifier form
+\[
+\forall\, \Theta_0 \in \mathcal{M}\ \exists\, T\ \forall t\ge T:\ \Theta_t \in \mathcal{B},
+\]
+which can encode \(\mathrm{TOT}\) and is \(\Pi^0_2\)-hard.
+
+\paragraph{Bundle B (UI-Traceability failure with unknown input policy).}
+Assumptions:
+\begin{itemize}[leftmargin=1.5em]
+\item \((C)\), \((F)\), \((S)\), \((PV) \equiv (EM1–EM3)\) all hold.
+\item PL-Traceability holds along any realised execution, 
+  but UI-Traceability fails: no open tick-0 guard partition 
+  isolates the realised branch.
+\item The environment’s input policy \(\pi\) is uncontrollable and unknown 
+  at compile time, drawn from a large admissible class~\(\Gamma\).
+\end{itemize}
+Consequence:
+The robust-liveness statement
+\[
+\forall\, \pi\in\Gamma\ \exists\, T\ \forall t\ge T:\ 
+\Theta_t^{(\pi)} \in \mathcal{B}
+\]
+is \(\Pi^0_2\)-hard in general, because UI failure prevents 
+a uniform finite decomposition that works for all~\(\pi\).
+
+\paragraph{Bundle C (PV failure with unknown robustness budget).}
+Assumptions:
+\begin{itemize}[leftmargin=1.5em]
+\item \((C)\), \((F)\), \((S)\) all hold.
+\item  \((PV) \equiv (EM1–EM3)\) fails: the acceptance relation \(W_n\) 
+  is open and robust topologically, but no deterministic polytime verifier 
+  can decide membership uniformly to all tolerances.
+\item The required tolerance~\(\varepsilon_k\) is adversarially chosen 
+  from a compact range, unknown at compile time.
+\end{itemize}
+Consequence:
+The uniform instrumentability property
+\[
+\forall\, k\ \exists\, \Pi_k\ \text{(finite guarded program certifying tolerance $\varepsilon_k$)}
+\]
+is \(\Pi^0_2\)-hard, since PV failure can be arranged 
+to encode \(\mathrm{TOT}\) into the need for 
+non-recursive boundary information in~\(\Pi_k\).
+
+\subsection{Abstract examples}
+
+We now give three purely mathematical constructions, 
+one for each bundle, to illustrate the quantifier structure. 
+These are not intended as physically realisable setups; 
+they serve only to make the complexity jump explicit.
+
+\paragraph{Example A (Bundle A).}
+Let \(\mathcal{M} = \bigsqcup_{n\in\mathbb{N}} S_n\) 
+be a disjoint union of compact components~\(S_n\) 
+with a metric making \(\mathcal{M}\) non-compact. 
+Let \(U\) be such that from each \(S_n\) there is a path into~\(\mathcal{B}\) 
+in at most \(t(n)\) steps. 
+If \(t(n)\) encodes the halting time of the \(n\)-th Turing machine on input~\(n\), 
+then
+\[
+\forall\,\Theta_0\ \exists\, T\ \forall t\ge T:\ \Theta_t\in\mathcal{B}
+\]
+is equivalent to \(\mathrm{TOT}\), hence \(\Pi^0_2\)-hard.
+
+\paragraph{Example B (Bundle B).}
+Let \(\mathcal{M}=[0,1]\), \(\mathcal{Z}^{\rm in}=[0,1]\), 
+and \(U(\theta,z) = f_\theta(z)\) where for each \(\theta\) 
+the preimage \(f_\theta^{-1}(\mathcal{B})\) 
+is a middle-third Cantor set of positive measure. 
+Arrange these Cantor sets so that no finite open cover at tick 0 
+intersects all of them. 
+Let \(\Gamma\) be the set of all Lipschitz input policies. 
+Then the statement 
+``for all \(\pi\in\Gamma\) eventually in~\(\mathcal{B}\)'' 
+is \(\Pi^0_2\)-hard.
+
+\paragraph{Example C (Bundle C).}
+Let \(\mathcal{M}=[0,1]\), \(W_n\) be the union of open intervals 
+whose endpoints encode the halting set of some Turing machine, 
+with gaps shrinking like \(2^{-k}\). 
+Let \(\varepsilon_k=2^{-k}\). 
+Any finite guarded program \(\Pi_k\) certifying \(W_n\) 
+to tolerance~\(\varepsilon_k\) must decide 
+halting for all inputs up to size~\(k\). 
+Thus 
+\[
+\forall\, k\ \exists\, \Pi_k\ \text{correct for $\varepsilon_k$}
+\]
+is \(\Pi^0_2\)-hard.
+
+\subsection{Concrete physics example: Bundle A in cosmology}
+
+A notable instantiation of Bundle~A occurs 
+if we take as the ``system'' the \emph{entire Universe} 
+modelled in a theory whose full state space~\(\mathcal{M}_{\rm global}\) 
+is non-compact (e.g., unbounded energy spectrum, 
+no uniform truncation on degrees of freedom). 
+If the \emph{actual} global initial state~\(\Theta_0\) 
+is unknowable to any finite experimenter, 
+then any well-posed certification claim 
+about eventual capture into a target basin~\(\mathcal{B}\) 
+must be quantified as:
+\[
+\forall\, \Theta_0\in\mathcal{M}_{\rm global}\ \exists\, T\ \forall t\ge T:\ 
+\Theta_t\in\mathcal{B}.
+\]
+Under mild richness assumptions on~\(\mathcal{M}_{\rm global}\) 
+this formulation is \(\Pi^0_2\)-hard, 
+since \(\Theta_0\) can encode arbitrary Turing-machine instances 
+and \(T\) can encode the halting times. 
+This is independent of any specific dynamics; 
+it follows solely from the 
+(non-compactness, unknowability)-pair of conditions in Bundle~A.
+
+In physical collapse models posed on such a global state space, 
+this complexity obstruction is \emph{intrinsic}: 
+even if the dynamics are otherwise well-behaved locally, 
+the certification language for ``eventual capture for all admissible global states'' 
+cannot be reduced below~\(0''\) without access to non-computable information 
+about the actual \(\Theta_0\).
+
+
+\section{Epistemic Inaccessibility of Global Collapse}
+\label{sec:global-collapse-inaccessibility}
+
+\subsection{Two distinct claims}
+We distinguish:
+\begin{enumerate}[leftmargin=1.5em,itemsep=2pt]
+  \item \textbf{Out-of-scope claim (Category 1).} On the \emph{global}, non-compact Hilbert space, Axiom (C) fails, hence ABET cannot be formed and the Simple Test cannot be constructed.
+  \item \textbf{Operational indistinguishability claim (in-scope).} On any \emph{compact} laboratory slice satisfying (F), (S), (C), if the collapse dynamics agrees (exactly or within precision~$\varepsilon$) with unitary on all observables accessible to finite guarded decompositions, then no finite guarded test can distinguish them.
+\end{enumerate}
+Only the second claim is a \emph{theorem of indistinguishability}; the first is a scope statement.
+
+\subsection{Out-of-scope theorem (global non-compact domain)}
+\label{subsec:global-out-of-scope}
+
+\begin{theorem}[Global domain is out of FDI scope]\label{thm:global-out-of-scope}
+Let $\mathcal H_{\rm global}$ be a separable, infinite-dimensional Hilbert space and consider the full state space $\mathcal D(\mathcal H_{\rm global})$ endowed with the trace-norm topology. If experiments are allowed to range over \emph{all} finite-energy levels with no uniform cutoff, the accessible input set $Z^{\mathrm{in}}$ is non-compact. Consequently Axiom~\textup{(C)} (compact continuity) fails on that domain, ABET cannot be instantiated, and the Simple Test is undefined. In the taxonomy of Sec.\,\ref{sec:fdi-audit-collapse}, the \emph{global} collapse vs.\ unitary question is Category~1.
+\end{theorem}
+
+\begin{proof}
+Without a uniform energy/localisation cutoff, $Z^{\mathrm{in}}$ contains sequences escaping any bounded set, so no finite open cover admits a finite subcover; this is the failure of compactness. The ABET construction and its finite subcover step require compactness of both the state and input slices under which $U,E$ are continuous. Hence ABET cannot be formed and the Simple Test cannot be defined.
+\end{proof}
+
+\subsection{Indistinguishability on compact laboratory slices}
+\label{subsec:global-indistinguishability}
+
+\paragraph{Setup.} Let $\mathcal H_{\rm lab}\subset \mathcal H_{\rm global}$ be a finite-energy, finite-resolution laboratory slice such that the induced state space $\mathcal M:=\mathcal D(\mathcal H_{\rm lab})$ is compact, with $(\mathrm F)$, $(\mathrm S)$, $(\mathrm C)$ satisfied, and let instruments (update-and-measure primitives) obey $(\mathrm{EM1}\text{–}\mathrm{EM3})$. Write $\mathrm{Instr}$ for the class of finite instruments implementable by finite guarded decompositions over $\mathcal M$ (finite sequences of CPTP maps and POVMs with the book’s effectivity bounds).
+
+\begin{definition}[Operational agreement on $\mathcal M$]
+Two evolutions on $\mathcal D(\mathcal H_{\rm global})$,
+\(
+\mathcal U(\rho)=U\rho U^\dagger
+\)
+and a channel $\mathcal C$, are said to be \emph{operationally $\varepsilon$-equivalent on $\mathcal M$}
+if for every instrument $\mathsf I\in\mathrm{Instr}$ with outcome set $\Omega$ and every $\rho\in\mathcal M$,
+\[
+\bigl\|\mathsf I\circ \mathcal U(\rho)\;-\;\mathsf I\circ \mathcal C(\rho)\bigr\|_{\mathrm{TV}}
+\;\le\;\varepsilon,
+\]
+where the left-hand side is total-variation distance between the induced outcome distributions on $\Omega$.
+\end{definition}
+
+\begin{theorem}[Compact-access indistinguishability]\label{thm:compact-indistinguishability}
+Assume $(\mathrm F)$, $(\mathrm S)$, $(\mathrm C)$ on $\mathcal M$, and $(\mathrm{EM1}\text{–}\mathrm{EM3})$, $(\mathrm I)$ for finite guarded tests. If $\mathcal U$ and $\mathcal C$ are operationally $\varepsilon$-equivalent on $\mathcal M$, then no finite guarded decomposition can distinguish $\mathcal U$ from $\mathcal C$ with advantage exceeding~$\varepsilon$. In particular, for $\varepsilon=0$ they are indistinguishable by any finite guarded decomposition.
+\end{theorem}
+
+\begin{proof}
+Any finite guarded decomposition on $\mathcal M$ compiles to an instrument $\mathsf I\in\mathrm{Instr}$ whose outcome distribution depends affinely and continuously on the input state and the composing CPTP maps/POVMs (the latter are fixed by the test). By assumption, for all $\rho\in\mathcal M$,
+\(
+\|\mathsf I\circ \mathcal U(\rho) - \mathsf I\circ \mathcal C(\rho)\|_{\mathrm{TV}}\le\varepsilon.
+\)
+Hence the supremum distinguishing advantage of any test over $\mathcal M$ is at most $\varepsilon$. For $\varepsilon=0$ all outcome distributions coincide, making the tests indistinguishable.
+\end{proof}
+
+\begin{remark}[Sufficient structural condition]
+A sufficient (and checkable) condition for $\varepsilon=0$ is
+\[
+\operatorname{Tr}_{\rm env}\!\bigl[\mathcal U(\rho\otimes \eta)\bigr]
+\;=\;
+\operatorname{Tr}_{\rm env}\!\bigl[\mathcal C(\rho\otimes \eta)\bigr]
+\quad
+\text{for all }\rho\in\mathcal M\text{ and all environment states }\eta
+\]
+\emph{that can arise within the finite test horizon}. Since every $\mathsf I\in\mathrm{Instr}$ acts on $\mathcal H_{\rm lab}$ and depends only on these reduced states, all outcome statistics coincide.
+\end{remark}
+
+\begin{corollary}[Finite-precision robustness]
+If operational equivalence holds up to $\varepsilon(\delta)$ for instruments whose POVM elements have operator-norm tolerance $\delta$, then no \emph{$\delta$-precision} finite guarded test can distinguish beyond~$\varepsilon(\delta)$.
+\end{corollary}
+
+\subsection{“God-observer” corollary and discussion}
+\label{subsec:god-observer}
+
+\begin{corollary}[No superobserver with finite resources]
+Any observer—no matter how large—whose probes and detectors are limited to finite precision and finite energy implements instruments in $\mathrm{Instr}$ over some compact slice $\mathcal M$. If a putative global collapse map $\mathcal C$ agrees (exactly or within $\varepsilon$) with unitary on all such instruments, then even a ``God-observer'' cannot distinguish $\mathcal C$ from $\mathcal U$ beyond advantage~$\varepsilon$.
+\end{corollary}
+
+\begin{remark}[Relation to ABET/FET/FDI]
+Thm.\,\ref{thm:global-out-of-scope} explains why \emph{global} collapse is Category~1: ABET cannot even be posed on a non-compact domain. Thm.\,\ref{thm:compact-indistinguishability} is a distinct, in-scope statement: on compact slices where ABET and the Simple Test exist, indistinguishability follows from \emph{marginal agreement} on the accessible observables, not merely from the global non-compactness.
+\end{remark}
+
+
+\section{Why this matters now}
+
+\subsection{From formal limits to physical meaning}
+
+Most discussions about the limits of physical theories focus on the
+\emph{accuracy} of their predictions: how closely they match experimental
+results, how far those results can be pushed by better instruments, and where
+new physics might emerge. Our concern here is different. We are interested in
+the \emph{decidability} of statements about the world: whether a given theory
+can, even in principle, assign a definite truth value to a certain kind of
+physical claim.
+
+To make this concrete, imagine a claim that has the form:
+
+\begin{quote}
+``From \emph{any} allowed initial state of the system, the dynamics will
+eventually carry it into a certain well-defined region, and once there, it will
+stay there forever.''
+\end{quote}
+
+Mathematically, this is an ``eventual capture'' property:
+\[
+\forall\,\Theta_0 \in \mathcal{M}\ \exists\,T\ \forall t \ge T:\ 
+\Theta_t \in \mathcal{B}.
+\]
+Here $\mathcal{M}$ is the space of allowed states, $\Theta_t$ is the state at
+time $t$, and $\mathcal{B}$ is the ``target'' region. This form of statement
+appears in many guises: stability in control theory, safety in engineering,
+asymptotic convergence in algorithms, and irreversibility in thermodynamics.
+It also appears in fundamental physics whenever we speak of the system having
+settled into a certain macroscopic condition.
+
+Our framework allows us to classify the \emph{computational complexity} of such
+claims. In some cases they can be verified by a finite procedure---a bounded
+experiment or calculation. In others, they are provably beyond the reach of
+any such finite procedure. This is not a matter of technology or cleverness,
+but of the structure of the state space and the kind of quantifiers the claim
+involves. 
+
+The key point is that this is a \emph{theoretical} limit: it applies to any
+experimenter, no matter how powerful, as long as they are bound by the basic
+constraints of finiteness---finite precision, finite resources, and a finite
+amount of accessible information.
+
+\subsection{When the state space is too large}
+
+One of the strongest obstructions arises when the underlying space of possible
+states is \emph{non-compact} and the actual initial state is unknowable in full
+detail. Non-compactness means, loosely speaking, that the system admits
+configurations arbitrarily far apart in the relevant metric---for example,
+arbitrarily high energies, unbounded particle numbers, or unlimited spatial
+extent. Unknowability means that no experiment, however precise, can fully
+specify the starting point within that vast space.
+
+In such a setting, the ``eventual capture'' statement above becomes a problem
+of the following logical shape:
+\[
+\forall\ \text{(possible initial states)}\quad
+\exists\ \text{(time to capture)}\quad
+\forall\ \text{(later times)}\ \ldots
+\]
+This is a \(\Pi^0_2\)-type statement in the hierarchy of decision problems: it
+has a universal quantifier over an infinite set, followed by an existential
+quantifier, followed by another universal one. Problems of this form are
+famously hard: they can encode the question of whether an arbitrary computer
+program will run forever or eventually halt. In practical terms, there is no
+finite list of experiments or finite computation that can decide such a
+property for \emph{all} possible initial states.
+
+This is not just an abstract exercise in logic. If we treat the ``system'' as
+large as the entire Universe, described by a theory whose full state space is
+non-compact---as is the case in the standard infinite-dimensional Hilbert-space
+formalism of quantum mechanics---then the obstacle is \emph{intrinsic}. It does
+not depend on the details of the dynamics. Even if the evolution law is
+perfectly well-behaved and local, the combination of (i) an unbounded state
+space and (ii) our inability to know the actual global state is enough to make
+certain natural, physically meaningful claims formally undecidable by any
+finite process.
+
+\subsection{Why this is relevant to laboratory physics}
+
+At first sight, such global undecidability might seem irrelevant to physics as
+we practise it. No laboratory experiment attempts to probe \emph{all} possible
+states of the Universe; we work with carefully prepared, finite-energy
+subsystems. On these restricted ``laboratory slices,'' the state space can be
+compact, the relevant quantities continuous, and the corresponding statements
+verifiable in finite time.
+
+However, the connection between the global and laboratory levels matters for
+two reasons.
+
+First, many interpretations of quantum mechanics, and many proposed
+modifications such as collapse models, are formulated \emph{globally}. Their
+rules apply to the whole Universe at once, even if we only ever test small
+parts. If the global theory has built-in undecidable facts, then some questions
+about its behaviour can \emph{never} be settled in principle, no matter how far
+we extend our experiments.
+
+Second, the passage from the global state to what an experimenter can actually
+observe inevitably discards information. Our earlier results show that this
+``observer--observable split'' is not just a philosophical move: it has a
+well-defined computational cost. In the worst case, it can raise the complexity
+of deciding a physical fact to the highest levels considered in computability
+theory. That means that even if the local, observable physics looks simple and
+well-behaved, the unobservable part of the state may hide complexity that
+prevents us from ever proving certain properties with finite resources.
+
+This perspective reframes some long-standing foundational debates. Questions
+about whether collapse happens, or whether different interpretations are truly
+distinct, can have fundamentally different answers depending on whether we
+look at the laboratory slice (where finite verification may be possible) or the
+full global state (where it may not be).
+
+\subsection{Implications for theory choice}
+
+Recognising the role of these complexity barriers forces a sharper distinction
+between two kinds of theoretical differences.
+
+Some differences live entirely within the \emph{laboratory slice}. These affect
+predictions in ways that can, at least in principle, be detected by a finite
+sequence of experiments. Competing models in this category can be distinguished
+by sufficiently clever experimental design, even if the required precision or
+resources make the task challenging in practice.
+
+Other differences exist only at the \emph{global} level, where the state space
+is non-compact and the actual state unknowable. In this regime, complexity
+theory tells us that certain natural verification tasks become as hard as the
+most difficult problems in the arithmetical hierarchy that still admit definite
+truth values. Here, no conceivable finite experiment—no matter how powerful—can
+settle the question for all possible states. In such cases, models may remain
+\emph{empirically indistinguishable forever}, even if they differ dramatically
+in their global description of reality.
+
+For theory choice, this means that apparent empirical underdetermination may
+come in two very different flavours: one that can, in principle, be broken by
+future experiments, and one that is \emph{in principle} unbreakable. The first
+type is a challenge to experimental ingenuity; the second is a challenge to how
+we weigh untestable global features when deciding between otherwise equivalent
+models.
+
+By making these categories explicit, we can have a more honest conversation
+about what is at stake in foundational debates. Disagreements that fall into
+the second category are not just matters of experimental difficulty—they are
+separated by a provable barrier that no improvement in technology can cross.
+
+\subsection{From assumptions to consequences: a chain of reasoning}
+
+To make the discussion concrete, we first state the minimal assumptions
+about \emph{classical reality} we adopt in this section:
+
+\begin{enumerate}[leftmargin=1.5em,itemsep=2pt]
+  \item \textbf{Existence of facts.}  
+  At any given time $t$, there exists at least one \emph{fact}---a statement
+  about the state of the world---that is objectively true, in the sense
+  that its truth value is independent of any observer's belief or
+  information.
+  \item \textbf{Ledger view.}  
+  These facts can be thought of as entries in a (possibly unbounded) ledger:
+  a temporally ordered collection of statements, each of which can be
+  individually referenced and re-stated without ambiguity.
+  \item \textbf{Finite-certifiable procedure.}  
+  Each entry in the ledger comes into existence through a procedure
+  that is \emph{finite-certifiable}: there exists, in principle, a finite
+  operational test whose outcome would settle the fact's truth value.
+  (The test may depend on context, but it halts in finite time whenever
+  the fact is true.)
+\end{enumerate}
+
+These three assumptions are intentionally modest:
+they do not specify what the facts \emph{are}, nor what physical mechanism
+produces them; they only require that facts \emph{exist},
+are \emph{recordable} in principle, and are \emph{operationally certifiable}.
+
+\paragraph{Step 1: Ledger existence imposes compactness.}
+From the finite-certifiability requirement, the set of all possible
+states that could underlie ledger entries at a given time
+must be representable with a finite amount of information to any desired
+precision.
+Mathematically, this forces the underlying state space to be \emph{compact}:
+without compactness, no uniform finite resolution would suffice to
+cover all admissible states, and the certification procedure could not
+be constructed.
+
+\paragraph{Step 2: Ledger procedure implies information loss.}
+Our results from Book~I, Ch.~5 and Appendix~B show that
+\emph{any} finite-certifiable fact necessarily arises from an
+\emph{information-losing} transformation of the underlying state.
+The separation between ``observer'' and ``observed''
+is not a mere convenience: it is the structural reason that
+a fact can be stated at all.
+Lossless transformations of the underlying state
+make the certification problem $\Pi^0_2$-hard in the general case
+(reduction from \textsc{Total}), rendering them operationally unreachable.
+
+\paragraph{Step 3: Initial facts require restriction to a compact slice.}
+If the ``world'' is modelled as a single evolving point in a
+non-compact state space (e.g., an infinite-dimensional Hilbert space
+with no uniform cutoff), then \emph{no} fact can satisfy the above
+assumptions without first restricting attention to a compact subset
+and a concrete initial state within it.
+The unknowability of a global initial state in a non-compact space
+is exactly the \emph{Bundle~A} obstruction: it yields
+$\Pi^0_2$-hardness for universal certification claims.
+
+\paragraph{Step 4: Persistent reality from local re-creation.}
+Once an initial fact exists on a compact slice
+and the dynamics satisfy the usual regularity axioms
+(\emph{finiteness}, \emph{safety}, and \emph{continuity}),
+the arrow of time ensures that new facts can be continually
+certified and appended to the ledger.
+The ``classical reality'' we experience is this ongoing, procedural
+re-creation of certifiable facts.
+
+\paragraph{Step 5: Incompatibility with a purely unitary,
+infinite-dimensional global state.}
+A theory that postulates an ontic, \emph{globally} unitary evolution
+on a non-compact state space, with no mechanism for restriction to
+a compact, fact-certifiable slice, is thereby committed to the
+\emph{absence} of facts in the above sense.
+If one adopts the assumption that classical reality \emph{exists},
+then such a theory is, by construction, \emph{incomplete}:
+it lacks the structural ingredients needed to generate the facts that
+its own postulated reality demands.
+
+
+
+%-------------------------------------------------------------
+\bibliographystyle{unsrt}
+\begin{thebibliography}{1}
+\bibitem{gibney2025}
+E.~Gibney.
+\newblock Physicists disagree wildly on what quantum mechanics says about
+  reality, {Nature} survey shows.
+\newblock {\em Nature News Feature} (2025).
+\end{thebibliography}
+%=============================================================
+\end{document}

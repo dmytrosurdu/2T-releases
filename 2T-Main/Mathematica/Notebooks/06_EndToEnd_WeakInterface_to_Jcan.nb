@@ -1,0 +1,357 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     14663,        348]
+NotebookOptionsPosition[     11860,        309]
+NotebookOutlinePosition[     12174,        323]
+CellTagsIndexPosition[     12131,        320]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["06 End To End Weak Interface to Jcan", "Title",ExpressionUUID->"ee459fb6-ec5a-4d32-bd70-b4f490ae3314"],
+
+Cell["Scope", "Section",ExpressionUUID->"1ca67f64-8f1a-44dc-b46c-75ba81ebac32"],
+
+Cell["This notebook is the sprint milestone certificate for ", "Text",ExpressionUUID->"71052666-245f-4332-8cc7-ad4837b03fbc"],
+
+Cell["(E^-, Aminus, [Xi^(1)], chi, epsilon) => B => Jcan", "Program",ExpressionUUID->"d2fdf647-a21f-4fdc-9e5d-dc7b1df55724"],
+
+Cell["\<\
+using the certified transport model from Task 3.5, the calibration \
+constructor from Task 4, and the affine projection theorem from Task 5. \
+\>", "Text",ExpressionUUID->"30e21f03-38c1-449f-88bb-bb74f4997663"],
+
+Cell["Exact pipeline", "Section",ExpressionUUID->"17776b2c-2125-4b2d-a38c-ac538bf872fc"],
+
+Cell["Step 1: weak interface from transport", "Subsection",ExpressionUUID->"0d4be261-14fd-4ee5-8241-a8aa59857732"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"model", "=", 
+   RowBox[{
+   "MainProof`ActiveTransport`CertifiedActiveTransportModel", "[", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"chi", "=", 
+   RowBox[{"MainProof`ActiveTransport`DerivedChi", "[", "model", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"epsilon", "=", 
+   RowBox[{"chi", ".", 
+    RowBox[{"model", "[", "\"\<Jdesc\>\"", "]"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Aminus", "=", 
+   RowBox[{"model", "[", "\"\<Aminus\>\"", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Jdesc", "=", 
+   RowBox[{"model", "[", "\"\<Jdesc\>\"", "]"}]}], ";"}]}], "Input",Expression\
+UUID->"4cd10d56-5928-471b-93c9-52008b7bb2ca"],
+
+Cell["Exact result: ", "CodeText",ExpressionUUID->"4ed68a85-bc62-467d-b734-6ac9071fe38e"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"chi", "=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"epsilon", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Jdesc", "=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], ";"}]}], "Input",ExpressionUUI\
+D->"9f2e887d-6609-468d-a095-9b0f8d43bfe9"],
+
+Cell["Step 2: construct calibration", "Subsection",ExpressionUUID->"36659a9b-fa19-4f12-83ff-c3826094e950"],
+
+Cell["Choose exact auxiliary data ", "Text",ExpressionUUID->"541b5275-20d2-455c-a4b2-fe0deb9181f7"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"h", "=", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", 
+     RowBox[{"-", "1"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"J0", "=", 
+   RowBox[{
+    RowBox[{"Jdesc", "+", 
+     RowBox[{"Aminus", ".", "h"}]}], "=", 
+    RowBox[{"{", 
+     RowBox[{"2", ",", 
+      RowBox[{"-", "1"}], ",", "1"}], "}"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"N", "=", 
+   RowBox[{
+   "MainProof`CommonProofTools`KernelBasisFromFunctional", "[", "chi", 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Q", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "3"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"beta", "=", "5"}], ";"}]}], "Input",ExpressionUUID->"0c50ce5d-0b4a-\
+46a3-9628-fa34ff736a62"],
+
+Cell["Then ", "Text",ExpressionUUID->"693839f7-e6e2-4748-9c3a-9682ad2db909"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cal", "=", 
+   RowBox[{
+   "MainProof`Calibration`CalibrationData", "[", "\[IndentingNewLine]", "  ", 
+    
+    RowBox[{"chi", ",", "\[IndentingNewLine]", "  ", 
+     RowBox[{"epsilon", " ", "Jdesc"}], ",", "\[IndentingNewLine]", "  ", 
+     "beta", ",", "\[IndentingNewLine]", "  ", "Q", ",", 
+     "\[IndentingNewLine]", "  ", 
+     RowBox[{"\"\<KernelBasis\>\"", "->", "N"}], ",", "\[IndentingNewLine]", 
+     "  ", 
+     RowBox[{"\"\<Aminus\>\"", "->", "Aminus"}], ",", "\[IndentingNewLine]", 
+     "  ", 
+     RowBox[{"\"\<Representative\>\"", "->", "Jdesc"}], ",", 
+     "\[IndentingNewLine]", "  ", 
+     RowBox[{"\"\<Epsilon\>\"", "->", "epsilon"}]}], "\[IndentingNewLine]", 
+    "]"}]}], ";"}]], "Input",ExpressionUUID->"f4737f7a-d99f-4f3d-a661-\
+f4cef260f50e"],
+
+Cell["Exact calibration matrix: ", "CodeText",ExpressionUUID->"41be97de-3929-4b27-8adc-81d7bad40041"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"B", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"3", ",", "1", ",", "0"}], "}"}], ",", "\[IndentingNewLine]", 
+     "     ", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "0"}], "}"}], ",", "\[IndentingNewLine]", 
+     "     ", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "5"}], "}"}]}], "}"}]}], ";"}]], "Input",Exp\
+ressionUUID->"4661cd7d-5ccb-477a-a802-7906ef4fe39f"],
+
+Cell["Step 3: compute the canonical representative", "Subsection",ExpressionUUID->"258c308e-cdda-44dc-8be0-44daebd3636f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"canon", "=", 
+   RowBox[{
+   "MainProof`CanonicalRepresentative`CanonicalRepresentativeData", "[", 
+    "\[IndentingNewLine]", "  ", 
+    RowBox[{
+    "Aminus", ",", "\[IndentingNewLine]", "  ", "B", ",", 
+     "\[IndentingNewLine]", "  ", "J0", ",", "\[IndentingNewLine]", "  ", 
+     RowBox[{"\"\<Chi\>\"", "->", "chi"}], ",", "\[IndentingNewLine]", "  ", 
+     RowBox[{"\"\<Epsilon\>\"", "->", "epsilon"}]}], "\[IndentingNewLine]", 
+    "]"}]}], ";"}]], "Input",ExpressionUUID->"6e4610a8-c4e2-44fc-a21d-\
+bb5f7059f6b9"],
+
+Cell["Exact output: ", "CodeText",ExpressionUUID->"aaaf456f-f9d5-4168-817e-cc2d658e51d7"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"aStar", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2"}], ",", "1"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Jcan", "=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], ";"}]}], "Input",ExpressionUUI\
+D->"bffd9fb9-6d24-4db2-b3d5-f7f4aef28a83"],
+
+Cell[TextData[{
+ "So the shifted representative projects back to the calibrating \
+representative ",
+ Cell[BoxData[Cell["epsilon Jdesc",
+   Background->None,ExpressionUUID->"1d68ab55-e0a8-42a5-92ce-bb09a530ed67"]], 
+  "InlineCode",ExpressionUUID->"7967a7ae-6db9-4f98-93c1-7bc175acbad6"],
+ ". "
+}], "Text",ExpressionUUID->"27cba666-9aeb-4df4-8027-1ae7e7aac5a0"],
+
+Cell["Re-run", "Section",ExpressionUUID->"bbfdc4cd-9613-44b4-a73e-2a02e7f7abc9"],
+
+Cell[BoxData[
+ RowBox[{"Get", 
+  "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Reports/\
+RunWeakInterfaceToJcan.wl\>\"", "]"}]], "Input",ExpressionUUID->"355eadae-\
+45db-4b68-99e3-b57d5546ae21"],
+
+Cell["Full symbolic artifact: ", "Text",ExpressionUUID->"d73b5b44-bdfa-4988-bf12-895846639b51"],
+
+Cell["\<\
+Main/Mathematica/Certificates/WeakInterfaceToJcan_Certificates.wl\
+\>", "Program",ExpressionUUID->"017e9a3c-84b6-4432-9391-e8728fe018d3"],
+
+Cell["Status", "Section",ExpressionUUID->"b09b2775-798c-4f20-a1ce-de4e98dd42ca"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Claim\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm], 
+         TagBox["\<\"ScopeClass\"\>",
+          HoldForm]},
+        {"\<\"Weak interface extracted from the certified transport \
+model\"\>", "\<\"exact finite-dimensional certificate\"\>", \
+"\<\"exact-model-certificate\"\>"},
+        {Cell[TextData[{
+          "Calibration constructed exactly from ",
+          Cell[BoxData[Cell["(chi, epsilon Jdesc, beta, Q)",
+            Background->None,ExpressionUUID->
+            "5a688926-7256-4b9d-9c5d-30c03beba2c4"]], "InlineCode",
+           ExpressionUUID->"a98e32fe-adac-49b4-89c4-1b0c6ced0609"]
+         }],ExpressionUUID->
+          "85ecb219-a5fb-4966-b4ad-4bc4e105b38e"], \
+"\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {Cell[TextData[{
+          Cell[BoxData[Cell["TickData",
+            Background->None,ExpressionUUID->
+            "b037ceba-09e7-4cc2-9533-28d389eb5f8c"]], "InlineCode",
+           ExpressionUUID->"e0111461-f569-4cb3-ae1a-872fd5cc82cf"],
+          " with transported ",
+          StyleBox["chi", "TI"],
+          ", calibrated ",
+          Cell[BoxData[Cell["B",
+            Background->None,ExpressionUUID->
+            "4fa7b505-c54b-4d74-8150-ea7cd1e56865"]], "InlineCode",
+           ExpressionUUID->"d1593a22-b36f-4cb5-b597-0cbd37f52833"],
+          ", and shifted ",
+          Cell[BoxData[Cell["J0",
+            Background->None,ExpressionUUID->
+            "6ecff273-781a-43ad-adf5-146e9552e59d"]], "InlineCode",
+           ExpressionUUID->"899d179d-b63a-4b9f-ab54-ace342e35a7e"],
+          " validates"
+         }],ExpressionUUID->
+          "d57c7547-da6e-464a-8325-d88da3b3cec3"], "\<\"exact \
+finite-dimensional certificate\"\>", "\<\"schema-validator\"\>"},
+        {Cell[TextData[{
+          Cell[BoxData[Cell["Jcan",
+            Background->None,ExpressionUUID->
+            "5f6711bc-b996-4def-98e9-a3285637e747"]], "InlineCode",
+           ExpressionUUID->"43e01fa8-c480-467e-8672-d0347b4a035a"],
+          " computed exactly and satisfies ",
+          Cell[BoxData[Cell["chi(Jcan) = epsilon",
+            Background->None,ExpressionUUID->
+            "ff9ddc4d-bae4-4273-a11d-2bac249a8647"]], "InlineCode",
+           ExpressionUUID->"fe5c4170-d541-4585-bdce-60ea59c113ce"]
+         }],ExpressionUUID->
+          "b28e51dd-1fc7-425a-aadb-d146f93ae902"], \
+"\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {Cell[TextData[{
+          Cell[BoxData[Cell["Jcan",
+            Background->None,ExpressionUUID->
+            "a37c06e7-e227-4ff6-997a-d129a162f7a1"]], "InlineCode",
+           ExpressionUUID->"b0fb7e1a-1289-4718-9f30-b6abdaf00cb8"],
+          " equals the calibrating representative after projection"
+         }],ExpressionUUID->
+          "ad49c431-709a-452c-b05e-2128e36252a0"], \
+"\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {Cell[TextData[{
+          "End-to-end milestone ",
+          Cell[BoxData[Cell["weak interface -> calibration -> Jcan",
+            Background->None,ExpressionUUID->
+            "68cf6d30-564d-4059-8aa9-9ab91d46a372"]], "InlineCode",
+           ExpressionUUID->"be0e7aca-ffcc-4740-a636-182dd2dae650"]
+         }],ExpressionUUID->
+          "eb7c15fd-7cdb-4ce8-8791-dc8630c090c7"], "\<\"proved\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"AQFT/HLS, LoG, and Peierls closure\"\>", "\<\"deferred\"\>", \
+"\<\"abstract-imported-assumptions\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[
+      BoxForm`e$, 
+       TableHeadings -> {None, {"Claim", "Status", "ScopeClass"}}]]], "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"f8724079-7c71-4e8d-9589-9d86544a5a6d"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9fb98179-9cdd-493e-8616-b4f0b8195a60"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 108, 0, 70, "Title",ExpressionUUID->"ee459fb6-ec5a-4d32-bd70-b4f490ae3314"],
+Cell[665, 22, 79, 0, 70, "Section",ExpressionUUID->"1ca67f64-8f1a-44dc-b46c-75ba81ebac32"],
+Cell[747, 24, 125, 0, 70, "Text",ExpressionUUID->"71052666-245f-4332-8cc7-ad4837b03fbc"],
+Cell[875, 26, 124, 0, 70, "Program",ExpressionUUID->"d2fdf647-a21f-4fdc-9e5d-dc7b1df55724"],
+Cell[1002, 28, 220, 3, 70, "Text",ExpressionUUID->"30e21f03-38c1-449f-88bb-bb74f4997663"],
+Cell[1225, 33, 88, 0, 70, "Section",ExpressionUUID->"17776b2c-2125-4b2d-a38c-ac538bf872fc"],
+Cell[1316, 35, 114, 0, 70, "Subsection",ExpressionUUID->"0d4be261-14fd-4ee5-8241-a8aa59857732"],
+Cell[1433, 37, 738, 20, 70, "Input",ExpressionUUID->"4cd10d56-5928-471b-93c9-52008b7bb2ca"],
+Cell[2174, 59, 89, 0, 70, "CodeText",ExpressionUUID->"4ed68a85-bc62-467d-b734-6ac9071fe38e"],
+Cell[2266, 61, 395, 12, 70, "Input",ExpressionUUID->"9f2e887d-6609-468d-a095-9b0f8d43bfe9"],
+Cell[2664, 75, 106, 0, 70, "Subsection",ExpressionUUID->"36659a9b-fa19-4f12-83ff-c3826094e950"],
+Cell[2773, 77, 99, 0, 70, "Text",ExpressionUUID->"541b5275-20d2-455c-a4b2-fe0deb9181f7"],
+Cell[2875, 79, 885, 29, 70, "Input",ExpressionUUID->"0c50ce5d-0b4a-46a3-9628-fa34ff736a62"],
+Cell[3763, 110, 76, 0, 70, "Text",ExpressionUUID->"693839f7-e6e2-4748-9c3a-9682ad2db909"],
+Cell[3842, 112, 805, 18, 70, "Input",ExpressionUUID->"f4737f7a-d99f-4f3d-a661-f4cef260f50e"],
+Cell[4650, 132, 101, 0, 70, "CodeText",ExpressionUUID->"41be97de-3929-4b27-8adc-81d7bad40041"],
+Cell[4754, 134, 448, 13, 70, "Input",ExpressionUUID->"4661cd7d-5ccb-477a-a802-7906ef4fe39f"],
+Cell[5205, 149, 121, 0, 70, "Subsection",ExpressionUUID->"258c308e-cdda-44dc-8be0-44daebd3636f"],
+Cell[5329, 151, 557, 12, 70, "Input",ExpressionUUID->"6e4610a8-c4e2-44fc-a21d-bb5f7059f6b9"],
+Cell[5889, 165, 89, 0, 70, "CodeText",ExpressionUUID->"aaaf456f-f9d5-4168-817e-cc2d658e51d7"],
+Cell[5981, 167, 330, 10, 70, "Input",ExpressionUUID->"bffd9fb9-6d24-4db2-b3d5-f7f4aef28a83"],
+Cell[6314, 179, 360, 7, 70, "Text",ExpressionUUID->"27cba666-9aeb-4df4-8027-1ae7e7aac5a0"],
+Cell[6677, 188, 80, 0, 70, "Section",ExpressionUUID->"bbfdc4cd-9613-44b4-a73e-2a02e7f7abc9"],
+Cell[6760, 190, 197, 4, 70, "Input",ExpressionUUID->"355eadae-45db-4b68-99e3-b57d5546ae21"],
+Cell[6960, 196, 95, 0, 70, "Text",ExpressionUUID->"d73b5b44-bdfa-4988-bf12-895846639b51"],
+Cell[7058, 198, 147, 2, 70, "Program",ExpressionUUID->"017e9a3c-84b6-4432-9391-e8728fe018d3"],
+Cell[7208, 202, 80, 0, 70, "Section",ExpressionUUID->"b09b2775-798c-4f20-a1ce-de4e98dd42ca"],
+Cell[7291, 204, 4565, 103, 70, "TextTableForm",ExpressionUUID->"f8724079-7c71-4e8d-9589-9d86544a5a6d"]
+}
+]
+*)
+
+(* End of internal cache information *)

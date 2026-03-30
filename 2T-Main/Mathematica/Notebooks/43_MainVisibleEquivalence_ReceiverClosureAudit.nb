@@ -1,0 +1,637 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     30232,        628]
+NotebookOptionsPosition[     22169,        532]
+NotebookOutlinePosition[     22483,        546]
+CellTagsIndexPosition[     22440,        543]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Main-Visible Equivalence Receiver-Closure Audit", "Title",ExpressionUUID->"3bbd6619-aef3-4410-bddf-dbb260f1546e"],
+
+Cell[TextData[{
+ "Date: ",
+ Cell[BoxData[Cell["2026-03-18",
+   Background->None,ExpressionUUID->"9236bef5-4f0b-4b85-89d9-747d4209c646"]], 
+  "InlineCode",ExpressionUUID->"1aaeb258-1a56-414d-88ba-7825dfb23c77"],
+ "This packet audits the candidate quotient defined by equality after \
+accepted-record reduction plus"
+}], "Text",ExpressionUUID->"fadf5664-411d-4972-82c7-bc1dfa10835d"],
+
+Cell["\<\
+the common reduced welded projection. It reuses the reduced-receiver \
+semantics fixed in the prior\
+\>", "Text",ExpressionUUID->"442cb199-0ff8-452f-b0d9-4b4865e50d05"],
+
+Cell["\<\
+closure audit and checks whether the Main-visible quotient remains compatible \
+with the same reduced\
+\>", "Text",ExpressionUUID->"67094a3b-1922-4d92-ab34-8325eafeb164"],
+
+Cell["\<\
+receiver object and the same five closure clauses in the current exact \
+audited family. \
+\>", "Text",ExpressionUUID->"b03da605-26e1-48f4-8182-e28c1da00c5c"],
+
+Cell["Scope And Source Lock", "Section",ExpressionUUID->"1d6505e4-b54f-4401-be5d-d57ab20b2871"],
+
+Cell["This lane uses only: ", "Text",ExpressionUUID->"aaa2f0e6-08db-4cda-9791-2208e66623df"],
+
+Cell[TextData[Cell[BoxData[Cell["UOM/source_internal_control_factorization_\
+note.tex",
+  Background->None,ExpressionUUID->
+  "0886486e-02be-4c5e-9197-2e8b3d8cdd44"]], \
+"InlineCode",ExpressionUUID->"dc83780d-ee70-47ef-ba2f-6e4d2429fa9e"]], "Item",\
+ExpressionUUID->"ea6aaa45-efcc-48a0-8468-8fc739fbdfb5"],
+
+Cell[TextData[Cell[BoxData[Cell["Main/appendix_main.tex::def:2T-char",
+  Background->None,ExpressionUUID->
+  "efc880c3-cf49-415f-b63f-56c06ba8708e"]], \
+"InlineCode",ExpressionUUID->"31d58a6e-f7ad-4783-a5c9-ed4c5872303c"]], "Item",\
+ExpressionUUID->"3b598fdd-e162-4d51-a42f-00679036f3d3"],
+
+Cell[TextData[Cell[BoxData[Cell["\<\
+UOM/canonical_odd_interface_note.tex::thm:char-weak-interface\
+\>",
+  Background->None,ExpressionUUID->
+  "ef092265-bb9d-4df0-99b0-a78379ea3567"]], \
+"InlineCode",ExpressionUUID->"f45c996e-5456-410a-a662-d3c5cd5eb9ec"]], "Item",\
+ExpressionUUID->"6f0875ea-eb0b-4ea1-9afd-971b2bef2ac0"],
+
+Cell[TextData[Cell[BoxData[Cell["\<\
+UOM/canonical_odd_interface_note.tex::rem:char-weak-interface-rho-first\
+\>",
+  Background->None,ExpressionUUID->
+  "879a402c-bf2c-44d0-b932-a6d908396bc9"]], \
+"InlineCode",ExpressionUUID->"79b447e2-c6ee-4a28-bfd2-dbd6a94514d7"]], "Item",\
+ExpressionUUID->"66d8d667-1c5b-490a-997f-c2a22695fb1a"],
+
+Cell[TextData[Cell[BoxData[Cell["UOM/canonical_odd_interface_note.tex::rem:\
+Main-abstract",
+  Background->None,ExpressionUUID->
+  "a4c662bb-e4e3-4809-a374-83050b016923"]], \
+"InlineCode",ExpressionUUID->"b624119e-ba3f-404f-b877-e4728ef92dbc"]], "Item",\
+ExpressionUUID->"1c5380ba-850b-4b15-88e8-ae9e05f887fe"],
+
+Cell[TextData[{
+ "the prior reduced receiver packet in ",
+ Cell[BoxData[Cell["Main/Mathematica/Reports/SourceInternalClosureAudit.md",
+   Background->None,ExpressionUUID->"2a76d177-9138-461a-8e6e-3e845fe2f994"]], 
+  "InlineCode",ExpressionUUID->"0370733f-6edd-49a5-9105-062f6e7975b6"]
+}], "Item",ExpressionUUID->"45b156b1-5fdd-4c71-a317-8f60502b4371"],
+
+Cell[TextData[{
+ "The result is an ",
+ Cell[BoxData[Cell["exact finite-dimensional certificate",
+   Background->None,ExpressionUUID->"e114e288-481c-4164-b9d0-b5d549ffed83"]], 
+  "InlineCode",ExpressionUUID->"141f004b-4285-40cc-8f6d-d80dcab7cc56"],
+ " for the current audited family only. It is"
+}], "Text",ExpressionUUID->"4f591a93-3e23-4971-9e92-aa0efcbff885"],
+
+Cell["not source-theorem promotion. ", "Text",ExpressionUUID->"0c9afcd6-91d3-45cc-bd51-a25c7fc2b004"],
+
+Cell["Main-Visible Quotient Target", "Section",ExpressionUUID->"df616a23-301f-4697-8dc7-cb198dd17adf"],
+
+Cell[TextData[{
+ "The Main-visible data consumed at weak-interface level are the abstract \
+characterization data ",
+ Cell[BoxData[Cell["\<\
+(E^-_Lambda, A^-_Lambda, [Xi^(1)_Lambda], chi_Lambda, epsilon_Lambda, \
+B_Lambda)\
+\>",
+   Background->None,ExpressionUUID->"3e4723e9-3d8d-4aa3-8217-610141f150af"]], 
+  "InlineCode",ExpressionUUID->"d28810a6-c977-4112-96d1-ce4e58433689"],
+ "with the scalar readout carried by the weak exported functional ",
+ Cell[BoxData[Cell["chi_Lambda = nu_Lambda^(-1) rho^dom_Lambda",
+   Background->None,ExpressionUUID->"d90a9aff-afe2-40c0-b3ba-debe7fa0ddab"]], 
+  "InlineCode",ExpressionUUID->"c64fa869-bd94-4d9e-b079-790bf3c904cf"],
+ "."
+}], "Text",ExpressionUUID->"4f88ed1a-2b59-4f46-a80d-edd6199e7bb4"],
+
+Cell["\<\
+In the current exact audited family, the reduced receiver side already fixes \
+one common welded\
+\>", "Text",ExpressionUUID->"6edba368-ffe2-4b99-918a-dd1f7ebc4827"],
+
+Cell[TextData[{
+ "projector ",
+ Cell[BoxData[Cell["ProfileProjectorB = {{1,0},{0,0}}",
+   Background->None,ExpressionUUID->"7889c675-c9e0-4f76-b87f-256a4389deb4"]], 
+  "InlineCode",ExpressionUUID->"b91e9610-c83b-4efc-bd5a-13be9cbbde7c"],
+ "."
+}], "Text",ExpressionUUID->"0b2f9005-5092-4e04-ad13-ae75e32bdfd4"],
+
+Cell[TextData[{
+ "So the candidate exact quotient is: ",
+ Cell[BoxData[Cell["v ~ w",
+   Background->None,ExpressionUUID->"e76cb30d-c893-409f-a8fa-429fca6fe75a"]], 
+  "InlineCode",ExpressionUUID->"51378fc8-55d1-48ef-83fb-2f1c2dca931d"],
+ " iff the accepted-record reduction agrees and the reduced Main-visible \
+readout agrees after the common welded projection."
+}], "Text",ExpressionUUID->"c84cd9cb-b9d6-416b-9fb5-4451c12b1abd"],
+
+Cell[TextData[{
+ "At the exact current-family level this becomes: ",
+ Cell[BoxData[Cell["v ~ w",
+   Background->None,ExpressionUUID->"ab2433fb-52af-48aa-a590-da2b844995b9"]], 
+  "InlineCode",ExpressionUUID->"d5e68541-b6ff-4aee-a170-452b6a322a1f"],
+ " iff ",
+ Cell[BoxData[Cell["(chi . v) ProfileProjectorB = (chi . w) ProfileProjectorB",
+   Background->None,ExpressionUUID->"37eefab1-5620-4e86-acce-3d3bf0fdf903"]], 
+  "InlineCode",ExpressionUUID->"f751b617-b9ec-4b90-989e-70836fe636bb"],
+ ". "
+}], "Text",ExpressionUUID->"91fa04d9-3f06-421f-b232-dd41e9ed3490"],
+
+Cell["Exact Current-Family Data", "Section",ExpressionUUID->"ad55e351-9017-424a-85f5-d070feca2686"],
+
+Cell["\<\
+The certified current-family transport/welded package gives: \
+\>", "Text",ExpressionUUID->"31de8e76-2c1e-468f-8a0e-a7457149769b"],
+
+Cell[TextData[Cell[BoxData[Cell["chi = {0,0,1}",
+  Background->None,ExpressionUUID->
+  "2ee677c5-556f-497d-a409-47bfea343614"]], \
+"InlineCode",ExpressionUUID->"3f39b872-0af5-4b1a-a4a0-c67c24047d18"]], "Item",\
+ExpressionUUID->"449bcb50-eb72-4eb3-b47f-5006730e2c9a"],
+
+Cell[TextData[Cell[BoxData[Cell["Aminus = {{1,0},{0,1},{0,0}}",
+  Background->None,ExpressionUUID->
+  "4d1360ec-22fb-46e9-b5ea-a25b64654f6d"]], \
+"InlineCode",ExpressionUUID->"7e4d18ba-0a27-41fd-9663-e54d63529fbf"]], "Item",\
+ExpressionUUID->"c2010a1e-06de-471f-ad84-fe5383c83ab8"],
+
+Cell[TextData[Cell[BoxData[Cell["J0 = {0,0,1}",
+  Background->None,ExpressionUUID->
+  "4a4944d7-7f33-4a45-bdab-122dc363a5f6"]], \
+"InlineCode",ExpressionUUID->"9ec6148b-7c3c-48bb-8ebf-326289d91b11"]], "Item",\
+ExpressionUUID->"7d5b572e-db19-4557-a1e9-d952b2fa7870"],
+
+Cell[TextData[Cell[BoxData[Cell["epsilon = chi . J0 = 1",
+  Background->None,ExpressionUUID->
+  "e42caa87-222f-45e0-a2d3-8a2cb0efe379"]], \
+"InlineCode",ExpressionUUID->"9db00e8c-681b-447b-91d0-47cad3ca1d26"]], "Item",\
+ExpressionUUID->"b6f1df55-fa76-4225-9257-5fc3f4e3d10e"],
+
+Cell[TextData[Cell[BoxData[Cell["ProfileProjectorB = {{1,0},{0,0}}",
+  Background->None,ExpressionUUID->
+  "abcdb103-a9b0-4492-a2b1-9a8371ec2908"]], \
+"InlineCode",ExpressionUUID->"9feb16e8-345f-492f-867e-f25ded9f8c37"]], "Item",\
+ExpressionUUID->"c22710ad-7aed-4cb0-9321-6dd5073ac47b"],
+
+Cell["So: ", "Text",ExpressionUUID->"a88e87af-01ba-4650-ad56-62e442a49370"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["Aminus = ker chi",
+   Background->None,ExpressionUUID->"a7168f8e-b728-4fe9-ad37-2b189280a1ca"]], 
+  "InlineCode",ExpressionUUID->"090d6130-96c7-4388-83de-fd9a22a83327"],
+ " in the current exact family,"
+}], "Item",ExpressionUUID->"887b2312-8709-46e0-9739-207faf3b59f6"],
+
+Cell[TextData[{
+ "the quotient dimension is exactly ",
+ Cell[BoxData[Cell["1",
+   Background->None,ExpressionUUID->"863256be-cc95-48fd-95c8-21300d114f6e"]], 
+  "InlineCode",ExpressionUUID->"3fee3f7a-09db-453b-ac54-1921c8ed71f6"],
+ ","
+}], "Item",ExpressionUUID->"010a0238-2cd3-4c9f-88a3-524242ef6b80"],
+
+Cell["and the reduced Main-visible readout has the explicit form", "Item",ExpressionUUID->"70c5b33a-ec2e-4270-a7be-033f75811901"],
+
+Cell[TextData[{
+ "  ",
+ Cell[BoxData[Cell["R_main(v) = (chi . v) ProfileProjectorB",
+   Background->None,ExpressionUUID->"dbb55885-0932-4f05-bcfd-e8c371cdf7d1"]], 
+  "InlineCode",ExpressionUUID->"fa355362-3b7a-4ec3-8f3e-a4b872c74161"],
+ "."
+}], "Text",ExpressionUUID->"a4fbcef4-13a5-4572-bd5a-f9f1e3cc99fd"],
+
+Cell["\<\
+This means the quotient is exactly the one-dimensional scalar quotient \
+already seen through the\
+\>", "Text",ExpressionUUID->"b78c9ee2-9b53-46e7-af55-6bc21d32f817"],
+
+Cell["reduced welded line. ", "Text",ExpressionUUID->"dadc04bb-1487-4f69-8b22-a7fa1f89357c"],
+
+Cell["Core Exact Equivalence", "Section",ExpressionUUID->"990cda79-5b2f-4c84-95ad-7a0151835af9"],
+
+Cell[TextData[{
+ "The exact lane certifies: ",
+ Cell[BoxData[Cell["same reduced Main-visible image",
+   Background->None,ExpressionUUID->"6cbc0e7b-b075-47f5-b008-f90a500a3dc6"]], 
+  "InlineCode",ExpressionUUID->"5ba504bd-7e82-4f5a-921c-f21f981004ba"],
+ " if and only if ",
+ Cell[BoxData[Cell["same quotient coordinate",
+   Background->None,ExpressionUUID->"66cf4e3b-bc18-4852-a4e9-216f12a60e2b"]], 
+  "InlineCode",ExpressionUUID->"8d9b24e5-958b-420e-84bf-71e90f1811c8"],
+ "."
+}], "Text",ExpressionUUID->"2cb01c13-1381-4d36-b78d-859000f79d9a"],
+
+Cell["In the current family this reduces to: ", "Text",ExpressionUUID->"8d396dd1-19c2-4187-bc84-53b9ca753e40"],
+
+Cell[TextData[{
+ "same reduced image ",
+ Cell[BoxData[Cell["iff x3 = y3",
+   Background->None,ExpressionUUID->"a42d526f-d18f-4583-8210-e09fb4d5855a"]], 
+  "InlineCode",ExpressionUUID->"daf34546-2550-46de-be5b-6b5f68e59727"],
+ ","
+}], "Item",ExpressionUUID->"84e67f1f-d3b6-4344-b0d5-232bcd5dbb4d"],
+
+Cell[TextData[{
+ "same quotient coordinate ",
+ Cell[BoxData[Cell["iff x3 = y3",
+   Background->None,ExpressionUUID->"7c66ef52-b165-4ce2-ba2c-1e5aaccc297d"]], 
+  "InlineCode",ExpressionUUID->"53cf0817-5b30-42b7-8751-3dfba7e3b112"],
+ ","
+}], "Item",ExpressionUUID->"2a5bfdde-c822-40f5-a22b-791139538848"],
+
+Cell["\<\
+no exact witness exists with different quotient coordinate but the same \
+reduced Main-visible image,\
+\>", "Item",ExpressionUUID->"56790d42-0244-404d-9535-deff10bd54b6"],
+
+Cell["\<\
+and no exact witness exists with the same quotient coordinate but a different \
+reduced Main-visible image.\
+\>", "Item",ExpressionUUID->"ae77a737-76a8-42bc-8099-d11959c6ff87"],
+
+Cell["\<\
+So there is no residual exact orbit structure beyond the one-dimensional \
+scalar coordinate on the\
+\>", "Text",ExpressionUUID->"3ec04cb9-b44e-499b-9b81-b38d77ba56e6"],
+
+Cell["reduced welded line. ", "Text",ExpressionUUID->"da319933-0aa0-46a5-8c4e-d2d054afb508"],
+
+Cell["Answer To A: Receiver-Closure Compatibility", "Section",ExpressionUUID->"736830a1-a815-4ce5-9c42-aee522ec2178"],
+
+Cell["\<\
+Yes. In the current exact audited family, the quotient remains compatible \
+with the same reduced\
+\>", "Text",ExpressionUUID->"dbb750f6-728e-4007-b81f-2b90fd5af7c5"],
+
+Cell["\<\
+receiver object and the same five closure clauses isolated in the previous \
+sprint. \
+\>", "Text",ExpressionUUID->"cd395e87-973e-4fbb-9011-09ae6116f655"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"closure clause\"\>",
+          HoldForm], 
+         TagBox["\<\"exact answer on the quotient target\"\>",
+          HoldForm], 
+         TagBox["\<\"reason\"\>",
+          HoldForm]},
+        {"\<\"bookkeeping closure\"\>", Cell[BoxData[Cell["Yes",
+           Background->None,ExpressionUUID->
+           "8fc7b89a-3f86-4d01-8799-a079b55e40d0"]], "InlineCode",
+          ExpressionUUID->
+          "af7821da-6cd0-4b95-9bad-eda54200b98c"], "\<\"quotient \
+representatives determine the same reduced receiver image on the same welded \
+line, so the theorem-facing bookkeeping still refers to the same reduced \
+object\"\>"},
+        {"\<\"bridge-target closure\"\>", Cell[BoxData[Cell["Yes",
+           Background->None,ExpressionUUID->
+           "deec5f92-e80b-40cd-a626-1d512c17177d"]], "InlineCode",
+          ExpressionUUID->
+          "55e6d105-becd-4f4d-ac82-8124b3624787"], "\<\"the quotient readout \
+already lands on the same reduced welded projector, so the theorem-facing \
+object is unchanged\"\>"},
+        {"\<\"one-boundary covariance\"\>", Cell[BoxData[Cell["Yes",
+           Background->None,ExpressionUUID->
+           "f51e4a91-8a01-4462-ba6a-079b7df975e3"]], "InlineCode",
+          ExpressionUUID->
+          "7b10c6c9-9ac0-4038-82ff-4d91e3e87e2a"], "\<\"all quotient images \
+lie on one common rank-one welded line\"\>"},
+        {"\<\"RP/OS control\"\>", Cell[BoxData[Cell["Yes",
+           Background->None,ExpressionUUID->
+           "c4723892-e979-4c18-bea3-706b98430fe5"]], "InlineCode",
+          ExpressionUUID->
+          "9c8761d2-1d7f-4ce5-9af5-d8724ab761ce"], "\<\"the reduced receiver \
+object is the same one-dimensional welded line used in the previous reduced \
+packet\"\>"},
+        {"\<\"single-cutoff geometry\"\>", Cell[BoxData[Cell["Yes",
+           Background->None,ExpressionUUID->
+           "cf254940-5a09-4d2d-8d4f-2b816b76409b"]], "InlineCode",
+          ExpressionUUID->
+          "7d2d0e08-e634-4c70-8baf-55f94fb7f27a"], "\<\"the quotient does not \
+introduce a second theorem-facing receiver object or a second theorem-facing \
+cutoff structure\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[
+      BoxForm`e$, 
+       TableHeadings -> {
+        None, {"closure clause", "exact answer on the quotient target", 
+          "reason"}}]]], "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"37ebf114-0624-40d0-bb4c-d9f63d8df354"],
+
+Cell["\<\
+So the Main-visible quotient does not force a new receiver semantics. It \
+factors through the same\
+\>", "Text",ExpressionUUID->"521d8b5a-e9b2-4890-8579-d4d56487f155"],
+
+Cell["\<\
+reduced receiver object already certified in the prior packet. \
+\>", "Text",ExpressionUUID->"0eb01624-58f4-4e96-a29d-a3a247739f12"],
+
+Cell["Answer To B: Remaining Exact Countermodels", "Section",ExpressionUUID->"44525a04-d716-42cd-9083-556c4186d4fe"],
+
+Cell["\<\
+No exact reduced countermodel was found in the current audited family that \
+distinguishes quotient\
+\>", "Text",ExpressionUUID->"9474971f-a1f2-4ad4-87dc-416319196c49"],
+
+Cell["\<\
+representatives while leaving all reduced Main-visible data unchanged.\
+\>", "Text",ExpressionUUID->"74e48385-f6a8-4169-9218-adbfc41f4c12"],
+
+Cell["The exact searches returned: ", "Text",ExpressionUUID->"c47e0f75-bea6-445b-ae8a-f62112d35858"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["different quotient, same reduced image",
+   Background->None,ExpressionUUID->"f62eb55c-46b3-4110-b57d-7bdd1f405c0b"]], 
+  "InlineCode",ExpressionUUID->"9b05f751-2ea4-42fa-93fb-36c54427c14a"],
+ " -> no witness,"
+}], "Item",ExpressionUUID->"80eab799-b4b8-4188-8096-e6705c6d09b8"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["same quotient, different reduced image",
+   Background->None,ExpressionUUID->"7b843b4e-c363-4235-9be2-674765309152"]], 
+  "InlineCode",ExpressionUUID->"526b1093-3dba-4866-b2ef-e70e7b83171f"],
+ " -> no witness."
+}], "Item",ExpressionUUID->"3622dcff-fd35-4b2f-acc8-297664f7fc03"],
+
+Cell["\<\
+So the current family does not exhibit hidden reduced Main-visible \
+distinctions inside a single\
+\>", "Text",ExpressionUUID->"a55a936f-ca57-426c-9683-5cd97b0388c6"],
+
+Cell["quotient fiber. ", "Text",ExpressionUUID->"9482b367-455f-4c65-92b0-11d319ee7c0e"],
+
+Cell["Answer To C: Orbit Structure", "Section",ExpressionUUID->"216677b8-b81e-404e-bcee-9974df5be810"],
+
+Cell[TextData[{
+ "The reduced Main-visible fibers look: ",
+ Cell[BoxData[Cell["\<\
+rank-one/scalar with separate branch-orientation sign, not richer in the \
+current audited family\
+\>",
+   Background->None,ExpressionUUID->"1ed03cb0-406b-4c95-9349-944d8f7643a8"]], 
+  "InlineCode",ExpressionUUID->"b2b39d10-3adc-4347-bcf9-78bb48ec3500"],
+ "."
+}], "Text",ExpressionUUID->"494d5380-7310-4d30-a1da-ad8a75187f06"],
+
+Cell["More precisely: ", "Text",ExpressionUUID->"1db035bc-ffc6-4c27-959e-c9b57201c5f3"],
+
+Cell[TextData[{
+ "the quotient dimension is ",
+ Cell[BoxData[Cell["1",
+   Background->None,ExpressionUUID->"93463bf2-659a-49fc-9743-2e12a5840ddc"]], 
+  "InlineCode",ExpressionUUID->"71eda4de-99cb-49cd-bdd6-e9758e7d6e29"],
+ ","
+}], "Item",ExpressionUUID->"4015fe3a-ad31-4bf9-a691-311d5edcd014"],
+
+Cell[TextData[{
+ "the reduced Main-visible image is ",
+ Cell[BoxData[Cell["(chi . v) ProfileProjectorB",
+   Background->None,ExpressionUUID->"eb3e0174-123c-4b37-a0c3-df7b9fab14cd"]], 
+  "InlineCode",ExpressionUUID->"9c933ce0-bd67-4da5-b52d-6e91d4308170"],
+ ","
+}], "Item",ExpressionUUID->"1282c1d0-54e9-4579-b66b-730641f7ab4c"],
+
+Cell[TextData[{
+ "the only surviving reduced degree of freedom is the scalar ",
+ Cell[BoxData[Cell["chi . v",
+   Background->None,ExpressionUUID->"6d5eadc9-78fe-4440-9b5b-47eaf5c9623a"]], 
+  "InlineCode",ExpressionUUID->"d4a135b7-83f9-431c-a9f2-75ba5c33ad27"],
+ ","
+}], "Item",ExpressionUUID->"9cb77bfe-65e7-484c-b254-9771b956474e"],
+
+Cell[TextData[{
+ "and the sign/orientation datum is the separate branchwise ",
+ StyleBox["epsilon", "TI"],
+ " channel, not a richer reduced"
+}], "Item",ExpressionUUID->"ae413ed8-13c7-40cd-9c36-dd2e05df112b"],
+
+Cell["  orbit family.", "Text",ExpressionUUID->"6d8428fa-dc6c-4bb1-a1bb-407d6766f355"],
+
+Cell["\<\
+So the exact lane does not see a richer reduced orbit structure in the \
+current family. It sees a\
+\>", "Text",ExpressionUUID->"a2955178-2d5a-4213-aa7f-dec09b6c3760"],
+
+Cell["\<\
+one-dimensional scalar quotient together with the separate orientation sign. \
+\
+\>", "Text",ExpressionUUID->"94ff5924-283a-4bf6-9935-ed739a6a4a3c"],
+
+Cell["Answer To D: Collapse Of Broad Unreduced Differences", "Section",ExpressionUUID->"bc55452e-bc8c-4251-b5c7-7350ce700ca2"],
+
+Cell["\<\
+Yes, at exact current-family level and with the corrected reduced semantics.\
+\>", "Text",ExpressionUUID->"09679d91-4de5-4cb1-849e-76e3fe700a07"],
+
+Cell["\<\
+The exact lane supports the statement that broad unreduced seam differences \
+collapse to the same\
+\>", "Text",ExpressionUUID->"35c9639f-7d05-4bf8-b429-c42b2021fb39"],
+
+Cell["reduced Main-visible readout whenever: ", "Text",ExpressionUUID->"fe1db6a0-eca2-4742-871f-c13a3891d405"],
+
+Cell["the accepted-record reduction agrees,", "Item",ExpressionUUID->"2e7a9545-641a-411d-aa8a-d60564002e98"],
+
+Cell["the common reduced welded projection is used,", "Item",ExpressionUUID->"96b73ace-b2b1-498b-b877-2e99a7a695e2"],
+
+Cell["\<\
+and no explicit accepted-record failure or explicit leakage branch is \
+introduced.\
+\>", "Item",ExpressionUUID->"5bc5d8cb-ac12-466c-8cae-f7a30234f20e"],
+
+Cell["\<\
+Any remaining unreduced seam/source/tangent differences are theorem-invisible \
+to the Main-visible\
+\>", "Text",ExpressionUUID->"2e4c3a3a-7ef5-4a31-826f-1e8ea60794bf"],
+
+Cell["\<\
+quotient as formulated here. That is fully consistent with the source note's \
+corrected distinction\
+\>", "Text",ExpressionUUID->"c44d9051-24d2-4137-935c-a5ab83bc06e8"],
+
+Cell["\<\
+between theorem-visible reduced data and stronger unreduced source/tangent \
+factorization targets. \
+\>", "Text",ExpressionUUID->"1c05694c-d311-48c2-aa92-4964bbc27eb2"],
+
+Cell["Top-Line Verdict", "Section",ExpressionUUID->"4acc54c6-3540-4b5e-b764-f40321f49a45"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["\<\
+Main-visible quotient survives exact receiver-closure audit in the current \
+family\
+\>",
+   Background->None,ExpressionUUID->"48889607-3fa3-4d45-b059-5e8f16cbf2e7"]], 
+  "InlineCode",ExpressionUUID->"ced91171-5e77-457c-91a5-77371dfdccc6"],
+ "with the sharper exact reading: ",
+ Cell[BoxData[Cell["\<\
+No reduced exact falsifier was found; the quotient fibers are rank-one/scalar \
+in the current audited family, not richer.\
+\>",
+   Background->None,ExpressionUUID->"2a9d164a-dd67-4673-a14e-eeb754194fd8"]], 
+  "InlineCode",ExpressionUUID->"13d36443-b6aa-46b9-a6ef-888edd65632d"]
+}], "Text",ExpressionUUID->"2feb13e2-9908-4fc2-8038-280570d04414"],
+
+Cell["Non-Claims", "Section",ExpressionUUID->"26f9b26e-d72f-4496-aa37-70ab7d74f218"],
+
+Cell["This is not source-internal theorem promotion.", "Item",ExpressionUUID->"b716ef0a-166b-41f2-9fc1-40791706f1fc"],
+
+Cell["\<\
+This does not prove full unreduced seam/source/tangent agreement.\
+\>", "Item",ExpressionUUID->"0aa74798-2d2d-4108-b142-8b6830f7c19d"],
+
+Cell["\<\
+This does not enlarge Main beyond the abstract weak-interface data it already \
+consumes.\
+\>", "Item",ExpressionUUID->"63866ac3-98ef-4000-bd76-1b89c4e20e39"],
+
+Cell["\<\
+This does not discharge leakage or accepted-record failure cases; those \
+remain explicit exceptions.\
+\>", "Item",ExpressionUUID->"b8c04929-c818-4f61-b8fd-da0c88f0c342"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"56d65ee1-713c-4d4f-be72-d1f94487bf57"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 119, 0, 70, "Title",ExpressionUUID->"3bbd6619-aef3-4410-bddf-dbb260f1546e"],
+Cell[676, 22, 381, 7, 70, "Text",ExpressionUUID->"fadf5664-411d-4972-82c7-bc1dfa10835d"],
+Cell[1060, 31, 178, 3, 70, "Text",ExpressionUUID->"442cb199-0ff8-452f-b0d9-4b4865e50d05"],
+Cell[1241, 36, 180, 3, 70, "Text",ExpressionUUID->"67094a3b-1922-4d92-ab34-8325eafeb164"],
+Cell[1424, 41, 168, 3, 70, "Text",ExpressionUUID->"b03da605-26e1-48f4-8182-e28c1da00c5c"],
+Cell[1595, 46, 95, 0, 70, "Section",ExpressionUUID->"1d6505e4-b54f-4401-be5d-d57ab20b2871"],
+Cell[1693, 48, 92, 0, 70, "Text",ExpressionUUID->"aaa2f0e6-08db-4cda-9791-2208e66623df"],
+Cell[1788, 50, 305, 5, 70, "Item",ExpressionUUID->"ea6aaa45-efcc-48a0-8468-8fc739fbdfb5"],
+Cell[2096, 57, 288, 4, 70, "Item",ExpressionUUID->"3b598fdd-e162-4d51-a42f-00679036f3d3"],
+Cell[2387, 63, 322, 6, 70, "Item",ExpressionUUID->"6f0875ea-eb0b-4ea1-9afd-971b2bef2ac0"],
+Cell[2712, 71, 332, 6, 70, "Item",ExpressionUUID->"66d8d667-1c5b-490a-997f-c2a22695fb1a"],
+Cell[3047, 79, 310, 5, 70, "Item",ExpressionUUID->"1c5380ba-850b-4b15-88e8-ae9e05f887fe"],
+Cell[3360, 86, 351, 5, 70, "Item",ExpressionUUID->"45b156b1-5fdd-4c71-a317-8f60502b4371"],
+Cell[3714, 93, 361, 6, 70, "Text",ExpressionUUID->"4f591a93-3e23-4971-9e92-aa0efcbff885"],
+Cell[4078, 101, 101, 0, 70, "Text",ExpressionUUID->"0c9afcd6-91d3-45cc-bd51-a25c7fc2b004"],
+Cell[4182, 103, 102, 0, 70, "Section",ExpressionUUID->"df616a23-301f-4697-8dc7-cb198dd17adf"],
+Cell[4287, 105, 736, 14, 70, "Text",ExpressionUUID->"4f88ed1a-2b59-4f46-a80d-edd6199e7bb4"],
+Cell[5026, 121, 175, 3, 70, "Text",ExpressionUUID->"6edba368-ffe2-4b99-918a-dd1f7ebc4827"],
+Cell[5204, 126, 309, 6, 70, "Text",ExpressionUUID->"0b2f9005-5092-4e04-ad13-ae75e32bdfd4"],
+Cell[5516, 134, 429, 7, 70, "Text",ExpressionUUID->"c84cd9cb-b9d6-416b-9fb5-4451c12b1abd"],
+Cell[5948, 143, 561, 10, 70, "Text",ExpressionUUID->"91fa04d9-3f06-421f-b232-dd41e9ed3490"],
+Cell[6512, 155, 99, 0, 70, "Section",ExpressionUUID->"ad55e351-9017-424a-85f5-d070feca2686"],
+Cell[6614, 157, 140, 2, 70, "Text",ExpressionUUID->"31de8e76-2c1e-468f-8a0e-a7457149769b"],
+Cell[6757, 161, 266, 4, 70, "Item",ExpressionUUID->"449bcb50-eb72-4eb3-b47f-5006730e2c9a"],
+Cell[7026, 167, 281, 4, 70, "Item",ExpressionUUID->"c2010a1e-06de-471f-ad84-fe5383c83ab8"],
+Cell[7310, 173, 265, 4, 70, "Item",ExpressionUUID->"7d5b572e-db19-4557-a1e9-d952b2fa7870"],
+Cell[7578, 179, 275, 4, 70, "Item",ExpressionUUID->"b6f1df55-fa76-4225-9257-5fc3f4e3d10e"],
+Cell[7856, 185, 286, 4, 70, "Item",ExpressionUUID->"c22710ad-7aed-4cb0-9321-6dd5073ac47b"],
+Cell[8145, 191, 75, 0, 70, "Text",ExpressionUUID->"a88e87af-01ba-4650-ad56-62e442a49370"],
+Cell[8223, 193, 305, 5, 70, "Item",ExpressionUUID->"887b2312-8709-46e0-9739-207faf3b59f6"],
+Cell[8531, 200, 301, 6, 70, "Item",ExpressionUUID->"010a0238-2cd3-4c9f-88a3-524242ef6b80"],
+Cell[8835, 208, 129, 0, 70, "Item",ExpressionUUID->"70c5b33a-ec2e-4270-a7be-033f75811901"],
+Cell[8967, 210, 307, 6, 70, "Text",ExpressionUUID->"a4fbcef4-13a5-4572-bd5a-f9f1e3cc99fd"],
+Cell[9277, 218, 176, 3, 70, "Text",ExpressionUUID->"b78c9ee2-9b53-46e7-af55-6bc21d32f817"],
+Cell[9456, 223, 92, 0, 70, "Text",ExpressionUUID->"dadc04bb-1487-4f69-8b22-a7fa1f89357c"],
+Cell[9551, 225, 96, 0, 70, "Section",ExpressionUUID->"990cda79-5b2f-4c84-95ad-7a0151835af9"],
+Cell[9650, 227, 542, 10, 70, "Text",ExpressionUUID->"2cb01c13-1381-4d36-b78d-859000f79d9a"],
+Cell[10195, 239, 110, 0, 70, "Text",ExpressionUUID->"8d396dd1-19c2-4187-bc84-53b9ca753e40"],
+Cell[10308, 241, 296, 6, 70, "Item",ExpressionUUID->"84e67f1f-d3b6-4344-b0d5-232bcd5dbb4d"],
+Cell[10607, 249, 302, 6, 70, "Item",ExpressionUUID->"2a5bfdde-c822-40f5-a22b-791139538848"],
+Cell[10912, 257, 180, 3, 70, "Item",ExpressionUUID->"56790d42-0244-404d-9535-deff10bd54b6"],
+Cell[11095, 262, 186, 3, 70, "Item",ExpressionUUID->"ae77a737-76a8-42bc-8099-d11959c6ff87"],
+Cell[11284, 267, 178, 3, 70, "Text",ExpressionUUID->"3ec04cb9-b44e-499b-9b81-b38d77ba56e6"],
+Cell[11465, 272, 92, 0, 70, "Text",ExpressionUUID->"da319933-0aa0-46a5-8c4e-d2d054afb508"],
+Cell[11560, 274, 117, 0, 70, "Section",ExpressionUUID->"736830a1-a815-4ce5-9c42-aee522ec2178"],
+Cell[11680, 276, 176, 3, 70, "Text",ExpressionUUID->"dbb750f6-728e-4007-b81f-2b90fd5af7c5"],
+Cell[11859, 281, 164, 3, 70, "Text",ExpressionUUID->"cd395e87-973e-4fbb-9011-09ae6116f655"],
+Cell[12026, 286, 3138, 71, 70, "TextTableForm",ExpressionUUID->"37ebf114-0624-40d0-bb4c-d9f63d8df354"],
+Cell[15167, 359, 178, 3, 70, "Text",ExpressionUUID->"521d8b5a-e9b2-4890-8579-d4d56487f155"],
+Cell[15348, 364, 142, 2, 70, "Text",ExpressionUUID->"0eb01624-58f4-4e96-a29d-a3a247739f12"],
+Cell[15493, 368, 116, 0, 70, "Section",ExpressionUUID->"44525a04-d716-42cd-9083-556c4186d4fe"],
+Cell[15612, 370, 178, 3, 70, "Text",ExpressionUUID->"9474971f-a1f2-4ad4-87dc-416319196c49"],
+Cell[15793, 375, 149, 2, 70, "Text",ExpressionUUID->"74e48385-f6a8-4169-9218-adbfc41f4c12"],
+Cell[15945, 379, 100, 0, 70, "Text",ExpressionUUID->"c47e0f75-bea6-445b-ae8a-f62112d35858"],
+Cell[16048, 381, 313, 5, 70, "Item",ExpressionUUID->"80eab799-b4b8-4188-8096-e6705c6d09b8"],
+Cell[16364, 388, 313, 5, 70, "Item",ExpressionUUID->"3622dcff-fd35-4b2f-acc8-297664f7fc03"],
+Cell[16680, 395, 176, 3, 70, "Text",ExpressionUUID->"a55a936f-ca57-426c-9683-5cd97b0388c6"],
+Cell[16859, 400, 87, 0, 70, "Text",ExpressionUUID->"9482b367-455f-4c65-92b0-11d319ee7c0e"],
+Cell[16949, 402, 102, 0, 70, "Section",ExpressionUUID->"216677b8-b81e-404e-bcee-9974df5be810"],
+Cell[17054, 404, 409, 9, 70, "Text",ExpressionUUID->"494d5380-7310-4d30-a1da-ad8a75187f06"],
+Cell[17466, 415, 87, 0, 70, "Text",ExpressionUUID->"1db035bc-ffc6-4c27-959e-c9b57201c5f3"],
+Cell[17556, 417, 293, 6, 70, "Item",ExpressionUUID->"4015fe3a-ad31-4bf9-a691-311d5edcd014"],
+Cell[17852, 425, 327, 6, 70, "Item",ExpressionUUID->"1282c1d0-54e9-4579-b66b-730641f7ab4c"],
+Cell[18182, 433, 332, 6, 70, "Item",ExpressionUUID->"9cb77bfe-65e7-484c-b254-9771b956474e"],
+Cell[18517, 441, 207, 4, 70, "Item",ExpressionUUID->"ae413ed8-13c7-40cd-9c36-dd2e05df112b"],
+Cell[18727, 447, 86, 0, 70, "Text",ExpressionUUID->"6d8428fa-dc6c-4bb1-a1bb-407d6766f355"],
+Cell[18816, 449, 177, 3, 70, "Text",ExpressionUUID->"a2955178-2d5a-4213-aa7f-dec09b6c3760"],
+Cell[18996, 454, 158, 3, 70, "Text",ExpressionUUID->"94ff5924-283a-4bf6-9935-ed739a6a4a3c"],
+Cell[19157, 459, 126, 0, 70, "Section",ExpressionUUID->"bc55452e-bc8c-4251-b5c7-7350ce700ca2"],
+Cell[19286, 461, 155, 2, 70, "Text",ExpressionUUID->"09679d91-4de5-4cb1-849e-76e3fe700a07"],
+Cell[19444, 465, 177, 3, 70, "Text",ExpressionUUID->"35c9639f-7d05-4bf8-b429-c42b2021fb39"],
+Cell[19624, 470, 110, 0, 70, "Text",ExpressionUUID->"fe1db6a0-eca2-4742-871f-c13a3891d405"],
+Cell[19737, 472, 108, 0, 70, "Item",ExpressionUUID->"2e7a9545-641a-411d-aa8a-d60564002e98"],
+Cell[19848, 474, 116, 0, 70, "Item",ExpressionUUID->"96b73ace-b2b1-498b-b877-2e99a7a695e2"],
+Cell[19967, 476, 162, 3, 70, "Item",ExpressionUUID->"5bc5d8cb-ac12-466c-8cae-f7a30234f20e"],
+Cell[20132, 481, 178, 3, 70, "Text",ExpressionUUID->"2e4c3a3a-7ef5-4a31-826f-1e8ea60794bf"],
+Cell[20313, 486, 179, 3, 70, "Text",ExpressionUUID->"c44d9051-24d2-4137-935c-a5ab83bc06e8"],
+Cell[20495, 491, 179, 3, 70, "Text",ExpressionUUID->"1c05694c-d311-48c2-aa92-4964bbc27eb2"],
+Cell[20677, 496, 90, 0, 70, "Section",ExpressionUUID->"4acc54c6-3540-4b5e-b764-f40321f49a45"],
+Cell[20770, 498, 687, 14, 70, "Text",ExpressionUUID->"2feb13e2-9908-4fc2-8038-280570d04414"],
+Cell[21460, 514, 84, 0, 70, "Section",ExpressionUUID->"26f9b26e-d72f-4496-aa37-70ab7d74f218"],
+Cell[21547, 516, 117, 0, 70, "Item",ExpressionUUID->"b716ef0a-166b-41f2-9fc1-40791706f1fc"],
+Cell[21667, 518, 144, 2, 70, "Item",ExpressionUUID->"0aa74798-2d2d-4108-b142-8b6830f7c19d"],
+Cell[21814, 522, 168, 3, 70, "Item",ExpressionUUID->"63866ac3-98ef-4000-bd76-1b89c4e20e39"],
+Cell[21985, 527, 180, 3, 70, "Item",ExpressionUUID->"b8c04929-c818-4f61-b8fd-da0c88f0c342"]
+}
+]
+*)
+
+(* End of internal cache information *)

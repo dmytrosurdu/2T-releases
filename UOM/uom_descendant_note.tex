@@ -1,0 +1,2020 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+\usepackage{mathrsfs}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{xr-hyper}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=blue!60!black,
+  urlcolor=blue!60!black
+}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{assumption}[definition]{Assumption}
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+
+\crefname{definition}{definition}{definitions}
+\Crefname{definition}{Definition}{Definitions}
+\crefname{assumption}{assumption}{assumptions}
+\Crefname{assumption}{Assumption}{Assumptions}
+\crefname{theorem}{theorem}{theorems}
+\Crefname{theorem}{Theorem}{Theorems}
+\crefname{lemma}{lemma}{lemmas}
+\Crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{proposition}{propositions}
+\Crefname{proposition}{Proposition}{Propositions}
+\crefname{corollary}{corollary}{corollaries}
+\Crefname{corollary}{Corollary}{Corollaries}
+\crefname{remark}{remark}{remarks}
+\Crefname{remark}{Remark}{Remarks}
+
+\newcommand{\Fsloc}{\mathcal F_{\rm s.loc}}
+\newcommand{\Xscr}{\mathscr X}
+\newcommand{\Islab}{I_k}
+\newcommand{\Ozero}{\mathcal O^{(0)}}
+\newcommand{\Oaf}{\mathcal O^{\mathrm{af}}}
+\newcommand{\Aone}{\mathcal A^{(1)}}
+\newcommand{\Xione}{\Xi^{(1)}}
+\newcommand{\Xiselk}{\Xi^{(1)}_{\mathrm{sel},k}}
+\newcommand{\Qt}{Q_t}
+\newcommand{\Qu}{Q_u}
+\newcommand{\Du}{\mathfrak D_u}
+\newcommand{\Quphys}{Q_u^{\rm phys}}
+\newcommand{\Quscheme}{Q_u^{\rm scheme}}
+\newcommand{\loc}{\mathrm{loc}}
+\newcommand{\rec}{\mathrm{rec}}
+\newcommand{\SK}{\mathrm{SK}}
+\newcommand{\Lie}{\mathcal L}
+\newcommand{\diagop}{\operatorname{diag}}
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\pair}[1]{\left\langle #1 \right\rangle}
+
+\externaldocument[main-]{main}
+\externaldocument[stack-]{odd_characterization_transport_stack_note}
+
+\title{Finite-Cutoff Raw Descendant Data on the UOM Receiver Head:\\
+SK Bicomplex, Anomalous First Descent, and Conditional Hodge Normalization}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note studies raw first-descendant data at finite cutoff on a bounded receiver-head slab using
+only UOM-side finite-cutoff inputs.
+On the slab-supported sufficiently local complex it constructs the geometric two-time bicomplex,
+proves the \(t\)-Ward identity, identifies the fixed-scheme physical radial Ward operator with the
+geometric \(u\)-derivative on compact head smearings, and derives the exact anomalous descent
+\[
+\Quphys \Ozero + \Qt \Xione = \Aone,
+\]
+and proves that a nonzero RG slope forces a nontrivial degree-one cohomology class.
+
+A second, conditional layer treats Hodge/Moore--Penrose normalization of alternative
+representatives on a selected admissible Hilbertized sector.
+Finally, choosing the cumulative anomaly-floor monotone yields an explicit finite-cutoff
+realization of the \(\mathbf{2T}_{\mathrm{RG}}\) data on the slab-supported monotone sector,
+together with a double-cone localization statement for the canonical representatives.
+\end{abstract}
+
+\tableofcontents
+
+\section{Scope and UOM Input Package}
+\label{sec:uomdesc-scope}
+
+All external premises used below are UOM-side finite-cutoff statements; no result from the Main
+manuscript lane is used as a premise.
+
+\paragraph{Receiver-head localization.}
+Fix one accepted receiver cutoff \(\Lambda_k<\infty\) and one bounded receiver-head time slab
+\[
+\Islab=(t_k^-,t_k^+)\subset \mathbb R,
+\qquad
+\Xscr_k:=\Islab\times \Sigma_{\rec}.
+\]
+All sufficiently local functionals below are supported in \(\Xscr_k\) and evaluated in the
+finite-cutoff UOM background at \(\Lambda_k\).
+
+\paragraph{Imported finite-cutoff UOM analytic/structural inputs.}
+The following finite-cutoff facts are imported from the UOM finite-cutoff package.
+\begin{enumerate}[leftmargin=2em]
+\item By Theorem~\ref{main-thm:uom-peierls-package}, the renormalized
+  Schwinger--Keldysh functional \(W_{\rm ren}[J_+,J_-]\) is \(C^2\) near the
+  physical diagonal \(J_a=0\) for compactly supported admissible source multiplets on
+  \(\Xscr_k\).
+\item By Theorem~\ref{main-thm:uom-peierls-package}, the UOM-P1--P5 package holds at finite cutoff on a
+  sufficiently local gauge-invariant class
+  \(\Fsloc^{\Lambda_k}\), including well-definedness, gauge independence, and closure of the
+  Peierls bracket.
+\item By Proposition~\ref{main-prop:RG-observable-in-Floc}, the receiver anomaly/Wess--Zumino monotone sector
+  is represented by compact smearings of local
+  scalar densities on the receiver head and hence lies in \(\Fsloc^{\Lambda_k}\).
+\item By Definition~\ref{main-def:uom-limited-scope-package},
+  Proposition~\ref{main-prop:uom-limited-scope-realization},
+  and Theorem~\ref{main-thm:uom-equal-source-swap},
+  the finite-cutoff SK state space carries a diagonal embedding of the physical sector and a swap
+  involution \(s:\mathcal S_{\SK}\to\mathcal S_{\SK}\) fixing that diagonal sector, and the
+  equal-source locus is swap-invariant.
+\end{enumerate}
+
+\begin{assumption}[Local radial chart on the accepted branch]
+\label{ass:uomdesc-u-chart}
+On the accepted branch through \(\Lambda_k\), choose a local continuous radial chart \(u\) near the
+point under consideration.
+All source-dependent receiver data used below depend differentiably enough on this branchwise chart
+that the infinitesimal geometric radial differential
+\[
+\Du=\Lie_{c_u\partial_u}
+\]
+is defined on the chosen slab-supported sufficiently local class.
+\end{assumption}
+
+\section{Finite-Cutoff Two-Time SK Bicomplex}
+\label{sec:uomdesc-bicomplex}
+
+\subsection{Local cochains on a tick slab}
+
+\begin{definition}[Slab-supported sufficiently local cochains]
+\label{def:uomdesc-floc-slab}
+Let \(\Fsloc^{\Lambda_k}(\Xscr_k)\subset \Fsloc^{\Lambda_k}\) denote the vector space of sufficiently
+local gauge-invariant functionals whose support is contained in \(\Xscr_k\).
+Its monotone subspace
+\[
+{\Fsloc}_{\rm mon}^{\Lambda_k}(\Xscr_k)\subset \Fsloc^{\Lambda_k}(\Xscr_k)
+\]
+consists of finite linear combinations of compact smearings of receiver-head scalar densities from
+the anomaly/Wess--Zumino monotone sector.
+\end{definition}
+
+\begin{definition}[Geometric odd differentials on slab-supported cochains]
+\label{def:uomdesc-two-diff}
+Introduce constant Grassmann-odd parameters \(c_t,c_u\).
+On source-dependent local receiver-head densities, define
+\[
+\Qt:=\Lie_{c_t\partial_t},
+\qquad
+\Du:=\Lie_{c_u\partial_u},
+\]
+extended to \(\Fsloc^{\Lambda_k}(\Xscr_k)\) by the graded Leibniz rule and linearity.
+The action is taken on the \emph{full smeared density}, including compact test kernels.
+\end{definition}
+
+\begin{lemma}[Bicomplex identities]
+\label{lem:uomdesc-bicomplex}
+The operators \(\Qt\) and \(\Du\) are odd derivations on
+\(\Fsloc^{\Lambda_k}(\Xscr_k)\) satisfying
+\[
+\Qt^2=0,
+\qquad
+\Du^2=0,
+\qquad
+\Qt\Du+\Du\Qt=0.
+\]
+\end{lemma}
+
+\begin{proof}
+The odd vector fields \(c_t\partial_t\) and \(c_u\partial_u\) square to zero because
+\(c_t^2=c_u^2=0\), and they commute because \([\partial_t,\partial_u]=0\) on the local
+\((t,u)\)-chart of the receiver-head data.
+Lie derivatives along commuting square-zero odd vector fields therefore satisfy the stated
+identities.
+\end{proof}
+
+\begin{definition}[Physical SK sector]
+\label{def:uomdesc-sk-adm}
+A state is called \emph{physical SK-admissible on \(\Xscr_k\)} if it lies on the equal-source SK
+diagonal, uses the UOM renormalized variational principle, and all source insertions are compactly
+supported inside \(\Xscr_k\) so that no endpoint term arises from the closed \(t\)-contour.
+\end{definition}
+
+\begin{proposition}[Finite-cutoff \(t\)-Ward identity on the slab]
+\label{prop:uomdesc-ward}
+For every physical SK-admissible state \(\rho\) and every
+\(X\in\Fsloc^{\Lambda_k}(\Xscr_k)\),
+\[
+\pair{\Qt X}_{\rho}=0.
+\]
+\end{proposition}
+
+\begin{proof}
+The \(\Qt\)-identity is the usual closed-time-path change-of-variables argument on the equal-source
+SK locus of Theorem~\ref{main-thm:uom-equal-source-swap}, applied to the renormalized functional
+supplied by Theorem~\ref{main-thm:uom-peierls-package}.
+Because the time contour is closed and the source support is contained strictly inside \(\Xscr_k\),
+no endpoint term survives, so \(\Qt\)-exact insertions decouple in expectation.
+\end{proof}
+
+\subsection{Local ambiguity quotient}
+
+\begin{definition}[UOM local ambiguity relation on the slab]
+\label{def:uomdesc-loc-quot}
+On \(\Fsloc^{\Lambda_k}(\Xscr_k)\) define an equivalence relation \(\sim_{\loc}\) generated by:
+\begin{enumerate}[leftmargin=2em]
+\item \(\Qt\)-exact shifts \(F\mapsto F+\Qt X\);
+\item boundary-admissible total divergences \(F\mapsto F+\partial_\mu K^\mu\) whose renormalized
+  flux vanishes on the slab boundary;
+\item admissible local counterterm shifts \(F\mapsto F+\Delta_{\rm ct}\) whose finite-cutoff
+  physical Peierls response vanishes on the receiver-head sector under consideration.
+\end{enumerate}
+Write \([F]_{\loc}\) for the \(\sim_{\loc}\)-class of \(F\).
+\end{definition}
+
+\begin{remark}[Fixed-scheme scope]
+\label{rem:uomdesc-fixed-scheme}
+The identities in \cref{prop:uomdesc-radial-decomp,prop:uomdesc-radial-ward} are fixed-scheme
+statements on the chosen monotone sector.
+Inter-scheme comparison is treated separately in \cref{thm:uomdesc-interscheme}.
+\end{remark}
+
+\section{Good Monotone Representatives on the Receiver Head}
+\label{sec:uomdesc-monotone}
+
+\begin{definition}[Monotone representative by head smearing]
+\label{def:uomdesc-o0}
+Let \(L_{\rm mon}(t,x;u)\) be a receiver-head scalar density in the UOM anomaly/Wess--Zumino
+monotone sector.
+For a compactly supported spatial kernel \(\eta_k\in C_c^\infty(\Sigma_{\rec})\) and a temporal
+kernel \(\kappa_k\in C_c^\infty(\Islab)\), define
+\begin{equation}
+\Ozero_k(u)
+:=
+\int_{\Xscr_k} dt\,d^3x\;
+\kappa_k(t)\,\eta_k(x)\,L_{\rm mon}(t,x;u).
+\label{eq:uomdesc-o0-def}
+\end{equation}
+\end{definition}
+
+\begin{proposition}[\(\Qt\)-closed head smearing]
+\label{prop:uomdesc-qt-closed}
+Assume \(\kappa_k\in C_c^\infty(\Islab)\) and that \(\kappa_k\) vanishes in a neighborhood of both
+endpoints \(t_k^\pm\).
+Then
+\[
+\Qt \Ozero_k(u)=0.
+\]
+\end{proposition}
+
+\begin{proof}
+Because \(\Qt\) acts on the full smeared density, including the kernel,
+\[
+\Qt \Ozero_k(u)
+=
+\int_{\Xscr_k} dt\,d^3x\;
+\Lie_{c_t\partial_t}\!\big(\kappa_k(t)\eta_k(x)L_{\rm mon}(t,x;u)\,dt\wedge d^3x\big).
+\]
+Since \(L_{\rm mon}\,dt\wedge d^3x\) is a scalar-density integrand on the receiver head, the Lie
+derivative is a total \(t\)-derivative:
+\[
+\Qt \Ozero_k(u)
+=
+\int_{\Xscr_k}\partial_t\!\big(c_t\,\kappa_k(t)\eta_k(x)L_{\rm mon}(t,x;u)\big)\,dt\,d^3x.
+\]
+The compact support and endpoint vanishing of \(\kappa_k\) remove the slab-end contribution exactly,
+so the integral vanishes without passing to the local ambiguity quotient.
+\end{proof}
+
+\begin{proposition}[Fixed-scheme radial Ward decomposition on the monotone sector]
+\label{prop:uomdesc-radial-decomp}
+Let \(\Qu\) denote the full fixed-scheme radial Ward differential on
+\(({\Fsloc}_{\rm mon}^{\Lambda_k}(\Xscr_k))\).
+Then, in the chosen finite-cutoff renormalization scheme,
+\[
+\Qu=\Quphys+\Quscheme,
+\qquad
+\Quscheme=0.
+\]
+Moreover, for every \(\Qt\)-closed \(X\in{\Fsloc}_{\rm mon}^{\Lambda_k}(\Xscr_k)\),
+\[
+[\Quscheme X]_{\loc}=0
+\qquad\text{and}\qquad
+[\Quscheme X]=0\in H^1(\Fsloc^{\Lambda_k}(\Xscr_k),\Qt).
+\]
+\end{proposition}
+
+\begin{proof}
+The analysis is carried out in one fixed finite-cutoff renormalization scheme, so there is no
+independent scheme variation inside the present note.
+Accordingly, the full radial Ward differential \(\Qu\) on the chosen monotone sector reduces to its
+physical part, and the scheme part vanishes.
+The two displayed triviality statements are therefore immediate because \(\Quscheme=0\).
+\end{proof}
+
+\begin{proposition}[Physical radial Ward/geometric identification on compact head smearings]
+\label{prop:uomdesc-radial-split}
+For every compactly smeared monotone head observable in
+\(({\Fsloc}_{\rm mon}^{\Lambda_k}(\Xscr_k))\), the physical radial Ward differential is identified
+with the geometric branchwise \(u\)-derivative by
+\[
+\Quphys X=-\Du X.
+\]
+Consequently,
+\[
+\Qt\Quphys+\Quphys\Qt=0,
+\qquad
+\Quphys X=-\Du X
+\]
+for every such observable \(X\).
+\end{proposition}
+
+\begin{proof}
+The compactly smeared scalar class used here is the slab-supported restriction of the class covered
+by Proposition~\ref{main-prop:uom-uv-radial-ward}.
+That result identifies the physical radial Ward differential with the geometric \(u\)-derivative on
+compact head smearings.
+In the present two-time complex, \(\Du\) is the odd geometric lift of that derivative acting on the
+full smeared density, so the same identity reads
+\(
+\Quphys X=-\Du X
+\)
+on the slab-supported monotone sector.
+The anticommutation with \(\Qt\) follows from \cref{lem:uomdesc-bicomplex}, since for any such
+observable \(X\),
+\[
+\Qt\Quphys X+\Quphys\Qt X
+=
+-\,(\Qt\Du X+\Du\Qt X)
+=
+0,
+\]
+proving the claim.
+\end{proof}
+
+\begin{proposition}[Imported fixed-scheme radial Ward identity on monotone head observables]
+\label{prop:uomdesc-radial-ward}
+For every compactly smeared monotone head observable \(X(u)\),
+\[
+\frac{d}{du}\pair{X(u)}_{\rho_u}
+=
+-\,\pair{\Qu X(u)}_{\rho_u}
+=
+-\,\pair{\Quphys X(u)}_{\rho_u}.
+\]
+If \(X(u)\) lies in the compactly smeared head-observable class of
+\cref{prop:uomdesc-radial-split}, then equivalently
+\[
+\frac{d}{du}\pair{X(u)}_{\rho_u}
+=
+\pair{\Du X(u)}_{\rho_u}.
+\]
+\end{proposition}
+
+\begin{proof}
+This is the fixed-scheme radial Ward identity for the chosen branchwise renormalized expectation
+functional on the monotone sector.
+The second equality uses \cref{prop:uomdesc-radial-decomp}.
+On compact head observables, the geometric form is the slab-supported version of
+Proposition~\ref{main-prop:uom-uv-radial-ward} and agrees with
+\cref{prop:uomdesc-radial-split}.
+\end{proof}
+
+\begin{remark}[Sign convention]
+\label{rem:uomdesc-sign}
+This note uses the convention
+\[
+\Quphys=-\Du
+\]
+on the fixed-scheme monotone sector, so that the monotone derivative identity reads
+\[
+\partial_u M(u)=-\pair{\Quphys\Ozero_k(u)}_{\rho_u}.
+\]
+\end{remark}
+
+\begin{theorem}[Good monotone representative theorem]
+\label{thm:uomdesc-good-o0}
+Let \(M(u)\) be a finite-cutoff UOM receiver monotone realized by
+\eqref{eq:uomdesc-o0-def} and suppose \(M(u_0)\neq 0\) at the chosen UV-side endpoint \(u_0\).
+Then there exists a sufficiently local representative \(\Ozero_k(u)\in
+{\Fsloc}_{\rm mon}^{\Lambda_k}(\Xscr_k)\) such that:
+\[
+M(u)=\pair{\Ozero_k(u)}_{\rho_u},
+\qquad
+\Qt \Ozero_k(u)=0,
+\qquad
+[\Ozero_k(u_0)]\neq 0\in H^0(\Fsloc^{\Lambda_k}(\Xscr_k),\Qt).
+\]
+\end{theorem}
+
+\begin{proof}
+By Proposition~\ref{main-prop:RG-observable-in-Floc}, the compactly smeared representative
+\(\Ozero_k(u)\) belongs to \(({\Fsloc}_{\rm mon}^{\Lambda_k}(\Xscr_k))\).
+\Cref{prop:uomdesc-qt-closed} gives \(\Qt \Ozero_k(u)=0\).
+
+It remains to prove nontriviality in \(H^0\).
+If \(\Ozero_k(u_0)=\Qt X\) were \(\Qt\)-exact, then \cref{prop:uomdesc-ward} would give
+\[
+M(u_0)=\pair{\Ozero_k(u_0)}_{\rho_{u_0}}
+=
+\pair{\Qt X}_{\rho_{u_0}}
+=0,
+\]
+contradicting the assumption \(M(u_0)\neq 0\).
+Hence \([\Ozero_k(u_0)]\neq 0\) in degree zero cohomology.
+\end{proof}
+
+\section{Radial Anomaly Insertion and Raw First Descent}
+\label{sec:uomdesc-descent}
+
+\begin{definition}[Radial anomaly class]
+\label{def:uomdesc-a1}
+Let \(\Ozero_k(u)\) be a good monotone representative as in
+\cref{thm:uomdesc-good-o0}.
+Define the odd cohomology class
+\begin{equation}
+[\Aone_k(u)]
+:=
+[\Quphys \Ozero_k(u)]
+\in
+H^1(\Fsloc^{\Lambda_k}(\Xscr_k),\Qt).
+\label{eq:uomdesc-a1-class}
+\end{equation}
+\end{definition}
+
+\begin{lemma}[Monotone derivative identity in the fixed scheme]
+\label{lem:uomdesc-monotone-derivative}
+Assume \cref{ass:uomdesc-u-chart}.
+For every good monotone representative \(\Ozero_k(u)\),
+\[
+\partial_u M(u)=-\pair{\Quphys\Ozero_k(u)}_{\rho_u},
+\qquad
+\pair{\Quscheme\Ozero_k(u)}_{\rho_u}=0.
+\]
+\end{lemma}
+
+\begin{proof}
+Apply \cref{prop:uomdesc-radial-ward} to \(X(u)=\Ozero_k(u)\).
+The second displayed identity then follows from \cref{prop:uomdesc-radial-decomp}.
+\end{proof}
+
+\begin{theorem}[Locality of differentiated radial insertion on compact head smearings]
+\label{thm:uomdesc-a1-locality}
+For every good monotone representative \(\Ozero_k(u)\), the differentiated radial insertion
+\[
+\Aone_k(u):=\Quphys\Ozero_k(u)
+\]
+defines a sufficiently local odd cochain in \((\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 1}\).
+\end{theorem}
+
+\begin{proof}
+Write \(\Ozero_k(u)\) in the form \eqref{eq:uomdesc-o0-def}.
+Because \(L_{\rm mon}(t,x;u)\) is a local receiver-head scalar density and the branchwise \(u\)-chart
+is differentiable by \cref{ass:uomdesc-u-chart}, the derivative \(\partial_u L_{\rm mon}(t,x;u)\)
+is again a local scalar density depending on some finite jet order.
+Therefore
+\[
+\Aone_k(u)
+=
+\Quphys\Ozero_k(u)
+=
+-\,
+\int_{\Xscr_k}dt\,d^3x\;
+\kappa_k(t)\eta_k(x)\,\partial_u L_{\rm mon}(t,x;u)
+\]
+is a compact smearing of a local density on the receiver head, hence belongs to
+\((\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 1}\) by
+Proposition~\ref{main-prop:RG-observable-in-Floc}.
+\end{proof}
+
+\begin{proposition}[Radial anomaly cohomology on compact head smearings]
+\label{prop:uomdesc-a1-from-sk}
+Let \(\Aone_k(u):=\Quphys\Ozero_k(u)\in (\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 1}\) be the sufficiently
+local odd cochain provided by \cref{thm:uomdesc-a1-locality}.
+Then
+\[
+[\Aone_k(u)]=[\Quphys \Ozero_k(u)]
+\in
+H^1(\Fsloc^{\Lambda_k}(\Xscr_k),\Qt),
+\qquad
+\Qt \Aone_k(u)=0.
+\]
+\end{proposition}
+
+\begin{proof}
+\Cref{thm:uomdesc-a1-locality} already gives the existence and sufficient locality of
+\(\Aone_k(u)\).
+The cohomology identity is tautological from the definition \(\Aone_k(u):=\Quphys\Ozero_k(u)\).
+Moreover, \(\Qt\Ozero_k(u)=0\) by \cref{prop:uomdesc-qt-closed}, and
+\(\Qt\Quphys+\Quphys\Qt=0\) by \cref{prop:uomdesc-radial-split}, so
+\[
+\Qt\Aone_k(u)=\Qt\Quphys\Ozero_k(u)=-\Quphys\Qt\Ozero_k(u)=0.
+\]
+\end{proof}
+
+\begin{theorem}[Canonical fixed-scheme exact anomalous descent]
+\label{thm:uomdesc-raw}
+Assume \cref{ass:uomdesc-u-chart} and let \(\Ozero_k(u)\) be a good monotone representative.
+Then the canonical sufficiently local cochains are
+\[
+\Aone_k(u):=\Quphys\Ozero_k(u)\in(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 1},
+\qquad
+\Xione_k(u):=0\in(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0}
+\]
+and they satisfy
+\begin{equation}
+\Quphys\Ozero_k(u)+\Qt\Xione_k(u)=\Aone_k(u),
+\qquad
+\Qt \Aone_k(u)=0.
+\label{eq:uomdesc-anom-descent}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The first identity in \eqref{eq:uomdesc-anom-descent} is immediate from the canonical choice
+\(\Aone_k(u):=\Quphys\Ozero_k(u)\), \(\Xione_k(u):=0\), while
+\(\Qt\Aone_k(u)=0\) is exactly \cref{prop:uomdesc-a1-from-sk}.
+\end{proof}
+
+\begin{corollary}[Raw first descent in the local ambiguity quotient]
+\label{cor:uomdesc-anom-descent-loc}
+Under the hypotheses of \cref{thm:uomdesc-raw},
+\[
+[\Quphys\Ozero_k(u)+\Qt\Xione_k(u)-\Aone_k(u)]_{\loc}=0.
+\]
+\end{corollary}
+
+\begin{proof}
+This is the image of \eqref{eq:uomdesc-anom-descent} in the quotient by \(\sim_{\loc}\).
+\end{proof}
+
+\begin{proposition}[Solution torsor for the exact descent equation]
+\label{prop:uomdesc-solution-torsor}
+Fix a good monotone representative \(\Ozero_k(u)\) and the canonical anomaly representative
+\(\Aone_k(u):=\Quphys\Ozero_k(u)\).
+Then an even sufficiently local cochain \(\Xione_k(u)\in(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0}\)
+solves the exact descent equation
+\[
+\Quphys\Ozero_k(u)+\Qt\Xione_k(u)=\Aone_k(u)
+\]
+if and only if
+\[
+\Xione_k(u)\in \ker(\Qt)\cap(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0}.
+\]
+Hence the solution space of the canonical exact descent equation is precisely the vector space
+\[
+\ker(\Qt)\cap(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0}.
+\]
+
+More generally, if
+\(\widetilde{\Aone}_k(u)\in(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 1}\) is any odd representative of the
+same radial anomaly class as \(\Aone_k(u)\), then the set of solutions of
+\[
+\Quphys\Ozero_k(u)+\Qt\widetilde{\Xione}_k(u)=\widetilde{\Aone}_k(u)
+\]
+is a nonempty affine space over
+\[
+\ker(\Qt)\cap(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0}.
+\]
+\end{proposition}
+
+\begin{proof}
+For the canonical anomaly representative, the displayed equation is equivalent to
+\[
+\Qt\Xione_k(u)=0,
+\]
+which proves the first statement.
+
+For the general representative \(\widetilde{\Aone}_k(u)\), class equality
+\(
+[\widetilde{\Aone}_k(u)]=[\Aone_k(u)]
+\)
+implies that the defect
+\(
+\widetilde{\Aone}_k(u)-\Aone_k(u)
+\)
+is \(\Qt\)-exact.
+Hence at least one solution \(\widetilde{\Xione}_{k,0}(u)\) exists.
+If \(\widetilde{\Xione}_k(u)\) is any other solution, subtracting the two descent equations gives
+\[
+\Qt\big(\widetilde{\Xione}_k(u)-\widetilde{\Xione}_{k,0}(u)\big)=0.
+\]
+Conversely, adding any \(\Qt\)-closed even cochain to a given solution preserves the equation.
+Thus the full solution set is the affine space
+\[
+\widetilde{\Xione}_{k,0}(u)+
+\ker(\Qt)\cap(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0}.
+\]
+\end{proof}
+
+\begin{proposition}[Nontrivial degree-one class from nonzero RG slope]
+\label{prop:uomdesc-degree-one}
+Assume the hypotheses of \cref{thm:uomdesc-raw}.
+If
+\[
+\partial_u M(u)\big|_{u_0}\neq 0,
+\]
+then
+\[
+[\Quphys\Ozero_k(u_0)]\neq 0
+\qquad\text{in}\qquad
+H^1(\Fsloc^{\Lambda_k}(\Xscr_k),\Qt).
+\]
+\end{proposition}
+
+\begin{proof}
+Suppose \([\Quphys\Ozero_k(u_0)]=0\).
+Then \(\Quphys\Ozero_k(u_0)=\Qt Y\) for some sufficiently local \(Y\).
+Taking expectations in a physical SK-admissible state and using \cref{prop:uomdesc-ward},
+\[
+\pair{\Quphys\Ozero_k(u_0)}_{\rho_{u_0}}
+=
+\pair{\Qt Y}_{\rho_{u_0}}
+=0.
+\]
+By \cref{lem:uomdesc-monotone-derivative}, this forces \(\partial_u M(u_0)=0\), a contradiction.
+\end{proof}
+
+\subsection{Inter-scheme comparison of the radial anomaly class}
+
+\begin{definition}[Cohomologically admissible inter-scheme comparison]
+\label{def:uomdesc-interscheme}
+Fix a good monotone representative \(\Ozero_k(u)\) on the chosen slab.
+Two finite-cutoff renormalization schemes \(S\) and \(S'\) at the same cutoff \(\Lambda_k\) are
+said to be \emph{cohomologically admissibly comparable on the chosen monotone sector} if:
+\begin{enumerate}[leftmargin=2em]
+\item the same compactly smeared monotone observable \(\Ozero_k(u)\) belongs to
+  \(({\Fsloc}_{\rm mon}^{\Lambda_k}(\Xscr_k))\) in both schemes and remains \(\Qt\)-closed;
+\item each scheme defines a sufficiently local physical radial differential on compactly smeared
+  monotone head observables, written
+  \[
+  Q_{u,S}^{\rm phys},
+  \qquad
+  Q_{u,S'}^{\rm phys},
+  \]
+  and the associated anomaly representatives
+  \[
+  \mathcal A_{k,S}^{(1)}(u):=Q_{u,S}^{\rm phys}\Ozero_k(u),
+  \qquad
+  \mathcal A_{k,S'}^{(1)}(u):=Q_{u,S'}^{\rm phys}\Ozero_k(u)
+  \]
+  lie in \((\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 1}\);
+\item for every \(\Qt\)-closed
+  \(X\in{\Fsloc}_{\rm mon}^{\Lambda_k}(\Xscr_k)\), the relative physical radial defect
+  \[
+  \delta_{{\rm sch};S'\leftarrow S}X
+  :=
+  \big(Q_{u,S'}^{\rm phys}-Q_{u,S}^{\rm phys}\big)X
+  \]
+  admits a sufficiently local decomposition
+  \[
+  \delta_{{\rm sch};S'\leftarrow S}X
+  =
+  \Qt Y_X+\partial_\mu K_X^\mu+\Delta_{{\rm ct},X},
+  \]
+  with \(Y_X\in(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0}\), \(K_X^\mu\) boundary-admissible on the
+  slab, and \(\Delta_{{\rm ct},X}\) an admissible local counterterm shift in the sense of
+  \cref{def:uomdesc-loc-quot};
+  and, in addition,
+  \[
+  [\delta_{{\rm sch};S'\leftarrow S}X]
+  =
+  0
+  \qquad\text{in}\qquad
+  H^1(\Fsloc^{\Lambda_k}(\Xscr_k),\Qt).
+  \]
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Inter-scheme invariance of the radial anomaly class]
+\label{thm:uomdesc-interscheme}
+Assume \cref{ass:uomdesc-u-chart}, and let \(S\) and \(S'\) be cohomologically admissibly
+comparable in the sense of \cref{def:uomdesc-interscheme}.
+Then there exist sufficiently local data
+\[
+Y_k(u)\in(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0},
+\qquad
+K_k^\mu(u),
+\qquad
+\Delta_{{\rm ct},k}(u)
+\]
+such that
+\begin{equation}
+\mathcal A_{k,S'}^{(1)}(u)-\mathcal A_{k,S}^{(1)}(u)
+=
+\Qt Y_k(u)+\partial_\mu K_k^\mu(u)+\Delta_{{\rm ct},k}(u).
+\label{eq:uomdesc-interscheme-diff}
+\end{equation}
+Consequently,
+\[
+[\mathcal A_{k,S'}^{(1)}(u)]
+=
+[\mathcal A_{k,S}^{(1)}(u)]
+\qquad\text{in}\qquad
+H^1(\Fsloc^{\Lambda_k}(\Xscr_k),\Qt),
+\]
+and
+\[
+[\mathcal A_{k,S'}^{(1)}(u)-\mathcal A_{k,S}^{(1)}(u)]_{\loc}=0.
+\]
+In particular, if \(S\) is the fixed scheme used in the present note, then
+\[
+[\mathcal A_{k,S'}^{(1)}(u)]
+=
+[\Aone_k(u)]
+\qquad\text{in}\qquad
+H^1(\Fsloc^{\Lambda_k}(\Xscr_k),\Qt),
+\]
+and
+\[
+[\mathcal A_{k,S'}^{(1)}(u)-\Aone_k(u)]_{\loc}=0.
+\]
+\end{theorem}
+
+\begin{proof}
+Apply item (3) of \cref{def:uomdesc-interscheme} to the chosen good monotone representative
+\(X=\Ozero_k(u)\).
+Since
+\[
+\mathcal A_{k,S}^{(1)}(u)=Q_{u,S}^{\rm phys}\Ozero_k(u),
+\qquad
+\mathcal A_{k,S'}^{(1)}(u)=Q_{u,S'}^{\rm phys}\Ozero_k(u),
+\]
+the relative defect identity becomes exactly \eqref{eq:uomdesc-interscheme-diff}, with
+\(
+Y_k(u):=Y_{\Ozero_k(u)}
+\),
+\(
+K_k^\mu(u):=K_{\Ozero_k(u)}^\mu
+\),
+and
+\(
+\Delta_{{\rm ct},k}(u):=\Delta_{{\rm ct},\Ozero_k(u)}
+\).
+
+The local-quotient statement follows immediately from \cref{def:uomdesc-loc-quot}, because the
+right-hand side of \eqref{eq:uomdesc-interscheme-diff} is a sum of generating ambiguity moves.
+The cohomology statement is the specialization of the final clause of item (3) in
+\cref{def:uomdesc-interscheme} to \(X=\Ozero_k(u)\).
+If \(S\) is the present fixed scheme, then
+\(
+\mathcal A_{k,S}^{(1)}(u)=\Aone_k(u)
+\)
+by \cref{thm:uomdesc-raw}, giving the last two displays.
+\end{proof}
+
+\begin{corollary}[Affine stability of descendant spaces for exactly compared representatives]
+\label{cor:uomdesc-interscheme-desc}
+Under the hypotheses of \cref{thm:uomdesc-interscheme}, choose sufficiently local odd
+representatives
+\[
+\widehat{\mathcal A}_{k,S}^{(1)}(u),
+\qquad
+\widehat{\mathcal A}_{k,S'}^{(1)}(u)
+\]
+of the common degree-one class
+\(
+[\mathcal A_{k,S}^{(1)}(u)]=[\mathcal A_{k,S'}^{(1)}(u)]
+\)
+such that
+\begin{equation}
+\widehat{\mathcal A}_{k,S'}^{(1)}(u)-\widehat{\mathcal A}_{k,S}^{(1)}(u)
+=
+\mathcal A_{k,S'}^{(1)}(u)-\mathcal A_{k,S}^{(1)}(u)+\Qt Y_k(u)
+\label{eq:uomdesc-interscheme-exact-comp}
+\end{equation}
+for some even sufficiently local cochain \(Y_k(u)\).
+Let
+\[
+\mathrm{Sol}_{S}\big(\widehat{\mathcal A}_{k,S}^{(1)}(u)\big)
+\]
+and
+\[
+\mathrm{Sol}_{S'}\big(\widehat{\mathcal A}_{k,S'}^{(1)}(u)\big)
+\]
+denote the affine spaces of sufficiently local exact descendants solving
+\[
+Q_{u,S}^{\rm phys}\Ozero_k(u)+\Qt\Xione_k(u)=\widehat{\mathcal A}_{k,S}^{(1)}(u)
+\]
+and
+\[
+Q_{u,S'}^{\rm phys}\Ozero_k(u)+\Qt\Xione_k(u)=\widehat{\mathcal A}_{k,S'}^{(1)}(u),
+\]
+respectively.
+Then
+\[
+\mathrm{Sol}_{S'}\big(\widehat{\mathcal A}_{k,S'}^{(1)}(u)\big)
+=
+\mathrm{Sol}_{S}\big(\widehat{\mathcal A}_{k,S}^{(1)}(u)\big)+Y_k(u).
+\]
+In particular, once the anomaly representatives are chosen in exactly compared form, the two
+descendant affine spaces differ only by translation by \(Y_k(u)\).
+If \(Y_k'(u)\) is another primitive satisfying \eqref{eq:uomdesc-interscheme-exact-comp} for the
+same pair of representatives, then
+\[
+Y_k'(u)-Y_k(u)\in \ker(\Qt)\cap(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0}.
+\]
+\end{corollary}
+
+\begin{proof}
+Let \(\Xione_{k,S}(u)\in\mathrm{Sol}_{S}(\widehat{\mathcal A}_{k,S}^{(1)}(u))\) and define
+\[
+\Xione_{k,S'}(u):=\Xione_{k,S}(u)+Y_k(u).
+\]
+Using the exact descendant equation in scheme \(S\) and the exact comparison
+\eqref{eq:uomdesc-interscheme-exact-comp}, we compute
+\[
+Q_{u,S'}^{\rm phys}\Ozero_k(u)+\Qt\Xione_{k,S'}(u)
+=
+\widehat{\mathcal A}_{k,S'}^{(1)}(u).
+\]
+Thus translation by \(+Y_k(u)\) sends solutions in scheme \(S\) to solutions in scheme \(S'\), and
+the inverse translation by \(-Y_k(u)\) gives the converse inclusion.
+If \(Y_k'(u)\) is another primitive for the same chosen pair of representatives, then
+\[
+\Qt\big(Y_k'(u)-Y_k(u)\big)=0,
+\]
+which is the final claim.
+\end{proof}
+
+\section{Conditional Hodge/Pseudoinverse Normalization}
+\label{sec:uomdesc-hodge}
+
+\begin{theorem}[First-variation Hilbertization on the monotone sector]
+\label{thm:uomdesc-first-var}
+Assume the finite-cutoff UOM input package of \cref{sec:uomdesc-scope} and fix
+\(u\) in the branchwise neighborhood of \cref{ass:uomdesc-u-chart}.
+Let \(\varphi_u\in\mathcal X_{\Lambda_k}^s\) denote the corresponding finite-cutoff
+receiver-head boundary data.
+For each parity \(\bar\imath\in\{\bar 0,\bar 1\}\), define
+\[
+\mathcal Y_{{\rm pre},\bar\imath}^{\Lambda_k}(\Xscr_k;u)
+:=
+\operatorname{span}\!\left\{
+F^{(1)}(\varphi_u)
+\;\middle|\;
+F\in({\Fsloc}_{\rm mon}^{\Lambda_k}(\Xscr_k))_{\bar\imath}
+\right\}.
+\]
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item every element of \(\mathcal Y_{{\rm pre},\bar\imath}^{\Lambda_k}(\Xscr_k;u)\) is a compactly
+  supported band-limited receiver-head density on \(\Xscr_k\);
+\item after choosing any positive-definite inner product \(m_{AB}\) on the finite component space
+  of receiver boundary fields, the pairing
+  \[
+  (\alpha,\beta)_{{\rm fv},k,u}
+  :=
+  \int_{\Xscr_k}dt\,d^3x\;\sqrt{-\gamma}\,m^{AB}\alpha_A(x)\beta_B(x)
+  \]
+  defines a pre-Hilbert structure on each
+  \(\mathcal Y_{{\rm pre},\bar\imath}^{\Lambda_k}(\Xscr_k;u)\);
+\item if \(\mathcal Y_{\bar\imath}^{\Lambda_k}(\Xscr_k;u)\) denotes the corresponding Hilbert
+  completion and
+  \[
+  \mathcal N_{\bar\imath,k}(u)
+  :=
+  \big\{
+  F\in({\Fsloc}_{\rm mon}^{\Lambda_k}(\Xscr_k))_{\bar\imath}
+  \;:\;
+  F^{(1)}(\varphi_u)=0
+  \big\},
+  \]
+  then the first-variation map descends to an injective linear map
+  \[
+  \jmath_{\bar\imath,u}:
+  ({\Fsloc}_{\rm mon}^{\Lambda_k}(\Xscr_k))_{\bar\imath}/\mathcal N_{\bar\imath,k}(u)
+  \into
+  \mathcal Y_{\bar\imath}^{\Lambda_k}(\Xscr_k;u)
+  \]
+  with dense image.
+\end{enumerate}
+In particular, the selected monotone sector admits a theorem-level first-variation Hilbertization,
+which is the natural analytic input underlying the Hodge target \textbf{(H1)}.
+\end{theorem}
+
+\begin{proof}
+By Definition~\ref{main-def:Floc} and \eqref{main-eq:XLambda}, every
+\(F\in\Fsloc^{\Lambda_k}(\Xscr_k)\) is a finite sum of compactly supported smearings of local jet
+polynomials in the band-limited receiver-head variables, and its first Fr\'echet derivative
+\(F^{(1)}(\varphi_u)\) exists as a compactly supported density-valued function on the receiver head.
+For the monotone sector this derivative is again supported in \(\Xscr_k\), and band limitation is
+preserved because the receiver data lie in the projected space \(\mathcal X_{\Lambda_k}^s\).
+Finite linear combinations therefore remain compactly supported band-limited densities, proving
+item (1).
+
+Because the receiver cutoff leaves only finitely many field components and because the slab is
+bounded, a choice of positive-definite fiber metric \(m_{AB}\) produces a positive-definite
+\(L^2\)-type pairing on such density coefficients.  Compact support of \(\alpha,\beta\) makes the
+integral finite, and bilinearity is immediate, proving item (2).
+
+For item (3), quotient by the null space of the first-variation map so that the induced map
+\(\jmath_{\bar\imath,u}\) is injective.  Its image contains
+\(\mathcal Y_{{\rm pre},\bar\imath}^{\Lambda_k}(\Xscr_k;u)\) by construction, hence is dense in the
+Hilbert completion \(\mathcal Y_{\bar\imath}^{\Lambda_k}(\Xscr_k;u)\).
+\end{proof}
+
+\begin{definition}[Admissible endpoint-vanishing time-kernel sector]
+\label{def:uomdesc-time-kernel-sector}
+Fix \(u\) and choose a real Hilbert space \(\mathcal R_k(u)\) representing the finite-cutoff
+band-limited receiver coefficient sector on \(\Sigma_{\rec}\).
+Define the Bochner spaces
+\[
+\mathcal K_{\bar 0,k}^{\Lambda_k}(u)
+:=
+H_0^1(\Islab;\mathcal R_k(u)),
+\qquad
+\mathcal K_{\bar 1,k}^{\Lambda_k}(u)
+:=
+L^2(\Islab;\mathcal R_k(u)),
+\]
+and the zero-mode-free odd sector
+\[
+\mathcal K_{\bar 1,k}^{\Lambda_k,0}(u)
+:=
+\left\{
+G\in L^2(\Islab;\mathcal R_k(u))
+\;\middle|\;
+\int_{\Islab}G(t)\,dt=0
+\right\},
+\]
+where the integral is the Bochner integral in \(\mathcal R_k(u)\).
+The kernel-level \(t\)-differential is
+\[
+\overline{\Qt}_{{\rm ker},k}
+:=
+c_t\partial_t:
+\mathcal K_{\bar 0,k}^{\Lambda_k}(u)\to \mathcal K_{\bar 1,k}^{\Lambda_k}(u),
+\]
+with the odd parameter \(c_t\) recording parity and \(\partial_t\) the underlying real operator.
+\end{definition}
+
+\begin{theorem}[Closedness and closed range of \texorpdfstring{\(Q_t\)}{Qt} on the admissible time-kernel sector]
+\label{thm:uomdesc-qt-kernel}
+In the setting of \cref{def:uomdesc-time-kernel-sector}, the operator
+\[
+\partial_t:
+H_0^1(\Islab;\mathcal R_k(u))
+\to
+L^2(\Islab;\mathcal R_k(u))
+\]
+is densely defined and closed, and its range is exactly
+\[
+\operatorname{ran}(\partial_t)
+=
+\mathcal K_{\bar 1,k}^{\Lambda_k,0}(u).
+\]
+Hence \(\operatorname{ran}(\partial_t)\) is a closed subspace of
+\(L^2(\Islab;\mathcal R_k(u))\).
+Equivalently,
+\[
+\operatorname{ran}(\overline{\Qt}_{{\rm ker},k})
+=
+c_t\,\mathcal K_{\bar 1,k}^{\Lambda_k,0}(u)
+\]
+is closed in the odd copy of the admissible time-kernel sector.
+Moreover, there is a Poincar\'e--Friedrichs estimate
+\[
+\|F\|_{L^2(\Islab;\mathcal R_k(u))}
+\le
+|\Islab|\,\|\partial_t F\|_{L^2(\Islab;\mathcal R_k(u))}
+\]
+for all \(F\in H_0^1(\Islab;\mathcal R_k(u))\).
+\end{theorem}
+
+\begin{proof}
+Density of the domain is standard because \(C_c^\infty(\Islab;\mathcal R_k(u))\) is dense in
+\(H_0^1(\Islab;\mathcal R_k(u))\), and hence dense in \(L^2(\Islab;\mathcal R_k(u))\).
+
+To prove closedness, let \(F_n\in H_0^1(\Islab;\mathcal R_k(u))\) satisfy
+\[
+F_n\to F
+\quad\text{in}\quad
+L^2(\Islab;\mathcal R_k(u)),
+\qquad
+\partial_tF_n\to G
+\quad\text{in}\quad
+L^2(\Islab;\mathcal R_k(u)).
+\]
+For every scalar test function \(\phi\in C_c^\infty(\Islab)\) and every \(v\in\mathcal R_k(u)\),
+integration by parts gives
+\[
+\int_{\Islab}\!\big\langle F_n(t),v\big\rangle\,\phi'(t)\,dt
+=
+-\int_{\Islab}\!\big\langle \partial_tF_n(t),v\big\rangle\,\phi(t)\,dt.
+\]
+Passing to the limit shows that \(F\) has weak derivative \(G\), hence
+\(F\in H^1(\Islab;\mathcal R_k(u))\) and \(\partial_tF=G\).
+Because the trace map \(H^1(\Islab;\mathcal R_k(u))\to\mathcal R_k(u)\times\mathcal R_k(u)\) is
+continuous and each \(F_n\) has vanishing endpoint traces, \(F\) also has vanishing endpoint
+traces. Therefore \(F\in H_0^1(\Islab;\mathcal R_k(u))\), proving that \(\partial_t\) is closed.
+
+If \(F\in H_0^1(\Islab;\mathcal R_k(u))\), the Bochner fundamental theorem of calculus yields
+\[
+\int_{\Islab}\partial_tF(t)\,dt
+=
+F(t_k^+)-F(t_k^-)
+=
+0,
+\]
+so \(\operatorname{ran}(\partial_t)\subset\mathcal K_{\bar 1,k}^{\Lambda_k,0}(u)\).
+Conversely, let \(G\in\mathcal K_{\bar 1,k}^{\Lambda_k,0}(u)\) and define
+\[
+(\mathsf S_kG)(t)
+:=
+\int_{t_k^-}^{t}G(s)\,ds.
+\]
+Then \(\mathsf S_kG\in H^1(\Islab;\mathcal R_k(u))\), \(\partial_t(\mathsf S_kG)=G\) a.e., and
+\[
+(\mathsf S_kG)(t_k^-)=0,
+\qquad
+(\mathsf S_kG)(t_k^+)=\int_{\Islab}G(s)\,ds=0,
+\]
+so \(\mathsf S_kG\in H_0^1(\Islab;\mathcal R_k(u))\).
+Hence \(\operatorname{ran}(\partial_t)=\mathcal K_{\bar 1,k}^{\Lambda_k,0}(u)\), and this range is
+closed because the zero-mode-free Bochner subspace is closed in \(L^2\).
+
+Finally, for \(F\in H_0^1(\Islab;\mathcal R_k(u))\),
+\[
+F(t)=\int_{t_k^-}^{t}\partial_tF(s)\,ds,
+\]
+so
+\[
+\|F(t)\|_{\mathcal R_k(u)}
+\le
+\int_{\Islab}\|\partial_tF(s)\|_{\mathcal R_k(u)}\,ds.
+\]
+Integrating in \(t\) and applying Cauchy--Schwarz gives
+\[
+\|F\|_{L^2(\Islab;\mathcal R_k(u))}
+\le
+|\Islab|\,\|\partial_tF\|_{L^2(\Islab;\mathcal R_k(u))},
+\]
+which is the stated Poincar\'e--Friedrichs estimate.
+\end{proof}
+
+\begin{assumption}[Conditional analytic package beyond theorem-level H1--H2]
+\label{ass:uomdesc-hodge}
+Fix the first-variation Hilbertizations
+\[
+\mathcal Y_{\bar 0}^{\Lambda_k}(\Xscr_k;u),
+\qquad
+\mathcal Y_{\bar 1}^{\Lambda_k}(\Xscr_k;u)
+\]
+of \cref{thm:uomdesc-first-var}.
+Assume in addition that there exist real Hilbert spaces
+\[
+\mathcal H_{\bar 0}^{\Lambda_k}(\Xscr_k),
+\qquad
+\mathcal H_{\bar 1}^{\Lambda_k}(\Xscr_k),
+\]
+giving a compatible raw-cochain realization of that first-variation Hilbertization, with
+continuous dense inclusions
+\[
+(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0}\into \mathcal H_{\bar 0}^{\Lambda_k}(\Xscr_k),
+\qquad
+(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 1}\into \mathcal H_{\bar 1}^{\Lambda_k}(\Xscr_k),
+\]
+such that:
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Compatibility with the theorem-level time-kernel sector.}
+  There are closed subspaces
+  \[
+  \mathcal H_{\bar 0,{\rm adm}}^{\Lambda_k}(\Xscr_k;u)\subset\mathcal H_{\bar 0}^{\Lambda_k}(\Xscr_k),
+  \qquad
+  \mathcal H_{\bar 1,{\rm adm}}^{\Lambda_k}(\Xscr_k;u)\subset\mathcal H_{\bar 1}^{\Lambda_k}(\Xscr_k),
+  \]
+  unitarily identified with the admissible time-kernel sector of
+  \cref{def:uomdesc-time-kernel-sector} as the closures of the corresponding raw sufficiently local
+  kernel-generated sectors.
+  Writing
+  \[
+  \overline{\Qt}_{\rm adm}:
+  \mathcal D(\overline{\Qt}_{\rm adm})\subset
+  \mathcal H_{\bar 0,{\rm adm}}^{\Lambda_k}(\Xscr_k;u)
+  \to
+  \mathcal H_{\bar 1,{\rm adm}}^{\Lambda_k}(\Xscr_k;u)
+  \]
+  for the restriction of \(\overline{\Qt}\) to those subspaces, one has
+  \[
+  \overline{\Qt}_{\rm adm}\cong \overline{\Qt}_{{\rm ker},k}
+  \]
+  under the chosen unitary identifications.
+\item \textbf{Branch-symmetric norm choice.}
+  The dense sufficiently local sectors are \(\Gamma\)-stable, and the chosen Hilbert norms satisfy
+  \[
+  \|\Gamma F\|_{\mathcal H_{\bar 0}^{\Lambda_k}(\Xscr_k)}
+  =
+  \|F\|_{\mathcal H_{\bar 0}^{\Lambda_k}(\Xscr_k)},
+  \qquad
+  \|\Gamma G\|_{\mathcal H_{\bar 1}^{\Lambda_k}(\Xscr_k)}
+  =
+  \|G\|_{\mathcal H_{\bar 1}^{\Lambda_k}(\Xscr_k)}
+  \]
+  for all \(F\in(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0}\) and
+  \(G\in(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 1}\).
+\item \textbf{(H4) Admissible representative class and return problem.}
+  There is a selected class
+  \[
+  \mathcal C_{{\rm adm},k}(u)\subset(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 1}
+  \]
+  of sufficiently local odd representatives of the radial anomaly class
+  \(
+  [\Aone_k(u)]
+  \)
+  such that every
+  \(
+  \widetilde{\Aone}_k(u)\in\mathcal C_{{\rm adm},k}(u)
+  \)
+  lies in \(\mathcal H_{\bar 1,{\rm adm}}^{\Lambda_k}(\Xscr_k;u)\), its defect
+  \[
+  \widetilde{B}_k(u):=\widetilde{\Aone}_k(u)-\Aone_k(u)
+  \]
+  belongs to \(\mathrm{ran}(\overline{\Qt}_{\rm adm})\).
+  The raw return problem is then to show, on this selected class, that the Moore--Penrose-selected
+  primitive of \(\widetilde{B}_k(u)\) lies back in
+  \((\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0}\).
+\end{enumerate}
+\end{assumption}
+
+\begin{remark}[Scope of the Hodge section]
+\label{rem:uomdesc-hodge-scope}
+The raw package of \cref{thm:uomdesc-raw-package} is independent of the present section.
+The additional hypotheses in \cref{ass:uomdesc-hodge} are used only to choose and normalize
+representatives of the same degree-one class on the selected admissible Hilbert sector.
+\end{remark}
+
+\begin{theorem}[Branch-symmetric Hilbert extension of \texorpdfstring{\(\Gamma\)}{Gamma}]
+\label{thm:uomdesc-gamma-hilbert}
+Assume \cref{ass:uomdesc-hodge}.
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item the dense raw action of \(\Gamma\) extends uniquely to bounded isometric involutions on
+  \(\mathcal H_{\bar 0}^{\Lambda_k}(\Xscr_k)\) and \(\mathcal H_{\bar 1}^{\Lambda_k}(\Xscr_k)\);
+\item the admissible closed subspaces
+  \(
+  \mathcal H_{\bar 0,{\rm adm}}^{\Lambda_k}(\Xscr_k;u)
+  \)
+  and
+  \(
+  \mathcal H_{\bar 1,{\rm adm}}^{\Lambda_k}(\Xscr_k;u)
+  \)
+  are \(\Gamma\)-stable;
+\item on the admissible closed sector, the domain of \(\overline{\Qt}_{\rm adm}\) is
+  \(\Gamma\)-stable and
+  \[
+  \Gamma\overline{\Qt}_{\rm adm}=\overline{\Qt}_{\rm adm}\Gamma;
+  \]
+\item the domain of \(\overline{\Qt}_{\rm adm}^{\dagger}\) is \(\Gamma\)-stable and
+  \[
+  \Gamma\overline{\Qt}_{\rm adm}^{\dagger}=\overline{\Qt}_{\rm adm}^{\dagger}\Gamma;
+  \]
+\item writing
+  \[
+  \overline{\Qt}_{\rm adm}^{+}
+  :=
+  \overline{\Qt}_{\rm adm}^{\dagger}
+  \big(\overline{\Qt}_{\rm adm}\,\overline{\Qt}_{\rm adm}^{\dagger}\big)^{-1}
+  \]
+  for the Moore--Penrose inverse on the admissible closed-range sector of
+  \cref{thm:uomdesc-qt-kernel}, one has
+  \[
+  \Gamma\overline{\Qt}_{\rm adm}^{+}=\overline{\Qt}_{\rm adm}^{+}\Gamma.
+  \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Because the Hilbert norms are \(\Gamma\)-invariant on the dense raw sectors, \(\Gamma\) is an
+isometry there.  Every isometry on a dense subspace extends uniquely by continuity to a bounded
+isometric operator on the Hilbert completion, and \(\Gamma^2=\id\) on the dense raw sector implies
+\(\Gamma^2=\id\) after extension. This proves item (1).
+
+Because the raw kernel-generated sectors are \(\Gamma\)-stable and the admissible closed subspaces
+are their closures, item (2) follows immediately from continuity of the Hilbert extension.
+
+For item (3), let \(F\) lie in the domain of \(\overline{\Qt}_{\rm adm}\).
+By construction of the admissible sector as the closure of the raw kernel-generated sector, there
+exists a sequence \(F_n\) in the corresponding raw sector
+such that
+\[
+F_n\to F,
+\qquad
+\overline{\Qt}_{\rm adm}F_n\to \overline{\Qt}_{\rm adm}F
+\]
+in the graph norm of \(\overline{\Qt}_{\rm adm}\).
+On the raw sector, \(\Gamma\Qt=\Qt\Gamma\) by \cref{lem:uomdesc-gamma-comm}.
+Applying the bounded extension of \(\Gamma\) and passing to the limit gives
+\[
+\Gamma F_n\to \Gamma F,
+\qquad
+\overline{\Qt}_{\rm adm}\Gamma F_n
+=
+\Gamma\overline{\Qt}_{\rm adm}F_n
+\to
+\Gamma\overline{\Qt}_{\rm adm}F.
+\]
+Since \(\overline{\Qt}_{\rm adm}\) is closed on that sector by \cref{thm:uomdesc-qt-kernel}, it
+follows that \(\Gamma F\in\mathcal D(\overline{\Qt}_{\rm adm})\) and
+\(
+\overline{\Qt}_{\rm adm}\Gamma F=\Gamma\overline{\Qt}_{\rm adm}F
+\),
+proving item (3).
+
+For item (4), let \(G\in\mathcal D(\overline{\Qt}_{\rm adm}^{\dagger})\) and
+\(F\in\mathcal D(\overline{\Qt}_{\rm adm})\) on the admissible closed sector.
+Using item (3) and the fact that \(\Gamma\) is an isometric involution, we compute
+\[
+\langle \overline{\Qt}_{\rm adm}F,\Gamma G\rangle
+=
+\langle \Gamma\overline{\Qt}_{\rm adm}F,G\rangle
+=
+\langle \overline{\Qt}_{\rm adm}\Gamma F,G\rangle
+=
+\langle \Gamma F,\overline{\Qt}_{\rm adm}^{\dagger}G\rangle
+=
+\langle F,\Gamma\overline{\Qt}_{\rm adm}^{\dagger}G\rangle.
+\]
+Therefore \(\Gamma G\in\mathcal D(\overline{\Qt}_{\rm adm}^{\dagger})\) and
+\(
+\overline{\Qt}_{\rm adm}^{\dagger}\Gamma G=\Gamma\overline{\Qt}_{\rm adm}^{\dagger}G
+\),
+proving item (4).
+
+Finally, item (4) implies that \(\Gamma\) commutes with
+\(\overline{\Qt}_{\rm adm}\,\overline{\Qt}_{\rm adm}^{\dagger}\) on its natural domain, hence also
+with its inverse on \(\mathrm{ran}(\overline{\Qt}_{\rm adm})\) in the admissible closed-range
+sector of \cref{thm:uomdesc-qt-kernel}.
+Combining this with item (4) gives
+\[
+\begin{aligned}
+\Gamma\overline{\Qt}_{\rm adm}^{+}
+&=
+\Gamma\overline{\Qt}_{\rm adm}^{\dagger}
+\big(\overline{\Qt}_{\rm adm}\,\overline{\Qt}_{\rm adm}^{\dagger}\big)^{-1} \\
+&=
+\overline{\Qt}_{\rm adm}^{\dagger}\Gamma
+\big(\overline{\Qt}_{\rm adm}\,\overline{\Qt}_{\rm adm}^{\dagger}\big)^{-1} \\
+&=
+\overline{\Qt}_{\rm adm}^{\dagger}
+\big(\overline{\Qt}_{\rm adm}\,\overline{\Qt}_{\rm adm}^{\dagger}\big)^{-1}\Gamma \\
+&=
+\overline{\Qt}_{\rm adm}^{+}\Gamma,
+\end{aligned}
+\]
+which is item (5).
+\end{proof}
+
+\begin{theorem}[Conditional Hodge/pseudoinverse normalization]
+\label{thm:uomdesc-hodge}
+Assume \cref{ass:uomdesc-hodge}.
+Let
+\[
+\widetilde{\Aone}_k(u)\in\mathcal C_{{\rm adm},k}(u)
+\]
+be an admissible sufficiently local odd representative of the same radial anomaly class as
+\(\Aone_k(u)=\Quphys\Ozero_k(u)\), and define the representative defect
+\[
+\widetilde{B}_k(u):=\widetilde{\Aone}_k(u)-\Aone_k(u).
+\]
+Then \(\widetilde{B}_k(u)\in\mathrm{ran}(\overline{\Qt}_{\rm adm})\), and the Moore--Penrose
+normalized
+primitive
+\[
+\widetilde{\Xione}_{{\rm can},k}(u)
+:=
+\overline{\Qt}_{\rm adm}^{\dagger}
+\big(\overline{\Qt}_{\rm adm}\,\overline{\Qt}_{\rm adm}^{\dagger}\big)^{-1}
+\widetilde{B}_k(u)
+\]
+is the unique element of
+\(
+\ker(\overline{\Qt}_{\rm adm})^\perp\subset
+\mathcal H_{\bar 0,{\rm adm}}^{\Lambda_k}(\Xscr_k;u)
+\)
+of minimal Hilbert norm satisfying
+\[
+\overline{\Qt}_{\rm adm}\,\widetilde{\Xione}_{{\rm can},k}(u)=\widetilde{B}_k(u).
+\]
+Consequently,
+\[
+\Quphys\Ozero_k(u)+\overline{\Qt}_{\rm adm}\,\widetilde{\Xione}_{{\rm can},k}(u)
+=
+\widetilde{\Aone}_k(u)
+\]
+holds in the admissible closed Hilbert sector.
+If, in addition,
+\(
+\widetilde{\Xione}_{{\rm can},k}(u)\in(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0},
+\)
+then the same equation holds in the raw sufficiently local complex.
+\end{theorem}
+
+\begin{proof}
+Because \(\widetilde{\Aone}_k(u)\) and \(\Aone_k(u)\) represent the same cohomology class, the
+defect \(\widetilde{B}_k(u)\) is \(\Qt\)-exact in the raw complex.
+By the compatibility clause and \textbf{(H4)} of \cref{ass:uomdesc-hodge}, admissible
+representative defects lie in the admissible closed subspace on which \(\overline{\Qt}_{\rm adm}\)
+agrees with the
+closed-range operator of \cref{thm:uomdesc-qt-kernel}.
+Applying closed-range Hilbert-space Hodge theory to that restricted sector, and writing the
+restricted operator explicitly as \(\overline{\Qt}_{\rm adm}\), we obtain:
+standard closed-range Hilbert-space Hodge theory gives the orthogonal decomposition
+\[
+\mathcal H_{\bar 0,{\rm adm}}^{\Lambda_k}(\Xscr_k;u)
+=
+\ker(\overline{\Qt}_{\rm adm})
+\oplus
+\overline{\mathrm{ran}(\overline{\Qt}_{\rm adm}^{\dagger})},
+\]
+and the Moore--Penrose right inverse of \(\overline{\Qt}_{\rm adm}\) on
+\(\mathrm{ran}(\overline{\Qt}_{\rm adm})\) is
+\[
+\overline{\Qt}_{\rm adm}^{+}
+=
+\overline{\Qt}_{\rm adm}^{\dagger}
+\big(\overline{\Qt}_{\rm adm}\,\overline{\Qt}_{\rm adm}^{\dagger}\big)^{-1}.
+\]
+Setting
+\(
+\widetilde{\Xione}_{{\rm can},k}(u):=\overline{\Qt}_{\rm adm}^{+}\widetilde{B}_k(u)
+\)
+therefore yields the unique solution in \(\ker(\overline{\Qt}_{\rm adm})^\perp\) of minimal
+Hilbert norm.
+The displayed descent equation in the admissible sector is then immediate from the definition of
+\(\widetilde{B}_k(u)\).
+If the normalized primitive happens to lie back in the sufficiently local complex, the same
+identity holds there without change.
+\end{proof}
+
+\begin{corollary}[Parity of the Hodge-normalized primitive]
+\label{cor:uomdesc-hodge-parity}
+Assume \cref{ass:uomdesc-hodge}.
+If the representative defect \(\widetilde{B}_k(u)\) is \(\Gamma\)-odd, respectively \(\Gamma\)-even,
+then the Hodge-normalized primitive \(\widetilde{\Xione}_{{\rm can},k}(u)\) is also
+\(\Gamma\)-odd, respectively \(\Gamma\)-even.
+\end{corollary}
+
+\begin{proof}
+By \cref{thm:uomdesc-gamma-hilbert}, \(\Gamma\) is a Hilbert isometry and commutes with
+\(\overline{\Qt}_{\rm adm}\), \(\overline{\Qt}_{\rm adm}^{\dagger}\), and the Moore--Penrose right
+inverse
+\[
+\overline{\Qt}_{\rm adm}^{+}
+=
+\overline{\Qt}_{\rm adm}^{\dagger}
+\big(\overline{\Qt}_{\rm adm}\,\overline{\Qt}_{\rm adm}^{\dagger}\big)^{-1}
+\]
+on \(\mathrm{ran}(\overline{\Qt}_{\rm adm})\).
+Hence
+\[
+\Gamma\widetilde{\Xione}_{{\rm can},k}(u)
+=
+\Gamma\overline{\Qt}_{\rm adm}^{+}\widetilde{B}_k(u)
+=
+\overline{\Qt}_{\rm adm}^{+}\Gamma\widetilde{B}_k(u).
+\]
+If \(\Gamma\widetilde{B}_k(u)=\pm\widetilde{B}_k(u)\), the same sign is inherited by
+\(\widetilde{\Xione}_{{\rm can},k}(u)\).
+\end{proof}
+
+\begin{corollary}[Hilbertized affine solution space]
+\label{cor:uomdesc-hodge-torsor}
+Under the hypotheses of \cref{thm:uomdesc-hodge}, every solution of
+\[
+\Quphys\Ozero_k(u)+\overline{\Qt}_{\rm adm}\,\widetilde{\Xione}_k(u)=\widetilde{\Aone}_k(u)
+\]
+in the admissible closed Hilbert sector is of the form
+\[
+\widetilde{\Xione}_k(u)
+=
+\widetilde{\Xione}_{{\rm can},k}(u)+K_k(u),
+\qquad
+K_k(u)\in\ker(\overline{\Qt}_{\rm adm}).
+\]
+\end{corollary}
+
+\begin{proof}
+Subtract any two solutions and apply \(\overline{\Qt}_{\rm adm}\).
+Their difference lies in \(\ker(\overline{\Qt}_{\rm adm})\), while adding a kernel element to a
+given solution preserves the equation.
+\end{proof}
+
+\begin{remark}[Canonical representative in the Hodge sector]
+\label{rem:uomdesc-second-closure}
+For the canonical representative \(\widetilde{\Aone}_k(u)=\Aone_k(u)\), the defect
+\[
+\widetilde{B}_k(u)=\widetilde{\Aone}_k(u)-\Aone_k(u)
+\]
+vanishes.
+Hence the Hodge-normalized primitive furnished by \cref{thm:uomdesc-hodge} is zero.
+\end{remark}
+
+\section{Swap Symmetry and Summary Theorems}
+\label{sec:uomdesc-package}
+
+\begin{definition}[Swap action on sufficiently local cochains]
+\label{def:uomdesc-gamma}
+Let \(s:\mathcal S_{\SK}\to\mathcal S_{\SK}\) be the finite-cutoff UOM swap involution of
+Definition~\ref{main-def:uom-limited-scope-package} and
+Theorem~\ref{main-thm:uom-equal-source-swap}.
+Define its pullback \(\Gamma\) on sufficiently local cochains by
+\[
+(\Gamma F)(x):=F(sx).
+\]
+\end{definition}
+
+\begin{lemma}[Swap commutes with the two-time bicomplex]
+\label{lem:uomdesc-gamma-comm}
+On \(\Fsloc^{\Lambda_k}(\Xscr_k)\),
+\[
+\Gamma\Qt=\Qt\Gamma,
+\qquad
+\Gamma\Du=\Du\Gamma.
+\]
+\end{lemma}
+
+\begin{proof}
+The swap acts only on the SK branch labels, while \(\Qt\) and \(\Du\) are Lie derivatives along the
+base directions \(t\) and \(u\) with fixed odd parameters \(c_t,c_u\).
+Therefore swap and the two odd reparametrization operators commute.
+\end{proof}
+
+\begin{proposition}[Swap covariance of the fixed-scheme radial split]
+\label{prop:uomdesc-swap-split}
+On the monotone sector,
+\[
+\Gamma\Quphys=\Quphys\Gamma,
+\qquad
+\Gamma\Quscheme=\Quscheme\Gamma.
+\]
+\end{proposition}
+
+\begin{proof}
+By \cref{prop:uomdesc-radial-split}, \(\Quphys=-\Du\) and \(\Quscheme=0\) on the chosen monotone
+sector.
+The first identity is therefore
+\[
+\Gamma\Quphys
+=
+-\,\Gamma\Du
+=
+-\,\Du\Gamma
+=
+\Quphys\Gamma,
+\]
+using \cref{lem:uomdesc-gamma-comm}, and the second is immediate because \(\Quscheme=0\).
+\end{proof}
+
+\begin{proposition}[Swap-even core cochains]
+\label{prop:uomdesc-gamma-even-core}
+Let \(\Ozero_k(u)\) be the compactly smeared monotone representative \eqref{eq:uomdesc-o0-def} on
+the equal-source physical sector, and let \(\Aone_k(u):=\Quphys\Ozero_k(u)\).
+Then
+\[
+\Gamma\Ozero_k(u)=\Ozero_k(u),
+\qquad
+\Gamma\Aone_k(u)=\Aone_k(u).
+\]
+\end{proposition}
+
+\begin{proof}
+The kernels \(\kappa_k,\eta_k\) are ordinary branch-independent test functions, while
+\(L_{\rm mon}(t,x;u)\) is a receiver-head scalar density evaluated on the equal-source physical SK
+diagonal.
+By Definition~\ref{main-def:uom-limited-scope-package} and
+Theorem~\ref{main-thm:uom-equal-source-swap}, the swap involution acts only on the SK branch labels
+and fixes that diagonal sector.
+Hence the full compact smearing defining \(\Ozero_k(u)\) is swap-invariant:
+\(\Gamma\Ozero_k(u)=\Ozero_k(u)\).
+Using \cref{prop:uomdesc-swap-split}, we then obtain
+\[
+\Gamma\Aone_k(u)
+=
+\Gamma\Quphys\Ozero_k(u)
+=
+\Quphys\Gamma\Ozero_k(u)
+=
+\Quphys\Ozero_k(u)
+=
+\Aone_k(u).
+\]
+\end{proof}
+
+\begin{proposition}[Swap preserves anomalous descent]
+\label{prop:uomdesc-gamma-descent}
+Assume \cref{thm:uomdesc-raw}.
+If \(\Xione_k(u)\) satisfies the exact anomalous descent equation
+\eqref{eq:uomdesc-anom-descent}, then \(\Gamma\Xione_k(u)\) satisfies the same exact anomalous
+descent equation.
+\end{proposition}
+
+\begin{proof}
+Apply \(\Gamma\) to \eqref{eq:uomdesc-anom-descent}.
+Using \cref{lem:uomdesc-gamma-comm,prop:uomdesc-swap-split,prop:uomdesc-gamma-even-core}, we get
+\[
+\Gamma(\Quphys\Ozero_k(u)+\Qt\Xione_k(u))
+=
+\Quphys\Ozero_k(u)+\Qt\Gamma\Xione_k(u)
+=
+\Gamma\Aone_k(u)
+=
+\Aone_k(u).
+\]
+This is exactly the anomalous descent equation for \(\Gamma\Xione_k(u)\).
+\end{proof}
+
+\begin{corollary}[Swap-odd descendant choice]
+\label{cor:uomdesc-gamma-odd}
+Under the hypotheses of \cref{prop:uomdesc-gamma-descent}, the odd projection
+\[
+\Xione_{-,k}(u)
+:=
+\frac12\big(\Xione_k(u)-\Gamma\Xione_k(u)\big)
+\]
+is \(\Gamma\)-odd and satisfies the same exact anomalous descent equation.
+\end{corollary}
+
+\begin{proof}
+Both \(\Xione_k(u)\) and \(\Gamma\Xione_k(u)\) solve the same exact descent equation.
+Subtracting and dividing by \(2\) preserves that equation, and the parity identity
+\(\Gamma\Xione_{-,k}(u)=-\Xione_{-,k}(u)\) is immediate.
+\end{proof}
+
+\begin{corollary}[Odd solution torsor for the canonical anomaly]
+\label{cor:uomdesc-odd-solution-torsor}
+For the canonical anomaly representative \(\Aone_k(u)=\Quphys\Ozero_k(u)\), the \(\Gamma\)-odd exact
+descendants are precisely
+\[
+\ker(\Qt)\cap(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0}\cap\ker(\Gamma+\id).
+\]
+\end{corollary}
+
+\begin{proof}
+By \cref{prop:uomdesc-solution-torsor}, the exact descendants for the canonical anomaly equation are
+exactly the \(\Qt\)-closed even sufficiently local cochains.
+Among them, the \(\Gamma\)-odd ones are precisely those annihilated by \(\Gamma+\id\).
+Conversely, any cochain in the displayed intersection is \(\Qt\)-closed and therefore solves the
+canonical exact descent equation.
+\end{proof}
+
+\begin{remark}[Odd extension versus odd nonvanishing]
+\label{rem:uomdesc-third-closure}
+\Cref{thm:uomdesc-conditional-odd-package} produces swap-odd exact descendants but does not prove
+that any such descendant is nonzero.
+Nonvanishing requires an additional witness, for example the overlap and witness-comparison
+criteria of
+\cref{stack-thm:descendant-overlap,stack-thm:witness-descended-scalar-comparison,stack-thm:active-response-transport-minimal}.
+For the canonical fixed-scheme raw solution \(\Xione_k(u)=0\), the odd projection vanishes
+identically, whereas \cref{cor:uomdesc-odd-solution-torsor} shows that a nonzero odd realization
+can arise only by adding a nonzero \(\Gamma\)-odd kernel element of the canonical equation.
+\end{remark}
+
+\begin{theorem}[Raw descendant data for a chosen monotone]
+\label{thm:uomdesc-raw-package}
+Assume \cref{ass:uomdesc-u-chart}.
+Fix a finite-cutoff UOM receiver monotone \(M(u)\) in the anomaly/Wess--Zumino sector, realized by
+compact head smearing \eqref{eq:uomdesc-o0-def}, and assume \(M(u_0)\neq 0\).
+Then at finite cutoff \(\Lambda_k\), on the slab-supported sufficiently local monotone sector,
+the following hold:
+\begin{enumerate}[leftmargin=2em]
+\item a geometric bicomplex \((\Fsloc^{\Lambda_k}(\Xscr_k),\Qt,\Du)\) with
+  \[
+  \Qt^2=\Du^2=\Qt\Du+\Du\Qt=0;
+  \]
+\item a fixed-scheme radial Ward decomposition on the monotone sector,
+  \[
+  \Qu=\Quphys+\Quscheme,
+  \qquad
+  \Quscheme=0;
+  \]
+\item on compactly smeared monotone head observables,
+  \[
+  \Quphys X=-\Du X;
+  \]
+\item the \(t\)-Ward identity \(\pair{\Qt X}_\rho=0\) on the physical SK sector;
+\item a good monotone representative \(\Ozero_k(u)\in{\Fsloc}_{\rm mon}^{\Lambda_k}(\Xscr_k)\) with
+  \[
+  M(u)=\pair{\Ozero_k(u)}_{\rho_u},
+  \qquad
+  \Qt\Ozero_k(u)=0,
+  \qquad
+  [\Ozero_k(u_0)]\neq 0\in H^0(\Fsloc^{\Lambda_k}(\Xscr_k),\Qt);
+  \]
+\item the monotone derivative identity
+  \[
+  \partial_u M(u)=-\pair{\Quphys\Ozero_k(u)}_{\rho_u};
+  \]
+\item the canonical sufficiently local anomaly insertion
+  \(\Aone_k(u):=\Quphys\Ozero_k(u)\) and a raw first-descendant potential
+  \(\Xione_k(u):=0\) such that
+  \[
+  \Quphys\Ozero_k(u)+\Qt\Xione_k(u)=\Aone_k(u),
+  \qquad
+  \Qt\Aone_k(u)=0;
+  \]
+\item the exact descendants for the canonical anomaly representative are exactly the vector space
+  \[
+  \ker(\Qt)\cap(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0};
+  \]
+\item if \(\partial_u M(u_0)\neq 0\), then
+  \[
+  [\Quphys\Ozero_k(u_0)]\neq 0
+  \quad\text{in}\quad
+  H^1(\Fsloc^{\Lambda_k}(\Xscr_k),\Qt);
+  \]
+\item the canonical core cochains are swap-even:
+  \[
+  \Gamma\Ozero_k(u)=\Ozero_k(u),
+  \qquad
+  \Gamma\Aone_k(u)=\Aone_k(u).
+  \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Item (1) is \cref{lem:uomdesc-bicomplex}.
+Item (2) is \cref{prop:uomdesc-radial-decomp}.
+Item (3) is \cref{prop:uomdesc-radial-split}.
+Item (4) is \cref{prop:uomdesc-ward}.
+Item (5) is \cref{thm:uomdesc-good-o0}.
+Item (6) is \cref{lem:uomdesc-monotone-derivative}.
+Item (7) is \cref{thm:uomdesc-raw}.
+Item (8) is \cref{prop:uomdesc-solution-torsor}.
+Item (9) is \cref{prop:uomdesc-degree-one}.
+Item (10) is \cref{prop:uomdesc-gamma-even-core}.
+\end{proof}
+
+\begin{theorem}[Conditional Hodge-normalized extension]
+\label{thm:uomdesc-conditional-hodge-package}
+Assume the hypotheses of \cref{thm:uomdesc-raw-package,ass:uomdesc-hodge}.
+Then, for the same chosen monotone \(M(u)\), every admissible odd representative
+\(
+\widetilde{\Aone}_k(u)\in\mathcal C_{{\rm adm},k}(u)
+\)
+of the radial anomaly class \([\Aone_k(u)]\) defines a representative defect
+\[
+\widetilde{B}_k(u):=\widetilde{\Aone}_k(u)-\Aone_k(u)\in \mathrm{ran}(\overline{\Qt}_{\rm adm})
+\]
+which admits the canonical Hodge-normalized primitive
+\[
+\widetilde{\Xione}_{{\rm can},k}(u)
+=
+\overline{\Qt}_{\rm adm}^{\dagger}
+\big(\overline{\Qt}_{\rm adm}\,\overline{\Qt}_{\rm adm}^{\dagger}\big)^{-1}
+\widetilde{B}_k(u)
+\in
+\mathcal H_{\bar 0,{\rm adm}}^{\Lambda_k}(\Xscr_k;u).
+\]
+This primitive satisfies
+\[
+\Quphys\Ozero_k(u)+\overline{\Qt}_{\rm adm}\,\widetilde{\Xione}_{{\rm can},k}(u)
+=
+\widetilde{\Aone}_k(u)
+\]
+in the admissible closed Hilbert sector.
+\end{theorem}
+
+\begin{proof}
+This is \cref{thm:uomdesc-hodge}.
+\end{proof}
+
+\begin{theorem}[Exact swap-odd extension]
+\label{thm:uomdesc-conditional-odd-package}
+Assume the hypotheses of \cref{thm:uomdesc-raw-package}.
+Then every raw solution \(\Xione_k(u)\) of the exact anomalous descent equation yields a
+\(\Gamma\)-odd descendant candidate
+\[
+\Xione_{-,k}(u)=\frac12\big(\Xione_k(u)-\Gamma\Xione_k(u)\big)
+\]
+solving the same exact anomalous descent equation.
+For the canonical anomaly representative \(\Aone_k(u)=\Quphys\Ozero_k(u)\), the \(\Gamma\)-odd
+exact descendants are precisely
+\[
+\ker(\Qt)\cap(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0}\cap\ker(\Gamma+\id).
+\]
+\end{theorem}
+
+\begin{proof}
+The first statement is \cref{cor:uomdesc-gamma-odd}.
+The second statement is \cref{cor:uomdesc-odd-solution-torsor}.
+\end{proof}
+
+\section[Finite-Cutoff Realization of 2T RG]{Finite-Cutoff Realization of \texorpdfstring{\(\mathbf{2T}_{\mathrm{RG}}\)}{2T RG}}
+\label{sec:uomdesc-2trg}
+
+\begin{definition}[Imported UV-local sufficiently local class]
+\label{def:uomdesc-local-O}
+Fix a double cone \(O\) in the Minkowski UV chart with \(O\subset\Xscr_k\).
+Let
+\[
+\Fsloc^{\Lambda_k}(O)\subset \Fsloc^{\Lambda_k}(\Xscr_k)
+\]
+denote the UOM-P5 local subspace of sufficiently local gauge-invariant functionals
+supported in \(O\).
+\end{definition}
+
+\begin{proposition}[Double-cone localization of the cumulative RG data]
+\label{prop:uomdesc-2trg-local}
+Assume \cref{ass:uomdesc-u-chart}.
+Fix a double cone \(O\subset\Xscr_k\) in the Minkowski UV chart and choose the compact kernels in
+\eqref{eq:uomdesc-o0-def} with support contained in \(O\).
+Then
+\[
+\Ozero_k(u)\in \Fsloc^{\Lambda_k}(O),
+\qquad
+\Aone_k(u)\in \Fsloc^{\Lambda_k}(O),
+\qquad
+\Xiselk(u):=\Ozero_k(u)\in \Fsloc^{\Lambda_k}(O).
+\]
+Moreover, on the canonical monotone sector in the chosen fixed scheme, the derivations
+\(\Qt\), \(\Quphys\), and \(\Quscheme\) preserve \(\Fsloc^{\Lambda_k}(O)\).
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{main-prop:RG-observable-in-Floc}, compactly smeared receiver-head scalar
+densities belong
+to \(\Fsloc^{\Lambda_k}(\Xscr_k)\); the chosen support condition then places
+\(\Ozero_k(u)\) in \(\Fsloc^{\Lambda_k}(O)\).
+The selected descendant potential \(\Xiselk(u)\) is \(\Ozero_k(u)\) itself, hence
+also belongs to \(\Fsloc^{\Lambda_k}(O)\).
+
+By \cref{prop:uomdesc-radial-split}, on compactly smeared monotone head observables one has
+\(
+\Quphys=-\Du
+\).
+The geometric derivative \(\Du\) acts only on the local density and the fixed compact kernels in
+\eqref{eq:uomdesc-o0-def}; it does not enlarge support.
+Therefore
+\(
+\Aone_k(u)=\Quphys\Ozero_k(u)\in \Fsloc^{\Lambda_k}(O)
+\).
+By \cref{prop:uomdesc-radial-decomp}, \(\Quscheme=0\) in the chosen fixed scheme, so it trivially
+preserves \(\Fsloc^{\Lambda_k}(O)\).
+The same support-preservation argument applies to \(\Qt\), since it acts by Lie differentiation in
+\(t\) on the full smeared density without enlarging support.
+\end{proof}
+
+\begin{definition}[Cumulative anomaly-floor monotone candidate]
+\label{def:uomdesc-cum-floor}
+Assume \cref{ass:uomdesc-u-chart} and fix a branch interval
+\[
+(u_0-\varepsilon,u_{\rm IR}]
+\]
+with \(u_{\rm IR}>u_0\).
+Let \(L_{\rm af}(t,x;u)\) be a receiver-head scalar density in the anomaly/Wess--Zumino sector
+whose compact head smearing yields the finite-cutoff anomaly-floor observable appearing in
+\eqref{main-eq:theta-def} and \eqref{main-eq:BY-step-deriv-fixed}.
+Define the cumulative density
+\[
+L_{\rm cum}(t,x;u)
+:=
+\int_u^{u_{\rm IR}}L_{\rm af}(t,x;v)\,dv
+\]
+and choose the monotone density in \cref{def:uomdesc-o0} to be
+\[
+L_{\rm mon}:=L_{\rm cum}.
+\]
+Write
+\[
+\Oaf_k(u)
+:=
+\int_{\Xscr_k}dt\,d^3x\;
+\kappa_k(t)\eta_k(x)L_{\rm af}(t,x;u),
+\qquad
+\Ozero_k(u)
+:=
+\int_{\Xscr_k}dt\,d^3x\;
+\kappa_k(t)\eta_k(x)L_{\rm cum}(t,x;u).
+\]
+Then
+\[
+\Ozero_k(u)=\int_u^{u_{\rm IR}}\Oaf_k(v)\,dv.
+\]
+\end{definition}
+
+\begin{proposition}[Activity of the cumulative anomaly-floor monotone]
+\label{prop:uomdesc-cum-floor-activity}
+Assume \cref{ass:uomdesc-u-chart,def:uomdesc-cum-floor}.
+Let
+\[
+\Theta(u):=\pair{\Oaf_k(u)}_{\rho_u},
+\qquad
+M(u):=\pair{\Ozero_k(u)}_{\rho_u}
+=
+\int_u^{u_{\rm IR}}\Theta(v)\,dv.
+\]
+Then at every active branch point with nonzero admitted payload,
+\[
+\Theta(u)>0,
+\qquad
+M(u)>0,
+\qquad
+\partial_u M(u)=-\Theta(u)<0.
+\]
+In particular, for every active UV-side point \(u_0\),
+\[
+M(u_0)\neq 0,
+\qquad
+\partial_u M(u_0)<0.
+\]
+\end{proposition}
+
+\begin{proof}
+By \eqref{main-eq:admitted-payload} and Proposition~\ref{main-prop:semiclassical-diag}, the
+admitted payload is a
+nonnegative classical accepted-record quantity.
+On the welded band-locked locus, \eqref{main-eq:BY-step-deriv-fixed} gives
+\[
+\Theta(u)=K(\Lambda(u))\,\Delta I(u),
+\]
+with \(K(\Lambda)>0\). Therefore every active tick with nonzero admitted payload satisfies
+\(
+\Theta(u)>0
+\).
+
+By \cref{def:uomdesc-cum-floor},
+\[
+M(u)=\int_u^{u_{\rm IR}}\Theta(v)\,dv,
+\]
+so positivity of \(\Theta(v)\) on the active branch gives \(M(u)>0\).
+Differentiating with respect to the lower limit yields
+\[
+\partial_u M(u)=-\Theta(u)<0.
+\]
+Evaluating at \(u_0\) gives the final displayed statement.
+\end{proof}
+
+\begin{lemma}[Explicit selector from the cumulative anomaly-floor monotone]
+\label{lem:uomdesc-cum-selector}
+Assume \cref{ass:uomdesc-u-chart,def:uomdesc-cum-floor}.
+Define the explicit raw first-descendant selector by
+\[
+\Xiselk(u):=\Ozero_k(u).
+\]
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item \(\Xiselk(u)\in(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0}\) and
+  \(\Qt\Xiselk(u)=0\);
+\item the anomaly insertion
+  \[
+  \Aone_k(u):=\Quphys\Ozero_k(u)=\Oaf_k(u)
+  \]
+  is sufficiently local, \(Q_t\)-closed, and satisfies the exact anomalous descent equation
+  \[
+  \Quphys\Ozero_k(u)+\Qt\Xiselk(u)=\Aone_k(u);
+  \]
+\item if \(u_0\) is an active UV-side point, then
+  \(\Xiselk(u_0)\) is not a c-number on the connected vacuum component of the
+  reduced phase space.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Because \(L_{\rm cum}(t,x;u)\) is a receiver-head scalar density obtained by integrating the local
+anomaly-floor density \(L_{\rm af}(t,x;v)\) over the external branch parameter \(v\), the compact
+smearing \(\Ozero_k(u)\) belongs to \((\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0}\). Its \(\Qt\)-closure
+is exactly \cref{prop:uomdesc-qt-closed}, proving item (1).
+
+For item (2), \cref{prop:uomdesc-radial-split} gives \(\Quphys=-\Du\) on compact head smearings.
+Since
+\[
+\Du L_{\rm cum}(t,x;u)=-L_{\rm af}(t,x;u),
+\]
+one has
+\[
+\Quphys\Ozero_k(u)
+=
+-\,\Du\Ozero_k(u)
+=
+\int_{\Xscr_k}dt\,d^3x\;
+\kappa_k(t)\eta_k(x)L_{\rm af}(t,x;u)
+=
+\Oaf_k(u).
+\]
+Thus \(\Aone_k(u)=\Oaf_k(u)\). The sufficient locality and \(Q_t\)-closure of \(\Aone_k(u)\) are
+the same arguments as in \cref{thm:uomdesc-a1-locality,prop:uomdesc-a1-from-sk}. Since
+\(\Qt\Xiselk(u)=0\), the displayed exact anomalous descent equation follows.
+
+For item (3), suppose instead that \(\Xiselk(u_0)=\Ozero_k(u_0)\) were constant on
+the connected vacuum component of the reduced phase space.
+Choose a nonzero compact welded trace perturbation \(\tau\) supported where the compact kernels are
+nontrivial, and let \(\varphi_{u_0,s}:=\varphi_{u_0}+s\tau\) be the corresponding local line in the
+same connected vacuum component for small \(s\).
+By \eqref{main-eq:variance-scaling} and \eqref{main-eq:theta-def}, the instantaneous anomaly floor
+is a
+positive quadratic form of the welded trace perturbation.
+Therefore, at fixed \(u_0\),
+\[
+\Ozero_k(u_0)[\varphi_{u_0,s}]
+=
+\Ozero_k(u_0)[\varphi_{u_0,0}]
++
+s^2\,C_{u_0}(\tau)
++
+o(s^2)
+\]
+for some \(C_{u_0}(\tau)>0\).
+Hence \(\Ozero_k(u_0)\) is not constant on that connected vacuum component, a contradiction.
+So \(\Xiselk(u_0)\) is not a c-number there.
+\end{proof}
+
+\begin{theorem}[Finite-cutoff realization of \texorpdfstring{\(\mathbf{2T}_{\mathrm{RG}}\)}{2T_RG}]
+\label{thm:uomdesc-2trg}
+Assume \cref{ass:uomdesc-u-chart,def:uomdesc-cum-floor}.
+Choose the monotone representative of \cref{def:uomdesc-o0} from the cumulative anomaly-floor density
+\(
+L_{\rm mon}=L_{\rm cum}
+\),
+and let
+\[
+M(u):=\pair{\Ozero_k(u)}_{\rho_u}.
+\]
+Then, at finite cutoff \(\Lambda_k\) and on the slab-supported sufficiently local monotone sector,
+the following \(\mathbf{2T}_{\mathrm{RG}}\) data are realized:
+\begin{enumerate}[leftmargin=2em]
+\item a sufficiently local good monotone representative \(\Ozero_k(u)\) such that
+  \[
+  M(u)=\pair{\Ozero_k(u)}_{\rho_u},
+  \qquad
+  \Qt\Ozero_k(u)=0,
+  \qquad
+  [\Ozero_k(u_0)]\neq 0\in H^0(\Fsloc^{\Lambda_k}(\Xscr_k),\Qt);
+  \]
+\item fixed-scheme RG Ward data and scheme control on the monotone sector,
+  \[
+  \Qu=\Quphys+\Quscheme,
+  \qquad
+  \Quscheme=0,
+  \qquad
+  \Quphys X=-\Du X
+  \]
+  on compactly smeared monotone head observables, together with
+  \[
+  \partial_u M(u)=-\pair{\Quphys\Ozero_k(u)}_{\rho_u},
+  \qquad
+  \pair{\Quscheme\Ozero_k(u)}_{\rho_u}=0;
+  \]
+\item explicit sufficiently local anomalous first descent,
+  \[
+  \Aone_k(u):=\Quphys\Ozero_k(u)=\Oaf_k(u)\in(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 1},
+  \qquad
+  \Xiselk(u):=\Ozero_k(u)\in(\Fsloc^{\Lambda_k}(\Xscr_k))_{\bar 0},
+  \]
+  with
+  \[
+  \Quphys\Ozero_k(u)+\Qt\Xiselk(u)=\Aone_k(u),
+  \qquad
+  \Qt\Aone_k(u)=0,
+  \]
+  and the chosen UV-side selector \(\Xiselk(u_0)\) is not a c-number on the
+  connected vacuum component;
+\item UV-local double-cone localization of the cumulative canonical data in the sense of
+  \cref{prop:uomdesc-2trg-local};
+\item a scheme-stable degree-one anomaly class: for every cohomologically admissible
+  finite-cutoff inter-scheme comparison, the class represented by \(\Aone_k(u)\) is invariant
+  in \(H^1(\Fsloc^{\Lambda_k}(\Xscr_k),\Qt)\) and in the local ambiguity quotient;
+\item the cumulative anomaly-floor monotone has nontrivial UV slope
+  \[
+  \partial_u M(u_0)<0
+  \]
+  at every active UV-side point \(u_0\) on the chosen branch.
+\end{enumerate}
+Consequently, if \(u_0\) is such an active UV-side point, then
+\[
+[\Quphys\Ozero_k(u_0)]\neq 0
+\qquad\text{in}\qquad
+H^1(\Fsloc^{\Lambda_k}(\Xscr_k),\Qt).
+\]
+Thus the slab-supported monotone sector carries an explicit finite-cutoff realization of
+\(\mathbf{2T}_{\mathrm{RG}}\), with fixed-scheme representatives and a scheme-stable degree-one
+anomaly class.
+\end{theorem}
+
+\begin{proof}
+Item (1) is \cref{thm:uomdesc-good-o0} together with
+\cref{prop:uomdesc-cum-floor-activity}.
+Item (2) is the combination of \cref{prop:uomdesc-radial-decomp,prop:uomdesc-radial-split}
+and \cref{lem:uomdesc-monotone-derivative}.
+Item (3) is \cref{lem:uomdesc-cum-selector}.
+Item (4) is \cref{prop:uomdesc-2trg-local}.
+Item (5) is \cref{thm:uomdesc-interscheme}.
+Item (6) is \cref{prop:uomdesc-cum-floor-activity}.
+The final nontriviality statement is then \cref{prop:uomdesc-degree-one}.
+\end{proof}
+
+\begin{remark}[Later selector, spectral, and transport uses]
+\label{rem:uomdesc-fit}
+The raw swap-odd class of \cref{thm:uomdesc-conditional-odd-package} and the explicit
+\(\mathbf{2T}_{\mathrm{RG}}\) data of \cref{thm:uomdesc-2trg} are the UOM-side inputs used later
+by
+\cref{stack-thm:finite-cutoff-canonical-odd-spectral-selection,stack-thm:uom-char-export,stack-thm:active-response-transport-minimal}.
+\end{remark}
+
+\end{document}

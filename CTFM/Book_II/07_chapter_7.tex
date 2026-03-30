@@ -1,0 +1,213 @@
+\documentclass[12pt]{article}
+\usepackage{xr}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\externaldocument{chapter_6}
+\title{\textbf{Chapter 7: Unification of Type A and Type B measurements}}
+\author{Dmytro Surdu}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+\section{What is the notion of Type A Testable Measurement?}
+\begin{definition}[Type A Testable Measurement]
+A \emph{Type\,A Testable Measurement} is a quintuple
+\[
+  \bigl(\,
+    \mathcal Q,\;
+    \mathcal Z,\;
+    P,\;
+    T,\;
+    \mathcal R
+  \bigr),
+\]
+where
+\begin{enumerate}
+  \item \(\mathcal Q\) is a compact metric \emph{parameter space}.
+  \item \(\mathcal Z\) is a compact metric \emph{observation space}.
+  \item \(P\colon \mathcal Q \to \mathcal P(\mathcal Z)\) assigns to each \(q\in\mathcal Q\) a sampling distribution \(P_q\), and the data stream \(\{Z_k\}\) is generated i.i.d.\ from \(P_q\).
+  \item \(T\colon \mathcal P(\mathcal Z)\to \Theta\subseteq \mathbb R^d\) is a Lipschitz \emph{statistic map}.
+  \item \(\mathcal R\colon \Theta\to 2^{\mathcal Z}\) is Lipschitz in the Hausdorff metric, where \(\mathcal R_\theta\subseteq\mathcal Z\) is the \emph{guard‐band region} associated to statistic \(\theta\).
+\end{enumerate}
+The corresponding tail predicate is
+\[
+  P_{\rm tail}(z_{1:\infty}) 
+  \;\iff\;
+  \exists\,n\quad\forall\,k>n,\;
+    z_k \in \mathcal R_{T(P_q)},
+\]
+where \(q\) is the true (unknown) parameter in \(\mathcal Q\).
+\end{definition}
+
+\section{Cross-representation of the Testable Measurement types}
+\subsection{Representation of Type A Testable Measurement as a Type B}
+\begin{definition}[Canonical \(\text{A}\to\text{B}\) Cast]
+\label{def:canonical-A-to-B}
+Let a \emph{Type A} measurement be specified by
+\begin{itemize}
+  \item A compact parameter space \(\mathcal Q\).
+  \item An observation space \(\mathcal Z\) (compact metric).
+  \item A family of sampling distributions \(\{P_q\}_{q\in\mathcal Q}\) on \(\mathcal Z\).
+  \item A Lipschitz statistic map \(T:\mathcal P(\mathcal Z)\to\Theta\subseteq\mathbb R^d\).
+  \item A Lipschitz guard‐band map \(\theta\mapsto\mathcal R_\theta\subseteq\mathcal Z\) in the Hausdorff metric.
+\end{itemize}
+We construct a \emph{Type B Testable Measurement}
+\[
+  \mathfrak M_{\!A}
+  =\bigl(\,
+     \mathcal M,\;
+     \mathcal Z^{\rm in},\;
+     \mathcal Z^{\rm out},\;
+     E,\;
+     U,\;
+     \mathcal S
+   \bigr)
+\]
+by setting
+\[
+  \mathcal M = \mathcal Q \times \mathcal Z,
+  \qquad
+  \mathcal Z^{\rm in} = \mathcal Z,
+  \qquad
+  \mathcal Z^{\rm out} = \mathcal Z,
+\]
+\[
+  U\bigl((q,z),\,z'\bigr) = (\,q,z'\,),
+  \qquad
+  E\bigl((q,z)\bigr) = z,
+\]
+and defining the Certification Standard \(\mathcal S=\{\varepsilon_n\}_{n\ge1}\) by
+\[
+  \varepsilon_n \;=\;\frac{1}{L_T\,L_{\mathcal R}}\;\cdot\;2^{-\,\lceil \log_2 n\rceil},
+\]
+where \(L_T\) and \(L_{\mathcal R}\) are the Lipschitz constants of \(T\) and \(\theta\mapsto\mathcal R_\theta\).  Thus any witness of length \(n\) specifying a quantized statistic \(\widehat\theta\) induces a guard‐band \(\varepsilon_n\) that guarantees robustness of the per‐sample check
+\(\;z\in\mathcal R_{\widehat\theta}\).
+\end{definition}
+
+\begin{theorem}[Type\,A \(\to\) Type\,B Cast]
+\label{prop:A-to-B-cast}
+Let 
+\[
+  (\mathcal Q,\;\mathcal Z,\;P,\;T,\;\mathcal R)
+\]
+be a Type\,A Testable Measurement (Definition 4.1).  Then the canonical cast
+\(\mathfrak M_A\) of Definition \ref{def:canonical-A-to-B}
+is a valid Type\,B Testable Measurement (Definition 3.3), and its tail predicate
+agrees with the original guard‑band predicate.
+\end{theorem}
+
+\begin{proof}
+Let \(\mathfrak M_A=(\mathcal M,\mathcal Z^{\rm in},\mathcal Z^{\rm out},E,U,\mathcal S)\)
+be constructed as in Definition \ref{def:canonical-A-to-B}.  We verify:
+
+\medskip\noindent\textbf{1. Spaces and maps.}
+\(\mathcal M=\mathcal Q\times\mathcal Z\), \(\mathcal Z^{\rm in}=\mathcal Z^{\rm out}=\mathcal Z\)
+are compact metric spaces.  The update 
+\(
+U((q,z),z')=(q,z')
+\)
+and emit
+\(
+E((q,z))=z
+\)
+maps are clearly continuous (in fact Lipschitz).
+
+\medskip\noindent\textbf{2. Certification Standard.}
+By construction \(\mathcal S=\{\varepsilon_n\}\) satisfies
+the robustness requirement of Definition 3.3, since any quantized estimate
+\(\widehat\theta\) of \(T(P_q)\) within \(2^{-\lceil\log_2 n\rceil}\)
+induces a guard‑band \(\varepsilon_n\) guaranteeing
+\(\forall z\in\mathcal Z\), \(|T(P_q)-T(P_{q'})|\) and
+\(d_H(\mathcal R_{T(P_q)},\mathcal R_{T(P_{q'})})\)
+remain within \(\varepsilon_n\).
+
+\medskip\noindent\textbf{3. Tail predicate equivalence.}
+Under \(\mathfrak M_A\), the belief‑state at time \(t\) is \((q,Z_t)\), so
+\[
+  E\bigl(U^t((q,z_0),\,z_{1:t})\bigr)=Z_t.
+\]
+By Chapter 6 ABET Theorem \ref{thm:basin_equivalence}, certifiability in NP is equivalent to
+the existence of an attractor basin 
+\(\mathcal B=\{(q,z)\!\mid\!z\in\mathcal R_{T(P_q)}\}\).
+But
+\[
+  (q,z_{t+1:\infty})\text{ satisfies }\forall k>n\;Z_k\in\mathcal R_{T(P_q)}
+  \;\Longleftrightarrow\;
+  (q,z_n)\in\mathcal B\text{ and remains in }\mathcal B.
+\]
+This is exactly the original guard‑band predicate
+\(\forall k>n,\;Z_k\in\mathcal R_{T(P_q)}\).  
+
+Hence \(\mathfrak M_A\) is a Testable Measurement whose tail predicate
+coincides with that of the given Type A measurement.
+\end{proof}
+
+\subsection{Representation of Type B Testable Measurement as a Type A}
+
+\begin{definition}[Long‐Trajectory \(\mathrm B\!\to\!\mathrm A\) Cast]
+\label{def:long-trajectory-B-to-A}
+Let \(\mathfrak M=(\mathcal M,\mathcal Z^{\rm in},\mathcal Z^{\rm out},E,U,\mathcal S)\) be a Type B Testable Measurement, and let \(T_{\max}\) be its uniform reachability bound (Lemma \ref{lem:reachability-uniform}).  We define the corresponding Type A Testable Measurement
+\[
+  (\mathcal Q,\mathcal Z,P,T,\mathcal R)
+\]
+as follows:
+\begin{itemize}
+  \item \(\mathcal Q = \mathcal M\).
+  \item \(\mathcal Z = \mathcal Z^{\rm out}\).
+  \item For each \(\Theta\in\mathcal M\), let
+    \[
+      P_{\Theta} \;=\;\delta_{E(\Theta)},
+    \]
+    the Dirac measure concentrated at \(E(\Theta)\).
+  \item The statistic map 
+    \(
+      T:\{P_{\Theta}\}\to \Theta
+    \) 
+    is given by 
+    \(T(P_{\Theta})=\Theta\).
+  \item The guard‐band map 
+    \(\mathcal R:\Theta\to2^{\mathcal Z}\) 
+    is defined by
+    \[
+      \mathcal R_{\Theta}
+      = \bigl\{\,z\in\mathcal Z^{\rm out} : d\bigl(z,E(\Theta)\bigr)<\varepsilon_{T_{\max}}\bigr\},
+    \]
+    where \(\varepsilon_{T_{\max}}\) is the radius from the Certification Standard \(\mathcal S\) at index \(T_{\max}\).
+\end{itemize}
+\end{definition}
+
+\begin{theorem}
+Under the Long‐Trajectory Cast of Definition \ref{def:long-trajectory-B-to-A}, the induced tail predicate
+\[
+  \exists\,n\quad\forall\,k>n,\quad
+    z_k\in\mathcal R_{T(P_{\Theta_0})}
+\]
+is equivalent to the original tail‐certification predicate “\(\Theta_0\) enters \(\mathcal B\) by time \(T_{\max}\) and thereafter \(E(\Theta_t)\) remains within the guard‐band.”  Hence the Cast is valid.
+\end{theorem}
+
+\begin{proof}
+First, \(P_{\Theta}=\delta_{E(\Theta)}\) implies \(T(P_{\Theta})=\Theta\), and since \(E\) is continuous so is \(T\).  The sets \(\mathcal R_{\Theta}\) are open in \(\mathcal Z^{\rm out}\) by construction, and the map \(\Theta\mapsto\mathcal R_{\Theta}\) is Lipschitz in the Hausdorff metric because \(\mathcal S\) supplies a uniform robustness margin \(\varepsilon_{T_{\max}}\).
+
+Next, by uniform reachability every trajectory enters \(\mathcal B\) by time \(T_{\max}\), and by definition of \(\mathcal S\) all subsequent outputs satisfy
+\[
+  d\bigl(Z_t,E(\Theta_{T_{\max}})\bigr)
+  < \varepsilon_{T_{\max}},
+  \quad t > T_{\max},
+\]
+so \(Z_t\in\mathcal R_{\Theta_{T_{\max}}}\).  Thus the Long‑Trajectory Cast’s guard‑band predicate holds exactly when the original Type B tail‑certificate exists.  This completes the proof.
+\end{proof}
+
+
+\end{document}

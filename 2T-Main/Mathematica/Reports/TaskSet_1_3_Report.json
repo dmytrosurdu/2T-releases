@@ -1,0 +1,54 @@
+{
+	"GeneratedAt":"2026-03-12 14:57:40",
+	"SprintScope":"Tasks 1-3 only: theorem ledger, TickData\/ValidCharDataQ, and active transport audit.",
+	"Ledger":[
+		[
+			"def:2T-char",
+			"Finite-dimensional surrogate for the seven Main-facing interface clauses.",
+			"Exact association validation plus 3 valid and 3 invalid synthetic examples.",
+			"exact finite-dimensional certificate"
+		],
+		[
+			"thm:active-response-transport-minimal",
+			"Branchwise rho^dom, nu, Aminus, and Jdesc family on an accepted interval.",
+			"Resolve\/Reduce on an exact polynomial branch model plus broken-model hypothesis audit.",
+			"exact finite-dimensional certificate"
+		],
+		[
+			"thm:char-weak-interface",
+			"Transport theorem discharged; chi = nu^-1 rho^dom defines the weak Main export.",
+			"Exact export chi = nu^-1 rho^dom with affine constancy and branch-sign certification.",
+			"exact finite-dimensional certificate"
+		],
+		[
+			"prop:minimal-transport-calibration",
+			"chi, Jsharp, beta > 0, and a coercive form on ker chi.",
+			"Exact matrix decomposition and positivity certificates.",
+			"deferred"
+		],
+		[
+			"thm:finite-cutoff-Jcan",
+			"Weak 2T_char interface and a positive symmetric B on the affine class.",
+			"Exact linear algebra + projection formula.",
+			"deferred"
+		],
+		[
+			"prop:Jcan-orth",
+			"Finite-dimensional affine class and positive B.",
+			"Exact orthogonality\/minimality equivalence.",
+			"deferred"
+		],
+		[
+			"thm:finite-cutoff-canonical-odd-spectral-selection",
+			"Certified compressed spectral regime and rank-one LoG operator.",
+			"Exact eigenvalue\/projector certificates.",
+			"deferred"
+		],
+		[
+			"thm:Main-Peierls-Hamiltonization",
+			"Canonical representative plus imported bracket axioms on a concrete model.",
+			"Formal rewrite + exact model checks.",
+			"deferred"
+		]
+	]
+}

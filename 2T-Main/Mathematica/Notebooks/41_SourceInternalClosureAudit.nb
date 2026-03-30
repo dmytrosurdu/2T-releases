@@ -1,0 +1,859 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     40576,        850]
+NotebookOptionsPosition[     31083,        739]
+NotebookOutlinePosition[     31397,        753]
+CellTagsIndexPosition[     31354,        750]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Source-Internal Closure Audit", "Title",ExpressionUUID->"20745db7-3b90-42b6-803f-c167aef10330"],
+
+Cell[TextData[{
+ "Date: ",
+ Cell[BoxData[Cell["2026-03-18",
+   Background->None,ExpressionUUID->"557ec6c2-1fad-4534-ad13-674c0587be0c"]], 
+  "InlineCode",ExpressionUUID->"5f0e9ed1-0567-4822-b939-19499bd8e0ab"],
+ "This second-sprint packet reuses the first exact audit but strengthens the \
+target in the way now"
+}], "Text",ExpressionUUID->"f435f71f-4eff-4f3d-89de-f6a046ccbe7b"],
+
+Cell["\<\
+forced by the lane steering: theorem-facing receiver semantics are evaluated \
+only after a common\
+\>", "Text",ExpressionUUID->"dca7ff48-46c9-4bf3-a9f0-cbdcc67df07e"],
+
+Cell["\<\
+reduction/projection to the single reduced welded boundary factor, not on the \
+unreduced split\
+\>", "Text",ExpressionUUID->"2c01dcd3-59a6-4089-a673-1808ab36a00c"],
+
+Cell["\<\
+target. The question is no longer whether unreduced source/completion data \
+can differ. The question\
+\>", "Text",ExpressionUUID->"015e1aa1-0928-4574-984f-d0575baab393"],
+
+Cell["\<\
+is whether any exact falsifier remains for the reduced receiver target in the \
+current audited\
+\>", "Text",ExpressionUUID->"ad4bd2ed-fb71-4ee6-95d5-5cfe51540305"],
+
+Cell["family. ", "Text",ExpressionUUID->"efadce70-2f55-4820-b423-6097e838f3f6"],
+
+Cell["Executive Decision", "Section",ExpressionUUID->"21038910-aef6-4e60-999e-3fc9d9e04b83"],
+
+Cell[TextData[{
+ "Verdict: ",
+ Cell[BoxData[Cell["reduced target survives exact audit in current family",
+   Background->None,ExpressionUUID->"3ea60027-d715-468d-8290-55d754a986a9"]], 
+  "InlineCode",ExpressionUUID->"258cdba7-5a9a-4942-a2b6-2bca74dcb1a7"]
+}], "Item",ExpressionUUID->"0e14998f-2a47-474c-9ec5-fa68f938b7c7"],
+
+Cell[TextData[{
+ "Exact status: ",
+ Cell[BoxData[Cell["exact finite-dimensional certificate",
+   Background->None,ExpressionUUID->"fc15d7e4-0c69-445c-86a7-63a6146860d0"]], 
+  "InlineCode",ExpressionUUID->"6e06f6fe-d270-4b0f-bf40-4d2a01db81ef"]
+}], "Item",ExpressionUUID->"c492c80b-d872-4192-9e63-bcedec1256c1"],
+
+Cell["\<\
+Narrow answer: no exact reduced falsifier was found in the current audited \
+family once\
+\>", "Item",ExpressionUUID->"d897e190-cc3d-4e89-bfd9-76c770ca7b1b"],
+
+Cell["\<\
+  theorem-facing receiver semantics are pushed through the common reduced \
+boundary projector. \
+\>", "Text",ExpressionUUID->"14a1ba0c-cfde-4121-ae92-f7dc2a79e9fb"],
+
+Cell["\<\
+Scope guard: this does not promote the bounded split theorem to a \
+source-internal theorem.\
+\>", "Item",ExpressionUUID->"6620cdf2-96bd-4ff6-b548-4f0b5e6839b1"],
+
+Cell[TextData[{
+ "The first-sprint unreduced verdict remains historically true: ",
+ Cell[BoxData[Cell["P2 + P3 + one extra closure clause are enough",
+   Background->None,ExpressionUUID->"4afeb70e-c5fc-4447-a8e2-e818336f02eb"]], 
+  "InlineCode",ExpressionUUID->"683e1824-4b22-4856-a413-46cf1300bf8d"],
+ "What changed is that the extra clause has now been imposed explicitly and \
+exactly: "
+}], "Text",ExpressionUUID->"a2761337-11cd-4277-8483-70516e49ea94"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["P2",
+   Background->None,ExpressionUUID->"a2f4fef2-9c24-4dfe-90c5-529e902736d6"]], 
+  "InlineCode",ExpressionUUID->"02dd9919-9f86-4dc6-80d6-052e794a4db4"],
+ " algebraic cessation on inherited ledger sectors,"
+}], "Item",ExpressionUUID->"1051d6d4-d245-4d97-820e-3dfb36bcc4f7"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["P3",
+   Background->None,ExpressionUUID->"b8fb6e02-9486-4ec7-823b-b2d9d42b54ac"]], 
+  "InlineCode",ExpressionUUID->"910fde4f-5b5c-43d8-a1e2-33cd73673062"],
+ " source-internal factorization through accepted-record history,"
+}], "Item",ExpressionUUID->"e824ca4c-617f-4dde-a70e-c02d734a8456"],
+
+Cell["\<\
+theorem-facing semantics evaluated only on the common reduced boundary factor \
+already certified in\
+\>", "Item",ExpressionUUID->"82d96c16-efe9-41a4-8763-08595203288f"],
+
+Cell["  the welded boundary lane.", "Text",ExpressionUUID->"7fbc0bfc-d6ae-473e-bf46-03f0812871bb"],
+
+Cell[TextData[{
+ "Under that strengthened reduced target, the old unreduced falsifiers ",
+ Cell[BoxData[Cell["F2-F5",
+   Background->None,ExpressionUUID->"989b6de1-5c88-4677-b400-a10d417d8bbc"]], 
+  "InlineCode",ExpressionUUID->"760252ef-7aed-40e2-83db-6cd15f51733c"],
+ " do not survive as"
+}], "Text",ExpressionUUID->"86bea559-8dfe-46a1-b41c-c9b9a27b8de8"],
+
+Cell["reduced receiver falsifiers in the current audited family. ", "Text",ExpressionUUID->"1b9c90a2-0ca4-4cfe-8c73-49a8c882a0ac"],
+
+Cell["Packet Rule", "Section",ExpressionUUID->"76e26bb0-35f9-4a3b-a7d8-185fb7c9e290"],
+
+Cell["This packet keeps the evidence lanes separate: ", "Text",ExpressionUUID->"bfab945c-417b-4e3a-91e3-1cf6e3b191b4"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"theorem-facing source semantics\"\>",
+          HoldForm], 
+         TagBox["\<\"exact WL certificate\"\>",
+          HoldForm], 
+         TagBox["\<\"non-claim\"\>",
+          HoldForm]},
+        {Cell[TextData[{
+          Cell[BoxData[Cell["UOM/main.tex",
+            Background->None,ExpressionUUID->
+            "5c260541-1f95-4a6a-b99a-4baf5d15c262"]], "InlineCode",
+           ExpressionUUID->"17b8971b-2a6e-4d5d-802f-142e0a8deb58"],
+          
+          " treats the receiver as a reduced boundary factor with one \
+receiver-side image, one receiver geometry, and one theorem-facing cut \
+structure."
+         }],ExpressionUUID->
+          "f89d9e4c-91c7-4155-b85c-e800a372135d"], "\<\"The exact lane \
+certifies only that no reduced falsifier was found in the current audited \
+family once all receiver semantics are evaluated after the common welded \
+reduction.\"\>", "\<\"This packet does not prove the full unreduced \
+source-internal physics theorem, and it does not promote manuscript status.\"\
+\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[
+      BoxForm`e$, 
+       TableHeadings -> {
+        None, {"theorem-facing source semantics", "exact WL certificate", 
+          "non-claim"}}]]], "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"19368402-193a-4457-ba4c-3e8322c7783c"],
+
+Cell["Safe Algebraic Cessation Lemma", "Section",ExpressionUUID->"4d1fe830-2dce-4919-9636-23f5a1711292"],
+
+Cell[TextData[{
+ "Write the inherited ledger projectors as ",
+ Cell[BoxData[Cell["P_i = Pi_i^(A) \\otimes 1_B",
+   Background->None,ExpressionUUID->"b3485573-9b34-4027-8ce0-2db95aa349fb"]], 
+  "InlineCode",ExpressionUUID->"2dfffd24-bdf6-4263-8d94-648bb1cfafec"],
+ "and let the post-split channel be ",
+ Cell[BoxData[Cell["E(X) = Sum_alpha K_alpha X K_alpha^\\dagger",
+   Background->None,ExpressionUUID->"66617bdc-97c4-4717-958c-c3a73e3e8e96"]], 
+  "InlineCode",ExpressionUUID->"e0dc5783-a82a-47f4-9520-00f93e62e492"],
+ "."
+}], "Text",ExpressionUUID->"536e6850-ce75-432e-b64d-c93ba4fcec6c"],
+
+Cell["The safe algebraic statement is:", "Text",ExpressionUUID->"fedec53b-52ba-4aa5-a326-e91eb8e28c66"],
+
+Cell[TextData[{
+ "1. If ",
+ Cell[BoxData[Cell["E^*(P_i) = P_i",
+   Background->None,ExpressionUUID->"d2cd924a-b1c3-46cb-ae97-d300eda8084a"]], 
+  "InlineCode",ExpressionUUID->"b12d30ea-59df-458c-85ce-6b8f53f33e5f"],
+ " for every inherited ledger projector, then sector transfer vanishes:"
+}], "Text",ExpressionUUID->"0ceb46a3-c92c-4fe0-99fa-d8b7a4345901"],
+
+Cell[TextData[{
+ "   ",
+ Cell[BoxData[Cell["(1 - P_i) K_alpha P_i = 0",
+   Background->None,ExpressionUUID->"ffe514b1-988e-4846-b4af-0f654c1212ad"]], 
+  "InlineCode",ExpressionUUID->"c025c3ca-e79b-4b11-bf70-6cdb1956e035"],
+ " and ",
+ Cell[BoxData[Cell["P_i K_alpha (1 - P_i) = 0",
+   Background->None,ExpressionUUID->"d34f9c64-b69d-484d-8c5c-488ec58adc6f"]], 
+  "InlineCode",ExpressionUUID->"c0a4179d-3722-4128-9444-ef6fca534ff9"],
+ "."
+}], "Text",ExpressionUUID->"19855b25-bc73-4e29-a232-578d915626cb"],
+
+Cell["\<\
+2. Hence one may choose Kraus operators block-diagonal on inherited ledger \
+sectors:\
+\>", "Text",ExpressionUUID->"1034b678-09f6-4a1b-84e6-783a57590487"],
+
+Cell[TextData[{
+ "   ",
+ Cell[BoxData[Cell["K_alpha = Sum_i P_i K_alpha P_i",
+   Background->None,ExpressionUUID->"ae4bbfbc-2dc1-41b8-a4aa-e40d167b402a"]], 
+  "InlineCode",ExpressionUUID->"db01b9a5-f05c-4603-b6cd-ceb0d08cfe8d"],
+ "."
+}], "Text",ExpressionUUID->"26235d4d-f9de-4c28-ae53-21a908ceec3c"],
+
+Cell[TextData[{
+ "3. Therefore the accepted-record algebra is frozen on ",
+ Cell[BoxData[Cell["A",
+   Background->None,ExpressionUUID->"60890082-78dd-43ee-9979-6405dfb3b2b7"]], 
+  "InlineCode",ExpressionUUID->"416a9ebd-b955-4f4e-95a2-00c84e4e49db"],
+ "."
+}], "Text",ExpressionUUID->"5f672ae1-ae31-4e53-a2b7-82fb61776096"],
+
+Cell[TextData[{
+ "4. For ledger-classical inputs, the ",
+ Cell[BoxData[Cell["A",
+   Background->None,ExpressionUUID->"82231458-6a89-4975-9e46-4d399d90b73f"]], 
+  "InlineCode",ExpressionUUID->"50a66906-8640-4dc5-9070-ad8591bd1c7b"],
+ "-marginal is preserved exactly."
+}], "Text",ExpressionUUID->"b710f491-6448-4d86-8a81-143ff14ff131"],
+
+Cell["\<\
+This remains the safe exact algebraic cessation layer. It is enough for \
+accepted-record freezing and\
+\>", "Text",ExpressionUUID->"c49fc529-c44f-4b06-a1d7-b00d30bedcab"],
+
+Cell[TextData[{
+ "ledger-classical ",
+ Cell[BoxData[Cell["A",
+   Background->None,ExpressionUUID->"89b05be7-218e-45dc-be11-232bcf2d37e9"]], 
+  "InlineCode",ExpressionUUID->"cb1578aa-1e8c-49b6-ba8d-16b9e0e61e3f"],
+ "-marginal preservation. By itself it does not imply the sharper unreduced \
+tensor"
+}], "Text",ExpressionUUID->"090e7d4a-106f-4491-a150-a32c7ee3863c"],
+
+Cell[TextData[{
+ "form ",
+ Cell[BoxData[Cell["K_alpha = Sum_i Pi_i^(A) \\otimes M_{alpha i}",
+   Background->None,ExpressionUUID->"2ac8cdd5-9ec1-4abf-ab4d-9912616ae680"]], 
+  "InlineCode",ExpressionUUID->"c4ff2846-1d7b-457d-adfb-dc7e70386abb"],
+ "."
+}], "Text",ExpressionUUID->"f2b53af4-024e-4d83-a592-3ebeb2934f73"],
+
+Cell["\<\
+That stronger tensor statement still needs the same minimal extra hypothesis \
+as before: \
+\>", "Text",ExpressionUUID->"59c89cf0-64ff-49ae-b1d5-7519eb1c05de"],
+
+Cell["\<\
+either the inherited ledger sectors are already minimal classical pointer \
+sectors,\
+\>", "Item",ExpressionUUID->"07ecd4cf-8009-4ecc-a204-2f99f714ffc3"],
+
+Cell[TextData[{
+ "or the action inside each ",
+ Cell[BoxData[Cell["A",
+   Background->None,ExpressionUUID->"80accd5b-e060-4d74-b49c-eb23b4f71075"]], 
+  "InlineCode",ExpressionUUID->"8a597cb7-f9fe-49ff-ae43-aad339703acf"],
+ "-block is trivial on the theorem-facing ledger algebra."
+}], "Item",ExpressionUUID->"ab1b4a6b-7212-471e-831e-3dc89104553e"],
+
+Cell["\<\
+For the reduced receiver verdict below, no additional within-block \
+classical-pointer premise was\
+\>", "Text",ExpressionUUID->"fbdc0561-7cb4-43a9-9fed-4c71af21e6a7"],
+
+Cell["needed in the current audited family. ", "Text",ExpressionUUID->"8d129e40-4f78-494d-b69a-f436d4695a65"],
+
+Cell["Reduced-Receiver Strengthening", "Section",ExpressionUUID->"1f35aeab-a059-470a-b213-29e2b03a9f47"],
+
+Cell["The strengthened exact target is:", "Text",ExpressionUUID->"99e37293-0152-47ee-9819-0a174faa3ded"],
+
+Cell[TextData[{
+ "1. ",
+ Cell[BoxData[Cell["P2",
+   Background->None,ExpressionUUID->"432fbec6-6d9a-480c-96c4-ba34c65b37a1"]], 
+  "InlineCode",ExpressionUUID->"94bcddd1-b5bd-4283-afec-c08d8c1444aa"],
+ " algebraic cessation holds on inherited ledger sectors."
+}], "Text",ExpressionUUID->"547b1e5f-5c59-46c5-905c-599d4920a44f"],
+
+Cell[TextData[{
+ "2. ",
+ Cell[BoxData[Cell["P3",
+   Background->None,ExpressionUUID->"ee1cb5e2-5e1e-4bbd-878c-469b1152ad95"]], 
+  "InlineCode",ExpressionUUID->"e93f22f1-846c-4df1-835b-b1b965e380af"],
+ " source-internal factorization holds through accepted-record history."
+}], "Text",ExpressionUUID->"02ff1acc-bd53-4afd-a466-8a733a17cdf7"],
+
+Cell["\<\
+3. Theorem-facing receiver semantics are evaluated only after a common \
+reduction/projection to the\
+\>", "Text",ExpressionUUID->"a5752abf-99d5-4e18-905b-e6c6f44f6f24"],
+
+Cell["   single reduced welded boundary factor.", "Text",ExpressionUUID->"66fddaa3-8acb-4d3b-b508-d07951683392"],
+
+Cell["\<\
+The current audited family already supplies the exact reduction data: \
+\>", "Text",ExpressionUUID->"94d947ba-9b7e-4a93-9984-e550d63d9b4c"],
+
+Cell["\<\
+the common reduced receiver projector is the certified welded projector\
+\>", "Item",ExpressionUUID->"f0cc1685-62f7-41cb-9338-62348950b92c"],
+
+Cell[TextData[{
+ "  ",
+ Cell[BoxData[Cell["ProfileProjectorB = {{1,0},{0,0}}",
+   Background->None,ExpressionUUID->"55c4b3c9-b050-4922-b93f-8dd82a2d3a23"]], 
+  "InlineCode",ExpressionUUID->"bd16fc3a-f2da-453e-a7a9-b88f77ae9f92"],
+ ", "
+}], "Text",ExpressionUUID->"b146dff1-9cd7-4944-a57e-bd7b1d1ca876"],
+
+Cell["that projector has exact rank one,", "Item",ExpressionUUID->"577cb985-6979-4d06-9429-3c0771e7a945"],
+
+Cell["\<\
+the representative reduced boundary image is exactly compatible with that \
+line,\
+\>", "Item",ExpressionUUID->"e9bb00f8-75a8-4864-9478-5813ae65afd3"],
+
+Cell["\<\
+and all ambiguity images vanish on that reduced boundary image.\
+\>", "Item",ExpressionUUID->"d26e2100-df39-4d0e-a0bb-d3dfc3882966"],
+
+Cell["\<\
+So the strengthened target is not an ad hoc quotient. It is the same reduced \
+welded boundary factor\
+\>", "Text",ExpressionUUID->"d9b5242f-f235-4dba-80c4-3ab2d233674a"],
+
+Cell["already used in the exact UOM boundary lane. ", "Text",ExpressionUUID->"fe737fc2-7a46-4cf4-88d8-46f25cf6e5a3"],
+
+Cell["Exact Reduced Audit", "Section",ExpressionUUID->"fde60743-7501-4d2c-a24d-b93efd5f4e3d"],
+
+Cell[TextData[{
+ "The exact reduced audit used the common reduced readout ",
+ Cell[BoxData[Cell["\<\
+R(block) = (Tr[block . ProfileProjectorB] / Tr[ProfileProjectorB]) \
+ProfileProjectorB\
+\>",
+   Background->None,ExpressionUUID->"71315c85-2f8e-481f-8cd7-a97b42d2a5a4"]], 
+  "InlineCode",ExpressionUUID->"3fc6bc16-4449-44b6-81b8-89d540bc6513"],
+ "with the same certified ",
+ Cell[BoxData[Cell["ProfileProjectorB",
+   Background->None,ExpressionUUID->"0e75e80d-71c2-4775-b70b-b9493390212b"]], 
+  "InlineCode",ExpressionUUID->"d72f4104-e7e7-4b7b-b148-2af7940df54e"],
+ " across ledger sectors."
+}], "Text",ExpressionUUID->"47d9ec85-cde0-46e4-b4e7-17a34983e2f6"],
+
+Cell["The exact certificate obtained: ", "Text",ExpressionUUID->"f05b60e7-ac2c-4be0-8784-918e46ac16fd"],
+
+Cell[TextData[Cell[BoxData[Cell["ProfileProjectorRank = 1",
+  Background->None,ExpressionUUID->
+  "0c1ee5a0-8da5-4a4c-a6f7-8032cd86be70"]], \
+"InlineCode",ExpressionUUID->"d9701860-7ae7-43b4-b6f5-68a9358d2ada"]], "Item",\
+ExpressionUUID->"364c806e-73f5-4756-9a84-0b7248c6926a"],
+
+Cell[TextData[Cell[BoxData[Cell["RepresentativeBoundaryImageCompatibleQ = \
+True",
+  Background->None,ExpressionUUID->
+  "30efa147-7b93-4293-9020-0d1a3f587a84"]], \
+"InlineCode",ExpressionUUID->"6203fecb-b787-48b6-9ba7-9954a62af598"]], "Item",\
+ExpressionUUID->"eb63fe59-b5cb-45db-aab4-5fd121e822ba"],
+
+Cell[TextData[Cell[BoxData[Cell["AmbiguityImagesAllZeroQ = True",
+  Background->None,ExpressionUUID->
+  "b9e28861-3e01-453d-a6b3-afc55de15879"]], \
+"InlineCode",ExpressionUUID->"46bdc91c-6a58-4946-be4e-752b2314cb0e"]], "Item",\
+ExpressionUUID->"e1c574ba-3cf1-4681-a2e3-d079fb3e88e7"],
+
+Cell[TextData[Cell[BoxData[Cell["ReducedResponseScalarRepresentative = 1",
+  Background->None,ExpressionUUID->
+  "6e1dea0f-fb47-423f-bcbd-6dad6bace167"]], \
+"InlineCode",ExpressionUUID->"6a8ffbfd-78c6-4d4a-9ef4-285fdf71201d"]], "Item",\
+ExpressionUUID->"342e0a3e-fdee-4f54-afd3-4c07d5ca11e7"],
+
+Cell["\<\
+So the theorem-facing reduced receiver is exactly the one-dimensional welded \
+line already certified\
+\>", "Text",ExpressionUUID->"3126acc0-d5a2-4553-92fb-7a4b35703e4f"],
+
+Cell["elsewhere in the current audited family. ", "Text",ExpressionUUID->"c9166e3d-23cb-492d-847d-952cc0abbd87"],
+
+Cell["Old Falsifiers After Reduction", "Section",ExpressionUUID->"94cec6b1-0d58-429f-b238-8ad28184d167"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"old falsifier\"\>",
+          HoldForm], 
+         TagBox["\<\"status after common reduced readout\"\>",
+          HoldForm], 
+         TagBox["\<\"exact certificate\"\>",
+          HoldForm]},
+        {Cell[TextData[{
+          Cell[BoxData[Cell["F2",
+            Background->None,ExpressionUUID->
+            "4a04dad4-13bd-4723-b6c2-3281dda28bc8"]], "InlineCode",
+           ExpressionUUID->"1479cc08-346c-4e82-87c1-83baaac170eb"],
+          " bridge leak"
+         }],ExpressionUUID->"655ccece-1607-4897-9a6f-365a425234fb"], Cell[
+         BoxData[Cell["killed by reduction",
+           Background->None,ExpressionUUID->
+           "81bc1eaf-4ba9-4236-94fc-b9fc25ccee15"]], "InlineCode",
+          ExpressionUUID->
+          "b1642ff0-2742-4db8-88e9-05f950c2fee0"], "\<\"the old outside-code \
+witness reduces exactly to zero\"\>"},
+        {Cell[TextData[{
+          Cell[BoxData[Cell["F3",
+            Background->None,ExpressionUUID->
+            "31c1d944-6191-403a-806f-b6c55b94b8ac"]], "InlineCode",
+           ExpressionUUID->"ca45f136-ed5c-4f4f-9152-69ce534c513e"],
+          " covariance mismatch"
+         }],ExpressionUUID->"c33517ce-a33f-493c-a951-9fb14cf2099a"], Cell[
+         BoxData[Cell["killed by reduction",
+           Background->None,ExpressionUUID->
+           "a20a2062-ed78-44b7-9446-99601a604d52"]], "InlineCode",
+          ExpressionUUID->
+          "21fe60e1-baa7-47d6-9bf5-a168a85d41f5"], "\<\"the mismatched sector \
+blocks reduce to the same welded line and, in the tested witness, to the same \
+reduced scalar\"\>"},
+        {Cell[TextData[{
+          Cell[BoxData[Cell["F4",
+            Background->None,ExpressionUUID->
+            "0f8d8ef7-9547-4cca-ab96-bdf5529d76bd"]], "InlineCode",
+           ExpressionUUID->"e2e32ccc-38eb-4007-bb14-c8e695a2dad2"],
+          " RP/OS failure"
+         }],ExpressionUUID->"4276aa2c-b82b-4b6a-ab8f-6952e4ac2b7c"], Cell[
+         BoxData[Cell["killed by reduction",
+           Background->None,ExpressionUUID->
+           "37a21959-77b6-4cef-a9be-f6e5b77bd7d1"]], "InlineCode",
+          ExpressionUUID->"b08c5720-c2ca-425b-af2d-b4e60ec73953"], Cell[
+         TextData[{
+          "the unreduced reflection spectrum ",
+          Cell[BoxData[Cell["{-1,1,1,1}",
+            Background->None,ExpressionUUID->
+            "8cf29e08-7ec0-4489-aee4-58930dc1c5be"]], "InlineCode",
+           ExpressionUUID->"1686325b-4d4d-4214-86e6-b7ebcb413c22"],
+          
+          " becomes a positive-semidefinite reduced operator with eigenvalues \
+",
+          Cell[BoxData[Cell["{1,1,0,0}",
+            Background->None,ExpressionUUID->
+            "84691c62-7d67-4826-9bee-c246a547947c"]], "InlineCode",
+           ExpressionUUID->"fd3b335a-83de-41ff-a958-fc2c89850c15"]
+         }],ExpressionUUID->"b1d4acd3-e5f5-4514-9509-46b4ecfd859a"]},
+        {Cell[TextData[{
+          Cell[BoxData[Cell["F5",
+            Background->None,ExpressionUUID->
+            "d0459876-97cf-4186-84ec-757f9d4bcc40"]], "InlineCode",
+           ExpressionUUID->"6ef862bc-820e-4516-8ce7-c09b871c6eb7"],
+          " geometry/bookkeeping mismatch"
+         }],ExpressionUUID->"d8b7c61e-d70e-4ac8-a15a-5a063ded64eb"], Cell[
+         BoxData[Cell["replaced by narrower condition",
+           Background->None,ExpressionUUID->
+           "93a83ac9-21ac-4a17-b3ab-44e61a1c907c"]], "InlineCode",
+          ExpressionUUID->
+          "71415a47-88ba-4e44-8fd4-b238a661af25"], "\<\"hidden unreduced \
+cutoffs/bookkeeping may remain, but they are not a falsifier of the reduced \
+receiver target once all theorem-facing semantics pass through the same \
+reduced boundary factor\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[
+      BoxForm`e$, 
+       TableHeadings -> {
+        None, {"old falsifier", "status after common reduced readout", 
+          "exact certificate"}}]]], "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"60606341-95f1-42e9-98b7-494ba5d80a33"],
+
+Cell["\<\
+This is the key narrowing. The exact lane no longer says the unreduced \
+source/tangent data must\
+\>", "Text",ExpressionUUID->"e257aab6-8dfd-44f4-90c3-132a1970fc9c"],
+
+Cell["\<\
+already factorize completely. It says that in the present audited family \
+those unreduced differences\
+\>", "Text",ExpressionUUID->"d9ccd7aa-1e70-44a3-a7cd-d00c0be0f650"],
+
+Cell["\<\
+do not generate an exact falsifier for the reduced receiver target. \
+\>", "Text",ExpressionUUID->"173ba33d-edfe-4873-a1fa-bfcb407141ad"],
+
+Cell["Reduced Closure Versus Stronger Unreduced Factorization", "Section",ExpressionUUID->"e2f8acdf-5e7d-4415-a2fc-83f631c412d2"],
+
+Cell["\<\
+The audit language must now stay explicit about this distinction: \
+\>", "Text",ExpressionUUID->"35873f15-eb8d-49fe-8f5c-dd81f07e6d27"],
+
+Cell["\<\
+exact reduced receiver closure may survive in the current audited family,\
+\>", "Item",ExpressionUUID->"9aa4b91d-6543-4e9e-81d1-a52d8d47ef37"],
+
+Cell["\<\
+even if a stronger unreduced source/tangent factorization theorem is false,\
+\>", "Item",ExpressionUUID->"f536c181-0f37-4bc1-90f0-4de3fa154b69"],
+
+Cell[TextData[{
+ "or even if that stronger theorem is simply too strong for what ",
+ Cell[BoxData[Cell["main.tex",
+   Background->None,ExpressionUUID->"3235d53c-cb50-4a11-8bc7-23966a9c2ddd"]], 
+  "InlineCode",ExpressionUUID->"30a060ed-180e-49b0-9394-faa74885fe12"],
+ " actually uses on the"
+}], "Item",ExpressionUUID->"26c925fe-2bf1-4353-9657-0d3e29da6d2e"],
+
+Cell["  theorem-facing receiver side.", "Text",ExpressionUUID->"e0bfd74e-911c-44fd-ade5-8f81717f0a47"],
+
+Cell["\<\
+So if source lanes later confirm seam realizations with the same \
+accepted-record payload but opposite\
+\>", "Text",ExpressionUUID->"95b2a059-60f9-4135-bde7-1d951635f80c"],
+
+Cell["\<\
+welded source/tangent response, that would not by itself refute this reduced \
+exact packet. It would\
+\>", "Text",ExpressionUUID->"ee3df80b-b310-4fab-9e1e-b2868c1b96cc"],
+
+Cell["\<\
+instead reinforce that the exact theorem-facing target must be stated as a \
+reduced receiver target,\
+\>", "Text",ExpressionUUID->"54b73e73-5b54-46df-bc3a-d67285b47094"],
+
+Cell["not as full unreduced source/tangent agreement. ", "Text",ExpressionUUID->"0d778b6a-1611-4a5e-b2ab-d08f1082c93c"],
+
+Cell["Five Closure Requirements Under The Reduced Target", "Section",ExpressionUUID->"2c71d287-3c3f-4ed1-893a-c4851adae1ae"],
+
+Cell["\<\
+With the common reduced receiver clause imposed, the five first-sprint \
+closure failures no longer\
+\>", "Text",ExpressionUUID->"81fd2d1c-29af-43b9-996b-caba9826b3f2"],
+
+Cell["\<\
+produce an exact reduced falsifier in the current audited family: \
+\>", "Text",ExpressionUUID->"6309367a-c40b-4907-8226-d1f98651c119"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"requirement\"\>",
+          HoldForm], 
+         TagBox["\<\"reduced-target outcome\"\>",
+          HoldForm], 
+         TagBox["\<\"exact support\"\>",
+          HoldForm]},
+        {"\<\"bookkeeping closure\"\>", Cell[BoxData[
+         Cell["Yes, at the theorem-facing reduced receiver level",
+           Background->None,ExpressionUUID->
+           "746ea273-5b01-4922-b2bf-5c14b0b63394"]], "InlineCode",
+          ExpressionUUID->
+          "72a1aaff-b5b1-4113-ad33-c28cbda73afc"], "\<\"hidden completion \
+bookkeeping is no longer a reduced receiver falsifier once theorem-facing \
+semantics are reduced before evaluation\"\>"},
+        {"\<\"bridge-target closure\"\>", Cell[BoxData[Cell["Yes",
+           Background->None,ExpressionUUID->
+           "751cd6e2-63bc-4767-b4db-f45f3fb469d6"]], "InlineCode",
+          ExpressionUUID->
+          "bbdfea5e-8e42-4ca3-9a03-9792fe87bc8b"], "\<\"the old outside-code \
+witness reduces exactly to zero\"\>"},
+        {"\<\"one-boundary covariance closure\"\>", Cell[BoxData[
+         Cell["Yes in the current family",
+           Background->None,ExpressionUUID->
+           "aad02782-21fa-4b8b-ad7a-cb492fd7175d"]], "InlineCode",
+          ExpressionUUID->
+          "77d82b04-39cd-4669-bdc6-d6a64301b707"], "\<\"the reduced image \
+lives on one common rank-one welded line\"\>"},
+        {"\<\"RP/OS closure\"\>", Cell[BoxData[
+         Cell["Yes in the current family",
+           Background->None,ExpressionUUID->
+           "490ba3d1-f2b6-46f7-aa0f-7530922212a3"]], "InlineCode",
+          ExpressionUUID->
+          "00e4d15c-bed0-4fd7-a8b5-50d365914e76"], "\<\"the reduced \
+reflection witness is positive semidefinite\"\>"},
+        {"\<\"single-cutoff geometry closure\"\>", Cell[BoxData[
+         Cell["Yes, as a reduced receiver statement",
+           Background->None,ExpressionUUID->
+           "2fe196da-2f27-4b4f-ae95-476e74528eed"]], "InlineCode",
+          ExpressionUUID->
+          "35c662ad-e08e-45ec-9a4f-b4e5e71000de"], "\<\"sector-dependent \
+unreduced data become theorem-invisible after the common reduced boundary \
+projection\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[
+      BoxForm`e$, 
+       TableHeadings -> {
+        None, {"requirement", "reduced-target outcome", "exact support"}}]]], 
+    "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"233ef71f-2657-43ae-b3ea-fc5577956178"],
+
+Cell["These are exact family-relative conclusions only. ", "Text",ExpressionUUID->"0daf407e-b783-47d2-9237-2e5b95cfd778"],
+
+Cell["Minimal Sufficient Package", "Section",ExpressionUUID->"2014243c-8821-402a-bdf6-63845b670683"],
+
+Cell["\<\
+In the strengthened reduced form, the exact minimal package is now:\
+\>", "Text",ExpressionUUID->"e07394c5-26cf-4e08-9e6d-1cc906787c6f"],
+
+Cell[TextData[{
+ "1. ",
+ Cell[BoxData[Cell["P2 algebraic cessation",
+   Background->None,ExpressionUUID->"0223206f-b366-4051-9bc8-e1e7f2bcc6df"]], 
+  "InlineCode",ExpressionUUID->"fe299d8f-dc91-44f6-8685-4561928ce1dc"],
+ "2. ",
+ Cell[BoxData[Cell["\<\
+P3 source-internal factorization through accepted-record history\
+\>",
+   Background->None,ExpressionUUID->"ffaeeacd-322e-4ef8-ae16-073d7f937a34"]], 
+  "InlineCode",ExpressionUUID->"a458db0a-ff66-4c5c-b485-586a2e2974db"],
+ "3. ",
+ Cell[BoxData[Cell["common reduced receiver clause",
+   Background->None,ExpressionUUID->"664dba3d-f11c-4720-be46-8d2de147e75a"]], 
+  "InlineCode",ExpressionUUID->"55d52913-044d-4939-b6d3-aa8df0eacc1f"],
+ "   all theorem-facing receiver semantics are evaluated only after the same \
+reduction/projection to"
+}], "Text",ExpressionUUID->"cf6eab8d-1157-4f9f-ac65-004846fb9321"],
+
+Cell["   the certified one-dimensional welded boundary factor.", "Text",ExpressionUUID->"e7e267fe-dae1-48fc-a894-82b1c72fc590"],
+
+Cell["\<\
+No additional within-block classical-pointer premise was needed for this \
+reduced verdict in the\
+\>", "Text",ExpressionUUID->"20656374-d2a0-4fc5-9603-a6874472b7b2"],
+
+Cell["\<\
+current audited family. That extra premise is still needed only if one wants \
+the sharper unreduced\
+\>", "Text",ExpressionUUID->"4829d123-6c49-4317-b88f-d15e3bb2fd52"],
+
+Cell["tensor splitting statement. ", "Text",ExpressionUUID->"cba4ee9c-ac50-4484-9a17-9aedcdd6a711"],
+
+Cell["Completion Decomposition Reassessment", "Section",ExpressionUUID->"7cf611a5-cb57-45f5-b0af-82a531cb74ad"],
+
+Cell["\<\
+From the stronger reduced theorem perspective, the current exact family still \
+points to the same\
+\>", "Text",ExpressionUUID->"4429c470-dc8a-4dd8-9279-60f67bd965c8"],
+
+Cell["completion conclusion: ", "Text",ExpressionUUID->"ef87618a-2b0b-49ac-b7fd-932dae09af8d"],
+
+Cell["\<\
+split core remains the meaningful strong-safe completion candidate,\
+\>", "Item",ExpressionUUID->"04d2df6d-4454-4ff1-b5d2-b2bc99ecfb53"],
+
+Cell["\<\
+Gaussian augmentation still does not perform the class change,\
+\>", "Item",ExpressionUUID->"f8359a87-d15e-494c-ad98-3787f500eae9"],
+
+Cell["\<\
+so split core plus the right receiver-level factorization target remains the \
+natural exact\
+\>", "Item",ExpressionUUID->"f297fae2-006c-4893-b7b1-d323669fb1eb"],
+
+Cell["  class-changing package in the current audited family.", "Text",ExpressionUUID->"50ca1f65-5f2b-42d4-9434-6c71f0568490"],
+
+Cell["\<\
+This remains an exact finite-dimensional conclusion only. It is not theorem \
+promotion. \
+\>", "Text",ExpressionUUID->"0832d200-0b1e-45b6-849a-3d3900faa35a"],
+
+Cell["Acceptance State", "Section",ExpressionUUID->"e4ba261c-bf0d-47b4-8fdf-3c457008cdda"],
+
+Cell[TextData[{
+ "This lane now returns: ",
+ Cell[BoxData[Cell["reduced target survives exact audit in current family",
+   Background->None,ExpressionUUID->"65c95305-dd90-439c-bfb3-38b208803999"]], 
+  "InlineCode",ExpressionUUID->"f1a8183d-9161-4bbd-bd1d-9780ed5c8398"],
+ "with the explicit scope qualifier: ",
+ Cell[BoxData[Cell["\<\
+No exact reduced falsifier found in the current audited family once \
+theorem-facing receiver reduction is imposed.\
+\>",
+   Background->None,ExpressionUUID->"2d8a9832-badf-4ae2-b3e8-0ca59ff1e99c"]], 
+  "InlineCode",ExpressionUUID->"835d9c5c-6ffc-46ff-a128-901ab558d6be"]
+}], "Text",ExpressionUUID->"65713960-7def-4709-9027-33f5ed07dd1b"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"56d65ee1-713c-4d4f-be72-d1f94487bf57"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 101, 0, 70, "Title",ExpressionUUID->"20745db7-3b90-42b6-803f-c167aef10330"],
+Cell[658, 22, 379, 7, 70, "Text",ExpressionUUID->"f435f71f-4eff-4f3d-89de-f6a046ccbe7b"],
+Cell[1040, 31, 177, 3, 70, "Text",ExpressionUUID->"dca7ff48-46c9-4bf3-a9f0-cbdcc67df07e"],
+Cell[1220, 36, 174, 3, 70, "Text",ExpressionUUID->"2c01dcd3-59a6-4089-a673-1808ab36a00c"],
+Cell[1397, 41, 180, 3, 70, "Text",ExpressionUUID->"015e1aa1-0928-4574-984f-d0575baab393"],
+Cell[1580, 46, 174, 3, 70, "Text",ExpressionUUID->"ad4bd2ed-fb71-4ee6-95d5-5cfe51540305"],
+Cell[1757, 51, 79, 0, 70, "Text",ExpressionUUID->"efadce70-2f55-4820-b423-6097e838f3f6"],
+Cell[1839, 53, 92, 0, 70, "Section",ExpressionUUID->"21038910-aef6-4e60-999e-3fc9d9e04b83"],
+Cell[1934, 55, 322, 5, 70, "Item",ExpressionUUID->"0e14998f-2a47-474c-9ec5-fa68f938b7c7"],
+Cell[2259, 62, 310, 5, 70, "Item",ExpressionUUID->"c492c80b-d872-4192-9e63-bcedec1256c1"],
+Cell[2572, 69, 167, 3, 70, "Item",ExpressionUUID->"d897e190-cc3d-4e89-bfd9-76c770ca7b1b"],
+Cell[2742, 74, 175, 3, 70, "Text",ExpressionUUID->"14a1ba0c-cfde-4121-ae92-f7dc2a79e9fb"],
+Cell[2920, 79, 171, 3, 70, "Item",ExpressionUUID->"6620cdf2-96bd-4ff6-b548-4f0b5e6839b1"],
+Cell[3094, 84, 457, 7, 70, "Text",ExpressionUUID->"a2761337-11cd-4277-8483-70516e49ea94"],
+Cell[3554, 93, 311, 5, 70, "Item",ExpressionUUID->"1051d6d4-d245-4d97-820e-3dfb36bcc4f7"],
+Cell[3868, 100, 325, 5, 70, "Item",ExpressionUUID->"e824ca4c-617f-4dde-a70e-c02d734a8456"],
+Cell[4196, 107, 179, 3, 70, "Item",ExpressionUUID->"82d96c16-efe9-41a4-8763-08595203288f"],
+Cell[4378, 112, 98, 0, 70, "Text",ExpressionUUID->"7fbc0bfc-d6ae-473e-bf46-03f0812871bb"],
+Cell[4479, 114, 357, 6, 70, "Text",ExpressionUUID->"86bea559-8dfe-46a1-b41c-c9b9a27b8de8"],
+Cell[4839, 122, 130, 0, 70, "Text",ExpressionUUID->"1b9c90a2-0ca4-4cfe-8c73-49a8c882a0ac"],
+Cell[4972, 124, 85, 0, 70, "Section",ExpressionUUID->"76e26bb0-35f9-4a3b-a7d8-185fb7c9e290"],
+Cell[5060, 126, 118, 0, 70, "Text",ExpressionUUID->"bfab945c-417b-4e3a-91e3-1cf6e3b191b4"],
+Cell[5181, 128, 2057, 52, 70, "TextTableForm",ExpressionUUID->"19368402-193a-4457-ba4c-3e8322c7783c"],
+Cell[7241, 182, 104, 0, 70, "Section",ExpressionUUID->"4d1fe830-2dce-4919-9636-23f5a1711292"],
+Cell[7348, 184, 590, 10, 70, "Text",ExpressionUUID->"536e6850-ce75-432e-b64d-c93ba4fcec6c"],
+Cell[7941, 196, 103, 0, 70, "Text",ExpressionUUID->"fedec53b-52ba-4aa5-a326-e91eb8e28c66"],
+Cell[8047, 198, 354, 6, 70, "Text",ExpressionUUID->"0ceb46a3-c92c-4fe0-99fa-d8b7a4345901"],
+Cell[8404, 206, 503, 10, 70, "Text",ExpressionUUID->"19855b25-bc73-4e29-a232-578d915626cb"],
+Cell[8910, 218, 164, 3, 70, "Text",ExpressionUUID->"1034b678-09f6-4a1b-84e6-783a57590487"],
+Cell[9077, 223, 300, 6, 70, "Text",ExpressionUUID->"26235d4d-f9de-4c28-ae53-21a908ceec3c"],
+Cell[9380, 231, 321, 6, 70, "Text",ExpressionUUID->"5f672ae1-ae31-4e53-a2b7-82fb61776096"],
+Cell[9704, 239, 333, 6, 70, "Text",ExpressionUUID->"b710f491-6448-4d86-8a81-143ff14ff131"],
+Cell[10040, 247, 181, 3, 70, "Text",ExpressionUUID->"c49fc529-c44f-4b06-a1d7-b00d30bedcab"],
+Cell[10224, 252, 365, 7, 70, "Text",ExpressionUUID->"090e7d4a-106f-4491-a150-a32c7ee3863c"],
+Cell[10592, 261, 316, 6, 70, "Text",ExpressionUUID->"f2b53af4-024e-4d83-a592-3ebeb2934f73"],
+Cell[10911, 269, 169, 3, 70, "Text",ExpressionUUID->"59c89cf0-64ff-49ae-b1d5-7519eb1c05de"],
+Cell[11083, 274, 163, 3, 70, "Item",ExpressionUUID->"07ecd4cf-8009-4ecc-a204-2f99f714ffc3"],
+Cell[11249, 279, 347, 6, 70, "Item",ExpressionUUID->"ab1b4a6b-7212-471e-831e-3dc89104553e"],
+Cell[11599, 287, 177, 3, 70, "Text",ExpressionUUID->"fbdc0561-7cb4-43a9-9fed-4c71af21e6a7"],
+Cell[11779, 292, 109, 0, 70, "Text",ExpressionUUID->"8d129e40-4f78-494d-b69a-f436d4695a65"],
+Cell[11891, 294, 104, 0, 70, "Section",ExpressionUUID->"1f35aeab-a059-470a-b213-29e2b03a9f47"],
+Cell[11998, 296, 104, 0, 70, "Text",ExpressionUUID->"99e37293-0152-47ee-9819-0a174faa3ded"],
+Cell[12105, 298, 325, 6, 70, "Text",ExpressionUUID->"547b1e5f-5c59-46c5-905c-599d4920a44f"],
+Cell[12433, 306, 339, 6, 70, "Text",ExpressionUUID->"02ff1acc-bd53-4afd-a466-8a733a17cdf7"],
+Cell[12775, 314, 179, 3, 70, "Text",ExpressionUUID->"a5752abf-99d5-4e18-905b-e6c6f44f6f24"],
+Cell[12957, 319, 112, 0, 70, "Text",ExpressionUUID->"66fddaa3-8acb-4d3b-b508-d07951683392"],
+Cell[13072, 321, 149, 2, 70, "Text",ExpressionUUID->"94d947ba-9b7e-4a93-9984-e550d63d9b4c"],
+Cell[13224, 325, 150, 2, 70, "Item",ExpressionUUID->"f0cc1685-62f7-41cb-9338-62348950b92c"],
+Cell[13377, 329, 302, 6, 70, "Text",ExpressionUUID->"b146dff1-9cd7-4944-a57e-bd7b1d1ca876"],
+Cell[13682, 337, 105, 0, 70, "Item",ExpressionUUID->"577cb985-6979-4d06-9429-3c0771e7a945"],
+Cell[13790, 339, 160, 3, 70, "Item",ExpressionUUID->"e9bb00f8-75a8-4864-9478-5813ae65afd3"],
+Cell[13953, 344, 142, 2, 70, "Item",ExpressionUUID->"d26e2100-df39-4d0e-a0bb-d3dfc3882966"],
+Cell[14098, 348, 180, 3, 70, "Text",ExpressionUUID->"d9b5242f-f235-4dba-80c4-3ab2d233674a"],
+Cell[14281, 353, 116, 0, 70, "Text",ExpressionUUID->"fe737fc2-7a46-4cf4-88d8-46f25cf6e5a3"],
+Cell[14400, 355, 93, 0, 70, "Section",ExpressionUUID->"fde60743-7501-4d2c-a24d-b93efd5f4e3d"],
+Cell[14496, 357, 658, 13, 70, "Text",ExpressionUUID->"47d9ec85-cde0-46e4-b4e7-17a34983e2f6"],
+Cell[15157, 372, 103, 0, 70, "Text",ExpressionUUID->"f05b60e7-ac2c-4be0-8784-918e46ac16fd"],
+Cell[15263, 374, 277, 4, 70, "Item",ExpressionUUID->"364c806e-73f5-4756-9a84-0b7248c6926a"],
+Cell[15543, 380, 300, 5, 70, "Item",ExpressionUUID->"eb63fe59-b5cb-45db-aab4-5fd121e822ba"],
+Cell[15846, 387, 283, 4, 70, "Item",ExpressionUUID->"e1c574ba-3cf1-4681-a2e3-d079fb3e88e7"],
+Cell[16132, 393, 292, 4, 70, "Item",ExpressionUUID->"342e0a3e-fdee-4f54-afd3-4c07d5ca11e7"],
+Cell[16427, 399, 180, 3, 70, "Text",ExpressionUUID->"3126acc0-d5a2-4553-92fb-7a4b35703e4f"],
+Cell[16610, 404, 112, 0, 70, "Text",ExpressionUUID->"c9166e3d-23cb-492d-847d-952cc0abbd87"],
+Cell[16725, 406, 104, 0, 70, "Section",ExpressionUUID->"94cec6b1-0d58-429f-b238-8ad28184d167"],
+Cell[16832, 408, 4661, 103, 70, "TextTableForm",ExpressionUUID->"60606341-95f1-42e9-98b7-494ba5d80a33"],
+Cell[21496, 513, 176, 3, 70, "Text",ExpressionUUID->"e257aab6-8dfd-44f4-90c3-132a1970fc9c"],
+Cell[21675, 518, 181, 3, 70, "Text",ExpressionUUID->"d9ccd7aa-1e70-44a3-a7cd-d00c0be0f650"],
+Cell[21859, 523, 147, 2, 70, "Text",ExpressionUUID->"173ba33d-edfe-4873-a1fa-bfcb407141ad"],
+Cell[22009, 527, 129, 0, 70, "Section",ExpressionUUID->"e2f8acdf-5e7d-4415-a2fc-83f631c412d2"],
+Cell[22141, 529, 145, 2, 70, "Text",ExpressionUUID->"35873f15-eb8d-49fe-8f5c-dd81f07e6d27"],
+Cell[22289, 533, 152, 2, 70, "Item",ExpressionUUID->"9aa4b91d-6543-4e9e-81d1-a52d8d47ef37"],
+Cell[22444, 537, 154, 2, 70, "Item",ExpressionUUID->"f536c181-0f37-4bc1-90f0-4de3fa154b69"],
+Cell[22601, 541, 357, 6, 70, "Item",ExpressionUUID->"26c925fe-2bf1-4353-9657-0d3e29da6d2e"],
+Cell[22961, 549, 102, 0, 70, "Text",ExpressionUUID->"e0bfd74e-911c-44fd-ade5-8f81717f0a47"],
+Cell[23066, 551, 182, 3, 70, "Text",ExpressionUUID->"95b2a059-60f9-4135-bde7-1d951635f80c"],
+Cell[23251, 556, 180, 3, 70, "Text",ExpressionUUID->"ee3df80b-b310-4fab-9e1e-b2868c1b96cc"],
+Cell[23434, 561, 180, 3, 70, "Text",ExpressionUUID->"54b73e73-5b54-46df-bc3a-d67285b47094"],
+Cell[23617, 566, 119, 0, 70, "Text",ExpressionUUID->"0d778b6a-1611-4a5e-b2ab-d08f1082c93c"],
+Cell[23739, 568, 124, 0, 70, "Section",ExpressionUUID->"2c71d287-3c3f-4ed1-893a-c4851adae1ae"],
+Cell[23866, 570, 178, 3, 70, "Text",ExpressionUUID->"81fd2d1c-29af-43b9-996b-caba9826b3f2"],
+Cell[24047, 575, 145, 2, 70, "Text",ExpressionUUID->"6309367a-c40b-4907-8226-d1f98651c119"],
+Cell[24195, 579, 3129, 72, 70, "TextTableForm",ExpressionUUID->"233ef71f-2657-43ae-b3ea-fc5577956178"],
+Cell[27327, 653, 121, 0, 70, "Text",ExpressionUUID->"0daf407e-b783-47d2-9237-2e5b95cfd778"],
+Cell[27451, 655, 100, 0, 70, "Section",ExpressionUUID->"2014243c-8821-402a-bdf6-63845b670683"],
+Cell[27554, 657, 146, 2, 70, "Text",ExpressionUUID->"e07394c5-26cf-4e08-9e6d-1cc906787c6f"],
+Cell[27703, 661, 856, 17, 70, "Text",ExpressionUUID->"cf6eab8d-1157-4f9f-ac65-004846fb9321"],
+Cell[28562, 680, 127, 0, 70, "Text",ExpressionUUID->"e7e267fe-dae1-48fc-a894-82b1c72fc590"],
+Cell[28692, 682, 176, 3, 70, "Text",ExpressionUUID->"20656374-d2a0-4fc5-9603-a6874472b7b2"],
+Cell[28871, 687, 179, 3, 70, "Text",ExpressionUUID->"4829d123-6c49-4317-b88f-d15e3bb2fd52"],
+Cell[29053, 692, 99, 0, 70, "Text",ExpressionUUID->"cba4ee9c-ac50-4484-9a17-9aedcdd6a711"],
+Cell[29155, 694, 111, 0, 70, "Section",ExpressionUUID->"7cf611a5-cb57-45f5-b0af-82a531cb74ad"],
+Cell[29269, 696, 177, 3, 70, "Text",ExpressionUUID->"4429c470-dc8a-4dd8-9279-60f67bd965c8"],
+Cell[29449, 701, 94, 0, 70, "Text",ExpressionUUID->"ef87618a-2b0b-49ac-b7fd-932dae09af8d"],
+Cell[29546, 703, 146, 2, 70, "Item",ExpressionUUID->"04d2df6d-4454-4ff1-b5d2-b2bc99ecfb53"],
+Cell[29695, 707, 141, 2, 70, "Item",ExpressionUUID->"f8359a87-d15e-494c-ad98-3787f500eae9"],
+Cell[29839, 711, 171, 3, 70, "Item",ExpressionUUID->"f297fae2-006c-4893-b7b1-d323669fb1eb"],
+Cell[30013, 716, 126, 0, 70, "Text",ExpressionUUID->"50ca1f65-5f2b-42d4-9434-6c71f0568490"],
+Cell[30142, 718, 168, 3, 70, "Text",ExpressionUUID->"0832d200-0b1e-45b6-849a-3d3900faa35a"],
+Cell[30313, 723, 90, 0, 70, "Section",ExpressionUUID->"e4ba261c-bf0d-47b4-8fdf-3c457008cdda"],
+Cell[30406, 725, 673, 12, 70, "Text",ExpressionUUID->"65713960-7def-4709-9027-33f5ed07dd1b"]
+}
+]
+*)
+
+(* End of internal cache information *)

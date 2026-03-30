@@ -1,0 +1,7 @@
+The controlled boundary theorem has been sharpened to block-centrality: only the surviving diagonal controlled ambiguity blocks matter after controlled projection.
+
+Natural boundary null ideals were compared exactly. The readout-kernel and block-trace-zero candidates are stable but overlarge and trivialize the audited controlled dynamics; the state-invisible candidate is nontrivial but not stable.
+
+The actual transported ambiguity basis from the certified weak-interface export now has exact safe and unsafe split+welded boundary realizations.
+
+Because visible diagonal controlled ambiguity survives in an exact transported witness, boundary safety is not forced structurally by the current transport stack, and the selector lane must be promoted if Main needs a canonical nontrivial boundary derivation.

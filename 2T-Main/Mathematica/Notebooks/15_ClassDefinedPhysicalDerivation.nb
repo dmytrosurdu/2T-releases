@@ -1,0 +1,303 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     11720,        294]
+NotebookOptionsPosition[      9855,        265]
+NotebookOutlinePosition[     10169,        279]
+CellTagsIndexPosition[     10126,        276]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["15. Class-Defined Physical Derivation", "Title",ExpressionUUID->"45af8539-65dc-4f99-88d7-b9616014a086"],
+
+Cell["\<\
+This notebook turns the ambiguity action into the exact criterion for \
+representative-independence of the physical Peierls derivation. \
+\>", "Text",ExpressionUUID->"ffeeaa97-588f-4694-a222-79e53d3ad7b9"],
+
+Cell["Exact quotient criterion", "Section",ExpressionUUID->"f5a0e72c-45aa-4757-877b-8f1202109be2"],
+
+Cell[TextData[{
+ "Let ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          StyleBox["J", "TI"], "2"], "\[LongEqual]", 
+         SubscriptBox[
+          StyleBox["J", "TI"], "1"], "+", 
+         StyleBox["A", "TI"], ",    ", 
+         StyleBox["A", "TI"], "\[Element]", 
+         SuperscriptBox[
+          StyleBox["A", "TI"], "-"], "."}], TraditionalForm], "errors" -> {}, 
+     "input" -> "J_2 = J_1 + A,\n\\qquad A \\in \\mathcal A^-.", "state" -> 
+     "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "d38f6161-b26b-4740-a72f-346bc41e8434"],
+ "Then ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox["\[Delta]", 
+          SubscriptBox[
+           StyleBox["J", "TI"], "2"]], "-", 
+         SubscriptBox["\[Delta]", 
+          SubscriptBox[
+           StyleBox["J", "TI"], "1"]], "\[LongEqual]", 
+         SubscriptBox[
+          RowBox[{
+            StyleBox["a", "TI"], 
+            StyleBox["d", "TI"]}], 
+          StyleBox["A", "TI"]], "."}], TraditionalForm], "errors" -> {}, 
+     "input" -> "\\delta_{J_2} - \\delta_{J_1} = \\operatorname{ad}_A.", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "fe06d0d4-d3b5-4394-9c6f-0e96ff4fccef"],
+ "Therefore the induced physical derivation is class-defined exactly when \
+every ambiguity direction acts trivially on the physical observable sector, \
+or more generally when ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          RowBox[{
+            StyleBox["a", "TI"], 
+            StyleBox["d", "TI"]}], 
+          StyleBox["A", "TI"]], 
+         RowBox[{"(", 
+           SubscriptBox[
+            StyleBox["O", "TI"], 
+            StyleBox["phys", FontSlant -> "Plain"]], ")"}], "\[SubsetEqual]", 
+         
+         SubscriptBox[
+          StyleBox["N", "TI"], 
+          StyleBox["phys", FontSlant -> "Plain"]], "."}], TraditionalForm], 
+     "errors" -> {}, "input" -> 
+     "\\operatorname{ad}_A(\\mathcal O_{\\mathrm{phys}}) \\subseteq \\mathcal \
+N_{\\mathrm{phys}}.", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "803aeb3d-d564-4a85-b0f1-b2b3bb537584"]
+}], "Text",ExpressionUUID->"a9f03736-5abd-4645-9e88-ad96e3890d21"],
+
+Cell["Exact model outcomes", "Section",ExpressionUUID->"ee1bc084-8da6-4e5f-8761-6cb3ca8ed8cd"],
+
+Cell["On-the-nose triviality", "Subsection",ExpressionUUID->"099322a6-2881-4f08-9edc-7e81325bf74d"],
+
+Cell[TextData[{
+ "The invisible model certifies the strongest case: ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          RowBox[{
+            StyleBox["a", "TI"], 
+            StyleBox["d", "TI"]}], 
+          StyleBox["A", "TI"]], 
+         RowBox[{"(", 
+           SubscriptBox[
+            StyleBox["O", "TI"], 
+            StyleBox["phys", FontSlant -> "Plain"]], ")"}], "\[LongEqual]", 
+         "0", ","}], TraditionalForm], "errors" -> {}, "input" -> 
+     "\\operatorname{ad}_A(\\mathcal O_{\\mathrm{phys}})=0,", "state" -> 
+     "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "eb356886-b61d-4c55-855d-663a3d1be336"],
+ "so the derivation is literally representative-independent on the physical \
+sector. "
+}], "Text",ExpressionUUID->"584cc7b4-579a-4f25-b944-1dcb02b51cdf"],
+
+Cell["Triviality modulo the physical null ideal", "Subsection",ExpressionUUID->"27300729-674d-4085-8689-aeef32910cc0"],
+
+Cell[TextData[{
+ "The null-ideal model certifies the quotient version: ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          RowBox[{
+            StyleBox["a", "TI"], 
+            StyleBox["d", "TI"]}], 
+          StyleBox["A", "TI"]], 
+         RowBox[{"(", 
+           SubscriptBox[
+            StyleBox["O", "TI"], 
+            StyleBox["phys", FontSlant -> "Plain"]], ")"}], "\[SubsetEqual]", 
+         
+         SubscriptBox[
+          StyleBox["N", "TI"], 
+          StyleBox["phys", FontSlant -> "Plain"]], ","}], TraditionalForm], 
+     "errors" -> {}, "input" -> 
+     "\\operatorname{ad}_A(\\mathcal O_{\\mathrm{phys}}) \\subseteq \\mathcal \
+N_{\\mathrm{phys}},", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "01e66939-0e85-4197-b52a-0ac75c75b72e"],
+ "while ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SubscriptBox[
+        RowBox[{
+          StyleBox["a", "TI"], 
+          StyleBox["d", "TI"]}], 
+        StyleBox["A", "TI"]], TraditionalForm], "errors" -> {}, "input" -> 
+     "\\operatorname{ad}_A", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "5d1a5818-6e2e-4c5d-b874-83e1714afd0e"],
+ " is still nonzero before quotienting. "
+}], "Text",ExpressionUUID->"ef308443-a3e2-4be5-b773-ee6eaff84201"],
+
+Cell["Visible failure", "Subsection",ExpressionUUID->"7bef5c40-5aed-4c27-9809-3dbb79014b91"],
+
+Cell[TextData[{
+ "The visible model provides the minimal exact obstruction. There, ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          RowBox[{
+            StyleBox["a", "TI"], 
+            StyleBox["d", "TI"]}], 
+          StyleBox["A", "TI"]], 
+         RowBox[{"(", 
+           SubscriptBox[
+            StyleBox["O", "TI"], 
+            StyleBox["phys", FontSlant -> "Plain"]], ")"}], 
+         "\[NotSubsetEqual]", 
+         SubscriptBox[
+          StyleBox["N", "TI"], 
+          StyleBox["phys", FontSlant -> "Plain"]], ","}], TraditionalForm], 
+     "errors" -> {}, "input" -> 
+     "\\operatorname{ad}_A(\\mathcal O_{\\mathrm{phys}}) \\not\\subseteq \
+\\mathcal N_{\\mathrm{phys}},", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "e9bb6b2d-ca00-4e56-a154-58dad98e7d35"],
+ "so the induced physical derivation is not class-defined. "
+}], "Text",ExpressionUUID->"25ef4441-6fe9-4c6a-b2e8-f04fb71c020f"],
+
+Cell["Decision for Main", "Section",ExpressionUUID->"7bd14fcc-bc4a-49e5-a425-6868522c9a08"],
+
+Cell["The WL audit proves an exact finite-cutoff fork: ", "Text",ExpressionUUID->"456f3ca5-2dbc-483c-a931-f5cbb2cb4f90"],
+
+Cell["\<\
+if ambiguity directions are trivial on the physical sector or modulo the \
+physical null ideal, the physical derivation is class-defined;\
+\>", "Item",ExpressionUUID->"0b414894-0799-4c77-b094-aa11b0724e7a"],
+
+Cell["\<\
+otherwise, representative dependence is physically visible, so a preferred \
+selector or calibration remains a live requirement.\
+\>", "Item",ExpressionUUID->"f7513518-cc6f-474d-94ad-2538606d621e"],
+
+Cell[TextData[{
+ "This notebook certifies the criterion itself. It does ",
+ StyleBox["not",
+  FontWeight->Bold],
+ " derive the ambiguity-triviality hypothesis from the current Main/UOM \
+assumptions. "
+}], "Text",ExpressionUUID->"322adc86-c963-4aa4-bf0b-88a58747fc42"],
+
+Cell["Status", "Section",ExpressionUUID->"96e8bb66-f4cc-4d24-b667-57d261f4a31e"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Claim\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm]},
+        {Cell[TextData[{
+          "Exact formula delta",
+          StyleBox["(J + A) - delta",
+           FontSlant->Italic],
+          "J = ad_A"
+         }],ExpressionUUID->
+          "0a13e778-123a-465d-aaa5-57b47ed3b86a"], \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"On-the-nose ambiguity triviality gives invariance\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Null-ideal triviality gives quotient invariance\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Visible ambiguity breaks class-definedness\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Criterion not yet derived from Main/UOM hypotheses\"\>", \
+"\<\"abstract-imported-assumptions\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[BoxForm`e$, TableHeadings -> {None, {"Claim", "Status"}}]]], 
+    "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"8025bd30-ba3b-4f55-a27e-fb45b4430fca"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"a83bd6d1-c378-4ba4-8c49-4f0e587986a8"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 109, 0, 70, "Title",ExpressionUUID->"45af8539-65dc-4f99-88d7-b9616014a086"],
+Cell[666, 22, 215, 3, 70, "Text",ExpressionUUID->"ffeeaa97-588f-4694-a222-79e53d3ad7b9"],
+Cell[884, 27, 98, 0, 70, "Section",ExpressionUUID->"f5a0e72c-45aa-4757-877b-8f1202109be2"],
+Cell[985, 29, 2374, 63, 70, "Text",ExpressionUUID->"a9f03736-5abd-4645-9e88-ad96e3890d21"],
+Cell[3362, 94, 94, 0, 70, "Section",ExpressionUUID->"ee1bc084-8da6-4e5f-8761-6cb3ca8ed8cd"],
+Cell[3459, 96, 99, 0, 70, "Subsection",ExpressionUUID->"099322a6-2881-4f08-9edc-7e81325bf74d"],
+Cell[3561, 98, 872, 22, 70, "Text",ExpressionUUID->"584cc7b4-579a-4f25-b944-1dcb02b51cdf"],
+Cell[4436, 122, 118, 0, 70, "Subsection",ExpressionUUID->"27300729-674d-4085-8689-aeef32910cc0"],
+Cell[4557, 124, 1385, 37, 70, "Text",ExpressionUUID->"ef308443-a3e2-4be5-b773-ee6eaff84201"],
+Cell[5945, 163, 92, 0, 70, "Subsection",ExpressionUUID->"7bef5c40-5aed-4c27-9809-3dbb79014b91"],
+Cell[6040, 165, 1012, 25, 70, "Text",ExpressionUUID->"25ef4441-6fe9-4c6a-b2e8-f04fb71c020f"],
+Cell[7055, 192, 91, 0, 70, "Section",ExpressionUUID->"7bd14fcc-bc4a-49e5-a425-6868522c9a08"],
+Cell[7149, 194, 120, 0, 70, "Text",ExpressionUUID->"456f3ca5-2dbc-483c-a931-f5cbb2cb4f90"],
+Cell[7272, 196, 216, 3, 70, "Item",ExpressionUUID->"0b414894-0799-4c77-b094-aa11b0724e7a"],
+Cell[7491, 201, 207, 3, 70, "Item",ExpressionUUID->"f7513518-cc6f-474d-94ad-2538606d621e"],
+Cell[7701, 206, 268, 6, 70, "Text",ExpressionUUID->"322adc86-c963-4aa4-bf0b-88a58747fc42"],
+Cell[7972, 214, 80, 0, 70, "Section",ExpressionUUID->"96e8bb66-f4cc-4d24-b667-57d261f4a31e"],
+Cell[8055, 216, 1796, 47, 70, "TextTableForm",ExpressionUUID->"8025bd30-ba3b-4f55-a27e-fb45b4430fca"]
+}
+]
+*)
+
+(* End of internal cache information *)

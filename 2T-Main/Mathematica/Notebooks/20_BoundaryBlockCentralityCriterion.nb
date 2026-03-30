@@ -1,0 +1,241 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      9770,        232]
+NotebookOptionsPosition[      8023,        204]
+NotebookOutlinePosition[      8337,        218]
+CellTagsIndexPosition[      8294,        215]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Boundary Block Centrality Criterion", "Title",ExpressionUUID->"e0f0acc8-942a-4c91-8d68-46e0077c8553"],
+
+Cell[TextData[{
+ "This notebook audits the exact controlled-boundary theorem lane implemented \
+in ",
+ Cell[BoxData[Cell["\<\
+/home/kray-l8/work/2T/Main/Mathematica/Kernel/BoundaryBlockCentrality.wl\
+\>",
+   Background->None,ExpressionUUID->"18b22391-95ea-4221-821c-3d14072a4474"]], 
+  "InlineCode",ExpressionUUID->"5402f987-43d1-49d6-bf78-73cd4233de4a"],
+ ". "
+}], "Text",ExpressionUUID->"2543dbe8-bdb7-4493-8529-e06bfbddb184"],
+
+Cell["Targets", "Section",ExpressionUUID->"96150f64-6491-40f7-8a15-863c5bd18967"],
+
+Cell[TextData[Cell[BoxData[Cell["thm:controlled-boundary-block-centrality-\
+strong",
+  Background->None,ExpressionUUID->
+  "ed3f6d84-e7f5-477a-a62e-53224a0f247f"]], \
+"InlineCode",ExpressionUUID->"27a74746-4b03-46cc-9aa3-0a3ab85744a0"]], "Item",\
+ExpressionUUID->"4bce4a21-cdde-49a3-814f-615df2f363fb"],
+
+Cell[TextData[Cell[BoxData[Cell["thm:controlled-boundary-block-centrality-mod-\
+null",
+  Background->None,ExpressionUUID->
+  "4059ca77-09c9-4f39-9fb2-59b27bc1530f"]], \
+"InlineCode",ExpressionUUID->"47b5fd1a-8922-41b8-b899-4402e633bc8b"]], "Item",\
+ExpressionUUID->"92523be2-e98a-4faf-82b8-37469599f23d"],
+
+Cell[TextData[Cell[BoxData[Cell["rem:expectation-invisibility-insufficient",
+  Background->None,ExpressionUUID->
+  "f23f5b8f-5221-47ce-b164-904d73053a6b"]], \
+"InlineCode",ExpressionUUID->"d6d3fcc7-cd7b-489f-95f2-689f59cbb67d"]], "Item",\
+ExpressionUUID->"c4fa3c27-7143-44b0-88a1-7c4f6ba1c015"],
+
+Cell["Exact setup", "Section",ExpressionUUID->"f3ebcca9-971a-4bcc-bd98-e2650affa28f"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"blockSuite", "=", 
+   RowBox[{
+   "MainProof`BoundaryBlockCentrality`RunBoundaryBlockCentralityExampleSuite",
+     "[", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"statements", "=", 
+   RowBox[{
+   "MainProof`BoundaryBlockCentrality`\
+BoundaryBlockCentralityTheoremStatements", "[", "]"}]}], ";"}]}], "Input",Expr\
+essionUUID->"d5fd69a0-3b2e-499d-abf2-78716b478311"],
+
+Cell["Core theorem", "Section",ExpressionUUID->"358c1f42-b47a-4d59-81dd-cee5a6c815e5"],
+
+Cell[TextData[{
+ "For controlled observables ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["O", "TI"], "\[LongEqual]", 
+         UnderscriptBox["\[Sum]", 
+          StyleBox["i", "TI"], LimitsPositioning -> True], 
+         SubsuperscriptBox["\[CapitalPi]", 
+          StyleBox["i", "TI"], 
+          RowBox[{"(", 
+            StyleBox["A", "TI"], ")"}]], "\[CircleTimes]", 
+         SubsuperscriptBox[
+          StyleBox["O", "TI"], 
+          StyleBox["i", "TI"], 
+          RowBox[{"(", 
+            StyleBox["B", "TI"], ")"}]]}], TraditionalForm], "errors" -> {}, 
+     "input" -> "O=\\sum_i \\Pi_i^{(A)}\\otimes O_i^{(B)}", "state" -> 
+     "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "667a7870-efc6-40cb-aa94-dfa3c159997e"],
+ "and a controlled ambiguity operator with surviving blocks ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SubsuperscriptBox[
+        StyleBox["K", "TI"], 
+        StyleBox["i", "TI"], 
+        RowBox[{"(", 
+          StyleBox["B", "TI"], ")"}]], TraditionalForm], "errors" -> {}, 
+     "input" -> "K_i^{(B)}", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "a36ca9c4-4988-4320-b43f-7e8302d943c2"],
+ ", the exact finite-cutoff reduction is ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          StyleBox["P", "TI"], 
+          StyleBox["ctrl", FontSlant -> "Plain"]], 
+         RowBox[{"(", 
+           RowBox[{"[", 
+             RowBox[{
+               StyleBox["K", "TI"], ",", 
+               StyleBox["O", "TI"]}], "]"}], ")"}], "\[LongEqual]", 
+         UnderscriptBox["\[Sum]", 
+          StyleBox["i", "TI"], LimitsPositioning -> True], 
+         SubsuperscriptBox["\[CapitalPi]", 
+          StyleBox["i", "TI"], 
+          RowBox[{"(", 
+            StyleBox["A", "TI"], ")"}]], "\[CircleTimes]", 
+         RowBox[{"[", 
+           RowBox[{
+             SubsuperscriptBox[
+              StyleBox["K", "TI"], 
+              StyleBox["i", "TI"], 
+              RowBox[{"(", 
+                StyleBox["B", "TI"], ")"}]], ",", 
+             SubsuperscriptBox[
+              StyleBox["O", "TI"], 
+              StyleBox["i", "TI"], 
+              RowBox[{"(", 
+                StyleBox["B", "TI"], ")"}]]}], "]"}], "."}], TraditionalForm],
+      "errors" -> {}, "input" -> 
+     "P_{\\mathrm{ctrl}}([K,O])=\\sum_i \\Pi_i^{(A)}\\otimes \
+[K_i^{(B)},O_i^{(B)}].", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "94dae983-3f9c-4a6e-9ff7-633d2fd368b4"],
+ "The strong class-definedness criterion is therefore equivalent to blockwise \
+centrality on the surviving ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["B", "TI"], TraditionalForm], "errors" -> {}, "input" -> "B", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "301b9f2d-36b1-43be-94ab-1912809d69b7"],
+ "-blocks, and the mod-null criterion is equivalent to blockwise centrality \
+modulo the chosen boundary null ideal. "
+}], "Text",ExpressionUUID->"f666c2e1-b5e1-4fd4-a133-e12c2178c4c6"],
+
+Cell["Exact checks", "Section",ExpressionUUID->"de9ae266-2f26-41dc-9385-c453921675d6"],
+
+Cell[BoxData[
+ RowBox[{"<|", "\[IndentingNewLine]", "  ", 
+  RowBox[{
+   RowBox[{"\"\<StrongTheorem_2x2\>\"", "->", 
+    RowBox[{"blockSuite", "[", "\"\<StrongTheorem_2x2\>\"", "]"}]}], ",", 
+   "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<StrongTheorem_2x3\>\"", "->", 
+    RowBox[{"blockSuite", "[", "\"\<StrongTheorem_2x3\>\"", "]"}]}], ",", 
+   "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<StrongTheorem_3x2\>\"", "->", 
+    RowBox[{"blockSuite", "[", "\"\<StrongTheorem_3x2\>\"", "]"}]}], ",", 
+   "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<SafeFamily\>\"", "->", 
+    RowBox[{"blockSuite", "[", "\"\<SafeFamily\>\"", "]"}]}], ",", 
+   "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<UnsafeFamily\>\"", "->", 
+    RowBox[{"blockSuite", "[", "\"\<UnsafeFamily\>\"", "]"}]}], ",", 
+   "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<BorderlineFamily\>\"", "->", 
+    RowBox[{"blockSuite", "[", "\"\<BorderlineFamily\>\"", "]"}]}], ",", 
+   "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<Statements\>\"", "->", "statements"}]}], 
+  "\[IndentingNewLine]", "|>"}]], "Input",ExpressionUUID->"43bec30c-347c-42a9-\
+9068-978b9d7f95fc"],
+
+Cell["Expected outcome", "Section",ExpressionUUID->"14ff286c-11f8-4e1e-aa3f-8d7902dd4977"],
+
+Cell["\<\
+The controlled commutator formula is exact in the tested dimensions.\
+\>", "Item",ExpressionUUID->"248ca53e-75fe-4942-8a90-01bf0d55d6a6"],
+
+Cell["Strong class-definedness matches block-centrality exactly.", "Item",ExpressionUUID->"e0e52d8b-48cb-4e8e-b357-a0c964cf8322"],
+
+Cell["\<\
+Mod-null class-definedness matches block-centrality modulo the chosen null \
+ideal exactly.\
+\>", "Item",ExpressionUUID->"eb0136fa-9102-4d4f-8477-89d1bbee18a8"],
+
+Cell["\<\
+Expectation-level invisibility is weaker than operator-level and mod-null \
+class-definedness, with an explicit unsafe witness.\
+\>", "Item",ExpressionUUID->"59ab59a7-d94c-4c0b-92f7-ced7a0787608"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"a83bd6d1-c378-4ba4-8c49-4f0e587986a8"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 107, 0, 70, "Title",ExpressionUUID->"e0f0acc8-942a-4c91-8d68-46e0077c8553"],
+Cell[664, 22, 428, 9, 70, "Text",ExpressionUUID->"2543dbe8-bdb7-4493-8529-e06bfbddb184"],
+Cell[1095, 33, 81, 0, 70, "Section",ExpressionUUID->"96150f64-6491-40f7-8a15-863c5bd18967"],
+Cell[1179, 35, 302, 5, 70, "Item",ExpressionUUID->"4bce4a21-cdde-49a3-814f-615df2f363fb"],
+Cell[1484, 42, 304, 5, 70, "Item",ExpressionUUID->"92523be2-e98a-4faf-82b8-37469599f23d"],
+Cell[1791, 49, 294, 4, 70, "Item",ExpressionUUID->"c4fa3c27-7143-44b0-88a1-7c4f6ba1c015"],
+Cell[2088, 55, 85, 0, 70, "Section",ExpressionUUID->"f3ebcca9-971a-4bcc-bd98-e2650affa28f"],
+Cell[2176, 57, 561, 15, 70, "Input",ExpressionUUID->"d5fd69a0-3b2e-499d-abf2-78716b478311"],
+Cell[2740, 74, 86, 0, 70, "Section",ExpressionUUID->"358c1f42-b47a-4d59-81dd-cee5a6c815e5"],
+Cell[2829, 76, 3210, 81, 70, "Text",ExpressionUUID->"f666c2e1-b5e1-4fd4-a133-e12c2178c4c6"],
+Cell[6042, 159, 86, 0, 70, "Section",ExpressionUUID->"de9ae266-2f26-41dc-9385-c453921675d6"],
+Cell[6131, 161, 1131, 23, 70, "Input",ExpressionUUID->"43bec30c-347c-42a9-9068-978b9d7f95fc"],
+Cell[7265, 186, 90, 0, 70, "Section",ExpressionUUID->"14ff286c-11f8-4e1e-aa3f-8d7902dd4977"],
+Cell[7358, 188, 147, 2, 70, "Item",ExpressionUUID->"248ca53e-75fe-4942-8a90-01bf0d55d6a6"],
+Cell[7508, 192, 129, 0, 70, "Item",ExpressionUUID->"e0e52d8b-48cb-4e8e-b357-a0c964cf8322"],
+Cell[7640, 194, 170, 3, 70, "Item",ExpressionUUID->"eb0136fa-9102-4d4f-8477-89d1bbee18a8"],
+Cell[7813, 199, 206, 3, 70, "Item",ExpressionUUID->"59ab59a7-d94c-4c0b-92f7-ced7a0787608"]
+}
+]
+*)
+
+(* End of internal cache information *)

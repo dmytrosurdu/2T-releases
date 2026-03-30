@@ -1,0 +1,423 @@
+\section{Subprogram 4c: Maximality of supersymmetry at the UV fixed point}
+\label{sec:subprogram4c}
+
+This subprogram is an optional strengthening of the superconformal
+closure obtained in Subprogram~4b. We take that closure as imported
+input and ask what additional assumptions would force maximal
+supersymmetry at the UV fixed point. The answer is conditional:
+under a short list of extra assumptions about non--gravitationality,
+interaction, and symmetry selection, the superconformal symmetry must be
+\(\mathcal N=4\) (i.e.\ \(N=4\) copies of Weyl supercharges).
+
+\subsection{Inputs and goal}
+\label{subsec:4c-inputs-goal}
+
+We begin by collecting the earlier outputs used in this optional
+strengthening.
+
+\begin{itemize}
+  \item Subprogram~1b produced the Wightman vacuum representation
+        \((\mathcal H,\pi,U,\Omega)\) with locality, positivity, and
+        positive--energy Poincar\'e covariance
+        (Theorem~\ref{thm:subprogram1b-Wightman}).
+
+  \item Subprogram~3c produced the HLS odd charge module on that UV
+        boundary representation, together with the operator
+        implementation of the odd symmetry derivation
+        (Theorem~\ref{thm:Main-HLS} and
+        Proposition~\ref{prop:inner}).
+
+  \item Subprogram~4a showed that on the common UV sector, any
+        nontrivial odd charge \(Q_\alpha^I\) has dilatation weight
+        \(\Delta(Q_\alpha^I)=\tfrac12\)
+        (Theorem~\ref{thm:4a-Delta-half}).
+
+  \item Subprogram~4b established the same-\(\mathcal H\)
+        superconformal closure of the odd sector: the generators
+        \(P_\mu,M_{\mu\nu},D,K_\mu,Q,\bar Q,S,\bar S,R\) close on a
+        common invariant core to the full \(4\)D superconformal algebra
+        (Theorem~\ref{thm:4d-SConf}). At Main level the same conclusion
+        is packaged in Corollary~\ref{cor:Main-postHLS-superconf}.
+\end{itemize}
+
+In the present subprogram we:
+
+\begin{enumerate}[(1)]
+  \item import from Subprogram~4b the resulting \(4\)D superconformal
+        algebra and write \(N\) for its odd multiplicity parameter;
+
+  \item impose that the theory is non–gravitational and has a unique
+        stress tensor, together with standard representation–theoretic
+        input, to show that \(N\le 4\);
+
+  \item add interaction and nonfactorization assumptions so that \(N\)
+        measures the intrinsic supersymmetry of the interacting UV fixed
+        point rather than of a theory enlarged by decoupled free
+        sectors;
+
+  \item assume a maximality principle and deduce that, within this
+        optional strengthening, the emergent supersymmetry is maximal,
+        i.e.\ \(N=4\).
+\end{enumerate}
+
+Everything beyond the imported superconformal closure of
+Subprogram~4b is therefore assumption-driven.
+
+\subsection{Imported superconformal algebra from Subprogram 4b}
+\label{subsec:4c-algebraic}
+
+\begin{proposition}[Imported algebraic form of the superconformal symmetry]
+\label{prop:4c-su-22N}
+Use Theorem~\ref{thm:4d-SConf} as imported input. Then on the same UV
+Hilbert space the resulting \(4\)D superconformal algebra is of standard
+type: for some integer \(N\ge1\), it is
+\(\mathfrak{su}(2,2|N)\) for \(N\neq4\), while in the \(N=4\) case the
+standard simple form is obtained after quotienting the central
+\(\mathfrak u(1)\), giving \(\mathfrak{psu}(2,2|4)\). Throughout this
+section we write \(N\) for this imported multiplicity parameter. When
+convenient, we speak informally of the \(N=4\) case as
+\(\mathfrak{su}(2,2|4)\), since the central \(\mathfrak u(1)\) does not
+affect the arguments below.
+\end{proposition}
+
+\begin{proof}
+This is exactly the algebraic form isolated in
+Theorem~\ref{thm:4d-SConf}; see also
+Corollary~\ref{cor:Main-postHLS-superconf} for the corresponding Main
+packaging. The Kac--Nahm classification explains why this is the
+standard \(4\)D superconformal family, but that classification is not
+rederived here.
+\end{proof}
+
+At this stage \(N\) is an imported integer label. The purpose of the
+remaining subsections is to examine what additional assumptions would
+bound or determine it.
+
+\subsection{Stress tensor multiplet and absence of dynamical gravity}
+\label{subsec:4c-stresstensor}
+
+We now impose that our theory is purely field–theoretic, with a unique
+stress tensor and no dynamical gravity.
+
+\begin{definition}[Stress tensor and its multiplet]
+\label{def:4c-T-multiplet}
+Let \(T_{\mu\nu}(x)\) be the unique conserved, symmetric, traceless
+stress tensor of the boundary Wightman theory constructed in
+Subprogram~1b. In the presence of the imported superconformal symmetry
+of Proposition~\ref{prop:4c-su-22N}, the \emph{stress tensor multiplet} is the
+smallest unitary positive–energy representation of
+\(\mathfrak{su}(2,2|N)\) on \(\mathcal H\) whose component fields
+include \(T_{\mu\nu}\) and close under the action of all supercharges
+\(Q_\alpha^I,\bar Q_{\dot\alpha I}\) and \(S^\alpha{}_I,\bar S^{\dot\alpha I}\).
+\end{definition}
+
+The existence and structure of this multiplet is standard: it contains
+\(T_{\mu\nu}\), the supercurrents
+\(\mathcal J^\mu{}_\alpha{}^I,\bar{\mathcal J}^\mu{}_{\dot\alpha I}\),
+the R–symmetry
+currents, and typically a scalar primary at the bottom, subject to
+unitarity bounds.
+
+\begin{assumption}[No dynamical gravity (NG)]
+\label{ass:4c-NG}
+The boundary theory is non–gravitational: it has a unique conserved
+stress tensor \(T_{\mu\nu}\) generating translations and does not
+contain any additional massless spin–2 gauge field (graviton) or
+distinct stress tensors associated with decoupled sectors.
+\end{assumption}
+
+In the representation theory of superconformal algebras, one typically
+distinguishes between:
+
+\begin{itemize}
+  \item \emph{matter} or \emph{Yang–Mills} multiplets, which contain
+        fields of spin \(\le1\) (plus the stress tensor in a specific
+        short multiplet), and
+  \item \emph{supergravity multiplets}, which necessarily include a
+        massless spin–2 gauge field (graviton) and additional gauge
+        fields fixed by supersymmetry.
+\end{itemize}
+
+We use the following standard structural input.
+
+\begin{assumption}[Spin–2 saturation for \(N>4\)]
+\label{ass:4c-spin2-saturation}
+In four dimensions, any unitary positive–energy representation of
+\(\mathfrak{su}(2,2|N)\) with more than \(16\) real supercharges
+(i.e.\ \(N>4\)) whose component fields include a unique conserved
+stress tensor necessarily coincides with a supergravity multiplet and
+thus contains a dynamical graviton.  In other words, for \(N>4\) there
+are no purely ``matter'' stress tensor multiplets compatible with
+Assumption~\ref{ass:4c-NG}.
+\end{assumption}
+
+Assumption~\ref{ass:4c-spin2-saturation} summarises the standard
+representation–theoretic lore familiar from the classification of 4D
+supergravity multiplets: once the number of supercharges exceeds \(16\),
+the stress tensor cannot sit in a purely matter multiplet.
+
+\begin{lemma}[Bound on the number of supercharges]
+\label{lem:4c-Nle4}
+Under Assumptions~\ref{ass:4c-NG} and
+\ref{ass:4c-spin2-saturation}, the superconformal algebra
+\(\mathfrak g_{\mathrm{SC}}\) constructed in Subprogram~4b has at most
+\(16\) real Poincaré supercharges, i.e.
+\begin{equation}
+  N\;\le\;4.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By Proposition~\ref{prop:4c-su-22N}, \(\mathfrak g_{\mathrm{SC}}\) is a
+superconformal algebra of type \(\mathfrak{su}(2,2|N)\) for some
+\(N\ge1\), with the
+stress tensor \(T_{\mu\nu}\) sitting in a stress tensor multiplet in the
+sense of Definition~\ref{def:4c-T-multiplet}.  Suppose, for contradiction,
+that \(N>4\).  Then by Assumption~\ref{ass:4c-spin2-saturation}, this
+multiplet necessarily contains a dynamical graviton and realises a
+supergravity multiplet, contradicting Assumption~\ref{ass:4c-NG} that
+our theory is non–gravitational.  Hence \(N\le4\).
+\end{proof}
+
+Thus, after imposing non–gravitationality and the standard structure of
+superconformal multiplets, the only candidates are \(N=1,2,3,4\).
+
+\subsection{Interacting SK fixed points and exclusion of decoupled free sectors}
+\label{subsec:4c-interacting}
+
+We now sharpen the interpretation of \(N\) so that it counts
+supersymmetries of the \emph{interacting} universality class singled out
+by the SK RG structure, not of arbitrary decoupled free factors.
+
+\begin{assumption}[Interacting SK fixed point]
+\label{ass:4c-interacting}
+The UV fixed point under consideration is \emph{interacting} in the
+following sense:
+\begin{enumerate}[(a)]
+  \item the SK RG monotone \(\mathcal M\) of Subprogram~3b admits the
+        following strengthening at the UV fixed point: it is strictly
+        monotone along nontrivial RG flows, additive under decoupled
+        tensor products, and has a nondegenerate local extremum there
+        (in particular, no flat directions corresponding to decoupled
+        generalized free sectors);
+
+  \item the GNS Hilbert space \(\mathcal H\) is generated, as a
+        representation of \(\mathfrak g_{\mathrm{SC}}\), by the orbit
+        of local operators in the stress tensor multiplet and their
+        descendants; in particular, there is no orthogonal direct
+        summand carrying a decoupled free superconformal theory with an
+        independent stress tensor.
+
+\end{enumerate}
+\end{assumption}
+
+In addition we exclude higher–spin enhanced free theories.
+
+\begin{assumption}[No higher–spin enhancement]
+\label{ass:4c-noHS}
+The UV fixed point carries no infinite tower of conserved higher–spin
+currents beyond the stress tensor and its superconformal descendants.
+Equivalently, it is not a free or generalized free CFT in the sense of
+the higher–spin symmetry no–go theorems.
+\end{assumption}
+
+Assumption~\ref{ass:4c-noHS} is motivated by the results showing that
+in unitary CFTs in \(d>2\), an infinite tower of higher–spin symmetries
+implies that the theory is essentially free.
+
+\begin{lemma}[Intrinsic nature of \(N\) for interacting SK fixed points]
+\label{lem:4c-N-intrinsic}
+Under Assumptions~\ref{ass:4c-interacting} and
+\ref{ass:4c-noHS}, the integer \(N\) appearing in
+Proposition~\ref{prop:4c-su-22N} is an intrinsic invariant of the
+interacting SK universality class: it cannot be increased by tensoring
+with decoupled free superconformal sectors without violating the
+standing assumptions.
+\end{lemma}
+
+\begin{proof}
+Suppose we attempt to pass from our interacting fixed point \(\mathcal C\)
+with superconformal symmetry \(\mathfrak{su}(2,2|N)\) to a product theory
+\(\mathcal C\otimes\mathcal F\), where \(\mathcal F\) is a decoupled free
+SCFT carrying additional supersymmetry \(\mathfrak{su}(2,2|N')\) with
+\(N'>0\).  Then:
+
+\begin{enumerate}[(1)]
+  \item The product theory has two independent, conserved, symmetric
+        stress tensors, \(T_{\mu\nu}^{(\mathcal C)}\) and
+        \(T_{\mu\nu}^{(\mathcal F)}\), whose sum generates the total
+        translation operator.  This violates the uniqueness of the
+        stress tensor in Assumption~\ref{ass:4c-NG}, unless one of the
+        factors is trivial.
+
+  \item Alternatively, if one attempts to keep only the diagonal
+        combination of the two stress tensors while retaining both sets
+        of odd generators as symmetries of the product, the additional
+        higher–spin currents in the free factor \(\mathcal F\) violate
+        Assumption~\ref{ass:4c-noHS}.
+
+  \item Finally, the SK RG monotone \(\mathcal M\) constructed in
+        Subprogram~3b is assumed in
+        Assumption~\ref{ass:4c-interacting}(a) to be additive over
+        tensor products of decoupled sectors and to have a
+        nondegenerate UV extremum; this rules out a nontrivial direct
+        product decomposition of the fixed point.
+\end{enumerate}
+
+In all cases, raising the effective number of supercharges by adding a
+decoupled free factor contradicts the assumptions.  It follows that the
+value of \(N\) determined by Proposition~\ref{prop:4c-su-22N} and
+Lemma~\ref{lem:4c-Nle4} is an invariant of the interacting SK fixed
+point.
+\end{proof}
+
+Combined with Lemma~\ref{lem:4c-Nle4}, we thus have:
+\begin{equation}
+  1 \;\le\; N \;\le\; 4,
+\end{equation}
+for the interacting, non–gravitational UV fixed point singled out by
+our SK construction.
+
+\subsection{Maximality principle and selection of \texorpdfstring{$N=4$}{N=4}}
+\label{subsec:4c-maximality}
+
+We now articulate the maximality principle that connects the SK RG
+structure to a preference for maximal supersymmetry.
+
+The remainder of this subsection is explicitly conditional. We do not
+attempt to derive the maximality principle or the existence statement
+below inside the present appendix; we record only what they imply once
+the imported superconformal algebra and the previous assumptions are in
+place.
+
+\begin{assumption}[Maximality of symmetry at SK fixed points]
+\label{prin:4c-maximality}
+Consider the class of interacting, non–gravitational, SK–admissible UV
+fixed points in four dimensions satisfying the standing Wightman and SK
+assumptions and equipped with the two–time BRST/RG structure of
+Subprograms~1a and~3b.  Among all such fixed points compatible with a given set
+of macroscopic constraints (number of dimensions, spin range, locality,
+etc.), the SK RG dynamics selects those with the \emph{maximal} amount
+of unbroken symmetry, in the sense that:
+\begin{enumerate}[(a)]
+  \item the SK RG monotone \(\mathcal M\) attains local extrema on
+        fixed points whose symmetry algebra is maximal within their
+        basin of attraction in theory space, and
+
+  \item for fixed macroscopic data, increasing the number of
+        supercharges \(N\) (within the allowed algebraic range) cannot
+        be compensated by adding further continuous symmetries without
+        changing the universality class.
+\end{enumerate}
+\end{assumption}
+
+Assumption~\ref{prin:4c-maximality} is an additional assumption of this
+optional strengthening. It promotes the observed tendency of RG flows to land on
+highly symmetric fixed points, together with the SK construction of odd
+symmetries from monotones, into a symmetry-selection rule. It is not
+derived here.
+
+\begin{assumption}[Existence of interacting SCFTs for all \(N\le4\)]
+\label{ass:4c-existence}
+For each \(N\in\{1,2,3,4\}\) there exist interacting, non–gravitational,
+unitary four–dimensional superconformal field theories with symmetry
+\(\mathfrak{su}(2,2|N)\) satisfying the standing assumptions (in
+particular, with a unique stress tensor and compact R–symmetry).
+\end{assumption}
+
+Assumption~\ref{ass:4c-existence} is motivated by the known families of
+$\mathcal N=1,2,4$ SCFTs and the recent constructions of genuinely
+$\mathcal N=3$ theories; we do not require a complete classification,
+only that the possible $N$ in the allowed range are all realised.
+
+\begin{proposition}[Maximal supersymmetry: \(N=4\)]
+\label{prop:4c-N-equals-4}
+Let \(\mathcal C\) be an interacting, non–gravitational, SK–admissible
+UV fixed point in four dimensions, equipped with the two-time RG
+structure and SK monotone of Subprogram~3b, and suppose
+Assumptions~\ref{ass:4c-NG}, \ref{ass:4c-spin2-saturation},
+\ref{ass:4c-interacting}, \ref{ass:4c-noHS},
+\ref{ass:4c-existence}, and
+Assumption~\ref{prin:4c-maximality} hold.
+Then the superconformal symmetry of \(\mathcal C\) is maximally
+supersymmetric:
+\begin{equation}
+  \mathfrak g_{\mathrm{SC}} \;\cong\; \mathfrak{su}(2,2|4),
+\end{equation}
+i.e.\ the boundary theory has \(\mathcal N=4\) superconformal symmetry.
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:4c-su-22N} and Lemma~\ref{lem:4c-Nle4}, the
+superconformal symmetry is of imported type \(\mathfrak{su}(2,2|N)\) with
+\(1\le N\le4\).  By Lemma~\ref{lem:4c-N-intrinsic}, \(N\) is an intrinsic
+invariant of the interacting SK universality class.  By
+Assumption~\ref{ass:4c-existence}, there exist interacting SCFTs
+realising each \(N\) in this range; in particular, there exist candidate
+fixed points with superconformal symmetry \(\mathfrak{su}(2,2|4)\).
+
+Assumption~\ref{prin:4c-maximality} then asserts that, within the class
+of SK–admissible fixed points compatible with a given set of macroscopic
+constraints, the RG dynamics selects fixed points with maximal symmetry.
+Specialising to the superconformal symmetries under discussion, this
+implies that the emergent algebra must correspond to the largest
+available value of \(N\), namely \(N=4\).  Hence
+\(\mathfrak g_{\mathrm{SC}}\cong\mathfrak{su}(2,2|4)\).
+\end{proof}
+
+\begin{remark}[Projective form and R–symmetry]
+\label{rmk:4c-psu}
+The even part of \(\mathfrak{su}(2,2|4)\) is
+\(\mathfrak{so}(4,2)\oplus\mathfrak{su}(4)\oplus\mathfrak u(1)\).  In
+many physical applications the central \(\mathfrak u(1)\) acts trivially
+and one works with the projective algebra
+\(\mathfrak{psu}(2,2|4)\).  Our arguments are insensitive to this subtle
+distinction, which can be fixed later by imposing the absence of
+conserved currents for the central \(\mathfrak u(1)\).
+\end{remark}
+
+\subsection{Summary of Subprogram 4c}
+\label{subsec:4c-summary}
+
+We summarise the logical content of this subprogram.
+
+\begin{itemize}
+  \item We import from Subprogram~4b the same-\(\mathcal H\)
+        realization of a \(4\)D superconformal algebra, written in
+        standard form as \(\mathfrak{su}(2,2|N)\) (with the projective
+        quotient in the \(N=4\) case)
+        (Proposition~\ref{prop:4c-su-22N}).
+
+  \item Under the additional non--gravitationality and spin--2
+        saturation assumptions, the number of supercharges is bounded by
+        \(N\le4\)
+        (Lemma~\ref{lem:4c-Nle4}).
+
+  \item Under the additional interaction, nonfactorization, and
+        no--higher--spin assumptions, \(N\) is an intrinsic invariant of
+        the interacting SK universality class and cannot be raised by
+        tensoring with decoupled free factors
+        (Lemma~\ref{lem:4c-N-intrinsic}).
+
+  \item Finally, under the additional maximality principle and the
+        existence of interacting SCFTs for each \(N\le4\), the emergent
+        symmetry at the UV fixed point must be maximally
+        supersymmetric,
+        \(\mathfrak{su}(2,2|4)\)
+        (Proposition~\ref{prop:4c-N-equals-4}).
+
+\end{itemize}
+
+This subsection therefore gives a conditional route from the imported
+superconformal closure of Subprogram~4b to maximal
+\(\mathcal N=4\) symmetry under the added assumptions above.
+The conjecture below records the corresponding cosmology-theory
+interpretation suggested by this optional strengthening.
+\begin{conjecture}[String realisation of a \(\mathbf{2T}_{\mathrm{Main}}\) cosmology theory]
+\label{conj:4c-string-realisation}
+A cosmology theory that implements the \(2T\)-Main interface
+\(\mathbf{2T}_{\mathrm{Main}}\) of Definition~\ref{def:2T-Main} is realised by
+the \(\mathcal N=4\) superconformal field theory with symmetry algebra
+\(\mathfrak{su}(2,2|4)\), together with its type IIB superstring dual on
+\(\mathrm{AdS}_5\times S^5\).
+\end{conjecture}

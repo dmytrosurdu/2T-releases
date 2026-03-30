@@ -1,0 +1,125 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      4627,        116]
+NotebookOptionsPosition[      3440,         94]
+NotebookOutlinePosition[      3754,        108]
+CellTagsIndexPosition[      3711,        105]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["TickData Validation", "Title",ExpressionUUID->"6bb57bef-9e42-4c6b-a620-dc931cbbe6aa"],
+
+Cell[TextData[{
+ "This notebook implements the finite-dimensional surrogate of ",
+ Cell[BoxData[Cell["def:2T-char",
+   Background->None,ExpressionUUID->"28aee4dc-4ef8-41fd-ac23-14b65a92a475"]], 
+  "InlineCode",ExpressionUUID->"04f01aed-e071-45e5-8963-9118297fa3f1"],
+ "."
+}], "Text",ExpressionUUID->"e72866fc-55f1-449e-a44d-2b6e21e0a194"],
+
+Cell["Target: ", "Text",ExpressionUUID->"a429782f-8814-4120-b50f-0ae4b2646df1"],
+
+Cell[TextData[Cell[BoxData[Cell["def:2T-char",
+  Background->None,ExpressionUUID->
+  "5844bbba-4127-4adf-b058-89db226c2afc"]], \
+"InlineCode",ExpressionUUID->"2ea47ed5-e0a5-45f6-9f33-bb9647017285"]], "Item",\
+ExpressionUUID->"695f46b8-b0e1-4ef5-8ea3-a1f09eb3bbb7"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Get", "[", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NotebookDirectory", "[", "]"}], ",", "\"\<..\>\"", 
+      ",", "\"\<Kernel\>\"", ",", "\"\<Init.wl\>\""}], "}"}], "]"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"suite", "=", 
+   RowBox[{"MainProof`CharData`RunCharDataExampleSuite", "[", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", "suite"}], "Input",ExpressionUUID->"5326d858-\
+cbd2-4616-83fe-aa50f0353d0a"],
+
+Cell["One Valid Example", "Section",ExpressionUUID->"8cfdf97c-0bd2-4fcd-884c-2fcedd19d43c"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"valid", "=", 
+   RowBox[{
+    RowBox[{"First", "[", 
+     RowBox[{
+      RowBox[{"MainProof`CharData`CharDataExampleSuite", "[", "]"}], 
+      "[", "\"\<ValidExamples\>\"", "]"}], "]"}], "[", "\"\<Data\>\"", 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"MainProof`CharData`ValidateCharData", "[", "valid", "]"}]}], "Input",\
+ExpressionUUID->"0b964dbc-8ba0-4a5f-80b5-9bfff9e96afa"],
+
+Cell["One Invalid Example", "Section",ExpressionUUID->"94883d44-134e-4c6c-bd49-ddb509f02c3e"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"invalid", "=", 
+   RowBox[{
+    RowBox[{"First", "[", 
+     RowBox[{
+      RowBox[{"MainProof`CharData`CharDataExampleSuite", "[", "]"}], 
+      "[", "\"\<InvalidExamples\>\"", "]"}], "]"}], "[", "\"\<Data\>\"", 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"MainProof`CharData`ValidateCharData", "[", "invalid", 
+  "]"}]}], "Input",ExpressionUUID->"1515bc16-5d81-4983-8740-f8e563a78909"],
+
+Cell["Status Summary", "Section",ExpressionUUID->"c5a11eb6-3d80-485f-8d77-2a3af6812a6d"],
+
+Cell[BoxData[
+ RowBox[{"<|", "\[IndentingNewLine]", "  ", 
+  RowBox[{
+   RowBox[{"\"\<def:2T-char / valid examples\>\"", 
+    "->", "\"\<exact finite-dimensional certificate\>\""}], ",", 
+   "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<def:2T-char / invalid examples rejected\>\"", 
+    "->", "\"\<exact finite-dimensional certificate\>\""}]}], 
+  "\[IndentingNewLine]", "|>"}]], "Input",ExpressionUUID->"e9626da7-300d-4d33-\
+8049-d9db3c73a3b4"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9fb98179-9cdd-493e-8616-b4f0b8195a60"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 91, 0, 70, "Title",ExpressionUUID->"6bb57bef-9e42-4c6b-a620-dc931cbbe6aa"],
+Cell[648, 22, 338, 6, 70, "Text",ExpressionUUID->"e72866fc-55f1-449e-a44d-2b6e21e0a194"],
+Cell[989, 30, 79, 0, 70, "Text",ExpressionUUID->"a429782f-8814-4120-b50f-0ae4b2646df1"],
+Cell[1071, 32, 264, 4, 70, "Item",ExpressionUUID->"695f46b8-b0e1-4ef5-8ea3-a1f09eb3bbb7"],
+Cell[1338, 38, 505, 13, 70, "Input",ExpressionUUID->"5326d858-cbd2-4616-83fe-aa50f0353d0a"],
+Cell[1846, 53, 91, 0, 70, "Section",ExpressionUUID->"8cfdf97c-0bd2-4fcd-884c-2fcedd19d43c"],
+Cell[1940, 55, 425, 10, 70, "Input",ExpressionUUID->"0b964dbc-8ba0-4a5f-80b5-9bfff9e96afa"],
+Cell[2368, 67, 93, 0, 70, "Section",ExpressionUUID->"94883d44-134e-4c6c-bd49-ddb509f02c3e"],
+Cell[2464, 69, 432, 10, 70, "Input",ExpressionUUID->"1515bc16-5d81-4983-8740-f8e563a78909"],
+Cell[2899, 81, 88, 0, 70, "Section",ExpressionUUID->"c5a11eb6-3d80-485f-8d77-2a3af6812a6d"],
+Cell[2990, 83, 446, 9, 70, "Input",ExpressionUUID->"e9626da7-300d-4d33-8049-d9db3c73a3b4"]
+}
+]
+*)
+
+(* End of internal cache information *)

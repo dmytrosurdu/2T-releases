@@ -1,0 +1,1381 @@
+\documentclass[12pt]{article}
+\usepackage{xr}
+
+\externaldocument{../Book_II/chapter_6}
+\externaldocument{../Book_II/chapter_8}
+\externaldocument{chapter_1}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, decorations.pathreplacing, calc, backgrounds}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{pdflscape} % For the landscape environment
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist[enumerate]{align=left,labelindent=0pt}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+% Chapter-specific theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+\title{\textbf{Chapter 2: Fundamental Test Equivalence Preliminaries}}
+\author{Dmytro Surdu}
+\begin{document}
+\maketitle
+
+\section{Starting motivation}
+In the last chapter, we established the deep result: every \emph{valid test} may be dually represented in the decomposed form. While transitioning to this form, we replace the Update Map with a \emph{program} composed from the tree of Update Maps of Test Primitives (which may also operate on its own input subspace). Simultaneously, the solid Certification Standard obtains a dual representation of a \emph{tree of distributed Certification Standards}.
+
+The very first question which arises is: what is the complexity of the resulting decomposition? For a computer scientist, the very appearance of sequential+conditional+loop primitives suggests Turing-completeness. 
+
+However, we have the physics in our composition on the other side; maybe it inevitably restricts the complexity? Have we achieved the goal of the Turing Machine creation?
+
+The second question, once we have a positive answer to the first one, can be understood as a reversal of the first one: if we can embed a TM via our primitives, what additional physical or epistemic constraints must hold so that it actually halts (i.e., produces a measurement result)?
+
+And the third question arise once there are positive answers to the first two questions: under which condition can we certify such a result? And further, what does it ever mean that the measurement, which is associated with a precision, to be locked in a precision-limiting deterministic program, is it ever still a measurement?
+
+Let's figure it out.
+
+
+\section{Computational Universality of Guarded Tests}
+\label{sec:turing-complete-tests}
+
+We will show that, under the structural axioms (VT1–VT4) and the Input‑Traceability Axiom, the primitive toolkit \textsc{Sequential}, \textsc{Conditional}, and \textsc{Loop} is computationally universal.  Concretely, for any deterministic single‑tape Turing Machine \(M\) and input \(x\), we construct a valid test
+\[
+  \mathfrak T_{M,x} = \bigl(\mathcal M,\;\mathcal Z^{\rm in},\;\mathcal Z^{\rm out},\;U,\;E,\;\mathcal S\bigr)
+\]
+such that:
+\begin{enumerate}
+  \item \(M(x)\) halts if and only if \(\mathfrak T_{M,x}\) enters its invariant basin \(\mathcal B\).
+  \item All primitive constructions and the Open‑Preimage Axiom apply directly, with no additional work.
+\end{enumerate}
+
+The key insight is to choose the \emph{input space} to \emph{be} the state space itself:
+\[
+  \mathcal Z^{\rm in} \;=\; \mathcal M,
+  \quad
+  z_t \;=\; \Theta_t,
+\]
+so that branching on the current TM configuration becomes a \emph{Conditional} primitive on the input domain.  We now make this precise in a sequence of self‑contained steps.
+
+\subsection{Computation Model and Notation}
+\label{subsec:tm-model}
+
+Fix a deterministic, single‑tape Turing machine
+\[
+  M = (Q,\,\Gamma,\,b,\,q_{\mathrm{init}},\,q_{\mathrm{halt}},\,\delta),
+\]
+where \(Q\) is the finite set of control states, \(\Gamma\) the tape alphabet, \(b\in\Gamma\) the blank symbol, and
+\(\delta:Q\times\Gamma\to Q\times\Gamma\times\{L,R\}\) the transition function.
+
+\paragraph{State space \(\mathcal M\).}
+We encode TM configurations into a compact metric space
+\(\mathcal M\subset[0,1]^d\) (see Lemma \ref{lem:encoding}).
+
+\paragraph{Input and output spaces.}
+To leverage our primitive framework, we set
+\[
+  \mathcal Z^{\rm in} = \mathcal M,
+  \qquad
+  \mathcal Z^{\rm out} = \mathcal M,
+  \qquad
+  E(\Theta) = \Theta.
+\]
+Thus each external input tick simply echoes the current state:
+\[
+  z_t = \Theta_t.
+\]
+With this choice, any branch on “control‑state = \(q\), symbol = \(a\)” is an \textsc{Conditional} on \(\mathcal Z^{\rm in}\).
+
+\subsection{Continuous Encoding of Configurations}
+\label{subsec:encoding}
+
+We recall how to map a TM configuration continuously into \(\mathcal M\).
+
+\begin{lemma}[Encoding Map]
+\label{lem:encoding}
+There exists a continuous injection
+\[
+  \mathsf{enc}:\{\text{TM configurations}\}\;\hookrightarrow\;\mathcal M\subset[0,1]^d
+\]
+such that each tape segment and control‑state is coded in a base‑\(b\) expansion with only finitely many nonzero digits.
+\end{lemma}
+
+\begin{proof}
+Let 
+\[
+  C = (\dots, s_{-2},s_{-1},s_0,s_1,s_2,\dots;\;q;\;h)
+\]
+be any configuration of the Turing machine \(M\).  We will define
+\(\mathsf{enc}(C)=(L,R,S)\in[0,1]^3\times[0,1]^m=\mathcal M\) as follows.
+
+\medskip
+\noindent\textbf{1. Encoding the tape contents.}
+Fix a base \(b\ge|\Gamma|\) and an injective code
+\(\mathrm{code}:\Gamma\to\{0,1,\dots,b-2\}\), with \(\mathrm{code}(b)=0\).
+Since \(C\) has only finitely many non‑blank symbols, there is some
+\(N\) so that \(s_k=b\) for \(\lvert k\rvert>N\).  Define
+\[
+  R \;=\; \sum_{k=0}^\infty \frac{\mathrm{code}(s_k)}{b^{\,k+1}}
+  \quad\text{and}\quad
+  L \;=\; \sum_{k=1}^\infty \frac{\mathrm{code}(s_{-k})}{b^{\,k}}.
+\]
+\begin{itemize}
+  \item \emph{Well–defined and ultimately zero expansions:} After index
+    \(N\), all \(s_k=b\) so \(\mathrm{code}(s_k)=0\); hence both series
+    terminate in finitely many nonzero digits and converge in \([0,1]\).
+  \item \emph{No ambiguity:} Because only the digit \(0\) appears
+    infinitely often, we never encounter the “all \((b-1)\)” tail that
+    causes base‑\(b\) ambiguity.
+\end{itemize}
+
+\medskip
+\noindent\textbf{2. Encoding the control state and head position.}
+Let \(Q=\{q_0,\dots,q_{|Q|-1}\}\) and encode \(q\) by
+\(\mathrm{enc}(q)\in\{0,\dots,|Q|-1\}\).  Similarly, write the integer
+head position \(h\in\mathbb Z\) in signed‑digit base \(b\), or equivalently
+as a pair \((h^+,h^-)\) with \(h=h^+-h^-\) and each of \(h^+,h^-\) finitely
+supported in base \(b\).  Pack these into a finite vector
+\[
+  S \;=\;\Bigl(\mathrm{enc}(q),\,h^+,\,h^-\Bigr)\;\in\;[0,1]^m,
+\]
+again ensuring each coordinate has an ultimately zero base‑\(b\)
+expansion.
+
+\medskip
+\noindent\textbf{3. Definition of the map.}
+Set
+\[
+  \mathsf{enc}(C)\;=\;(L,R,S)\,\in\,[0,1]^3\times[0,1]^m=\mathcal M.
+\]
+
+\medskip
+\noindent\textbf{4. Injectivity.}
+Suppose \(C\neq C'\).  Then either
+\(\exists\,k\) with \(s_k\neq s'_k\), or the control state \(q\neq q'\),
+or the head positions differ.  In the first case, let \(k_0\) be the
+smallest index where \(s_{k_0}\neq s'_{k_0}\).  Then the \(b\)-ary
+expansions of \(R\) (if \(k_0\ge0\)) or of \(L\) (if \(k_0<0\)) differ in
+the \(k_0\)-th digit, so \(\mathsf{enc}(C)\neq\mathsf{enc}(C')\).  In the
+state/head case, the corresponding coordinate of \(S\) differs.  Hence
+\(\mathsf{enc}\) is injective.
+
+\medskip
+\noindent\textbf{5. Continuity.}
+Equip the configuration space with the metric
+\[
+  d\bigl(C,C'\bigr)
+  =\max\Bigl\{
+    b^{-\min\{k\ge0:s_k\neq s'_k\}},\;
+    b^{-\min\{k>0:s_{-k}\neq s'_{-k}\}},\;
+    \lvert\mathrm{enc}(q)-\mathrm{enc}(q')\rvert,\;
+    \lvert h-h'\rvert
+  \Bigr\},
+\]
+where if two tapes agree on all non‑blank cells then the first two terms
+are zero.  Then:
+\begin{itemize}
+  \item If \(C\) and \(C'\) agree on all symbols for \(\lvert k\rvert<K\),
+    and share the same \(q,h\), then
+    \(\lvert R-R'\rvert\le \sum_{k\ge K}\!b^{-(k+1)} = b^{-K}\), and
+    similarly \(\lvert L-L'\rvert\le b^{-K}\).  The \(S\)-coordinates
+    coincide exactly.  
+  \item Thus for any \(\varepsilon>0\), choosing \(K\) so that
+    \(b^{-K}<\varepsilon\) ensures 
+    \(d(C,C')<b^{-K}\implies\|\mathsf{enc}(C)-\mathsf{enc}(C')\|_\infty<\varepsilon\).
+\end{itemize}
+Hence \(\mathsf{enc}\) is continuous.
+
+\medskip
+\noindent\textbf{Conclusion.}
+We have produced a well‑defined, injective, continuous map
+\(\mathsf{enc}\) whose coordinates admit ultimately zero, unambiguous
+base‑\(b\) expansions, as required.
+\end{proof}
+
+
+\noindent\emph{Remark.}  From now on we identify each configuration with its image \(\Theta\in\mathcal M\), and we take \(\mathcal Z^{\rm in}=\mathcal M\).
+
+\subsection{Realizing One TM Step with Primitives}
+\label{subsec:step-realization}
+
+Fix a transition \(\delta(q,a)=(q',a',d)\).  We dispatch on the current input \(z\in\mathcal Z^{\rm in}=\mathcal M\).
+
+\begin{definition}[Guard Set in Input Space]
+For each \((q,a)\in Q\times\Gamma\), define the open cylinder
+\[
+  N_{q,a}
+  := \bigl\{\,z\in\mathcal Z^{\rm in}:\;
+     \text{control‑state}(z)=q,\;\text{symbol‑under‑head}(z)=a
+  \bigr\}.
+\]
+Each \(N_{q,a}\) is open because it fixes finitely many leading code digits.
+\end{definition}
+
+\begin{lemma}[Branch Update Map]
+\label{lem:branch-update}
+On each cell \(N_{q,a}\), define
+\[
+  U_{q,a}:\mathcal M\times N_{q,a}\;\longrightarrow\;\mathcal M
+\]
+to implement exactly one TM step: write \(a'\), move the head \(d\), and update the control to \(q'\).  Then \(U_{q,a}\) is continuous and agrees with the usual TM‐transition on encoded states.
+\end{lemma}
+
+\begin{proof}
+Fix a branch \((q,a)\) and let \(N_{q,a}\subset\mathcal M\) be the open cylinder on which the control‐state coordinate equals \(q\) and the tape‐symbol under the head equals \(a\).  On this cell, the encoded state \(\Theta=(L,R,S)\in N_{q,a}\) carries the following information in its base‑\(b\) expansions:
+\[
+  R \;=\;\sum_{k=0}^\infty \frac{\mathrm{code}(s_k)}{b^{k+1}},
+  \quad
+  L \;=\;\sum_{k=1}^\infty \frac{\mathrm{code}(s_{-k})}{b^k},
+  \quad
+  S=(\mathrm{enc}(q),\,h^+,\,h^-)\,,
+\]
+where \(\mathrm{code}(s_0)=\mathrm{code}(a)\) and \(h\) is the head position with signed‐digit split \((h^+,h^-)\).
+
+We define \(U_{q,a}(\Theta,z)\) by three steps:
+\begin{enumerate}
+
+\item \textbf{\textit{Write the new symbol \(a'\).}}  
+   Since \(\mathrm{code}(s_0)=\mathrm{code}(a)\) is constant on \(N_{q,a}\), the “pop” operation
+   \[
+     b\,R \;=\;\mathrm{code}(a)\;+\;\underbrace{\sum_{k=1}^\infty \frac{\mathrm{code}(s_k)}{b^k}}_{=:R_{\rm tail}}
+   \]
+   identifies \(R_{\rm tail}\).  We then form the updated halves by
+   \[
+     R_{\rm new}
+     = b\,R - \mathrm{code}(a)
+     \quad\text{and}\quad
+     L_{\rm new} = L\,,
+   \]
+   and prepare to “push” \(\mathrm{code}(a')\) in the next step.
+
+\item \textbf{\textit{Move the head.}}
+   - If the direction \(d=R\), we set
+     \[
+       L' \;=\;\frac{L + \mathrm{code}(a')}{b},
+       \quad
+       R' \;=\;R_{\rm new}.
+     \]
+   - If \(d=L\), symmetrically,
+     \[
+       R' \;=\;\frac{R + \mathrm{code}(a')}{b},
+       \quad
+       L' \;=\;L - b\,\mathrm{code}(s_{-1}),
+     \]
+     where \(\mathrm{code}(s_{-1})\) is read off from the first digit of \(L\).  
+
+   Each of these formulas is an affine map in \((L,R)\) on the open set \(N_{q,a}\).
+
+\item \textbf{\textit{Update control state and head coordinate.}}  
+   The vector \(S\in[0,1]^m\) encodes \((q,h)\) in finitely many base‑\(b\) digits.  On \(N_{q,a}\), the current digits for \(q\) and \(h\) are fixed and away from any carry threshold.  We define
+   \[
+     \mathrm{enc}(q') 
+     = \text{new control‐state code},
+     \qquad
+     h' = 
+     \begin{cases}
+       h+1, & d=R,\\
+       h-1, & d=L,
+     \end{cases}
+   \]
+   and re‑encode \((q',h')\) in the same digit‐window as an affine update on \(S\).
+\end{enumerate}
+\medskip
+\noindent\textbf{Continuity.}  
+For each branch $(q,a)$, we refine its domain cell to fix \emph{all} base-$b$ digits that the branch update rule consults in that step.  
+In particular, for a left move we also fix the symbol $s_{-1}$ (read from the first digit of $L$) and exclude the base-$b$ boundary points where this digit changes, so that carry/borrow events are eliminated.  
+Denote these refined cells by $N_{q,a,\sigma}$, where $\sigma$ encodes the additional fixed digits.  
+On each such open cylinder $N_{q,a,\sigma}$, the map $U_{q,a}$ acts by an affine transformation with coefficients determined entirely by $(q,a,\sigma)$, and is therefore continuous there.  
+Since the domain of $U_{q,a}$ is the finite disjoint union of such refined open cylinders, $U_{q,a}$ is continuous on its domain.
+
+
+\medskip
+\noindent\textbf{Correctness on TM encodings.}  
+By construction, if \(\Theta\) encodes a configuration \(C\) with \(\delta(q,a)=(q',a',d)\), then \(U_{q,a}(\Theta,\Theta)\) encodes the next configuration \(C'\).  Hence \(U_{q,a}\) agrees exactly with one step of the deterministic TM on encoded states.
+
+\end{proof}
+
+
+\paragraph{Conditional composition.}
+Define the single \textsc{Conditional} primitive
+\[
+  U_{\mathrm{cond}}(\Theta,z)
+  = U_{q,a}(\Theta,z)
+  \quad\text{if }z\in N_{q,a},
+\]
+covering all \((q,a)\).  This is the one‑tick update used inside the Loop.
+
+\subsection{Looping and Halting Basin}
+\label{subsec:loop-halting}
+
+\paragraph{Loop‑Until instantiation.}  
+We build the guarded program
+\[
+  \Pi \;=\; \textsc{Loop}\bigl(U_{\mathrm{cond}},\,\text{halt‑test}\bigr),
+\]
+where at each tick \(t\) the input \(z_t=\Theta_t\) is used to select the branch \(U_{q,a}\), and we update \(\Theta_{t+1}=U_{\mathrm{cond}}(\Theta_t,z_t)\).
+
+\paragraph{Halting basin.}  
+Set
+\[
+  \mathcal B = \{\Theta : \text{control‑state}(\Theta)=q_{\mathrm{halt}}\}.
+\]
+Then \(\mathcal B\) is invariant (no further updates once halted) and is entered exactly when \(M\) halts.
+
+\begin{lemma}[Halting \(\iff\) Basin Entry]
+\label{lem:halt-basin}
+Under the above construction,
+\[
+  M(x)\text{ halts at step }T
+  \;\iff\;
+  \Theta_T\in\mathcal B
+  \;\iff\;
+  \Pi\text{ halts at tick }T.
+\]
+\end{lemma}
+
+\begin{proof}
+Each loop iteration simulates one TM step.  If \(M\) halts in state \(q_{\mathrm{halt}}\) at step \(T\), then \(\Theta_T\in\mathcal B\) and Loop‑Until stops.  Conversely, entry into \(\mathcal B\) forces the control state to be \(q_{\mathrm{halt}}\), so \(M\) must have halted.
+\end{proof}
+
+\subsection{Existence of a Minimal Certification Standard}
+\label{subsec:min-standard-exists}
+We assume \emph{global} UI-Traceability (Def.~\ref{def:ui-traceability}, Chapter 1) throughout this argument, so that the open-preimage property holds for every shell $\mathcal{B}_n$ and every admissible state.  
+Under this global assumption, the compactness/minimality machinery of Book~II applies directly to yield the existence of the global minimal certification standard; without it, the argument applies only to \emph{local} or pathwise standards along a fixed certificate-consistent trajectory.
+
+As a preliminary step, we prove a very helpful theorem that we will also use in following chapters.
+
+\subsubsection*{Existence of Refinement-Compatible Decompositions}
+\label{subsub:refinement-existence}
+
+\begin{theorem}[Refinement Extension of Guarded Decompositions]
+\label{thm:refinement-extension}
+Let \(U:\mathcal M\times\mathcal Z^{\mathrm{in}}\to\mathcal M\) be a composite test map equipped with a Certification Standard at resolution \(\varepsilon>0\), and suppose there is a valid guarded decomposition \(G_\varepsilon\) of \(U\) at that resolution (i.e., a finite guarded program with primitive tests/guards, branch labels, and ranking, consistent with the standard equivalence theorem). Then for any finer resolution \(\varepsilon_{\mathrm{ref}}<\varepsilon\) there exists a guarded decomposition \(G_{\varepsilon_{\mathrm{ref}}}\) of the same composite map \(U\) at resolution \(\varepsilon_{\mathrm{ref}}\) such that:
+\begin{enumerate}[itemsep=1pt]
+  \item \(G_{\varepsilon_{\mathrm{ref}}}\) is a \emph{refinement} of \(G_\varepsilon\): every branch label and decision in \(G_\varepsilon\) appears as a prefix in \(G_{\varepsilon_{\mathrm{ref}}}\), and any ambiguity present in \(G_\varepsilon\) is either preserved or resolved consistently (never contradicted).  
+  \item The primitive tests/guards in \(G_{\varepsilon_{\mathrm{ref}}}\) refine those in \(G_\varepsilon\) (the partition induced by the finer standard refines the coarser one).  
+  \item The ranking function remains the same deterministic tie-breaker, so any previous ranking-based choices persist as canonical representatives.  
+\end{enumerate}
+As a consequence, given any descending sequence of resolutions \(\varepsilon_1>\varepsilon_2>\cdots\to0\), one can inductively build a coherent sequence of guarded decompositions \(G_{\varepsilon_k}\) whose certificate prefixes refine each other, thereby supporting the composed Double-Bound under Decomposition.
+\end{theorem}
+
+\begin{lemma}[Robust Branch Stability / Interior Margin]
+\label{lem:branch-stability-margin}
+Let \(G_\varepsilon\) be a guarded decomposition at resolution \(\varepsilon\), with branch predicates defined by continuous decision regions (guard cells) on compact metric spaces. Then for every finite execution prefix in \(G_\varepsilon\) that makes a definite branch choice, there exists a positive margin \(\eta>0\) (depending on \(\varepsilon\) and the prefix) such that any perturbation of the underlying state-input pair within distance \(\eta\) yields the same prefix of branch decisions. In particular, the decision is stable under sufficiently fine refinements, and no earlier branch label is reversed when passing to a finer resolution inside that margin.
+\end{lemma}
+
+\begin{proof}
+Each branch decision in \(G_\varepsilon\) is made by membership in a finite intersection / union of open guard cells defined via continuous predicates (the guarded decomposition machinery ensures these are open with nonempty interior when the decision is definite). Therefore, if a given execution prefix selects a particular sequence of branches, the current state-input pair lies in the interior of the corresponding finite intersection of these open sets. By openness, there exists \(\eta>0\) such that the ball of radius \(\eta\) around the pair is still contained in the same intersection, hence yields the same prefix of branch decisions. That \(\eta\) is the required interior margin. Continuity of all involved maps prevents reversal of prior labels within that neighborhood.
+\end{proof}
+
+
+\begin{proof}[Refinement Extension Theorem Proof]
+We construct \(G_{\varepsilon_{\mathrm{ref}}}\) explicitly from \(G_\varepsilon\) and argue correctness.
+
+\textbf{Step 1: Partition refinement.}  
+By assumption the Certification Standard at \(\varepsilon_{\mathrm{ref}}\) is strictly finer than at \(\varepsilon\); hence the induced partitions of \(\mathcal M\) and \(\mathcal Z^{\mathrm{in}}\) refine the coarser ones. That is, every coarse guard cell or basin shell at scale \(\varepsilon\) is a union of finer cells at scale \(\varepsilon_{\mathrm{ref}}\). Use this to define new primitive guards: for each guard or decision region in \(G_\varepsilon\), replace it with its refinement into the appropriate collection of \(\varepsilon_{\mathrm{ref}}\)-level subregions. The new guarded program evaluates membership with the finer cells, preserving the logical structure of the original decomposition but with higher resolution.
+
+\textbf{Step 2: Decision monotonicity and extension.}  
+Because the original branch predicates are constructed from continuous functions and guard definitions with interior margins (as per the standard equivalence structure), any decision that was definitive at the coarser level (i.e., a branch taken because the state lay inside the interior of a guard cell) remains valid in the finer subdivision: the point still lies inside some child cell refining the parent, so the corresponding refined predicate evaluates consistently. If a coarse-level branch was ambiguous (multiple child possibilities collapsed), the finer level splits that ambiguity; ranking is applied deterministically (see Step 3) to choose a canonical extension. Thus each branch in \(G_\varepsilon\) lifts to one or more coherent child branches in \(G_{\varepsilon_{\mathrm{ref}}}\), and no earlier decision is reversed—only refined or disambiguated. This persistence is guaranteed quantitatively by Lemma~\ref{lem:branch-stability-margin}, which supplies the interior margin preventing reversal of previously taken branches under sufficiently fine \(\varepsilon_{\mathrm{ref}}\).
+
+
+\textbf{Step 3: Ranking consistency.}  
+Retain the same deterministic ranking function used in \(G_\varepsilon\) as the tie-breaker in \(G_{\varepsilon_{\mathrm{ref}}}\). Since ranking is resolution-independent by design, any tie previously broken stays broken in the same way; newly resolved finer ambiguities inherit ranking order compatibly. This guarantees canonical extension of previously chosen paths.
+
+\textbf{Step 4: Assembly of \(G_{\varepsilon_{\mathrm{ref}}}\).}  
+Compose the refined primitive tests, updated branch structure, and preserved ranking into a full guarded program \(G_{\varepsilon_{\mathrm{ref}}}\). By construction it computes the same underlying composite map \(U\) (now observed with finer discriminating power) and extends \(G_\varepsilon\) in the prefix sense: every execution trace of \(G_\varepsilon\) corresponds to a prefix of some trace in \(G_{\varepsilon_{\mathrm{ref}}}\).
+
+\textbf{Induction.}  
+Given a descending chain \(\varepsilon_1>\varepsilon_2>\cdots\), apply the above step iteratively: from \(G_{\varepsilon_k}\) construct \(G_{\varepsilon_{k+1}}\) that refines it. The sequence of certificate prefixes extracted from these guarded programs is therefore coherent, monotone, and converges to the infinite-precision behavior. This establishes the inductive composability required for the Double-Bound under Decomposition.
+
+\end{proof}
+
+
+We must now check that \(\mathfrak T_{M,x}\) satisfies VT1–VT4 and hence admits a minimal standard \(\mathcal S\).
+
+
+%=== New subsection: Minimal radii need only be approximated (not computed exactly) ===
+\subsubsection*{Minimal Radii via Refinement: What We Actually Need}
+
+The constructions in Sections~\ref{sec:turing-complete-tests} based on the Chapter 1 0-Tick Decomposition (Thh.~\ref{sec:sufficiency-ti-wf}, Chapter 1) never require the
+\emph{exact} values of minimal guard–band radii. It suffices that they exist (VT1–VT4) and that we can refine any
+valid guarded decomposition to obtain sound radii that monotonically tighten. 
+
+\begin{proposition}[Upper–Semicomputability of Minimal Radii via Refinement]
+\label{prop:upper-semi-eps}
+Fix a shell index $n$ and a finite tick-$0$ guarded decomposition of $\mathcal Z^{\mathrm{in}}$ into open cells
+$\{N_i\}_{i=1}^k$ (Theorem~\ref{thm:op-iff-finite}, Chapter 1). For each branch $i$ define the branchwise minimal admissible
+radius
+\[
+  \varepsilon_{n,i}^\star
+  := \inf\Bigl\{\, r>0:\ \forall\,\Theta\in\mathcal B_n,\ \forall\,z\in N_i,\ d(z,\partial N_i)\ge r\ \Rightarrow\ U_i(\Theta,z)\in\mathcal B_n \Bigr\},
+\]
+and the global minimal $\varepsilon_n^\star:=\min_{1\le i\le k}\varepsilon_{n,i}^\star$ (cf.\ Theorem~\ref{thm:primitive-global-equivalence}, Chapter 1).
+Then there exists a sequence of finite guarded refinements indexed by $m=0,1,2,\ldots$ and radii
+$\{\varepsilon_{n,i}^{(m)}\}_{i=1}^k$ such that, writing $\varepsilon_n^{(m)}:=\min_i \varepsilon_{n,i}^{(m)}$:
+\begin{enumerate}[label=(\alph*), leftmargin=2em]
+  \item (\emph{Soundness}) For all $m$ and all $i$, if $z\in N_i$ satisfies $d(z,\partial N_i)\ge \varepsilon_{n,i}^{(m)}$, then
+        $U_i(\Theta,z)\in\mathcal B_n$ for every $\Theta\in\mathcal B_n$.
+  \item (\emph{Monotone tightening}) $\varepsilon_{n,i}^{(m+1)}\le \varepsilon_{n,i}^{(m)}$ for all $m$ and $i$; hence
+        $\varepsilon_n^{(m+1)}\le \varepsilon_n^{(m)}$.
+  \item (\emph{Convergence}) $\lim_{m\to\infty}\varepsilon_{n,i}^{(m)}=\varepsilon_{n,i}^\star$ for all $i$, and therefore
+        $\varepsilon_n^{(m)}\downarrow \varepsilon_n^\star$.
+\end{enumerate}
+Consequently, the sequences $m\mapsto \varepsilon_{n,i}^{(m)}$ and $m\mapsto \varepsilon_n^{(m)}$ are
+\emph{upper–semicomputable} from the finite refinement data: they give sound (safe) radii at every stage and
+decrease to the minimal values.
+\end{proposition}
+
+\begin{proof}
+\textbf{Setup.}
+Fix $n$. By Theorem~\ref{thm:op-iff-finite}, Chapter 1 (tick-$0$ decomposition) and Lemma~\ref{lem:no-crossing-from-minimal}, Chapter 1, each branch
+$N_i$ admits a nontrivial input guard into $\mathcal B_n$. By Theorem~\ref{thm:refinement-extension} (refinement extension),
+for each $m\ge0$ we have a finite disjoint open refinement of $N_i$ into subcells
+$\{N_{i,\alpha}^{(m)}\}_{\alpha\in A_i^{(m)}}$ whose union is $N_i$, and such that each restriction
+$U_{i,\alpha}^{(m)}:=U_i|_{\mathcal M\times N_{i,\alpha}^{(m)}}$ is continuous and respects the guarded predicate into
+$\mathcal B_n$ on its domain. The index sets $A_i^{(m)}$ are finite and the refinement is nested:
+every $N_{i,\beta}^{(m+1)}$ lies in some parent $N_{i,\alpha}^{(m)}$.
+
+\medskip
+\textbf{Local inner radii on subcells.}
+For a fixed branch $i$ and refinement level $m$, define the \emph{local $\mathcal B_n$–core} of a subcell
+\[
+  C_{i,\alpha}^{(m)}
+  \ :=\
+  \bigl\{\, z\in N_{i,\alpha}^{(m)}:\ \forall\,\Theta\in\mathcal B_n,\ U_{i,\alpha}^{(m)}(\Theta,z)\in\mathcal B_n \,\bigr\}.
+\]
+By construction of the guarded decomposition and openness of preimages (Axiom~\ref{ax:open-preimage}, Chapter 1), each
+$C_{i,\alpha}^{(m)}$ is open (possibly empty). Define its \emph{inner trimming radius} relative to the ambient
+branch $N_i$ by
+\[
+  r_{i,\alpha}^{(m)}
+  \ :=\
+  \sup \Bigl\{\ \rho\ge0\ :\ \{z\in N_{i,\alpha}^{(m)}:\ d(z,\partial N_i)\ge \rho\}\ \subset\ C_{i,\alpha}^{(m)} \ \Bigr\}.
+\]
+(Convention: $\sup\emptyset=0$.) Intuitively, $r_{i,\alpha}^{(m)}$ is the largest margin from the \emph{global} branch
+boundary $\partial N_i$ that we can trim inside this subcell while remaining entirely within the certified core $C_{i,\alpha}^{(m)}$.
+
+\medskip
+\textbf{Branch radius at level $m$.}
+Set
+\[
+  \varepsilon_{n,i}^{(m)} \ :=\ \min_{\alpha\in A_i^{(m)}} r_{i,\alpha}^{(m)} \qquad(\text{minimum over a finite set}).
+\]
+Because $A_i^{(m)}$ is finite and each $r_{i,\alpha}^{(m)}\ge0$, $\varepsilon_{n,i}^{(m)}$ is well-defined and finite.
+
+\medskip
+\textbf{(a) Soundness.}
+Fix $m$ and $i$, and take any $z\in N_i$ with $d(z,\partial N_i)\ge \varepsilon_{n,i}^{(m)}$. Since the refinement
+$\{N_{i,\alpha}^{(m)}\}$ covers $N_i$, $z$ lies in some subcell $N_{i,\alpha}^{(m)}$. By definition of
+$\varepsilon_{n,i}^{(m)}\le r_{i,\alpha}^{(m)}$, we have
+\[
+  \{\, w\in N_{i,\alpha}^{(m)}:\ d(w,\partial N_i)\ge \varepsilon_{n,i}^{(m)}\,\}
+  \ \subset\ 
+  \{\, w\in N_{i,\alpha}^{(m)}:\ d(w,\partial N_i)\ge r_{i,\alpha}^{(m)}\,\}
+  \ \subset\ C_{i,\alpha}^{(m)}.
+\]
+Hence $z\in C_{i,\alpha}^{(m)}$, which by definition implies
+$U_{i,\alpha}^{(m)}(\Theta,z)\in\mathcal B_n$ for all $\Theta\in\mathcal B_n$. But
+$U_{i,\alpha}^{(m)}=U_i$ on $\mathcal M\times N_{i,\alpha}^{(m)}$, so $U_i(\Theta,z)\in\mathcal B_n$ for all
+$\Theta\in\mathcal B_n$. This is exactly the required forward-closure at radius $\varepsilon_{n,i}^{(m)}$.
+
+\medskip
+\textbf{(b) Monotone tightening.}
+Consider levels $m$ and $m+1$. Every child subcell $N_{i,\beta}^{(m+1)}$ lies in a unique
+parent $N_{i,\alpha}^{(m)}$. By the refinement-extension theorem, guards only \emph{strengthen} under refinement:
+$C_{i,\beta}^{(m+1)} \subseteq C_{i,\alpha}^{(m)}\cap N_{i,\beta}^{(m+1)}$. Consequently, the largest admissible
+trimming from $\partial N_i$ that still lies inside the certified core cannot increase when we pass to the child:
+$r_{i,\beta}^{(m+1)}\le r_{i,\alpha}^{(m)}$. Taking minima over all children yields
+\[
+  \varepsilon_{n,i}^{(m+1)}=\min_{\beta\in A_i^{(m+1)}} r_{i,\beta}^{(m+1)}
+  \ \le\ 
+  \min_{\alpha\in A_i^{(m)}} r_{i,\alpha}^{(m)}
+  \ =\ \varepsilon_{n,i}^{(m)}.
+\]
+Thus $\varepsilon_{n,i}^{(m)}$ is nonincreasing in $m$, and so is its global meet $\varepsilon_n^{(m)}=\min_i \varepsilon_{n,i}^{(m)}$.
+
+\medskip
+\textbf{(c) Convergence to the infimum.}
+Fix a branch $i$. The sequence $(\varepsilon_{n,i}^{(m)})_{m\ge0}$ is monotone nonincreasing and bounded below by
+$0$, hence converges to some limit $\varepsilon_{n,i}^{(\infty)}\ge0$. We show
+$\varepsilon_{n,i}^{(\infty)}=\varepsilon_{n,i}^\star$.
+
+\emph{(i) Lower bound: $\varepsilon_{n,i}^{(\infty)}\ge \varepsilon_{n,i}^\star$.}
+By soundness (part (a)), each $\varepsilon_{n,i}^{(m)}$ satisfies the defining implication of the set in the infimum
+for $\varepsilon_{n,i}^\star$. Therefore $\varepsilon_{n,i}^{(m)}\ge \varepsilon_{n,i}^\star$ for all $m$, and taking
+limits gives $\varepsilon_{n,i}^{(\infty)}\ge \varepsilon_{n,i}^\star$.
+
+\emph{(ii) Upper bound: $\varepsilon_{n,i}^{(\infty)}\le \varepsilon_{n,i}^\star$.}
+Let $\eta>0$. By definition of the infimum $\varepsilon_{n,i}^\star$, the radius
+$r:=\varepsilon_{n,i}^\star+\eta$ \emph{fails} the forward-closure property: there exist
+$\Theta^\sharp\in\mathcal B_n$ and $z^\sharp\in N_i$ with $d(z^\sharp,\partial N_i)\ge r$ such that
+$U_i(\Theta^\sharp,z^\sharp)\notin\mathcal B_n$.
+Because $\{N_{i,\alpha}^{(m)}\}_{\alpha}$ forms a base of shrinking open partitions of $N_i$, for all sufficiently
+large $m$ there is a unique subcell $N_{i,\alpha(m)}^{(m)}\ni z^\sharp$ whose diameter is smaller than $\eta$
+(in the metric of $\mathcal Z^{\mathrm{in}}$), and such that the refinement preserves the failure $U_i(\Theta^\sharp,z^\sharp)\notin\mathcal B_n$.
+By continuity of $U_i$ and closedness of $\mathcal B_n$, there is an open neighborhood $V\subset N_{i,\alpha(m)}^{(m)}$
+of $z^\sharp$ on which $U_i(\Theta^\sharp,\cdot)\notin\mathcal B_n$. Hence $V\cap\{z:\ d(z,\partial N_i)\ge r\}$ is
+nonempty and contained in the \emph{complement} of $C_{i,\alpha(m)}^{(m)}$. By definition of $r_{i,\alpha(m)}^{(m)}$,
+this implies $r_{i,\alpha(m)}^{(m)}<r$, and therefore
+\[
+  \varepsilon_{n,i}^{(m)}=\min_{\alpha} r_{i,\alpha}^{(m)} \ \le\ r_{i,\alpha(m)}^{(m)} \ <\ r=\varepsilon_{n,i}^\star+\eta.
+\]
+Since this holds for all sufficiently large $m$, we have
+$\limsup_{m\to\infty}\varepsilon_{n,i}^{(m)}\le \varepsilon_{n,i}^\star+\eta$. Letting $\eta\downarrow0$ gives
+$\varepsilon_{n,i}^{(\infty)}\le \varepsilon_{n,i}^\star$.
+
+Combining (i) and (ii) yields $\varepsilon_{n,i}^{(\infty)}=\varepsilon_{n,i}^\star$.
+
+\medskip
+\textbf{Global meet.}
+Because there are finitely many branches, taking minima commutes with limits:
+\[
+  \lim_{m\to\infty}\varepsilon_n^{(m)}
+  = \lim_{m\to\infty}\min_{1\le i\le k}\varepsilon_{n,i}^{(m)}
+  = \min_{1\le i\le k}\lim_{m\to\infty}\varepsilon_{n,i}^{(m)}
+  = \min_{1\le i\le k}\varepsilon_{n,i}^\star
+  = \varepsilon_n^\star.
+\]
+Since $(\varepsilon_n^{(m)})_m$ is nonincreasing, it converges \emph{down} to $\varepsilon_n^\star$.
+
+\medskip
+\textbf{Effectivity / upper–semicomputability.}
+At each finite stage $m$ the refinement is finite, and each $r_{i,\alpha}^{(m)}$ is determined by the finite guarded data
+on $N_{i,\alpha}^{(m)}$ (continuous predicates on compact open boxes). Thus $\varepsilon_{n,i}^{(m)}=\min_\alpha r_{i,\alpha}^{(m)}$
+and $\varepsilon_n^{(m)}=\min_i \varepsilon_{n,i}^{(m)}$ are obtained from finite data and form a nonincreasing sequence of sound
+radii converging to the minimal values: this is exactly upper–semicomputability. In the pure TM embedding (Section~\ref{subsec:step-realization}),
+after excluding carry/borrow, each branch is affine on a rational open box, so $r_{i,\alpha}^{(m)}$ (hence $\varepsilon_{n,i}^{(m)}$ and
+$\varepsilon_n^{(m)}$) are \emph{exactly} computable rational numbers at each stage.
+\end{proof}
+
+Now we will establish two more lemmas which finalize our preparations to prove the existence of Minimal Certification Standard.
+
+\begin{lemma}[Continuity and Compactness]
+\label{lem:compact-cont}
+\(\mathcal M\) is compact; each branch \(U_{q,a}\) is continuous; hence so is \(U_{\mathrm{cond}}\).  Emission \(E(\Theta)=\Theta\) is continuous.
+\end{lemma}
+
+\begin{lemma}[Open-Preimage Holds along Certificate-Consistent Paths]
+\label{lem:open-preimage-step}
+Suppose we are given a configuration \(\Theta\) and a finite certificate witness (i.e., a finite input sequence) demonstrating that from \(\Theta\) the TM eventually reaches the halting basin \(\mathcal B\) in \(T\) steps.  Assume UI-traceability (global open-preimage) holds. Then for each shell \(\mathcal B_n\) appearing along that halting trajectory, the preimage
+\[
+  U(\Theta,\cdot)^{-1}(\mathcal B_n)
+  \;\subset\;
+  \mathcal Z^{\rm in}=\mathcal M
+\]
+is open and nonempty.  Hence, along any certificate-consistent (halting) path, the Open-Preimage Axiom is satisfied.
+\end{lemma}
+
+\begin{proof}
+We show openness and nonemptiness for each branch \((q,a)\) that appears along the particular halting sequence.
+
+\medskip
+\noindent\textbf{(i) Openness.}  
+As before, each \(N_{q,a}\) is an open cylinder in the product topology, and on \(N_{q,a}\) the restricted update \(U_{q,a}\) is continuous. Hence \(U_{q,a}^{-1}(\mathcal B_n)\) is open in \(N_{q,a}\), and thus open in \(\mathcal M\times\mathcal Z^{\rm in}\). Taking the finite union over the finitely many relevant branches along the certificate yields that \(U(\Theta,\cdot)^{-1}(\mathcal B_n)\) is open.
+
+\medskip
+\noindent\textbf{(ii) Nonemptiness (certificate-consistent).}  
+Fix a shell \(\mathcal B_n\) encountered along the halting trajectory from \(\Theta\). By assumption there exists a future finite input sequence \(z_{1:T}\) steering \(\Theta\) into \(\mathcal B\), so in particular for the specific preceding branch \((q,a)\) we have some \((\Theta',z')\) with \(U_{q,a}(\Theta',z')\in\mathcal B_n\). UI-traceability guarantees that the preimage of \(\mathcal B_n\) under \(U\) is nonempty (and open) globally, so the particular local preimage restricted to the halting-consistent branch is also nonempty.
+
+\medskip
+Combining (i) and (ii) along the certificate-consistent sequence, each shell’s preimage is open and nonempty.  Therefore, for the purposes of constructing a valid test along a halting witness, the Open-Preimage Axiom is satisfied.
+\end{proof}
+
+
+
+\noindent By compactness and Lemma \ref{lem:open-preimage-step}, the infimum radii defining \(\mathcal S\) are attained, giving a minimal Certification Standard.
+
+\subsection{Computational Universality Theorem}
+\label{subsec:universality-theorem}
+
+\begin{theorem}[Universality of Guarded Tests]
+\label{thm:universality}
+Under VT1–VT4 and Axiom \ref{ax:open-preimage}, the above construction maps any deterministic TM \(M\) and input \(x\) to a valid test
+\(\mathfrak T_{M,x}\) using only \textsc{Conditional}, \textsc{Loop} (and optional \textsc{Sequential}), such that
+\[
+  M(x)\text{ halts} 
+  \;\iff\;
+  \mathfrak T_{M,x}\text{ enters its basin } \mathcal B
+  \;\iff\;
+  \text{the Loop‑Until program halts.}
+\]
+Hence the guarded‑test formalism is Turing‑complete.
+\end{theorem}
+
+\noindent\textbf{Remark on Halting Recognition.}  
+Although the construction already identifies \(\mathcal B\) as the halting basin, to ensure the Loop-Until program \emph{terminates} immediately upon entry we note that \(\mathcal B\) is absorbing and can be equipped with a trivial ranking: define \(f(\Theta)\) to be 0 on \(\mathcal B\) and 1 elsewhere, so that entry into \(\mathcal B\) is detectable as the unique decrease.  Thus the halt-test is robust (decidable in finite time) and the Loop-Until primitive ceases execution exactly when \(\Theta_t\in\mathcal B\), making the equivalence \(M(x)\) halts \(\iff\) the Loop-Until program halts precise.  
+
+
+\begin{proof}
+Combine:
+\begin{itemize}
+  \item Lemma \ref{lem:encoding}: continuous encoding of configurations.
+  \item Lemmas \ref{lem:branch-update} and \ref{lem:open-preimage-step}: each one‑tick test is valid.
+  \item Lemma \ref{lem:halt-basin}: halting \(\iff\) basin entry.
+  \item Proposition \ref{prop:primitive-closure}: finite composition yields a valid test.
+  \item Lemma \ref{lem:compact-cont}: VT1–VT4 hold, so a minimal standard exists.
+\end{itemize}
+Thus \(\mathfrak T_{M,x}\) is a valid test and simulates \(M\) exactly.
+\end{proof}
+
+
+\section{Augmenting with Physical Inputs and Belief‐State}
+\subsection{Extended State Space}
+\label{subsec:augmented-state-space}
+
+We incorporate the physical belief‑state together with the TM configuration into a single composite state.
+
+\begin{definition}[Augmented State Space]
+Let
+\[
+  \mathcal M_{\rm phys},\;\mathcal M_{\rm TM}
+\]
+be the compact metric state spaces for the physical belief‑state \(\Theta^{\rm phys}\) and the TM configuration \(\Theta^{\rm TM}\), respectively.  We define the \emph{augmented state space}
+\[
+  \widetilde{\mathcal M}
+  \;=\;
+  \mathcal M_{\rm phys} \;\times\; \mathcal M_{\rm TM},
+\]
+equipped with the product metric
+\[
+  d_{\widetilde{\mathcal M}}
+  \Bigl((\Theta^{\rm phys},\Theta^{\rm TM}),\;(\Theta'^{\rm phys},\Theta'^{\rm TM})\Bigr)
+  =\max\bigl\{d_{\rm phys}(\Theta^{\rm phys},\Theta'^{\rm phys}),\;d_{\rm TM}(\Theta^{\rm TM},\Theta'^{\rm TM})\bigr\}.
+\]
+\end{definition}
+
+\begin{remark}[Compactness]
+Since both \(\mathcal M_{\rm phys}\) and \(\mathcal M_{\rm TM}\) are compact, their product \(\widetilde{\mathcal M}\) is also compact.  Continuity of any map out of \(\widetilde{\mathcal M}\) will follow from continuity on each factor.
+\end{remark}
+
+\subsection{Extended Input Time‑Domain}
+\label{subsec:augmented-input-domain}
+
+We extend the input time‑domain to include both the physical external input and the current belief‑state.
+
+\begin{definition}[Augmented Input Space]
+Let 
+\(\mathcal Z^{\rm in}_{\rm phys}\) be the compact metric space of physical sensor inputs.  We define the \emph{augmented input space}
+\[
+  \widetilde{\mathcal Z}^{\rm in}
+  \;=\;
+  \mathcal Z^{\rm in}_{\rm phys}
+  \;\times\;
+  \mathcal M_{\rm phys}
+  \;\times\;
+  \mathcal M_{\rm TM},
+\]
+with the product metric
+\[
+  d_{\widetilde{\mathcal Z}}
+  \bigl((z,\Theta^{\rm phys},\Theta^{\rm TM}),\;(z',\Theta'^{\rm phys},\Theta'^{\rm TM})\bigr)
+  =\max\bigl\{d_{\rm phys}(z,z'),\;d_{\rm phys}(\Theta^{\rm phys},\Theta'^{\rm phys}),\;d_{\rm TM}(\Theta^{\rm TM},\Theta'^{\rm TM})\bigr\}.
+\]
+\end{definition}
+
+\begin{remark}[Motivation]
+By feeding back the current belief‑state \((\Theta^{\rm phys},\Theta^{\rm TM})\) as part of the “input,” we can perform conditional branching on both physical and TM state within the same \textsc{Conditional} primitive.
+\end{remark}
+
+\subsection{Mixed One‑Step Update Map}
+\label{subsec:augmented-update-map}
+
+We now define the composite one‑tick update on the augmented state and input.
+
+\begin{definition}[Augmented Update Map]
+Let
+\[
+  U_{\rm phys}:\mathcal M_{\rm phys}\times\mathcal Z^{\rm in}_{\rm phys}\to\mathcal M_{\rm phys},
+  \quad
+  U_{\rm TM}:\mathcal M_{\rm TM}\times\mathcal M_{\rm TM}\to\mathcal M_{\rm TM}
+\]
+be the physical and TM‐step updates, respectively.  Define
+\[
+  \widetilde U:
+    \widetilde{\mathcal M}\times\widetilde{\mathcal Z}^{\rm in}
+  \;\longrightarrow\;
+    \widetilde{\mathcal M},
+\]
+by
+\[
+  \widetilde U\bigl((\Theta^{\rm phys},\Theta^{\rm TM}),\;(z^{\rm phys},\Theta^{\rm phys},\Theta^{\rm TM})\bigr)
+  =
+  \Bigl(
+    U_{\rm phys}\bigl(\Theta^{\rm phys},\,z^{\rm phys}\bigr),\;
+    U_{\rm TM}\bigl(\Theta^{\rm TM},\,\Theta^{\rm TM}\bigr)
+  \Bigr).
+\]
+\end{definition}
+
+\begin{remark}[Well‑Definedness]
+On each augmented input tick \((z^{\rm phys},\Theta^{\rm phys},\Theta^{\rm TM})\), the first factor advances the physical belief by the sensor reading \(z^{\rm phys}\), while the second factor performs the TM step by treating the TM’s own configuration \(\Theta^{\rm TM}\) as its “input.”
+\end{remark}
+
+\subsection{Continuity and Compactness}
+\label{subsec:augmented-continuity-compactness}
+
+We verify that the extended domains and update map retain the required topological properties.
+
+\begin{lemma}
+\label{lem:augmented-continuity}
+The spaces \(\widetilde{\mathcal M}\) and \(\widetilde{\mathcal Z}^{\rm in}\) are compact metric spaces, and the augmented update
+\(\widetilde U\) is continuous.
+\end{lemma}
+
+\begin{proof}
+\begin{itemize}
+  \item \emph{Compactness:} Finite products of compact metric spaces remain compact.
+  \item \emph{Metric structure:} We have endowed the products with the sup‐metric of their factors, which is a valid metric topology.
+  \item \emph{Continuity of \(\widetilde U\):} Since both
+    \(U_{\rm phys}\) and \(U_{\rm TM}\) are continuous, the map
+    \[
+      ((\Theta^{\rm phys},\Theta^{\rm TM}),\;(z^{\rm phys},\Theta^{\rm phys},\Theta^{\rm TM}))
+      \;\longmapsto\;
+      \bigl(U_{\rm phys}(\Theta^{\rm phys},z^{\rm phys}),\,U_{\rm TM}(\Theta^{\rm TM},\Theta^{\rm TM})\bigr)
+    \]
+    is continuous as a product of continuous projections and compositions.  
+\end{itemize}
+\end{proof}
+
+
+\subsection{Conditional Decomposition on the Augmented Domain}
+\label{subsec:augmented-conditional-decomp}
+
+We now exhibit a finite open partition of \(\widetilde{\mathcal Z}^{\rm in}\) that supports a \textsc{Conditional} primitive.
+
+\begin{definition}[Augmented Branch Cells]
+\begin{enumerate}
+  \item Let \(\{M_j\}_{j=1}^r\) be a finite open partition of \(\mathcal Z^{\rm in}_{\rm phys}\) (the physical guard‑bands).
+  \item Let \(\{N_{q,a}\}_{(q,a)}\) be the TM cylinders in \(\mathcal M_{\rm TM}\) (as before).
+  \item Then 
+  \[
+    \widetilde N_{j,(q,a)}
+    := M_j
+       \;\times\;
+       \mathcal M_{\rm phys}
+       \;\times\;
+       N_{q,a}
+    \;\;\subset\;
+    \widetilde{\mathcal Z}^{\rm in}
+  \]
+  runs over finitely many open cells covering the whole augmented input space.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[Augmented Conditional Primitive]
+On each cell \(\widetilde N_{j,(q,a)}\), the map \(\widetilde U\) restricts to a continuous update.  Therefore, the overall \(\widetilde U\) can be realized as a \textsc{Conditional} primitive over the finite open partition \(\{\widetilde N_{j,(q,a)}\}\).
+\end{proposition}
+
+\begin{proof}
+Each \(\widetilde N_{j,(q,a)}\) is open by product‐set openness.  On it,
+\(\widetilde U\bigl((\Theta^{\rm phys},\Theta^{\rm TM}),\,\cdot\bigr)\)
+coincides with a fixed pair of continuous maps
+\((U_{\rm phys},U_{\rm TM})\).  Finitely many such pieces glue to a
+globally continuous conditional update.
+\end{proof}
+
+
+\subsection{Open‑Preimage in the Augmented Domain}
+\label{subsec:augmented-open-preimage}
+
+We check that the augmented update satisfies input‑traceability at each shell.
+
+\begin{lemma}[Augmented Open‑Preimage]
+\label{lem:augmented-open-preimage}
+This lemma is conditional on the \emph{UI-Traceability} (Def.~\ref{def:ui-traceability}, Chapter 1): for every shell $\mathcal{B}_n$ and every state $\Theta\notin\mathcal{B}$ there exists an admissible input $z$ with $U(\Theta,z)\in\mathcal{B}_n$.  
+
+Let \(\mathcal B_n^{\rm phys}\subset\mathcal M_{\rm phys}\) and
+\(\mathcal B_n^{\rm TM}\subset\mathcal M_{\rm TM}\) be the respective
+\(n\)-th shells.  Then for every \((\Theta^{\rm phys},\Theta^{\rm TM})\)
+and every \(n\),
+\[
+  \widetilde U\bigl((\Theta^{\rm phys},\Theta^{\rm TM}),\,\cdot\bigr)^{-1}
+    \bigl(\mathcal B_n^{\rm phys}\times\mathcal B_n^{\rm TM}\bigr)
+  \;\subset\;\widetilde{\mathcal Z}^{\rm in}
+\]
+is open and nonempty.
+\end{lemma}
+
+\begin{proof}
+\begin{itemize}
+  \item \emph{Openness:} \(\widetilde U\) is continuous, and
+    \(\mathcal B_n^{\rm phys}\times\mathcal B_n^{\rm TM}\) is open, so
+    its preimage is open.
+  \item \emph{Nonemptiness:}  
+    \begin{enumerate}
+      \item For the TM factor, we appeal to the original TM preimage
+            argument: there is always some TM‐branch input
+            \(\Theta^{\rm TM}\) driving into \(\mathcal B_n^{\rm TM}\).
+      \item For the physics factor, by assumption of the physical test,
+            there is some \(z^{\rm phys}\) driving
+            \(\Theta^{\rm phys}\) into \(\mathcal B_n^{\rm phys}\).
+    \end{enumerate}
+    Taking the product of these admissible inputs gives a point in the
+    preimage.  
+\end{itemize}
+\end{proof}
+
+\section{Time-Irreversibility/Weak-Fairness Axiom}
+\begin{axiom}[Time-Irreversibility / Weak-Fairness (TI/WF)]
+\label{ax:ti-wf-subsec}
+Let \(f:\mathcal M\to\mathbb N\) be a well-founded ranking function, and define the enabled-decrease set at time \(t\) by
+\[
+  D_t \;=\; \{\,z\in G^{\rm in}(\Theta_t)\mid f(U(\Theta_t,z))<f(\Theta_t)\,\}.
+\]
+An infinite execution \((\Theta_0,z_0,\Theta_1,z_1,\dots)\) is called \emph{fair} if whenever \(D_t\neq\varnothing\) for infinitely many \(t\) (i.e., the set \(\{t: D_t\neq\varnothing\}\) is infinite), it holds that \(z_t\in D_t\) for infinitely many \(t\); equivalently,
+\[
+\limsup_{t\to\infty} \mathbf{1}_{D_t\neq\varnothing} = 1
+\quad\Longrightarrow\quad
+\limsup_{t\to\infty} \mathbf{1}_{z_t\in D_t} = 1.
+\]
+In words, if decrease is enabled infinitely often, then it is taken infinitely often.
+\end{axiom}
+
+
+Intuitively, it is a full analogue of a time arrow in our measurement. However slow it is, it always points in one direction.
+
+\subsection{Sufficiency of Time-Irreversibility/Weak-Fairness}
+\label{sec:sufficiency-ti-wf}
+
+We now show that the Time-Irreversibility / Weak-Fairness axiom (TI/WF, Axiom~\ref{ax:ti-wf-subsec}), together with the structural hypotheses of Book~III, Chapter~1, suffices to guarantee \emph{uniform polynomial reachability} under the guarded decomposition. The polynomial bound is provided by PUB (Polynomial Uniform Bound) from ABET (Book~II, Chapter~6, Corollary~\ref{cor:poly-uniform-entry-bound}).
+
+\begin{theorem}[Sufficiency of TI/WF under Decomposition]
+\label{thm:sufficiency-TIWF-PUB}
+Let $\mathfrak T=(\mathcal M,\mathcal Z^{\rm in},\mathcal Z^{\rm out},U,E,\mathcal S)$ be a valid test satisfying the structural axioms (VT1–VT4), the Open-Preimage/Traceability hypothesis at every shell (UI-Traceability), and admitting the guarded tick-0 (and shell-wise) decomposition of Chapter~1. Define the well-founded ranking
+\[
+f(\Theta)\ :=\ \min\Bigl\{\,t\in\mathbb N:\ \exists\,z_{1:t}\ \text{with}\ U^t(\Theta;z_{1:t})\in\mathcal B\,\Bigr\},
+\]
+with $f(\Theta)=0$ iff $\Theta\in\mathcal B$.
+Assume the Time-Irreversibility / Weak-Fairness axiom (Axiom~\ref{ax:ti-wf-subsec}) holds for the induced Loop-Until execution, and that PUB holds (Book~II, Chapter~6, Cor.~\ref{cor:poly-uniform-entry-bound}). Then there exists a polynomial $p(\cdot)$ such that every fair execution starting from $\Theta_0$ reaches $\mathcal B$ in at most
+\[
+T_{\max}(\Theta_0)\ \le\ f(\Theta_0)\ \le\ p\bigl(|\Theta_0|\bigr)
+\]
+ticks. In particular, the guarded Loop-Until program halts in uniformly polynomial time on all fair runs.
+\end{theorem}
+
+\begin{proof}
+\emph{(1) Ranking and existential decrease.)} By definition of $f$, for any $\Theta\notin\mathcal B$ there exists an admissible input $z$ such that
+\[
+f\bigl(U(\Theta,z)\bigr)\ \le\ f(\Theta)-1.
+\]
+Thus the enabled-decrease set $D_t=\{z\in G^{\rm in}(\Theta_t): f(U(\Theta_t,z))<f(\Theta_t)\}$ is nonempty whenever $\Theta_t\notin\mathcal B$.
+
+\emph{(2) Fairness $\Rightarrow$ progress.)} By Axiom~\ref{ax:ti-wf-subsec} (TI/WF), if $D_t\neq\varnothing$ infinitely often then $z_t\in D_t$ infinitely often. Since $D_t\neq\varnothing$ for every $t$ with $\Theta_t\notin\mathcal B$, fairness ensures that $f(\Theta_t)$ decreases infinitely often unless it hits $0$.
+
+\emph{(3) Well-foundedness $\Rightarrow$ finite time.)} Because $f:\mathcal M\to\mathbb N$ is well-founded and strictly decreases whenever a choice in $D_t$ is taken, there can be at most $f(\Theta_0)$ such decreases. Hence every fair run reaches $\mathcal B$ in at most $T_{\max}(\Theta_0)\le f(\Theta_0)$ ticks.
+
+\emph{(4) Primitive timing bounds and their role.}
+Recall from Test Primitives Sec.~\ref{sec:test-primitives} from Chapter 1 that each primitive test in our framework has a uniform, certification–preserving bound on the number of \emph{input} ticks needed to enter its target basin: a \emph{Sequential} test reaches its basin within two input ticks and emits within one output tick; a \emph{Conditional} test satisfying UI–Traceability reaches in a single input tick and emits within one output tick; a \emph{Loop–Until} test reaches its basin within a number of input ticks bounded by a polynomial in the shell index (by the PUB property) and emits within one output tick. Since the inductive decomposition (Theorem~\ref{thm:inductive-decomposition}, Chapter 1) nests only such primitives shell–by–shell, these bounds compose directly: under the TI/WF axiom, whenever a decrease move is available at some shell it is taken within its per–primitive bound, and PUB then bounds the total completion time by a polynomial in the target shell index. This justifies applying PUB at the decomposition level without any additional assumptions on the guards.
+
+
+\emph{(5) Polynomial bound via PUB.)} ABET’s Polynomial Uniform Bound (Book~II, Chapter~6, Cor.~\ref{cor:poly-uniform-entry-bound}) guarantees the existence of a polynomial $p$ such that the minimal hitting time of the basin from $\Theta_0$ is at most $p(|\Theta_0|)$ under the standing hypotheses (compactness, continuity, minimal standard, open-preimage, and polytime verifiability). Since $f(\Theta_0)$ is by definition the minimal such hitting time, we have $f(\Theta_0)\le p(|\Theta_0|)$. Combining with Step (3) yields the claimed uniform polynomial bound.
+\end{proof}
+
+\begin{remark}[Role of decomposition]
+The guarded tick-0 (and shell-wise) decomposition is used to ensure that admissible inputs (open preimages) exist and remain robust at each step, so $D_t\neq\varnothing$ whenever $\Theta_t\notin\mathcal B$. TI/WF then converts this \emph{existential} progress into \emph{actual} progress along every fair run; PUB upgrades the uniform bound to a polynomial one in the input size.
+\end{remark}
+
+
+
+\subsection{Necessity of Time‑Irreversibility/Weak‑Fairness}
+\label{subsec:augmented-no-fairness}
+
+\begin{proposition}[Non‑Termination Without TI/WF]
+\label{prop:augmented-nontermination}
+Let 
+\[
+  \widetilde U : (\mathcal M_{\rm phys}\times\mathcal M_{\rm TM}\times\mathcal Z^{\rm in}_{\rm phys})
+            \;\times\;\mathcal Z^{\rm in}_{\rm phys}
+  \;\longrightarrow\;\mathcal M_{\rm phys}\times\mathcal M_{\rm TM}
+\]
+be the augmented update map of Section~\ref{subsec:augmented-update-map}, and let 
+\(\widetilde f:\mathcal M_{\rm phys}\times\mathcal M_{\rm TM}\to\mathbb N\)
+be any well‐founded ranking satisfying only the existential decrease condition:
+\[
+  \forall\,\xi\notin\mathcal B,\quad\exists\,z:\quad 
+    \widetilde f\bigl(\widetilde U(\xi,z)\bigr)<\widetilde f(\xi).
+\]
+If we \emph{do not} assume Axiom~\ref{ax:ti-wf-subsec} (Time‑Irreversibility/Weak‑Fairness), then there exists an input stream
+\(\{\tilde z_t\}_{t=0}^\infty\subset\widetilde{\mathcal Z}^{\rm in}\)
+such that the corresponding Loop‑Until execution
+\((\xi_t)_{t=0}^\infty\) never enters \(\mathcal B\), even though at each state there is some admissible move that would decrease \(\widetilde f\).  Hence, without TI/WF, no deterministic termination guarantee is possible.
+\end{proposition}
+
+\begin{proof}
+At any current state \(\xi_t\), the existential ranking property ensures the \emph{existence} of at least one “good” input \(z^\downarrow_t\) for which
+\[
+  \widetilde f\bigl(\widetilde U(\xi_t,z^\downarrow_t)\bigr)
+  \;<\;\widetilde f(\xi_t).
+\]
+However, open‐preimage (Axiom~\ref{ax:open-preimage}, Chapter 1) also guarantees the existence of \emph{other} admissible inputs \(z^\circlearrowleft_t\) that \emph{do not} decrease \(\widetilde f\):
+\[
+  \widetilde f\bigl(\widetilde U(\xi_t,z^\circlearrowleft_t)\bigr)
+  \;=\;\widetilde f(\xi_t).
+\]
+In the absence of any fairness constraint, an adversarial environment can simply choose \(z_t = z^\circlearrowleft_t\) at \emph{every} step.  By construction,
+\[
+  \widetilde f(\xi_{t+1}) 
+  = \widetilde f\bigl(\widetilde U(\xi_t,z_t)\bigr)
+  = \widetilde f(\xi_t),
+  \quad\forall\,t,
+\]
+so the ranking never drops, and \(\xi_t\) never reaches the basin \(\mathcal B\).  Thus the Loop‑Until loop fails to terminate—even though at each state a terminating move was available—showing TI/WF is \emph{necessary} for any guaranteed halting behavior.
+\end{proof}
+
+
+
+\subsection{Loop‑Until and Ranking Lifted}
+\label{subsec:augmented-loop-until-ranking}
+
+Finally, we observe that the Loop‑Until construction and the ranking
+argument carry over verbatim to the augmented setting.
+
+\begin{proposition}
+Under the usual TI/WF and polynomial‐bound assumptions, the Loop‑Until
+program built from \(\widetilde U\) on the augmented state/input
+terminates in polynomial time and admits a well‐founded ranking
+\(\widetilde f:\widetilde{\mathcal M}\to\mathbb N\).
+\end{proposition}
+
+\begin{proof}[Sketch]
+\begin{itemize}
+  \item \emph{Ranking:} Define 
+    \(\widetilde f(\Theta^{\rm phys},\Theta^{\rm TM})
+      = f_{\rm phys}(\Theta^{\rm phys}) + f_{\rm TM}(\Theta^{\rm TM})\),
+    summing the individual rankings; each step decreases one summand
+    by at least one.
+  \item \emph{Loop‑Until:} The same inductive decomposition and
+    Loop‑Until procedure applies to \(\widetilde U\) because it is
+    built from \textsc{Conditional}/\textsc{Sequential} on an open
+    finite partition.  
+  \item \emph{Termination:} TI/WF guarantees that whenever progress is
+    possible in either the physical or TM coordinate, it eventually
+    happens.  Hence the combined ranking drops to zero in at most
+    \(f_{\rm phys}(\Theta^{\rm phys}_0) + f_{\rm TM}(\Theta^{\rm TM}_0)\)
+    steps, which is polynomially bounded.
+\end{itemize}
+\end{proof}
+
+\subsection{Minimal Certification Standard in Augmented Decomposition}
+
+We already proved the existence of Minimal Certification Standard in TM-embedding setup. The corollary of the Upper–Semicomputability of Minimal Radii via Refinement (Prop.~\ref{prop:upper-semi-eps}) explains why this is enough for universality in the augmented setup, given the TI/WF axiom.
+
+
+\begin{corollary}[Universality and TI/WF Do Not Require Exact Minima]
+\label{cor:universality-independent-of-exact-eps}
+All results that establish: \emph{(i)} computational universality (Theorem~\ref{thm:universality}), and
+\emph{(ii)} uniform polynomial reachability under TI/WF (Theorem~\ref{thm:sufficiency-TIWF-PUB}), use only that for each shell
+there exists \emph{some} valid guard–band radius and that these radii can be tightened by refinement. Consequently, the proofs
+go through verbatim when $\varepsilon_n$ is replaced by any $\varepsilon_n^{(m)}$ from Proposition~\ref{prop:upper-semi-eps};
+no appeal to the exact minimal values $\varepsilon_n^\star$ is needed.
+\end{corollary}
+
+\begin{remark}[TM embedding vs.\ augmented setup]
+In the TM-only embedding (Section~\ref{subsec:step-realization}), on any fixed finite cylinder refinement that excludes carry/borrow,
+each branch map is affine on a rational open box, so the \emph{local} per-branch tick-$0$ radius is exactly computable.
+Globally (across all future refinements and Loop-Until iterations) exact minimality may be non-computable; this is immaterial:
+Proposition~\ref{prop:upper-semi-eps} supplies a decreasing sequence of valid radii converging to the minimal meet, which is all
+that Theorems~\ref{thm:universality} and~\ref{thm:sufficiency-TIWF-PUB} ever use. In the augmented (physics+TM) setup, the same
+conclusion holds under UI-Traceability; exact minima are unnecessary for the halting/NP-certifiability claims.
+\end{remark}
+
+
+
+\section{Ranking Function \& Reachability}
+\label{sec:ranking-reachability}
+Above, we established the way to convert an arbitrary Turing Machine algorithm with the endowed physical spaces and transitions into 0-tick-decomposed structure of our primitives. We also established the existential condition for such an endowment: \emph{TI/WF axiom}.
+
+However, before we can argue this structure can restore a Simple Test behavior, we must ensure the \emph{polynomial} reachability in our structure.
+
+This section isolates the \emph{combinatorial} core of reachability: a well‑founded \emph{ranking function} that strictly decreases along (at least one) admissible input step until the basin is reached.  We show:
+
+\begin{itemize}
+  \item A ranking is \emph{necessary} for any deterministically certifiable test (it comes “for free” from the Attractor Basin Equivalence).
+  \item Together with the structural axioms (continuity/compactness, minimal standard, open‑preimage), a polynomially bounded ranking is also \emph{sufficient} for certifiability.
+  \item Rankings are preserved by the finite guarded decomposition (Section~\ref{sec:inductive-shell-loop}, Chapter 1), hence yield a uniform bound on the Loop‑Until program.
+  \item The classical Lyapunov‑border function is a \emph{universal} (for all inputs) continuous analogue; the ranking is an \emph{existential} (for some input) discrete analogue.  Either can drive reachability, but the ranking is the weakest needed.
+\end{itemize}
+
+%----------------------------------------------------------
+\subsection{Well‑Founded Rankings: Definition and Intuition}
+\label{subsec:ranking-def}
+
+\begin{definition}[Well‑Founded Ranking Function]
+\label{def:ranking}
+Let $\mathfrak T=(\mathcal M,\mathcal Z^{\rm in},\mathcal Z^{\rm out},U,E,\mathcal S)$ be a valid test with invariant basin $\mathcal B$.  
+A function $f:\mathcal M\to\mathbb N$ is a \emph{well‑founded ranking} if:
+\begin{enumerate}
+  \item $f(\Theta)=0 \iff \Theta\in\mathcal B$;
+  \item For every $\Theta\notin\mathcal B$ there exists at least one input $z\in\mathcal Z^{\rm in}$ such that
+  \[
+     f\bigl(U(\Theta,z)\bigr) < f(\Theta).
+  \]
+\end{enumerate}
+We call (2) an \emph{existential decrease} condition.
+\end{definition}
+
+\paragraph{Intuition.}  
+$f(\Theta)$ is the “remaining distance in steps” to the basin along \emph{some} acceptable evolution.  It need not decrease under \emph{every} input (contrast with a Lyapunov function), only that there is at least one guard‑band‑admissible input that drives it down.
+
+%----------------------------------------------------------
+\subsection{Necessity of a Ranking for Certifiability}
+\label{subsec:ranking-necessary}
+
+\begin{proposition}[Ranking is Necessary]
+\label{prop:ranking-necessary-again}
+If $\mathfrak T$ is deterministically certifiable in NP (i.e.\ admits a polynomial‑size witness for its tail predicate), then there exists a well‑founded ranking function $f:\mathcal M\to\mathbb N$.
+\end{proposition}
+
+\noindent\textbf{Note.}  
+The uniform finite hitting time \(T_{\max}\) invoked below is guaranteed to be polynomially bounded by Corollary~\ref{cor:poly-uniform-entry-bound} (PUB) under the hypotheses of the Attractor Basin Equivalence Theorem (ABET), including compactness, open-preimage, and the existence of a polynomial-time verifier. Hence the definition of \(f\) below uses this uniform entry bound as its origin.
+
+\noindent\textbf{PUB dependency (explicit).}
+Proposition~\ref{prop:ranking-necessary-again} guarantees only the \emph{existence} of a well-founded ranking \(f\).
+It does \emph{not} supply any polynomial bound on \(f(\Theta)\).
+Whenever a polynomial bound on \(f\) is used later in this chapter, it is derived from the Polynomial Uniform Entry Bound (PUB) of Book~II, Chapter~6, Corollary~\ref{cor:poly-uniform-entry-bound}—not from ABET alone.
+
+
+\begin{proof}
+By the Attractor Basin Equivalence Theorem, certifiability implies:
+(i) existence of a reachable, invariant basin $\mathcal B$; and
+(ii) a uniform bound $T_{\max}$ (polynomial in the input description) on the time to enter $\mathcal B$ for every trajectory (or, more precisely, for every head consistent with acceptance).
+
+Define
+\[
+  f(\Theta) 
+  := \min\bigl\{\,t\in\mathbb N:\ \exists\ z_{1:t}\ \text{with}\ U^t(\Theta;z_{1:t})\in\mathcal B\,\bigr\},
+\]
+with $f(\Theta)=0$ if $\Theta\in\mathcal B$.  Because $T_{\max}$ bounds the search, $f(\Theta)$ is well‑defined and finite.
+
+Now fix $\Theta\notin\mathcal B$.  By definition of $f(\Theta)$, there is a sequence $z_{1:f(\Theta)}$ steering $\Theta$ into $\mathcal B$ in exactly $f(\Theta)$ steps.  Let $z=z_1$.  Then
+\[
+  f\bigl(U(\Theta,z)\bigr) \le f(\Theta)-1,
+\]
+because from $U(\Theta,z)$ we can follow the rest of the sequence $z_{2:f(\Theta)}$ and reach $\mathcal B$ in $f(\Theta)-1$ steps.  Thus $f$ decreases strictly under the \emph{existential} choice of $z$, satisfying Definition~\ref{def:ranking}.
+\end{proof}
+
+\noindent\textbf{Comment.}  
+The proof uses only the existence of a finite hitting time for the basin—not continuity or open‑preimage.  Thus $f$ is a very weak, purely combinatorial certificate of reachability.
+
+%----------------------------------------------------------
+\subsection{Sufficiency: Ranking + Structural Axioms $\Rightarrow$ Certifiability}
+\label{subsec:ranking-sufficient}
+
+A ranking alone does not ensure we can \emph{compute} or \emph{verify} anything in polynomial time (e.g.\ the preimages might be fractal sets).  We need the structural axioms introduced earlier.
+
+\begin{theorem}[Ranking + (C1)–(C3) + Poly‑Bounded $f$ $\Rightarrow$ Certifiable]
+\label{thm:ranking-sufficient}
+Assume:
+\begin{enumerate}[label=(C\arabic*)]
+  \item Compactness/continuity: $\mathcal M,\mathcal Z^{\rm in}$ compact metric; $U,E$ continuous.
+  \item Minimal standard $\mathcal S=\{\varepsilon_n\}$ exists, yielding shells $\mathcal B_n$.
+  \item Open‑preimage at all levels (Axiom~\ref{ax:open-preimage}).
+  \item A well‑founded ranking $f:\mathcal M\to\mathbb N$ exists, with $f(\Theta_0)\le p(|\text{input}|)$ for some polynomial $p$.
+\end{enumerate}
+Then $\mathfrak T$ is deterministically certifiable in NP.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+\begin{itemize}
+  \item (C1)–(C3) yield (Section~\ref{sec:inductive-shell-loop}, Chapter 1) a finite guarded decomposition for each shell and the Loop‑Until primitive.
+  \item The ranking $f$ gives a bound on the number of loop iterations: by Definition~\ref{def:ranking}, each iteration can choose an admissible input that decreases $f$ by $\ge1$.  Thus the loop halts in $\le f(\Theta_0)$ steps.
+  \item Because $f(\Theta_0)\le p(|\text{input}|)$, the halting time is polynomially bounded.  The NP witness is $(T,\Theta_T)$ with $T\le p(|\text{input}|)$, and the verifier replays $U$ for $T$ steps and checks $\Theta_T\in\mathcal B$ (within $\varepsilon_T$).
+\end{itemize}
+All checks use only polynomial time because the decomposition is finite and each $U_i,E$ is continuous on a compact set (so can be simulated to required precision).  Hence $\mathfrak T$ is NP‑certifiable.
+\end{proof}
+
+\begin{corollary}
+\label{cor:ranking-not-enough}
+The ranking condition by itself (without (C1)–(C3) and poly‑boundedness) is \emph{not} sufficient for NP certifiability: pathological maps could admit a ranking but fail open‑preimage or minimal standard construction, making a finite guarded program or robust verifier impossible.
+\end{corollary}
+
+%----------------------------------------------------------
+\subsection{Ranking vs.\ Lyapunov: Universal vs.\ Existential Decrease}
+\label{subsec:ranking-vs-lyapunov}
+
+\begin{definition}[Strict Lyapunov‑Border Function]
+A continuous $L:\mathcal M\to\mathbb R_{\ge0}$ is a strict Lyapunov‑border function for $U$ if:
+\begin{enumerate}
+  \item $L(\Theta)=0 \iff \Theta\in\mathcal B$;
+  \item For every $\Theta\notin\mathcal B$ and \emph{every} admissible $z\in G^{\rm in}(\Theta)$,
+        $L(U(\Theta,z))<L(\Theta)$.
+\end{enumerate}
+\end{definition}
+
+\noindent A Lyapunov $L$ demands \emph{universal} decrease—stronger than ranking’s existential decrease.  In practice:
+\begin{itemize}
+  \item $L$ gives a direct, analytic handle (geometry, contraction) but may be hard to find.
+  \item $f$ is easy to construct once reachability is known, but is combinatorial/implicit.
+\end{itemize}
+Either can certify halting; $L$ implies a ranking (e.g.\ discretize $L$ by shells), but not conversely.
+
+%----------------------------------------------------------
+%================== Preservation Under Decomposition (Revised) ==================
+\subsection{Preservation Under Decomposition}
+\label{subsec:ranking-preserve}
+\paragraph{Existence of a Ranking-Preserving branch}
+Previous results immediately give us a weak statement:
+\begin{lemma}[Existence of Ranking Preservation under Guarded Decomposition]
+\label{lem:ranking-preserve}
+Let $f$ be a ranking for $U$.  Suppose $U$ is decomposed at tick 0 into $\{U_i\}_{i=1}^k$ over cells $\{N_i\}$ (Theorem~\ref{thm:op-iff-finite}).  Then for every $\Theta\notin\mathcal B$ there exists an $i$ and a $z\in N_i$ such that
+\[
+  f\bigl(U_i(\Theta,z)\bigr) < f(\Theta).
+\]
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{def:ranking}, there exists some $z^\star$ such that $f(U(\Theta,z^\star))<f(\Theta)$.  Because $\{N_i\}$ partitions $\mathcal Z^{\rm in}$, $z^\star\in N_j$ for some $j$.  On $N_j$, $U_j=U$, so $f(U_j(\Theta,z^\star))<f(\Theta)$.  Thus branch $j$ witnesses the decrease.
+\end{proof}
+
+\paragraph{But some guarantee of progress is still necessary.}
+We have seen (Lemma~\ref{lem:ranking-preserve}) that \emph{existentially} there is always some branch/input which decreases the ranking:
+\[
+  \forall\,\Theta\notin\mathcal B,\quad
+  \exists\,i,\; \exists\,z\in N_i:\;
+    f\bigl(U_i(\Theta,z)\bigr)<f(\Theta).
+\]
+However, this \emph{existential} guarantee alone does \emph{not} suffice to ensure that \emph{every} admissible trajectory eventually takes a decreasing step.  Indeed, an adversarial or uncontrolled choice of inputs could forever avoid the “good” $z$’s and stall.
+
+\medskip
+\noindent\textbf{Why existential decrease is not enough.}  
+Consider a state $\Theta$ with two admissible inputs $z_\downarrow$ (decreases $f$) and $z_\circlearrowleft$ (keeps $f$ constant).  Lemma~\ref{lem:ranking-preserve} assures $\exists\,z_\downarrow$, but a run that picks $z_\circlearrowleft$ indefinitely never makes progress.
+
+\medskip
+\noindent\textbf{Candidate progress axioms.}  To bridge the gap we could:
+\begin{enumerate}[label=(\roman*)]
+  \item \emph{Universal Decrease (Lyapunov)}: require \emph{all} admissible inputs in each cell decrease $f$.
+  \item \emph{Angelic Control}: assume the program \emph{chooses} a decreasing input whenever one exists.
+  \item \emph{Weak Fairness (TI/WF)}: if decreasing inputs are enabled infinitely often, then one is taken infinitely often.
+\end{enumerate}
+
+We adopt the weakest that still forces termination in all \emph{fair} runs: the Time-Irreversibility/Weak-Fairness (Axiom-\ref{ax:ti-wf-subsec})
+
+\medskip
+\noindent\textbf{Termination under TI/WF fairness.} With the time irreversibility, it is easy to show the polynomial reachability from the ranking function.
+
+\begin{proposition}[Uniform Reachability under TI/WF]
+\label{prop:uniform-reachability-fair}
+Under the hypotheses of Lemma~\ref{lem:ranking-preserve} and Axiom~\ref{ax:ti-wf-subsec}, every \emph{fair} trajectory of the fully expanded Loop‑Until program decreases $f$ infinitely often whenever $f>0$, and hence reaches $\mathcal B$ in at most $f(\Theta_0)$ steps.
+\end{proposition}
+
+\begin{proof}
+By Lemma~\ref{lem:ranking-preserve}, whenever $\Theta_t\notin\mathcal B$ we have $D_t\neq\varnothing$.  TI/WF then ensures that $z_t\in D_t$ for infinitely many $t$, so $f(\Theta_{t+1})<f(\Theta_t)$ infinitely often.  Since $f$ is well‐founded (it takes values in $\mathbb N$), there can be only finitely many such decreases.  Therefore the run must enter $\mathcal B$ within $f(\Theta_0)$ steps.
+\end{proof}
+%===============================================================================
+
+
+\section{Double-Bound under Decomposition}
+\label{sec:double-bound-decomp}
+\subsection{Introduction and High-Level Statement}
+In preceding chapters we separated the two layers of information dynamics: the \emph{epistemically lossless} basin dynamics (strict contraction) and the \emph{genuine} many-to-one collapse occurring during adaptation, captured in the ranking/ Lyapunov mechanism under Time-Irreversibility/Weak-Fairness (TI/WF). What remains to be made precise is how these two interact in the full decomposed test, and how the residual non-injectivity propagates as resolution is refined.
+
+This section proves a \textbf{Decomposition Double-Bound}: under the tick-0 (and shell-by-shell) guarded decomposition, as the finite resolution of the measurement is increased, all per-step information loss outside the basin is funneled into the ranking function, while the basin updates remain epistemically lossless. We then show how TI/WF guarantees that this residual, adaptation-originating collapse suffices to enforce uniform reachability and therefore certification. Finally, we quantify the complexity consequences: finite-resolution certification is decidable (in fact, in \(\mathbf{NP}\) under the usual regularity), whereas the infinite-resolution limit preserves at most semi-decidability, matching the upper bound given by the double-bound analysis.
+\subsection{Setup and Notation}
+\label{sub:dbd-setup}
+
+We work with the decomposed test representation introduced in Chapter 2: the original test is unrolled at Tick-0 (and beyond) into a \emph{guarded program} composed of primitive decision/transition blocks, each of which is assumed to be contracting or asymptotically resolving ambiguity, together with a deterministic \emph{ranking} function that breaks remaining ties to yield a canonical branch when multiple refinements are equally viable.
+
+Fix compact metric state space \(\mathcal M\) and input space \(\mathcal Z^{\mathrm{in}}\), and let \(U:\mathcal M\times\mathcal Z^{\mathrm{in}}\to\mathcal M\) be the underlying update map. The \emph{decomposed finite-resolution guarded program} at scale \(\varepsilon>0\) is denoted \(G_\varepsilon\); it maps an initial condition \((\Theta,z)\) to a finite tuple
+\[
+G_\varepsilon(\Theta,z)
+=
+\bigl(\ell_\varepsilon(\Theta,z),\, r_\varepsilon(\Theta,z)\bigr),
+\]
+where \(\ell_\varepsilon\) is the sequence of guarded branch labels (including conditional decisions, localized state refinements, guard-band indicators, etc.) observed up to tick 0 at resolution \(\varepsilon\), and \(r_\varepsilon\) is the output of the deterministic ranking function applied when multiple branch-subtrees are equally supported.
+
+Let \(T_\infty\) denote the ideal infinite-precision target execution outcome (e.g., the fully resolved branch plus eventual tail property). For a decreasing resolution schedule \(\varepsilon_1>\varepsilon_2>\cdots\to 0\), each \(G_{\varepsilon_k}\) produces a finite \emph{certificate prefix} \(c_k\) that encodes the partial guarded program behavior consistent with \(T_\infty\) at that scale. We require \(c_{k+1}\) to refine \(c_k\) (i.e., extend it with higher-precision branching/labels), forming a coherent sequence converging to the full infinite-precision certificate.
+
+Throughout, we assume that each primitive sub-map contributing to \(G_\varepsilon\) either is strictly contracting on its local state coordinates or has an explicitly controlled modulus of continuity so that its decision boundaries stabilize as \(\varepsilon\to0\). 
+
+\subsection{Key Definitions}
+\label{sub:dbd-definitions}
+
+\begin{definition}[Primitive Contracting Branch]
+A \emph{primitive contracting branch} is any component of the guarded program whose internal transition map, restricted to its local state coordinates, satisfies either a uniform strict contraction property or admits a provable modulus of stability such that small perturbations in its input produce vanishing perturbations in its output as resolution refines. Each such primitive branch induces a \emph{stability modulus} \(\omega_{\mathrm{prim}}(\cdot)\) controlling its sensitivity.
+\end{definition}
+
+\begin{definition}[Decomposed Guarded Label (Ignoring Ranking)]
+For resolution \(\varepsilon>0\), define the map \(\tilde G_\varepsilon(\Theta,z)\) to be the guarded-program output excluding the ranking output—i.e., the tuple of branch decisions and local state refinements without deterministic tie-breaking. Two inputs \((\Theta,z)\) and \((\Theta',z')\) are \emph{ranking-equivalent} if \(G_\varepsilon(\Theta,z)\) and \(G_\varepsilon(\Theta',z')\) differ only in their \(r_\varepsilon\) component.
+\end{definition}
+
+\begin{definition}[Effective Ambiguity Set]
+At resolution \(\varepsilon\), the \emph{effective ambiguity set} is
+\[
+\mathcal A_\varepsilon
+:=
+\left\{
+(\Theta,z)\;\big|\;
+\exists\, (\Theta',z')\neq (\Theta,z),\;
+\tilde G_\varepsilon(\Theta,z)=\tilde G_\varepsilon(\Theta',z')
+\text{ and not ranking-equivalent}
+\right\},
+\]
+i.e., the preimage collisions under \(\tilde G_\varepsilon\) that are not resolved by the ranking mechanism.
+\end{definition}
+
+\begin{definition}[Certificate Prefix Sequence]
+A sequence \(\{c_k\}_{k\ge1}\) is a \emph{certificate prefix sequence} for \(T_\infty\) if \(c_k\) is the finite guarded-program output at resolution \(\varepsilon_k\), \(c_{k+1}\) refines \(c_k\) (i.e., is consistent and extends decisions with higher precision), and \(\lim_{k\to\infty} c_k\) uniquely identifies \(T_\infty\) in the infinite-resolution limit.
+\end{definition}
+
+\begin{definition}[Resolution Schedule]
+A \emph{resolution schedule} \(\{\varepsilon_k\}\) is a computable, strictly decreasing sequence with \(\varepsilon_k\to0\). Associated with each \(\varepsilon_k\) is a refinement depth determining how fine the guarded program branches and state partitions must be to certify behavior at that precision.
+\end{definition}
+
+\subsection{Preliminary Lemmas}
+\label{sub:dbd-lemmas}
+
+
+\begin{remark}
+In all subsequent lemmas and theorems in this section we work under the assumption that whenever a guarded decomposition at resolution $\varepsilon$ is given, it has been extended to any finer resolution $\varepsilon_{\mathrm{ref}}<\varepsilon$ via the refinement-extension construction of Theorem~\ref{thm:refinement-extension}; i.e., all further prefixes live in a coherent refinement chain.
+\end{remark}
+
+
+\begin{lemma}[Stability of Guarded Decisions under Refinement]
+\label{lem:stability-guarded}
+Let \((\Theta,z)\) and \((\Theta',z')\) be two distinct inputs. Suppose their guarded-program decisions diverge at infinite precision. Then there exists \(\varepsilon_0>0\) and a computable modulus \(\delta(\varepsilon)\to0\) such that for all \(\varepsilon<\varepsilon_0\), if \(\tilde G_\varepsilon(\Theta,z)=\tilde G_\varepsilon(\Theta',z')\) (without ranking), the distance between the underlying state-input pairs is bounded by \(\delta(\varepsilon)\). In particular, unless \((\Theta,z)\) and \((\Theta',z')\) are asymptotically indistinguishable, their finite-resolution guarded labels separate as \(\varepsilon\to0\).
+\end{lemma}
+
+\subsubsection*{Proof of Lemma~\ref{lem:stability-guarded} (Stability of Guarded Decisions under Refinement)}
+\label{proof:stability-guarded}
+
+\begin{proof}
+By assumption each primitive component of the guarded program has a known stability modulus: small perturbations in its input induce bounded perturbations in its output that vanish as resolution is refined. Concretely, let \((\Theta,z)\) and \((\Theta',z')\) be two inputs whose infinite-precision guarded decisions diverge. Then there exists some finite depth in the guarded program at which their branch labels differ in the limit. Since each decision predicate (guard-band membership, conditional branching) is defined via continuous thresholds and the underlying maps are contracting or have controlled continuity, there is a neighborhood size \(\varepsilon_0>0\) such that for all \(0<\varepsilon<\varepsilon_0\), if \(\tilde G_\varepsilon(\Theta,z)=\tilde G_\varepsilon(\Theta',z')\), then the discrepancy between \((\Theta,z)\) and \((\Theta',z')\) must lie within the back-propagated uncertainty induced by the stability moduli of the primitives. That is, their distance is bounded by a computable function \(\delta(\varepsilon)\to0\) as \(\varepsilon\to0\), which aggregates the contraction/continuity bounds along the shared prefix of decisions. Therefore, unless \((\Theta,z)\) and \((\Theta',z')\) converge to indistinguishability in the limit, their finite-resolution guarded labels separate for sufficiently small \(\varepsilon\). This establishes the stated stability property.
+\end{proof}
+
+
+\begin{lemma}[Approximate Injectivity of \(G_\varepsilon\)]
+\label{lem:approx-injective}
+Under the primitive contraction/stability assumptions, for each fixed non-ranking-equivalent pair \((\Theta,z)\neq (\Theta',z')\), there exists \(\varepsilon^*>0\) such that for all \(0<\varepsilon<\varepsilon^*\),
+\[
+\tilde G_\varepsilon(\Theta,z)\neq \tilde G_\varepsilon(\Theta',z').
+\]
+Hence every non-ranking collision disappears in the limit: the only residual non-injectivity of \(G_\varepsilon\) as \(\varepsilon\to0\) arises from ranking-equivalence.
+\end{lemma}
+
+\subsubsection*{Proof of Lemma~\ref{lem:approx-injective} (Approximate Injectivity of \(G_\varepsilon\))}
+\label{proof:approx-injective}
+
+\begin{proof}
+We show that any non-ranking-equivalent collision vanishes as \(\varepsilon\to0\). Suppose to the contrary that there exists a sequence \(\varepsilon_k\to0\) and distinct inputs \((\Theta,z)\neq(\Theta',z')\), not ranking-equivalent, with \(\tilde G_{\varepsilon_k}(\Theta,z)=\tilde G_{\varepsilon_k}(\Theta',z')\) for all \(k\). Then by Lemma~\ref{lem:stability-guarded}, the distance between the inputs must shrink: \(d((\Theta,z),(\Theta',z'))\le \delta(\varepsilon_k)\), where \(\delta(\varepsilon_k)\to0\). Hence \((\Theta,z)\) and \((\Theta',z')\) become asymptotically indistinguishable. If they remain distinct in the limit, this is impossible. Therefore for any fixed pair of distinct, non-ranking-equivalent inputs, there exists \(\varepsilon^*>0\) such that for all \(0<\varepsilon<\varepsilon^*\), \(\tilde G_\varepsilon(\Theta,z)\neq \tilde G_\varepsilon(\Theta',z')\). In other words, all non-ranking collisions disappear for sufficiently fine resolution, proving the approximate injectivity.
+\end{proof}
+
+
+\begin{lemma}[Controlled Ambiguity Shrinkage]
+\label{lem:ambiguity-shrink}
+Let \(\mathcal A_\varepsilon\) be the effective ambiguity set as in Section~\ref{sub:dbd-definitions}, and let \(\delta(\varepsilon)\) be the stability modulus from Lemma~\ref{lem:stability-guarded}.  Working with the metric entropy / covering number framework of Chapter~4 (cf.\ Definition~4.X and the information-drop bounds), the covering number of \(\mathcal A_\varepsilon\) with balls of radius \(\delta(\varepsilon)\) satisfies
+\[
+\mathcal N\bigl(\mathcal A_\varepsilon,\; \delta(\varepsilon)\bigr)
+= o(1)
+\quad\text{as }\varepsilon\to0.
+\]
+Equivalently, the entropy \(\mathcal H_{\delta(\varepsilon)}(\mathcal A_\varepsilon)\to -\infty\) in the normalized scale, so the “hard” region where non-ranking collisions persist vanishes under refinement.
+\end{lemma}
+
+
+\subsubsection*{Proof of Lemma~\ref{lem:ambiguity-shrink} (Controlled Ambiguity Shrinkage)}
+\label{proof:ambiguity-shrink}
+
+\begin{proof}
+By Lemma~\ref{lem:approx-injective}, any fixed non-ranking-equivalent pair \((\Theta,z)\neq(\Theta',z')\) cannot produce a collision in \(\tilde G_\varepsilon\) for all sufficiently small \(\varepsilon\): there exists \(\varepsilon^*>0\) such that for all \(0<\varepsilon<\varepsilon^*\), the pair is excluded from \(\mathcal A_\varepsilon\). Hence ambiguities can only arise from inputs that are within distance \(\delta(\varepsilon)\) of each other, where \(\delta(\varepsilon)\to0\) quantifies the back-propagated indistinguishability from Lemma~\ref{lem:stability-guarded}.
+
+Cover \ ambient space \(\mathcal M\times\mathcal Z^{\mathrm{in}}\) with balls of radius \(\delta(\varepsilon)\); any potential collision must lie inside one of these shrinking neighborhoods around the diagonal of ranking-equivalent or near-indistinguishable inputs. Therefore the number of such balls required to cover \(\mathcal A_\varepsilon\) is bounded by the covering number of a vanishing neighborhood, which by standard metric entropy estimates tends to zero in the normalized sense. Thus \(\mathcal N(\mathcal A_\varepsilon,\delta(\varepsilon))=o(1)\), proving the controlled shrinkage of ambiguity.
+\end{proof}
+
+
+
+\begin{lemma}[Composable Prefix Consistency]
+\label{lem:prefix-consistency}
+Suppose \(c_k\) is the certificate prefix at resolution \(\varepsilon_k\) and \(c_{k+1}\) is computed at finer resolution \(\varepsilon_{k+1}<\varepsilon_k\). Then \(c_{k+1}\) is a valid extension of \(c_k\): the guarded decisions in \(c_k\) remain intact in \(c_{k+1}\), and refined ambiguities are resolved consistently. Hence the sequence \(\{c_k\}\) forms a coherent monotone refinement converging to a limit certificate.
+\end{lemma}
+
+\subsubsection*{Proof of Lemma~\ref{lem:prefix-consistency} (Composable Prefix Consistency)}
+\label{proof:prefix-consistency}
+
+\begin{proof}
+Let \(c_k = G_{\varepsilon_k}(\Theta,z)\) and \(c_{k+1} = G_{\varepsilon_{k+1}}(\Theta,z)\) with \(\varepsilon_{k+1}<\varepsilon_k\). By construction the finer-resolution guarded program incorporates all decision predicates used at coarser resolution with tighter thresholds and more precise state refinements. The stability of these decisions (Lemma~\ref{lem:stability-guarded}) ensures that any choice made at resolution \(\varepsilon_k\) remains valid under refinement (unless it was ambiguous and resolved, in which case the refinement picks the consistent extension). Therefore \(c_{k+1}\) extends \(c_k\): all branch labels in \(c_k\) appear as prefixes in \(c_{k+1}\), and any prior ambiguity is resolved in a way consistent with the deterministic ranking function or contraction-induced separation. This monotonicity implies the sequence \(\{c_k\}\) is coherent and converges to a well-defined infinite-precision certificate, as claimed.
+\end{proof}
+
+
+\subsection{Main Theorem: Double-Bound under Decomposition}
+\label{sub:dbd-main}
+
+\begin{theorem}[Double-Bound under Decomposition]
+\label{thm:double-bound-decomp}
+Assume the primitive contracting/stability conditions, the guarded program decomposition at Tick-0 (and further ticks) as in Chapter 2, and the availability of a computable resolution schedule \(\varepsilon_k\to0\). Let \(T_\infty\) be the ideal infinite-precision execution outcome (branch plus eventual tail property). Then:
+
+\begin{enumerate}[label=(\alph*)]
+  \item \textbf{Injectivity Approximation:} As \(\varepsilon\to0\), the finite-resolution decomposed map \(G_\varepsilon\) becomes injective up to ranking equivalence. Equivalently, all non-ranking preimage collisions vanish in the limit; the only structural ambiguity that remains is the deterministic tie-breaking imposed by the ranking function.  
+  \item \textbf{Recursive Enumerability / Certification Recovery:} There exists an effective procedure that produces a certificate prefix sequence \(\{c_k\}\) with \(c_k\) derived from \(G_{\varepsilon_k}\), such that \(c_{k+1}\) refines \(c_k\), and \(\lim_{k\to\infty} c_k = T_\infty\). The sequence is recursively enumerable, providing asymptotically exact certification of the infinite-precision decomposed test.
+\end{enumerate}
+\end{theorem}
+
+\subsubsection*{Proof of Theorem~\ref{thm:double-bound-decomp} (Double-Bound under Decomposition)}
+\label{proof:double-bound-decomp}
+
+\begin{proof}
+We treat parts (a) and (b) separately and then combine them.
+
+\textbf{(a) Injectivity Approximation.}  
+By the contracting/stability assumptions on the primitive components, the guarded decisions—including branch selection and localized state refinements—stabilize as resolution is refined. Lemma~\ref{lem:stability-guarded} establishes that distinct, non-ranking-equivalent inputs cannot continue to collide in \(\tilde G_\varepsilon\) for arbitrarily small \(\varepsilon\); hence, Lemma~\ref{lem:approx-injective} implies that all such non-ranking-induced collisions vanish in the limit. The only remaining ambiguity in the infinite-resolution limit arises from ranking-equivalence, which by design is a deterministic tie-breaking mechanism imposing a canonical representative among otherwise indistinguishable refinements. Thus \(G_\varepsilon\) approaches injectivity modulo this known residual, proving part (a).
+
+\textbf{(b) Recursive Enumerability / Certification Recovery.}  
+Construct the certificate prefix sequence \(\{c_k\}\) by evaluating the guarded program at resolutions \(\varepsilon_k\to0\), setting \(c_k := G_{\varepsilon_k}(\Theta,z)\) for the true execution input \((\Theta,z)\) (or for the purported one under verification). By Lemma~\ref{lem:prefix-consistency}, the sequence is coherent: each subsequent prefix extends the previous, resolving diminishing ambiguity. The shrinking of the effective ambiguity set (Lemma~\ref{lem:ambiguity-shrink}) guarantees that this refinement process does not oscillate indefinitely: the amount of unresolved collision decreases, and eventually the prefix sequence identifies a unique infinite-precision branch \(T_\infty\). Each \(c_k\) is computable given \(G_{\varepsilon_k}\); thus the sequence is recursively enumerable. Because the only remaining ambiguity is resolved by the deterministic ranking, the limit uniquely corresponds to \(T_\infty\), achieving asymptotically exact certification.
+
+\textbf{Synthesis.}  
+Part (a) ensures the infinite-precision target is well-defined and stable (injective up to ranking), while part (b) provides an effective means to approximate it with arbitrarily fine finite certificates. The coexistence of approximate injectivity and enumerability constitutes the “double bound” in the decomposed setting: although finite-resolution guarded outputs may appear ambiguous, refinement recovers the unique ideal behavior. This completes the proof.
+\end{proof}
+
+
+\subsection{Summary}
+\label{subsec:ranking-summary}
+
+\begin{itemize}
+  \item Tick-0 decomposition is Turing-complete. Physics of the measurement does not restrict the program fundamentally.
+  \item However, \emph{the physics and program together} (the overall procedure) is restricted in a way so that the Turing machine of the decomposition halts, i.e., measurement produces a result. The necessary and sufficient additional condition for this is the Time-Irreversibility/Weak-Fairness axiom.
+  \item A ranking $f$ captures the \emph{discrete} progress toward the basin.  It is necessary (Prop.~\ref{prop:ranking-necessary-again}) and—together with (C1)–(C3) and a poly bound—sufficient (Thm.~\ref{thm:ranking-sufficient}).
+  \item The poly-bounded inductive decomposition preserves the ranking’s decrease property (Sec~\ref{subsec:ranking-preserve}) if and only if the time irreversibility is guaranteed (Axiom-\ref{ax:ti-wf-subsec}), ensuring uniform halting of Loop‑Until (Prop.~\ref{prop:uniform-reachability-fair}). 
+  \item Time-Irreversible/Weakly Fair (TI/WF) rankings are the weakest combinatorial condition needed for poly-time reachability (which we need for NP certifiability). \emph{This} is the only fundamental restriction on the program execution.
+  \item Decomposed test program is, absent ranking, epistemically lossless. The infinte-precision measurement certification on the decomposed program is not harder than r.e.
+\end{itemize}
+
+\section{Conclusion}
+We continued our investigation of the Simple Test anatomy and behavior "under the hood". Our steps in this Chapter were as follows:
+\begin{enumerate}
+    
+  \item \textbf{Turing-Completeness of Guarded Tests.}  
+        We proved universality: any deterministic TM can be implemented as a valid test; halting $\iff$ basin entry.  
+  \item \textbf{Time-Irreversibility of any Guarded Test performing physical measurement.} We proved that endowing a Turing-complete decomposed structure with any kind of physical input and belief-state spaces requires the explicit time irreversibility in its weakest form - the Weak-Fairness axiom. We showed that this axiom is precisely necessary and sufficient for ANY measurement result to be produced, in a polynomial or non-polynomial time. 
+  \item \textbf{Ranking \& Reachability.}  
+        Then, we investigated the conditions for our program to provide a \emph{polynomial} reachability, thus making a base to create a \emph{certifiable} measurement. It is turned out that the requirement is precisely the same as above for \emph{general} termination: the program execution must be weakly fair, or, in terms involving physics of our metrology, the adaptation process \emph{must} be time-irreversible.      
+        
+        Axiom of TI/WF (Axiom-\ref{ax:ti-wf-subsec}) ranking function is \emph{necessary}; combined with (C1)–(C4), it is also \emph{sufficient} for uniform reachability.  
+        
+        In analytic terms, a Lyapunov-border function is a strong (but optional, so too strong for our general goal) way to obtain such a ranking.
+        \item \textbf{Double-Bound under Decomposition crystallizes why the guarded program representation is (absent ranking) epistemically lossless.} Even though finite-resolution guarded outputs may temporarily blur distinctions (the numerical bound) and induce apparent non-injectivities, the decomposition’s contracting primitives and refinement-compatible hierarchy ensure those ambiguities shrink and are systematically resolved (the algorithmic recovery bound). 
+        
+        As resolution is driven downward and prefixes are extended coherently, the only residual structural uncertainty is the deterministic ranking tie-breaker, and the infinite-precision execution emerges as the limit of an effectively enumerable sequence of certificate prefixes. 
+        
+        Thus the decomposition does not sacrifice certifiability for compactness—on the contrary, it reconciles transient indistinguishability with asymptotically exact identification, while realizing (absent ranking) epistemic losslessness in the composed test Adaptation, where it was not observed before the decomposition.
+
+
+          
+\end{enumerate}
+
+
+
+
+
+\end{document}

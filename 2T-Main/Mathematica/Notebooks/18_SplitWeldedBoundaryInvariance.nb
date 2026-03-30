@@ -1,0 +1,246 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     10250,        237]
+NotebookOptionsPosition[      7668,        200]
+NotebookOutlinePosition[      7982,        214]
+CellTagsIndexPosition[      7939,        211]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["18. Split-Welded Boundary Invariance", "Title",ExpressionUUID->"32986c71-d81e-429b-8d5e-d57bd24553ce"],
+
+Cell["\<\
+This notebook tests exact toy families aligned with the split note: \
+\>", "Text",ExpressionUUID->"d72c70cc-777c-45d5-a4c5-8947d8c2b541"],
+
+Cell[TextData[{
+ "inherited ledger sector ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["A", "TI"], TraditionalForm], "errors" -> {}, "input" -> "A", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "cc19150b-cfeb-40cd-a4d3-da39d60cd787"],
+ ","
+}], "Item",ExpressionUUID->"90d638d1-b467-4c44-8bde-4e20504ad9a0"],
+
+Cell[TextData[{
+ "completion/newborn sector ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["B", "TI"], TraditionalForm], "errors" -> {}, "input" -> "B", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "a0166a27-c868-44d6-a4eb-97726c1ccc1f"],
+ ","
+}], "Item",ExpressionUUID->"85e864b3-fcde-4aa3-a360-e00b78a45497"],
+
+Cell["controlled split unitary", "Item",ExpressionUUID->"e44547e3-c84b-4f91-9795-a391304e8685"],
+
+Cell[TextData[{
+ "  ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          StyleBox["U", "TI"], 
+          StyleBox["split", FontSlant -> "Plain"]], "\[LongEqual]", 
+         UnderscriptBox["\[Sum]", 
+          StyleBox["i", "TI"], LimitsPositioning -> True], 
+         SubsuperscriptBox["\[CapitalPi]", 
+          StyleBox["i", "TI"], 
+          RowBox[{"(", 
+            StyleBox["A", "TI"], ")"}]], "\[CircleTimes]", 
+         SubsuperscriptBox[
+          StyleBox["U", "TI"], 
+          StyleBox["i", "TI"], 
+          RowBox[{"(", 
+            StyleBox["B", "TI"], ")"}]], ","}], TraditionalForm], 
+     "errors" -> {}, "input" -> 
+     "U_{\\mathrm{split}} = \\sum_i \\Pi_i^{(A)} \\otimes U_i^{(B)},", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "d38f6c97-0157-4e4f-973b-812065aefe0b"]
+}], "Text",ExpressionUUID->"14e59066-abbd-4166-ae60-075848898071"],
+
+Cell["\<\
+welded boundary generators and ambiguity directions carried by the same \
+ledger histories.\
+\>", "Item",ExpressionUUID->"e91c9919-6b41-4793-8ca5-f07f85ac5e31"],
+
+Cell["Family 1: safe off-diagonal ambiguity", "Section",ExpressionUUID->"69292e92-bee6-4023-9ae6-8cbbc53146ff"],
+
+Cell["\<\
+Here the ambiguity is purely ledger-off-diagonal. Controlled projection kills \
+it exactly, so the induced controlled boundary derivation is class-defined on \
+the nose.\
+\>", "Text",ExpressionUUID->"f3e94478-97d5-4fdd-b1b7-1274bc48e2f2"],
+
+Cell["\<\
+This family realizes the strongest possible boundary safety condition. \
+\>", "Text",ExpressionUUID->"0c2746fb-ab4d-4138-a6a4-317ae6767aeb"],
+
+Cell["Family 2: unsafe visible ambiguity", "Section",ExpressionUUID->"c0311414-f20f-4508-a32b-08b1148f73ff"],
+
+Cell[TextData[{
+ "Here the ambiguity has a diagonal controlled ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["B", "TI"], TraditionalForm], "errors" -> {}, "input" -> "B", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "d9b10bd8-a24a-4cd8-a557-af1746c76a10"],
+ "-component that survives controlled projection. The induced boundary \
+derivation changes visibly on the controlled sector."
+}], "Text",ExpressionUUID->"cd8f52c9-e4c6-4d31-b750-e76d6652e92f"],
+
+Cell[TextData[{
+ "This is the required exact countermodel showing that classical ledger \
+endpoints alone do ",
+ StyleBox["not",
+  FontWeight->Bold],
+ " imply full microscopic calibration invariance."
+}], "Text",ExpressionUUID->"1ae739d0-57dd-40d1-a5e6-7c13ce913c4c"],
+
+Cell["It also gives the operator/expectation separation: ", "Text",ExpressionUUID->"1002a92e-f537-4557-8b0c-95ee36a2b883"],
+
+Cell["operator-level visibility survives,", "Item",ExpressionUUID->"3036fa39-bbce-4d44-84e3-5803530a9616"],
+
+Cell["\<\
+expectation-level invisibility can still hold on diagonal boundary-classical \
+states.\
+\>", "Item",ExpressionUUID->"f7abcc81-8bca-41b8-8fa7-f147a6fff1bc"],
+
+Cell["Family 3: borderline null-ideal family", "Section",ExpressionUUID->"5f4a107e-faf2-4680-84c6-1c0c7e4b3390"],
+
+Cell["\<\
+Here the ambiguity survives controlled projection but lands entirely in the \
+chosen boundary null ideal. The ambiguity is therefore invisible modulo that \
+ideal, while the base controlled derivation remains nonzero on the quotient.\
+\>", "Text",ExpressionUUID->"e4444ae6-9517-47a0-8a20-3fb28958b3fb"],
+
+Cell["This is the key exact nontrivial example for the sprint. ", "Text",ExpressionUUID->"fcd25387-a418-46fc-9576-b99836971457"],
+
+Cell["Outcome", "Section",ExpressionUUID->"0543b7fc-80d0-4e12-a88f-c867ec0099b8"],
+
+Cell["\<\
+The split+welded restriction does not give unconditional invariance. It gives \
+a sharp controlled criterion: \
+\>", "Text",ExpressionUUID->"774aa0ef-bb9f-43e2-8801-7ef11f2b8dde"],
+
+Cell["off-diagonal ledger ambiguity is harmless,", "Item",ExpressionUUID->"4c024941-0b5c-456e-b4ee-e6cfe01727a0"],
+
+Cell["\<\
+diagonal controlled ambiguity is the only possible obstruction,\
+\>", "Item",ExpressionUUID->"2c3df4dd-1628-498e-96d1-3df0f036c832"],
+
+Cell["\<\
+if that controlled ambiguity is null-ideal valued, the derivation can remain \
+nontrivial while becoming class-defined on the boundary quotient.\
+\>", "Item",ExpressionUUID->"4dddc8f9-efe0-4371-8b99-ff5851a8b9f7"],
+
+Cell["Status", "Section",ExpressionUUID->"ba5f1ee8-3ef0-480d-92cf-697de99c9e7d"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Family / claim\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm]},
+        {"\<\"Safe family gives strong operator-level invariance\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Unsafe family gives visible controlled ambiguity\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Borderline family gives nontrivial mod-null invariance\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"False overreach model blocks full microscopic invariance\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[
+      BoxForm`e$, TableHeadings -> {None, {"Family / claim", "Status"}}]]], 
+    "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"2e9538dc-63f8-4cfa-aeb7-733518ea515e"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"a83bd6d1-c378-4ba4-8c49-4f0e587986a8"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 108, 0, 70, "Title",ExpressionUUID->"32986c71-d81e-429b-8d5e-d57bd24553ce"],
+Cell[665, 22, 147, 2, 70, "Text",ExpressionUUID->"d72c70cc-777c-45d5-a4c5-8947d8c2b541"],
+Cell[815, 26, 392, 10, 70, "Item",ExpressionUUID->"90d638d1-b467-4c44-8bde-4e20504ad9a0"],
+Cell[1210, 38, 394, 10, 70, "Item",ExpressionUUID->"85e864b3-fcde-4aa3-a360-e00b78a45497"],
+Cell[1607, 50, 95, 0, 70, "Item",ExpressionUUID->"e44547e3-c84b-4f91-9795-a391304e8685"],
+Cell[1705, 52, 968, 25, 70, "Text",ExpressionUUID->"14e59066-abbd-4166-ae60-075848898071"],
+Cell[2676, 79, 170, 3, 70, "Item",ExpressionUUID->"e91c9919-6b41-4793-8ca5-f07f85ac5e31"],
+Cell[2849, 84, 111, 0, 70, "Section",ExpressionUUID->"69292e92-bee6-4023-9ae6-8cbbc53146ff"],
+Cell[2963, 86, 248, 4, 70, "Text",ExpressionUUID->"f3e94478-97d5-4fdd-b1b7-1274bc48e2f2"],
+Cell[3214, 92, 150, 2, 70, "Text",ExpressionUUID->"0c2746fb-ab4d-4138-a6a4-317ae6767aeb"],
+Cell[3367, 96, 108, 0, 70, "Section",ExpressionUUID->"c0311414-f20f-4508-a32b-08b1148f73ff"],
+Cell[3478, 98, 535, 11, 70, "Text",ExpressionUUID->"cd8f52c9-e4c6-4d31-b750-e76d6652e92f"],
+Cell[4016, 111, 267, 6, 70, "Text",ExpressionUUID->"1ae739d0-57dd-40d1-a5e6-7c13ce913c4c"],
+Cell[4286, 119, 122, 0, 70, "Text",ExpressionUUID->"1002a92e-f537-4557-8b0c-95ee36a2b883"],
+Cell[4411, 121, 106, 0, 70, "Item",ExpressionUUID->"3036fa39-bbce-4d44-84e3-5803530a9616"],
+Cell[4520, 123, 165, 3, 70, "Item",ExpressionUUID->"f7abcc81-8bca-41b8-8fa7-f147a6fff1bc"],
+Cell[4688, 128, 112, 0, 70, "Section",ExpressionUUID->"5f4a107e-faf2-4680-84c6-1c0c7e4b3390"],
+Cell[4803, 130, 312, 4, 70, "Text",ExpressionUUID->"e4444ae6-9517-47a0-8a20-3fb28958b3fb"],
+Cell[5118, 136, 128, 0, 70, "Text",ExpressionUUID->"fcd25387-a418-46fc-9576-b99836971457"],
+Cell[5249, 138, 81, 0, 70, "Section",ExpressionUUID->"0543b7fc-80d0-4e12-a88f-c867ec0099b8"],
+Cell[5333, 140, 189, 3, 70, "Text",ExpressionUUID->"774aa0ef-bb9f-43e2-8801-7ef11f2b8dde"],
+Cell[5525, 145, 113, 0, 70, "Item",ExpressionUUID->"4c024941-0b5c-456e-b4ee-e6cfe01727a0"],
+Cell[5641, 147, 142, 2, 70, "Item",ExpressionUUID->"2c3df4dd-1628-498e-96d1-3df0f036c832"],
+Cell[5786, 151, 223, 3, 70, "Item",ExpressionUUID->"4dddc8f9-efe0-4371-8b99-ff5851a8b9f7"],
+Cell[6012, 156, 80, 0, 70, "Section",ExpressionUUID->"ba5f1ee8-3ef0-480d-92cf-697de99c9e7d"],
+Cell[6095, 158, 1569, 40, 70, "TextTableForm",ExpressionUUID->"2e9538dc-63f8-4cfa-aeb7-733518ea515e"]
+}
+]
+*)
+
+(* End of internal cache information *)

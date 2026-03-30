@@ -1,0 +1,111 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{pdflscape} 
+\usepackage{braket}
+\newcommand{\ketbra}[2]{\mathinner{|{#1}\rangle\,\langle{#2}|}}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+\title{\textbf{A Complexity-Theoretic Foundation for Metrology \\ \large Book III: Finite Tests, Fact Decomposition-Independence, and Physics}}
+\author{Dmytro Surdu}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This volume develops the operational and computational backbone for single-run verification in measurement science. Building on the Simple Test formalism and the ABET scaffolding from earlier books, we prove the \emph{Fundamental Test Equivalence} (FTE)—showing that tail facts are certifiable \emph{iff} they admit a finite guarded decomposition—and the \emph{Fact Decomposition-Independence} (FDI) theorem—characterizing when no such decomposition can exist and why the corresponding certification language necessarily jumps to at least Turing degree $0'$. 
+
+We isolate precisely which axioms (Compact Continuity, Traceability, Time-Irreversibility, Effectivity EM1–EM3) are responsible for \emph{hypercomputational} behavior and exhibit clean embeddings of \textsc{HALT} (and, in globalized settings, \textsc{TOT}) that attach hardness either to run time, compile time, or both. We then audit collapse and interpretation frameworks in quantum measurement, distinguishing compact laboratory slices (where ABET/FTE/FDI apply) from non-compact, global ontologies (out of scope). Along the way, we use Weihrauch reductions (closed choice) to formalize the intrinsic non-computability of single-outcome selection and identify bundles of assumptions that force $\Pi^0_2$-hardness. The goal is a neutral, model-independent yardstick for \emph{epistemic certifiability} in physics.
+\end{abstract}
+
+\section*{Foreword and Guide to This Collection}
+This book continues the same editorial approach as Books I and II: a guided tour through a research program as it crystallized. Chapters are written to be self-contained while sustaining a cumulative argument. The first part fixes the operational language and the temporal discipline (fairness, ranking). The second part proves the central equivalence and its sharp converse under axiom failures. The third part turns to physics: quantum measurement, laboratory vs.\ global scope, and an \emph{epistemic-complexity} audit of leading theories. 
+
+Readers familiar with Book I (motivation, metrology and complexity) and Book II (Simple Tests, ABET, certification standards) can enter here directly. Newcomers may wish to skim Book I’s primer on computational classes and Book II’s definitions of basins, shells, and the minimal certification standard $\mathcal S$.
+
+\newpage
+\tableofcontents
+\newpage
+
+\part[Operational Foundations]{Operational Foundations}
+
+This part fixes the process language and temporal discipline for single-run tests. We formalize guarded programs, traceability, and certification shells, then require time to flow irreversibly via weak-fairness and ranking functions.
+
+\section*{Chapter 1: Foundational Process Structure}
+\begin{itemize}
+  \item The Simple Test tuple $\mathfrak T=(\mathcal M,\mathcal Z^{\mathrm{in}},\mathcal Z^{\mathrm{out}},U,E,\mathcal S)$ and tail facts.
+  \item Guarded program primitives: \textsc{Sequential}, \textsc{Conditional}, \textsc{Loop}; PL vs.\ UI traceability.
+  \item Axioms (F) invariant basin, (S) certification standard, (C) compact continuity; shells and the Minimal Standard.
+  \item What “finite decomposition” means: guards as effectively testable open cells; robustness under $\mathcal S$.
+  \item \textit{Editor’s Note:} This chapter sets the operational vocabulary that all later equivalences will compile into.
+\end{itemize}
+
+\section*{Chapter 2: Temporal Fairness and Ranking Functions}
+\begin{itemize}
+  \item Axiom (I): time-irreversibility and weak-fairness; progress via ranking functions.
+  \item Halting of guarded programs under (I); unrolling loops without Zeno paths.
+  \item Reduction lemmas linking NP-style witnesses to finite guarded branches.
+  \item Separation of compile time vs.\ run time; local vs.\ uniform traceability.
+  \item \textbf{Key Result:} Under (I) and (F,S,C), fair executions admit finite witnessing structure for tail facts.
+\end{itemize}
+
+\part[Equivalences and Failure Modes]{Equivalences and Failure Modes}
+
+Here we prove that finite guarded decompositions and NP-verification coincide (FTE), and that when no such decomposition exists (FDI) the certification language must already be hypercomputational—pinpointing exactly which axiom(s) break.
+
+\section*{Chapter 3: Finite-Test Equivalence (FTE)}
+\begin{itemize}
+  \item \textbf{Main Theorem:} A tail fact $\Phi$ admits a finite guarded decomposition $\iff$ $\Phi$ is verifiable by a polytime checker (NP/$\mathcal V$).
+  \item ATRT (Adaptive Traceability Resolution Theorem): synthesizing open guards under PL-traceability.
+  \item Effectivity EM1–EM3 (representation, modulus, guard tests) $\Rightarrow$ polynomial verifiers.
+  \item Consequences: extraction of decision trees; robustness to shell tolerances; uniformity in instance size.
+  \item \textit{Editor’s Note:} FTE is the “if” direction that explains why proofs look like small finite programs.
+\end{itemize}
+
+\section*{Chapter 4: Fact Decomposition-Independence Theorem (FDI)}
+\begin{itemize}
+  \item \textbf{FDI Theorem:} If no finite guarded decomposition exists (with (F) and (S) in scope), then $\deg_T(L_\Phi)\ge 0'$.
+  \item Clean embeddings for each single-axiom failure:
+    \begin{itemize}
+      \item (I) Zeno subroutines $\Rightarrow$ \textsc{HALT} at run time.
+      \item (C) non-compactness $\Rightarrow$ ABET uniformization $\Sigma^0_1$-hard.
+      \item (T) non-open preimages $\Rightarrow$ compile-time stabilization $\Sigma^0_1$-hard.
+      \item (EM1) real-constant encoding; (EM2) super-polynomial modulus; (EM3) r.e.-open guards.
+    \end{itemize}
+  \item Hierarchy-collapse corollary: with all axioms, languages lie in NP; otherwise $\ge 0'$.
+  \item Parameterized variants for $(\mathbf C,\mathcal V)$ (e.g., BQP/QCMA) with the same dichotomy.
+\end{itemize}
+
+\part[Physics and Epistemic Audit]{Physics and Epistemic Audit}
+
+This part applies the machinery to quantum measurement. We separate compact laboratory slices (FDI in scope) from global non-compact ontologies (out of scope), formalize single-outcome non-computability via closed choice, and audit collapse/interpretation theories.
+
+\section*{Chapter 5: Physical Measurement and the Turing Barrier}
+\begin{itemize}
+  \item Weihrauch reductions: $\mathbf{C}_I \le_W \mathrm{Collapse}$ and $\mathbf{C}_{\mathbb R} \le_W \mathrm{Collapse}$ (closed choice $\Rightarrow$ non-computable selection).
+  \item Scope split: lab slices (compact $Z^{\mathrm{in}}$) vs.\ global collapse (non-compact; ABET undefined).
+  \item Two-stage audit (Stage~0 in-scope gate; Stage~1 decomposition test) across major theories.
+  \item Summary verdicts: Categories 1–3 (out-of-scope, in-scope \& indecomposable, in-scope \& decomposable).
+  \item $\Pi^0_2$-hardness bundles (A/B/C): when “for all unknowns, there exists a bound” forces $0''$ hardness.
+  \item Operational indistinguishability theorem on compact slices; “no superobserver with finite resources.”
+\end{itemize}
+
+\appendix
+\section*{Appendix A: Proof Kits and Constructions}
+\begin{itemize}
+  \item Detailed ATRT construction and covering-number bounds for shells under PL-traceability.
+  \item Zeno, Cantor, r.e.-open, and real-constant embeddings (axiom-by-axiom).
+  \item Parameterized effectivity (EM1$_{\mathbf C}$–EM3$_{\mathbf C}$) and verifier classes $\mathcal V$.
+\end{itemize}
+
+\end{document}

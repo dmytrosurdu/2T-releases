@@ -1,0 +1,7 @@
+The physical representative-independence question is now reduced to the exact identity delta_(J + A) - delta_J = ad_A on explicit bracket models.
+
+The null-ideal refinement is now machine-audited: ambiguity directions need not vanish on the nose if they act into the physical null ideal.
+
+Visible and invisible countermodels are both explicit, so the ambiguity-triviality criterion is sharp rather than heuristic.
+
+The remaining finite-cutoff boundary is no longer the criterion itself, but whether current Main/UOM hypotheses imply ambiguity-triviality or null-ideal triviality on the physical sector.

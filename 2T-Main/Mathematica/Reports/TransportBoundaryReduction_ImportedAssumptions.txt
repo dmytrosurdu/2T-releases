@@ -1,0 +1,7 @@
+Closedness of Aminus, continuity of branch data, and Hilbertizability are still represented by finite-dimensional surrogates rather than independent infinite-dimensional constructions.
+
+Source representability is now split into an exact algebraic image-membership problem and a still-imported sufficient-locality condition.
+
+Witness-to-descendant comparison has been reduced to a rho-level scalar compatibility statement at fixed cutoff; the unscaled chi-level version remains obstructed unless an extra normalization such as nu = 1 is added.
+
+AQFT/HLS semantics, LoG spectral certification, and the Peierls bracket lane remain outside the Mathematica core in this sprint.

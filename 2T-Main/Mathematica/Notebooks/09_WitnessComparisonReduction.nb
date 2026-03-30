@@ -1,0 +1,343 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     13796,        334]
+NotebookOptionsPosition[     10834,        293]
+NotebookOutlinePosition[     11148,        307]
+CellTagsIndexPosition[     11105,        304]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["09 Witness Comparison Reduction", "Title",ExpressionUUID->"efcdf189-00be-4143-9afa-7ca549df1126"],
+
+Cell["Scope", "Section",ExpressionUUID->"d63e1255-7266-4051-8178-c1c375c01cdf"],
+
+Cell["This notebook answers the Research Lead's question directly.", "Text",ExpressionUUID->"f0910dce-f245-41b1-a67c-1028d88ef85d"],
+
+Cell["At fixed cutoff, once quotient descent holds and ", "Text",ExpressionUUID->"9a6b9330-2552-49bc-9d6f-d493bbbe5741"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"rho", "=", 
+   RowBox[{"nu", " ", "chi"}]}], ",", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"chi", "|", "Aminus"}], "=", "0"}], ",", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"[", 
+    RowBox[{"Xi", "^", 
+     RowBox[{"(", "1", ")"}]}], "]"}], "=", 
+   RowBox[{"J0", "+", "Aminus"}]}], ","}]], "Input",ExpressionUUID->"36997d1b-\
+667e-42d6-9e12-a237bf124dd9"],
+
+Cell[TextData[{
+ "the representative search problem does reduce to a scalar compatibility \
+statement, but at the ",
+ StyleBox["rho", "TI"],
+ " level, not at the unscaled ",
+ StyleBox["chi", "TI"],
+ " level. "
+}], "Text",ExpressionUUID->"44456feb-8af2-497d-83ed-c5dbc78b0912"],
+
+Cell["Exact reduction", "Section",ExpressionUUID->"9f645b25-9784-4f93-9ac5-a76a977eddfc"],
+
+Cell["For the exact model ", "Text",ExpressionUUID->"f164bc8f-e608-40bb-9b14-e3dd5bc15783"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"chi", "=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Aminus", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"J0", "=", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", 
+     RowBox[{"-", "1"}], ",", "1"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nu", "=", "5"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rho", "=", 
+   RowBox[{
+    RowBox[{"nu", " ", "chi"}], "=", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "5"}], "}"}]}]}], ";"}]}], "Input",Expression\
+UUID->"9cfd7147-e424-48bc-86a1-d609e1bddeeb"],
+
+Cell["one has ", "Text",ExpressionUUID->"66a405a5-5e46-4ff2-bfb1-b3a64c2cd7f1"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Exists", "[", 
+   RowBox[{"a", ",", 
+    RowBox[{
+     RowBox[{"rho", " ", ".", " ", 
+      RowBox[{"(", 
+       RowBox[{"J0", "+", 
+        RowBox[{"Aminus", ".", "a"}]}], ")"}]}], "==", "s"}]}], "]"}], "<=", ">", 
+  RowBox[{"rho", " ", ".", " ", "J0"}], "==", "s"}]], "Input",ExpressionUUID->\
+"3643bbf4-e369-4138-a8f8-33ccfd29b411"],
+
+Cell["exactly.", "Text",ExpressionUUID->"8dc3eec2-26a9-409e-afc9-5918b0481401"],
+
+Cell["Equivalently, ", "Text",ExpressionUUID->"3b75dfab-2e91-4010-9c7b-62b3982086fd"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Exists", "[", 
+   RowBox[{"a", ",", 
+    RowBox[{
+     RowBox[{"rho", " ", ".", " ", 
+      RowBox[{"(", 
+       RowBox[{"J0", "+", 
+        RowBox[{"Aminus", ".", "a"}]}], ")"}]}], "==", "s"}]}], "]"}], "<=", ">", 
+  RowBox[{"chi", " ", ".", " ", "J0"}], "==", 
+  RowBox[{"s", "/", 
+   RowBox[{"nu", "."}]}]}]], "Input",ExpressionUUID->"386b65c2-d7fa-46a6-9383-\
+2bf25d89e193"],
+
+Cell[TextData[{
+ "So the representative choice is indeed fake structure after quotient \
+descent, but the scalar compatibility must retain the normalization factor ",
+ StyleBox["nu", "TI"],
+ ". "
+}], "Text",ExpressionUUID->"b2e41c47-8576-4eb1-b9b0-823382eac0d4"],
+
+Cell["Exact obstruction to the unscaled claim", "Section",ExpressionUUID->"6d54a70b-263b-41f8-a68f-a4903ede446e"],
+
+Cell["The stronger proposal ", "Text",ExpressionUUID->"afcd5408-7022-40ad-88e2-4960087f62a9"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"chi", " ", ".", " ", "J0"}], "==", 
+  RowBox[{"rho", 
+   RowBox[{"(", "Ftau", ")"}]}]}]], "Input",ExpressionUUID->"624edbe4-ce38-\
+429d-9204-5adfd49147f9"],
+
+Cell["is false in general.", "Text",ExpressionUUID->"e2bfd5e2-74b7-4522-9062-8dad9768f985"],
+
+Cell["Exact counterexample in the same model: ", "CodeText",ExpressionUUID->"928b3970-9ac6-4189-816a-c1be4b449a43"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"chi", " ", ".", " ", "J0"}], "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"rho", " ", ".", " ", "J0"}], "=", "5"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"s", "=", "1."}]}], "Input",ExpressionUUID->"3d71ced0-4659-4513-8dd6-\
+084718e62a59"],
+
+Cell[TextData[{
+ "Then ",
+ Cell[BoxData[Cell["chi . J0 == s",
+   Background->None,ExpressionUUID->"43e23152-f99a-40ae-8e04-ad9493700ed1"]], 
+  "InlineCode",ExpressionUUID->"f4357b91-55cb-48c1-91d4-4e4393746a08"],
+ " is true, but there is no representative ",
+ Cell[BoxData[Cell["J in J0 + Aminus",
+   Background->None,ExpressionUUID->"8d767e12-235c-482d-9394-de953ecef033"]], 
+  "InlineCode",ExpressionUUID->"152f5f08-6cc9-4231-a162-6deb8d367f92"],
+ " with ",
+ Cell[BoxData[Cell["rho(J) == s",
+   Background->None,ExpressionUUID->"85fe5f13-3252-4d5b-b277-e09f24e77015"]], 
+  "InlineCode",ExpressionUUID->"ff41eef2-6470-4301-9798-7ee2d552dfd9"],
+ ", because ",
+ StyleBox["rho", "TI"],
+ " is constant on the class with value ",
+ Cell[BoxData[Cell["5",
+   Background->None,ExpressionUUID->"153b5015-688f-47ff-8033-b0e072f865a1"]], 
+  "InlineCode",ExpressionUUID->"75c1ae2d-0812-4dd6-9053-b03d08e1e91e"],
+ ". "
+}], "Text",ExpressionUUID->"3ce8bee2-cbc4-4cb8-b7b0-36706aacce6c"],
+
+Cell["Outcome", "Section",ExpressionUUID->"f24e1964-c24d-448f-9bfa-f8c9b913e8d2"],
+
+Cell["The exact reduction that survives is: ", "CodeText",ExpressionUUID->"ca15f189-0aaf-4878-b1f7-19ba6a6b0f2f"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Exists", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"J", " ", "in", " ", "J0"}], "+", "Aminus"}], ",", 
+    RowBox[{
+     RowBox[{"rho", 
+      RowBox[{"(", "J", ")"}]}], "==", "target"}]}], "]"}], "<=", ">", 
+  RowBox[{"rho", 
+   RowBox[{"(", "J0", ")"}]}], "==", 
+  RowBox[{"target", "."}]}]], "Input",ExpressionUUID->"5c521962-4d98-4d40-\
+b752-6b6161cd7cfb"],
+
+Cell[TextData[{
+ "The unscaled ",
+ Cell[BoxData[Cell["chi(J0) == target",
+   Background->None,ExpressionUUID->"f19be34d-f90e-4b94-8630-4e566b5a87f1"]], 
+  "InlineCode",ExpressionUUID->"fe457863-4aaa-4f38-8f9c-f0e4565dfabf"],
+ " version requires an extra hypothesis, for example ",
+ Cell[BoxData[Cell["nu = 1",
+   Background->None,ExpressionUUID->"bdadd3a6-a3f1-49e6-8a14-34d9c273dd82"]], 
+  "InlineCode",ExpressionUUID->"99e0d4d4-b4ef-4960-a86d-b30c00dbf88b"],
+ ", or else a normalized target ",
+ Cell[BoxData[Cell["target/nu",
+   Background->None,ExpressionUUID->"2f8bb6ee-fc28-4009-b792-da5076058a37"]], 
+  "InlineCode",ExpressionUUID->"9c1119a4-4301-443c-bb68-2d70e14e17f1"],
+ ". "
+}], "Text",ExpressionUUID->"11bc9bbe-dd9c-4f7a-ab1b-8c304f8ff735"],
+
+Cell["Re-run", "Section",ExpressionUUID->"da2d6f5d-1fc8-4ffc-a6a6-31a641f4545f"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"MainProof`QuotientDescent`RunQuotientDescentExampleSuite", "[", 
+  "]"}]}], "Input",ExpressionUUID->"ff94b6cc-5cc5-4c3f-957c-e1a0c15f62cd"],
+
+Cell["Status", "Section",ExpressionUUID->"ea9b7108-8451-4548-a70f-58269426b79f"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Claim\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm], 
+         TagBox["\<\"ScopeClass\"\>",
+          HoldForm]},
+        {Cell[TextData[{
+          "Exact reduction to ",
+          Cell[BoxData[Cell["rho(J0) = target",
+            Background->None,ExpressionUUID->
+            "c719fdf8-a083-4112-9793-f8488ccf2448"]], "InlineCode",
+           ExpressionUUID->"e83d0ef6-6f62-4ecc-adc9-93e36b3da4c6"]
+         }],ExpressionUUID->
+          "1d103905-b023-4e11-b946-2533f3fc62f0"], \
+"\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {Cell[TextData[{
+          "Equivalent normalized statement ",
+          Cell[BoxData[Cell["chi(J0) = target/nu",
+            Background->None,ExpressionUUID->
+            "c9fe717a-09d7-41eb-8869-ebb8389ba71b"]], "InlineCode",
+           ExpressionUUID->"3dcaa8a6-0647-44f5-8b13-7374ad2e753b"]
+         }],ExpressionUUID->
+          "3895f57e-bdd3-4dca-b48b-714298083b6e"], \
+"\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {Cell[TextData[{
+          "Unscaled ",
+          Cell[BoxData[Cell["chi(J0) = target",
+            Background->None,ExpressionUUID->
+            "33159f7f-1ba4-42a1-b618-a8cca4fb44c6"]], "InlineCode",
+           ExpressionUUID->"7d3d680b-3785-49c7-8fa7-36fd443306b7"],
+          " proposal"
+         }],ExpressionUUID->
+          "591ce151-228f-4b5c-8852-b700b151bdb7"], "\<\"counterexample \
+found\"\>", "\<\"finite-dimensional-theorem-certificate\"\>"},
+        {Cell[TextData[{
+          "Extra hypothesis needed: ",
+          Cell[BoxData[Cell["nu = 1",
+            Background->None,ExpressionUUID->
+            "062646ec-a013-4be2-9935-c7b9f72ebeb6"]], "InlineCode",
+           ExpressionUUID->"c8ddd777-1721-4f52-9918-20d63cfc59f0"],
+          " or normalized target"
+         }],ExpressionUUID->
+          "575828ff-5bb2-487d-b987-a8cc38439d7d"], "\<\"proved\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[
+      BoxForm`e$, 
+       TableHeadings -> {None, {"Claim", "Status", "ScopeClass"}}]]], "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"9f55b5e4-4a42-4f50-b1d9-fa91a12200da"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9fb98179-9cdd-493e-8616-b4f0b8195a60"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 103, 0, 70, "Title",ExpressionUUID->"efcdf189-00be-4143-9afa-7ca549df1126"],
+Cell[660, 22, 79, 0, 70, "Section",ExpressionUUID->"d63e1255-7266-4051-8178-c1c375c01cdf"],
+Cell[742, 24, 131, 0, 70, "Text",ExpressionUUID->"f0910dce-f245-41b1-a67c-1028d88ef85d"],
+Cell[876, 26, 120, 0, 70, "Text",ExpressionUUID->"9a6b9330-2552-49bc-9d6f-d493bbbe5741"],
+Cell[999, 28, 402, 11, 70, "Input",ExpressionUUID->"36997d1b-667e-42d6-9e12-a237bf124dd9"],
+Cell[1404, 41, 276, 7, 70, "Text",ExpressionUUID->"44456feb-8af2-497d-83ed-c5dbc78b0912"],
+Cell[1683, 50, 89, 0, 70, "Section",ExpressionUUID->"9f645b25-9784-4f93-9ac5-a76a977eddfc"],
+Cell[1775, 52, 91, 0, 70, "Text",ExpressionUUID->"f164bc8f-e608-40bb-9b14-e3dd5bc15783"],
+Cell[1869, 54, 882, 29, 70, "Input",ExpressionUUID->"9cfd7147-e424-48bc-86a1-d609e1bddeeb"],
+Cell[2754, 85, 79, 0, 70, "Text",ExpressionUUID->"66a405a5-5e46-4ff2-bfb1-b3a64c2cd7f1"],
+Cell[2836, 87, 370, 10, 70, "Input",ExpressionUUID->"3643bbf4-e369-4138-a8f8-33ccfd29b411"],
+Cell[3209, 99, 79, 0, 70, "Text",ExpressionUUID->"8dc3eec2-26a9-409e-afc9-5918b0481401"],
+Cell[3291, 101, 85, 0, 70, "Text",ExpressionUUID->"3b75dfab-2e91-4010-9c7b-62b3982086fd"],
+Cell[3379, 103, 413, 12, 70, "Input",ExpressionUUID->"386b65c2-d7fa-46a6-9383-2bf25d89e193"],
+Cell[3795, 117, 262, 5, 70, "Text",ExpressionUUID->"b2e41c47-8576-4eb1-b9b0-823382eac0d4"],
+Cell[4060, 124, 113, 0, 70, "Section",ExpressionUUID->"6d54a70b-263b-41f8-a68f-a4903ede446e"],
+Cell[4176, 126, 93, 0, 70, "Text",ExpressionUUID->"afcd5408-7022-40ad-88e2-4960087f62a9"],
+Cell[4272, 128, 190, 5, 70, "Input",ExpressionUUID->"624edbe4-ce38-429d-9204-5adfd49147f9"],
+Cell[4465, 135, 91, 0, 70, "Text",ExpressionUUID->"e2bfd5e2-74b7-4522-9062-8dad9768f985"],
+Cell[4559, 137, 115, 0, 70, "CodeText",ExpressionUUID->"928b3970-9ac6-4189-816a-c1be4b449a43"],
+Cell[4677, 139, 319, 8, 70, "Input",ExpressionUUID->"3d71ced0-4659-4513-8dd6-084718e62a59"],
+Cell[4999, 149, 973, 20, 70, "Text",ExpressionUUID->"3ce8bee2-cbc4-4cb8-b7b0-36706aacce6c"],
+Cell[5975, 171, 81, 0, 70, "Section",ExpressionUUID->"f24e1964-c24d-448f-9bfa-f8c9b913e8d2"],
+Cell[6059, 173, 113, 0, 70, "CodeText",ExpressionUUID->"ca15f189-0aaf-4878-b1f7-19ba6a6b0f2f"],
+Cell[6175, 175, 397, 12, 70, "Input",ExpressionUUID->"5c521962-4d98-4d40-b752-6b6161cd7cfb"],
+Cell[6575, 189, 751, 14, 70, "Text",ExpressionUUID->"11bc9bbe-dd9c-4f7a-ab1b-8c304f8ff735"],
+Cell[7329, 205, 80, 0, 70, "Section",ExpressionUUID->"da2d6f5d-1fc8-4ffc-a6a6-31a641f4545f"],
+Cell[7412, 207, 306, 6, 70, "Input",ExpressionUUID->"ff94b6cc-5cc5-4c3f-957c-e1a0c15f62cd"],
+Cell[7721, 215, 80, 0, 70, "Section",ExpressionUUID->"ea9b7108-8451-4548-a70f-58269426b79f"],
+Cell[7804, 217, 3026, 74, 70, "TextTableForm",ExpressionUUID->"9f55b5e4-4a42-4f50-b1d9-fa91a12200da"]
+}
+]
+*)
+
+(* End of internal cache information *)

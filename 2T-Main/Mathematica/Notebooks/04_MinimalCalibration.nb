@@ -1,0 +1,459 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     19147,        450]
+NotebookOptionsPosition[     15720,        404]
+NotebookOutlinePosition[     16034,        418]
+CellTagsIndexPosition[     15991,        415]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["04 Minimal Calibration", "Title",ExpressionUUID->"b5176c89-a9c1-4ba2-8834-84e8da095865"],
+
+Cell["Scope", "Section",ExpressionUUID->"49b23e22-6cf5-4e2a-83b2-002b956455fa"],
+
+Cell[TextData[{
+ "This notebook audits ",
+ Cell[BoxData[Cell["prop:minimal-transport-calibration",
+   Background->None,ExpressionUUID->"abb7e25d-03b5-44fb-98a0-e8aeb0b65e23"]], 
+  "InlineCode",ExpressionUUID->"c9903a1b-6a26-48dd-a052-04f763519f7a"],
+ " in the exact basis-aware finite-dimensional form requested by the Research \
+Lead. "
+}], "Text",ExpressionUUID->"fda1ae8b-a975-41c9-aa51-4f511e6804cf"],
+
+Cell["Construction", "Section",ExpressionUUID->"12d3509f-6991-435f-a402-87de9e7b95a2"],
+
+Cell[TextData[{
+ "Given ",
+ Cell[BoxData[Cell["chi(F) = c^T F",
+   Background->None,ExpressionUUID->"60b2e15c-48ae-4296-ac9e-b0c145d55ca2"]], 
+  "InlineCode",ExpressionUUID->"9e85bfe6-854e-4984-b86e-4afdfbb7f022"],
+ ", choose: "
+}], "Text",ExpressionUUID->"eea14a06-c925-4ba5-bca7-525c7e0a3a50"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["jSharp",
+   Background->None,ExpressionUUID->"bd6c47c9-1ad8-4616-9135-df76121d826d"]], 
+  "InlineCode",ExpressionUUID->"85e84ba6-87c9-4ecb-8773-0479461eb624"],
+ " with ",
+ Cell[BoxData[Cell["c . jSharp == 1",
+   Background->None,ExpressionUUID->"c0333320-422e-4a5d-851e-8f8ac4c96161"]], 
+  "InlineCode",ExpressionUUID->"3d01e4f0-3b1e-4f30-90cc-803cd271a805"]
+}], "Item",ExpressionUUID->"4737e94d-0134-42e9-ade6-b585788c5b68"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  TemplateBox[{
+   "N", "paclet:ref/N", "https://reference.wolfram.com/language/ref/N.html"},
+   "TextRefLink",
+   DisplayFunction->(TagBox[
+     ButtonBox[
+      StyleBox[#, ShowStringCharacters -> True, FontFamily -> 
+       "Source Sans Pro"], 
+      BaseStyle -> {"Link", FontColor -> LightDarkSwitched[
+          RGBColor[0.02, 0.286, 0.651], 
+          RGBColor[0.2823, 0.6666, 0.949]]}, ButtonData -> #2, ContentPadding -> 
+      False], 
+     MouseAppearanceTag["LinkHand"]]& )]],ExpressionUUID->
+  "c56a95ae-3853-4855-bbfd-dca1700beae0"],
+ " with columns spanning ",
+ Cell[BoxData[Cell["ker chi",
+   Background->None,ExpressionUUID->"2739c845-ebd9-4d19-86d8-c87bbbcb8ea1"]], 
+  "InlineCode",ExpressionUUID->"3f0682e7-c9f4-41eb-ba4e-55ec64343b30"]
+}], "Item",ExpressionUUID->"97bc27c7-b68a-4fe0-83d3-674f7743a4b6"],
+
+Cell[TextData[{
+ "positive definite kernel metric ",
+ Cell[BoxData[Cell["Q",
+   Background->None,ExpressionUUID->"1630a3ad-d63e-4c23-80ff-7c2041d4213e"]], 
+  "InlineCode",ExpressionUUID->"104ae7b6-a80a-46d0-ab5d-d47939745c55"]
+}], "Item",ExpressionUUID->"a8ec1e6a-2b86-44c5-8c79-bb540698d72e"],
+
+Cell[TextData[{
+ "scalar ",
+ Cell[BoxData[Cell["beta > 0",
+   Background->None,ExpressionUUID->"c5b266e9-1a4f-46c2-86d8-1c87ce3ab328"]], 
+  "InlineCode",ExpressionUUID->"2ef22441-b981-47d5-ae2b-ea9d42784563"]
+}], "Item",ExpressionUUID->"b4e26e8b-8494-4c03-ae18-e1b3e71f13c2"],
+
+Cell["Define ", "Text",ExpressionUUID->"373c84a8-a7ac-4c8c-8d42-a7c764d941e9"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"M", "=", 
+   RowBox[{"ArrayFlatten", "[", 
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Transpose", "[", 
+        RowBox[{"{", "jSharp", "}"}], "]"}], ",", "N"}], "}"}], "}"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"G", "=", 
+   RowBox[{"ArrayFlatten", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"{", "beta", "}"}], "}"}], ",", 
+        RowBox[{"0", " ", 
+         RowBox[{"N", "[", 
+          RowBox[{"[", 
+           RowBox[{
+            RowBox[{"{", "1", "}"}], ",", "All"}], "]"}], "]"}]}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"0", " ", 
+         RowBox[{"N", "[", 
+          RowBox[{"[", 
+           RowBox[{"All", ",", 
+            RowBox[{"{", "1", "}"}]}], "]"}], "]"}]}], ",", "Q"}], "}"}]}], 
+     "}"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"B", "=", 
+   RowBox[{
+    RowBox[{"Inverse", "[", 
+     RowBox[{"Transpose", "[", "M", "]"}], "]"}], ".", "G", ".", 
+    RowBox[{"Inverse", "[", "M", "]"}]}]}], ";"}]}], "Input",ExpressionUUID->\
+"344dc7a3-6fc2-4a85-822e-5ce481997a1a"],
+
+Cell["This is implemented by: ", "CodeText",ExpressionUUID->"cb6e1c27-2dbc-42a8-8546-c24dda37fa6a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"suite", "=", 
+   RowBox[{"MainProof`Calibration`RunCalibrationExampleSuite", "[", "]"}]}], 
+  ";"}]}], "Input",ExpressionUUID->"b25529ee-3ef2-4b4c-98ca-2680c9cbd679"],
+
+Cell["Exact certified example", "Section",ExpressionUUID->"dbeccca1-86dc-4306-aed1-936ab13522d9"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"chi", "=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"jSharp", "=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"N", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Q", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"2", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "3"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"beta", "=", "5"}], ";"}]}], "Input",ExpressionUUID->"c9d35909-604c-\
+4273-97a0-05a4a3cc2bfd"],
+
+Cell["Exact output: ", "CodeText",ExpressionUUID->"5546dc3e-424f-4c7a-988f-a65b508d4fb7"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"B", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"5", ",", "0", ",", "0"}], "}"}], ",", "\[IndentingNewLine]", 
+     "     ", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "2", ",", "1"}], "}"}], ",", "\[IndentingNewLine]", 
+     "     ", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1", ",", "3"}], "}"}]}], "}"}]}], ";"}]], "Input",Exp\
+ressionUUID->"0e79cb27-066c-4dc4-8944-92ac376038f1"],
+
+Cell["Certified properties: ", "Text",ExpressionUUID->"0a1a2075-03e7-44ac-bda7-8f77ce95c850"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["M",
+   Background->None,ExpressionUUID->"cb1b8600-29dd-4908-bdc3-5ceb99f6b3a9"]], 
+  "InlineCode",ExpressionUUID->"82064ef7-787b-4fc7-a6ca-7dbce07126ed"],
+ " is invertible, so ",
+ Cell[BoxData[Cell["E^- \[TildeFullEqual] R jSharp \[CirclePlus] ker chi",
+   Background->None,ExpressionUUID->"76c7f813-0a09-4937-9843-0e37dc29c4f4"]], 
+  "InlineCode",ExpressionUUID->"b6c01d87-fddb-460a-9436-5d3ef0d7dc5e"],
+ "."
+}], "Item",ExpressionUUID->"537a06e7-e5c4-4103-865e-4279e0d51083"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["B",
+   Background->None,ExpressionUUID->"010a76ec-6dc9-4b80-bff7-ef4a6e3b6fa6"]], 
+  "InlineCode",ExpressionUUID->"fba48c49-1d78-4b28-811f-a82d30534623"],
+ " is symmetric."
+}], "Item",ExpressionUUID->"4a13f407-3cfb-4763-b652-8aed9425ddb3"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["B",
+   Background->None,ExpressionUUID->"1a2b5e1a-2cee-49e2-bf4c-b3c86eb07fd0"]], 
+  "InlineCode",ExpressionUUID->"d1fa9f00-17c1-4b9a-be4b-907a62d4a9b3"],
+ " is positive definite."
+}], "Item",ExpressionUUID->"f6b5c9eb-2422-4b35-aaef-caf3b8aaa96a"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["B(jSharp, K) = 0",
+   Background->None,ExpressionUUID->"fd306418-f57f-440c-b441-d91dc2ee2cd7"]], 
+  "InlineCode",ExpressionUUID->"71d01f55-8f97-4b51-8707-3a7ecc1c72a1"],
+ " for every ",
+ Cell[BoxData[Cell["K in ker chi",
+   Background->None,ExpressionUUID->"48bac392-3952-4514-bf90-e252360aaee0"]], 
+  "InlineCode",ExpressionUUID->"385848a5-f7b5-4335-984f-22b4ed6af455"],
+ "."
+}], "Item",ExpressionUUID->"4d036d2f-401b-49b7-b7a4-66e682511af2"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["B(jSharp, A) = 0",
+   Background->None,ExpressionUUID->"36121fae-3c4d-4aa7-a14f-19bf16c68622"]], 
+  "InlineCode",ExpressionUUID->"b8d4ff6d-d549-432b-af8f-523f12a72407"],
+ " for every ",
+ Cell[BoxData[Cell["A in Aminus",
+   Background->None,ExpressionUUID->"dc7d55a9-3e4d-47c6-9e37-5ee3edd79f80"]], 
+  "InlineCode",ExpressionUUID->"a0638b67-6893-4495-9b8c-0cf4a8381571"],
+ "."
+}], "Item",ExpressionUUID->"c9fc0d52-3ce0-4aaf-84a2-bf1d98f4a7e0"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["B(jSharp, jSharp) = beta",
+   Background->None,ExpressionUUID->"e3cdf070-7cab-462b-947f-260c6575a4cc"]], 
+  "InlineCode",ExpressionUUID->"26410d4b-2669-452c-89b6-a15c8b21abbe"],
+ "."
+}], "Item",ExpressionUUID->"b73732ac-a0b7-4eec-a0c3-8857f7c6d56e"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["jSharp = epsilon JXi",
+   Background->None,ExpressionUUID->"a29393ed-cb2c-45df-b72d-1b79b5b56cfc"]], 
+  "InlineCode",ExpressionUUID->"8c08e499-b528-4172-8ea2-d98b5dc542d6"],
+ " is admissible when ",
+ Cell[BoxData[Cell["chi(JXi) = epsilon",
+   Background->None,ExpressionUUID->"3ba56987-b0ea-4acf-911e-ccaf0667e93a"]], 
+  "InlineCode",ExpressionUUID->"dedfc604-cc4c-421e-9468-f2b688db2dfc"],
+ "."
+}], "Item",ExpressionUUID->"618313d8-0c0b-4e0b-bdb1-ccd32a720205"],
+
+Cell["Broken examples", "Section",ExpressionUUID->"254d8b34-9162-4d1e-9fcf-30ec25f05a5c"],
+
+Cell["The suite contains exact countermodels for: ", "Text",ExpressionUUID->"b2fbacd4-63a5-42fa-aba1-365e297f867a"],
+
+Cell[TextData[Cell[BoxData[Cell["beta <= 0",
+  Background->None,ExpressionUUID->
+  "2295b05b-893d-4282-bc85-0025c572195f"]], \
+"InlineCode",ExpressionUUID->"d100a1f5-265e-433a-a851-c5a1ce86bd94"]], "Item",\
+ExpressionUUID->"3a3971ea-1f39-4eb7-a1f5-52c2110bf38f"],
+
+Cell[TextData[{
+ "noncoercive kernel metric ",
+ Cell[BoxData[Cell["Q",
+   Background->None,ExpressionUUID->"2ffba3a6-570c-4384-b7c1-8781d323a747"]], 
+  "InlineCode",ExpressionUUID->"e0757846-17b9-457d-804a-22529b13c677"]
+}], "Item",ExpressionUUID->"0a31dfe3-e07e-4cee-b483-30c15e333b6a"],
+
+Cell[TextData[{
+ "wrong normalization ",
+ Cell[BoxData[Cell["chi(jSharp) != 1",
+   Background->None,ExpressionUUID->"367e4f62-8f34-4ea1-b562-022bcac4d1f0"]], 
+  "InlineCode",ExpressionUUID->"a1976ca7-8688-4511-96e3-ab7379de11ca"]
+}], "Item",ExpressionUUID->"1a21ba9a-352f-4cf1-8175-1f6f9f1255a5"],
+
+Cell[TextData[Cell[BoxData[Cell["Aminus \[NotSubset] ker chi",
+  Background->None,ExpressionUUID->
+  "7c0c3abc-cc62-4359-a966-203d79db3035"]], \
+"InlineCode",ExpressionUUID->"b121737e-3976-41fe-91eb-87a5786976fc"]], "Item",\
+ExpressionUUID->"23689b2f-ab41-4f9e-8820-2a0f762d8bd4"],
+
+Cell["Re-run", "Section",ExpressionUUID->"9c84d145-c796-4d8e-bf51-32adc40032cf"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"MainProof`Calibration`RunCalibrationExampleSuite", "[", 
+  "]"}]}], "Input",ExpressionUUID->"46939b28-8145-4a54-a83b-5e9672f76dbf"],
+
+Cell["Status", "Section",ExpressionUUID->"afdd1e7e-ae04-4aa2-ad54-206c8f1cf74c"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Claim\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm], 
+         TagBox["\<\"ScopeClass\"\>",
+          HoldForm]},
+        {Cell[TextData[{
+          "Product decomposition ",
+          Cell[BoxData[
+          Cell["E^- \[TildeFullEqual] R jSharp \[CirclePlus] ker chi",
+            Background->None,ExpressionUUID->
+            "dddcb8f6-9a48-49e3-be98-e0d6896be646"]], "InlineCode",
+           ExpressionUUID->"ba38617f-8481-4ae1-ac55-77b56b0f7c31"]
+         }],ExpressionUUID->
+          "8adbe522-97b2-4d3d-909d-af9097a2c54b"], \
+"\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {Cell[TextData[{
+          "Symmetry and positive definiteness of ",
+          Cell[BoxData[Cell["B",
+            Background->None,ExpressionUUID->
+            "4f329c79-e24c-41d3-828c-306453f6c849"]], "InlineCode",
+           ExpressionUUID->"9fd3cf56-b4ec-4464-ae16-7ea9e6ea6bf6"]
+         }],ExpressionUUID->
+          "a633c8f1-e291-48c1-bf9d-a625c31ca729"], \
+"\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {Cell[TextData[{
+          "Orthogonality of ",
+          Cell[BoxData[Cell["jSharp",
+            Background->None,ExpressionUUID->
+            "c9010d84-5d77-4157-b435-56004bd615ea"]], "InlineCode",
+           ExpressionUUID->"3b47533b-b393-4ca8-a32a-1ed8aef9b68d"],
+          " to ",
+          Cell[BoxData[Cell["ker chi",
+            Background->None,ExpressionUUID->
+            "0a2681e0-979d-481c-bb6d-404d4932b6bb"]], "InlineCode",
+           ExpressionUUID->"7d4206be-7aae-4024-b091-63cb819eceea"],
+          " and ",
+          Cell[BoxData[Cell["Aminus",
+            Background->None,ExpressionUUID->
+            "7d4ee036-e5cc-4946-a786-441287e32eba"]], "InlineCode",
+           ExpressionUUID->"8d0c054f-a83e-49a0-9e16-176ee2ff86ff"]
+         }],ExpressionUUID->
+          "e7b9728e-1ad1-41c3-a17b-30b80cd490ae"], \
+"\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {Cell[TextData[{
+          "Admissibility of ",
+          Cell[BoxData[Cell["jSharp = epsilon JXi",
+            Background->None,ExpressionUUID->
+            "1df3042f-875e-4276-bb99-11d51cdcc591"]], "InlineCode",
+           ExpressionUUID->"45e03804-4f6a-44a6-994f-e0e4eae63ba5"]
+         }],ExpressionUUID->
+          "45e0b8e8-c7b1-44f8-8e07-0a39a7ad63cb"], \
+"\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {Cell[TextData[{
+          Cell[BoxData[Cell["beta <= 0",
+            Background->None,ExpressionUUID->
+            "2a0473fb-37b1-4f8f-8c34-d6a92d6cfe48"]], "InlineCode",
+           ExpressionUUID->"96218e60-de09-4695-8fa0-4e02b4e3e5f1"],
+          " counterexample family"
+         }],ExpressionUUID->
+          "3a4d8c07-f4db-49a4-ba42-537bbbb2ac95"], "\<\"counterexample \
+found\"\>", "\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Noncoercive auxiliary metric counterexample family\"\>", \
+"\<\"counterexample found\"\>", "\<\"finite-dimensional-theorem-certificate\"\
+\>"},
+        {"\<\"Infinite-dimensional Hilbert completion\"\>", \
+"\<\"deferred\"\>", "\<\"abstract-imported-assumptions\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[
+      BoxForm`e$, 
+       TableHeadings -> {None, {"Claim", "Status", "ScopeClass"}}]]], "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"d77164db-dfda-40db-9ac1-c3f2aac8de1a"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9fb98179-9cdd-493e-8616-b4f0b8195a60"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 94, 0, 70, "Title",ExpressionUUID->"b5176c89-a9c1-4ba2-8834-84e8da095865"],
+Cell[651, 22, 79, 0, 70, "Section",ExpressionUUID->"49b23e22-6cf5-4e2a-83b2-002b956455fa"],
+Cell[733, 24, 404, 7, 70, "Text",ExpressionUUID->"fda1ae8b-a975-41c9-aa51-4f511e6804cf"],
+Cell[1140, 33, 86, 0, 70, "Section",ExpressionUUID->"12d3509f-6991-435f-a402-87de9e7b95a2"],
+Cell[1229, 35, 295, 6, 70, "Text",ExpressionUUID->"eea14a06-c925-4ba5-bca7-525c7e0a3a50"],
+Cell[1527, 43, 461, 8, 70, "Item",ExpressionUUID->"4737e94d-0134-42e9-ade6-b585788c5b68"],
+Cell[1991, 53, 853, 19, 70, "Item",ExpressionUUID->"97bc27c7-b68a-4fe0-83d3-674f7743a4b6"],
+Cell[2847, 74, 293, 5, 70, "Item",ExpressionUUID->"a8ec1e6a-2b86-44c5-8c79-bb540698d72e"],
+Cell[3143, 81, 275, 5, 70, "Item",ExpressionUUID->"b4e26e8b-8494-4c03-ae18-e1b3e71f13c2"],
+Cell[3421, 88, 78, 0, 70, "Text",ExpressionUUID->"373c84a8-a7ac-4c8c-8d42-a7c764d941e9"],
+Cell[3502, 90, 1198, 38, 70, "Input",ExpressionUUID->"344dc7a3-6fc2-4a85-822e-5ce481997a1a"],
+Cell[4703, 130, 99, 0, 70, "CodeText",ExpressionUUID->"cb6e1c27-2dbc-42a8-8546-c24dda37fa6a"],
+Cell[4805, 132, 344, 8, 70, "Input",ExpressionUUID->"b25529ee-3ef2-4b4c-98ca-2680c9cbd679"],
+Cell[5152, 142, 97, 0, 70, "Section",ExpressionUUID->"dbeccca1-86dc-4306-aed1-936ab13522d9"],
+Cell[5252, 144, 905, 31, 70, "Input",ExpressionUUID->"c9d35909-604c-4273-97a0-05a4a3cc2bfd"],
+Cell[6160, 177, 89, 0, 70, "CodeText",ExpressionUUID->"5546dc3e-424f-4c7a-988f-a65b508d4fb7"],
+Cell[6252, 179, 448, 13, 70, "Input",ExpressionUUID->"0e79cb27-066c-4dc4-8944-92ac376038f1"],
+Cell[6703, 194, 93, 0, 70, "Text",ExpressionUUID->"0a1a2075-03e7-44ac-bda7-8f77ce95c850"],
+Cell[6799, 196, 512, 9, 70, "Item",ExpressionUUID->"537a06e7-e5c4-4103-865e-4279e0d51083"],
+Cell[7314, 207, 275, 5, 70, "Item",ExpressionUUID->"4a13f407-3cfb-4763-b652-8aed9425ddb3"],
+Cell[7592, 214, 283, 5, 70, "Item",ExpressionUUID->"f6b5c9eb-2422-4b35-aaef-caf3b8aaa96a"],
+Cell[7878, 221, 479, 9, 70, "Item",ExpressionUUID->"4d036d2f-401b-49b7-b7a4-66e682511af2"],
+Cell[8360, 232, 478, 9, 70, "Item",ExpressionUUID->"c9fc0d52-3ce0-4aaf-84a2-bf1d98f4a7e0"],
+Cell[8841, 243, 285, 5, 70, "Item",ExpressionUUID->"b73732ac-a0b7-4eec-a0c3-8857f7c6d56e"],
+Cell[9129, 250, 498, 9, 70, "Item",ExpressionUUID->"618313d8-0c0b-4e0b-bdb1-ccd32a720205"],
+Cell[9630, 261, 89, 0, 70, "Section",ExpressionUUID->"254d8b34-9162-4d1e-9fcf-30ec25f05a5c"],
+Cell[9722, 263, 115, 0, 70, "Text",ExpressionUUID->"b2fbacd4-63a5-42fa-aba1-365e297f867a"],
+Cell[9840, 265, 262, 4, 70, "Item",ExpressionUUID->"3a3971ea-1f39-4eb7-a1f5-52c2110bf38f"],
+Cell[10105, 271, 287, 5, 70, "Item",ExpressionUUID->"0a31dfe3-e07e-4cee-b483-30c15e333b6a"],
+Cell[10395, 278, 296, 5, 70, "Item",ExpressionUUID->"1a21ba9a-352f-4cf1-8175-1f6f9f1255a5"],
+Cell[10694, 285, 280, 4, 70, "Item",ExpressionUUID->"23689b2f-ab41-4f9e-8820-2a0f762d8bd4"],
+Cell[10977, 291, 80, 0, 70, "Section",ExpressionUUID->"9c84d145-c796-4d8e-bf51-32adc40032cf"],
+Cell[11060, 293, 298, 6, 70, "Input",ExpressionUUID->"46939b28-8145-4a54-a83b-5e9672f76dbf"],
+Cell[11361, 301, 80, 0, 70, "Section",ExpressionUUID->"afdd1e7e-ae04-4aa2-ad54-206c8f1cf74c"],
+Cell[11444, 303, 4272, 99, 70, "TextTableForm",ExpressionUUID->"d77164db-dfda-40db-9ac1-c3f2aac8de1a"]
+}
+]
+*)
+
+(* End of internal cache information *)

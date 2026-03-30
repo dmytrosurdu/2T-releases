@@ -1,0 +1,172 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      7063,        163]
+NotebookOptionsPosition[      5046,        132]
+NotebookOutlinePosition[      5360,        146]
+CellTagsIndexPosition[      5317,        143]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Selector Necessity Decision", "Title",ExpressionUUID->"2cc6d3f7-cb10-4a03-9b3f-f8a2faa0f458"],
+
+Cell["\<\
+This notebook synthesizes the exact block-centrality theorem, the natural \
+boundary null-ideal comparison, and the transported ambiguity audit into the \
+next Main decision. \
+\>", "Text",ExpressionUUID->"d0925e69-e008-4aaa-8457-824c3eb49581"],
+
+Cell["Target", "Section",ExpressionUUID->"398d6e52-0486-45c0-ab86-f218c08129fe"],
+
+Cell[TextData[Cell[BoxData[Cell["task:selector-necessity-decision",
+  Background->None,ExpressionUUID->
+  "f0513ea1-5d91-4c41-989e-d6709b1cfba5"]], \
+"InlineCode",ExpressionUUID->"27c1a69f-1fbe-4708-9724-c1657729483e"]], "Item",\
+ExpressionUUID->"f6f36f64-2695-4354-984d-eb919cd0f80f"],
+
+Cell["Exact setup", "Section",ExpressionUUID->"da28cafd-91bf-4d15-a781-f2ec442a9d0c"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"decision", "=", 
+   RowBox[{
+   "MainProof`SelectorNecessityDecision`SelectorNecessityDecision", "[", 
+    "]"}]}], ";"}]}], "Input",ExpressionUUID->"99460105-c550-4d61-bb6f-\
+07eb1b63a5b7"],
+
+Cell["Decision query", "Section",ExpressionUUID->"5e253234-4799-4af0-9e5c-186723000028"],
+
+Cell["\<\
+Does the actual transported ambiguity class satisfy the boundary-safe \
+criterion for structural reasons under split+welded restriction, or must a \
+preferred selector be promoted? \
+\>", "Text",ExpressionUUID->"82b37565-4409-4b1c-bd11-a226d34042fc"],
+
+Cell["Exact synthesis", "Section",ExpressionUUID->"85a15b55-235f-4910-9865-01d7b4c00b1a"],
+
+Cell[BoxData["decision"], "Input",ExpressionUUID->"f4f571d6-bdde-4ac0-8807-65ca34e2476f"],
+
+Cell["Expected outcome", "Section",ExpressionUUID->"20bc334e-3a63-4b22-b23e-dd9d7a7686aa"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["Decision B",
+   Background->None,ExpressionUUID->"6ae104a4-b07a-46af-8dca-9d785a283bb3"]], 
+  "InlineCode",ExpressionUUID->"acbfb092-81ef-4bd5-9506-217c9b9fe090"],
+ ": "
+}], "Text",ExpressionUUID->"f968f396-d9f2-489b-bdbc-543c6b72ec59"],
+
+Cell[BoxData[GridBox[{
+   {
+    PaneBox["\<\"That does not follow from the transported structure; visible \
+diagonal controlled ambiguity survives, so a preferred selector must be \
+promoted to core status.\"\>",
+     BaseStyle->{"Text", FontColor -> LightDarkSwitched[
+         GrayLevel[0.35], 
+         GrayLevel[0.8602474]]},
+     ImageMargins->5,
+     ImageSize->{Full, Automatic}]}
+  },
+  AutoDelete->False,
+  GridBoxBackground->{"Columns" -> {{
+       LightDarkSwitched[
+        GrayLevel[1], 
+        GrayLevel[0.278317]]}}},
+  GridBoxDividers->{"ColumnsIndexed" -> {1 -> Directive[
+        LightDarkSwitched[
+         RGBColor[0.87, 0.94, 1], 
+         RGBColor[0.2491127, 0.3295188, 0.4231198]], 
+        AbsoluteThickness[4]]}, "Rows" -> {{False}}},
+  GridBoxItemSize->{
+   "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}]], "Text", \
+"BlockQuote",
+ Background->None,ExpressionUUID->"dba0c973-b8ce-4503-bafd-3a3b04aa8cce"],
+
+Cell["Why the decision is forced", "Section",ExpressionUUID->"8d5b6308-b4fe-42ea-8af1-00a3e8115632"],
+
+Cell["\<\
+The controlled boundary theorem reduces representative-independence to \
+block-centrality or mod-null block-centrality.\
+\>", "Item",ExpressionUUID->"1cd0bda3-a77f-487d-bf48-c5c51302c87a"],
+
+Cell["\<\
+No tested natural boundary null ideal is both stable and nontrivial.\
+\>", "Item",ExpressionUUID->"4ce9dbc9-748a-4b21-9e93-e8f7b31dbca3"],
+
+Cell["\<\
+The actual exported transported ambiguity basis has an exact unsafe boundary \
+realization with a visible diagonal controlled block.\
+\>", "Item",ExpressionUUID->"b3a79dd2-db5b-4992-9f35-a3825b64d119"],
+
+Cell["\<\
+Therefore boundary restriction alone does not close Main\[CloseCurlyQuote]s \
+selector problem at finite cutoff.\
+\>", "Item",ExpressionUUID->"bd3b831b-c576-4602-8240-06752029a207"],
+
+Cell["Artifact bundle", "Section",ExpressionUUID->"58d5453c-ca77-461b-bf3a-93c4bb7f2a6e"],
+
+Cell[TextData[{
+ "Run ",
+ Cell[BoxData[Cell["\<\
+/home/kray-l8/work/2T/Main/Mathematica/Reports/\
+RunTransportedBoundarySelectorDecision.wl\
+\>",
+   Background->None,ExpressionUUID->"6f7fffff-16bb-455e-8a97-526b52c0f1d7"]], 
+  "InlineCode",ExpressionUUID->"a09cd809-9ca0-44ab-a6b8-cbe040c9d645"],
+ " to refresh the full report, updated ledger, certificate bundle, \
+imported-assumptions note, and manuscript-facing remark snippet."
+}], "Text",ExpressionUUID->"9ffce6a8-4a66-452c-807b-5d57d789cad5"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"a83bd6d1-c378-4ba4-8c49-4f0e587986a8"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 99, 0, 70, "Title",ExpressionUUID->"2cc6d3f7-cb10-4a03-9b3f-f8a2faa0f458"],
+Cell[656, 22, 254, 4, 70, "Text",ExpressionUUID->"d0925e69-e008-4aaa-8457-824c3eb49581"],
+Cell[913, 28, 80, 0, 70, "Section",ExpressionUUID->"398d6e52-0486-45c0-ab86-f218c08129fe"],
+Cell[996, 30, 285, 4, 70, "Item",ExpressionUUID->"f6f36f64-2695-4354-984d-eb919cd0f80f"],
+Cell[1284, 36, 85, 0, 70, "Section",ExpressionUUID->"da28cafd-91bf-4d15-a781-f2ec442a9d0c"],
+Cell[1372, 38, 368, 10, 70, "Input",ExpressionUUID->"99460105-c550-4d61-bb6f-07eb1b63a5b7"],
+Cell[1743, 50, 88, 0, 70, "Section",ExpressionUUID->"5e253234-4799-4af0-9e5c-186723000028"],
+Cell[1834, 52, 260, 4, 70, "Text",ExpressionUUID->"82b37565-4409-4b1c-bd11-a226d34042fc"],
+Cell[2097, 58, 89, 0, 70, "Section",ExpressionUUID->"85a15b55-235f-4910-9865-01d7b4c00b1a"],
+Cell[2189, 60, 89, 0, 70, "Input",ExpressionUUID->"f4f571d6-bdde-4ac0-8807-65ca34e2476f"],
+Cell[2281, 62, 90, 0, 70, "Section",ExpressionUUID->"20bc334e-3a63-4b22-b23e-dd9d7a7686aa"],
+Cell[2374, 64, 272, 5, 70, "Text",ExpressionUUID->"f968f396-d9f2-489b-bdbc-543c6b72ec59"],
+Cell[2649, 71, 938, 24, 70, "Text",ExpressionUUID->"dba0c973-b8ce-4503-bafd-3a3b04aa8cce"],
+Cell[3590, 97, 100, 0, 70, "Section",ExpressionUUID->"8d5b6308-b4fe-42ea-8af1-00a3e8115632"],
+Cell[3693, 99, 198, 3, 70, "Item",ExpressionUUID->"1cd0bda3-a77f-487d-bf48-c5c51302c87a"],
+Cell[3894, 104, 147, 2, 70, "Item",ExpressionUUID->"4ce9dbc9-748a-4b21-9e93-e8f7b31dbca3"],
+Cell[4044, 108, 211, 3, 70, "Item",ExpressionUUID->"b3a79dd2-db5b-4992-9f35-a3825b64d119"],
+Cell[4258, 113, 191, 3, 70, "Item",ExpressionUUID->"bd3b831b-c576-4602-8240-06752029a207"],
+Cell[4452, 118, 89, 0, 70, "Section",ExpressionUUID->"58d5453c-ca77-461b-bf3a-93c4bb7f2a6e"],
+Cell[4544, 120, 498, 10, 70, "Text",ExpressionUUID->"9ffce6a8-4a66-452c-807b-5d57d789cad5"]
+}
+]
+*)
+
+(* End of internal cache information *)

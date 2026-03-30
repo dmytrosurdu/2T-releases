@@ -1,0 +1,1024 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{xr-hyper}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\providecommand{\Fsloc}{\mathcal F_{\rm s.loc}}
+\providecommand{\Qt}{Q_t}
+\externaldocument[main-]{UOM/main}
+\externaldocument[uomdesc-]{UOM/uom_descendant_note}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=blue!60!black,
+  urlcolor=blue!60!black
+}
+
+% ---------- Theorem environments ----------
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{assumption}{Assumption}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+\crefname{definition}{definition}{definitions}
+\Crefname{definition}{Definition}{Definitions}
+\crefname{assumption}{assumption}{assumptions}
+\Crefname{assumption}{Assumption}{Assumptions}
+\crefname{theorem}{theorem}{theorems}
+\Crefname{theorem}{Theorem}{Theorems}
+\crefname{lemma}{lemma}{lemmas}
+\Crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{proposition}{propositions}
+\Crefname{proposition}{Proposition}{Propositions}
+\crefname{corollary}{corollary}{corollaries}
+\Crefname{corollary}{Corollary}{Corollaries}
+\crefname{remark}{remark}{remarks}
+\Crefname{remark}{Remark}{Remarks}
+
+% ---------- Notation ----------
+\newcommand{\cH}{\mathcal H}
+\newcommand{\cA}{\mathcal A}
+\newcommand{\cD}{\mathcal D}
+\newcommand{\cB}{\mathcal B}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\cL}{\mathcal L}
+\newcommand{\cK}{\mathcal K}
+\newcommand{\cR}{\mathcal R}
+\newcommand{\cG}{\mathcal G}
+\newcommand{\Ztwo}{\mathbb Z_2}
+\newcommand{\Sys}{\mathrm{Sys}}
+\newcommand{\Time}{\mathrm{Time}}
+\newcommand{\RG}{\mathrm{RG}}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\ad}{\mathrm{ad}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+\newcommand{\abs}[1]{\left\lvert #1\right\rvert}
+\newcommand{\ip}[2]{\left\langle #1,#2\right\rangle}
+
+\title{Nontrivial Summability and the Split in UOM and 2T-LS:\\
+Completion-Sector Leak, Classicality, and Theoretical Derivation}
+\author{Internal technical note}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note studies two coupled structures in Universe-Originating Measurement (UOM):
+\emph{(i)} the nontrivial summability of the Brown--York (BY) increments $\{\Theta_k\}$ and
+\emph{(ii)} the split as exposure of a completion sector into the next aeon's source.
+The leak term in the SK/HJ wall balance is formulated as a completion-sector export flux
+controlled by a signed odd split amplitude and carried by hidden Stinespring/commutant degrees of
+freedom.
+The note derives the continued-sector RP coefficient \(\alpha(\Lambda)\), a parity-based rank-one
+wall-match normal form, a projected Gaussian affine realization of the odd split mode, a
+centered/squeeze-dominated specialization of that affine dynamics, a positive decomposition of the
+split-driving leak into fresh-injection and transport pieces, a low-rank projected stock law, and
+an exported characterization interface for the canonical odd representative used downstream in
+\(\mathbf{2T}_{\mathrm{Main}}\).
+Where UOM does not determine a unique completion Hamiltonian, export projector, or one-wall/two-wall
+matching, the corresponding steps are left as explicit \emph{hypotheses}.
+Classicality is assigned to the coarse-grained accessible ledger, whereas RP/OS oddness is assigned
+to the analytic-continued completion sector.
+\end{abstract}
+
+\tableofcontents
+
+\section{Scope and inputs}
+\label{sec:scope}
+
+\paragraph{Primary sources (internal).}
+We take as authoritative the UOM main manuscript and the 2T-LS rigorous translation note.
+The simulators are used only as \emph{phenomenological inputs}: they probe reduced scalar closures of the wall balance and
+help identify which qualitative leak behaviors do or do not produce split.
+They are not treated as the primary source of theoretical definitions.
+
+\paragraph{What ``nontrivial summability'' means here.}
+There are two levels:
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Within one aeon:} beyond the trivial telescoping identity that follows from the bookkeeping update,
+the observed phenomenon is that the \emph{implicit one-wall $\Lambda$-solve} can dynamically adjust the cutoff trajectory
+so as to avoid overshoot \emph{at all finite ticks} while still exhausting the curvature budget:
+\[
+0<\Theta_k<R^{\rm abs}_k\ \text{for all finite }k,
+\qquad
+R^{\rm abs}_k\downarrow 0,
+\qquad
+\sum_{k\ge 0}\Theta_k=\abs{R_0}.
+\]
+This is what we call \emph{nontrivial (exact) summability} in this note; the ``flip'' is an asymptotic boundary point of
+the solvable one-wall channel rather than a finite threshold crossing.
+\item \textbf{Across aeons:} in the exhaustion/terminal branch the total available wall-work is summable (UOM Theorem
+\texttt{thm:ads5-static}), yielding a terminal cutoff $\Lambda_\infty$ and decoupled tail behavior.
+\end{enumerate}
+
+\paragraph{What ``split'' means here.}
+Operationally, a split is the end-of-aeon event in which the construction produces a \emph{new} dS source branch and a
+\emph{new} AdS receiver branch. In UOM this is treated as compatible with BY charge conservation across a pillbox around
+the split region (UOM App. \texttt{app:energy-split}). In 2T-LS, the split/continuation has a mathematically clean
+signature: a parity cocycle $\omega$ whose nontrivial holonomy obstructs a global ``splitting'' (sectioning) of a
+$\Ztwo$-cover (2T-LS Theorem \texttt{thm:non-splitting}).
+
+\section{Mathematical objects: states, channels, and per-tick scalars}
+\label{sec:objects}
+
+\subsection{State spaces and admissible coarse views}
+\label{subsec:state-spaces}
+
+Let $\cH_{\rm tot}$ denote the total microscopic Hilbert space of the composite (source patches, commutant/bath bookkeeping,
+receiver degrees of freedom, and any bulk/shadow auxiliaries retained).
+We write $\cD(\cH)$ for density matrices on $\cH$.
+
+UOM frequently avoids assuming a literal tensor factorization for ``accessible'' degrees of freedom and instead uses
+operator-algebra restrictions and conditional expectations. A key UOM definition (label
+\texttt{def:eta-bridge-leak}) introduces:
+\begin{itemize}[leftmargin=1.6em]
+\item a conditional expectation $\mathbb E_{\rm ptr}$ onto a pointer algebra, and
+\item a commutant record map $\cR_k$ with commutative range (classical record algebra),
+\end{itemize}
+together with a bridge/leak instrument decomposition $\Phi_k=\cB_k+\cL_k$ of the tick CPTP map.
+
+\subsection{Source-side QND dephaser and exported payload $\Delta I_k$}
+\label{subsec:qnd-payload}
+
+The source-side mechanism is a pointer-aligned QND absorption channel with generator of the form (UOM label
+\texttt{lem:exp-tail}):
+\begin{equation}
+\cL(t)\rho \;=\; -\frac12 \sum_a \gamma_a(t)\,[L_a,[L_a,\rho]],
+\qquad L_a=f_a(H_{{\rm sp},\Delta}),\qquad [L_a,H_{{\rm sp},\Delta}]=0.
+\label{eq:qnd-generator}
+\end{equation}
+Across a tick window $I_k=[t_-,t_+]$ in a steady-actuator regime one obtains exponential contraction of the modular
+free energy $F(t)=S(\rho_t\|\sigma_\Delta)$ relative to a band-limited BD/KMS anchor $\sigma_\Delta$:
+\begin{equation}
+F(t_+) \le e^{-\beta_k}F(t_-),
+\qquad
+\Delta I_k := F(t_-)-F(t_+)\ge (1-e^{-\beta_k})F(t_-).
+\label{eq:payload-lower-bound}
+\end{equation}
+In reduced scalar closures this appears as:
+\begin{equation}
+\Delta I_k \approx (1-e^{-\beta_k})\,F_k,
+\qquad
+F_{k+1}=F_k-\Delta I_k,
+\label{eq:sim-payload-update}
+\end{equation}
+where $F_k$ is represented by the scalar source stock \texttt{F\_dS} in \texttt{aeon\_driver.py}, and where
+$\beta_k$ is computed from a schedule factor times the source Hubble scale and (in v1) a band-fraction modifier.
+
+\paragraph{Matrix-element form (for later classicality bounds).}
+The closed form of the dephasing channel on the band is (UOM label \texttt{eq:app-phi-closed})
+\begin{equation}
+\Phi_\Delta^{(k)}=\exp\!\Big\{-\tfrac12\sum_a \Gamma_a^{(k)}\,\ad_{L_a}^{\,2}\Big\},
+\qquad
+\Gamma_a^{(k)}=\int_{\mathbb R}\gamma_a^{(k)}(t)\,dt.
+\label{eq:qnd-channel-closed}
+\end{equation}
+In a common eigenbasis of $\{L_a\}$, $\ad_{L_a}^{\,2}$ acts diagonally on matrix elements, yielding suppression of
+off-diagonals by factors $\exp(-\Gamma^{(k)}_{ij})$ with
+$\Gamma^{(k)}_{ij}=\tfrac12\sum_a\Gamma_a^{(k)}(\ell_a(i)-\ell_a(j))^2$.
+
+\subsection{Receiver-side BY rectifier increment $\Theta_k$}
+\label{subsec:theta}
+
+UOM defines the BY anomaly/rectifier increment (UOM label \texttt{eq:theta-def}) as
+\begin{equation}
+\Theta_k
+:=\gamma\,\Delta\!\langle R^2\rangle_k
+\;=\;\underbrace{\frac{aG_4}{12\pi}}_{=\gamma}\,(8\pi G_4)^2\,
+\big\langle|\cK|^2\big\rangle_k\,
+C_{\rm LoG}\;\frac{A_k^2}{\sigma_{t,k}\,\sigma_{x,k}^3}.
+\label{eq:theta-def-note}
+\end{equation}
+Equivalently, in the welded/throughput form (UOM label \texttt{eq:R2}) one writes a per-tick BY penalty
+\begin{equation}
+\Phi_{{\rm BY},k}
+=
+\gamma(8\pi G_4)^2\,C_{\rm LoG}\;
+\frac{\Delta I_k}{s_{t,k}\,s_{x,k}^{3}\,G(s_{t,k},s_{x,k};\Lambda_k)}.
+\label{eq:by-throughput-note}
+\end{equation}
+In reduced phenomenological closures, $\Theta_k$ is evaluated by a discretized Euclidean BY kernel integrating over a
+frequency grid and an $S^3$ harmonic grid, with:
+\begin{itemize}[leftmargin=1.6em]
+\item welded widths $s_t(\Lambda)=\alpha_t/\Lambda$ and $s_x(\Lambda)=\alpha_x/(v_{\rm geom}\Lambda)$,
+\item an evanescent suppression across the brane gap $d_{\rm sep}$ as $\exp(-d_{\rm sep}q)$ with
+$q=\sqrt{\omega^2+k^2+m_g^2}$,
+\item screening $K=q/(q+r(\Lambda)k^2)$ with $r(\Lambda)\simeq \ell_{\rm AdS5}/2 + C_{m3}\Lambda^2$,
+\item degeneracy weights $D_\ell=(\ell+1)^2$.
+\end{itemize}
+\begin{remark}[Linearity in $\Delta I_k$ and the effective kernel $K(\Lambda)$]
+Both the manuscript and the code implement $\Theta_k$ as \emph{linear} in the exported payload $\Delta I_k$ when the welded
+shape family is fixed: the reduced closure chooses an amplitude $A_{\rm eff}$ so that (heuristically) ``signal power'' equals
+$\Delta I_k$, and then integrates a quadratic response which is proportional to $A_{\rm eff}^2\propto \Delta I_k$.
+Thus one can write
+\begin{equation}
+\Theta_k = K(\bar\Lambda_k;d_k,L_{4,k},\text{locks})\,\Delta I_k,
+\label{eq:theta-factorization}
+\end{equation}
+for a (state-dependent) kernel factor $K$ extracted numerically as $\Theta_k/\Delta I_k$.
+This factorization is explicit in UOM's receiver evolution summary (label \texttt{par:uom-main-138}).
+\end{remark}
+
+\section{Nontrivial summability within an aeon}
+\label{sec:summability}
+
+\subsection{Curvature bookkeeping and exact summability}
+\label{subsec:curvature-bookkeeping}
+
+UOM's receiver-side coarse evolution tracks a signed curvature variable (AdS negative, dS positive) or equivalently
+its magnitude $\abs{R}$.
+The simulators encode the update in one of two equivalent ways:
+\begin{itemize}[leftmargin=1.6em]
+\item \textbf{v1 (magnitude bookkeeping):} $R^{\rm abs}_{k+1}=R^{\rm abs}_k-\Theta_k$ with $R^{\rm abs}_0=\abs{R_0}$.
+\item \textbf{v2 (signed bookkeeping):} $R_{k+1}=R_k+\Theta_k$ with $R_0=-\abs{R_0}<0$.
+\end{itemize}
+In either case, $\Theta_k\ge 0$ drives the receiver toward the flip.
+
+\begin{remark}[Legacy ``first-crossing'' convention]
+For comparison with UOM's manuscript language, one sometimes declares a flip at the first $N$ such that
+$S_N:=\sum_{k=0}^N\Theta_k\ge \abs{R_0}$.
+In the exact-summability regimes observed in the implicit $\Lambda$-solver experiments (no-leak and fixed-work-percentage
+(i.e.\ proportional) leak models), one instead finds $S_N<\abs{R_0}$ for all finite $N$ but
+$\lim_{N\to\infty}S_N=\abs{R_0}$.
+Thus there is no finite ``flip tick'': the flip is realized as an asymptotic boundary point of the solvable one-wall
+channel.
+\end{remark}
+
+\begin{proposition}[Telescoping identity (exact curvature-budget summation)]
+Assume the within-aeon update is $R^{\rm abs}_{k+1}=R^{\rm abs}_k-\Theta_k$ without additional clamps and that
+$\Theta_k\ge 0$.
+Then for any $N$,
+\begin{equation}
+\sum_{k=0}^N \Theta_k = R^{\rm abs}_0 - R^{\rm abs}_{N+1}.
+\label{eq:telescoping}
+\end{equation}
+In particular, if the update runs indefinitely with $R^{\rm abs}_{N+1}\downarrow 0$ as $N\to\infty$ (no overshoot /
+no sign crossing), then the series is \emph{exactly} summable:
+\begin{equation}
+\sum_{k=0}^{\infty}\Theta_k \;=\; \abs{R_0}.
+\label{eq:exact-summability}
+\end{equation}
+\end{proposition}
+
+\begin{proof}[Derivation and mechanism]
+\textbf{(i) Exact telescoping.}
+Summing the within-aeon update $R^{\rm abs}_{k+1}=R^{\rm abs}_k-\Theta_k$ from $k=0$ to $N$ gives
+\[
+R^{\rm abs}_{N+1}=R^{\rm abs}_0-\sum_{k=0}^N\Theta_k,
+\]
+which is \eqref{eq:telescoping}.
+This is not an approximation: it is the exact discrete bookkeeping of the receiver curvature budget used by the reduced
+one-wall closures.
+
+\textbf{(ii) Why the \emph{no-leak solvable branch} produces $R^{\rm abs}_k\downarrow 0$ (hence exact summability).}
+The nontrivial experimental observation is not \eqref{eq:telescoping} but that, in the no-leak and
+fixed-work-percentage-leak regimes where the implicit move equation is solvable, one gets a trajectory with
+\emph{no finite flip/crossing tick}:
+\[
+0<\Theta_k<R^{\rm abs}_k\quad\text{for all finite }k,
+\qquad\text{and}\qquad
+R^{\rm abs}_k\downarrow 0.
+\]
+This is a feedback consequence of the \emph{implicit} $\Lambda$-solve.
+At tick $k$ the solver does \emph{not} choose $\Theta_k$ directly; it chooses $\Lambda_{k+1}$ as a real root of the
+energy-balance residual $f_k(\Lambda)=0$ (cf.\ \eqref{eq:residual}).
+The resulting $\Theta_k$ is then the BY-kernel output at that $\Lambda_{k+1}$, i.e.\ a function
+$\Theta_k=\Theta(\Lambda_{k+1};\Delta I_k,d_k,L_{4,k},\text{locks})$ which is linear in $\Delta I_k$ but is
+strongly suppressed at large $\Lambda$ and/or large separation $d_k$ by the evanescent factor $\exp(-d_k q)$ in the kernel
+(\cref{subsec:theta}).
+Thus, when $R^{\rm abs}_k$ becomes small, the solver can keep the trajectory feasible (no overshoot) by moving to a
+slightly larger cutoff so that $\Theta_k$ becomes correspondingly smaller.
+In the solvable no-leak branch this yields an infinite ``micro-step'' regime in which
+$\Lambda_{k+1}-\Lambda_k\to 0$ and $\Theta_k\to 0$ while still maintaining $\Theta_k<R^{\rm abs}_k$
+\emph{until the budget itself vanishes}.
+
+Formally, the exact-summability regime is the one-wall continuation in which (a) the move equation remains solvable for all
+ticks (no split) and (b) exported payload does not terminate before the feasibility boundary is reached (``enough
+coherence''). In that regime the only terminal point is $R^{\rm abs}=0$, reached asymptotically with $\Theta_k\to 0$, and
+taking $N\to\infty$ in \eqref{eq:telescoping} yields \eqref{eq:exact-summability}.
+
+\textbf{(iii) Why constant/additive leaks spoil exact summability (and create splits).}
+Additive leaks enter as a positive shift $Q_{\rm leak}$ in the residual \eqref{eq:residual}.
+Once $R^{\rm abs}_k$ is small enough that the residual minimum becomes strictly positive, the real root disappears and the
+local quadratic continuation produces a complex-conjugate pair (``two complex solutions''); this is the split mechanism
+discussed in \cref{subsec:root-vs-split}.
+The trajectory then terminates before $R^{\rm abs}_k$ reaches $0$, and \eqref{eq:exact-summability} fails exactly by the
+nonzero remainder $R^{\rm abs}_\infty$ in \eqref{eq:telescoping}.
+\end{proof}
+
+\begin{remark}[Why this is still nontrivial]
+The identity \eqref{eq:telescoping} is algebraic once the update law is fixed. The \emph{nontrivial} content found in the
+simulator experiments is that the \emph{implicit one-wall $\Lambda$-solve} dynamically adjusts the cutoff trajectory so as
+to \emph{avoid overshoot} when a real solution exists: the solver selects $\Lambda_{k+1}$ satisfying the discrete
+energy-balance residual \eqref{eq:residual}, and in the no-leak / fixed-work-percentage (proportional) leak regimes this
+leads to
+$0<\Theta_k<R^{\rm abs}_k$ for all ticks and hence $R^{\rm abs}_k\downarrow 0$ while $S_N\uparrow \abs{R_0}$.
+By contrast, additive/rigid leak models can destroy the existence of real solutions for the $\Lambda$-move equation,
+producing a residual minimum strictly above tolerance (numerically: loss of bracketing/root and appearance of an
+``imaginary root'' diagnostic), which is interpreted as the onset of a split (see \cref{subsec:root-vs-split} and
+\cref{sec:phenom}).
+\end{remark}
+
+\subsection{A sufficient summability bound from QND exponential tails}
+\label{subsec:summability-bound}
+
+In the steady-actuator regime, UOM provides a geometric/exponential tail for $\Delta I_k$ (label \texttt{eq:tail-geom} in
+\texttt{lem:exp-tail}):
+\begin{equation}
+\Delta I_k \simeq F_0\,(1-e^{-\beta})\,e^{-\beta k},
+\qquad \sum_{k\ge 0}\Delta I_k = F_0.
+\label{eq:deltaI-summable}
+\end{equation}
+If $K(\bar\Lambda_k)$ is bounded above by $K_{\max}$ over the relevant tick range, then
+\begin{equation}
+\sum_{k\ge 0}\Theta_k
+\;=\;\sum_{k\ge 0}K(\bar\Lambda_k)\Delta I_k
+\;\le\;K_{\max}\sum_{k\ge 0}\Delta I_k
+\;=\;K_{\max}F_0.
+\label{eq:theta-summable-bound}
+\end{equation}
+This gives a clean \emph{sufficient} summability condition and makes explicit the two control levers: (i) the available
+coherence stock $F_0$ and (ii) the magnitude of $K$ along the receiver trajectory.
+
+\section{Wall balance and the implicit $\Lambda$-solver}
+\label{sec:lambda-solver}
+
+\subsection{Continuous wall RG balance}
+\label{subsec:wall-balance}
+
+UOM's SK/HJ wall balance is written as (UOM labels \texttt{eq:wall-ode} and \texttt{eq:ads5-wall-ode})
+\begin{equation}
+\mu_{\rm RG}(\Lambda)\,\dot\Lambda(t)
+= (\mathcal P_{\rm in}-\mathcal P_{\rm out})(t) - \dot{\mathcal F}_{\rm rec}(t),
+\label{eq:wall-ode-note}
+\end{equation}
+and in integrated/budget form
+\begin{equation}
+\Delta\lambda
+\le \int W^{\rm avail}(t)\,dt,
+\qquad \lambda'(\Lambda)=\mu_{\rm RG}(\Lambda).
+\label{eq:wall-budget-note}
+\end{equation}
+Reduced one-wall closures treat the tick as an implicit step that chooses $\Lambda_{k+1}$ such that a discrete analogue of
+this balance holds.
+
+\subsection{Geometry-side free energy surrogate and discrete balance}
+\label{subsec:geom-energy}
+
+The phenomenological one-wall closures use a geometry-side surrogate
+\begin{equation}
+E_{\rm geom}(\Lambda,L_4;\kappa)
+\;=\;
+\zeta\,\frac{A+\kappa\,a_{\rm cft}\,\Lambda^2}{L_4},
+\qquad
+A=\frac{M_5^3}{\ell_{\rm AdS5}}.
+\label{eq:Egeom}
+\end{equation}
+The discrete step compares $E_{\rm geom}$ between tick endpoints, with $L_4$ updated from the curvature bookkeeping
+$L_4=\sqrt{12/\abs{R}}$.
+
+\subsection{Wall-work kernel}
+\label{subsec:wall-kernel}
+
+The one-wall closure uses a wall penalty (work) kernel $J_{\rm wall}(\Lambda_k\to\Lambda)$ obtained by numerically
+evaluating an integral along the log-$\Lambda$ path. Heuristically, it implements the tick budget
+\begin{equation}
+J_{\rm wall}(\Lambda_k\to\Lambda_{k+1}) \approx E_{\rm geom}(\Lambda_k,L_{4,k})-E_{\rm geom}(\Lambda_{k+1},L_{4,k+1}),
+\label{eq:discrete-balance-no-leak}
+\end{equation}
+and the open-system closure generalizes this to include a nonnegative leak term $Q_{\rm leak}$ (UOM text around
+\texttt{eq:ads5-wall-ode}):
+\begin{equation}
+E_{\rm geom}(\Lambda_k,L_{4,k})-E_{\rm geom}(\Lambda_{k+1},L_{4,k+1})
+\approx
+J_{\rm wall}(\Lambda_k\to\Lambda_{k+1}) + Q_{\rm leak,k}.
+\label{eq:discrete-balance-leak}
+\end{equation}
+
+\subsection{Implicit solve and ``root vs split''}
+\label{subsec:root-vs-split}
+
+Define the residual at a candidate $\Lambda\ge \Lambda_k$:
+\begin{equation}
+f(\Lambda)
+:=
+J_{\rm wall}(\Lambda_k\to\Lambda)+Q_{\rm leak}(\Lambda)
+-\Big(E_{\rm geom}(\Lambda_k,L_{4,k})-E_{\rm geom}(\Lambda,L_4(\Lambda))\Big).
+\label{eq:residual}
+\end{equation}
+\begin{itemize}[leftmargin=1.6em]
+\item \textbf{Move step:} if a root exists, choose $\Lambda_{k+1}$ so that $f(\Lambda_{k+1})=0$.
+\item \textbf{Fallback + split (v2):} if no root is bracketed, minimize $f(\Lambda)$ over a grid (optionally refine).
+If the \emph{minimized residual is strictly positive} (exceeds tolerance), trigger a split event at $\Lambda_\star$; if the
+minimized residual is nonpositive, accept an approximate move with slack.
+\end{itemize}
+This is the operational meaning of the split diagnostic used in phenomenological one-wall solvers.
+
+\begin{remark}[Bracketing failure $\neq$ loss of a real move solution]
+\label{rem:bracketing-failure}
+The implementations typically seed the sign-change search at a slightly increased cutoff
+$\Lambda_{\rm lo}=\Lambda_k(1+\varepsilon_\Lambda)$ (e.g.\ $\varepsilon_\Lambda=10^{-9}$) to avoid the trivial fixed point.
+In late-time regimes where the true solution satisfies $\Lambda_{k+1}-\Lambda_k=o(\varepsilon_\Lambda\Lambda_k)$, the
+root can lie inside the \emph{micro-step} interval $[\Lambda_k,\Lambda_{\rm lo}]$ and is therefore missed by the bracketing
+loop (which only evaluates $f$ for $\Lambda\ge\Lambda_{\rm lo}$).
+The subsequent grid-min fallback can then return $\Lambda_{\rm lo}$ with a very small residual, even though a real root
+exists.
+
+In phenomenological implementations this issue appears whenever
+$f(\Lambda_k)<0$ but $f(\Lambda_k(1+\varepsilon_\Lambda))>0$: then a real solution exists inside the excluded micro-step
+interval.
+Therefore a split should be diagnosed by the \emph{positivity of the minimized residual} (equivalently, under local
+convexity, $f(\Lambda_\star)>0$ at the minimizer), not by ``no bracket found'' alone.
+\end{remark}
+
+\begin{remark}[``Two complex solutions'' as the analytic continuation of the move equation]
+In reduced numerical closures, loss of a real move solution is naturally viewed as the emergence of two
+complex-conjugate solutions of an (approximately) quadratic move equation.
+One may therefore use a local diagnostic based on the second derivative \(f''\) in the variable \(\ell=\log\Lambda\).
+
+Indeed, if locally
+\[
+f(\ell)\approx r+\tfrac12 f''(\ell_\star)\,(\ell-\ell_\star)^2,\qquad r:=f(\ell_\star)>0,
+\]
+then the equation $f(\ell)=0$ has no real solutions but has complex solutions
+\[
+\ell=\ell_\star\pm i\sqrt{\frac{2r}{f''(\ell_\star)}}.
+\]
+Thus the split trigger ``$\min f>0$'' (no feasible one-wall move) is naturally equivalent to ``the real root pair has moved
+off the real axis'', and the proxy estimates the imaginary displacement scale. This matches the stated interpretation of
+the split as the point where the one-wall continuation ceases to be physically realizable by a real cutoff move.
+\end{remark}
+
+\subsection{Receiver-wall leakage $Q_{\rm leak}$ and the RG-complement (split ancilla) sector}
+\label{subsec:leak-theory}
+
+\paragraph{Overview.}
+UOM has an information-theoretic ``leakage'' notion (bridge/leak instrument, Definition \texttt{def:eta-bridge-leak}), but
+the leak term relevant for the one-wall \(\Lambda\)-solver is different: it is a \emph{receiver-wall energy complement}
+appearing in the SK/HJ balance.
+In the open-system version of that balance one may include a nonnegative term \(Q_{\rm leak}\ge 0\) so that
+\begin{equation}
+\Delta E_{{\rm geom},k}\ =\ J_{{\rm wall},k}\ +\ Q_{{\rm leak},k},
+\qquad Q_{{\rm leak},k}\ge 0,
+\label{eq:wall-leak-balance}
+\end{equation}
+equivalently \(W^{\rm avail}=W_{\rm RG}+Q_{\rm leak}\) in integrated form.
+
+\paragraph{Interpretation used below.}
+Throughout the rest of the note we interpret \(Q_{{\rm leak},k}\) as the tickwise energy flux into the hidden completion
+sector \(B\), namely \(Q_{{\rm leak},k}=\Delta E_{B,k}\), with \(B\) prepared by the welded history through the quadratic
+SK data.
+The detailed derivation of this statement, the Gaussian recursion for the \(B\)-covariance, and the resulting scalar split
+criterion are given in \cref{sec:resolution}.
+
+\paragraph{Placement of RP/OS diagnostics.}
+UOM's active KR receiver is OS-positive and has vanishing RP block on the welded family, so any nontrivial RP witness must
+be assigned to the analytic-continued completion sector rather than to the healthy receiver itself.
+This placement is the central reason the current receiver-tangent proxy cannot be the fundamental leak law.
+
+\section{Split in UOM: conservation, diagnostics, and dilation picture}
+\label{sec:uom-split}
+
+\subsection{Charge conservation across a split}
+\label{subsec:by-charge-conservation}
+
+UOM app. \texttt{app:energy-split} states: enclose the split region in a small Gaussian pillbox and integrate the
+Hamiltonian constraint. With a static UV boundary, the Brown--York charge change is $\Delta Q_{\rm BY}=0$ and the pillbox
+balance reproduces the wall ODE projected onto $\Sigma_\Lambda$. In short: the split is a redistribution of quasi-local
+energy compatible with global conservation.
+
+\subsection{Split identification diagnostic}
+\label{subsec:split-ident}
+
+UOM treats $\sigma_{\rm eff}\to\sigma_\star$ (equivalently $\Lambda_{4,{\rm R}}\to 0^+$) as a \emph{diagnostic}
+of approach in the one-wall channel; in ``Model A'' the split onset is identified instead by the first crossing of a
+two-wall vs one-wall free-energy difference $\Delta\mathcal F(\Lambda)$ (UOM assumption \texttt{ass:split-ident} and app.
+\texttt{app:split-check}).
+
+Reduced one-wall closures implement an \emph{analogous} idea: if the one-wall balance residual $f(\Lambda)$ cannot be made
+small within tolerance, they interpret the failure as a split and use $\Lambda_\star$ minimizing the residual as the split
+point.
+This is a computational proxy for ``two-channel (two-wall) becomes favorable''.
+
+\subsection{No-cloning resolution via Stinespring dilation}
+\label{subsec:no-cloning}
+
+UOM makes the split mechanism compatible with no-cloning by interpreting it as exposing part of a Stinespring dilation
+ancilla as dynamical brane sector (UOM remark \texttt{rem:uom-main-007}): the two outputs (new dS source and new AdS
+receiver) are correlated and do not carry independent copies of the UV state.
+Operationally, UOM uses an algebraic notion of sub-cutoff equivalence (UOM definition \texttt{def:uom-main-002}) which does
+not require a microscopic factorization.
+
+\section{Split in 2T-LS: parity cocycle and non-splitting obstruction}
+\label{sec:2t-split}
+
+We recall only the pieces needed for the UOM split interpretation.
+
+\subsection{Square-loop and parity cocycle $\omega$}
+\label{subsec:omega}
+
+In 2T-LS, one defines a typed syntax $\mathrm{Proc}_5$ of record-level morphisms with generators
+(\texttt{time}, \texttt{rg}) and a ``square'' constructor $\mathrm{sq}(f;t,u,r)$ with $f\in\{\mathrm{diag},\mathrm{bridge}\}$
+(2T-LS definition \texttt{def:Proc5}). One then defines:
+\begin{itemize}[leftmargin=1.6em]
+\item the canonical ``to-corner'' paths $\mathrm{toCorner}_f(t,u,r)$ and
+\item the \emph{square-loop} $\mathrm{sqLoop}(t,u,r)$ comparing diag vs bridge procedures
+(2T-LS definition \texttt{def:sqloop}).
+\end{itemize}
+The parity cocycle $\omega$ assigns $0$ to diag squares and $1$ to bridge squares, extends additively mod $2$ under
+composition, and is invariant under inverses and casts (2T-LS definition
+\texttt{def:limited-scope-theorem-translation-clean-003}).
+
+The key lemma is that $\omega$ is well-defined and detects the square-loop:
+\begin{equation}
+\omega(\mathrm{sqLoop}(t,u,r))=1\qquad (t,u,r),
+\label{eq:omega-sqloop}
+\end{equation}
+which is 2T-LS lemma \texttt{lem:omega}.
+
+\subsection{$\Ztwo$-cover and non-splitting}
+\label{subsec:nonsplitting}
+
+Define the $\Ztwo$-cover $\pi:\widetilde{\mathcal G}\to\mathcal G$ whose objects are pairs $(r,b)$ with $b\in\Ztwo$
+and whose morphisms $(r,b)\to(s,c)$ are those base morphisms $p:r\to s$ with $c=b+\omega(p)$ mod $2$
+(2T-LS definition \texttt{def:limited-scope-theorem-translation-clean-004}).
+
+\paragraph{Splitting $\Leftrightarrow$ coboundary (2T-LS).}
+2T-LS makes the relationship between splittings and coboundaries explicit (lemma \texttt{lem:split-cob}):
+there exists a splitting if and only if there exists a function $\sigma:\Sys\to\Ztwo$ such that
+$\omega(p)=\sigma(r)+\sigma(s)\pmod 2$ for every morphism $p:r\to s$ in $\mathcal G$.
+Equivalently, an \emph{odd loop} ($\omega(p)=1$ for some loop $p:r\to r$) obstructs splitting (corollary
+\texttt{cor:odd-loop}).
+
+Then:
+\begin{theorem}[Non-splitting of the $\Ztwo$-cover (2T-LS)]
+Under assumptions \textbf{(A1)}--\textbf{(A6)} of the 2T-LS paper, if $\Sys$ is nonempty then the cover does not admit a
+splitting; equivalently, $\omega$ is not a coboundary on $\mathcal G$ (2T-LS theorem \texttt{thm:non-splitting}).
+\end{theorem}
+The obstruction can already be witnessed by the two parallel ``to-corner'' morphisms $p_{\rm diag}$ and $p_{\rm bridge}$
+whose $\omega$-values differ (2T-LS proposition \texttt{prop:two-way-obstruction}).
+
+\paragraph{Interpretation for UOM.}
+At the level of \emph{record-accessible} descriptions, the split is precisely the place where one must choose between two
+continuations that are not homotopic within a purely diagonal (classical) sector; the $\Ztwo$ holonomy is the formal
+encoding of that ``odd'' choice. This matches the proposed identification of the split with the odd cocycle generator.
+
+\section{Coarse-graining classicality reframing (analysis of the proposal)}
+\label{sec:coarse-graining}
+
+This section formalizes (and slightly sharpens) the proposed split reframing given in the prompt.
+
+\subsection{One global accessibility/coarse-graining map}
+\label{subsec:accessibility-map}
+
+Fix a tick/aeon scale index $k$ and define a CPTP \emph{accessibility} (or RG coarse-graining) map
+\begin{equation}
+\cC_k:\cD(\cH_{\rm tot})\to \cD(\cH_{{\rm acc},k}),
+\qquad
+\rho_k^{\rm RG}:=\cC_k(\varrho_k^{\rm tot}).
+\label{eq:accessibility}
+\end{equation}
+The point is that ``accessibility'' is defined \emph{after} applying $\cC_k$; no claim is made that the microscopic
+5D state ever becomes diagonal.
+
+\paragraph{UOM-compatible construction.}
+UOM already provides the natural building blocks for $\cC_k$:
+\begin{enumerate}[leftmargin=2em]
+\item patchwise pointer-aligned QND dephasing,
+\item conditional expectation $\mathbb E_{\rm ptr}$ onto the pointer algebra,
+\item a commutant record map $\cR_k$ with commutative range,
+\item an admissible bridge $\cB_k$ into the receiver code subspace, followed by any ``export'' selection of RG-visible
+observables (e.g.\ DC anomaly coordinates).
+\end{enumerate}
+Composing these yields a single global CPTP map of the form \eqref{eq:accessibility}.
+
+\subsection{Classicality defect at RG scale}
+\label{subsec:classicality-defect}
+
+Fix on $\cH_{{\rm acc},k}$ a preferred ``ledger'' basis (or commutative subalgebra) that defines what ``diagonal'' means.
+Define the \emph{classicality defect} by trace distance to the diagonal set:
+\begin{equation}
+\mathrm{cl}_k
+:=\inf_{\sigma\in\mathrm{Diag}(\cH_{{\rm acc},k})}\norm{\rho_k^{\rm RG}-\sigma}_1.
+\label{eq:cl-def}
+\end{equation}
+This is a legitimate operational requirement: it quantifies how well an observer restricted to the RG-accessible degrees
+of freedom can approximate the state by a classical probability distribution.
+
+\paragraph{A computable surrogate.}
+While \eqref{eq:cl-def} is the clean definition, in practice one often uses
+\begin{equation}
+\mathrm{Off}_k:=\norm{\rho_k^{\rm RG}-\diag(\rho_k^{\rm RG})}_1,
+\label{eq:off-def}
+\end{equation}
+which satisfies $\mathrm{cl}_k\le \mathrm{Off}_k$ by feasibility of $\diag(\rho_k^{\rm RG})$.
+(Note: for the trace norm, $\diag(\rho)$ need not be the unique optimizer in all dimensions; we will only use
+$\mathrm{Off}_k$ as a controlled upper bound and as a diagnostic aligned with dephasing.)
+
+\subsection{End-of-aeon classicality: where the bound is tightest}
+\label{subsec:end-of-aeon}
+
+Under pointer-basis dephasing, off-diagonals are suppressed multiplicatively in the pointer eigenbasis. Combined with
+data-processing (CPTP contractivity of distinguishability), one expects the smallest classicality defect to occur after:
+\begin{enumerate}[leftmargin=2em]
+\item enough QND time has accumulated so that coherence is exponentially small,
+\item patch reconciliation has produced a consistent global record basis, and
+\item the accessibility map $\cC_k$ has ``forgotten'' phases (projects/averages onto commutative output).
+\end{enumerate}
+This motivates defining \emph{diagonal ledger points} at the \emph{end of an aeon}:
+\begin{equation}
+\inf_{\sigma\in\mathrm{Diag}}\norm{\rho_{n,{\rm end}}^{\rm RG}-\sigma}_1\le \varepsilon_n,
+\qquad \varepsilon_n\downarrow 0.
+\label{eq:end-classicality}
+\end{equation}
+It is consistent with UOM that the diagonal approximation is tightest late in the aeon and not necessarily after each tick.
+
+\begin{lemma}[Off-diagonal suppression under pointer dephasing (diagnostic bound)]
+Let $\Phi$ be a pointer-basis QND dephasing channel of the form \eqref{eq:qnd-channel-closed} on a finite-dimensional
+space $\cH_{{\rm acc},k}$ with pointer eigenbasis $\{\lvert i\rangle\}$.
+Let $\Pi_{\rm diag}$ denote the pinching (conditional expectation) onto the diagonal in this basis:
+$\Pi_{\rm diag}(\rho)=\diag(\rho)$.
+Then for $A:=\rho-\Pi_{\rm diag}(\rho)$ (zero diagonal) the matrix elements obey
+\[
+(\Phi(A))_{ij}=e^{-\Gamma_{ij}}A_{ij}\qquad (i\neq j)
+\]
+with $\Gamma_{ij}\ge 0$ determined by the $\Gamma_a^{(k)}$ and pointer gaps.
+Consequently, if $\Gamma_{\min}:=\min_{i\neq j}\Gamma_{ij}$ then
+\begin{equation}
+\norm{\Phi(A)}_F \le e^{-\Gamma_{\min}}\norm{A}_F
+\qquad\Longrightarrow\qquad
+\mathrm{Off}(\Phi(\rho)) \le \sqrt{d}\,e^{-\Gamma_{\min}}\,\mathrm{Off}(\rho),
+\label{eq:off-bound}
+\end{equation}
+where $d=\dim\cH_{{\rm acc},k}$, $\norm{\cdot}_F$ is the Frobenius norm, and $\mathrm{Off}(\rho)=\norm{\rho-\diag(\rho)}_1$.
+\end{lemma}
+
+\begin{remark}[Backflow, leakage, and the ``tail + leak'' corrections]
+If the effective reduced dynamics is not exactly Markovian on the accessible space (e.g.\ due to memory kernels) or if the
+tick map includes a leakage branch $\cL_k$ outside the commutative record/code sector, then
+\eqref{eq:off-bound} is modified schematically to
+\[
+\mathrm{Off}_{k+1}
+\;\lesssim\;
+e^{-\gamma_k}\,\mathrm{Off}_k
+\;+\;(\text{backflow tail})
+\;+\;(\text{leakage}),
+\]
+matching the qualitative structure suggested in the prompt. UOM explicitly controls backflow tails in its source-side
+analysis (e.g.\ App.\ \texttt{app:dS-collapse}, ``Exponentially decaying backflow'') and treats leakage via the instrument
+decomposition in \texttt{def:eta-bridge-leak}.
+\end{remark}
+
+\subsection{Split as an odd lift / Stinespring refactorization}
+\label{subsec:split-as-lift}
+
+Let $\rho_{n,{\rm end}}^{\rm RG}$ denote the end-of-aeon accessible state.
+Model the split by a (generally non-unique) \emph{section} (odd lift)
+\begin{equation}
+\mathrm{sec}_\Pi:\rho_{n,{\rm end}}^{\rm RG}\mapsto x_{n+1,{\rm start}}\in \mathcal S_{\rm SK},
+\label{eq:secpi}
+\end{equation}
+where $\mathcal S_{\rm SK}$ is the space of Schwinger--Keldysh (two-time) states for the next aeon, including a new
+receiver initialized in a pure ``vacuum-like'' code state together with a new source state.
+Operationally, $\mathrm{sec}_\Pi$ is best understood as a Stinespring refactorization/isometry on an enlarged space
+rather than as ``recohering the same subsystem''.
+
+\paragraph{Connection to 2T-LS.}
+The non-uniqueness / parity of the lift is exactly what the 2T-LS cocycle $\omega$ formalizes:
+the choice between diag vs bridge corner procedures has intrinsic one-bit holonomy and cannot be absorbed into a
+single global state label on records. Thus the split is the natural locus of the odd cocycle.
+
+\subsection{Split ancilla $B$ and coherent birth: what drives it in UOM}
+\label{subsec:split-ancilla}
+
+This subsection develops the split proposal from the prompt into a UOM-faithful identification of
+\emph{(i)} what the ``newborn'' sector $B$ is and \emph{(ii)} why it is generically coherent even if the inherited ledger
+sector $A$ is (approximately) classical/QND at the end of the aeon.
+
+\subsubsection*{Subsystem identification: inherited ledger $A$ vs completion sector $B$}
+\label{subsec:AB-identification}
+
+UOM's microscopic $5$D evolution is unitary; CPTP structure only appears after discarding degrees of freedom.
+Therefore the split is \emph{not} a CPTP map acting on the old receiver alone.
+The clean reading of the Stinespring/refactorization picture is:
+\begin{itemize}[leftmargin=1.6em]
+\item $A$ is the \emph{inherited receiver ledger sector}: the commuting family of record variables that constitute the
+end-of-aeon accessible ``classical'' description (e.g.\ a DC anomaly/trace coordinate together with any other commuting
+registers retained by $\cC_{n,{\rm end}}$).
+\item $B$ is the \emph{completion / environment sector} that makes the receiver export isometric before reduction and that,
+at the split, is reclassified as (part of) the \emph{new dS brane Hilbert space} (new source).
+\end{itemize}
+UOM offers two canonical realizations of such a completion sector:
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Receiver Stinespring completion.}
+UOM explicitly enlarges the receiver code by a Weyl compensator $\sigma$ so that the welded export is an isometry, and
+the trace anomaly appears only after tracing out $\sigma$ (UOM \texttt{par:uom-main-040}--\texttt{par:uom-main-044} and
+\texttt{par:uom-main-077}).
+In this reading, $B$ may include $\sigma$ (and allied completion modes such as the brane-local boundary fluctuation
+$\mathcal S$ used in the portal sector).
+\item \textbf{Commutant/purifying partner.}
+On the source side, UOM's intrinsic bath is the commutant/purifying sector: patch marginals can look KMS/thermal because
+the global state is purified across a complementary algebra (UOM \texttt{subsec:source-qnd-commutant} and
+\texttt{subsec:commutant-stinespring}).
+In this reading, $B$ is the canonical partner sector that becomes dynamical as the next aeon's source.
+\end{enumerate}
+Both choices implement the same structural point: $B$ is \emph{not a new knob} but ``whatever sector was previously
+integrated out'' in the reduced description and is fixed by the same $5$D SK saddle.
+
+\subsubsection*{Classical-control split unitary (ledger inheritance) and the coherence target}
+\label{subsec:classical-control-split}
+
+To keep the inherited ledger classical while creating a coherent newborn source, the split must be QND on the ledger:
+\begin{equation}
+U_{\rm split}
+\;=\;
+\sum_i \Pi_i^{(A)}\otimes U_i^{(B)},
+\qquad
+[U_{\rm split},\Pi_i^{(A)}\otimes \mathbf 1_B]=0\quad\forall i,
+\label{eq:split-controlled}
+\end{equation}
+where $\{\Pi_i^{(A)}\}$ are orthogonal projectors onto the end-of-aeon ledger basis (or, equivalently, minimal
+projections of the commutative record algebra).
+If $\rho_A$ is diagonal in this basis (or $\mathrm{cl}_{n,{\rm end}}\ll 1$), then $A$ remains (approximately) diagonal
+after the split and can be viewed as \emph{classical control}.
+
+Recoherence, in the operational sense relevant for UOM's ``recohere $\to$ QND dephase'' picture, is a condition on $B$:
+let $\Pi_\Delta$ denote the pointer/record projection used in the next aeon (band/pointer basis on the newborn source).
+Then the newborn source must satisfy
+\begin{equation}
+\norm{\rho^{(B)}_{\rm start}-\Pi_\Delta(\rho^{(B)}_{\rm start})}_1 \;>\; 0,
+\label{eq:B-coherence-target}
+\end{equation}
+otherwise the next aeon's QND absorber produces no new record increment (and no positive ``entropy production'' in the
+Spohn/QND sense).
+
+\subsubsection*{What UOM fixes about the welded source $\int J\cdot\mathcal O$}
+\label{subsec:welded-source-fixed}
+
+UOM's microscopic receiver action contains an explicit welded source term (UOM \texttt{par:uom-main-077}):
+\begin{equation}
+S_{\rm weld}[J]
+\;=\;
+\int_{\Sigma_{\rm rec}}\! d^4x\,\sqrt{-\gamma}\,\big(J\cdot \mathcal O_{\rm LoG}\big),
+\qquad
+J\equiv J_k\ \text{(tick-localized LoG envelope).}
+\label{eq:Sweld-note}
+\end{equation}
+Two points are essential for the split proposal:
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{$J$ is not arbitrary.}
+In UOM it is a \emph{compiled/welded} image of the source-side payload into the receiver trace channel, regulated by the
+receiver cutoff (UOM \texttt{par:uom-main-080}, and ``welding/regulation'' step in the proof of
+\texttt{lem:ImW-noise}).
+In the portal sector, $J$ is explicitly identified as a LoG projection of the Brown--York trace response
+(UOM \texttt{eq:JLoG-def}): $J_{\rm LoG}=\kappa_{\rm HS}(\mathrm{LoG}\star T^\mu{}_\mu{}^{\rm (BY)})$.
+\item \textbf{$J$ is a classical control parameter at the coarse-grained level.}
+Once the ledger $A$ is diagonal, $J$ is effectively a function of the ledger history (the accepted payload/trace record),
+so the controlled form \eqref{eq:split-controlled} is the natural way to package ``history-dependent preparation'' of the
+newborn sector $B$.
+\end{enumerate}
+
+\subsubsection*{Quadratic generators and the squeeze picture: what UOM provides (and what it implies)}
+\label{subsec:quadratic-generators}
+
+UOM evaluates the \emph{Schwinger--Keldysh influence functional} on the welded source and integrates out bulk+brane fields
+in the Gaussian sector at \emph{quadratic order in $J$} (UOM \texttt{par:uom-main-080}):
+\begin{equation}
+W[J]
+=\frac12\!\int\!\frac{d^4k}{(2\pi)^4}\,
+J(-k)\,\big(G_R(k)+i\,\mathcal N(k)\big)\,J(k)
++O(J^3),
+\label{eq:W-quadratic-note}
+\end{equation}
+with $G_R$ retarded and $\mathcal N\ge 0$ a KMS/noise kernel (hence $\Im W\ge 0$; UOM \texttt{lem:ImW-noise}).
+Equivalently, in Keldysh $(\mathrm{cl},\mathrm{q})$ variables,
+\[
+W[\tau]\;=\;-\langle \tau_{\rm q},G^{\rm R}\tau_{\rm cl}\rangle\;+\;\frac{i}{2}\langle\tau_{\rm q},N_\Lambda\tau_{\rm q}\rangle\;+\;O(\tau^3),
+\]
+as in the proof of UOM \texttt{lem:ImW-noise}.
+
+\paragraph{Implication for split-state preparation.}
+To quadratic order, the completion sector excited by $J$ is \emph{Gaussian}. For bosonic degrees of freedom, any Gaussian
+state can be prepared from a vacuum-like reference by a product of a displacement (linear drive) and a symplectic
+transformation (squeezing/Bogoliubov):
+\begin{equation}
+U_i^{(B)}\;\sim\;D(\alpha_i)\,S(\zeta_i),
+\qquad
+S(\zeta)=\exp\!\Big(\tfrac12\sum_{\alpha,\beta}\zeta_{\alpha\beta}\,b_\alpha^\dagger b_\beta^\dagger-\mathrm{h.c.}\Big),
+\label{eq:gaussian-prep}
+\end{equation}
+with multi-mode creation/annihilation operators $b_\alpha$ on $B$.
+In this representation:
+\begin{itemize}[leftmargin=1.6em]
+\item the \textbf{linear} welded source term \eqref{eq:Sweld-note} supplies the displacement/drive (coherent component),
+and
+\item the \textbf{quadratic} SK kernels in \eqref{eq:W-quadratic-note} fix the Gaussian covariance, hence the effective
+squeeze/Bogoliubov parameters.
+\end{itemize}
+UOM does not presently write the squeeze generator as an operator $H_{B,{\rm sq}}$; rather, it provides the quadratic
+influence data $(G_R,\mathcal N)$ and the regulated on-shell quadratic functionals (Fisher and noise forms) from which
+one can reconstruct an equivalent Gaussian unitary description if one chooses an explicit mode basis on $B$.
+
+\paragraph{Contact with $H^{(i)}_{B,{\rm drive}}$ and $H^{(i)}_{B,{\rm sq}}$.}
+If one insists on a Hamiltonian/stroboscopic representation of the conditional preparation unitaries $U_i^{(B)}$, a
+minimal parametrization consistent with \eqref{eq:gaussian-prep} is
+\begin{equation}
+U_i^{(B)}
+\;\simeq\;
+\mathcal T\exp\!\Big(-i\int\!dt\;\big(H^{(0)}_B(t)+H^{(i)}_{B,{\rm drive}}(t)+H^{(i)}_{B,{\rm sq}}(t)\big)\Big),
+\label{eq:HB-drive-sq}
+\end{equation}
+where the drive is linear in fields/operators and the squeeze part is quadratic in canonical modes:
+\[
+H^{(i)}_{B,{\rm drive}}(t)=\int\!d^3x\;\big(J_i(t,x)\,\mathcal O_B(t,x)+\overline{J_i(t,x)}\,\mathcal O_B^\dagger(t,x)\big),
+\]
+\[
+H^{(i)}_{B,{\rm sq}}(t)
+=\frac{i}{2}\sum_{\alpha,\beta}\Big(\kappa^{(i)}_{\alpha\beta}(t)\,b_\alpha^\dagger b_\beta^\dagger
+-\overline{\kappa^{(i)}_{\alpha\beta}(t)}\,b_\alpha b_\beta\Big)
+\;+\;\sum_{\alpha,\beta}h^{(i)}_{\alpha\beta}(t)\,b_\alpha^\dagger b_\beta.
+\]
+In UOM terms, $J_i$ is supplied by the welded/compiled source history, and the quadratic kernels determining
+$\kappa^{(i)}$ and $h^{(i)}$ are encoded by the same Gaussian SK reduction data that define $W[J]$.
+
+\paragraph{Why analytic continuation naturally produces squeezing.}
+UOM's AdS$\to$dS analytic continuation maps a Euclidean on-shell quadratic functional to an oscillatory Hartle--Hawking
+wavefunctional (UOM \texttt{subsec:analytic-continuation}):
+\[
+\Psi_{\rm HH}[\phi_{(0)}]\propto e^{-S_{\rm os}^{\rm (EAdS)}[\phi_{(0)}]}
+\ \longrightarrow\ 
+e^{\,i S_{\rm eff}^{\rm (dS)}[\phi_{(0)}]}\,.
+\]
+For free/linearized modes this continuation is precisely the mechanism by which an ``in'' vacuum becomes a squeezed
+state with respect to an ``out'' (static-patch/pointer) basis: the quadratic phase encodes the Bogoliubov mixing.
+Thus UOM's existing quadratic (Gaussian) infrastructure already supplies the natural home for the
+``quadratic generators'' in a split-as-recoherence picture.
+
+\section{Phenomenological inputs from existing simulations}
+\label{sec:phenom}
+
+The simulator family is useful here only as a reduced phenomenology of the wall balance. Three lessons are robust and
+theory-relevant.
+
+\subsection{The exhaustion branch is physically meaningful}
+
+The one-wall solver can remain real for all finite ticks and realize exact summability:
+\[
+0<\Theta_k<R_k^{\rm abs}\quad\text{for all finite }k,\qquad
+R_k^{\rm abs}\downarrow 0,\qquad
+\sum_{k\ge 0}\Theta_k=\abs{R_0}.
+\]
+This is the phenomenological evidence for the \emph{exhaustion branch}: split is not guaranteed, and proportional
+or no-leak closures can stay on the solvable one-wall channel indefinitely.
+
+\subsection{Residual positivity is the meaningful split diagnostic}
+
+The theory-level split criterion is the positivity of the minimized discrete residual,
+\[
+\min_{\Lambda\ge \Lambda_k} f_k(\Lambda)>0,
+\]
+not mere failure of numerical bracketing and not the magnitude \(\min |f|\).
+This is exactly the criterion compatible with the wall-balance interpretation of split as loss of a real one-wall
+continuation.
+
+\subsection{The current RP proxy is only a phenomenological probe}
+
+The presently implemented quantity \(Q_{\rm rg}=\chi J_{\rm RP}/\beta_{\rm dS}\) is a useful reduced probe of when a
+one-wall scalar closure becomes hard to realize, but it is not a derived completion-sector leak.
+The key reason is structural: it is built from a receiver-side welded tangent, whereas the healthy KR receiver is
+OS-positive and has vanishing RP block on the welded family.
+The simulations therefore motivate two qualitative conclusions, but do not yet provide the microscopic leak law:
+\begin{enumerate}[leftmargin=2em]
+\item a leak capable of forcing split must be history-conditioned and non-proportional to the shrinking payload;
+\item any RP-based witness must be placed on the analytic-continued completion sector rather than on the healthy
+receiver tangent.
+\end{enumerate}
+
+\IfFileExists{completion_sector_split_model_body.tex}{%
+  \input{completion_sector_split_model_body}%
+}{%
+  \IfFileExists{UOM/completion_sector_split_model_body.tex}{%
+    \input{UOM/completion_sector_split_model_body}%
+  }{%
+    \input{../UOM/completion_sector_split_model_body}%
+  }%
+}
+
+\def\UOMTransportFragmentLoaded{}
+
+\IfFileExists{compressed_log_spectral_selection_note.tex}{%
+  \input{compressed_log_spectral_selection_note}%
+}{%
+  \IfFileExists{UOM/compressed_log_spectral_selection_note.tex}{%
+    \input{UOM/compressed_log_spectral_selection_note}%
+  }{%
+    \input{../UOM/compressed_log_spectral_selection_note}%
+  }%
+}
+
+\IfFileExists{odd_selector_note.tex}{%
+  \input{odd_selector_note}%
+}{%
+  \IfFileExists{UOM/odd_selector_note.tex}{%
+    \input{UOM/odd_selector_note}%
+  }{%
+    \input{../UOM/odd_selector_note}%
+  }%
+}
+
+\IfFileExists{canonical_odd_interface_note.tex}{%
+  \input{canonical_odd_interface_note}%
+}{%
+  \IfFileExists{UOM/canonical_odd_interface_note.tex}{%
+    \input{UOM/canonical_odd_interface_note}%
+  }{%
+    \input{../UOM/canonical_odd_interface_note}%
+  }%
+}
+
+\IfFileExists{active_response_transport_program_note.tex}{%
+  \input{active_response_transport_program_note}%
+}{%
+  \IfFileExists{UOM/active_response_transport_program_note.tex}{%
+    \input{UOM/active_response_transport_program_note}%
+  }{%
+    \input{../UOM/active_response_transport_program_note}%
+  }%
+}
+
+\appendix
+\section{Appendix: BY kernel discretization and scaling with $\Delta I$}
+\label{app:by-kernel}
+
+The discretized BY kernel constructs a welded time spectrum $\phi(u)$ and a welded spatial spectrum on $S^3$
+harmonics; it then chooses an effective amplitude $A_{\rm eff}$ so that
+$A_{\rm eff}^2\propto \Delta I/G(s_t,s_x;\Lambda)$ where $G$ is a (no-amplitude) throughput. The integrated BY penalty is
+quadratic in the signal and thus linear in $\Delta I$.
+This is the phenomenological origin of the manuscript factorization $\Theta_k=K(\bar\Lambda_k)\Delta I_k$.
+
+\section{Appendix: Minimal bibliography}
+\label{app:biblio}
+
+\begin{thebibliography}{99}
+\bibitem{Stinespring1955}
+W.\ F.\ Stinespring,
+``Positive Functions on $C^\ast$-Algebras,''
+\emph{Proc.\ Amer.\ Math.\ Soc.}\ \textbf{6} (1955).
+DOI: 10.1090/S0002-9939-1955-0069403-4.
+
+\bibitem{Lindblad1976}
+G.\ Lindblad,
+``On the generators of quantum dynamical semigroups,''
+\emph{Commun.\ Math.\ Phys.}\ \textbf{48} (1976).
+DOI: 10.1007/BF01608499.
+
+\bibitem{GKS1976}
+V.\ Gorini, A.\ Kossakowski, and E.\ C.\ G.\ Sudarshan,
+``Completely positive dynamical semigroups of $N$-level systems,''
+\emph{J.\ Math.\ Phys.}\ \textbf{17} (1976).
+DOI: 10.1063/1.522979.
+
+\bibitem{Spohn1978}
+H.\ Spohn,
+``Entropy production for quantum dynamical semigroups,''
+\emph{J.\ Math.\ Phys.}\ \textbf{19} (1978).
+DOI: 10.1063/1.523789.
+
+\bibitem{BrownYork1993}
+J.\ D.\ Brown and J.\ W.\ York,
+``Quasilocal energy and conserved charges derived from the gravitational action,''
+\emph{Phys.\ Rev.\ D}\ \textbf{47} (1993).
+DOI: 10.1103/PhysRevD.47.1407.
+
+\bibitem{Bhatia1997}
+R.\ Bhatia,
+\emph{Matrix Analysis},
+Springer (1997).
+DOI: 10.1007/978-1-4612-0653-8.
+
+\bibitem{PGWP2006}
+D.\ P\'erez-Garc\'{\i}a, M.\ M.\ Wolf, D.\ Petz, and M.\ B.\ Ruskai,
+``Contractivity of positive and trace-preserving maps under $L_p$ norms,''
+\emph{J.\ Math.\ Phys.}\ \textbf{47} (2006).
+DOI: 10.1063/1.2218675.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,178 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      8087,        169]
+NotebookOptionsPosition[      5719,        134]
+NotebookOutlinePosition[      6033,        148]
+CellTagsIndexPosition[      5990,        145]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["UOM Contract Traceability", "Title",ExpressionUUID->"2950b1b5-4848-4848-9ef9-38e7be5a43dd"],
+
+Cell["\<\
+This notebook mirrors the current traceability audit for the WL contract \
+ingredients used in the welded-boundary and split-faithful completion lanes. \
+\
+\>", "Text",ExpressionUUID->"da3cebe8-6426-42c6-b88e-089f8aa45a09"],
+
+Cell["Goal", "Section",ExpressionUUID->"8882fc4b-dfc1-4271-9852-1ef64d4b5608"],
+
+Cell["Map each current contract ingredient back to: ", "Text",ExpressionUUID->"3e49b7c9-b822-406b-9ba7-a80823b5f034"],
+
+Cell[TextData[Cell[BoxData[Cell["Main/appendix_main.tex",
+  Background->None,ExpressionUUID->
+  "2013c04c-b6f3-46a4-8fba-f04d3b3d84ee"]], \
+"InlineCode",ExpressionUUID->"dfb87b6a-f59b-46c7-b2b1-d63983ff4dbc"]], "Item",\
+ExpressionUUID->"9d91dc87-0194-453e-b3e4-ae12ec46a435"],
+
+Cell["the live UOM notes", "Item",ExpressionUUID->"674c88b2-4100-426f-aed3-40bcc7c75f36"],
+
+Cell["the 2T-LS assumption pattern", "Item",ExpressionUUID->"53bda7d3-2300-4920-a616-b26786ce933a"],
+
+Cell["while classifying whether the ingredient is: ", "Text",ExpressionUUID->"dc6a2ce5-04a9-4865-bd52-fc7cc187a379"],
+
+Cell["already theorem-backed,", "Item",ExpressionUUID->"3ab46797-49ef-4480-8ff7-9f39952a95d1"],
+
+Cell["only partially theorem-backed,", "Item",ExpressionUUID->"af3add0c-7cde-487f-a6af-f3ea167e6feb"],
+
+Cell["assumption-backed,", "Item",ExpressionUUID->"f25e65f2-8543-45d1-8fe5-fd3e1ccac4be"],
+
+Cell["and whether it is a good compact-interface candidate.", "Item",ExpressionUUID->"826a58c8-7dd5-4e1a-a8b4-a76215e10b43"],
+
+Cell["Current headline", "Section",ExpressionUUID->"e8d1457c-2e83-4de0-97d1-002687f0e8f7"],
+
+Cell[TextData[{
+ "Boundary ingredients traced: ",
+ Cell[BoxData[Cell["5",
+   Background->None,ExpressionUUID->"94473287-608f-46d0-947e-ee8c48d86cd9"]], 
+  "InlineCode",ExpressionUUID->"c95f7862-043e-4a3b-9c71-ecdf70a660ee"]
+}], "Item",ExpressionUUID->"39a2438d-3cb2-4cca-b4fd-aa0ca92880c8"],
+
+Cell[TextData[{
+ "Completion-specific additions traced: ",
+ Cell[BoxData[Cell["2",
+   Background->None,ExpressionUUID->"c1cb21df-5985-46a0-b5db-0765778f57b9"]], 
+  "InlineCode",ExpressionUUID->"34c2dab5-dfd2-4bb3-b9d8-ce4a683860d3"]
+}], "Item",ExpressionUUID->"8e58526e-1d34-4786-b791-c82d1ea7540f"],
+
+Cell["\<\
+Boundary ingredients are now theorem-backed or partially theorem-backed in \
+the live notes.\
+\>", "Item",ExpressionUUID->"93e61a27-04f3-4e50-ae07-76e96110fe9c"],
+
+Cell["\<\
+Completion additions remain assumption-backed/contract-level.\
+\>", "Item",ExpressionUUID->"41ddcd0d-f49a-40f5-8796-21014806f6c4"],
+
+Cell["LS pattern being used as a guide", "Section",ExpressionUUID->"cf41084d-49db-4445-9582-96a51a8555c6"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["A1",
+   Background->None,ExpressionUUID->"003e2814-07d0-4da4-8263-282abf8949e4"]], 
+  "InlineCode",ExpressionUUID->"3efd8ad8-82c3-4732-8dbc-ea2c4e15a7ac"],
+ " core SK data, ",
+ Cell[BoxData[Cell["A2",
+   Background->None,ExpressionUUID->"f2a547d7-4625-4429-839b-027afd343ec6"]], 
+  "InlineCode",ExpressionUUID->"91221782-5b02-4d35-b15d-e0423c5bbcaf"],
+ " two arrows, ",
+ Cell[BoxData[Cell["A3",
+   Background->None,ExpressionUUID->"5c346ae0-ff49-43af-815e-1776edd64fc9"]], 
+  "InlineCode",ExpressionUUID->"b54f54fc-f288-44ce-aa20-d83823d1a7ab"],
+ " strict diagonalization, ",
+ Cell[BoxData[Cell["A4",
+   Background->None,ExpressionUUID->"dd7d446e-10d2-4641-bcc4-fede6c599db2"]], 
+  "InlineCode",ExpressionUUID->"9f311887-c876-4ce9-bce4-f637652febd2"],
+ " reachability, ",
+ Cell[BoxData[Cell["A5",
+   Background->None,ExpressionUUID->"e11c8702-ad36-47f0-9307-54575b602928"]], 
+  "InlineCode",ExpressionUUID->"ecdd196a-7f0a-4623-8859-9856713fa21b"],
+ " no mixed anomaly, ",
+ Cell[BoxData[Cell["A6",
+   Background->None,ExpressionUUID->"78af21a8-7103-4570-ad8d-6894124d2d4c"]], 
+  "InlineCode",ExpressionUUID->"2c6534fe-5f44-4def-a7e2-565a82e14dc0"],
+ " record reflection, ",
+ Cell[BoxData[Cell["A7",
+   Background->None,ExpressionUUID->"0c536446-68f9-404f-af4b-3a1e71a19a95"]], 
+  "InlineCode",ExpressionUUID->"bf11e1a0-7376-4dfd-8ed2-b5a60204dbbc"],
+ " detector/analytic bridge."
+}], "Text",ExpressionUUID->"a13049c0-94ad-4b1f-bf4d-ea702ea46cb1"],
+
+Cell["\<\
+The practical lesson is: keep the interface minimal first, then put \
+realization-specific physics into a separate bridge layer. \
+\>", "Text",ExpressionUUID->"78cb8f2d-e493-4048-8ef0-7f20153f3186"],
+
+Cell["Report artifact", "Section",ExpressionUUID->"b24b16aa-1920-45cd-b866-c9649b00e78f"],
+
+Cell["See: ", "Text",ExpressionUUID->"f0c5f354-c555-4003-8ffb-f119bae34be4"],
+
+Cell[TextData[Cell[BoxData[Cell["Main/Mathematica/Reports/\
+UOMContractTraceability.md",
+  Background->None,ExpressionUUID->
+  "8b043e32-b2a8-4b8b-b7fb-de73da9edfb9"]], \
+"InlineCode",ExpressionUUID->"301770c3-33e6-4bd1-9404-a26f3f662b21"]], "Item",\
+ExpressionUUID->"c750ac84-a132-462c-a262-196cfd007c62"],
+
+Cell[TextData[Cell[BoxData[Cell["\<\
+Main/Mathematica/Reports/CosmologyInterfaceResearch_Report.json\
+\>",
+  Background->None,ExpressionUUID->
+  "8c5fcb63-147f-40aa-acd1-b112b2cfae43"]], \
+"InlineCode",ExpressionUUID->"4df9a209-8112-4f62-88f6-ecc7f8da94cd"]], "Item",\
+ExpressionUUID->"a53b2fd2-f816-4ce4-a426-89481a74e114"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"bacb05d1-7806-4062-9342-ddc6597ae3bd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 97, 0, 70, "Title",ExpressionUUID->"2950b1b5-4848-4848-9ef9-38e7be5a43dd"],
+Cell[654, 22, 233, 4, 70, "Text",ExpressionUUID->"da3cebe8-6426-42c6-b88e-089f8aa45a09"],
+Cell[890, 28, 78, 0, 70, "Section",ExpressionUUID->"8882fc4b-dfc1-4271-9852-1ef64d4b5608"],
+Cell[971, 30, 117, 0, 70, "Text",ExpressionUUID->"3e49b7c9-b822-406b-9ba7-a80823b5f034"],
+Cell[1091, 32, 275, 4, 70, "Item",ExpressionUUID->"9d91dc87-0194-453e-b3e4-ae12ec46a435"],
+Cell[1369, 38, 89, 0, 70, "Item",ExpressionUUID->"674c88b2-4100-426f-aed3-40bcc7c75f36"],
+Cell[1461, 40, 99, 0, 70, "Item",ExpressionUUID->"53bda7d3-2300-4920-a616-b26786ce933a"],
+Cell[1563, 42, 116, 0, 70, "Text",ExpressionUUID->"dc6a2ce5-04a9-4865-bd52-fc7cc187a379"],
+Cell[1682, 44, 94, 0, 70, "Item",ExpressionUUID->"3ab46797-49ef-4480-8ff7-9f39952a95d1"],
+Cell[1779, 46, 101, 0, 70, "Item",ExpressionUUID->"af3add0c-7cde-487f-a6af-f3ea167e6feb"],
+Cell[1883, 48, 89, 0, 70, "Item",ExpressionUUID->"f25e65f2-8543-45d1-8fe5-fd3e1ccac4be"],
+Cell[1975, 50, 124, 0, 70, "Item",ExpressionUUID->"826a58c8-7dd5-4e1a-a8b4-a76215e10b43"],
+Cell[2102, 52, 90, 0, 70, "Section",ExpressionUUID->"e8d1457c-2e83-4de0-97d1-002687f0e8f7"],
+Cell[2195, 54, 290, 5, 70, "Item",ExpressionUUID->"39a2438d-3cb2-4cca-b4fd-aa0ca92880c8"],
+Cell[2488, 61, 299, 5, 70, "Item",ExpressionUUID->"8e58526e-1d34-4786-b791-c82d1ea7540f"],
+Cell[2790, 68, 171, 3, 70, "Item",ExpressionUUID->"93e61a27-04f3-4e50-ae07-76e96110fe9c"],
+Cell[2964, 73, 140, 2, 70, "Item",ExpressionUUID->"41ddcd0d-f49a-40f5-8796-21014806f6c4"],
+Cell[3107, 77, 106, 0, 70, "Section",ExpressionUUID->"cf41084d-49db-4445-9582-96a51a8555c6"],
+Cell[3216, 79, 1481, 29, 70, "Text",ExpressionUUID->"a13049c0-94ad-4b1f-bf4d-ea702ea46cb1"],
+Cell[4700, 110, 208, 3, 70, "Text",ExpressionUUID->"78cb8f2d-e493-4048-8ef0-7f20153f3186"],
+Cell[4911, 115, 89, 0, 70, "Section",ExpressionUUID->"b24b16aa-1920-45cd-b866-c9649b00e78f"],
+Cell[5003, 117, 76, 0, 70, "Text",ExpressionUUID->"f0c5f354-c555-4003-8ffb-f119bae34be4"],
+Cell[5082, 119, 306, 5, 70, "Item",ExpressionUUID->"c750ac84-a132-462c-a262-196cfd007c62"],
+Cell[5391, 126, 324, 6, 70, "Item",ExpressionUUID->"a53b2fd2-f816-4ce4-a426-89481a74e114"]
+}
+]
+*)
+
+(* End of internal cache information *)

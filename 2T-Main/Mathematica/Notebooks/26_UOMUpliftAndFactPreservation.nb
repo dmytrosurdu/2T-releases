@@ -1,0 +1,112 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      4312,        103]
+NotebookOptionsPosition[      3129,         81]
+NotebookOutlinePosition[      3443,         95]
+CellTagsIndexPosition[      3400,         92]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["UOM Uplift And Fact Preservation", "Title",ExpressionUUID->"1d9e7047-f3b1-4b07-93ae-d184245a0e1c"],
+
+Cell["\<\
+This notebook grounds the accepted-channel contract beneath the welded-safe \
+theorem. \
+\>", "Text",ExpressionUUID->"4d051887-2249-4944-80e4-f0b33bd7db94"],
+
+Cell["Targets", "Section",ExpressionUUID->"1b48b5e4-3c0c-4452-b6ed-a4192f726580"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-channel-factorization",
+  Background->None,ExpressionUUID->
+  "3253c293-46f0-40d5-883b-16bd94b0f2ce"]], \
+"InlineCode",ExpressionUUID->"de983199-014f-4027-9074-a6ed16180e3f"]], "Item",\
+ExpressionUUID->"982f9aa8-c6a1-4f0c-85a4-591dbca501d2"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-uplift-isometry-surrogate",
+  Background->None,ExpressionUUID->
+  "b25983e8-3df5-429a-9df6-0451ed8f7582"]], \
+"InlineCode",ExpressionUUID->"598d2032-c6d2-40b9-bf9c-971b1b159591"]], "Item",\
+ExpressionUUID->"f66926f9-a0bc-4e44-8e29-cd12ad9a01fc"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-app-cptp-surrogate",
+  Background->None,ExpressionUUID->
+  "5d2e7075-e24d-468c-8d4d-f1d99b38dbda"]], \
+"InlineCode",ExpressionUUID->"da5f9b18-9392-4dd2-af72-0977ca7dfd87"]], "Item",\
+ExpressionUUID->"4b1b84db-57ce-4f0d-abb3-e732c4e6d4cd"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-accepted-record-preservation",
+  Background->None,ExpressionUUID->
+  "e56d61c3-1ef3-42db-8295-a17fe08bf1d4"]], \
+"InlineCode",ExpressionUUID->"3ce1cc21-d43a-4f50-ad67-87a839f76f42"]], "Item",\
+ExpressionUUID->"6f36825e-4695-4b47-8c80-4faa35cc4b83"],
+
+Cell["Evaluate", "Section",ExpressionUUID->"221e5ec1-f935-4237-9b55-6af631922122"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"audit", "=", 
+   RowBox[{
+   "MainProof`UOMAcceptedChannel`AuditUOMAcceptedChannel", "[", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"<|", 
+  RowBox[{
+   RowBox[{"\"\<Claims\>\"", "->", 
+    RowBox[{"audit", "[", "\"\<Claims\>\"", "]"}]}], ",", 
+   RowBox[{"\"\<RecordBreakingWitness\>\"", "->", 
+    RowBox[{"audit", "[", "\"\<RecordBreakingWitness\>\"", "]"}]}]}], 
+  "|>"}]}], "Input",ExpressionUUID->"ebf1c3c4-626a-4117-a678-0168b3720bfc"],
+
+Cell["Context", "Section",ExpressionUUID->"16f6f220-62cc-47d3-82d5-4fd2a4664d75"],
+
+Cell["\<\
+The notebook keeps the exact factorization contract and the accepted-record \
+preservation witness together so the welded-safe statement no longer rests \
+only on imported prose.\
+\>", "Text",ExpressionUUID->"4656a5e8-4f7a-4ee7-8f5d-4d1115d3a43e"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"bacb05d1-7806-4062-9342-ddc6597ae3bd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 104, 0, 70, "Title",ExpressionUUID->"1d9e7047-f3b1-4b07-93ae-d184245a0e1c"],
+Cell[661, 22, 166, 3, 70, "Text",ExpressionUUID->"4d051887-2249-4944-80e4-f0b33bd7db94"],
+Cell[830, 27, 81, 0, 70, "Section",ExpressionUUID->"1b48b5e4-3c0c-4452-b6ed-a4192f726580"],
+Cell[914, 29, 283, 4, 70, "Item",ExpressionUUID->"982f9aa8-c6a1-4f0c-85a4-591dbca501d2"],
+Cell[1200, 35, 287, 4, 70, "Item",ExpressionUUID->"f66926f9-a0bc-4e44-8e29-cd12ad9a01fc"],
+Cell[1490, 41, 280, 4, 70, "Item",ExpressionUUID->"4b1b84db-57ce-4f0d-abb3-e732c4e6d4cd"],
+Cell[1773, 47, 290, 4, 70, "Item",ExpressionUUID->"6f36825e-4695-4b47-8c80-4faa35cc4b83"],
+Cell[2066, 53, 82, 0, 70, "Section",ExpressionUUID->"221e5ec1-f935-4237-9b55-6af631922122"],
+Cell[2151, 55, 630, 16, 70, "Input",ExpressionUUID->"ebf1c3c4-626a-4117-a678-0168b3720bfc"],
+Cell[2784, 73, 81, 0, 70, "Section",ExpressionUUID->"16f6f220-62cc-47d3-82d5-4fd2a4664d75"],
+Cell[2868, 75, 257, 4, 70, "Text",ExpressionUUID->"4656a5e8-4f7a-4ee7-8f5d-4d1115d3a43e"]
+}
+]
+*)
+
+(* End of internal cache information *)

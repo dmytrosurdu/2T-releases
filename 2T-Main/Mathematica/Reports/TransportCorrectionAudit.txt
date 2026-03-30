@@ -1,0 +1,22 @@
+Repo-wide hygiene audit for the quotient-scalar correction:
+
+1. Corrected stale theorem vocabulary
+- Main/appendix_main.tex:
+  - "canonical odd Hamiltonian representative" -> "canonical odd representative"
+  - "canonical Hamiltonian representative" -> "canonical odd representative"
+- UOM/summability_split_note.tex:
+  - "canonical odd Hamiltonian representative" -> "canonical odd representative"
+
+2. Added explicit correction remarks
+- UOM/active_response_transport_program_note.tex:
+  - added a "false stronger form and normalized special case" remark after quotient constancy
+- UOM/canonical_odd_interface_note.tex:
+  - added a "correct scalar form of representative comparisons" remark after the weak export theorem
+
+3. General rule now enforced in prose
+- General case: representative-search and affine-class scalar comparisons are stated at the descended rho^dom level on E^-/A^- or on the affine class.
+- Normalized special case: chi-form statements are used only when the normalization is explicit, e.g. nu = 1 or chi = nu^-1 rho^dom is carried through the scalar equation.
+
+4. Compile parenting
+- Main/main_theorem.tex compiled successfully.
+- UOM/active_response_transport_program_note.tex and UOM/canonical_odd_interface_note.tex are section fragments; their parent compile is UOM/summability_split_note.tex, which compiled successfully.

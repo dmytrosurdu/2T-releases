@@ -1,0 +1,415 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{xr-hyper}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\newcommand{\Ztwo}{\mathbb Z_2}
+
+\externaldocument[red-]{source_internal_control_factorization_note}
+\externaldocument[stack-]{odd_characterization_transport_stack_note}
+\externaldocument[splitlift-]{split_controlled_completion_lift_note}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=blue!60!black,
+  urlcolor=blue!60!black
+}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{assumption}[definition]{Assumption}
+\newtheorem{corollary}[definition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+
+\title{Delayed Odd-Control and Next-Receiver Readout Note}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+This note isolates the delayed odd/control datum remaining after current accepted-record reduction,
+defines the corresponding delayed quotient and selected line, constructs the delayed realization map
+to the next-step reduced welded LoG line, and packages selected-line delayed response sufficiency
+with an explicit imported nondegeneracy clause.
+
+\section{Current Reduced Receiver Closure}
+
+\begin{proposition}[Current reduced receiver closure with delayed odd residue]
+\label{prop:delay-current-closure}
+Fix an accepted welded branch and an accepted tick \(k\).
+Assume the accepted-record reduction theorem \cref*{red-thm:accepted-record-reduction}.
+Then the current theorem-visible receiver object is closed under accepted-record reduction:
+\begin{enumerate}[leftmargin=2em,label=(\roman*)]
+\item equality of accepted-record history up to the current accepted tick fixes every current
+  theorem-visible reduced receiver datum;
+\item any remaining realization dependence can live only outside the current theorem-visible reduced
+  receiver object, namely in the off-diagonal complement or in the leakage/slack branch;
+\item consequently, any delayed odd/control datum relevant to the next receiver is not part of the
+  current theorem-visible reduced receiver data.
+\end{enumerate}
+In particular, residual odd completion/source data are \emph{not} part of the current
+theorem-visible reduced receiver data.
+\end{proposition}
+
+\begin{proof}
+Item \textnormal{(i)} is exactly item \textnormal{(R1)} of
+\cref*{red-thm:accepted-record-reduction}.
+Item \textnormal{(ii)} is item \textnormal{(R4)} of \cref*{red-thm:accepted-record-reduction}.
+Then item \textnormal{(iii)} follows: once the current theorem-visible reduced receiver object is
+fixed, any odd/control datum relevant to the next receiver can only enter as delayed downstream data
+rather than as part of the current reduced receiver semantics.
+\end{proof}
+
+\begin{remark}[Current versus delayed visibility]
+\label{rem:delay-zigzag}
+By \cref{prop:delay-current-closure}, the current accepted-record history determines the current
+theorem-visible reduced receiver object. Residual odd completion/source data therefore first appear,
+at the theorem-visible level considered here, through the delayed next-receiver readout.
+\end{remark}
+
+\section{Delayed Quotient and Selected Line}
+
+\begin{definition}[Delayed odd-control quotient]
+\label{def:delayed-odd-class}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Let
+\[
+\mathcal S^{\mathrm{odd}}_{k\to k+1}
+\]
+be the real vector space of residual odd completion/source data at tick \(k\) whose next-step
+incarnations are admissible welded odd trace-channel sources in the sense of
+\cref{stack-def:witness-seam-realization}.
+Let
+\[
+\mathcal T^{\mathrm{inv,cur}}_k
+\subset
+\mathcal S^{\mathrm{odd}}_{k\to k+1}
+\]
+be the linear subspace of realization differences invisible to every current reduced receiver datum
+in the sense of \cref*{red-def:reduced-datum,red-thm:accepted-record-reduction}.
+Define the \emph{delayed odd-control quotient} by
+\[
+\tau^{\mathrm{comp,delay}}_k
+:=
+\mathcal S^{\mathrm{odd}}_{k\to k+1}\big/\mathcal T^{\mathrm{inv,cur}}_k.
+\]
+Elements are written
+\(
+[\tau]^{\mathrm{delay}}_k
+\).
+\end{definition}
+
+\begin{definition}[Delayed selected generator and delayed selected line]
+\label{def:delayed-selected-line}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume a detector-factorized witness-indexed seam realization at \(\Lambda_{k+1}\) in the sense of
+\cref{stack-def:detector-factorized-seam}.
+Define the \emph{delayed selected generator} by the delayed class of the unit welded odd source:
+\[
+\widehat\ell^{\mathrm{delay}}_k
+:=
+[\tau^{\mathrm{unit}}_{\Lambda_{k+1}}]^{\mathrm{delay}}_k
+\in
+\tau^{\mathrm{comp,delay}}_k.
+\]
+The associated \emph{delayed selected line} is
+\[
+\widehat L^{\mathrm{sel,delay}}_k
+:=
+\mathbb R\,\widehat\ell^{\mathrm{delay}}_k
+\subset
+\tau^{\mathrm{comp,delay}}_k.
+\]
+\end{definition}
+
+\begin{theorem}[Detector-factorized seam sources generate a canonical delayed selected line]
+\label{thm:delayed-selected-line}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume a detector-factorized witness-indexed seam realization at \(\Lambda_{k+1}\) in the sense of
+\cref{stack-def:detector-factorized-seam}.
+Then every witness-indexed delayed class lies on the delayed selected line:
+\[
+\big[\tau^{f,y}_{\Lambda_{k+1}}\big]^{\mathrm{delay}}_k
+=
+\sigma_{\mathrm{fill}}(f)\,
+\overline{\mathrm{obs}}(y)\,
+\widehat\ell^{\mathrm{delay}}_k
+\qquad
+\forall f,\forall y.
+\]
+In particular, the delayed seam packet is one-dimensional after passing to the delayed quotient,
+with canonical generator \(\widehat\ell^{\mathrm{delay}}_k\).
+\end{theorem}
+
+\begin{proof}
+The detector-factorized seam identity of \cref{stack-def:detector-factorized-seam} gives
+\[
+\tau^{f,y}_{\Lambda_{k+1}}
+=
+\sigma_{\mathrm{fill}}(f)\,
+\overline{\mathrm{obs}}(y)\,
+\tau^{\mathrm{unit}}_{\Lambda_{k+1}}.
+\]
+Passing to the delayed quotient preserves the same linear relation, hence
+\[
+\big[\tau^{f,y}_{\Lambda_{k+1}}\big]^{\mathrm{delay}}_k
+=
+\sigma_{\mathrm{fill}}(f)\,
+\overline{\mathrm{obs}}(y)\,
+\big[\tau^{\mathrm{unit}}_{\Lambda_{k+1}}\big]^{\mathrm{delay}}_k.
+\]
+By \cref{def:delayed-selected-line}, the last class is exactly
+\(
+\widehat\ell^{\mathrm{delay}}_k
+\).
+\end{proof}
+
+\section{Delayed Realization}
+
+\begin{definition}[Delayed realization map on the selected line]
+\label{def:delayed-response-map}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume the hypotheses of \cref{thm:delayed-selected-line} and, in addition, the hypotheses of
+\cref{stack-thm:branchwise-seam-witness} on a connected accepted-branch segment containing
+\(\Lambda_{k+1}\).
+Define the \emph{delayed realization map} on the delayed selected line by
+\[
+\mathfrak R^{\mathrm{delay}}_{k\to k+1}
+:
+\widehat L^{\mathrm{sel,delay}}_k
+\longrightarrow
+\mathbb R\,u^{\mathrm{LoG}}_{\Lambda_{k+1}},
+\qquad
+\mathfrak R^{\mathrm{delay}}_{k\to k+1}\!\big(a\,\widehat\ell^{\mathrm{delay}}_k\big)
+:=
+a\,c_{\Lambda_{k+1}}\,u^{\mathrm{LoG}}_{\Lambda_{k+1}},
+\]
+where \(c_{\Lambda_{k+1}}\) is the normalized seam coefficient of
+\cref{stack-thm:branchwise-seam-witness}.
+Equivalently, its reduced welded-image form is
+\[
+\mathsf W^{\mathrm{delay}}_{k\to k+1}
+:
+\widehat L^{\mathrm{sel,delay}}_k
+\longrightarrow
+\mathbb R\,P^{\mathrm{LoG}}_{-,\Lambda_{k+1}},
+\qquad
+\mathsf W^{\mathrm{delay}}_{k\to k+1}\!\big(a\,\widehat\ell^{\mathrm{delay}}_k\big)
+:=
+a\,c_{\Lambda_{k+1}}\,P^{\mathrm{LoG}}_{-,\Lambda_{k+1}}.
+\]
+\end{definition}
+
+\begin{proposition}[Delayed realization formula on witness-indexed representatives]
+\label{prop:delayed-realization-formula}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume:
+\begin{enumerate}[leftmargin=2em,label=(\alph*)]
+\item the hypotheses of \cref{thm:delayed-selected-line};
+\item the hypotheses of \cref{stack-thm:branchwise-seam-witness} on a connected
+  accepted-branch segment containing \(\Lambda_{k+1}\);
+\item \cref{stack-prop:reduced-welded-ambiguity-trivial} at the next receiver step.
+\end{enumerate}
+Then for every filler tag \(f\) and witness \(y\),
+\[
+\mathsf W^{\mathrm{red}}_{\Lambda_{k+1}}\!\big(J^{f,y}_{\Lambda_{k+1}}\big)
+=
+\sigma_{\mathrm{fill}}(f)\,
+\overline{\mathrm{obs}}(y)\,
+c_{\Lambda_{k+1}}\,
+P^{\mathrm{LoG}}_{-,\Lambda_{k+1}}.
+\]
+Equivalently,
+\[
+\mathfrak R^{\mathrm{delay}}_{k\to k+1}\!\big(
+\big[\tau^{f,y}_{\Lambda_{k+1}}\big]^{\mathrm{delay}}_k
+\big)
+=
+\sigma_{\mathrm{fill}}(f)\,
+\overline{\mathrm{obs}}(y)\,
+c_{\Lambda_{k+1}}\,
+u^{\mathrm{LoG}}_{\Lambda_{k+1}}.
+\]
+In particular, the delayed realization depends only on the scalar coefficient of the delayed class
+on the selected line and is therefore well defined.
+\end{proposition}
+
+\begin{proof}
+By item \textnormal{(1)} of \cref{stack-thm:branchwise-seam-witness},
+\[
+\rho^{\mathrm{dom}}_{\Lambda_{k+1}}\!\big(J^{f,y}_{\Lambda_{k+1}}\big)
+=
+\sigma_{\mathrm{fill}}(f)\,
+c_{\Lambda_{k+1}}\,
+\overline{\mathrm{obs}}(y).
+\]
+By \cref{stack-prop:reduced-welded-ambiguity-trivial},
+\[
+\mathsf W^{\mathrm{red}}_{\Lambda_{k+1}}(F)
+=
+\rho^{\mathrm{dom}}_{\Lambda_{k+1}}(F)\,P^{\mathrm{LoG}}_{-,\Lambda_{k+1}}.
+\]
+Applying this to \(F=J^{f,y}_{\Lambda_{k+1}}\) gives the first displayed formula.
+The line-valued formula is the same identity written using the canonical generator
+\(
+u^{\mathrm{LoG}}_{\Lambda_{k+1}}
+\)
+of the one-dimensional compressed welded channel given by
+\cref{stack-thm:finite-cutoff-canonical-odd-spectral-selection}.
+
+Finally, by \cref{thm:delayed-selected-line},
+\[
+\big[\tau^{f,y}_{\Lambda_{k+1}}\big]^{\mathrm{delay}}_k
+=
+\sigma_{\mathrm{fill}}(f)\,
+\overline{\mathrm{obs}}(y)\,
+\widehat\ell^{\mathrm{delay}}_k,
+\]
+so the delayed realization depends only on the scalar multiplying the selected generator.
+\end{proof}
+
+\begin{remark}[Why the codomain is next-receiver and reduced]
+\label{rem:delay-codomain}
+By \cref{stack-thm:finite-cutoff-canonical-odd-spectral-selection}, the compressed welded LoG
+channel at \(\Lambda_{k+1}\) is one-dimensional with canonical generator
+\(u^{\mathrm{LoG}}_{\Lambda_{k+1}}\) and canonical projector
+\(P^{\mathrm{LoG}}_{-,\Lambda_{k+1}}\).
+By \cref{stack-prop:reduced-welded-ambiguity-trivial}, the next-step welded readout factors through
+the reduced welded image.
+Hence \cref{def:delayed-response-map} lands naturally in the next-step reduced welded LoG line.
+\end{remark}
+
+\section{Selected-Line Delayed Sufficiency}
+
+\begin{definition}[Theorem-trivial selected delayed classes]
+\label{def:delayed-selected-trivial}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume the hypotheses of \cref{prop:delayed-realization-formula}.
+The \emph{theorem-trivial selected delayed classes} are
+\[
+\mathcal T^{\mathrm{inv,delay,sel}}_k
+:=
+\ker\!\bigl(
+\mathsf W^{\mathrm{delay}}_{k\to k+1}
+\!\mid_{\widehat L^{\mathrm{sel,delay}}_k}
+\bigr).
+\]
+Equivalently, because the current theorem-visible reduced receiver content has already been quotiented
+out in \(\tau^{\mathrm{comp,delay}}_k\), these are exactly the selected delayed classes whose
+next-receiver reduced welded image vanishes.
+\end{definition}
+
+\begin{theorem}[Selected-line delayed response sufficiency]
+\label{thm:delayed-response-sufficiency}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume the hypotheses of \cref{prop:delayed-realization-formula} and
+\[
+c_{\Lambda_{k+1}}\neq 0.
+\]
+Then on the delayed selected line,
+\[
+\ker\!\bigl(
+\mathfrak R^{\mathrm{delay}}_{k\to k+1}
+\!\mid_{\widehat L^{\mathrm{sel,delay}}_k}
+\bigr)
+=
+\mathcal T^{\mathrm{inv,delay,sel}}_k
+=
+\{0\}.
+\]
+\end{theorem}
+
+\begin{proof}
+By \cref{def:delayed-response-map}, the maps
+\(
+\mathfrak R^{\mathrm{delay}}_{k\to k+1}
+\)
+and
+\(
+\mathsf W^{\mathrm{delay}}_{k\to k+1}
+\)
+are the same scalar map written in the canonical line generators
+\(
+u^{\mathrm{LoG}}_{\Lambda_{k+1}}
+\)
+and
+\(
+P^{\mathrm{LoG}}_{-,\Lambda_{k+1}}
+\),
+respectively.
+Hence they have the same kernel on
+\(
+\widehat L^{\mathrm{sel,delay}}_k
+\).
+By \cref{def:delayed-selected-trivial}, that common kernel is exactly
+\(
+\mathcal T^{\mathrm{inv,delay,sel}}_k
+\),
+which proves the first equality.
+
+By \cref{def:delayed-response-map}
+\[
+\mathfrak R^{\mathrm{delay}}_{k\to k+1}\!\big(
+a\,\widehat\ell^{\mathrm{delay}}_k
+\big)
+=
+a\,c_{\Lambda_{k+1}}\,u^{\mathrm{LoG}}_{\Lambda_{k+1}}.
+\]
+Since
+\(
+u^{\mathrm{LoG}}_{\Lambda_{k+1}}\neq 0
+\)
+by \cref{stack-thm:finite-cutoff-canonical-odd-spectral-selection},
+the image vanishes if and only if \(a=0\).
+So the kernel is trivial, and therefore the theorem-trivial selected delayed classes are trivial as
+well.
+\end{proof}
+
+\begin{remark}[Nondegeneracy clause in the delayed selected-line package]
+The delayed selected-line package used downstream consists of
+\cref{def:delayed-selected-line,def:delayed-response-map,thm:delayed-response-sufficiency}.
+The nonvanishing clause \(c_{\Lambda_{k+1}}\neq 0\) is therefore carried as an explicit package
+hypothesis at the delayed selected-line stage.
+Its source remains the upstream seam-overlap/transport lane rather than a proof internal to the
+present note.
+\end{remark}
+
+\begin{remark}[Scope of delayed selected-line sufficiency]
+\label{rem:delay-vs-same-tick}
+Theorem~\cref{thm:delayed-response-sufficiency} is a statement on the selected delayed line
+\(\widehat L^{\mathrm{sel,delay}}_k\).
+It does \emph{not} identify theorem-triviality on the whole delayed odd-control quotient
+\(\tau^{\mathrm{comp,delay}}_k\), and it does \emph{not} replace the intrinsic same-tick
+assumption \cref{stack-ass:response-sufficiency} inside the strong characterization package.
+\end{remark}
+
+\begin{remark}[Forward bridge boundary]
+\label{rem:delay-forward-bridge}
+The present note stops at faithfulness on the delayed carrier
+\(
+\widehat L^{\mathrm{sel,delay}}_k
+\)
+itself.
+Passing from that delayed selected line to a descendant point in
+\(
+\mathfrak D^-_{\Lambda_{k+1}}
+\)
+is the content of the later split-controlled scalar bridge
+\cref{splitlift-thm:splitlift-scalar-descendant-lift}.
+Any further selected quotient or mod-null reentry lies still beyond the scope of the present note.
+\end{remark}
+
+\end{document}

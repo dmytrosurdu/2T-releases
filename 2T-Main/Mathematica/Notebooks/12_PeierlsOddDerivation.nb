@@ -1,0 +1,286 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     11243,        277]
+NotebookOptionsPosition[      9584,        250]
+NotebookOutlinePosition[      9898,        264]
+CellTagsIndexPosition[      9855,        261]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["12. Peierls Odd Derivation on Exact Bracket Models", "Title",ExpressionUUID->"e289f934-7c55-4175-8bd6-08922564478e"],
+
+Cell["\<\
+This notebook keeps the Peierls lane finite-cutoff and exact. The model API \
+carries: \
+\>", "Text",ExpressionUUID->"58923731-13d1-460d-b365-ddf569779866"],
+
+Cell["an associative product", "Item",ExpressionUUID->"e3e4a22a-4fc0-44da-8981-d1dde92ba77f"],
+
+Cell[TextData[{
+ "a parity involution ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|
+    "boxes" -> FormBox["\[CapitalGamma]", TraditionalForm], "errors" -> {}, 
+     "input" -> "\\Gamma", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "734e6ec5-8911-427f-add0-6691be5c30d6"]
+}], "Item",ExpressionUUID->"1620434c-7fbc-4215-b034-7eaca977035a"],
+
+Cell["an exact bracket defined here by the associative commutator", "Item",ExpressionUUID->"f85089eb-9692-4ce2-b8bd-4b049b0d7c41"],
+
+Cell["\<\
+physical-sector and locality metadata as explicit inputs rather than hidden \
+assumptions\
+\>", "Item",ExpressionUUID->"3752a742-6f89-4476-b51b-ec3ff6316bff"],
+
+Cell["Model family", "Section",ExpressionUUID->"7db556de-b998-4cb3-aa9c-7de0064fbbc6"],
+
+Cell[TextData[{
+ "The audited model family has basis ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         RowBox[{"{", 
+           RowBox[{"1", ",", 
+             StyleBox["x", "TI"], ",", 
+             StyleBox["a", "TI"], ",", 
+             StyleBox["b", "TI"]}], "}"}], ","}], TraditionalForm], 
+     "errors" -> {}, "input" -> "\\{1,x,a,b\\},", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "7b38f31e-c310-43c4-8070-01539e395442"],
+ "with $1,x$ even and $a,b$ odd. The parity involution is ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{"\[CapitalGamma]", 
+         RowBox[{"(", "1", ")"}], "\[LongEqual]", "1", ",    ", 
+         "\[CapitalGamma]", 
+         RowBox[{"(", 
+           StyleBox["x", "TI"], ")"}], "\[LongEqual]", 
+         StyleBox["x", "TI"], ",    ", "\[CapitalGamma]", 
+         RowBox[{"(", 
+           StyleBox["a", "TI"], ")"}], "\[LongEqual]", "-", 
+         StyleBox["a", "TI"], ",    ", "\[CapitalGamma]", 
+         RowBox[{"(", 
+           StyleBox["b", "TI"], ")"}], "\[LongEqual]", "-", 
+         StyleBox["b", "TI"], "."}], TraditionalForm], "errors" -> {}, 
+     "input" -> 
+     "\\Gamma(1)=1,\\qquad \\Gamma(x)=x,\\qquad \\Gamma(a)=-a,\\qquad \
+\\Gamma(b)=-b.", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "457bc5d2-7c6c-4f82-b601-24d21e1d4408"],
+ "The product is associative by exact basis check, and the bracket is the \
+commutator. "
+}], "Text",ExpressionUUID->"ad0fc576-b9dc-45e6-9c7a-dc92f04bd2f8"],
+
+Cell["Odd derivation theorem at model level", "Section",ExpressionUUID->"2c0cd30e-075b-4582-ac03-377b416a77f7"],
+
+Cell[TextData[{
+ "For an odd generator ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["J", "TI"], TraditionalForm], "errors" -> {}, "input" -> "J", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "e80b8d5f-1641-44ab-b580-da562d942aac"],
+ ", define ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox["\[Delta]", 
+          StyleBox["J", "TI"]], 
+         RowBox[{"(", 
+           StyleBox["A", "TI"], ")"}], ":", "\[LongEqual]", 
+         SubscriptBox[
+          RowBox[{"{", 
+            RowBox[{
+              StyleBox["J", "TI"], ",", 
+              StyleBox["A", "TI"]}], "}"}], 
+          StyleBox["P", FontSlant -> "Plain"]], "."}], TraditionalForm], 
+     "errors" -> {}, "input" -> "\\delta_J(A) := \\{J,A\\}_{\\mathrm P}.", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "744d2754-dce1-495e-84b6-ad74571d1628"],
+ "The notebook certifies exactly that, on the explicit model family, "
+}], "Text",ExpressionUUID->"a986349c-bb86-4e94-a587-a11eff9515cc"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SubscriptBox["\[Delta]", 
+        StyleBox["J", "TI"]], TraditionalForm], "errors" -> {}, "input" -> 
+     "\\delta_J", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "c05dab03-7998-47a1-8daa-2af2f7274db8"],
+ " is a derivation of the associative product"
+}], "Item",ExpressionUUID->"5daa5b07-e0c4-4ae6-8c46-8f6980e78743"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SubscriptBox["\[Delta]", 
+        StyleBox["J", "TI"]], TraditionalForm], "errors" -> {}, "input" -> 
+     "\\delta_J", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "727d5bbd-fac6-483c-99da-d784bbf33d5d"],
+ " is ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|
+    "boxes" -> FormBox["\[CapitalGamma]", TraditionalForm], "errors" -> {}, 
+     "input" -> "\\Gamma", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "45a121db-28ca-41c7-9054-668660ecf4c8"],
+ "-odd whenever ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["J", "TI"], TraditionalForm], "errors" -> {}, "input" -> "J", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "5a4bfe65-ceaa-4445-9887-6b4c79374e92"],
+ " is odd"
+}], "Item",ExpressionUUID->"1046fc9a-94f8-443e-a8e8-d10529a1c398"],
+
+Cell["\<\
+the chosen odd generator gives a nontrivial action on the physical sector\
+\>", "Item",ExpressionUUID->"050196e4-3a4b-43b5-b9c1-387650b653fb"],
+
+Cell["\<\
+This is the finite-cutoff model-level version of Main's Hamiltonization step. \
+\>", "Text",ExpressionUUID->"b5744da5-8341-455d-969a-a8b824860525"],
+
+Cell["Status", "Section",ExpressionUUID->"a99bac5b-466f-43e8-a1c8-f1e3fa15f16c"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Claim\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm]},
+        {"\<\"Associativity and parity compatibility of the model\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {Cell[TextData[{
+          Cell[BoxData[
+           FormBox[
+            TemplateBox[<|"boxes" -> FormBox[
+                SubscriptBox["\[Delta]", 
+                 StyleBox["J", "TI"]], TraditionalForm], "errors" -> {}, 
+              "input" -> "\\delta_J", "state" -> "Boxes"|>,
+             "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+           "6cb1ccc8-62ff-45aa-8359-3b489b4c0c0d"],
+          " is a derivation for odd ",
+          Cell[BoxData[
+           FormBox[
+            TemplateBox[<|"boxes" -> FormBox[
+                StyleBox["J", "TI"], TraditionalForm], "errors" -> {}, 
+              "input" -> "J", "state" -> "Boxes"|>,
+             "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+           "eec23ae5-bea1-4e22-ab7a-349322e84136"]
+         }],ExpressionUUID->
+          "5ba0fea3-c3bd-4862-b415-a7efade9c187"], \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {Cell[TextData[{
+          Cell[BoxData[
+           FormBox[
+            TemplateBox[<|"boxes" -> FormBox[
+                SubscriptBox["\[Delta]", 
+                 StyleBox["J", "TI"]], TraditionalForm], "errors" -> {}, 
+              "input" -> "\\delta_J", "state" -> "Boxes"|>,
+             "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+           "8c77255f-1546-4e3c-9aee-a6f842f21a47"],
+          " is ",
+          Cell[BoxData[
+           FormBox[
+            
+            TemplateBox[<|
+             "boxes" -> FormBox["\[CapitalGamma]", TraditionalForm], 
+              "errors" -> {}, "input" -> "\\Gamma", "state" -> "Boxes"|>,
+             "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+           "3fac36ed-bd88-49c8-98cc-03ae005e414d"],
+          "-odd"
+         }],ExpressionUUID->
+          "c0eaa5e3-f20f-4b5a-97f0-50de152eb104"], \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Nontrivial physical-sector action in the example family\"\>", "\
+\<\"finite-dimensional-theorem-certificate\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[BoxForm`e$, TableHeadings -> {None, {"Claim", "Status"}}]]], 
+    "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"6935e022-34b0-48a6-9b81-d4e56df7fdc5"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9fb98179-9cdd-493e-8616-b4f0b8195a60"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 122, 0, 70, "Title",ExpressionUUID->"e289f934-7c55-4175-8bd6-08922564478e"],
+Cell[679, 22, 166, 3, 70, "Text",ExpressionUUID->"58923731-13d1-460d-b365-ddf569779866"],
+Cell[848, 27, 93, 0, 70, "Item",ExpressionUUID->"e3e4a22a-4fc0-44da-8981-d1dde92ba77f"],
+Cell[944, 29, 383, 9, 70, "Item",ExpressionUUID->"1620434c-7fbc-4215-b034-7eaca977035a"],
+Cell[1330, 40, 130, 0, 70, "Item",ExpressionUUID->"f85089eb-9692-4ce2-b8bd-4b049b0d7c41"],
+Cell[1463, 42, 168, 3, 70, "Item",ExpressionUUID->"3752a742-6f89-4476-b51b-ec3ff6316bff"],
+Cell[1634, 47, 86, 0, 70, "Section",ExpressionUUID->"7db556de-b998-4cb3-aa9c-7de0064fbbc6"],
+Cell[1723, 49, 1597, 37, 70, "Text",ExpressionUUID->"ad0fc576-b9dc-45e6-9c7a-dc92f04bd2f8"],
+Cell[3323, 88, 111, 0, 70, "Section",ExpressionUUID->"2c0cd30e-075b-4582-ac03-377b416a77f7"],
+Cell[3437, 90, 1138, 29, 70, "Text",ExpressionUUID->"a986349c-bb86-4e94-a587-a11eff9515cc"],
+Cell[4578, 121, 448, 10, 70, "Item",ExpressionUUID->"5daa5b07-e0c4-4ae6-8c46-8f6980e78743"],
+Cell[5029, 133, 993, 26, 70, "Item",ExpressionUUID->"1046fc9a-94f8-443e-a8e8-d10529a1c398"],
+Cell[6025, 161, 152, 2, 70, "Item",ExpressionUUID->"050196e4-3a4b-43b5-b9c1-387650b653fb"],
+Cell[6180, 165, 157, 2, 70, "Text",ExpressionUUID->"b5744da5-8341-455d-969a-a8b824860525"],
+Cell[6340, 169, 80, 0, 70, "Section",ExpressionUUID->"a99bac5b-466f-43e8-a1c8-f1e3fa15f16c"],
+Cell[6423, 171, 3157, 77, 70, "TextTableForm",ExpressionUUID->"6935e022-34b0-48a6-9b81-d4e56df7fdc5"]
+}
+]
+*)
+
+(* End of internal cache information *)

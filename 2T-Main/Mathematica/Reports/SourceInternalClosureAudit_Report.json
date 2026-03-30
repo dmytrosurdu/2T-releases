@@ -1,0 +1,99 @@
+{
+  "ReportDate": "2026-03-18",
+  "PreviousUnreducedVerdict": "P2 + P3 + one extra closure clause are enough",
+  "Verdict": "reduced target survives exact audit in current family",
+  "DirectAnswer": "No exact reduced falsifier was found in the current audited family once theorem-facing receiver semantics are evaluated only after the common reduced welded boundary projection.",
+  "ReducedReceiverStrengthening": {
+    "Hypotheses": [
+      "P2 algebraic cessation on inherited ledger sectors",
+      "P3 source-internal factorization through accepted-record history",
+      "Theorem-facing receiver semantics evaluated only after a common reduction/projection to the single reduced welded boundary factor"
+    ],
+    "CommonReducedProjector": [
+      [1, 0],
+      [0, 0]
+    ],
+    "ProfileProjectorRank": 1,
+    "RepresentativeBoundaryImage": [
+      [1, 0],
+      [0, 0]
+    ],
+    "RepresentativeBoundaryImageCompatibleQ": true,
+    "AmbiguityImagesAllZeroQ": true,
+    "ReducedResponseScalarRepresentative": 1
+  },
+  "SafeAlgebraicCessationLemma": {
+    "FixedProjectorControlledSplitCertifiedQ": true,
+    "AcceptedRecordFrozenQ": true,
+    "BoundaryBlockRecoveryQ": true,
+    "SharperTensorFormNeedsExtraHypothesis": "Need minimal classical-pointer sectors, or equivalently trivial action inside each A-block on the theorem-facing ledger algebra; fixed projectors alone certify block-diagonality by ledger sector, not full K_alpha = Sum_i Pi_i^(A) tensor M_{alpha i}.",
+    "WithinBlockClassicalPointerPremiseNeededForReducedVerdictQ": false
+  },
+  "OldFalsifierStatusAfterReduction": {
+    "F2BridgeLeak": {
+      "Status": "killed by reduction",
+      "OutsideCodeWitness": [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, "1/2"]
+      ],
+      "ReducedWitness": [
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 0, 0]
+      ],
+      "ReducedWitnessZeroQ": true
+    },
+    "F3CovarianceMismatch": {
+      "Status": "killed by reduction",
+      "Blocks": [
+        [[1, 0], [0, 1]],
+        [[1, 0], [0, -1]]
+      ],
+      "ReducedBlocks": [
+        [[1, 0], [0, 0]],
+        [[1, 0], [0, 0]]
+      ],
+      "SameReducedLineQ": true,
+      "SameReducedScalarQ": true
+    },
+    "F4RPOSFailure": {
+      "Status": "killed by reduction",
+      "ReflectionEigenvaluesUnreduced": [-1, 1, 1, 1],
+      "ReducedReflection": [
+        [1, 0, 0, 0],
+        [0, 0, 0, 0],
+        [0, 0, 1, 0],
+        [0, 0, 0, 0]
+      ],
+      "ReducedEigenvalues": [1, 1, 0, 0],
+      "ReducedPositiveSemidefiniteQ": true
+    },
+    "F5GeometryBookkeepingMismatch": {
+      "Status": "replaced by narrower condition",
+      "SectorCutoffs": [1, 2],
+      "CompletionBookkeepingShifts": [0, 1],
+      "TheoremFacingReducedReceiverUnaffectedQ": true,
+      "NarrowerCondition": "Hidden unreduced source/tangent or completion bookkeeping may persist, but it is not a falsifier of the reduced receiver target once all theorem-facing semantics pass through the common reduced boundary factor."
+    }
+  },
+  "ReducedClosureTable": {
+    "BookkeepingClosureAtReducedReceiverLevelQ": true,
+    "BridgeTargetClosureAtReducedReceiverLevelQ": true,
+    "OneBoundaryCovarianceClosureAtReducedReceiverLevelQ": true,
+    "RPOSClosureAtReducedReceiverLevelQ": true,
+    "SingleCutoffGeometryClosureAtReducedReceiverLevelQ": true
+  },
+  "MinimalReducedPackage": "P2 algebraic cessation + P3 source-internal factorization + theorem-facing semantics evaluated only after the common reduced welded boundary projection.",
+  "CompletionReassessment": {
+    "SplitCoreDistinctCandidateMeaningfulQ": true,
+    "GaussianAugmentationChangesClassQ": false,
+    "RecommendedCompletionCore": "split-controlled core plus the reduced receiver target, distinct from Gaussian augmentation",
+    "Interpretation": "In the current exact audited family, the reduced receiver audit still points to split-core structure rather than Gaussian augmentation as the class-changing package."
+  },
+  "FamilyRelativeScope": "Current audited family with the certified one-dimensional welded boundary factor and common reduced receiver projection only.",
+  "PromotionNote": "This is an exact finite-dimensional certificate only, not source-theorem or manuscript promotion.",
+  "ReducedClosureMaySurviveEvenIfStrongerUnreducedFactorizationFailsQ": true
+}

@@ -1,0 +1,162 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+
+\title{\textbf{Chapter 2: The Outlier-Robust Kalman Filter: \\ A Primer on Type B Certification}}
+\author{Dmytro Surdu}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{quote}
+\textit{Before diving into abstract theory, it is instructive to explore a concrete, sophisticated measurement algorithm that embodies the challenges and concepts of Type B certification. The Outlier-Robust Kalman Filter (ORKF) is a perfect case study. It is a system driven by non-statistical prior knowledge, it incorporates random measurements via a deterministic update rule, and its analysis reveals a deep distinction between per-step validation and infinite-tail proof. This chapter will use the ORKF to build our intuition and demonstrate the need for the formal theory to come.}
+\end{quote}
+
+\section{The Setting: Kalman Filtering with Unknown Outliers}
+The standard Kalman filter provides an optimal state estimate for linear systems under the assumption of Gaussian noise. We consider the more realistic scenario where this assumption is violated due to outliers.
+
+\subsection{The State-Space Model}
+A linear dynamical system is described by:
+\begin{align}
+    x_t &= A x_{t-1} + w_t \label{eq:process_model} \\
+    z_t &= C x_t + v_t \label{eq
+:measurement_model}
+\end{align}
+where $x_t \in \mathbb{R}^d$ is the hidden state and $z_t \in \mathbb{R}^m$ is the observable measurement. The matrices $A$ and $C$ are known. The process noise $w_t \sim \mathcal{N}(0, Q_w)$ is Gaussian with known covariance $Q_w$.
+
+\subsection{The Type B Problem: Non-Gaussian Measurement Noise}
+The standard filter assumes $v_t \sim \mathcal{N}(0, R_v)$ with a known, constant covariance matrix $R_v$. We relax this. We assume the measurement $z_t$ is contaminated by outliers, which can be modeled by assuming the noise $v_t$ is drawn from a Student's-t distribution. A Student's-t distribution can be represented as a Gaussian scale mixture, where the covariance matrix itself is a random variable.
+
+This means at each time step $t$, the noise $v_t$ follows a Gaussian distribution with an \emph{unknown} precision matrix (inverse covariance) $S_t$:
+\[
+v_t \sim \mathcal{N}(0, S_t^{-1})
+\]
+Our knowledge about $S_t$ is not derived from repeated observations (Type A), but from a prior belief (Type B). This is the core of the problem.
+
+\section{The ORKF Update: A Type B Belief System}
+The Outlier-Robust Kalman Filter, as detailed by Agamennoni et al. (2011), addresses this by placing a prior on the unknown precision matrix $S_t$ and estimating it along with the state $x_t$.
+
+\subsection{The Wishart Prior}
+A conjugate prior for the precision matrix of a multivariate normal distribution is the Wishart distribution. We model our Type B knowledge by assuming that at each step $t$, our prior belief about $S_t$ is:
+\[
+S_t \sim \mathcal{W}(\nu, V)
+\]
+where $\nu$ are the degrees of freedom and $V$ is the scale matrix. These hyperparameters, $(\nu, V)$, encode our non-statistical belief about the likely structure of the measurement noise. For simplicity in the following analysis, we will follow a common variant where the prior is placed on the expected value of $S_t^{-1}$, which is related to the Wishart parameters.
+
+\subsection{The Iterative Update Loop}
+The presence of the unknown $S_t$ makes a direct analytical solution for the posterior intractable. The ORKF instead computes a Maximum A Posteriori (MAP) estimate by iteratively solving a fixed-point equation.
+
+At each time $t$, given the predicted state $(\hat{x}_{t|t-1}, P_{t|t-1})$ and the new measurement $z_t$, the algorithm finds the optimal noise precision matrix, let's call it $\Gamma_t^* = S_t$, by iterating the following map $F$ to a fixed point $\Gamma_t^* = F(\Gamma_t^*)$:
+\begin{equation}\label{eq:orkf_update}
+\Gamma^{(i+1)}_t = F(\Gamma^{(i)}_t) := \frac{s R + \delta(\Gamma^{(i)}_t)\delta(\Gamma^{(i)}_t)^{T} + C^{T}\Sigma(\Gamma^{(i)}_t)C}{s+1}
+\end{equation}
+where $s$ and $R$ are parameters derived from the Wishart prior, and $\delta(\cdot)$ and $\Sigma(\cdot)$ are complex functions involving the Kalman gain and updated state covariances, which themselves depend on the current estimate $\Gamma^{(i)}_t$.
+
+The crucial observation is that once the hyperparameters $(s, R)$ are fixed, this iterative process is a **fully deterministic algorithm**. The only randomness enters via the observed measurement $z_t$.
+
+\section{Per-Step Certification via Contraction}
+We can now analyze this procedure from a certification perspective. The **belief-state** at time $t-1$ is $\Theta_{t-1} = (\hat{x}_{t-1|t-1}, P_{t-1|t-1})$. The update map $U$ takes $(\Theta_{t-1}, z_t)$ and produces $\Theta_t$. This map involves the iterative solver \eqref{eq:orkf_update}. Can we certify this step?
+
+A step is certifiable if the update map $U$ is polynomial-time computable. This holds if the inner fixed-point iteration is guaranteed to converge in a polynomially bounded number of steps. This guarantee, in turn, is provided if the map $F$ is a **strict contraction**.
+
+\begin{theorem}[Contraction of the ORKF Update]
+The fixed-point map $F(\Gamma)$ in \eqref{eq:orkf_update} is a strict contraction with respect to the spectral norm, i.e., there exists a $\rho < 1$ such that
+\[
+\| F(\Gamma_1) - F(\Gamma_2) \| \le \rho \| \Gamma_1 - \Gamma_2 \|
+\]
+if the system matrices $(A,C)$ are bounded and the Wishart prior parameter $s$ is chosen to be sufficiently large.
+\end{theorem}
+
+\begin{proof}[Proof]
+
+
+The core argument is as follows:
+
+\begin{lemma}[Lipschitz Bound on $\Sigma(\Gamma)$]
+\label{lem:Sigma_lipschitz}
+Let $P\succ 0$ be fixed and define
+\[
+\Sigma(\Gamma) \;=\; \bigl(C^T P\,C + \Gamma\bigr)^{-1} \,C^T P \,.
+\]
+Assume $\Gamma_1,\Gamma_2\succ0$ satisfy
+\[
+\lambda_{\min}\bigl(C^T P\,C + \Gamma_i\bigr)\;\ge\;\lambda_0>0
+\quad(i=1,2).
+\]
+Then
+\[
+\|\Sigma(\Gamma_1)\;-\;\Sigma(\Gamma_2)\|
+\;\le\;
+\frac{\|C^T P\|\,\|C\|}{\lambda_0^2}\;
+\|\Gamma_1-\Gamma_2\|.
+\]
+\end{lemma}
+
+\begin{proof}[Main theorem proof]
+Write
+\[
+\Sigma(\Gamma_1)-\Sigma(\Gamma_2)
+=
+\bigl(C^T P\,C+\Gamma_1\bigr)^{-1}
+\bigl(\Gamma_2-\Gamma_1\bigr)
+\bigl(C^T P\,C+\Gamma_2\bigr)^{-1}C^T P.
+\]
+Taking operator norms and using 
+$\|(C^T P\,C+\Gamma_i)^{-1}\|\le1/\lambda_0$, we obtain
+\[
+\|\Sigma(\Gamma_1)-\Sigma(\Gamma_2)\|
+\le
+\frac{\|\Gamma_2-\Gamma_1\|}{\lambda_0^2}\,\|C^T P\|\;\|C\|,
+\]
+as claimed.
+\end{proof}
+
+\begin{enumerate}
+    \item The difference $F(\Gamma_1) - F(\Gamma_2)$ can be shown to depend primarily on the difference in the updated state covariances, $\Sigma(\Gamma_1) - \Sigma(\Gamma_2)$, scaled by $\frac{1}{s+1}$.
+    \[
+    \|F(\Gamma_1)-F(\Gamma_2)\| \le \frac{\|C\|^2}{s+1} \|\Sigma(\Gamma_1)-\Sigma(\Gamma_2)\| + \text{h.o.t.}
+    \]
+    \item By Lemma above, the map $\Gamma \mapsto \Sigma(\Gamma)$ is itself Lipschitz continuous. Its Lipschitz constant depends on the norms of the system matrices and the inverse of the matrix $(C^T P C + \Gamma)$.
+    \[
+    \|\Sigma(\Gamma_1)-\Sigma(\Gamma_2)\| \le K \cdot \|\Gamma_1 - \Gamma_2\|
+    \]
+    where $K$ depends on $\|P\|, \|C\|^2$, and a lower bound on the eigenvalues of $(C^T P C + \Gamma)$.
+    \item Combining these, we get a Lipschitz constant for $F$ of the form:
+    \[
+    \rho \approx \frac{K \|C\|^2}{s+1}
+    \]
+\end{enumerate}
+By choosing the Wishart strength parameter $s$ to be large enough relative to the fixed system gains, we can ensure that $\rho < 1$. By the Banach Fixed-Point Theorem, the iteration is guaranteed to converge geometrically to a unique fixed point. The number of iterations needed to reach precision $\epsilon$ is $O(\log(1/\epsilon))$, which is polynomial in the number of bits of precision.
+\end{proof}
+
+This result is profound. It means that the seemingly complex ORKF update is a **polynomial-time computable, information-losing** map. Therefore, each step is certifiable. A prover can supply the resulting belief-state $\Theta_t$ as a witness, and a verifier can re-run the polynomial-time algorithm to check its correctness.
+
+\section{The Barrier to Tail Certification}
+We have established that we can trust each individual step of the filter. But what about a claim concerning the infinite future, such as:
+\begin{quote}
+$P_{stable}$: "For all future times $k > n$, the trace of the state error covariance, $\mathrm{Tr}(P_{k|k})$, will remain below a threshold $\beta$."
+\end{quote}
+This is a claim about the long-term stability of the filter. Can we provide a finite witness for this?
+
+The answer is no, not without more structure. Per-step contractivity is not enough. The sequence of incoming random measurements $z_{n+1}, z_{n+2}, \dots$ could, in principle, be adversarial and consistently push the state towards the boundary of the "safe" region. Certifying that this will \emph{never} happen requires a guarantee that spans an infinite number of future random inputs. This is the $\Pi^0_2$ barrier we identified in Chapter 1.
+
+To bridge this gap, we need a stronger concept: a region in the belief-space which, once entered, can never be escaped, regardless of future measurements. This is the concept of an **attractor basin**, which will be the central subject of Part III. The ORKF example demonstrates perfectly why such a concept is not just a theoretical nicety, but an absolute necessity for proving anything about the long-term behavior of a Type B measurement system.
+
+\subsection*{References}
+\begin{thebibliography}{9}
+\bibitem{agamennoni2011}
+G. Agamennoni, J. I. Nieto, and E. M. Nebot. "An outlier-robust Kalman filter." In \textit{2011 IEEE International Conference on Robotics and Automation}, pp. 1551-1558. IEEE, 2011.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,1790 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{xr-hyper}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\providecommand{\Fsloc}{\mathcal F_{\rm s.loc}}
+\providecommand{\Ztwo}{\mathbb Z_2}
+\externaldocument[stack-]{odd_characterization_transport_stack_note}
+\externaldocument[delay-]{delayed_odd_control_note}
+\externaldocument[sum-]{summability_split_note}
+\externaldocument[uommain-]{main}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=blue!60!black,
+  urlcolor=blue!60!black
+}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{assumption}[definition]{Assumption}
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+
+\crefname{definition}{definition}{definitions}
+\Crefname{definition}{Definition}{Definitions}
+\crefname{assumption}{assumption}{assumptions}
+\Crefname{assumption}{Assumption}{Assumptions}
+\crefname{theorem}{theorem}{theorems}
+\Crefname{theorem}{Theorem}{Theorems}
+\crefname{lemma}{lemma}{lemmas}
+\Crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{proposition}{propositions}
+\Crefname{proposition}{Proposition}{Propositions}
+\crefname{corollary}{corollary}{corollaries}
+\Crefname{corollary}{Corollary}{Corollaries}
+\crefname{remark}{remark}{remarks}
+\Crefname{remark}{Remark}{Remarks}
+
+\newcommand{\Arec}{\mathcal A_{\rm rec}}
+\newcommand{\Hacc}{\mathcal H_{\rm acc}}
+\newcommand{\HA}{\mathcal H_A}
+\newcommand{\HB}{\mathcal H_B}
+\newcommand{\Pacc}{\mathsf P^{\mathrm{acc}}}
+\newcommand{\Tr}{\operatorname{Tr}}
+\newcommand{\1}{\mathbf 1}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+
+\title{Split-Controlled Completion Lift Note}
+\author{Internal technical note}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note packages a narrow completion-side statement on the accepted welded branch.
+Assuming an explicit accepted welded split package in the band-locked, co-centered regime, it proves
+that the inherited ledger algebra is QND, the abstract accepted-record payload on the inherited
+ledger is preserved exactly, and recoherence is localized in branchwise completion data \(B\).
+The split package itself is imported structural data; the note does not derive it from microscopic
+UOM dynamics.
+\end{abstract}
+
+\tableofcontents
+
+\section{Scope}
+\label{sec:splitlift-scope}
+
+\paragraph{Statement proved here.}
+Fix an accepted welded branch in the band-locked, co-centered regime of
+\cref{stack-prop:compressed-log-lock}.
+This note proves a conditional completion-side statement:
+given an explicit accepted welded split package, the inherited ledger algebra is QND, the abstract
+accepted-record payload on the inherited ledger is preserved exactly, and recoherence is localized
+in branchwise completion data \(B\).
+
+\paragraph{Imported source basis.}
+The inherited accepted-record algebra and its canonical record projection are imported from the UOM
+main manuscript
+\textup{(Definition~\ref{uommain-def:pointer-algebra-projection},
+Lemma~\ref{uommain-lem:tick-fixes-record-algebra},
+Proposition~\ref{uommain-prop:semiclassical-diag},
+Remark~\ref{uommain-rem:uom-main-004})}.
+The structural \(A|B\) split picture is imported from the summability note:
+the inherited-ledger/completion-sector identification from \cref{sum-subsec:AB-identification},
+the controlled split form from \eqref{sum-eq:split-controlled},
+and the newborn coherence target from \eqref{sum-eq:B-coherence-target}.
+The accepted welded branch narrowing comes from \cref{stack-prop:compressed-log-lock},
+the accepted-record payload and witness-seam language come from
+\cref{stack-def:accepted-record-payload,stack-def:witness-seam-realization,stack-rem:accepted-record-vs-seam},
+and the ledger/completion compatibility statement comes from \cref{stack-rem:ledger-compat}.
+
+\paragraph{Boundary of the note.}
+The only genuinely structural input left below is a branchwise completion realization that refines
+the inherited accepted-record projectors into completion fibers and puts the split into controlled
+form on those fibers.
+Everything else is imported directly from the current UOM source basis.
+
+\begin{definition}[Inherited accepted-record algebra at the split tick]
+\label{def:splitlift-ledger}
+Fix one accepted tick \(k\) on an accepted welded branch in the band-locked, co-centered regime of
+\cref{stack-prop:compressed-log-lock}.
+Let \(\Hacc\) denote the accepted band-limited receiver space at that tick.
+By
+Definition~\ref{uommain-def:pointer-algebra-projection},
+Lemma~\ref{uommain-lem:tick-fixes-record-algebra},
+Proposition~\ref{uommain-prop:semiclassical-diag}, and
+Remark~\ref{uommain-rem:uom-main-004},
+\(\Hacc\) carries a commutative inherited accepted-record algebra with orthogonal record projectors
+\(\{\Pi_i\}\subset\operatorname{End}(\Hacc)\) and canonical record projection
+\[
+\mathsf P_{\mathrm{rec}}(X):=\sum_i \Pi_i X\Pi_i,
+\qquad
+X\in\operatorname{End}(\Hacc).
+\]
+We refer to this commutative algebra as the inherited accepted-record algebra at tick \(k\).
+\end{definition}
+
+\begin{definition}[Branchwise newborn pointer projections]
+\label{def:splitlift-newborn-pointer}
+Once a branchwise completion fiber is read as part of the next aeon's source, let
+\(\Pi_{\Delta,i}\) denote the canonical pointer/record projection on that branchwise newborn
+realization in the sense of Definition~\ref{uommain-def:pointer-algebra-projection}.
+The coherence target imported from \eqref{sum-eq:B-coherence-target} is measured branchwise with
+these projections.
+\end{definition}
+
+\begin{assumption}[Controlled completion branch decomposition]
+\label{ass:splitlift-controlled}
+Fix one accepted tick \(k\) on an accepted welded branch in the band-locked, co-centered regime of
+\cref{stack-prop:compressed-log-lock}, and let the inherited accepted-record algebra be as in
+\cref{def:splitlift-ledger}.
+Assume the structural \(A|B\) split picture of \cref{sum-subsec:AB-identification} in the following
+explicit form.
+There exist an abstract ledger space \(\HA\) with orthonormal basis \(\{e_i\}\), rank-one ledger
+projectors \(E_i^{(A)}:=|e_i\rangle\langle e_i|\), branchwise completion fibers
+\(\{\mathcal H_i^{(B)}\}\), and a unitary identification
+\[
+W:\Hacc \xrightarrow{\sim} \bigoplus_i \bigl(\mathbb C e_i \otimes \mathcal H_i^{(B)}\bigr)
+\]
+such that:
+\begin{enumerate}[leftmargin=2em]
+\item the inherited accepted-record algebra is realized branchwise as
+  \[
+  \mathrm{alg}\{\Pi_i\}
+  =
+  \mathrm{alg}\{W^\dagger(E_i^{(A)}\otimes \1_{\mathcal H_i^{(B)}})W\},
+  \]
+  so in particular \(W\Pi_iW^\dagger=E_i^{(A)}\otimes \1_{\mathcal H_i^{(B)}}\) on the \(i\)-th
+  summand;
+\item the split is implemented by a branchwise controlled unitary
+  \[
+  WU_{\rm split}W^\dagger
+  =
+  \bigoplus_i \bigl(E_i^{(A)}\otimes U_i^{(B)}\bigr),
+  \]
+  with each \(U_i^{(B)}\) unitary on \(\mathcal H_i^{(B)}\), as the branchwise direct-sum form of
+  \eqref{sum-eq:split-controlled}.
+\end{enumerate}
+\end{assumption}
+
+\begin{remark}[What remains assumed]
+\label{rem:splitlift-open-structure}
+The inherited accepted-record algebra and its canonical projection are source-backed by the UOM main
+manuscript.
+What remains assumed in \cref{ass:splitlift-controlled} is only a direct-sum realization
+\[
+\Hacc \cong \bigoplus_i \bigl(\mathbb C e_i\otimes \mathcal H_i^{(B)}\bigr)
+\]
+that realizes the inherited ledger projectors as branch labels and places the split in branchwise
+controlled form.
+\end{remark}
+
+\section{Accepted Welded Split Package}
+\label{sec:splitlift-data}
+
+\begin{definition}[Explicit accepted welded split package]
+\label{def:splitlift-data}
+Under
+\cref{def:splitlift-ledger,def:splitlift-newborn-pointer,ass:splitlift-controlled},
+an \emph{explicit accepted welded split package} is a choice of:
+\begin{enumerate}[leftmargin=2em]
+\item an abstract inherited ledger register \(\HA\) with basis \(\{e_i\}\) indexed by the
+  inherited accepted-record projectors and rank-one projectors
+  \[
+  E_i^{(A)}:=|e_i\rangle\langle e_i|;
+  \]
+\item a family of branchwise completion fibers
+  \[
+  \{\mathcal H_i^{(B)}\};
+  \]
+\item a unitary branch decomposition
+  \[
+  W:\Hacc\xrightarrow{\sim}\bigoplus_i \bigl(\mathbb C e_i \otimes \mathcal H_i^{(B)}\bigr),
+  \]
+  with \(W\Pi_iW^\dagger=E_i^{(A)}\otimes \1_{\mathcal H_i^{(B)}}\) on the \(i\)-th summand;
+\item the commutative inherited ledger algebra
+  \[
+  \Arec:=\mathrm{alg}\{\Pi_i\}\subset \operatorname{End}(\Hacc);
+  \]
+\item a split unitary of branchwise controlled form
+  \[
+  WU_{\rm split}W^\dagger
+  =
+  \bigoplus_i \bigl(E_i^{(A)}\otimes U_i^{(B)}\bigr),
+  \]
+  with each \(U_i^{(B)}\) unitary on \(\mathcal H_i^{(B)}\);
+\item the abstract accepted-record compression
+  \[
+  \Pacc(\rho):=\sum_i \Tr(\Pi_i\rho)\,E_i^{(A)},
+  \qquad
+  \rho\in\mathcal T_1(\Hacc);
+  \]
+\item a family of branchwise newborn pointer projections
+  \[
+  \{\Pi_{\Delta,i}\}.
+  \]
+\end{enumerate}
+We refer to the family \(\{\mathcal H_i^{(B)}\}\) as the branchwise completion data \(B\).
+An observable \(L\in\Arec\) will be called \emph{accepted-record visible}.
+\end{definition}
+
+\begin{definition}[Ledger-classical split input]
+\label{def:splitlift-ledger-classical}
+A state \(\rho\) on \(\Hacc\) is a \emph{ledger-classical split input} if, under an explicit
+accepted welded split package, it has the branchwise classical-control form
+\[
+W\rho W^\dagger
+=
+\sum_i p_i\,E_i^{(A)}\otimes \sigma_i^{(B)},
+\qquad
+p_i\ge 0,\quad \sum_i p_i=1,
+\]
+where \(\sigma_i^{(B)}\) is a state on \(\mathcal H_i^{(B)}\) and each term is understood on the
+\(i\)-th direct summand of \(\bigoplus_i(\mathbb C e_i\otimes\mathcal H_i^{(B)})\).
+Equivalently, the abstract inherited ledger register \(A\) acts as classical control for the
+branchwise completion preparation.
+\end{definition}
+
+\begin{definition}[Recoherence localized in branchwise completion data \(B\)]
+\label{def:splitlift-recoherence}
+Let \(\rho' := U_{\rm split}\rho U_{\rm split}^\dagger\) under an explicit accepted welded split
+package, and write
+\[
+\rho_A:=\Pacc(\rho),
+\qquad
+\rho'_A:=\Pacc(\rho').
+\]
+For each \(i\) with \(p_i':=\Tr(\Pi_i\rho')>0\), let \(\rho_i^{(B)\prime}\) be the unique state on
+\(\mathcal H_i^{(B)}\) determined by
+\[
+E_i^{(A)}W\rho'W^\dagger E_i^{(A)}
+=
+p_i' \, E_i^{(A)}\otimes \rho_i^{(B)\prime}.
+\]
+Recoherence is said to be \emph{localized in branchwise completion data \(B\)} if:
+\begin{enumerate}[leftmargin=2em]
+\item the abstract inherited ledger state is unchanged, i.e.
+  \[
+  \rho'_A=\rho_A;
+  \]
+\item for at least one accepted branch \(i\) with \(p_i'>0\), the branchwise completion state
+  satisfies the newborn coherence target
+  \[
+  \norm{\rho_i^{(B)\prime}-\Pi_{\Delta,i}(\rho_i^{(B)\prime})}_1>0.
+  \]
+  This is the branchwise form of the coherence criterion imported from
+  \eqref{sum-eq:B-coherence-target}.
+\end{enumerate}
+\end{definition}
+
+\section{Exact Ledger-Side Consequences}
+\label{sec:splitlift-lemmas}
+
+\begin{lemma}[Ledger observables are QND invariants]
+\label{lem:splitlift-qnd}
+Let \((\HA,\Arec,U_{\rm split},\Pacc)\) be an explicit accepted welded split package.
+Then every accepted-record-visible observable \(L\in\Arec\) satisfies
+\[
+U_{\rm split}^\dagger L U_{\rm split}
+=
+L.
+\]
+In particular,
+\[
+[U_{\rm split},\Pi_i]=0
+\qquad
+\text{for every } i.
+\]
+\end{lemma}
+
+\begin{proof}
+Under the explicit branch decomposition of \cref{def:splitlift-data},
+\[
+WU_{\rm split}W^\dagger
+=
+\bigoplus_i \bigl(E_i^{(A)}\otimes U_i^{(B)}\bigr),
+\]
+so \(WU_{\rm split}W^\dagger\) commutes with each \(E_i^{(A)}\otimes \1_{\mathcal H_i^{(B)}}\).
+Transporting this identity back to \(\Hacc\) yields
+\[
+[U_{\rm split},\Pi_i]=0
+\qquad
+\forall i.
+\]
+Since \(\Arec=\mathrm{alg}\{\Pi_i\}\), the same identity implies
+\(
+U_{\rm split}^\dagger L U_{\rm split}=L
+\)
+for every \(L\in\Arec\).
+\end{proof}
+
+\begin{proposition}[Exact preservation of the accepted-record part]
+\label{prop:splitlift-payload}
+Let \((\HA,\Arec,U_{\rm split},\Pacc)\) be an explicit accepted welded split package, and let
+\[
+\rho':=U_{\rm split}\rho U_{\rm split}^\dagger
+\]
+for an arbitrary state \(\rho\) on \(\Hacc\).
+Then the abstract accepted-record payload is preserved exactly:
+\[
+\Pacc(\rho')=\Pacc(\rho).
+\]
+Equivalently, every inherited ledger branch weight is preserved:
+\[
+\Tr(\Pi_i\rho')
+=
+\Tr(\Pi_i\rho)
+\qquad
+\forall i.
+\]
+\end{proposition}
+
+\begin{proof}
+By \cref{lem:splitlift-qnd}, \(U_{\rm split}\) commutes with every \(\Pi_i\). Therefore
+\[
+\Tr(\Pi_i\rho')
+=
+\Tr(\Pi_iU_{\rm split}\rho U_{\rm split}^\dagger)
+=
+\Tr(U_{\rm split}^\dagger \Pi_i U_{\rm split}\rho)
+=
+\Tr(\Pi_i\rho).
+\]
+Multiplying each preserved coefficient by \(E_i^{(A)}\) and summing over \(i\) yields the claimed
+identity for \(\Pacc\).
+\end{proof}
+
+\begin{corollary}[Exact ledger preservation on classical-control input]
+\label{cor:splitlift-classical}
+Let \((\HA,\Arec,U_{\rm split},\Pacc)\) be an explicit accepted welded split package and let
+\(\rho\) be a ledger-classical split input. Write
+\[
+\rho':=U_{\rm split}\rho U_{\rm split}^\dagger.
+\]
+Then
+\[
+W\rho'W^\dagger
+=
+\sum_i p_i\,E_i^{(A)}\otimes
+U_i^{(B)}\sigma_i^{(B)}(U_i^{(B)})^\dagger,
+\]
+so in particular
+\[
+\rho'_A=\rho_A=\sum_i p_i\,E_i^{(A)},
+\]
+where \(\rho_A:=\Pacc(\rho)\) and \(\rho'_A:=\Pacc(\rho')\).
+\end{corollary}
+
+\begin{proof}
+Substitute the classical-control form of \(W\rho W^\dagger\) into the branchwise controlled
+expression for \(WU_{\rm split}W^\dagger\).
+All cross terms vanish because \(E_i^{(A)}E_j^{(A)}=0\) for \(i\neq j\).
+The displayed formula follows immediately, and the identity for \(\rho'_A=\Pacc(\rho')\) is then
+exactly \cref{prop:splitlift-payload}.
+\end{proof}
+
+\section{Bounded Split-Controlled Packaging Theorem}
+\label{sec:splitlift-theorem}
+
+\begin{theorem}[Ledger-side consequences of explicit split data]
+\label{thm:splitlift-main}
+Let an explicit accepted welded split package be given on an accepted welded branch, let \(\rho\) be
+the input state, and write
+\[
+\rho':=U_{\rm split}\rho U_{\rm split}^\dagger.
+\]
+Assume that:
+\begin{enumerate}[leftmargin=2em]
+\item the input state is a ledger-classical split input;
+\item the accepted-record payload on the inherited receiver ledger is read through the accepted-record
+  compression \(\Pacc\), equivalently through the accepted-record-visible algebra \(\Arec\);
+\item the post-split branchwise completion data satisfy the newborn coherence target, i.e. there
+  exists an accepted branch \(i\) with \(p_i'=\Tr(\Pi_i\rho')>0\) and branchwise completion state
+  \(\rho_i^{(B)\prime}\) as in \cref{def:splitlift-recoherence} such that
+  \[
+  \norm{\rho_i^{(B)\prime}-\Pi_{\Delta,i}(\rho_i^{(B)\prime})}_1>0.
+  \]
+  as in \eqref{sum-eq:B-coherence-target}.
+\end{enumerate}
+Then the following ledger-side consequences hold:
+\begin{enumerate}[leftmargin=2em]
+\item the inherited ledger projectors are QND under the split;
+\item the abstract accepted-record payload on \(A\) is preserved exactly, and for ledger-classical
+  input one also has \(\rho'_A=\rho_A\);
+\item recoherence is localized in branchwise completion data \(B\).
+\end{enumerate}
+Together with the imported split package itself, these consequences furnish the bounded
+split-controlled completion package used in this note.
+\end{theorem}
+
+\begin{proof}
+Item (1) is \cref{lem:splitlift-qnd}.
+Item (2) follows from \cref{prop:splitlift-payload}; under the present assumptions, the
+accepted-record payload is exactly the part read by \(\Pacc\).
+The stronger identity \(\rho'_A=\rho_A\) for ledger-classical input is exactly
+\cref{cor:splitlift-classical}.
+Item (3) follows from \cref{cor:splitlift-classical} together with the assumed branchwise
+completion coherence target, which is exactly the definition of recoherence localized in branchwise
+completion data \(B\).
+\end{proof}
+
+\begin{corollary}[Compatibility with the weak transported interface]
+\label{cor:splitlift-main}
+Under the hypotheses of \cref{thm:splitlift-main}, the split acts trivially on every
+accepted-record-visible observable in \(\Arec\).
+Consequently, the completion-side recoherence considered here is compatible with the weak
+transported interface of \cref{stack-thm:char-weak-interface}: the inherited ledger data remain
+unchanged, while the nontrivial completion-side effect is carried by branchwise completion data
+\(B\), in accord with \cref{stack-rem:ledger-compat}.
+\end{corollary}
+
+\begin{proof}
+By \cref{thm:splitlift-main}, the split acts trivially on every \(L\in\Arec\) and preserves the
+accepted-record part on \(A\).
+The only recoherence admitted by the theorem is the branchwise \(B\)-localized recoherence of
+\cref{def:splitlift-recoherence}.
+This is exactly the separation between inherited ledger data and completion-side oddness recorded in
+\cref{stack-rem:ledger-compat}, and it does not alter the ledger-visible data read by the weak
+transported interface.
+\end{proof}
+
+\section{Split-Controlled Scalar Descendant Lift}
+\label{sec:splitlift-descendant}
+
+\begin{definition}[Split response scalar line]
+\label{def:splitlift-scalar-line}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Under the explicit accepted welded split package of \cref{def:splitlift-data}, a
+\emph{split response scalar line} at \(\Lambda_{k+1}\) is a one-dimensional real line
+\[
+\mathfrak S^{\mathrm{split}}_{\Lambda_{k+1}}
+:=
+\mathbb R\,s_{\Lambda_{k+1}}.
+\]
+It is understood as the scalar line extracted from the branchwise completion recoherence data at
+tick \(k\) and read at the next receiver step \(k+1\).
+\end{definition}
+
+\begin{definition}[Split-controlled scalar descendant lift datum]
+\label{def:splitlift-scalar-datum}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+A \emph{split-controlled scalar descendant lift datum} consists of:
+\begin{enumerate}[leftmargin=2em,label=(\alph*)]
+\item the delayed selected line
+  \[
+  \widehat L^{\mathrm{sel,delay}}_k
+  =
+  \mathbb R\,\widehat\ell^{\mathrm{delay}}_k
+  \]
+  of \cref{delay-def:delayed-selected-line};
+\item a split response scalar line
+  \[
+  \mathfrak S^{\mathrm{split}}_{\Lambda_{k+1}}
+  =
+  \mathbb R\,s_{\Lambda_{k+1}}
+  \]
+  as in \cref{def:splitlift-scalar-line};
+\item a source-compatible descendant representative
+  \[
+  J^{\mathrm{split}}_{\Lambda_{k+1}}
+  \in
+  [\Xi^{(1)}_{\Lambda_{k+1}}]\cap E^-_{\Lambda_{k+1}};
+  \]
+\item a linear map
+  \[
+  \mathfrak L^{\mathrm{split}}_{k\to k+1}:
+  \widehat L^{\mathrm{sel,delay}}_k
+  \longrightarrow
+  \mathfrak D^-_{\Lambda_{k+1}}
+  :=
+  E^-_{\Lambda_{k+1}}/\mathcal A^-_{\Lambda_{k+1}}
+  \]
+  such that
+  \[
+  \mathfrak L^{\mathrm{split}}_{k\to k+1}
+  \bigl(\widehat\ell^{\mathrm{delay}}_k\bigr)
+  =
+  q_{\Lambda_{k+1}}\!\bigl(J^{\mathrm{split}}_{\Lambda_{k+1}}\bigr),
+  \]
+  where \(q_{\Lambda_{k+1}}\) is the quotient map of
+  \cref{stack-def:dominant-response-quotient};
+\item compatibility of the current Main-visible reduced welded image with the delayed scalar:
+  \[
+  \mathsf W^{\mathrm{red}}_{\Lambda_{k+1}}
+  \!\bigl(J^{\mathrm{split}}_{\Lambda_{k+1}}\bigr)
+  =
+  c_{\Lambda_{k+1}}\,
+  P^{\mathrm{LoG}}_{-,\Lambda_{k+1}}.
+  \]
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Canonical split-to-descendant scalar bridge]
+\label{def:splitlift-canonical-bridge}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume the delayed selected line
+\(
+\widehat L^{\mathrm{sel,delay}}_k
+\)
+of \cref{delay-def:delayed-selected-line} and a split response scalar line
+\(
+\mathfrak S^{\mathrm{split}}_{\Lambda_{k+1}}
+\)
+of \cref{def:splitlift-scalar-line}.
+A \emph{canonical split-to-descendant scalar bridge} consists of:
+\begin{enumerate}[leftmargin=2em,label=(\alph*)]
+\item a linear scalar-transport map
+  \[
+  \mathfrak T^{\mathrm{split}}_{k\to k+1}:
+  \widehat L^{\mathrm{sel,delay}}_k
+  \longrightarrow
+  \mathfrak S^{\mathrm{split}}_{\Lambda_{k+1}}
+  \]
+  such that the image
+  \[
+  s^{\mathrm{split,can}}_{\Lambda_{k+1}}
+  :=
+  \mathfrak T^{\mathrm{split}}_{k\to k+1}
+  \bigl(\widehat\ell^{\mathrm{delay}}_k\bigr)
+  \]
+  generates the split response scalar line:
+  \[
+  \mathfrak S^{\mathrm{split}}_{\Lambda_{k+1}}
+  =
+  \mathbb R\,s^{\mathrm{split,can}}_{\Lambda_{k+1}};
+  \]
+\item a linear descendant lift map
+  \[
+  \mathfrak I^{\mathrm{split}}_{\Lambda_{k+1}}:
+  \mathfrak S^{\mathrm{split}}_{\Lambda_{k+1}}
+  \longrightarrow
+  E^-_{\Lambda_{k+1}}
+  \]
+  such that the lifted scalar generator
+  \[
+  J^{\mathrm{split,can}}_{\Lambda_{k+1}}
+  :=
+  \mathfrak I^{\mathrm{split}}_{\Lambda_{k+1}}
+  \bigl(
+  s^{\mathrm{split,can}}_{\Lambda_{k+1}}
+  \bigr)
+  \]
+  lies in the odd descendant class:
+  \[
+  J^{\mathrm{split,can}}_{\Lambda_{k+1}}
+  \in
+  [\Xi^{(1)}_{\Lambda_{k+1}}]\cap E^-_{\Lambda_{k+1}};
+  \]
+\item compatibility of the lifted scalar generator with the current Main-visible reduced welded
+  image:
+  \[
+  \mathsf W^{\mathrm{red}}_{\Lambda_{k+1}}
+  \!\bigl(
+  J^{\mathrm{split,can}}_{\Lambda_{k+1}}
+  \bigr)
+  =
+  c_{\Lambda_{k+1}}\,
+  P^{\mathrm{LoG}}_{-,\Lambda_{k+1}}.
+  \]
+\end{enumerate}
+Thus the only transport-level input not already canonical in the note stack is an explicit bridge
+that identifies the canonical delayed selected generator with a canonical split scalar generator and
+lifts that scalar generator into the odd descendant class.
+The later bridge-construction theorem of this section shows that, once the source-compatible unit
+comparison and canonical-representative packages are imported, this bridge is produced canonically
+from the \(B\)-localized recoherence output itself.
+\end{definition}
+
+\begin{proposition}[A canonical scalar bridge induces canonical scalar datum]
+\label{prop:splitlift-canonical-datum}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume a canonical split-to-descendant scalar bridge in the sense of
+\cref{def:splitlift-canonical-bridge}.
+Define the descended bridge map by
+\[
+\mathfrak L^{\mathrm{split,can}}_{k\to k+1}
+:=
+q_{\Lambda_{k+1}}
+\circ
+\mathfrak I^{\mathrm{split}}_{\Lambda_{k+1}}
+\circ
+\mathfrak T^{\mathrm{split}}_{k\to k+1}
+\;:\;
+\widehat L^{\mathrm{sel,delay}}_k
+\longrightarrow
+\mathfrak D^-_{\Lambda_{k+1}},
+\]
+where \(q_{\Lambda_{k+1}}\) is the quotient map of
+\cref{stack-def:dominant-response-quotient}.
+Set
+\[
+\overline\ell^{\mathrm{Main,can}}_{\Lambda_{k+1}}
+:=
+q_{\Lambda_{k+1}}
+\!\bigl(
+J^{\mathrm{split,can}}_{\Lambda_{k+1}}
+\bigr)
+\]
+and
+\[
+\overline L^{\mathrm{Main,can}}_{\Lambda_{k+1}}
+:=
+\mathbb R\,\overline\ell^{\mathrm{Main,can}}_{\Lambda_{k+1}}
+\subset
+\mathfrak D^-_{\Lambda_{k+1}}.
+\]
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item the data
+  \[
+  \widehat L^{\mathrm{sel,delay}}_k,\quad
+  \mathfrak S^{\mathrm{split}}_{\Lambda_{k+1}},\quad
+  J^{\mathrm{split,can}}_{\Lambda_{k+1}},\quad
+  \mathfrak L^{\mathrm{split,can}}_{k\to k+1}
+  \]
+  together with
+  \(
+  \mathsf W^{\mathrm{red}}_{\Lambda_{k+1}}
+  \!\bigl(
+  J^{\mathrm{split,can}}_{\Lambda_{k+1}}
+  \bigr)
+  =
+  c_{\Lambda_{k+1}}P^{\mathrm{LoG}}_{-,\Lambda_{k+1}}
+  \)
+  form a split-controlled scalar descendant lift datum in the sense of
+  \cref{def:splitlift-scalar-datum};
+\item the element
+  \(
+  J^{\mathrm{split,can}}_{\Lambda_{k+1}}
+  \)
+  is canonical relative to the bridge, because it is determined by the canonical delayed selected
+  generator
+  \(
+  \widehat\ell^{\mathrm{delay}}_k
+  \)
+  together with
+  \(
+  \mathfrak T^{\mathrm{split}}_{k\to k+1}
+  \)
+  and
+  \(
+  \mathfrak I^{\mathrm{split}}_{\Lambda_{k+1}}
+  \);
+\item the scalar line
+  \(
+  \overline L^{\mathrm{Main,can}}_{\Lambda_{k+1}}
+  \subset
+  \mathfrak D^-_{\Lambda_{k+1}}
+  \)
+  is canonical relative to the bridge.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Because
+\(
+\widehat L^{\mathrm{sel,delay}}_k
+=
+\mathbb R\,\widehat\ell^{\mathrm{delay}}_k
+\)
+by \cref{delay-def:delayed-selected-line}, the scalar-transport map
+\(
+\mathfrak T^{\mathrm{split}}_{k\to k+1}
+\)
+determines the generator
+\(
+s^{\mathrm{split,can}}_{\Lambda_{k+1}}
+\)
+uniquely.
+Applying
+\(
+\mathfrak I^{\mathrm{split}}_{\Lambda_{k+1}}
+\)
+then determines
+\(
+J^{\mathrm{split,can}}_{\Lambda_{k+1}}
+\)
+uniquely, and by definition of a canonical split-to-descendant scalar bridge this element lies in
+\(
+[\Xi^{(1)}_{\Lambda_{k+1}}]\cap E^-_{\Lambda_{k+1}}
+\)
+and satisfies the reduced welded compatibility clause of
+\cref{def:splitlift-scalar-datum}.
+
+The map
+\(
+\mathfrak L^{\mathrm{split,can}}_{k\to k+1}
+\)
+is linear by construction, and
+\[
+\mathfrak L^{\mathrm{split,can}}_{k\to k+1}
+\bigl(\widehat\ell^{\mathrm{delay}}_k\bigr)
+=
+q_{\Lambda_{k+1}}
+\!\bigl(
+\mathfrak I^{\mathrm{split}}_{\Lambda_{k+1}}
+\bigl(
+\mathfrak T^{\mathrm{split}}_{k\to k+1}
+\bigl(\widehat\ell^{\mathrm{delay}}_k\bigr)
+\bigr)
+\bigr)
+=
+q_{\Lambda_{k+1}}
+\!\bigl(
+J^{\mathrm{split,can}}_{\Lambda_{k+1}}
+\bigr),
+\]
+which is exactly the remaining clause of \cref{def:splitlift-scalar-datum}.
+So item \textnormal{(1)} follows.
+
+Items \textnormal{(2)} and \textnormal{(3)} are immediate from the displayed definitions: no
+auxiliary basis choice on
+\(
+\mathfrak S^{\mathrm{split}}_{\Lambda_{k+1}}
+\)
+or
+\(
+\mathfrak D^-_{\Lambda_{k+1}}
+\)
+remains after the bridge is fixed.
+\end{proof}
+
+\begin{theorem}[Canonical split scalar carrier from \(B\)-localized recoherence]
+\label{thm:splitlift-canonical-scalar-carrier}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume:
+\begin{enumerate}[leftmargin=2em]
+\item the hypotheses and conclusions of \cref{thm:splitlift-main};
+\item the delayed selected-line data of
+  \cref{delay-def:delayed-selected-line,delay-def:delayed-response-map}.
+\end{enumerate}
+Set
+\[
+\mathfrak S^{\mathrm{split,can}}_{\Lambda_{k+1}}
+:=
+\widehat L^{\mathrm{sel,delay}}_k
+=
+\mathbb R\,\widehat\ell^{\mathrm{delay}}_k,
+\qquad
+s^{\mathrm{split,can}}_{\Lambda_{k+1}}
+:=
+\widehat\ell^{\mathrm{delay}}_k,
+\]
+and define
+\[
+\mathfrak T^{\mathrm{split}}_{k\to k+1}
+:=
+\mathrm{id}_{\widehat L^{\mathrm{sel,delay}}_k}
+:
+\widehat L^{\mathrm{sel,delay}}_k
+\longrightarrow
+\mathfrak S^{\mathrm{split,can}}_{\Lambda_{k+1}}.
+\]
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item
+  \(
+  \mathfrak S^{\mathrm{split,can}}_{\Lambda_{k+1}}
+  \)
+  is a split response scalar line in the sense of \cref{def:splitlift-scalar-line};
+\item the generator
+  \(
+  s^{\mathrm{split,can}}_{\Lambda_{k+1}}
+  \)
+  is canonically determined by the unit delayed selected generator exported by the delayed
+  selected-line package;
+\item
+  \(
+  \mathfrak T^{\mathrm{split}}_{k\to k+1}
+  \)
+  is a canonical linear isomorphism from the delayed selected line to the split scalar carrier.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By \cref{delay-def:delayed-selected-line},
+\(
+\widehat L^{\mathrm{sel,delay}}_k
+=
+\mathbb R\,\widehat\ell^{\mathrm{delay}}_k
+\)
+is already a one-dimensional real line with canonical generator.
+By \cref{thm:splitlift-main}, the only post-split nontrivial effect certified in the present note is
+the recoherence localized in branchwise completion data \(B\), while the inherited \(A\)-side ledger
+is preserved exactly.
+So the honest scalar carrier extracted from that \(B\)-localized recoherence is precisely the
+canonical delayed selected carrier already isolated at the next receiver step.
+Declaring
+\(
+\mathfrak S^{\mathrm{split,can}}_{\Lambda_{k+1}}
+\)
+to be that line itself therefore furnishes a split response scalar line in the sense of
+\cref{def:splitlift-scalar-line}, and the identity map is a canonical linear isomorphism.
+\end{proof}
+
+\begin{definition}[Source-compatible unit descendant realization]
+\label{def:splitlift-unit-source-compatible}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume the unit seam source
+\(
+\tau^{\mathrm{unit}}_{\Lambda_{k+1}}
+\)
+is representable on the characterization layer in the sense of
+\cref{stack-thm:odd-source-representability}, with representable source generator
+\(
+F_{\tau^{\mathrm{unit}}_{\Lambda_{k+1}},\Lambda_{k+1}}
+\in E^-_{\Lambda_{k+1}}.
+\)
+A representative
+\[
+J^{\mathrm{unit}}_{\Lambda_{k+1}}
+\in
+[\Xi^{(1)}_{\Lambda_{k+1}}]\cap E^-_{\Lambda_{k+1}}
+\]
+is called a \emph{source-compatible unit descendant realization} if
+\[
+J^{\mathrm{unit}}_{\Lambda_{k+1}}
+-
+F_{\tau^{\mathrm{unit}}_{\Lambda_{k+1}},\Lambda_{k+1}}
+\in
+\mathcal A^-_{\Lambda_{k+1}}.
+\]
+Equivalently,
+\(
+J^{\mathrm{unit}}_{\Lambda_{k+1}}
+\)
+and
+\(
+F_{\tau^{\mathrm{unit}}_{\Lambda_{k+1}},\Lambda_{k+1}}
+\)
+define the same point of the ambiguity quotient
+\(
+\mathfrak D^-_{\Lambda_{k+1}}
+=
+E^-_{\Lambda_{k+1}}/\mathcal A^-_{\Lambda_{k+1}}.
+\)
+\end{definition}
+
+\begin{theorem}[Canonical source-side quotient bridge from the unit welded odd source]
+\label{thm:splitlift-canonical-quotient-bridge}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume:
+\begin{enumerate}[leftmargin=2em]
+\item the hypotheses of \cref{thm:splitlift-canonical-scalar-carrier};
+\item the unit welded odd source satisfies the specialized representability and scalar identity of
+  \cref{stack-cor:unit-source-representability} at \(\Lambda_{k+1}\);
+\item the descended dominant functional on
+  \(
+  \mathfrak D^-_{\Lambda_{k+1}}
+  \)
+  exists, for example by the generator-wise vanishing package of
+  \cref{stack-prop:dominant-quotient-generators}.
+\end{enumerate}
+Define the source-side quotient bridge point by
+\[
+\overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}}
+:=
+q_{\Lambda_{k+1}}
+\!\bigl(
+F_{\tau^{\mathrm{unit}}_{\Lambda_{k+1}},\Lambda_{k+1}}
+\bigr)
+\in
+\mathfrak D^-_{\Lambda_{k+1}}
+\]
+and define
+\[
+\overline L^{\mathrm{split,src}}_{\Lambda_{k+1}}
+:=
+\mathbb R\,\overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}}
+\subset
+\mathfrak D^-_{\Lambda_{k+1}},
+\qquad
+\mathfrak L^{\mathrm{split,src}}_{k\to k+1}
+:=
+\bigl(
+a\,\widehat\ell^{\mathrm{delay}}_k
+\bigr)
+\longmapsto
+a\,\overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}}.
+\]
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item the quotient point
+  \(
+  \overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}}
+  \)
+  is canonically determined by the representable unit welded odd source;
+\item
+  \(
+  \mathfrak L^{\mathrm{split,src}}_{k\to k+1}
+  \)
+  is a canonical linear map from the delayed selected line to the descendant ambiguity quotient,
+  sending
+  \(
+  \widehat\ell^{\mathrm{delay}}_k
+  \)
+  to
+  \(
+  \overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}}
+  \);
+\item the descended dominant scalar of that quotient point is the unit seam coefficient:
+  \[
+  \overline{\rho}^{\mathrm{dom}}_{\Lambda_{k+1}}
+  \bigl(
+  \overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}}
+  \bigr)
+  =
+  \rho^{\mathrm{dom}}_{\Lambda_{k+1}}
+  \!\bigl(
+  F_{\tau^{\mathrm{unit}}_{\Lambda_{k+1}},\Lambda_{k+1}}
+  \bigr)
+  =
+  c_{\Lambda_{k+1}}.
+  \]
+\end{enumerate}
+Hence the \(B\)-localized recoherence package determines a canonical source-side split-to-descendant
+quotient bridge datum before any descendant representative is chosen.
+\end{theorem}
+
+\begin{proof}
+\cref{stack-cor:unit-source-representability} already identifies the representable generator
+\(
+F_{\tau^{\mathrm{unit}}_{\Lambda_{k+1}},\Lambda_{k+1}}
+\)
+canonically and proves
+\[
+\rho^{\mathrm{dom}}_{\Lambda_{k+1}}
+\!\bigl(
+F_{\tau^{\mathrm{unit}}_{\Lambda_{k+1}},\Lambda_{k+1}}
+\bigr)
+=
+c_{\Lambda_{k+1}}.
+\]
+Because the descended dominant functional on
+\(
+\mathfrak D^-_{\Lambda_{k+1}}
+\)
+exists, its universal factorization identity gives
+\[
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_{k+1}}
+\bigl(
+q_{\Lambda_{k+1}}(J)
+\bigr)
+=
+\rho^{\mathrm{dom}}_{\Lambda_{k+1}}(J)
+\qquad
+\forall J\in E^-_{\Lambda_{k+1}}.
+\]
+Applying this to
+\(
+J=
+F_{\tau^{\mathrm{unit}}_{\Lambda_{k+1}},\Lambda_{k+1}}
+\)
+proves item \textnormal{(3)}.
+Items \textnormal{(1)} and \textnormal{(2)} are then immediate from the displayed definitions and
+\cref{thm:splitlift-canonical-scalar-carrier}.
+\end{proof}
+
+\begin{proposition}[Ambiguity-subordination criterion for the source-side bridge point]
+\label{prop:splitlift-ambiguity-subordination}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume the hypotheses of \cref{thm:splitlift-canonical-quotient-bridge}.
+Let
+\[
+J^{\mathrm{unit}}_{\Lambda_{k+1}}
+\in
+[\Xi^{(1)}_{\Lambda_{k+1}}]\cap E^-_{\Lambda_{k+1}}.
+\]
+Then the following are equivalent:
+\begin{enumerate}[leftmargin=2em,label=(\alph*)]
+\item
+  \[
+  J^{\mathrm{unit}}_{\Lambda_{k+1}}
+  -
+  F_{\tau^{\mathrm{unit}}_{\Lambda_{k+1}},\Lambda_{k+1}}
+  \in
+  \mathcal A^-_{\Lambda_{k+1}};
+  \]
+\item
+  \[
+  q_{\Lambda_{k+1}}
+  \!\bigl(
+  J^{\mathrm{unit}}_{\Lambda_{k+1}}
+  \bigr)
+  =
+  \overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}}.
+  \]
+\end{enumerate}
+If these equivalent statements hold, then
+\[
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_{k+1}}
+\!\bigl(
+q_{\Lambda_{k+1}}(J^{\mathrm{unit}}_{\Lambda_{k+1}})
+\bigr)
+=
+c_{\Lambda_{k+1}}
+\qquad\text{and}\qquad
+\mathsf W^{\mathrm{red}}_{\Lambda_{k+1}}
+\!\bigl(
+J^{\mathrm{unit}}_{\Lambda_{k+1}}
+\bigr)
+=
+c_{\Lambda_{k+1}}\,
+P^{\mathrm{LoG}}_{-,\Lambda_{k+1}}.
+\]
+\end{proposition}
+
+\begin{proof}
+Statement \textnormal{(a)} is equivalent to
+\[
+q_{\Lambda_{k+1}}
+\!\bigl(
+J^{\mathrm{unit}}_{\Lambda_{k+1}}
+\bigr)
+=
+q_{\Lambda_{k+1}}
+\!\bigl(
+F_{\tau^{\mathrm{unit}}_{\Lambda_{k+1}},\Lambda_{k+1}}
+\bigr),
+\]
+which is exactly statement \textnormal{(b)} by the definition of
+\(
+\overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}}
+\).
+So the two formulations are equivalent.
+
+If they hold, then
+\[
+q_{\Lambda_{k+1}}
+\!\bigl(
+J^{\mathrm{unit}}_{\Lambda_{k+1}}
+\bigr)
+=
+\overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}}.
+\]
+Applying item \textnormal{(3)} of \cref{thm:splitlift-canonical-quotient-bridge} gives
+\[
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_{k+1}}
+\!\bigl(
+q_{\Lambda_{k+1}}(J^{\mathrm{unit}}_{\Lambda_{k+1}})
+\bigr)
+=
+c_{\Lambda_{k+1}}.
+\]
+Because
+\(
+J^{\mathrm{unit}}_{\Lambda_{k+1}}
+\in
+[\Xi^{(1)}_{\Lambda_{k+1}}]
+\),
+\cref{stack-cor:dominant-quotient-constancy} identifies the left-hand side with
+\(
+\rho^{\mathrm{dom}}_{\Lambda_{k+1}}(J^{\mathrm{unit}}_{\Lambda_{k+1}})
+\).
+Finally,
+\cref{stack-prop:reduced-welded-ambiguity-trivial}
+gives the displayed reduced welded image identity.
+\end{proof}
+
+\begin{theorem}[Canonical unit realization from one subordinate realization]
+\label{thm:splitlift-canonical-unit-realization}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume:
+\begin{enumerate}[leftmargin=2em]
+\item the hypotheses of \cref{prop:splitlift-ambiguity-subordination};
+\item there exists a source-compatible unit descendant realization
+  \[
+  J^{\mathrm{unit},0}_{\Lambda_{k+1}}
+  \in
+  [\Xi^{(1)}_{\Lambda_{k+1}}]\cap E^-_{\Lambda_{k+1}}
+  \]
+  satisfying the equivalent conditions of \cref{prop:splitlift-ambiguity-subordination};
+\item the imported finite-cutoff canonical representative package at \(\Lambda_{k+1}\): there exists
+  a Hilbertizing bilinear form
+  \(
+  \mathsf B_{\Lambda_{k+1}}
+  \)
+  on
+  \(
+  E^-_{\Lambda_{k+1}}
+  \)
+  and a unique representative
+  \[
+  \mathcal J^{\mathrm{can}}_{\Lambda_{k+1}}
+  \in
+  [\Xi^{(1)}_{\Lambda_{k+1}}]\cap E^-_{\Lambda_{k+1}}
+  \]
+  minimizing
+  \(
+  \mathsf B_{\Lambda_{k+1}}(J,J)
+  \),
+  equivalently satisfying
+  \[
+  \mathsf B_{\Lambda_{k+1}}
+  \bigl(
+  \mathcal J^{\mathrm{can}}_{\Lambda_{k+1}},
+  A
+  \bigr)
+  =
+  0
+  \qquad
+  \forall\,A\in\mathcal A^-_{\Lambda_{k+1}}.
+  \]
+\end{enumerate}
+Set
+\[
+J^{\mathrm{unit,can}}_{\Lambda_{k+1}}
+:=
+\mathcal J^{\mathrm{can}}_{\Lambda_{k+1}}.
+\]
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item
+  \(
+  J^{\mathrm{unit,can}}_{\Lambda_{k+1}}
+  \in
+  [\Xi^{(1)}_{\Lambda_{k+1}}]\cap E^-_{\Lambda_{k+1}}
+  \);
+\item
+  \[
+  q_{\Lambda_{k+1}}
+  \!\bigl(
+  J^{\mathrm{unit,can}}_{\Lambda_{k+1}}
+  \bigr)
+  =
+  \overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}};
+  \]
+\item
+  \[
+  J^{\mathrm{unit,can}}_{\Lambda_{k+1}}
+  -
+  F_{\tau^{\mathrm{unit}}_{\Lambda_{k+1}},\Lambda_{k+1}}
+  \in
+  \mathcal A^-_{\Lambda_{k+1}};
+  \]
+\item
+  \(
+  J^{\mathrm{unit,can}}_{\Lambda_{k+1}}
+  \)
+  is canonical relative to
+  \(
+  \mathsf B_{\Lambda_{k+1}}
+  \)
+  and the source-side bridge point
+  \(
+  \overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}}
+  \).
+\end{enumerate}
+Hence one subordinate unit realization is enough to promote the fixed quotient bridge point to a
+canonical source-compatible unit descendant realization.
+\end{theorem}
+
+\begin{proof}
+Item \textnormal{(1)} is immediate from the definition of
+\(
+J^{\mathrm{unit,can}}_{\Lambda_{k+1}}
+\).
+Because
+\(
+J^{\mathrm{unit,can}}_{\Lambda_{k+1}}
+\)
+and
+\(
+J^{\mathrm{unit},0}_{\Lambda_{k+1}}
+\)
+both lie in the same affine class
+\(
+[\Xi^{(1)}_{\Lambda_{k+1}}]
+\),
+their difference belongs to
+\(
+\mathcal A^-_{\Lambda_{k+1}}
+\).
+Since
+\(
+J^{\mathrm{unit},0}_{\Lambda_{k+1}}
+\)
+satisfies the equivalent conditions of \cref{prop:splitlift-ambiguity-subordination}, we have
+\[
+q_{\Lambda_{k+1}}
+\!\bigl(
+J^{\mathrm{unit},0}_{\Lambda_{k+1}}
+\bigr)
+=
+\overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}}
+\]
+and
+\[
+J^{\mathrm{unit},0}_{\Lambda_{k+1}}
+-
+F_{\tau^{\mathrm{unit}}_{\Lambda_{k+1}},\Lambda_{k+1}}
+\in
+\mathcal A^-_{\Lambda_{k+1}}.
+\]
+Adding the ambiguity difference
+\(
+J^{\mathrm{unit,can}}_{\Lambda_{k+1}}
+-J^{\mathrm{unit},0}_{\Lambda_{k+1}}
+\in
+\mathcal A^-_{\Lambda_{k+1}}
+\)
+to the second display proves item \textnormal{(3)}.
+Applying the quotient map to the same ambiguity difference proves item \textnormal{(2)}.
+Finally, item \textnormal{(4)} is exactly the uniqueness clause in the imported finite-cutoff
+canonical-representative package.
+\end{proof}
+
+\begin{theorem}[Bridge closure from one ambiguity-subordinated unit realization]
+\label{thm:splitlift-canonical-bridge-from-B}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume the hypotheses of \cref{thm:splitlift-canonical-unit-realization}.
+Then the source-side quotient bridge point
+\(
+\overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}}
+\)
+is exactly the descendant-class quotient point
+\(
+q_{\Lambda_{k+1}}(J^{\mathrm{unit,can}}_{\Lambda_{k+1}})
+\),
+and the canonical map
+\(
+\mathfrak L^{\mathrm{split,src}}_{k\to k+1}
+\)
+is the desired split-to-descendant bridge datum in
+\(
+\mathfrak D^-_{\Lambda_{k+1}}
+\).
+\end{theorem}
+
+\begin{proof}
+This is exactly item \textnormal{(2)} of
+\cref{thm:splitlift-canonical-unit-realization}, together with the definition of
+\(
+\mathfrak L^{\mathrm{split,src}}_{k\to k+1}
+\)
+from \cref{thm:splitlift-canonical-quotient-bridge}.
+\end{proof}
+
+\begin{corollary}[Subordinate unit realizations are unique modulo ambiguity]
+\label{cor:splitlift-unit-realization-uniqueness}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume the hypotheses of \cref{prop:splitlift-ambiguity-subordination}.
+Let
+\[
+J^{\mathrm{unit},1}_{\Lambda_{k+1}},
+\quad
+J^{\mathrm{unit},2}_{\Lambda_{k+1}}
+\in
+[\Xi^{(1)}_{\Lambda_{k+1}}]\cap E^-_{\Lambda_{k+1}}
+\]
+each satisfy the equivalent conditions of \cref{prop:splitlift-ambiguity-subordination}.
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item
+  \[
+  J^{\mathrm{unit},2}_{\Lambda_{k+1}}
+  -
+  J^{\mathrm{unit},1}_{\Lambda_{k+1}}
+  \in
+  \mathcal A^-_{\Lambda_{k+1}};
+  \]
+\item
+  \[
+  q_{\Lambda_{k+1}}
+  \!\bigl(
+  J^{\mathrm{unit},1}_{\Lambda_{k+1}}
+  \bigr)
+  =
+  q_{\Lambda_{k+1}}
+  \!\bigl(
+  J^{\mathrm{unit},2}_{\Lambda_{k+1}}
+  \bigr)
+  =
+  \overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}};
+  \]
+\item
+  \[
+  \overline{\rho}^{\mathrm{dom}}_{\Lambda_{k+1}}
+  \!\bigl(
+  q_{\Lambda_{k+1}}(J^{\mathrm{unit},1}_{\Lambda_{k+1}})
+  \bigr)
+  =
+  \overline{\rho}^{\mathrm{dom}}_{\Lambda_{k+1}}
+  \!\bigl(
+  q_{\Lambda_{k+1}}(J^{\mathrm{unit},2}_{\Lambda_{k+1}})
+  \bigr)
+  =
+  c_{\Lambda_{k+1}};
+  \]
+\item
+  \[
+  \mathsf W^{\mathrm{red}}_{\Lambda_{k+1}}
+  \!\bigl(
+  J^{\mathrm{unit},1}_{\Lambda_{k+1}}
+  \bigr)
+  =
+  \mathsf W^{\mathrm{red}}_{\Lambda_{k+1}}
+  \!\bigl(
+  J^{\mathrm{unit},2}_{\Lambda_{k+1}}
+  \bigr)
+  =
+  c_{\Lambda_{k+1}}\,
+  P^{\mathrm{LoG}}_{-,\Lambda_{k+1}}.
+  \]
+\end{enumerate}
+In particular, source-compatible unit realizations subordinate to the canonical source-side bridge
+point are unique modulo
+\(
+\mathcal A^-_{\Lambda_{k+1}}
+\),
+and every datum read only through that quotient point together with the reduced welded image is
+representative-independent on that class.
+\end{corollary}
+
+\begin{proof}
+Because both
+\(
+J^{\mathrm{unit},1}_{\Lambda_{k+1}}
+\)
+and
+\(
+J^{\mathrm{unit},2}_{\Lambda_{k+1}}
+\)
+belong to
+\(
+[\Xi^{(1)}_{\Lambda_{k+1}}]
+\),
+their difference lies in
+\(
+\mathcal A^-_{\Lambda_{k+1}}
+\),
+which proves item \textnormal{(1)}.
+Item \textnormal{(2)} is exactly the quotient-point clause of
+\cref{prop:splitlift-ambiguity-subordination} applied to each representative.
+Items \textnormal{(3)} and \textnormal{(4)} are then the final conclusions of
+\cref{prop:splitlift-ambiguity-subordination}, again applied to each representative.
+The concluding sentence is immediate from those displayed identities.
+\end{proof}
+
+\begin{remark}[Exact-family accepted-boundary invariance]
+\label{rem:splitlift-unit-realization-accepted-boundary-audit}
+The theorem-backed corollary above controls the quotient point and the reduced welded image.
+On the current exact split-controlled surrogate family, the separate audit packet
+\texttt{Main/Mathematica/Reports/Lane1BridgeClosureAudit.md} also certifies a stronger
+finite-dimensional statement: any two admissible positive-calibration realizations subordinate to the
+same source-side bridge point have the same accepted welded boundary image.
+That accepted-boundary invariance is therefore presently exact-family support rather than
+theorem-backed text.
+\end{remark}
+
+\begin{corollary}[Canonical representative reconstruction after bridge closure]
+\label{cor:splitlift-canonical-bridge-reconstruction}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume the hypotheses of \cref{thm:splitlift-canonical-bridge-from-B}.
+Set
+\[
+J^{\mathrm{split,can}}_{\Lambda_{k+1}}
+:=
+J^{\mathrm{unit,can}}_{\Lambda_{k+1}}
+\]
+and define
+\[
+\mathfrak I^{\mathrm{split}}_{\Lambda_{k+1}}
+:
+\mathfrak S^{\mathrm{split,can}}_{\Lambda_{k+1}}
+\longrightarrow
+E^-_{\Lambda_{k+1}},
+\qquad
+\mathfrak I^{\mathrm{split}}_{\Lambda_{k+1}}
+\bigl(
+a\,s^{\mathrm{split,can}}_{\Lambda_{k+1}}
+\bigr)
+:=
+a\,J^{\mathrm{split,can}}_{\Lambda_{k+1}}.
+\]
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item
+  \[
+  q_{\Lambda_{k+1}}
+  \!\bigl(
+  J^{\mathrm{split,can}}_{\Lambda_{k+1}}
+  \bigr)
+  =
+  \overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}};
+  \]
+\item
+  \[
+  \mathsf W^{\mathrm{red}}_{\Lambda_{k+1}}
+  \!\bigl(
+  J^{\mathrm{split,can}}_{\Lambda_{k+1}}
+  \bigr)
+  =
+  c_{\Lambda_{k+1}}\,
+  P^{\mathrm{LoG}}_{-,\Lambda_{k+1}};
+  \]
+\item the pair
+  \(
+  \mathfrak T^{\mathrm{split}}_{k\to k+1}
+  \)
+  and
+  \(
+  \mathfrak I^{\mathrm{split}}_{\Lambda_{k+1}}
+  \)
+  defines a canonical split-to-descendant scalar bridge in the sense of
+  \cref{def:splitlift-canonical-bridge}.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Item \textnormal{(1)} is exactly \cref{thm:splitlift-canonical-bridge-from-B}.
+Item \textnormal{(2)} is the reduced welded-image conclusion of
+\cref{prop:splitlift-ambiguity-subordination}, applied to the canonical unit realization supplied by
+\cref{thm:splitlift-canonical-unit-realization}.
+
+By \cref{thm:splitlift-canonical-scalar-carrier}, the generator
+\(
+s^{\mathrm{split,can}}_{\Lambda_{k+1}}
+\)
+is exactly
+\(
+\widehat\ell^{\mathrm{delay}}_k
+\)
+and
+\(
+\mathfrak T^{\mathrm{split}}_{k\to k+1}
+\)
+is the identity on the delayed selected line.
+So every clause of \cref{def:splitlift-canonical-bridge} is satisfied, proving item
+\textnormal{(3)}.
+\end{proof}
+
+\begin{corollary}[\(B\)-localized recoherence plus one subordinate unit realization produces canonical scalar datum]
+\label{cor:splitlift-canonical-datum-from-B}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume the hypotheses of \cref{cor:splitlift-canonical-bridge-reconstruction}.
+Then \cref{prop:splitlift-canonical-datum} applies with the bridge reconstructed in
+\cref{cor:splitlift-canonical-bridge-reconstruction}.
+Consequently the split-controlled delayed selected-line data determine a canonical scalar datum
+and a canonical quotient subspace
+\[
+\overline L^{\mathrm{Main,can}}_{\Lambda_{k+1}}
+\subset
+\mathfrak D^-_{\Lambda_{k+1}}.
+\]
+\end{corollary}
+
+\begin{proof}
+Apply \cref{prop:splitlift-canonical-datum} to the canonical bridge furnished by
+\cref{cor:splitlift-canonical-bridge-reconstruction}.
+\end{proof}
+
+\begin{theorem}[Split-controlled scalar descendant lift]
+\label{thm:splitlift-scalar-descendant-lift}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume:
+\begin{enumerate}[leftmargin=2em]
+\item the hypotheses and conclusions of \cref{thm:splitlift-main};
+\item the delayed selected-line package of
+  \cref{delay-def:delayed-selected-line,delay-def:delayed-response-map,delay-thm:delayed-response-sufficiency};
+\item a split-controlled scalar descendant lift datum of
+  \cref{def:splitlift-scalar-datum}.
+\end{enumerate}
+Set
+\[
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}
+:=
+\mathfrak L^{\mathrm{split}}_{k\to k+1}
+\bigl(\widehat\ell^{\mathrm{delay}}_k\bigr)
+=
+q_{\Lambda_{k+1}}\!\bigl(J^{\mathrm{split}}_{\Lambda_{k+1}}\bigr)
+\]
+and
+\[
+\overline L^{\mathrm{Main}}_{\Lambda_{k+1}}
+:=
+\mathbb R\,\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}
+\subset
+\mathfrak D^-_{\Lambda_{k+1}}.
+\]
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item the map
+  \[
+  \mathfrak L^{\mathrm{split}}_{k\to k+1}:
+  \widehat L^{\mathrm{sel,delay}}_k\to \mathfrak D^-_{\Lambda_{k+1}}
+  \]
+  is well defined on the delayed selected line;
+\item the image generator is nonzero:
+  \[
+  \overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}\neq 0;
+  \]
+\item the image generator is dominant-active:
+  \[
+  \overline{\rho}^{\mathrm{dom}}_{\Lambda_{k+1}}
+  \bigl(
+  \overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}
+  \bigr)
+  =
+  c_{\Lambda_{k+1}}
+  \neq 0;
+  \]
+\item \(\mathfrak L^{\mathrm{split}}_{k\to k+1}\) is faithful on
+  \(\widehat L^{\mathrm{sel,delay}}_k\);
+\item the current Main-visible reduced welded image of the lifted generator is nonzero:
+  \[
+  \mathsf W^{\mathrm{red}}_{\Lambda_{k+1}}
+  \!\bigl(J^{\mathrm{split}}_{\Lambda_{k+1}}\bigr)
+  \neq 0.
+  \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By \cref{delay-thm:delayed-response-sufficiency}, the delayed realization map has trivial kernel on
+\(
+\widehat L^{\mathrm{sel,delay}}_k
+\).
+So the delayed selected line is already faithful on its own delayed carrier.
+
+Because
+\(
+\widehat L^{\mathrm{sel,delay}}_k
+=
+\mathbb R\,\widehat\ell^{\mathrm{delay}}_k
+\)
+by \cref{delay-def:delayed-selected-line}, any linear map out of that line is determined uniquely by
+the image of the generator.
+The datum of \cref{def:splitlift-scalar-datum} therefore makes
+\(
+\mathfrak L^{\mathrm{split}}_{k\to k+1}
+\)
+well defined, proving item \textnormal{(1)}.
+
+By the compatibility clause in \cref{def:splitlift-scalar-datum},
+\[
+\mathsf W^{\mathrm{red}}_{\Lambda_{k+1}}
+\!\bigl(J^{\mathrm{split}}_{\Lambda_{k+1}}\bigr)
+=
+c_{\Lambda_{k+1}}\,
+P^{\mathrm{LoG}}_{-,\Lambda_{k+1}}.
+\]
+Here
+\(
+c_{\Lambda_{k+1}}\neq 0
+\)
+by the delayed selected-line package and
+\(
+P^{\mathrm{LoG}}_{-,\Lambda_{k+1}}\neq 0
+\)
+by \cref{stack-cor:compressed-export-selection}.
+Hence the displayed reduced welded image is nonzero, proving item \textnormal{(5)}.
+
+Now suppose for contradiction that
+\[
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}
+=
+q_{\Lambda_{k+1}}\!\bigl(J^{\mathrm{split}}_{\Lambda_{k+1}}\bigr)
+=
+0.
+\]
+Then
+\(
+J^{\mathrm{split}}_{\Lambda_{k+1}}\in \mathcal A^-_{\Lambda_{k+1}}
+\),
+so \cref{stack-prop:reduced-welded-ambiguity-trivial} gives
+\[
+\mathsf W^{\mathrm{red}}_{\Lambda_{k+1}}
+\!\bigl(J^{\mathrm{split}}_{\Lambda_{k+1}}\bigr)
+=
+0,
+\]
+contradicting item \textnormal{(5)} already proved.
+Therefore
+\(
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}\neq 0
+\),
+which is item \textnormal{(2)}.
+
+By \cref{stack-prop:reduced-welded-ambiguity-trivial}, the reduced welded image is exactly the
+dominant-response scalar times the canonical LoG projector:
+\[
+\mathsf W^{\mathrm{red}}_{\Lambda_{k+1}}
+\!\bigl(J^{\mathrm{split}}_{\Lambda_{k+1}}\bigr)
+=
+\rho^{\mathrm{dom}}_{\Lambda_{k+1}}
+\!\bigl(J^{\mathrm{split}}_{\Lambda_{k+1}}\bigr)\,
+P^{\mathrm{LoG}}_{-,\Lambda_{k+1}}.
+\]
+Comparing with the compatibility clause from \cref{def:splitlift-scalar-datum} shows
+\[
+\rho^{\mathrm{dom}}_{\Lambda_{k+1}}
+\!\bigl(J^{\mathrm{split}}_{\Lambda_{k+1}}\bigr)
+=
+c_{\Lambda_{k+1}}.
+\]
+Because
+\(
+J^{\mathrm{split}}_{\Lambda_{k+1}}
+\in
+[\Xi^{(1)}_{\Lambda_{k+1}}]
+\),
+\cref{stack-cor:dominant-quotient-constancy} yields
+\[
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_{k+1}}
+\bigl(
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}
+\bigr)
+=
+\rho^{\mathrm{dom}}_{\Lambda_{k+1}}
+\!\bigl(J^{\mathrm{split}}_{\Lambda_{k+1}}\bigr)
+=
+c_{\Lambda_{k+1}}
+\neq 0,
+\]
+which proves item \textnormal{(3)}.
+
+Finally, the domain
+\(
+\widehat L^{\mathrm{sel,delay}}_k
+\)
+is one-dimensional, and its generator has nonzero image
+\(
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}\neq 0
+\).
+Therefore the kernel of
+\(
+\mathfrak L^{\mathrm{split}}_{k\to k+1}
+\)
+is trivial, proving item \textnormal{(4)}.
+\end{proof}
+
+\begin{corollary}[Canonical split-controlled scalar descendant lift]
+\label{cor:splitlift-canonical-scalar-descendant-lift}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume:
+\begin{enumerate}[leftmargin=2em]
+\item the hypotheses of \cref{cor:splitlift-canonical-datum-from-B};
+\item the delayed selected-line package of
+  \cref{delay-def:delayed-selected-line,delay-def:delayed-response-map,delay-thm:delayed-response-sufficiency}.
+\end{enumerate}
+Then the canonical datum of \cref{cor:splitlift-canonical-datum-from-B} satisfies the hypotheses of
+\cref{thm:splitlift-scalar-descendant-lift}.
+Consequently the conclusions of that theorem hold with
+\[
+J^{\mathrm{split}}_{\Lambda_{k+1}}
+:=
+J^{\mathrm{split,can}}_{\Lambda_{k+1}},
+\qquad
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}
+:=
+\overline\ell^{\mathrm{Main,can}}_{\Lambda_{k+1}},
+\]
+and
+\[
+\overline L^{\mathrm{Main}}_{\Lambda_{k+1}}
+=
+\overline L^{\mathrm{Main,can}}_{\Lambda_{k+1}}
+\subset
+\mathfrak D^-_{\Lambda_{k+1}}.
+\]
+In particular, once the canonical split-to-descendant scalar bridge is supplied, the scalar datum of
+the split-controlled delayed selected-line package is canonical and determines a canonical nonzero
+dominant-active scalar line in the ambiguity quotient once the delayed selected-line package is in
+force.
+\end{corollary}
+
+\begin{proof}
+By \cref{cor:splitlift-canonical-datum-from-B}, the canonical bridge built from the
+\(B\)-localized recoherence output induces a split-controlled scalar descendant lift datum.
+The remaining assumptions of \cref{thm:splitlift-scalar-descendant-lift} are already included in
+\cref{cor:splitlift-canonical-datum-from-B}, except for the delayed selected-line package, which is
+assumed here.
+So the conclusions of \cref{thm:splitlift-scalar-descendant-lift} apply verbatim to the canonical
+datum.
+\end{proof}
+
+\begin{remark}[Boundary for canonical scalar data]
+\label{rem:splitlift-canonical-status}
+Theorem~\cref{thm:splitlift-canonical-quotient-bridge} determines the canonical source-side bridge
+point
+\(
+\overline\ell^{\mathrm{split,src}}_{\Lambda_{k+1}}
+\in
+\mathfrak D^-_{\Lambda_{k+1}}
+\)
+before any descendant representative is chosen.
+If there exists a source-compatible unit descendant realization subordinate to that bridge point,
+then
+Theorem~\cref{thm:splitlift-canonical-unit-realization} and
+Corollary~\cref{cor:splitlift-unit-realization-uniqueness}
+canonicalize that realization and reconstruct the canonical split-to-descendant scalar bridge.
+
+What remains assumed is the existence of one such subordinate source-compatible unit descendant
+realization.
+Nor does the present note derive the package nondegeneracy clause
+\(
+c_{\Lambda_{k+1}}\neq 0
+\);
+that clause is still imported from the upstream seam-overlap/transport lane.
+\end{remark}
+
+\begin{remark}[Scope of the scalar bridge]
+\label{rem:splitlift-scalar-bridge-scope}
+\cref{thm:splitlift-scalar-descendant-lift} reaches only the ambiguity quotient
+\(
+\mathfrak D^-_{\Lambda_{k+1}}
+\)
+and the current Main-visible reduced welded image.
+It does \emph{not} claim any automatic further reentry into a stronger selected descendant quotient,
+physical quotient, or mod-null package.
+That later step remains conditional.
+\end{remark}
+
+\section{Structural Limits}
+\label{sec:splitlift-boundaries}
+
+\begin{remark}[Conditional character]
+\label{rem:splitlift-conditional}
+\label{rem:splitlift-upgrade}
+\label{rem:splitlift-gate}
+The proofs in this note begin once the controlled completion branch decomposition of
+\cref{ass:splitlift-controlled} is granted.
+They show that the inherited ledger projectors are QND, the abstract accepted-record payload on
+\(A\) is preserved exactly, and any recoherence certified here is confined to branchwise
+completion data \(B\).
+They do not derive the direct-sum realization
+\(
+\Hacc\cong\bigoplus_i (\mathbb C e_i\otimes \mathcal H_i^{(B)})
+\)
+or its branchwise controlled realization from microscopic UOM dynamics.
+\end{remark}
+
+\begin{remark}[Residual source-internal factorization problem]
+\label{rem:splitlift-blocker}
+\label{rem:splitlift-blocker-physical}
+To remove the explicit split-data premise from \cref{thm:splitlift-main}, one would need a
+source-internal statement on the accepted welded branch asserting that the compiled welded control is
+determined entirely by the accepted-record sectors of the inherited ledger, so that the controlling
+branch labels and branchwise completion actions are fixed by accepted-record data with no additional
+completion-side choice.
+That factorization problem is separate from the ledger-side consequences proved here.
+In particular, the present theorem should not be read as identifying the full completion datum with
+the current accepted-record sector.
+\end{remark}
+
+\begin{remark}[Gaussian-independent scope]
+\label{rem:splitlift-gaussian-fence}
+Nothing in this note proves Gaussian dilation existence, symplectic uniqueness, or completion
+Hamiltonian reconstruction.
+Those realization questions are not used in the proofs of
+\cref{lem:splitlift-qnd,prop:splitlift-payload,cor:splitlift-classical,thm:splitlift-main}.
+\end{remark}
+
+\end{document}

@@ -1,0 +1,333 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     15883,        324]
+NotebookOptionsPosition[     11559,        268]
+NotebookOutlinePosition[     11873,        282]
+CellTagsIndexPosition[     11830,        279]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Interface Robustness Audit", "Title",ExpressionUUID->"d5b36fc2-ae41-4a61-b61f-095403e94d39"],
+
+Cell[TextData[{
+ "Date: ",
+ Cell[BoxData[Cell["2026-03-14",
+   Background->None,ExpressionUUID->"71bc9c73-87e3-41d5-8d7f-6ab8bb8ddddf"]], 
+  "InlineCode",ExpressionUUID->"4b1b5efc-fe4f-47ff-b914-dc071bdf44a3"],
+ "Report companion: ",
+ Cell[BoxData[Cell["\<\
+/home/kray-l8/work/2T/Main/Mathematica/Reports/InterfaceRobustnessAudit.md\
+\>",
+   Background->None,ExpressionUUID->"1ad312d1-830b-4e3e-b1f6-86e9ce4b2df6"]], 
+  "InlineCode",ExpressionUUID->"693a68ac-13fe-4cbe-b34f-feaf28381973"]
+}], "Text",ExpressionUUID->"915d1f2d-bcb3-445a-a86e-71872bcabdc0"],
+
+Cell["Executive decision", "Section",ExpressionUUID->"2d2d9392-1835-4aa8-a246-097d2e2980e5"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["I0",
+   Background->None,ExpressionUUID->"9213017d-1d68-469f-89a8-4eff2b9ada54"]], 
+  "InlineCode",ExpressionUUID->"e4bd3816-e2b9-4201-a48e-425076757fa5"],
+ ": ",
+ Cell[BoxData[Cell["stable minimum",
+   Background->None,ExpressionUUID->"f4e3ae86-ec85-469b-8b92-05deee673f9e"]], 
+  "InlineCode",ExpressionUUID->"573c6bc1-3616-450c-b16f-bcfe034075e4"]
+}], "Item",ExpressionUUID->"35b680db-c075-4dee-b774-afeddcd58c44"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["I1",
+   Background->None,ExpressionUUID->"70f39417-9c6d-473b-890b-d061546b5f8b"]], 
+  "InlineCode",ExpressionUUID->"a8ff26e3-9241-4479-967c-0b87ebe6159b"],
+ " with fused ",
+ Cell[BoxData[Cell["GeometricLockingQ",
+   Background->None,ExpressionUUID->"12cc9778-d189-4837-bfa5-543db7d6b2ba"]], 
+  "InlineCode",ExpressionUUID->"d23dfb69-c2f8-4b8d-ad7a-dbf5e47ef59c"],
+ ": ",
+ StyleBox["overcompressed", "TI"]
+}], "Item",ExpressionUUID->"294a072e-77c7-450b-8abd-d2ee221f67ff"],
+
+Cell[TextData[{
+ "decomposed five-piece strong-safe package: ",
+ Cell[BoxData[Cell["family-relative minimum",
+   Background->None,ExpressionUUID->"c8d8f28f-76ee-4388-9ee0-844ec0fe25d5"]], 
+  "InlineCode",ExpressionUUID->"ad4ee737-1658-4746-b07c-3a6b6aa31de6"]
+}], "Item",ExpressionUUID->"a106ce15-8246-4d87-b995-1c90e78898fb"],
+
+Cell[TextData[{
+ "three-axiom compression: ",
+ Cell[BoxData[Cell["family-relative minimum",
+   Background->None,ExpressionUUID->"5c82aa1c-b147-47c5-b705-5081a602d349"]], 
+  "InlineCode",ExpressionUUID->"6431252e-bd9e-4140-8588-017754684577"]
+}], "Item",ExpressionUUID->"b736e55b-e414-488e-b5c2-359f10e83860"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["I2",
+   Background->None,ExpressionUUID->"15f7cec3-cc44-445b-9710-b27601a72cca"]], 
+  "InlineCode",ExpressionUUID->"623f6833-9a81-4c9f-853a-a939d1e2dd02"],
+ ": ",
+ Cell[BoxData[Cell["family-relative minimum",
+   Background->None,ExpressionUUID->"7dcafe60-311c-49fb-9174-c9271502cac8"]], 
+  "InlineCode",ExpressionUUID->"2b42f59f-5fad-44b9-820d-b862b70f4f36"]
+}], "Item",ExpressionUUID->"bc7fc7e3-7f5d-44f2-839a-410442498b25"],
+
+Cell["generic visible-ambiguity lane: retained as negative control", "Item",ExpressionUUID->"7fa50584-d59b-48e8-a14a-e38cebece581"],
+
+Cell["Evidence rule", "Section",ExpressionUUID->"904c99df-8063-42db-8c11-e0bf71a7a3b9"],
+
+Cell["Every decision is separated into: ", "Text",ExpressionUUID->"2eab7164-2576-4b42-87fb-bb8add82e991"],
+
+Cell["theorem-backed text", "Item",ExpressionUUID->"6786b4fe-ff8f-4bc2-b4c8-8f5ca153da4e"],
+
+Cell["exact WL certificate", "Item",ExpressionUUID->"3e0c7135-267c-4492-baf5-66d2504c2468"],
+
+Cell["imported analytic assumptions", "Item",ExpressionUUID->"497d396e-733f-4773-93f7-0285834d562c"],
+
+Cell["Exact ablation results", "Section",ExpressionUUID->"b87a37c7-8624-42fd-b672-41416386bd4f"],
+
+Cell[TextData[{
+ "remove exact accepted-record preservation -> ",
+ Cell[BoxData[Cell["mod-null-safe",
+   Background->None,ExpressionUUID->"ab31c50b-7917-44b7-9c61-c6624e5449ff"]], 
+  "InlineCode",ExpressionUUID->"43db9daa-ea5f-4ecd-9ad3-f0cc95c3f2bd"]
+}], "Item",ExpressionUUID->"4f5a014b-f51d-489e-96db-d0e4555d125e"],
+
+Cell[TextData[{
+ "relax receiver band-lock -> ",
+ Cell[BoxData[Cell["visible-ambiguity",
+   Background->None,ExpressionUUID->"8e48ef09-5abf-454f-9645-26c212395c6c"]], 
+  "InlineCode",ExpressionUUID->"4bffbad2-b4bc-41cd-84bc-f0eb6b6f13ef"]
+}], "Item",ExpressionUUID->"ef699bf8-b346-41b0-8633-b062311c6672"],
+
+Cell[TextData[{
+ "raise compressed rank -> ",
+ Cell[BoxData[Cell["visible-ambiguity",
+   Background->None,ExpressionUUID->"43fbfdd6-86f2-4fe2-a9c2-b74cd7c3a365"]], 
+  "InlineCode",ExpressionUUID->"988bfa0c-3f6e-4836-a821-f38ef201cd06"]
+}], "Item",ExpressionUUID->"aa1a8189-6825-437b-be1a-f832aa9fc2ca"],
+
+Cell[TextData[{
+ "relax co-centering -> ",
+ Cell[BoxData[Cell["visible-ambiguity",
+   Background->None,ExpressionUUID->"3d422199-d1fa-470c-a2b3-a2acaa787dd4"]], 
+  "InlineCode",ExpressionUUID->"360e6624-0ab7-433a-928b-6dc9a2351f03"]
+}], "Item",ExpressionUUID->"6f7a102d-7994-4276-9911-db3d2f3d04a4"],
+
+Cell[TextData[{
+ "replace descended-scalar factorization -> ",
+ Cell[BoxData[Cell["visible-ambiguity",
+   Background->None,ExpressionUUID->"7a4c5276-4f10-44bb-93bd-593855c78980"]], 
+  "InlineCode",ExpressionUUID->"f8f5f62a-b9e1-4cb8-8d79-295c7141dc73"]
+}], "Item",ExpressionUUID->"282fe1d6-43bd-44e2-ae81-4b35fe22e4eb"],
+
+Cell["Geometric locking conclusion", "Section",ExpressionUUID->"b856b300-0288-4791-b1c5-031e1d02bd7a"],
+
+Cell["Theorem-backed text:", "Text",ExpressionUUID->"a58a676d-156e-4af1-8429-c0b0b47bd19f"],
+
+Cell["\<\
+The live UOM text already treats band-lock and co-centering as \
+distinguishable theorem-level ingredients.\
+\>", "Text",ExpressionUUID->"4b50c87f-35cd-4758-84f9-0061d234280a"],
+
+Cell["Exact WL certificate:", "Text",ExpressionUUID->"2dec2661-7d86-4a35-9939-ee86730a5c08"],
+
+Cell[TextData[{
+ "The exact ablation lane shows that relaxing either one independently \
+destroys ",
+ Cell[BoxData[Cell["strong-safe",
+   Background->None,ExpressionUUID->"d9621c85-819f-4c6e-b960-b9eab1db883f"]], 
+  "InlineCode",ExpressionUUID->"059cbd94-81f0-43e2-a55d-a6c343beacba"],
+ "."
+}], "Text",ExpressionUUID->"77aa4ac6-6ff2-4a36-8807-89746b5032ff"],
+
+Cell["Imported analytic assumptions:", "Text",ExpressionUUID->"bbc87301-c6d7-4f87-a72b-8ac3ee61e275"],
+
+Cell[TextData[{
+ "Therefore ",
+ Cell[BoxData[Cell["geometric locking",
+   Background->None,ExpressionUUID->"91aca199-8226-4899-9370-aca89ee4c46f"]], 
+  "InlineCode",ExpressionUUID->"62b0f1f7-a5cb-4880-9fb5-8729ba10bee0"],
+ " is not yet an honest single theorem-facing primitive. "
+}], "Text",ExpressionUUID->"f8a5f20c-ba7f-4d59-879b-3f48d7eb3ff3"],
+
+Cell[TextData[{
+ "Candidate ",
+ Cell[BoxData[Cell["I0",
+   Background->None,ExpressionUUID->"6f73034e-2cb4-467a-9f2c-516f999b9eb0"]], 
+  "InlineCode",ExpressionUUID->"88fb20e8-d0a1-4ee5-b1bc-5494b2d8f426"]
+}], "Section",ExpressionUUID->"d04161a2-1282-4796-8986-ec411356dc60"],
+
+Cell[TextData[{
+ "Theorem-backed text: ",
+ Cell[BoxData[Cell["def:2T-char",
+   Background->None,ExpressionUUID->"a5d1e793-849d-4a65-98d0-56dc8704bb4e"]], 
+  "InlineCode",ExpressionUUID->"fecca2d1-d2f8-455e-be33-c03de1bd2a28"],
+ " and ",
+ Cell[BoxData[Cell["thm:finite-cutoff-Jcan",
+   Background->None,ExpressionUUID->"255069aa-470a-4e90-9c62-8aec2b710585"]], 
+  "InlineCode",ExpressionUUID->"0a1b2bb5-ffac-4e17-aa65-d318e430b647"],
+ " define the abstract boundary consumption map."
+}], "Text",ExpressionUUID->"2add8776-504f-4344-aa4e-7aa9acceca8d"],
+
+Cell[TextData[{
+ "Exact WL certificate: ",
+ Cell[BoxData[Cell["CosmologyBoundaryInterfaceCandidates.md",
+   Background->None,ExpressionUUID->"2e2b6e89-9367-4d5e-b0a0-6af366629b4a"]], 
+  "InlineCode",ExpressionUUID->"7f246145-2882-4875-b4fc-14b42a9e4676"],
+ " certifies ",
+ Cell[BoxData[Cell["I0",
+   Background->None,ExpressionUUID->"f598dec6-6391-4173-bf03-5731dc8a1aad"]], 
+  "InlineCode",ExpressionUUID->"cf74c366-b8b1-4629-bf6d-6043776dfaaf"],
+ " as the minimal boundary candidate."
+}], "Text",ExpressionUUID->"9a17c889-6cb2-4a36-b6dd-d17571d93cc2"],
+
+Cell["Imported analytic assumptions:", "Text",ExpressionUUID->"bf1f5ee4-f6d3-4c91-9f0c-a750e3ea0014"],
+
+Cell["\<\
+This is still mock-tested rather than abstractly proved for all cosmology \
+theories.\
+\>", "Text",ExpressionUUID->"760c4e70-95d4-4174-80b2-2d48c34eff00"],
+
+Cell[TextData[{
+ "Verdict: ",
+ Cell[BoxData[Cell["stable minimum",
+   Background->None,ExpressionUUID->"2a504d9d-2bce-4539-a630-ce1bd900280a"]], 
+  "InlineCode",ExpressionUUID->"68dc168c-1963-4c2a-a7ce-72ef6bfaf8d3"]
+}], "Text",ExpressionUUID->"61810ec1-1ac3-44c9-8d58-0c5a7b9a6c25"],
+
+Cell[TextData[{
+ "Candidate ",
+ Cell[BoxData[Cell["I2",
+   Background->None,ExpressionUUID->"107890e1-cee4-4858-9e20-5bc003fd4726"]], 
+  "InlineCode",ExpressionUUID->"df254d30-6bdf-4605-8370-fb6b032ee5c8"]
+}], "Section",ExpressionUUID->"912052e8-0023-4ff4-8915-9ba035324dd7"],
+
+Cell["Theorem-backed text:", "Text",ExpressionUUID->"9a7f79b0-83dc-4137-880d-aa88096c4771"],
+
+Cell["\<\
+Boundary ingredients are partially or fully theorem-backed, but completion \
+additions remain assumption-backed.\
+\>", "Text",ExpressionUUID->"03a04fc9-f289-489a-97ff-a19ced137ab9"],
+
+Cell[TextData[{
+ "Exact WL certificate: ",
+ Cell[BoxData[Cell["CosmologyBoundaryInterfaceCandidates.md",
+   Background->None,ExpressionUUID->"ee990877-b66e-49f4-8a1a-3ef5a9129f86"]], 
+  "InlineCode",ExpressionUUID->"0336310d-30fc-4b1d-b66d-696e0154ec72"],
+ " certifies ",
+ Cell[BoxData[Cell["I2",
+   Background->None,ExpressionUUID->"8b17cb08-c60e-444d-9b0e-9b68cebbd481"]], 
+  "InlineCode",ExpressionUUID->"fe76fa63-d8e5-4248-a23f-c04b4007441b"],
+ " as the minimal completion-aware candidate in the exact mock lane."
+}], "Text",ExpressionUUID->"48c9e39d-e282-49ee-93cd-eb4ee05d5bd3"],
+
+Cell["Imported analytic assumptions:", "Text",ExpressionUUID->"f9265cfe-0c72-4a89-8983-3792404bc62b"],
+
+Cell["The completion result remains contract-level.", "Text",ExpressionUUID->"79d93487-f75b-4b2d-b300-8b388f0b35b7"],
+
+Cell[TextData[{
+ "Verdict: ",
+ Cell[BoxData[Cell["family-relative minimum",
+   Background->None,ExpressionUUID->"65a4b160-a4cc-4e7c-9138-2ccc50300ed5"]], 
+  "InlineCode",ExpressionUUID->"86c37c48-2d9a-47c9-9676-5da956d9d7b2"]
+}], "Text",ExpressionUUID->"12affe1c-69c6-48a8-9158-27feed6e2d66"],
+
+Cell["Working decision", "Section",ExpressionUUID->"7bb2374c-78af-4352-bbb8-41e5b260294a"],
+
+Cell[TextData[{
+ "Use ",
+ Cell[BoxData[Cell["I0",
+   Background->None,ExpressionUUID->"7b524b66-19fd-4fd4-9d2f-802a0f7eb1ff"]], 
+  "InlineCode",ExpressionUUID->"68bc950f-c27f-4d34-8b58-2461c3587046"],
+ " as the current boundary working candidate."
+}], "Item",ExpressionUUID->"408fc565-4a17-477f-829e-aa5b18b48cfa"],
+
+Cell[TextData[{
+ "Use ",
+ Cell[BoxData[Cell["I2",
+   Background->None,ExpressionUUID->"72c43c75-0376-418b-a2b4-b49a31dbca72"]], 
+  "InlineCode",ExpressionUUID->"9a2b4a56-c774-427b-b01f-d45feb41c05f"],
+ " as the current completion-aware working candidate."
+}], "Item",ExpressionUUID->"23bcaf8f-b7ab-4343-84ce-6fee082da2b9"],
+
+Cell["\<\
+Keep band-lock and co-centering separate in theorem-facing prose.\
+\>", "Item",ExpressionUUID->"55b629c7-1412-44b9-9885-59820e04ac82"],
+
+Cell["Keep the generic unsafe lane in CI.", "Item",ExpressionUUID->"af67c1ad-8154-4af0-ae18-3b49229b1917"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"964b7e04-34f7-48ec-83dd-b8339417b848"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 98, 0, 70, "Title",ExpressionUUID->"d5b36fc2-ae41-4a61-b61f-095403e94d39"],
+Cell[655, 22, 555, 11, 70, "Text",ExpressionUUID->"915d1f2d-bcb3-445a-a86e-71872bcabdc0"],
+Cell[1213, 35, 92, 0, 70, "Section",ExpressionUUID->"2d2d9392-1835-4aa8-a246-097d2e2980e5"],
+Cell[1308, 37, 452, 8, 70, "Item",ExpressionUUID->"35b680db-c075-4dee-b774-afeddcd58c44"],
+Cell[1763, 47, 507, 10, 70, "Item",ExpressionUUID->"294a072e-77c7-450b-8abd-d2ee221f67ff"],
+Cell[2273, 59, 326, 5, 70, "Item",ExpressionUUID->"a106ce15-8246-4d87-b995-1c90e78898fb"],
+Cell[2602, 66, 308, 5, 70, "Item",ExpressionUUID->"b736e55b-e414-488e-b5c2-359f10e83860"],
+Cell[2913, 73, 461, 8, 70, "Item",ExpressionUUID->"bc7fc7e3-7f5d-44f2-839a-410442498b25"],
+Cell[3377, 83, 131, 0, 70, "Item",ExpressionUUID->"7fa50584-d59b-48e8-a14a-e38cebece581"],
+Cell[3511, 85, 87, 0, 70, "Section",ExpressionUUID->"904c99df-8063-42db-8c11-e0bf71a7a3b9"],
+Cell[3601, 87, 105, 0, 70, "Text",ExpressionUUID->"2eab7164-2576-4b42-87fb-bb8add82e991"],
+Cell[3709, 89, 90, 0, 70, "Item",ExpressionUUID->"6786b4fe-ff8f-4bc2-b4c8-8f5ca153da4e"],
+Cell[3802, 91, 91, 0, 70, "Item",ExpressionUUID->"3e0c7135-267c-4492-baf5-66d2504c2468"],
+Cell[3896, 93, 100, 0, 70, "Item",ExpressionUUID->"497d396e-733f-4773-93f7-0285834d562c"],
+Cell[3999, 95, 96, 0, 70, "Section",ExpressionUUID->"b87a37c7-8624-42fd-b672-41416386bd4f"],
+Cell[4098, 97, 318, 5, 70, "Item",ExpressionUUID->"4f5a014b-f51d-489e-96db-d0e4555d125e"],
+Cell[4419, 104, 305, 5, 70, "Item",ExpressionUUID->"ef699bf8-b346-41b0-8633-b062311c6672"],
+Cell[4727, 111, 302, 5, 70, "Item",ExpressionUUID->"aa1a8189-6825-437b-be1a-f832aa9fc2ca"],
+Cell[5032, 118, 299, 5, 70, "Item",ExpressionUUID->"6f7a102d-7994-4276-9911-db3d2f3d04a4"],
+Cell[5334, 125, 319, 5, 70, "Item",ExpressionUUID->"282fe1d6-43bd-44e2-ae81-4b35fe22e4eb"],
+Cell[5656, 132, 102, 0, 70, "Section",ExpressionUUID->"b856b300-0288-4791-b1c5-031e1d02bd7a"],
+Cell[5761, 134, 91, 0, 70, "Text",ExpressionUUID->"a58a676d-156e-4af1-8429-c0b0b47bd19f"],
+Cell[5855, 136, 186, 3, 70, "Text",ExpressionUUID->"4b50c87f-35cd-4758-84f9-0061d234280a"],
+Cell[6044, 141, 92, 0, 70, "Text",ExpressionUUID->"2dec2661-7d86-4a35-9939-ee86730a5c08"],
+Cell[6139, 143, 357, 7, 70, "Text",ExpressionUUID->"77aa4ac6-6ff2-4a36-8807-89746b5032ff"],
+Cell[6499, 152, 101, 0, 70, "Text",ExpressionUUID->"bbc87301-c6d7-4f87-a72b-8ac3ee61e275"],
+Cell[6603, 154, 347, 6, 70, "Text",ExpressionUUID->"f8a5f20c-ba7f-4d59-879b-3f48d7eb3ff3"],
+Cell[6953, 162, 275, 5, 70, "Section",ExpressionUUID->"d04161a2-1282-4796-8986-ec411356dc60"],
+Cell[7231, 169, 549, 10, 70, "Text",ExpressionUUID->"2add8776-504f-4344-aa4e-7aa9acceca8d"],
+Cell[7783, 181, 553, 10, 70, "Text",ExpressionUUID->"9a17c889-6cb2-4a36-b6dd-d17571d93cc2"],
+Cell[8339, 193, 101, 0, 70, "Text",ExpressionUUID->"bf1f5ee4-f6d3-4c91-9f0c-a750e3ea0014"],
+Cell[8443, 195, 164, 3, 70, "Text",ExpressionUUID->"760c4e70-95d4-4174-80b2-2d48c34eff00"],
+Cell[8610, 200, 283, 5, 70, "Text",ExpressionUUID->"61810ec1-1ac3-44c9-8d58-0c5a7b9a6c25"],
+Cell[8896, 207, 275, 5, 70, "Section",ExpressionUUID->"912052e8-0023-4ff4-8915-9ba035324dd7"],
+Cell[9174, 214, 91, 0, 70, "Text",ExpressionUUID->"9a7f79b0-83dc-4137-880d-aa88096c4771"],
+Cell[9268, 216, 191, 3, 70, "Text",ExpressionUUID->"03a04fc9-f289-489a-97ff-a19ced137ab9"],
+Cell[9462, 221, 584, 10, 70, "Text",ExpressionUUID->"48c9e39d-e282-49ee-93cd-eb4ee05d5bd3"],
+Cell[10049, 233, 101, 0, 70, "Text",ExpressionUUID->"f9265cfe-0c72-4a89-8983-3792404bc62b"],
+Cell[10153, 235, 116, 0, 70, "Text",ExpressionUUID->"79d93487-f75b-4b2d-b300-8b388f0b35b7"],
+Cell[10272, 237, 292, 5, 70, "Text",ExpressionUUID->"12affe1c-69c6-48a8-9158-27feed6e2d66"],
+Cell[10567, 244, 90, 0, 70, "Section",ExpressionUUID->"7bb2374c-78af-4352-bbb8-41e5b260294a"],
+Cell[10660, 246, 314, 6, 70, "Item",ExpressionUUID->"408fc565-4a17-477f-829e-aa5b18b48cfa"],
+Cell[10977, 254, 322, 6, 70, "Item",ExpressionUUID->"23bcaf8f-b7ab-4343-84ce-6fee082da2b9"],
+Cell[11302, 262, 144, 2, 70, "Item",ExpressionUUID->"55b629c7-1412-44b9-9885-59820e04ac82"],
+Cell[11449, 266, 106, 0, 70, "Item",ExpressionUUID->"af67c1ad-8154-4af0-ae18-3b49229b1917"]
+}
+]
+*)
+
+(* End of internal cache information *)

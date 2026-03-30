@@ -1,0 +1,7 @@
+Transport correction propagated: quotient and representative-search statements now use the descended rho^dom scalar as the general form, while chi-form statements are marked as normalized special cases.
+
+Calibration dependence sharpened: Jcan depends on B in general, but the exact comparison formula shows DeltaJ always lies in Aminus.
+
+Physical consequence sharpened: exact bracket models show that calibration dependence is representational on the physical sector when ambiguity directions are bracket-trivial there, and physically visible otherwise.
+
+Full parent-document compile logs are now part of the handoff artifact set.

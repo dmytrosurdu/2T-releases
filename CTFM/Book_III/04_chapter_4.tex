@@ -1,0 +1,1606 @@
+\documentclass[12pt]{article}
+\usepackage{xr}
+\externaldocument{"../Book_II/chapter_3"}
+\externaldocument{"../Book_II/chapter_5"}
+\externaldocument{"../Book_II/chapter_6"}
+\externaldocument{"../Book_II/chapter_8"}
+\externaldocument{chapter_1}
+\externaldocument{chapter_2}
+\externaldocument{chapter_3}
+\externaldocument{appendix}
+
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, decorations.pathreplacing, calc, backgrounds}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{pdflscape} 
+\usepackage{braket}
+\newcommand{\ketbra}[2]{\mathinner{|{#1}\rangle\,\langle{#2}|}}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist[enumerate]{align=left,labelindent=0pt}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+% Chapter-specific theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+\title{\textbf{Chapter 4: Fact Decomposition-Independence Theorem}}
+\author{Dmytro Surdu}
+\begin{document}
+\maketitle
+
+\section{Introduction \& Motivation}
+
+In Book III, Chapter 1 we promised to examine in detail the two \textbf{canonical counter‑examples} to the Church–Turing thesis.  We now keep that promise, and show how each of these thought‑experiments \emph{precisely} violates one of our axioms.  This will lead us to conjecture—and then prove—the \emph{Fact Decomposition‑Independence Theorem}, which characterises exactly when a measurement fact can evade all finite, constructive decompositions.
+
+\subsection*{1.1 Promise Recap}
+Recall that we set out to understand why certain physical processes appear to compute non‑Turing functions.  In particular, we highlighted two archetypal constructions:
+\begin{itemize}
+  \item \textbf{Accelerating (Zeno) Turing Machine}: packs infinitely many TM steps into finite real time, thus deciding the Halting problem.
+  \item \textbf{3‑D Wave‑Equation Solver}: encodes halting bits into arbitrarily high spatial frequencies so that a point‑evaluation after one second solves HALT.
+\end{itemize}
+
+\subsection*{1.2 The Two Canonical Examples}
+\paragraph{Example 1: Accelerating Turing Machine}  
+A device whose $k$‑th computation step takes time $2^{-(k-1)}$, so that in two seconds it has simulated any ordinary TM on input~$x$.  If the simulated TM ever halts, a lamp flashes at $t\!=\!2$.  This yields a finite‑time decider for HALT.
+
+\paragraph{Example 2: 3‑D Wave‑Equation Solver}  
+Choose computable initial data $(f,g)$ on $\mathbb{R}^3$ whose Fourier modes of wavelength $2^{-n}$ encode whether the $n$th TM on~$x$ halts.  By standard spherical‑means, the point value $u(0,1)$ crosses a threshold iff HALT holds.
+
+\subsection*{1.3 Observation: Which Axiom Fails?}
+Recap the axioms our framework rests on:
+
+
+\medskip
+Let 
+\[
+  \mathfrak T=(\mathcal M,\mathcal Z^{\rm in},\mathcal Z^{\rm out},U,E,\mathcal S)
+\]
+be a \emph{Simple Test} (Def.~\ref{def:simple-test} from Book II, Chapter 8), endowed with its finite guarded decomposition (Thm.~\ref{thm:fundamental-equivalence-clean} from Chapter 3) which is built upon the axioms:
+\paragraph{Gnosis Axioms:}
+\begin{itemize}
+  \item[(F)] \textbf{Invariant basin.} There exists a reachable, invariant attractor basin $\mathcal B\subseteq\mathcal M$ (Deff. \ref{def:basin-axiom-R},\ref{def:basin-axiom-L},\ref{def:basin-axiom-C} from Book II, Chapter 5). \emph{(There is a fact that remain)}
+  \item[(S)] \textbf{Certification  standard.} $\exists \mathcal{S} = \{\varepsilon_n\}_{n=1}^\infty: \forall \varepsilon_n \in (0, 1]\; \exists\; verifier \; V: V(z^{\text{out}}_{1:n}, w)=accept \Longrightarrow \forall z: d(z,z^{\text{out}}_{1:n}, w))<\varepsilon_n\; V(z)=accept$ (Def. \ref{def:certification-standard} from Book II, Chapter 6). \emph{(The statement can be made about the fact)} 
+\end{itemize}
+\paragraph{Structural Axioms:}
+\begin{itemize}
+    \item[(C)] \textbf{Compact Continuity.} $\mathcal M,\mathcal Z^{\rm in}$ are compact metric spaces; $U,E$ are continuous (Deff. \ref{def:belief-state},\ref{def:belief-state-space},\ref{def:emit-update-maps} from Book II, Chapter 3). \emph{(There are finite total degrees of freedom under any finite resolution)}
+    \item[(T)] \textbf{Traceability.} For every $n\ge1$ and $\Theta\in\mathcal M$, the set $U(\Theta,\cdot)^{-1}(\mathcal B_n)$ is open and nonempty (Def. \ref{ax:open-preimage} from Chapter 1). \emph{(The fact is traceable)}
+\end{itemize}
+\paragraph{Process Axiom:}
+\label{def:ti-wf-fair-execution}
+\begin{itemize}
+    \item[(I)] \textbf{Time Irreversibility.} There exists the finite decomposition of the test $\mathfrak T$ into guarded program \(\Pi\), built from the primitives \textsc{Sequential}, \textsc{Conditional}, \textsc{Loop} and equipped with a \emph{ranking function} \(f\) that satisfies (I) Axiom~\ref{ax:ti-wf-subsec} from Chapter 2 on program runs named in further \emph{(I)-fair executions}. \emph{(Execution time is irreversible)}
+\end{itemize}
+\paragraph{Effective Measurability Axioms:}
+\begin{enumerate}[label=(EM\arabic*), leftmargin=2em]
+  \item \textbf{Effective Representation.} Each $U_j$ and $E_j$ is given by a rational arithmetic circuit of size $\mathrm{poly}(n)$; all coefficients are rationals of $\mathrm{poly}(n)$ bit–length.
+  \item \textbf{Polynomial Modulus of Continuity.} There is a known polynomial $m_j(k)$ bounding the cost to compute $U_j(x,z)$ or $E_j(x)$ to $k$ bits in $\mathrm{poly}(m_j(k),n)$ time.
+  \item \textbf{Polynomial Guard/Basin Tests.} Membership in any guard cell $N_i\subset\mathcal Z$ or shell $\mathcal B_n\subset\mathcal X$ can be decided in time $\mathrm{poly}(n,\log(1/\varepsilon))$.
+\end{enumerate}
+
+\medskip
+\noindent
+\textbf{Which axiom fails in each example?}
+\begin{itemize}
+  \item \emph{Zeno Machine} breaks (I): it executes infinitely many steps in finite time.
+  \item \emph{Wave Solver} breaks (C): it requires infinite‑bandwidth, hence violates the minimal standard of finite information.
+\end{itemize}
+
+\section{Map of facts and axioms}
+% TikZ diagram of main axioms and facts
+%\input{Book_III/axiom_fact_diagram}
+
+\section{ABET/FTE Sensitivity to Dropping Individual Axioms: Full Lemmas}
+
+In this section we give a standalone lemma (with proof) for each axiom, showing exactly how its absence disrupts the ABET/FTE framework.
+
+\subsection{Failure of Invariant Basin (F)}
+
+\begin{lemma}[No Simple Test without (F)]\label{lem:no-F}
+If Axiom (F) (Invariant Basin) is dropped, then one cannot even formulate a non‐trivial Simple Test, and hence ABET and FTE have no content.
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+  \item  A ``tail fact'' is by definition of the form ``$\exists T\ \forall t\ge T:\Theta_t\in\mathcal B$'' for some invariant basin~$\mathcal B$.  Without (F) no such $\mathcal B$ exists or is guaranteed reachable.
+  \item  In particular one cannot assert Safety ($\Theta_t\in\mathcal B\implies\Theta_{t+1}\in\mathcal B$) or Liveness (eventually enter~$\mathcal B$).
+  \item  Therefore the very notion of a certificate ``once in $\mathcal B$, stay in $\mathcal B$'' collapses.  One cannot state any non‐trivial tail‐predicate, so ABET/FTE become vacuous.
+\end{enumerate}
+\end{proof}
+
+\subsection{Failure of Certification Standard (S)}
+
+\begin{lemma}[No Robust Certification without (S)]\label{lem:no-S}
+If Axiom (S) (Certification Standard) is dropped, then even if an invariant basin exists, arbitrarily small output perturbations can invalidate any purported certificate, so ABET fails.
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+  \item  ABET’s core open‐cover/finite‐subcover argument constructs shells $B_n$ around~$\mathcal B$ and relies on a tolerance $\varepsilon_n>0$ so that any measurement within $\varepsilon_n$ still yields acceptance.
+  \item  Without (S) there may be no nonzero $\varepsilon_n$ with the property
+  \[
+    V(z_{1:n},w)=\text{accept}
+    \;\Longrightarrow\;
+    V(z'_{1:n},w)=\text{accept}
+    \quad\text{whenever }d(z_{1:n},z'_{1:n})<\varepsilon_n.
+  \]
+  \item  Hence even if $\Theta_t\in\mathcal B$, the certificate can be ``torn apart'' by an $\omega$‐small noise and ABET’s guarantee of a uniform finite certificate vanishes.
+\end{enumerate}
+\end{proof}
+
+\subsection{Failure of Compact Continuity (C)}
+
+\begin{lemma}[No Uniform Bound without (C)]\label{lem:no-C}
+If Axiom (C) (Compact Continuity) is dropped, then the map
+\[
+  \Theta_0 \;\mapsto\; T(\Theta_0) \;=\;\min\{\,t: \Theta_t\in\mathcal B\}
+\]
+need not attain a maximum, so ABET’s finite‐subcover step fails.
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+  \item  Under (C), $\mathcal M$ is compact and $U,E$ are continuous, so $T(\cdot)$ is upper‐semicontinuous and attains $\max T_{\max}<\infty$.
+  \item  Without compactness one can exhibit a sequence $\Theta^{(k)}$ with $T(\Theta^{(k)})\to\infty$, so no single finite time works for all initial states.  
+  \item  The open‐cover/finite‐subcover argument in ABET therefore has no analogue.
+\end{enumerate}
+\end{proof}
+
+\subsection{Failure of Time Irreversibility (I)}
+
+\begin{lemma}[No Finite Decomposition without (I)]\label{lem:no-I}
+If Axiom (I) (Time Irreversibility) is dropped, then there can be NP‐style
+certificates along infinite paths that cannot be unrolled into any finite
+guarded program, so FTE fails.
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+  \item  (I) ensures that every enabled condition in an infinite execution
+    recurs infinitely often, which is used in the Reduction Lemma to turn an
+    NP‐style certificate into a finite guarded decision tree.
+  \item  Without (I) one can schedule infinitely many distinct guards in
+    Zeno‐style within finite time, so no finite list of guard‐cells can cover
+    all possible accepting paths of the NP‐verifier.
+  \item  Hence the converse direction of FTE—that every NP‐verifiable fact
+    admits a finite decomposition—breaks.
+\end{enumerate}
+\end{proof}
+
+\subsection{Failure of Traceability (T)}
+
+\begin{lemma}[Abstract ABET survives, but no effective guards without (T)]\label{lem:no-T}
+If Axiom (T) (Open‐Preimage) is dropped, the abstract open‐cover argument of
+ABET still goes through, but one cannot exhibit any finite list of
+\emph{effectively testable} guard cells, so FTE holds only non‐constructively.
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+  \item  The compactness argument up to finite‐subcover uses only (F),(S),(C),(I).
+  \item  But without (T) the preimage $U^{-1}(B_n)\subset\mathcal Z^{\rm in}$
+    need not be open, so there is no guarantee of any \emph{guard cell}
+    $N\subset\mathcal Z^{\rm in}$ that is both open and decidable.
+  \item  Thus ABET (existence of a finite witness in principle) remains valid,
+    but no finite \emph{effective} decomposition can be extracted.
+\end{enumerate}
+\end{proof}
+
+\subsection{Failure of EM1 (Effective Representation)}
+
+\begin{lemma}[No Effective Decomposition without (EM1)]\label{lem:no-EM1}
+If (EM1) fails—i.e.\ some $U_j,E_j$ require non‐rational or super‐polynomial‐size constants—then although ABET and FTE hold abstractly, no finite guarded decomposition can be realized by a polynomial‐time circuit.
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+  \item  Abstract ABET uses only topological and logical arguments, so it
+    still yields a finite decomposition in principle.
+  \item  But any guard‐test or update step invoking the non‐rational constant
+    cannot be implemented by a rational arithmetic circuit of size
+    $\mathrm{poly}(n)$, violating the EM1 requirement for \emph{effective}
+    decomposition.
+\end{enumerate}
+\end{proof}
+
+\subsection{Failure of EM2 (Polynomial Modulus of Continuity)}
+
+\begin{lemma}[No Poly-time Observation without (EM2)]\label{lem:no-EM2}
+If (EM2) fails—i.e.\ the modulus of continuity of some $U_j$ or $E_j$ grows
+faster than any polynomial—then the Simple Test may exist but any effective
+recovery of the tail predicate requires super-polynomial precision, so no
+polynomial-time decomposition is possible.
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+  \item  Abstractly, continuity suffices for ABET/FTE.
+  \item  Without a polynomial bound $m_j(k)$ on input‐accuracy vs. output‐accuracy,
+    achieving a guard‐test at tolerance $2^{-k}$ may require time
+    $\exp(k)$ or worse, hence no $\mathrm{poly}(n)$ decomposition can
+    implement the required checks.
+\end{enumerate}
+\end{proof}
+
+\subsection{Failure of EM3 (Polynomial Guard/Basin Tests)}
+
+\begin{lemma}[No Poly-time Guard Tests without (EM3)]\label{lem:no-EM3}
+If (EM3) fails—i.e.\ membership in some guard cell or basin shell is not
+decidable in $\mathrm{poly}(n,\log(1/\varepsilon))$—then although a
+finite decomposition exists abstractly, no polynomial-time verifier can
+execute it.
+\end{lemma}
+\begin{proof}
+\begin{enumerate}[label=(\arabic*)]
+  \item  ABET/FTE guarantee a finite list of open guard cells and proofs.
+  \item  If deciding any $N_i$ is $\mathrm{NP}$‐hard (or worse), then the
+    branching program cannot be run in polynomial time, so the decomposition
+    is not \emph{effective}.
+\end{enumerate}
+\end{proof}
+
+
+
+\section {Notion of Decomposition Independence}
+\subsection{Conjecture (Prelude to FDI)}
+\begin{quote}
+\emph{“Every measurement fact that resists \emph{all} finite guarded decompositions (i.e.\ is \textbf{decomposition‑independent}) has certification language of Turing degree at least~$0'$.”}
+\end{quote}
+
+\subsection{Preview of Significance}
+\begin{itemize}
+  \item Unifies \emph{all} physical hypercomputing attacks under two structural failure modes.
+  \item Explains why \emph{any} theory satisfying our axioms cannot escape the Turing barrier without invoking one of these infinities.
+  \item Provides a blueprint for analysing undecidability in quantum measurement, dynamical systems, and beyond.
+\end{itemize}
+
+\section{Decomposition‑Independence}
+
+In this section we formalize the notion of \emph{decomposition‑independence}, which captures the impossibility of certifying a measurement fact by any finite guarded decomposition.  We then relate it to non‑certifiability via the Fundamental Test Equivalence (FTE).
+
+\subsection{What it means to ``decompose'' a measurement}
+
+% A measurement process is specified by spaces, dynamics, and an observation map.
+Let
+\[
+  \mathcal M,\;\mathcal Z^{\rm in},\;U,\;E
+\]
+be as in Chapter II: a compact metric \emph{state space} $\mathcal M$, an \emph{input space} $\mathcal Z^{\rm in}$, a continuous \emph{update map} $U:\mathcal M\times\mathcal Z^{\rm in}\to\mathcal M$, and an \emph{output map} $E:\mathcal M\to\mathcal B$ into basin shells $\mathcal B_n$.  A \emph{measurement fact} is a predicate
+\[
+  \Phi(\Theta_0,z_0,\Theta_1,z_1,\dots)\;\in\;\{\text{True},\text{False}\}
+\]
+on infinite executions $(\Theta_t,z_t)_{t\ge0}$.  We focus on \emph{tail} facts of the form
+\[
+  \exists T\;\forall t\ge T:\; 
+    \Psi\bigl(\Theta_t,z_t\bigr),
+\]
+where $\Psi$ is a simple condition (e.g.\ “output enters a particular basin shell”).
+
+\subsection{Finite guarded decompositions}
+
+\begin{definition}[Guard Cell]
+A \emph{guard cell} is any effectively testable subset
+\[
+  N\;\subseteq\;\mathcal Z^{\rm in},
+\]
+decidable up to tolerance in time $\mathrm{poly}(n,\log(1/\varepsilon))$ by (EM3).  
+\end{definition}
+
+\begin{definition}[Finite Guarded Decomposition]
+A \emph{finite guarded decomposition} of a tail fact $\Phi$ consists of:
+\begin{enumerate}[itemsep=2pt]
+  \item A finite list of guard cells $N_1,\dots,N_k\subseteq\mathcal Z^{\rm in}$.
+  \item A deterministic decision tree (or branching program) that, on any input $z_0\in\mathcal Z^{\rm in}$, tests membership in these $N_i$ in some order and selects a branch $i\in\{1,\dots,k\}$.
+  \item For each branch $i$, a proof (or certificate) that \emph{under the assumption} $z_0\in N_i$, the tail fact $\Phi$ holds.
+\end{enumerate}
+We say the decomposition \emph{certifies} $\Phi$ if every input is routed to some $i$ and the corresponding proof is valid.
+\end{definition}
+
+% Intuitively, a finite program of guarded tests that settles the fact.
+
+\subsection{Decomposition‑Independence and FTE}
+
+\begin{definition}[Decomposition‑Independence]
+A measurement fact $\Phi$ is \emph{decomposition‑independent} if
+\[
+  \textstyle
+  \text{no finite guarded decomposition certifies }\Phi.
+\]
+\end{definition}
+
+\begin{remark}
+By the \textbf{Fundamental Test Equivalence} (Chapter 3), any finite guarded decomposition yields a \(\mathbf{NP}\) (or \(\mathcal V\)) certificate for $\Phi$.  Hence
+\[
+  \Phi\text{ is decomposition‑independent}
+  \;\Longrightarrow\;
+  \Phi\text{ is not certifiable in NP (or }\mathcal V\text{)}.
+\]
+\end{remark}
+
+\begin{proposition}
+If $\Phi$ admits a finite guarded decomposition, then its certification language lies in NP (degree 0).
+\end{proposition}
+\begin{proof}
+Immediate from FTE: the finite decision tree and per‑branch proofs form an NP witness that decides membership in the certification language.
+\end{proof}
+
+\begin{proposition}
+If $\Phi$ is decomposition‑independent, then any attempt to decide it by finite tests fails—no NP (or \(\mathcal V\)) algorithm exists.
+\end{proposition}
+\begin{proof}
+By contradiction, if an NP verifier decided $\Phi$, then its accepting computation could be unrolled into a finite guarded decomposition (tests = guards, accepting paths = branches), contradicting decomposition‑independence.
+\end{proof}
+
+% This sets the stage for the main theorem, which characterizes decomposition‑independence in terms of Turing degree.
+
+\section{Statement of the Fact Decomposition‑Independence Theorem}
+
+We are now ready to present our main result, which links the impossibility of any finite guarded decomposition to the Turing degree of the corresponding certification language.
+
+In what follows we do \emph{not} assume a priori that every model satisfies all of (C)–(T), EM1–EM3 and (I).  Instead, we only require those axioms needed to even \emph{state} and \emph{verify} a measurement fact:
+\[
+  \text{(F) (Invariant Basin),}
+  \quad
+  \text{S (Certification Standard)}.
+\]
+Any other axiom may or may not hold in a given model.
+
+\begin{theorem}[Fact Decomposition–Independence with Compile–Time + Run–Time Language]
+\label{thm:FDI_compile_run}
+Fix a measurement model
+\[
+  \mathfrak M \;=\; (\mathcal M,\mathcal Z^{\mathrm{in}},\mathcal Z^{\mathrm{out}},U,E,\mathcal S)
+\]
+together with a tail fact \(\Phi\) (“eventual entry into the basin and stay”) as in Book~II and Book~III.
+Assume throughout the two gnosis axioms:
+\begin{itemize}[itemsep=2pt,leftmargin=2em]
+  \item[\textup{(F)}] \emph{Invariant basin:} there exists a reachable, invariant attractor basin \(\mathcal B\subseteq\mathcal M\) (Book~II, Ch.~5).
+  \item[\textup{(S)}] \emph{Certification standard:} there is a nontrivial, robust certification standard \(\mathcal S=\{\varepsilon_n\}_{n\ge1}\) as in Book~II, Ch.~6.
+\end{itemize}
+
+\paragraph{Compile–time + run–time language.}
+Let \(\mathcal A\) be any \emph{sound, uniform} guarded–decomposition compiler that, given an instance \(x\in\mathbb N\) (encoding initial condition, inputs, and shell tolerance), iteratively refines guard candidates and either:
+\begin{enumerate}[label=(\alph*),itemsep=1pt,leftmargin=2em]
+  \item halts in some finite time \(t\) and outputs a finite guarded program \(\Pi_x\) whose primitives and tests are those permitted by the axioms that \(\mathfrak M\) satisfies, or
+  \item never halts (keeps refining).
+\end{enumerate}
+Define the \emph{compile–time + run–time} language
+\[
+  L^{\mathrm{crt}}_{\Phi}
+  \;:=\;
+  \Bigl\{\, x\in\mathbb N \;\Big|\;
+     \exists t\ \bigl[\ \mathcal A(x)\ \text{halts within time }t
+     \ \wedge\ \Pi_x\ \text{verifies }\Phi\ \text{under }\mathcal S\ \bigr]
+  \Bigr\}.
+\]
+Verification “\(\Pi_x\ \text{verifies }\Phi\ \text{under }\mathcal S\)” means:
+(i) \(\Pi_x\) is a finite guarded program built from the admissible primitives,
+(ii) all guard/basin tests are carried out with the shell tolerances prescribed by \(\mathcal S\), and
+(iii) the run–time replay of \(\Pi_x\) on instance \(x\) reaches \(\mathcal B\) (or the required shell) and stays, with robustness mandated by \(\mathcal S\).
+
+\medskip
+Then exactly one of the following two mutually exclusive cases holds.
+
+\begin{enumerate}[label=(\alph*),leftmargin=2em,itemsep=6pt]
+\item \textbf{Decomposable case (finite guards exist).}  
+      Suppose \(\mathfrak M\) satisfies, in addition to \textup{(F)} and \textup{(S)}, the structural/process/effectivity axioms
+      \[
+        \textup{(C)}\ (\text{Compact Continuity}),\quad
+      \]
+      \[
+        \textup{(T)}\ (\text{Traceability}),\quad
+      \]
+      \[
+        \textup{(I)}\ (\text{Time Irreversibility}),\quad
+      \]
+      \[
+        \textup{(EM1)}\text{–}\textup{(EM3)} (\text{Effective Measurability}).
+      \]
+      Then the Fundamental Test Equivalence of Book~III, Ch.~3 applies:
+      \(\Phi\) admits a finite guarded decomposition on \emph{every} instance, the compiler \(\mathcal A\) halts on every input, and
+      \[
+        L^{\mathrm{crt}}_{\Phi} \;=\; L_{\Phi}\ \in\ \mathbf{NP},
+        \qquad
+        \deg_T\!\bigl(L^{\mathrm{crt}}_{\Phi}\bigr) \;=\; 0.
+      \]
+      Here \(L_{\Phi}\) is the ordinary certification language (“run–time acceptance”) and coincides with \(L^{\mathrm{crt}}_{\Phi}\) because compilation always terminates.
+
+\item \textbf{Decomposition–independent case (no finite guards).}  
+      Suppose \(\Phi\) admits \emph{no} finite guarded decomposition under the axioms that \(\mathfrak M\) satisfies.  
+      Then the compile–time + run–time language is \emph{hypercomputational}:
+      \[
+        \deg_T\!\bigl(L^{\mathrm{crt}}_{\Phi}\bigr) \ \ge\ 0'.
+      \]
+      In particular, there is a many–one reduction from \(\mathrm{HALT}\) to \(L^{\mathrm{crt}}_{\Phi}\); equivalently,
+      \(L^{\mathrm{crt}}_{\Phi}\) is \(\Sigma^0_1\)-hard.  (When the failure includes certain continuum encodings—e.g.\ a pure (C) failure—stronger lower bounds may obtain; cf.\ the chapter’s embedding lemmas.)
+\end{enumerate}
+
+In plain words, the above statement of the theorem is:
+\begin{quote}
+    A measurement fact is decomposition-independent if and only if the problem of constructing and performing of the corresponding measurement is undecidable.
+\end{quote}
+
+\paragraph{Moreover (sharp responsibility of axioms).}
+For any model \(\mathfrak M\) as above:
+\begin{itemize}[itemsep=2pt,leftmargin=2em]
+  \item If \emph{any} of \textup{(F)}, \textup{(S)}, or \textup{(C)} fails, nontrivial tail facts are not well–posed or not robustly verifiable; consequently, \(\Phi\) is \emph{untestable} and \(L^{\mathrm{crt}}_{\Phi}\) is undefined (vacuous).
+  \item If \(\mathfrak M\) satisfies \textup{(F)}, \textup{(S)}, \textup{(C)} but fails \emph{at least one} of \textup{(I)}, \textup{(T)}, \textup{(EM1)}, \textup{(EM2)}, \textup{(EM3)}, then \(\Phi\) remains a well–posed tail fact, but is \emph{decomposition–independent}.  
+        In that case the compiler halts on some instances and diverges on others in a way that is \(\Sigma^0_1\)-hard to predict, and
+        \[
+          \deg_T\!\bigl(L^{\mathrm{crt}}_{\Phi}\bigr) \ \ge\ 0'.
+        \]
+\end{itemize}
+\end{theorem}
+
+
+
+
+\section{Embedding Axiom-Compliance and Computability Lemmas}
+\subsection{Zeno–TM Embedding with Pure (I) Failure and (F) Satisfied}
+\label{sec:zeno-i-failure-fixed}
+
+We refine the Zeno construction so that:
+(i) the \emph{basin fact} used by ABET/FTE is independent of halting and satisfies
+\(F\iff R\wedge L\wedge C_{\text{basin}}\);
+(ii) all effective axioms PV\(\equiv\)(EM1)–(EM3), as well as compactness/continuity and traceability, hold; and
+(iii) \emph{only} the Time–Irreversibility/Weak–Fairness axiom (I) fails, via a Zeno loop that executes infinitely many enabled decreases in finite time.
+
+\paragraph{Spaces, maps, basin, and certification standard.}
+Let
+\[
+\mathcal M \;=\; [0,1]_x \times \{0,1\}_\lambda,
+\qquad
+\mathcal Z^{\rm in} \;=\; [0,1],
+\]
+with the product of the Euclidean metric on $[0,1]$ and the discrete metric on $\{0,1\}$, capped at~1.
+Interpret $x$ as a Lyapunov “radius’’ and $\lambda$ as a halting lamp (independent of the basin).
+Fix a contraction parameter $\rho\in(0,1)$ and a radius $r\in(0,1)$.
+Define the invariant basin and shells by
+\[
+\mathcal B \;=\; \{(x,\lambda):\, x\le r\}, 
+\qquad
+\mathcal B_n \;=\; \{(x,\lambda):\, x\le r + 2^{-n}\}\quad(n\ge1).
+\]
+Let the \emph{emit} map be $E(x,\lambda)=x$ (the lamp is not part of the certified output).
+The Certification Standard $\mathcal S=\{\varepsilon_n\}_{n\ge1}$ is the Minimal Standard of Book~II, Ch.~6 for these shells.
+
+\paragraph{Update with a Zeno sub-loop.}
+A single global \emph{tick} consists of two primitives $U^{(1)}$ and $U^{(2)}$:
+\begin{align*}
+\textbf{Tick 1 ($U^{(1)}$):}\quad 
+&(x,\lambda),\,z \;\mapsto\; \bigl(\rho\,x,\;\lambda\bigr)
+\quad\text{(uniform contraction; independent of $z$).}\\[0.25em]
+\textbf{Tick 2 ($U^{(2)}$):}\quad 
+&(x',\lambda),\,z \;\mapsto\; \bigl(x',\,\Lambda(z)\bigr),
+\end{align*}
+where $\Lambda:[0,1]\to\{0,1\}$ is produced by a \emph{Zeno} subroutine that simulates, on a fixed universal TM \(U\), the run of \(U(z)\) with the accelerating schedule
+$I_k=(2-2^{-k},\,2-2^{-(k+1)})$ (the $k$-th internal sub-step takes time $2^{-(k+1)}$).  
+Within the physical interval of Tick~2, the subroutine:
+\begin{itemize}
+  \item performs exactly one TM step of \(U(z)\) during each internal slot $I_k$,
+  \item sets a local latch $h\gets1$ if \(U(z)\) ever halts; else $h$ stays at $0$,
+  \item at the end of Tick~2 (physical time $t=2$) writes $\Lambda(z)=h$.
+\end{itemize}
+Note carefully that $\Lambda$ \emph{does not} affect the $x$–dynamics or the basin.
+
+\medskip
+We now verify compliance and hardness.
+
+\begin{lemma}[Computability and Axiom Compliance for the Zeno–TM Embedding]
+\label{lem:zeno‐computability}
+With the above construction, the measurement model 
+\[
+\mathfrak M=(\mathcal M,\mathcal Z^{\rm in},U=U^{(2)}\!\circ U^{(1)},E,\mathcal S,\mathcal B)
+\]
+satisfies
+\[
+\textup{(F)}\ (\textup{$R,L,C_{\rm basin}$}),\quad
+\textup{(S)},\quad
+\textup{(C C)}\ (\text{compact spaces + continuity}),\quad
+\textup{(T)},\quad
+\textup{(EM1)--(EM3)},
+\]
+and \emph{violates} \textup{(I)} (Time–Irreversibility/Weak–Fairness).
+\end{lemma}
+
+\begin{proof}
+\emph{(F):} Let $V(x,\lambda)=x$. 
+Tick~1 maps $x\mapsto \rho x$ with $0<\rho<1$, hence:
+\begin{itemize}
+  \item \textbf{R (Uniform reachability):} For any initial $x_0\in[0,1]$, the sequence $x_t\le\rho^t x_0$ enters $x\le r$ within
+  \(
+  T_{\max}
+  = \min\{t: \rho^t \le r\}
+  \),
+  uniformly in $z$ and $\lambda$.
+  \item \textbf{L (Lyapunov border):} If $x=r$ at the beginning of Tick~1, after Tick~1 we have $x'=\rho r<r$; Tick~2 does not change $x$.
+  \item \textbf{$C_{\rm basin}$ (local contraction):} For $(x,\lambda),(x',\lambda')\in \mathcal B$,
+  Tick~1 yields $|x-x'|\mapsto \rho |x-x'|$, Tick~2 leaves $x$ unchanged; thus the restriction $U|_{\mathcal B}$ is $\rho$–Lipschitz with $\rho<1$.
+\end{itemize}
+
+\emph{(S):} The Minimal Certification Standard for shells $\mathcal B_n=\{x\le r+2^{-n}\}$ yields open acceptance sets in the product metric; robustness follows from the strict contraction across the boundary (Book~II, Ch.~6).
+
+\emph{(C C):} $\mathcal M$ and $\mathcal Z^{\rm in}$ are compact; $U^{(1)}$ is affine; $U^{(2)}$ leaves $x$ unchanged and flips a discrete bit $\lambda$ to $\Lambda(z)\in\{0,1\}$ at the end of the tick. As a map from $\mathcal M\times\mathcal Z^{\rm in}$ with the product topology to $\mathcal M$, $U$ is continuous (the discrete coordinate has the discrete topology; dependence on $z$ is through the measurable selection at the end of the tick but no discontinuity in $x$).
+
+\emph{(T):} For the shells above, for any $\Theta\in\mathcal M$, the preimage $U(\Theta,\cdot)^{-1}(\mathcal B_1)$ is $[0,1]$:
+Tick~1 sends $x\mapsto \rho x\le \rho<r+2^{-1}$ by choosing $r> \rho - 2^{-1}$ once and for all; Tick~2 leaves $x$ unchanged. Hence $U(\Theta,\cdot)^{-1}(\mathcal B_1)$ is open and nonempty for every $\Theta$; the axiom holds (PL–Traceability).
+
+\emph{(EM1)–(EM3):} 
+Tick~1 is a uniform rational affine map, hence admits a rational arithmetic circuit of size $\mathrm{poly}(1)$ with polynomial evaluation cost and polynomial guard tests (distance to shells).
+Tick~2 writes $\lambda\leftarrow \Lambda(z)$ at the end of the tick; \emph{evaluation} of $U$ and $E$ to $k$ bits costs polynomial time in $k$ because the $x$–coordinate is independent of $\lambda$ and is exact after Tick~1, and the emitter $E$ projects $x$. No non-rational constants are used; membership in shells is a dyadic threshold on $x$, decidable in $\mathrm{poly}(\log(1/\varepsilon))$ time.
+
+\emph{(I) violation:} Inside Tick~2, the Zeno subroutine executes an \emph{infinite} number of enabled loop iterations (one TM step per dyadic slot) before the physical deadline of the tick, so the well-founded ranking function mandated by (I) cannot certify that “if decrease is enabled infinitely often then it is taken infinitely often” along a \emph{fair} execution without completing infinitely many loop iterations in finite time. This is precisely the Zeno/accelerating supertask forbidden by (I). Hence (I) fails while all other axioms validated above remain true.
+\end{proof}
+
+\begin{lemma}[\(\Sigma_1\)–Hardness via the Zeno–TM Embedding]
+\label{lem:zeno‐hardness}
+Let \(U\) be a universal Turing machine and define 
+\[
+  L_\Phi^{\rm crt}
+  \;=\;
+  \Bigl\{\,z\in[0,1]\cap\mathbb Q\ \Big|\ 
+        \text{the Zeno subroutine inside Tick~2 sets }\Lambda(z)=1\Bigr\}.
+\]
+Then
+\[
+  z\in \mathrm{HALT}
+  \quad\Longleftrightarrow\quad
+  z\in L_\Phi^{\rm crt},
+\]
+so \(L_\Phi^{\rm crt}\) is \(\Sigma^0_1\)–complete (Turing degree \(0'\)).
+Moreover, the \emph{basin tail fact} remains trivially true (by (F)) and is unrelated to hardness.
+\end{lemma}
+
+\begin{proof}
+By construction, within Tick~2 the Zeno subroutine simulates the run of \(U(z)\) and flips \(\Lambda(z)\) to 1 iff \(U(z)\) reaches a halting configuration at some finite step:
+\begin{itemize}
+  \item If \(U(z)\) halts in $s$ steps, then on the $s$-th dyadic slot $I_s$ the latch $h$ is set to $1$ and remains so; hence at the end of Tick~2 we write $\Lambda(z)=1$.
+  \item If \(U(z)\) never halts, the latch remains $0$ and $\Lambda(z)=0$.
+\end{itemize}
+Therefore \(L_\Phi^{\rm crt}\) coincides with the \(\Sigma^0_1\)-complete set \(\mathrm{HALT}\).
+Since the certified tail fact in ABET/FTE concerns entry into $\mathcal B=\{x\le r\}$ (which holds for \emph{all} trajectories by Lemma~\ref{lem:zeno‐computability}), the hypercomputational hardness attaches only to the Zeno subroutine’s output bit $\Lambda(z)$ and not to basin entry. This isolates the failure to axiom (I).
+\end{proof}
+
+
+\subsection{HALT Embedding with Only (C) Violated}
+\label{sec:C-only-violation-abet}
+
+In this section we present, for each Turing index \(e\in\mathbb N\), a measurement
+model \(\mathfrak M_e\) in which \emph{all} axioms except \textup{(C)} (compactness
+of the state space) hold, while compactness itself \emph{fails}—and this single
+failure is already enough to make ABET’s global finite–subcover (the
+\emph{uniformization step}) equivalent to deciding whether the universal Turing
+machine \(U\) halts on input \(e\).
+Crucially, the tail fact “eventual entry into the basin and stay’’ remains
+well–posed and \emph{true} on every trajectory (so \(R_{\text{weak}}\) holds);
+what becomes \(\Sigma^0_1\)–hard is the existence of a \emph{uniform} time bound
+\(T_{\max}\) that works for all initial conditions, i.e.\ ABET’s compactness
+subcover.
+
+\paragraph{Spaces and basin.}
+Let the state space be
+\[
+  \mathcal M \;=\; [0,\infty)_x \times [0,1]_y \times \{0,1\}_h,
+\]
+with product metric given by the Euclidean metrics on the intervals (capped at
+1) and the discrete metric on the latch \(h\).  The input space is the singleton
+\(\mathcal Z^{\rm in}=\{\ast\}\) (no exogenous control).
+Fix parameters \(0<\rho<1\) and \(0<r<1\) satisfying
+\begin{equation}
+\label{eq:rho-r-choice}
+  \rho\,r \;<\; r \qquad\text{(always true)}.
+\end{equation}
+Define the (closed) basin
+\[
+  \mathcal B \;=\; [0,\infty)_x \times [0,r]_y \times \{1\}_h.
+\]
+
+\paragraph{Stations and spacing.}
+Let \((\Delta_n)_{n\ge0}\) be a computable, strictly increasing sequence of positive
+integers with \(\Delta_n\to\infty\) (e.g.\ \(\Delta_n=2^n\)).
+Define the increasing station positions
+\[
+  s_0 \;=\; 0,\qquad s_{n+1} \;=\; s_n + \Delta_n \quad(n\ge0),
+\]
+and write \(\mathrm{idx}(x)=\max\{n\in\mathbb N: s_n\le x\}\) for the index of the
+last station at or to the left of \(x\).
+
+\paragraph{Update and emit maps (discrete time).}
+Fix a universal Turing machine \(U\), and for each \(e\) embed a single–step
+simulator of \(U(e)\) into the dynamics.  Define the one–tick update
+\(U_e:\mathcal M\times\{\ast\}\to\mathcal M\) by
+\[
+  U_e(x,y,h) \;=\;
+  \begin{cases}
+    \bigl(x+1,\;\rho\,y,\;h'\bigr), 
+      & \text{if } h=1,\\[2pt]
+    \bigl(x+1,\;\rho\,y + \beta\cdot \eta(x),\;h'\bigr),
+      & \text{if } h=0,
+  \end{cases}
+\]
+where:
+\begin{itemize}
+  \item \(\beta\in(0,\,\min\{(1-\rho)\,r,\,1-r\})\) is a fixed rational “kick” amplitude;
+  \item \(\eta:[0,\infty)\to[0,1]\) is a continuous, compactly supported
+        “station indicator’’ that \emph{equals} \(1\) at each station and is zero off
+        a tiny neighborhood, e.g.
+        \(
+          \eta(x)=\sum_{n\ge0}\,\chi_n(x)
+        \)
+        with pairwise disjoint, continuous hat functions \(\chi_n\) supported in
+        \([s_n-\tfrac12,\,s_n+\tfrac12]\) and satisfying \(\chi_n(s_n)=1\).
+        Thus one gets a \emph{single} kick of size \(\beta\) when \(x\) passes near
+        \(s_n\), and no kick away from stations.\footnote{The disjoint supports
+        and the bounded width ensure continuity of the update on \(\mathcal M\).}
+  \item \(h'\) is the updated latch of the built–in simulator:
+        starting from \(h_0=0\), we set \(h_{t+1}=1\) iff the \(t\)-th simulated
+        step reveals that \(U(e)\) has halted, and otherwise \(h_{t+1}=h_t\);
+        once \(h\) turns \(1\), it remains \(1\) forever.
+\end{itemize}
+The emitter is \(E(x,y,h)=\mathbf 1_{\{y\le r,\;h=1\}}\).
+Intuitively: the \(x\)–coordinate drifts to the right at unit speed; when the
+trajectory crosses a station neighborhood it receives a small additive “kick”
+\(\beta\) in \(y\), but every tick also contracts \(y\) by \(\rho\); independently,
+the embedded simulator flips \(h\) to \(1\) at the first tick where it detects
+that \(U(e)\) halts.
+
+\medskip
+We analyze this family in two steps.
+
+\begin{lemma}[Compliance: only compactness fails]
+\label{lem:C-only-compliance}
+For each \(e\in\mathbb N\), the model
+\(\mathfrak M_e=(\mathcal M,\mathcal Z^{\rm in},U_e,E,\mathcal S,\mathcal B)\)
+satisfies:
+\[
+  \textup{(S)},\quad
+  \textup{(F)}\equiv(R_{\text{\em weak}},L,C_{\text{\em basin}}),\quad
+  \textup{(T)}\text{ (PL–traceability)},\quad
+  \textup{(I)},\quad
+  \textup{(EM1)}\text{--}\textup{(EM3)}.
+\]
+Axiom \textup{(C)} fails \emph{only} in the compactness clause:
+\(\mathcal M\) is non–compact; all maps \(U_e,E\) are continuous.
+\end{lemma}
+
+\begin{proof}
+\emph{Continuity and non–compactness (C).}
+The map \(x\mapsto x+1\) is continuous; the functions
+\(y\mapsto \rho\,y\) and \(y\mapsto \rho\,y+\beta\eta(x)\) are continuous in
+\((x,y)\) because \(\eta\) is continuous with disjoint, bounded–width supports;
+the latch update is continuous in the product topology (discrete on \(\{0,1\}\)).
+Thus \(U_e\) and \(E\) are continuous.  The space \([0,\infty)\times[0,1]\times\{0,1\}\)
+is not compact because the \(x\)–coordinate is unbounded; this is the \emph{only}
+failure of (C).
+
+\smallskip
+\emph{Certification standard (S).}
+We use the standard product–metric certification with shells
+\(\mathcal B_n=\{(x,y,h): y\le r-2^{-n},\,h=1\}\).
+Acceptance sets are open and robust in the product metric; this is exactly the
+construction in Book~II, Ch.~6.
+
+\smallskip
+\emph{Basin axioms (F) = \(R_{\text{weak}}\)+\(L\)+\(C_{\rm basin}\).}
+On \(\mathcal B\) we have \(h=1\) and the update is \(y\mapsto \rho\,y\), hence
+for any \((x,y,h)\in\mathcal B\) and any tick,
+\(y'\le \rho\,y\le \rho r<r\) by \eqref{eq:rho-r-choice}; this proves
+\emph{local contraction} \(C_{\rm basin}\) with constant \(\rho\in(0,1)\).
+The same computation with \(y=r\) shows the \emph{Lyapunov border} \(L\):
+boundary points map strictly inside, \(r\mapsto \rho r<r\).
+For \(R_{\text{weak}}\) (per–trajectory reachability), fix any initial
+\((x_0,y_0,h_0)\).  If \(h\) flips to \(1\) at some time \(t^\ast\), thereafter
+the evolution of \(y\) is the pure contraction \(y\mapsto \rho y\), so in at most
+\[
+  T_y \;\le\; \Bigl\lceil\frac{\ln(y_{t^\ast}/r)}{\ln(1/\rho)}\Bigr\rceil
+\]
+further ticks we obtain \(y\le r\); thus \((R_{\text{weak}})\) holds in this case.
+If \(h\) never flips, the \(x\)–coordinate still crosses every station
+neighborhood at most once, so the total additive contribution from kicks is
+bounded by \(\beta \cdot \#\{\text{visited stations}\}\) \emph{up to any fixed
+time}; in between kicks, the dynamics is a contraction.  A standard comparison
+argument for the inhomogeneous linear recurrence \(y_{t+1}=\rho y_t+\beta\eta(x_t)\)
+shows that after finitely many kicks (which occur at discrete times when
+\(x_t\) lies in some \([s_n-\tfrac12,s_n+\tfrac12]\)), the subsequent pure
+contractions drive \(y\) below \(r\) within finitely many additional ticks.
+Formally, if \(t_1<t_2<\dots<t_m\) are the (finite) kick times encountered up to
+the first moment \(y\le r\), then
+\(
+y_{t_{j}+k}\le \rho^k(y_{t_j}+\beta/(1-\rho))
+\)
+and the choice \(\beta<(1-\rho)r\) guarantees eventual descent below \(r\).
+Hence \(R_{\text{weak}}\) holds from any start.
+
+\smallskip
+\emph{PL–traceability (T).}
+With singleton input, for each \(\Theta\) and shell \(\mathcal B_n\) the preimage
+\(U_e(\Theta,\cdot)^{-1}(\mathcal B_n)\) is either \(\emptyset\) or the whole
+\(\mathcal Z^{\rm in}\).  Whenever \(\Theta\in\mathcal B\), the image stays in
+\(\mathcal B\subset\mathcal B_n\), hence the preimage equals \(\mathcal Z^{\rm in}\),
+which is open and nonempty.  This is the PL–variant used throughout Book~III.
+
+\smallskip
+\emph{Time–irreversibility / no supertask (I).}
+Each tick performs a bounded, finite amount of work (one lattice drift in \(x\),
+one affine update in \(y\), one simulator step for \(U(e)\)); there is no Zeno
+scheduling.  A ranking function is given by
+\(
+f(x,y,h)=\mathbf 1_{\{h=0\}}\cdot \lceil y/r\rceil + \mathbf 1_{\{h=1\}}\cdot \lceil y/r\rceil,
+\)
+which decreases whenever \(y>r\) and a contraction is applied; fairness is trivial
+because the schedule is deterministic.
+
+\smallskip
+\emph{Effectivity (EM1–EM3).}
+All primitives are rational–arithmetic and uniformly described: affine maps
+\((x,y)\mapsto(x+1,\rho y)\) and \((x,y)\mapsto(x+1,\rho y+\beta\eta(x))\) with
+fixed rational \(\rho,\beta\) and rational hat functions \(\chi_n\) (their
+centers \(s_n\) are computable from \(\Delta_n\)).  Evaluating to \(k\) bits is
+polynomial in \(k\) and in the bit–length of \((x,y)\) (EM2); membership in
+shells \(\{y\le r-2^{-n},\,h=1\}\) is decidable in time \(\mathrm{poly}(n,\log(1/\varepsilon))\)
+(EM3).  This establishes EM1–EM3.
+\end{proof}
+
+\begin{lemma}[\(\Sigma^0_1\)–hardness of ABET uniformization; compactness–only]
+\label{lem:C-only-sigma1}
+For the family \(\{\mathfrak M_e\}_{e\in\mathbb N}\) above, define the
+\emph{ABET–uniformization language}
+\[
+  L^{\mathrm{unif}}
+  \;=\;
+  \Bigl\{\, e\in\mathbb N \;\Big|\;
+     \exists T_{\max}\ \forall \Theta_0\in\mathcal M:\ 
+     \exists t\le T_{\max}\ \text{with}\ U_e^t(\Theta_0)\in\mathcal B
+  \Bigr\}.
+\]
+Then
+\[
+  e\in L^{\mathrm{unif}}
+  \quad\Longleftrightarrow\quad
+  U(e)\ \text{halts},
+\]
+so \(L^{\mathrm{unif}}\) is \(\Sigma^0_1\)–complete (Turing degree \(0'\)).
+\end{lemma}
+
+\begin{proof}
+We analyze the two directions separately.
+
+\smallskip
+\emph{(\(\Rightarrow\)) If \(U(e)\) halts, then \(e\in L^{\mathrm{unif}}\).}
+Let \(t^\ast\) be the first tick where the embedded simulator detects halting and
+sets \(h=1\).  Thereafter the update on \(y\) is the pure contraction
+\(y\mapsto \rho y\).  Since \(y\in[0,1]\), the number of additional ticks needed
+to reach \(y\le r\) is bounded by
+\(
+  T_{\rm contr}=\bigl\lceil \ln(1/r)/\ln(1/\rho)\bigr\rceil,
+\)
+\emph{independently} of \(\Theta_0\).
+It remains to bound, uniformly over \(\Theta_0\), the time until \(h\) flips.
+By construction, exactly one simulator step is executed per tick; thus \(h\) flips
+by time \(t^\ast\le S(e)+1\), where \(S(e)\) is the halting time of \(U(e)\) on
+input \(e\).  Therefore
+\[
+  T_{\max} \;=\; S(e)+1+T_{\rm contr}
+\]
+works uniformly for all initial states \(\Theta_0\), showing \(e\in L^{\mathrm{unif}}\).
+
+\smallskip
+\emph{(\(\Leftarrow\)) If \(U(e)\) does not halt, then \(e\notin L^{\mathrm{unif}}\).}
+Assume \(U(e)\) never halts, so \(h_t\equiv 0\).  Fix any candidate bound
+\(T\in\mathbb N\).  We will construct an initial state \(\Theta_0\) whose entry
+time exceeds \(T\), showing that no global \(T_{\max}\) exists.
+
+Choose \(N\) so large that the distance from station \(s_N\) to station
+\(s_{N+K}\) exceeds \(T\) for every fixed \(K\) (possible because the spacings
+\(\Delta_n\) are increasing and unbounded).  Set
+\(\Theta_0=(x_0,y_0,h_0)=(s_N-\tfrac14,\,1,\,0)\).
+From time \(0\) to the moment the trajectory first reaches the neighborhood of
+\(s_N\) there are at least \(\tfrac14\) ticks; upon crossing \(s_N\) the \(y\)–update
+applies one kick of size \(\beta\), but the inequality \(\beta<(1-\rho)r\)
+ensures that repeated contractions would suffice to eventually bring \(y\) below
+\(r\).  However, before enough contractions accrue, the trajectory must traverse
+the (very large) spacing \(\Delta_N=s_{N+1}-s_N\) to reach the next contraction
+opportunity; by the choice of \(N\) and monotonicity of the spacings, the number
+of ticks needed to pick up any fixed number \(K\) of contractions can be made
+arbitrarily large by increasing \(N\).  In particular, for the above \(\Theta_0\),
+the time needed to accumulate the (finite) number of contractions required to
+cross below \(r\) exceeds the prescribed \(T\).  Since \(T\) was arbitrary, no
+uniform \(T_{\max}\) exists, i.e.\ \(e\notin L^{\mathrm{unif}}\).
+
+\smallskip
+\emph{Completeness.}
+The mapping \(e\mapsto \mathfrak M_e\) is uniform and computable (the only
+\(e\)–dependence is the built–in single–step simulator for \(U(e)\)).
+By the two implications we have
+\[
+  e\in L^{\mathrm{unif}} \iff U(e)\ \text{halts},
+\]
+so \(L^{\mathrm{unif}}\) is many–one equivalent to \(\mathrm{HALT}\) and hence
+\(\Sigma^0_1\)–complete.  Note that in both cases (\(U(e)\) halts or not) the
+\emph{tail fact} “eventually enter \(\mathcal B\) and stay’’ is true from every
+start (Lemma~\ref{lem:C-only-compliance}); what is undecidable is the existence
+of a \emph{global} uniform time bound, i.e.\ ABET’s compactness–driven finite
+subcover—precisely the portion of the argument that relies on (C).
+\end{proof}
+
+\paragraph{Conclusion.}
+The family \(\{\mathfrak M_e\}\) isolates a pure failure of \textup{(C)} (compactness)
+already at the ABET level: the tail fact remains legitimate and holds on all
+trajectories, yet the existence of a \emph{finite} ABET certificate (a global
+\(T_{\max}\), hence a finite subcover) is \(\Sigma^0_1\)–complete.  All other
+axioms—including the weakened basin axiom \(R_{\text{weak}}\), Lyapunov border,
+local contraction on \(\mathcal B\), PL–traceability, time–irreversibility, and
+the effective measurability axioms—are satisfied.
+
+
+
+%============================================
+% Embedding HALT via failure of (T) (Open‐Preimage)
+%============================================
+
+\subsection{HALT embedding via iterative decomposition under a pure (T) failure}
+\label{subsec:halt-embedding-pure-T}
+
+We exhibit a fixed, computable measurement model in which all axioms (F), (S), (C), (I), (EM1)–(EM3) hold, but \textbf{(T) fails}, and where the \emph{compile–time termination} of a standard, sound iterative guarded–decomposition procedure is \(\Sigma^0_1\)-complete via a many–one reduction from \(\mathrm{HALT}\).
+The hardness attaches to the \emph{inductive construction of the decomposition} (compile–time), not to the run–time test (which remains finite and benign).
+
+\paragraph{Model.}
+Let the input space be \(\mathcal Z^{\rm in}=[0,1]\) with its usual metric, and let the state space be
+\[
+\mathcal M \;=\; [0,1]\times\{0,1\},
+\]
+with coordinates \((x,\ell)\), where \(\ell\) is a latch bit. Fix the \emph{middle–third Cantor set} \(K\subset[0,1]\).
+\paragraph{Basin definition.}
+To satisfy the basin axioms $(R_{\mathrm{weak}},L,C_{\mathrm{basin}})$ while keeping the traceability violation isolated, we fix parameters $0<r<1$ and $\rho\in(0,1)$ with $\rho\,r<r$ and define the basin
+\[
+  \mathcal B = \{(x,\ell)\in[0,1]\times\{0,1\} : x\le r,\ \ell=1\}.
+\]
+Here $x$ is a contracting coordinate updated by $x\mapsto \rho\,x$ on $\mathcal B$ (ensuring local contraction and Lyapunov border), and $\ell$ is a latch bit that is set to $1$ at a fixed primitive stage (independent of the hard guard geometry used for the traceability violation). This guarantees that every trajectory enters $\mathcal B$ in finite time from any initial state, so $R_{\mathrm{weak}}$ holds.
+
+Define a two–tick update \(U\) (implemented by two primitive steps \(U^{(1)},U^{(2)}\)), and a trivial emitter \(E\) that just reports \((x,\ell)\):
+
+\begin{itemize}[leftmargin=2em]
+  \item \textbf{Tick 1:} 
+  \(
+    U^{(1)}\bigl((x,\ell),z\bigr) \;=\; \bigl(d(z,K),\,\ell\bigr),
+  \)
+  where \(d(z,K)=\inf_{y\in K}|z-y|\) is the distance to \(K\).
+  \item \textbf{Tick 2:}
+  \(
+    U^{(2)}\bigl((x,\ell),z\bigr) \;=\; (0,1)
+  \)
+  for every input \(z\) and state \((x,\ell)\).
+\end{itemize}
+
+Thus, after Tick 2, the system is always in the basin \(\mathcal B\) and remains there; the \emph{tail fact} of interest is the usual basin‐entry predicate (“eventually in \(\mathcal B\) and stay”).
+
+We adopt the Minimal Certification Standard \(\mathcal S=\{\varepsilon_n\}_{n\ge1}\) from Chapter~3, Section~2, with shells \(\mathcal B_n=\{(x,\ell):x\le 2^{-n},\,\ell=1\}\).
+
+\paragraph{Traceability variant.}
+Throughout this construction we adopt the \emph{primitive–level} form of the traceability axiom \textup{(T)} (PL–Traceability): for each primitive update $U^{(j)}$ in the fixed decomposition, each $\Theta\in\mathcal M$, and each certification shell $\mathcal B_n$, the preimage $\big(U^{(j)}(\Theta,\cdot)\big)^{-1}(\mathcal B_n)$ must be open and nonempty in the input space. 
+This strengthens the universal–step variant only in the sense that it enforces the openness requirement \emph{at each individual stage} of the decomposition, not merely for the composed $U$; the motivation here is that the HALT embedding exploits the geometry of a single primitive’s guard set, so the violation manifests already before composition.
+
+
+\begin{lemma}[Computability and axiom compliance; pure (T) failure]
+\label{lem:pure-T-compliance}
+For the above model:
+\begin{enumerate}[label=(\roman*), itemsep=4pt]
+  \item \textup{(F)} holds: \(\mathcal B\) is closed, invariant, and uniformly reachable in two ticks.
+  \item \textup{(S)} holds with the Minimal Certification Standard \(\mathcal S\).
+  \item \textup{(C)} holds: \(\mathcal M\) and \(\mathcal Z^{\rm in}\) are compact metric spaces and all primitive updates are continuous.
+  \item \textup{(I)} holds: executions have two deterministic ticks (no supertask).
+  \item \textup{(EM1)}–\textup{(EM3)} hold in the sense of Chapter~3, \S\ref{subsec:effective-measurability-axioms}:
+        \begin{itemize}
+          \item the primitives \(U^{(1)}\), \(U^{(2)}\), \(E\) admit uniform, polynomial–time evaluation to \(k\) bits of precision (distance–to–\(K\) is computable in time \(poly(k)\) via triadic‐digit truncation);
+          \item a polynomial modulus of continuity exists (in fact, Lipschitz on compact sets);
+          \item guard/basin membership up to tolerance \(\varepsilon\) is decidable in time \(poly(\log(1/\varepsilon))\).
+        \end{itemize}
+  \item \textup{(T)} fails: for the initial state \((x,\ell)=(1,0)\) and the shell \(\mathcal B_1=\{(x,\ell): x\le1/2,\ \ell=1\}\), the preimage
+  \[
+     U^{(1)}\bigl((1,0),\cdot\bigr)^{-1}(\{(0,0)\})
+     \;=\; \{z\in[0,1]: d(z,K)=0\}
+     \;=\; K
+  \]
+  is closed, nowhere dense, and \emph{not} open.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\emph{(i) (F).}
+\(\mathcal B=\{(0,1)\}\) is closed and invariant because \(U^{(2)}\) maps every state to \((0,1)\), and a subsequent application keeps it there. Uniform reachability holds with \(T_{\max}=2\).
+
+\emph{(ii) (S).}
+The Minimal Certification Standard \(\mathcal S\) uses shells \(\mathcal B_n=\{(x,\ell):x\le2^{-n},\ \ell=1\}\). Because \(U^{(2)}\) maps any state to \((0,1)\), verifying basin entry at Tick 2 is robust: any \(\varepsilon_n>0\) that separates \(x\le 2^{-n}\) from \(x> 2^{-n}\) yields open acceptance sets in the product metric (Book~II, Ch.~6). Hence acceptance is robust to small output perturbations.
+
+\emph{(iii) (C).}
+\(\mathcal M\) and \(\mathcal Z^{\rm in}\) are compact intervals (finite products of compact metric spaces).
+The map \(U^{(2)}\) is constant, hence continuous. The distance function \(z\mapsto d(z,K)\) is 1–Lipschitz on \([0,1]\), hence continuous; therefore \(U^{(1)}\) is continuous. The emitter \(E\) is continuous (projection).
+
+\emph{(iv) (I).}
+Exactly two ticks occur; no supertask scheduling is present.
+
+\emph{(v) (EM1)–(EM3).}
+\underline{EM2/EM3:}
+The function \(d(\cdot,K)\) admits a uniform polynomial–time evaluator to \(k\) bits by reading the first \(k\) ternary digits of \(z\) and using the standard “no digit 1” certificate; this yields upper/lower bounds that converge geometrically (the ambiguity at triadic dyadic boundaries is handled by the product metric and tolerance). Hence there is a polynomial modulus for evaluating \(U^{(1)}\) and for deciding the shell predicates up to tolerance \(\varepsilon=2^{-k}\).
+\underline{EM1:}
+In the baseline \((\mathbf C,\mathcal V)=(\mathbf P,\mathbf{NP})\) setting, EM1 requires an effective (uniform, finite) representation with poly–time evaluation to \(k\) bits.\footnote{If one insists on “rational arithmetic circuit” in the strictest sense, replace EM1 by the parameterized effective representation EM1\(_{\mathbf C}\) of Proposition~\ref{prop:param-fdi} with \(\mathbf C=\mathbf P\), which is what the proofs in Chapter~3 actually use. The present construction is fully compliant with EM1\(_{\mathbf P}\), EM2\(_{\mathbf P}\), EM3\(_{\mathbf P}\).}
+Both primitives \(U^{(1)}\), \(U^{(2)}\) and the shell/guard tests satisfy this.
+
+\emph{(vi) (T).}
+At Tick 1, starting from any state, the \(x\)–coordinate is \(d(z,K)\). Since \(d(z,K)=0\) iff \(z\in K\), the preimage of the singleton \(\{x=0\}\) is exactly \(K\), which is closed and nowhere dense, hence not open. Therefore Axiom (T) fails.
+\end{proof}
+
+\paragraph{Iterative guarded–decomposition procedure \(\mathcal A\).}
+We use a standard, sound refinement scheme (cf.\ ATRT, Alg.~\ref{alg:adaptive-trace} in the Appendix) specialized to our model:
+
+\begin{enumerate}[label=\arabic*. , itemsep=2pt, leftmargin=2em]
+  \item Maintain a partition \(\mathcal P_m\) of \([0,1]\) into finitely many triadic intervals at depth \(m\).
+  \item On each cell \(I\in\mathcal P_m\), decide (via the EM2/EM3 evaluator for \(d(\cdot,K)\)) whether Tick–1 maps \emph{all} points in \(I\) to \(x=0\) (i.e., \(I\subseteq K\)), \emph{no} point in \(I\) maps to \(x=0\) (i.e., \(I\cap K=\varnothing\)), or the case is \emph{ambiguous} (the cell intersects the boundary).
+  \item Remove decided cells; refine ambiguous cells by splitting them into their three triadic subintervals; set \(m\gets m+1\).
+  \item \textbf{Termination condition:} stop when no ambiguous cells remain; output the finite guarded decomposition that routes “Tick–1 into \(\mathcal B\)” vs.\ “Tick–2 into \(\mathcal B\)”.
+\end{enumerate}
+
+Correctness is standard: on any cell that is declared “inside” or “outside”, continuity/Lipschitz of \(d(\cdot,K)\) and the shell tolerance ensure the decision is sound; refinement preserves soundness. The procedure terminates iff the ambiguous set becomes empty in finitely many triadic refinements.
+
+\begin{lemma}[\(\Sigma_1\)–hardness of compile–time stabilization under pure (T) failure]
+\label{lem:pure-T-hardness}
+Let \(U\) be the model of Lemma~\ref{lem:pure-T-compliance} and \(\mathcal A\) the above refinement procedure. Consider the meta–language
+\[
+  L_{\mathrm{stab}}
+  \;=\;
+  \bigl\{\,x\in\mathbb N\;:\;\text{on input }x,\ \mathcal A \text{ halts with a finite guarded decomposition}\,\bigr\},
+\]
+where \(\mathcal A\) is augmented to \emph{interleave} (in dovetailing fashion) a simulation of the universal Turing machine \(U_{\rm TM}(x)\).
+Then \(L_{\mathrm{stab}}\) is \(\Sigma^0_1\)–complete (many–one equivalent to \(\mathrm{HALT}\)).
+Moreover, during run–time, the produced guarded program (when \(\mathcal A\) halts) is finite, satisfies (EM1)–(EM3), and correctly certifies the tail fact.
+\end{lemma}
+
+\begin{proof}
+Define the augmented compiler \(\mathcal A\) as follows: run one iteration of the refinement loop, then simulate one step of \(U_{\rm TM}(x)\), and repeat. If ever \(U_{\rm TM}(x)\) halts, \(\mathcal A\) immediately \emph{short–circuits}: it outputs the following \emph{finite} guarded program
+\[
+\Pi^\star:\quad\text{(Ignore Tick 1); perform Tick 2; accept if in }\mathcal B.
+\]
+This program is valid for the model because Tick 2 maps every state into \(\mathcal B\), independently of \(z\in[0,1]\). Its guards are trivial (single open cell \([0,1]\)), and the primitives are those of Lemma~\ref{lem:pure-T-compliance}, hence (EM1)–(EM3) hold.
+
+We now show two implications.
+
+\underline{(A) If \(U_{\rm TM}(x)\) halts, then \(\mathcal A\) halts.}
+By construction, on the first step where the TM halts, \(\mathcal A\) outputs \(\Pi^\star\). This is finite and correct; thus \(x\in L_{\mathrm{stab}}\).
+
+\underline{(B) If \(U_{\rm TM}(x)\) does not halt, then \(\mathcal A\) does not halt.}
+In this case the short–circuit never triggers. The refinement loop runs forever. Because the preimage of Tick–1 entry is exactly \(K\), which has empty interior, every triadic refinement leaves some ambiguous cells (indeed, the ambiguous set is precisely the Cantor–like boundary that never disappears in finite depth). Consequently, the “no ambiguous cells remain” condition is never met, so \(\mathcal A\) does not halt.
+
+Thus we have established a many–one reduction \(x\mapsto x\) from \(\mathrm{HALT}\) to \(L_{\mathrm{stab}}\). Therefore \(L_{\mathrm{stab}}\) is \(\Sigma^0_1\)–hard. It lies in \(\Sigma^0_1\) by definition (“\(\exists t\): \(\mathcal A\) halts within \(t\) steps”), hence \(\Sigma^0_1\)–complete.
+
+Finally, whenever \(\mathcal A\) halts, the output \(\Pi^\star\) is a valid finite decomposition: it uses the same primitives as the model, requires only Tick 2, and its guards are trivially decidable in polynomial time to any tolerance. During run–time, the NP–style certificate/verifier of Chapter~3 applies verbatim (Polytime Verifier Construction), so the tail fact is certified in the usual way. 
+\end{proof}
+
+\paragraph{Discussion.}
+The only source of undecidability in this construction is the guard set $G\subseteq \mathcal Z^{\mathrm{in}}$ used by the designated primitive $U^{(2)}$ in the decomposition $U=U^{(2)}\circ U^{(1)}$. 
+
+We take $G$ to be an r.e.–open set whose membership problem encodes the halting of $U(e)$ on input $e$. 
+
+Because PL–Traceability requires the preimage $U^{(2)}(\Theta,\cdot)^{-1}(\mathcal B_n)$ to be open and nonempty for every $\Theta$ and $n$, but the boundary $\partial G$ is non–open and its interior membership is $\Sigma^0_1$–hard, the axiom fails exactly at this primitive, while all other primitives have trivially open preimages.
+
+This construction cleanly separates concerns:
+\begin{itemize}[itemsep=2pt, leftmargin=2em]
+  \item The \emph{model} violates only (T); all of (F),(S),(C),(I),(EM1)–(EM3) hold.
+  \item The \emph{compile–time} \emph{stabilization} of a sound, standard refinement procedure is \(\Sigma^0_1\)–complete.
+  \item Whenever the compiler halts, the emitted guarded program is finite, effective, and its run–time verification remains within the baseline \((\mathbf P,\mathbf{NP})\) regime of Chapter~3.
+\end{itemize}
+In particular, hardness is a property of \emph{inductive guard synthesis} in the presence of a pure (T) failure (non–open preimages), not of the run–time test itself.
+
+
+
+%============================================
+% Embedding HALT via failure of EM1 (Effective Representation)
+%============================================
+\subsection{Real–Constant Embedding (Violation of EM1)}
+\label{sec:EM1-violation}
+
+In this construction we exhibit a HALT embedding whose only failing axiom at the ABET level is \textup{(EM1)}, the \emph{effective modulus of continuity via rational constants} requirement.
+We recall that \textup{(EM1)} demands that all numerical constants used by the update map $U$ be \emph{effectively encodable}, for example as rationals or via a uniformly computable sequence of rationals converging at a known rate. 
+We will construct a system whose basin axioms $(R_{\mathrm{weak}},L,C_{\mathrm{basin}})$ hold, and for which the only violation is the appearance of a \emph{real constant} whose binary expansion encodes the halting set.
+
+\subsubsection*{Setup of the embedding}
+Let $\mathcal M = [0,1]\times\{0,1\}$, where $x\in[0,1]$ is a contracting coordinate and $\ell\in\{0,1\}$ is a latch bit.
+Fix $0<r<1$ and $\rho\in(0,1)$ with $\rho\,r<r$.
+Define the basin
+\[
+  \mathcal B \;=\; \{(x,\ell)\in[0,1]\times\{0,1\} \mid x\le r,\ \ell=1\}.
+\]
+The update map $U$ is given by the composition $U = U^{(2)}\circ U^{(1)}$, where:
+
+\begin{enumerate}
+\item $U^{(1)}$: Given $(x,\ell)$ and an input $e\in\mathbb N$ (encoded in the measurement $z^{\mathrm{in}}$), set $\ell := 1$ if the $e$–th bit of a fixed real constant $\alpha$ equals $1$, otherwise leave $\ell$ unchanged. The $x$ coordinate is not touched.
+
+\item $U^{(2)}$: Contract the $x$ coordinate by $x\mapsto \rho\,x$ and leave $\ell$ unchanged.
+\end{enumerate}
+
+The constant $\alpha\in[0,1]$ is chosen so that its binary expansion
+\[
+  \alpha = 0.\,b_1 b_2 b_3 \dots
+\]
+satisfies $b_e = 1$ if and only if the $e$–th Turing machine halts on empty input.
+This $\alpha$ is a well–defined real number, but it is not computable.
+
+Because $x$ is contracted each time by $U^{(2)}$, every trajectory enters the set $\{x\le r\}$ in finitely many steps, regardless of $\ell$; at that point, if $\ell=1$ the state is in $\mathcal B$. Since $\ell$ may be set to $1$ at the very first step depending on $b_e$, we obtain $(R_{\mathrm{weak}},L,C_{\mathrm{basin}})$ without requiring any uniform bound that is independent of $e$.
+
+\subsubsection*{Violation mechanism}
+The \textup{(EM1)} axiom fails because $\alpha$ has no effective encoding. Evaluation of $U^{(1)}$ for a given $e$ requires determining $b_e$, which is equivalent to deciding whether the $e$–th Turing machine halts — a $\Sigma^0_1$–complete problem.
+
+\begin{lemma}[Computability compliance of other axioms]
+\label{lem:EM1-violation-computability}
+The system $(\mathcal M, U, \mathcal B)$ described above satisfies axioms $(R_{\mathrm{weak}},L,C_{\mathrm{basin}})$, \textup{(C)}, and \textup{(T)}, as well as \textup{(EM2)} and \textup{(EM3)}, assuming these latter two are interpreted in the standard effective sense over rational constants.
+\end{lemma}
+
+\begin{proof}
+\begin{enumerate}
+\item \textbf{$R_{\mathrm{weak}}$:} For any initial state $(x_0,\ell_0)$, repeated application of $U^{(2)}$ reduces $x$ by the factor $\rho<1$ at each step. Thus there exists $t$ (depending on $x_0$) such that $x_t \le r$, ensuring reachability of the $x$–component of $\mathcal B$ in finitely many steps. The latch bit $\ell$ is set to $1$ whenever the input index $e$ satisfies $b_e=1$, but weak reachability does not require this to hold uniformly over $e$.
+
+\item \textbf{$L$:} The Lyapunov function $V(x,\ell) = x$ satisfies $V\le r$ on $\mathcal B$ and $V=r$ on the boundary. Applying $U^{(2)}$ to a boundary point sends $x$ to $\rho\,r < r$, so $L$ holds.
+
+\item \textbf{$C_{\mathrm{basin}}$:} On $\mathcal B$, the update $U^{(2)}$ contracts the $x$–coordinate by $\rho<1$ and leaves $\ell$ unchanged, so $(C_{\mathrm{basin}})$ is satisfied.
+
+\item \textbf{$\textup{(C)}$:} The local contraction on $\mathcal B$ follows from the contraction of the $x$–coordinate and the discrete nature of $\ell$.
+
+\item \textbf{$\textup{(T)}$:} Preimages of certification shells $\mathcal B_n = \{(x,\ell): x\le r_n, \ell=1\}$ under either $U^{(1)}$ or $U^{(2)}$ are open in the input space: for $U^{(1)}$ the openness is trivial in the discrete $e$–coordinate; for $U^{(2)}$ it is inherited from continuity in $x$.
+
+\item \textbf{$\textup{(EM2)}$, $\textup{(EM3)}$:} Both EM2 (effective modulus of continuity) and EM3 (decidable open guards) are satisfied relative to the operations and sets actually used in $U^{(2)}$ and in the guard for $\ell=1$, which are all finite–state or rational.
+\end{enumerate}
+Therefore all axioms except EM1 hold.
+\end{proof}
+
+\begin{lemma}[HALT–encoding hardness]
+\label{lem:EM1-violation-hardness}
+The evaluation of $U^{(1)}$ in the above system computes a $\Sigma^0_1$–complete predicate, and hence no effective encoding of the constant $\alpha$ exists. This is precisely the violation of \textup{(EM1)}.
+\end{lemma}
+
+\begin{proof}
+By construction, the constant $\alpha$ has binary expansion $(b_e)_{e\ge1}$ with
+\[
+  b_e = 
+  \begin{cases}
+  1, & \text{if the $e$--th Turing machine halts on empty input},\\
+  0, & \text{otherwise}.
+  \end{cases}
+\]
+Given an input index $e$ as part of $z^{\mathrm{in}}$, the primitive $U^{(1)}$ queries the $e$–th bit $b_e$ of $\alpha$ and sets $\ell := 1$ if and only if $b_e=1$.
+Thus, the mapping $e\mapsto b_e$ solves the halting problem on empty input. This problem is well–known to be $\Sigma^0_1$–complete, i.e., semi–decidable but not decidable.
+
+If $\alpha$ were effectively encodable in the sense of EM1, there would exist a Turing machine that, given $e$ and $k$, produces the $k$–bit truncation of $\alpha$ in time bounded by a uniform modulus of convergence. In particular, taking $k=e$, we could decide whether $b_e=0$ or $1$, thereby deciding the halting problem — a contradiction.
+
+Therefore, $\alpha$ is not effectively encodable, and EM1 fails exactly because of this constant. All other parts of the construction remain effective.
+\end{proof}
+
+\paragraph{Conclusion.}
+This construction isolates the violation of EM1 to a single real constant $\alpha$ whose binary expansion encodes HALT. The basin axioms $(R_{\mathrm{weak}},L,C_{\mathrm{basin}})$ and all other effectivity and contraction axioms hold, so the HALT–hardness is cleanly localized to EM1.
+
+
+%============================================
+% Embedding HALT via failure of EM2 (Polynomial Modulus of Continuity)
+%============================================
+\subsection{HALT Embedding via an \texorpdfstring{$\mathrm{EM2}$}{EM2}-Violation}
+\label{sec:EM2-violation}
+
+We construct a family of measurement models
+\[
+  \bigl\{\mathfrak M_e=(\mathcal M,\mathcal Z^{\rm in},U_e,E,\mathcal S,\mathcal B)\bigr\}_{e\in\mathbb N}
+\]
+that \emph{isolate} a failure of \textup{(EM2)} (the polynomial cost–modulus of evaluation), while all other assumptions required at the ABET level hold:
+\[
+  (R_{\text{weak}}),\ (L),\ (C_{\text{basin}}),\ (C),\ (T),\ (I),\ (EM1),\ (EM3).
+\]
+Intuitively, the update has a benign, uniform contraction in a state coordinate (so the basin axioms hold), but includes a single primitive whose \emph{evaluation to $k$ output bits} in the worst case forces \emph{super–polynomial} work in $k$ (hence \textup{(EM2)} fails). We then show that the associated \emph{compile–time $+$ run–time} acceptance language becomes $\Sigma^0_1$–complete (many–one equivalent to \textsc{HALT}).
+
+\paragraph{Spaces, basin, and certification standard.}
+Let
+\[
+  \mathcal M=[0,1]_x\times\{0,1\}_\ell,\qquad
+  \mathcal Z^{\rm in}=[0,1]_z,
+\]
+with the product of the Euclidean metric on $[0,1]$ (capped at $1$) and the discrete metric on $\{0,1\}$. Fix $\rho\in(0,1)$ and $r\in(0,1)$ with $\rho r<r$, and define the basin and the minimal shells by
+\[
+  \mathcal B=\{(x,\ell):x\le r\},\qquad
+  \mathcal B_n=\{(x,\ell):x\le r_n\},\quad r_n:=r/2^n.
+\]
+Thus $\ell$ plays \emph{no role} in $\mathcal B$ (this ensures the basin axioms will not hinge on any halting–dependent event). Take $\mathcal S$ to be the minimal certification standard built from the shells $\{\mathcal B_n\}_{n\ge1}$ (cf.\ Book~II, Ch.~6).
+
+\paragraph{Update and emitter.}
+Fix a smooth bump $b:\mathbb R\to[0,1]$ with $\operatorname{supp}b\subset(-1,1)$ and $b(0)=1$. For each $e\in\mathbb N$ define the \emph{halting–gated} widths
+\[
+  w_j^{(e)} \;:=\;
+  \begin{cases}
+    2^{-\,2^{j}}, & \text{if the universal TM $U(e)$ has not halted by step }2^{j},\\[2pt]
+    0, & \text{otherwise},
+  \end{cases}
+  \qquad j=1,2,\dots
+\]
+and rational centers $c_j:=\tfrac12-2^{-j}$. Define the continuous map
+\[
+  F_e(z) \;:=\; \sum_{j=1}^\infty 2^{-(j+2)}\, b\!\Bigl(\frac{z-c_j}{w_j^{(e)}+2^{-(2^{j}+j)}}\Bigr).
+\]
+(When $w_j^{(e)}=0$, the $j$th term is the zero function; the tiny rational floor $2^{-(2^{j}+j)}$ ensures each summand is well–defined by a \emph{uniform} rational circuit; see EM1 discussion below.)
+Set the two–tick update $U_e:=U_e^{(2)}\circ U_e^{(1)}$ by
+\[
+  U_e^{(1)}:(x,\ell),z\mapsto (x+\tfrac12 F_e(z),\ \ell),\qquad
+  U_e^{(2)}:(x',\ell)\mapsto (\rho x',\ \ell),
+\]
+and let the emitter be $E(x,\ell)=x$ (we certify the $x$–shells). Finally, in the background we run a \emph{separate} one–step–per–tick simulation of $U(e)$ (this influences only the parameters $w_j^{(e)}$ used by $U_e^{(1)}$ as explained above; there is no Zeno schedule).
+
+\medskip
+The role of $F_e$ is to create a very narrow family of ``bumps'' whose presence/absence at scales $2^{-2^{j}}$ depends on whether $U(e)$ has already halted by time $2^{j}$. To decide the $k$th output bit of $U_e^{(1)}$ on adversarial inputs $z$ one must, in general, determine the membership of $z$ in windows of width $2^{-2^{j}}$ for some $j=\Theta(k)$, which forces inspection of $\Theta(2^{k})$ input precision or the equivalent computational effort. This yields a \emph{super–polynomial} worst–case evaluation cost in $k$, i.e.\ a clean failure of \textup{(EM2)}.
+
+\subsubsection*{Axiom compliance (all but \texorpdfstring{EM2}{EM2})}
+\begin{lemma}[Computability and axiom compliance; only \textup{(EM2)} fails]
+\label{lem:EM2-violation-computability}
+For each $e\in\mathbb N$, the model $\mathfrak M_e$ satisfies
+\[
+  (R_{\text{weak}}),\ (L),\ (C_{\text{basin}}),\ (C),\ (T),\ (I),\ (EM1),\ (EM3),
+\]
+and violates \textup{(EM2)} (no polynomial evaluation cost–modulus for $U_e^{(1)}$).
+\end{lemma}
+
+\begin{proof}
+\emph{(C) compact $+$ continuity.} $\mathcal M$ and $\mathcal Z^{\rm in}$ are compact. Each summand in $F_e$ is a smooth bump of amplitude $2^{-(j+2)}$ and support radius $\le 2^{-(2^{j}+j)}$ \emph{given by a uniform rational circuit} (the dependence on halting only gates whether the term is identically zero: if $U(e)$ has halted by time $2^{j}$ we set the width to $0$ and the summand to $0$). Hence $F_e$ is a uniformly and absolutely convergent series of continuous functions; therefore $U_e^{(1)}$ and $U_e^{(2)}$ are continuous, so is $U_e=U_e^{(2)}\!\circ U_e^{(1)}$.
+
+\emph{$(R_{\text{weak}}), (L), (C_{\text{basin}})$.} Take the Lyapunov function $V(x,\ell)=x$. Since $x\mapsto \rho x$ in $U_e^{(2)}$ with $\rho\in(0,1)$, the $x$–coordinate contracts uniformly. For any initial $(x_0,\ell_0)$ there exists $t$ with $x_t\le r$ (reachability into the $x$–part of $\mathcal B$). On the boundary $x=r$, one tick maps $x$ to $\rho r<r$ (Lyapunov border), and on $\mathcal B$ the restriction is a strict contraction (local contraction). The latch $\ell$ is inert for $\mathcal B$ by design, so no halting event is needed for basin entry.
+
+\emph{(T) PL–traceability.} With shells $\mathcal B_n=\{x\le r_n\}$, for any $\Theta$ we have $U_e^{(2)}(\Theta,\cdot)^{-1}(\mathcal B_n)=\mathcal Z^{\rm in}$ (open, nonempty). Thus the per–primitive (PL) version of (T), used throughout Book~III, holds.
+
+\emph{(I) no supertask.} Each global tick performs: (i) evaluation of $F_e$ at the \emph{given} $z$ (no Zeno accumulation in physical time), and (ii) a single affine contraction by $\rho$. The background halting simulation of $U(e)$ advances by \emph{one step per tick} only to \emph{update} which summands in $F_e$ are known to be zero for future ticks; it does not affect the current tick’s physical update. Hence time–irreversibility (weak fairness) is respected.
+
+\emph{(EM1) effective representation.} The primitives are specified by a fixed finite recipe (a circuit schema) that, on input $j$, constructs the $j$th summand using rational arithmetic (centers $c_j$ dyadic; amplitudes $2^{-(j+2)}$ dyadic; floor width $2^{-(2^{j}+j)}$ dyadic). Whether the $j$th bump \emph{also} carries the additional (non–rational) width $w_j^{(e)}=2^{-2^{j}}$ is \emph{replaced} by the rule “set the $j$th summand to zero once the background simulation has reached time $2^j$ and has observed a halting state”. This gating is fully effective (it reads a single bit from the simulator state) and does not introduce non–rational parameters. Thus EM1 (effective specification by a uniform finite description) holds.
+
+\emph{(EM3) guard/basin tests.} Membership in $\mathcal B_n$ is a dyadic threshold on $x$ (independent of $z$), decidable in time polynomial in the state bit–length and $\log(1/\varepsilon)$.
+
+\emph{(EM2) failure (no polynomial cost–modulus).} Fix $k\ge1$. Consider adversarial inputs $z$ that, for some $j=\Theta(k)$, lie at distance $\tfrac12\,2^{-2^j}$ to the center $c_j$. Then changing $z$ by at most $2^{-2^j}$ toggles the $j$th summand between $\approx 2^{-(j+2)}$ and $0$, which alters $U_e^{(1)}$ by $\gtrsim 2^{-(j+2)}\asymp 2^{-\Theta(k)}$. Therefore, any algorithm that \emph{guarantees} $k$ correct output bits of $U_e^{(1)}$ must, in the worst case, distinguish inputs within $\delta\le 2^{-2^j}=2^{-2^{\Theta(k)}}$ around the centers $c_j$. Equivalently, it must either (a) inspect $\Theta(2^{k})$ digits of $z$ in base $2$, or (b) perform $\Omega(2^{k})$ steps of the background halting simulation to certify whether the $j$th summand is presently active. In either interpretation, the worst–case evaluation time grows faster than any fixed polynomial in $k$ (for fixed input bit–length), violating EM2’s polynomial cost–modulus requirement. All other axioms remain intact.
+\end{proof}
+
+\subsubsection*{Hardness at the compile–time + run–time level}
+We now show that the natural \emph{compile–time $+$ run–time} language associated with certifying the tail fact “eventually in the basin and stay” becomes $\Sigma^0_1$–complete in this family, precisely because the only available way for a (sound) compiler to finish is to \emph{discover} the halting time of $U(e)$ and thus remove all future ultra–narrow summands beyond a finite index.
+
+\begin{lemma}[\texorpdfstring{$\Sigma^0_1$}{Sigma-1}–hardness via \textup{(EM2)} failure]
+\label{lem:EM2-violation-hardness}
+Let $\mathcal A$ be any sound, uniform guarded–decomposition compiler that, on input the index $e$, iteratively refines a finite cover of $\mathcal Z^{\rm in}$ into guard cells on which it can certify entry into the shell sequence $\{\mathcal B_n\}$ using the primitives of $\mathfrak M_e$. Augment $\mathcal A$ so that, in parallel, it simulates $U(e)$ for one step per iteration; if it ever observes that $U(e)$ halts, it \emph{short–circuits} and outputs the trivial finite decomposition
+\[
+  \Pi^\star:\quad\text{(ignore $U_e^{(1)}$); apply $U_e^{(2)}$ for $T$ ticks and accept when }x\le r,
+\]
+with $T=\lceil \log_{1/\rho}(x_0/r)\rceil$ chosen per instance from the state encoding. Then the \emph{compile–time $+$ run–time} language
+\[
+  L^{\mathrm{crt}}
+  :=\{\,e\in\mathbb N:\ \mathcal A(e)\ \text{halts and $\Pi^\star$ (or the produced program) certifies entry}\,\}
+\]
+is many–one equivalent to \textsc{HALT}. In particular, $L^{\mathrm{crt}}$ is $\Sigma^0_1$–complete.
+\end{lemma}
+
+\begin{proof}
+\emph{Soundness of $\Pi^\star$.} Because $\mathcal B=\{x\le r\}$ and $U_e^{(2)}$ contracts $x$ by $\rho$, the program “apply $U_e^{(2)}$ for $T$ ticks” certifies entry into $\mathcal B$ for any instance, independent of $z$ and of $F_e$. Its guards are trivial (single open cell $\mathcal Z^{\rm in}$), and its run–time is finite and completely effective. Thus whenever $\mathcal A$ outputs $\Pi^\star$, the certification is valid.
+
+\emph{Reduction $e\mapsto e$.}
+\begin{itemize}
+\item ($\Rightarrow$) If $U(e)$ halts at some finite time $S$, the augmented compiler discovers this within $S$ iterations and immediately outputs the finite program $\Pi^\star$. Hence $e\in L^{\mathrm{crt}}$.
+
+\item ($\Leftarrow$) Conversely, suppose $U(e)$ does \emph{not} halt. Then the widths $w_j^{(e)}$ remain equal to $2^{-2^{j}}$ for all $j$. Any attempt by a sound compiler to produce a finite guarded decomposition that \emph{uses} $U_e^{(1)}$ must, on some guard cell, bound the $k$–bit error of $U_e^{(1)}$ \emph{uniformly} over $z$ in that cell. By Lemma~\ref{lem:EM2-violation-computability} (EM2 failure), this is impossible with a finite, polynomially evaluable guard structure: for each finite stage and any fixed cell there remain points $z$ (arbitrarily close to the centers $c_j$ at scales $2^{-2^{j}}$) where deciding the $k$th bit would require super–polynomial work in $k$, contradicting the soundness/effectivity of the emitted program. Since the short–circuit never triggers (non–halting), the only remaining option for $\mathcal A$ is to keep refining forever; thus it does \emph{not} halt, and $e\notin L^{\mathrm{crt}}$.
+\end{itemize}
+Therefore $e\in\textsc{HALT}\iff e\in L^{\mathrm{crt}}$, proving that $L^{\mathrm{crt}}$ is many–one equivalent to \textsc{HALT} and hence $\Sigma^0_1$–complete.
+\end{proof}
+
+\paragraph{Summary.}
+The model $\mathfrak M_e$ satisfies all ABET–level axioms except \textup{(EM2)}. The only obstruction to extracting a finite, effective guarded decomposition is the \emph{super–polynomial} worst–case cost inherent in evaluating $U_e^{(1)}$ to $k$ bits on adversarial inputs. As soon as the halting event is discovered (when it exists), the compiler short–circuits to the trivial contraction–only program $\Pi^\star$, which is finite and effective. Hence the compile–time $+$ run–time language is $\Sigma^0_1$–complete precisely because of the \textup{(EM2)} failure.
+
+
+
+
+%============================================
+% Embedding HALT via failure of EM3 (Polynomial Guard/Basin Test)
+%============================================
+\subsection{HALT Embedding via an \texorpdfstring{$\mathrm{EM3}$}{EM3}-Violation}
+\label{sec:em3-violation}
+
+We construct a fixed, compact, continuous, effective measurement model in which
+\[
+\textup{(F)}\ (R_{\mathrm{weak}},L,C_{\rm basin}),\quad
+\textup{(S)},\quad
+\textup{(C)},\quad
+\textup{(T)}\ (\text{PL}),\quad
+\textup{(I)},\quad
+\textup{(EM1)},\quad
+\textup{(EM2)}
+\]
+all hold, but \textup{(EM3)} fails \emph{at run time}. The failure is isolated to
+the necessity of testing membership in a recursively enumerable (r.e.) open set
+\(G\subset[0,1]\) in any correct finite guarded decomposition; guard/basin
+membership thus cannot be decided in time polynomial in \(\log(1/\varepsilon)\)
+(or even computably in general), violating \textup{(EM3)}. The underlying
+dynamics \(U,E\) remain fully effective and benign.
+
+\paragraph{Spaces, basin, certification.}
+Let
+\[
+\mathcal M \;=\; [0,1]_x \times \{0,1\}_\ell,\qquad
+\mathcal Z^{\rm in} \;=\; [0,1]_z,
+\]
+with the product metric (Euclidean on \([0,1]\), discrete on \(\{0,1\}\), capped at~1).
+Fix a contraction parameter \(\rho\in(0,1)\) and a guard radius \(r\in(0,1)\).
+Define the invariant basin
+\[
+\mathcal B \;=\; \{(x,\ell)\in\mathcal M : x\le r \text{ and } \ell=1\}.
+\]
+We adopt the Minimal Certification Standard \(\mathcal S=\{\varepsilon_n\}\) (Book~II, Ch.~6)
+with shells
+\[
+\mathcal B_n \;=\;\bigl\{(x,\ell): x\le r-2^{-n},\ \ell=1\bigr\},
+\]
+so that acceptance is robust in the product metric. The Lyapunov function is \(V(x,\ell)=x\).
+
+\paragraph{An r.e.-open target set and a fixed subinterval.}
+Fix an effective bijection \(e\mapsto q_e\in(0,1)\cap\mathbb Q\), and let \(U_{\rm TM}\) be a
+universal Turing machine. For each stage \(t\), let
+\[
+H_t \;=\; \{\,e \mid U_{\rm TM}(e)\ \text{halts within }\le t\text{ steps}\,\}.
+\]
+Define the increasing sequence of rational open sets
+\[
+G_t \;=\; \bigcup_{e\in H_t} B\!\left(q_e,\,2^{-(e+2)}\right),\qquad
+G \;=\; \bigcup_{t\ge 0} G_t \;\subset\;[0,1].
+\]
+Thus \(G\) is r.e.-open and has undecidable membership; nevertheless each \(G_t\) is a \emph{finite}
+union of rational intervals and is computable in time polynomial in its description length.
+Choose once and for all a nontrivial rational interval
+\[
+I \;=\; [a,b] \subset (0,1)
+\]
+such that \(I\cap B(q_{e_0},2^{-(e_0+2)})=\varnothing\) for at least one fixed index \(e_0\); this ensures
+that \(I\) does not trivially fall inside a single, always-present ball. We shall define the
+certification language over the domain \(I\cap\mathbb Q\).
+
+\paragraph{Dynamics and emitter (effective and benign).}
+We update in two primitive ticks per global step:
+\begin{align*}
+\textbf{Tick 1:}\quad
+(x,\ell),\,z \;&\mapsto\; (\rho x,\ \ell),\\
+\textbf{Tick 2:}\quad
+(x',\ell),\,z \;&\mapsto\; \bigl(x',\ \ell \,\vee\, \mathbf 1_{\,z\in G_t}\bigr),
+\end{align*}
+where \(t\in\mathbb N\) is the current global step counter (maintained implicitly by the controller),
+and \(G_t\) is the finite union of rational balls defined above. The emitter is
+\[
+E(x,\ell)=\ell.
+\]
+Note that membership in \(G_t\) is decidable in time polynomial in the size of the rational encoding
+of \(G_t\) and \(z\), since \(G_t\) is finite and rational.
+
+\paragraph{Tail fact.}
+For a fixed (constant) input \(z\in[0,1]\), the tail fact we certify is:
+\[
+\Phi(z):\quad \exists T\ \forall t\ge T:\ (x_t,\ell_t)\in\mathcal B.
+\]
+Because \(x_{t+1}=\rho x_t\), the \(x\)-component reaches \(x\le r\) in uniformly bounded time,
+independently of \(z\). The latch \(\ell\) flips to \(1\) iff (and when) \(z\in G_t\) for some finite
+stage \(t\), i.e., iff \(z\in G\). Thus
+\[
+\Phi(z)\ \text{holds} \quad\Longleftrightarrow\quad z\in G.
+\]
+
+\begin{lemma}[Computability and Axiom Compliance; only \textup{(EM3)} fails]
+\label{lem:EM3-violation-computability}
+For the above model, the following hold:
+\[
+\textup{(F)}\ (R_{\mathrm{weak}},\,L,\,C_{\rm basin}),\quad
+\textup{(S)},\quad
+\textup{(C)},\quad
+\textup{(T)}\ \text{(PL-Traceability)},\quad
+\textup{(I)},\quad
+\textup{(EM1)},\quad
+\textup{(EM2)}.
+\]
+Axiom \textup{(EM3)} fails at run time: any finite guarded decomposition that correctly decides
+\(\Phi\) on \(I\) must include a guard whose membership coincides with \(G\cap I\) (up to null
+tolerance), hence requires deciding an r.e.-open, undecidable predicate.
+\end{lemma}
+
+\begin{proof}
+\emph{(C) compactness and continuity.}
+\(\mathcal M\) and \(\mathcal Z^{\rm in}\) are compact. Each primitive tick is continuous:
+Tick~1 is affine in \(x\), independent of \(z\); Tick~2 updates \(\ell\) by a continuous map into
+the discrete coordinate, conditionally on \(z\in G_t\). Since \(G_t\) is a finite union of open
+intervals, the case distinction is continuous in the product topology. The composite update is continuous.
+
+\emph{(F) basin axioms.}
+Let \(V(x,\ell)=x\). Choose \(r\in(0,1)\) and \(\rho\in(0,1)\) fixed.
+\begin{itemize}
+  \item (L) Lyapunov border: if \(x=r\), then after Tick~1 we have \(x'=\rho r<r\), hence strict inward mapping.
+  \item \(C_{\rm basin}\): on \(\mathcal B\) (i.e., \(x\le r\), \(\ell=1\)) Tick~1 is \(x\mapsto \rho x\), a contraction; Tick~2 preserves \(\ell=1\).
+  \item \(R_{\mathrm{weak}}\): from any \((x_0,\ell_0)\), there \emph{exists} a (constant) input \(z\in[0,1]\) with \(z\in G_0\) (take any rational in some initial rational ball; or, if desired, enlarge \(G_0\) by an explicit fixed rational ball disjoint from \(I\) to ensure nonemptiness). With that choice, \(\ell\) flips to 1 at the first Tick~2, and \(x_t\) falls below \(r\) after a bounded number of steps depending only on \(x_0\). Thus a witness stream exists for each start state.%
+\end{itemize}
+
+\emph{(S) certification standard.}
+The shells \(\mathcal B_n=\{x\le r-2^{-n},\ \ell=1\}\) are open in the product metric; acceptance is robust because the latch is discrete and the \(x\)-thresholds are strict. This is the Minimal Certification Standard of Book~II, Ch.~6.
+
+\emph{(T) PL-Traceability.}
+For any state \(\Theta=(x,\ell)\) and any \(n\), the preimage
+\[
+U(\Theta,\cdot)^{-1}(\mathcal B_n)
+\]
+is either \(\mathcal Z^{\rm in}\) (if \(\ell=1\) and \(x\le r-2^{-n}\)), or one of the finite unions \(G_t\)
+that appear at the relevant Tick~2 on the path from \(\Theta\) (open and nonempty), or \(\emptyset\) if fewer than
+the required number of ticks has elapsed to reach \(x\le r-2^{-n}\). In particular, along any realized path, the tick at which entry becomes possible has an open, nonempty preimage in \(z\). This is precisely PL-Traceability (Def.~\ref{pl-traceability}).
+
+\emph{(I) time-irreversibility / no supertask.}
+Each global step performs two finite primitive ticks; no accelerating schedule. A standard ranking function \(f(x,\ell)=\lceil\log_{1/\rho}\max\{x-r,0\}\rceil\) decreases whenever \(x>r\) (Tick~1), and once \(\ell=1\) and \(x\le r\) the state remains in \(\mathcal B\).
+
+\emph{(EM1) effective representation.}
+Tick~1 is affine with rational coefficients. Tick~2 tests membership in \(G_t\), which is a \emph{finite}
+rational union generated by the (internal) universal simulation up to time \(t\); all constants are rational and uniformly encoded. Thus each primitive has a uniform finite effective description (or a uniform polytime evaluator), in line with EM1 (or EM1\(_{\mathbf P}\) in the parameterized reading of Book~III, Ch.~3).
+
+\emph{(EM2) polynomial evaluation modulus.}
+Evaluating \(x\mapsto \rho x\) to \(k\) bits is trivial. Testing \(z\in G_t\) is a finite union membership
+query against \(O(|H_t|)\) rational intervals; evaluating this to tolerance \(2^{-k}\) is polynomial in the bit-length of \(z\), the encodings of the interval endpoints, and \(k\). Hence a (known) polynomial evaluation modulus exists.
+
+\emph{(EM3) failure.}
+Consider the certification language on the domain \(I\cap\mathbb Q\) (see below). For \(z\in I\),
+\(\Phi(z)\) holds iff \(z\in G\cap I\) (because \(x\) always contracts under \(\rho\), and the latch flips
+iff \(z\in G\)). Any \emph{correct} finite guarded decomposition that decides \(\Phi\) on \(I\) must, on some branch, separate \(G\cap I\) from \(I\setminus G\). Otherwise, by continuity and robustness of shells, it would misclassify points arbitrarily close to the boundary of \(G\cap I\). Therefore at least one guard must implement the (undecidable) membership predicate \(z\in G\cap I\), which is not decidable in \(\mathrm{poly}(\log(1/\varepsilon))\) time (indeed, not decidable at all). Thus \textup{(EM3)} fails at run time, while all other axioms hold.
+\end{proof}
+
+\begin{lemma}[\texorpdfstring{$\Sigma^0_1$}{Sigma^0\_1}-Hardness of the Certification Language; EM3-only at run time]
+\label{lem:EM3-violation-hardness}
+Define the certification language over the fixed subinterval \(I=[a,b]\) by
+\[
+L_\Phi \;=\; \{\, z\in I\cap\mathbb Q \;:\; \Phi(z)\text{ holds}\,\}.
+\]
+Then
+\[
+z\in L_\Phi \quad\Longleftrightarrow\quad z\in G\cap I.
+\]
+Consequently, the many–one map \(e\mapsto q_e\) (restricted to those \(q_e\in I\)) reduces
+\(\mathrm{HALT}\) to \(L_\Phi\), and \(L_\Phi\) is \(\Sigma^0_1\)-complete (Turing degree \(0'\)).
+Moreover, at run time the only axiom that fails is \textup{(EM3)}.
+\end{lemma}
+
+\begin{proof}
+By construction, for any fixed \(z\in I\) (held constant along the run):
+\[
+\Phi(z)\ \text{holds}
+\iff \Big(\exists T: x_T\le r\Big)\ \wedge\ \Big(\exists t: z\in G_t\Big)
+\iff z\in G\cap I,
+\]
+because \(x_{t+1}=\rho x_t\) ensures \(x_T\le r\) for some finite \(T\) independently of \(z\), and \(\ell\) flips to 1 exactly at the first \(t\) with \(z\in G_t\). Hence \(L_\Phi = G\cap I\cap\mathbb Q\).
+
+For hardness, recall that \(G\) is the r.e.-open union \(\bigcup_{t}\bigcup_{e\in H_t} B(q_e,2^{-(e+2)})\).
+Fix any \(e\) with \(q_e\in I\). Then \(q_e\in G\cap I\) iff \(e\in H_t\) for some \(t\), i.e., iff
+\(U_{\rm TM}(e)\) halts. Thus the computable injection \(e\mapsto q_e\) (with \(q_e\in I\)) is a many–one reduction from \(\mathrm{HALT}\) to \(L_\Phi\). Therefore \(L_\Phi\) is \(\Sigma^0_1\)-complete (Turing degree \(0'\)).
+
+Finally, by Lemma~\ref{lem:EM3-violation-computability}, \((F),(S),(C),(T)\) (PL), (I), (EM1), (EM2) all hold.
+Run-time failure is confined to \textup{(EM3)} because any correct guarded program must implement the undecidable guard \(z\in G\cap I\). No other axiom is implicated.
+\end{proof}
+
+\paragraph{Discussion (compile-time oracle vs.\ run-time failure).}
+The guarded–decomposition compiler (ATRT) may fail to stabilize \emph{without} an oracle, since deciding
+guards equivalent to \(G\cap I\) is undecidable. If a \emph{compile-time} oracle supplies the correct finite
+decomposition (i.e., the exact guards), then compile time succeeds; nevertheless, at \emph{run time} the
+guard membership tests remain undecidable, so \textup{(EM3)} continues to fail while
+\((F),(S),(C),(T),(I),(EM1),(EM2)\) hold.
+
+
+
+
+\section{Proof of the FDI Theorem}
+\subsection{Finite-Guard Case \texorpdfstring{$\Rightarrow$}{⇒} Degree $0$}
+
+\begin{proof}
+Suppose \(\Phi\) admits a finite guarded decomposition.  By definition there is
+\begin{enumerate}[itemsep=2pt]
+  \item a finite list of guard cells \(N_1,\dots,N_k\subset\mathcal Z^{\rm in}\), and
+  \item a deterministic branching program \(B\) which tests membership in the \(N_i\) and selects a branch \(i\),
+  \item together with per-branch proofs that \(\Phi\) holds whenever the execution starts in \(N_i\).
+\end{enumerate}
+We now show \(L_\Phi\in\mathbf{NP}\):
+\begin{itemize}[itemsep=2pt]
+  \item\emph{NP witness.}  On input \(x\), guess
+    \[
+      (\,i,\;\pi_i)
+      \quad\text{where}\quad
+      i\in\{1,\dots,k\},\;
+      \pi_i = \text{proof of }\Phi\text{ under }N_i.
+    \]
+  \item\emph{Verification.}  In polynomial time one can
+    \begin{enumerate}[itemsep=1pt]
+      \item simulate the branching program to confirm \(x\) routes to branch \(i\),  
+      \item check membership \(z_0\in N_i\) up to the required tolerance (EM3),  
+      \item verify the proof \(\pi_i\) that \(\Phi\) holds from that branch.  
+    \end{enumerate}
+\end{itemize}
+Since all steps use only finitely many guard tests and polynomial-time proof checks, this is an NP-decider for \(L_\Phi\).  Hence
+\[
+  \deg_T(L_\Phi)\;=\;0.
+\]
+\end{proof}
+
+
+\subsection{No-Guard Case \texorpdfstring{$\Rightarrow$}{⇒} Degree \(\ge 0'\)}
+\label{subsec:no-guard-to-0prime}
+
+Throughout this subsection we assume (F) and (S), so that tail facts and their
+certification languages are well-defined.  Recall that under
+\((C),(T),(I),(\mathrm{EM1})\text{–}(\mathrm{EM3})\) the Fundamental Test
+Equivalence (FTE) from Chapter~3 guarantees a finite guarded decomposition for
+every certifiable tail fact.
+
+\begin{lemma}[Exhaustiveness of the failure modes]
+\label{lem:exhaustiveness-failure}
+Assume (F) and (S). If a tail fact \(\Phi\) admits no finite guarded
+decomposition, then at least one of the axioms
+\[
+(C),\quad (T),\quad (I),\quad (\mathrm{EM1}),\quad (\mathrm{EM2}),\quad (\mathrm{EM3})
+\]
+fails in the underlying model.
+\end{lemma}
+
+\begin{proof}
+Contraposition.  If all six axioms hold together with (F) and (S), the FTE
+(Theorem~\ref{thm:fundamental-equivalence-clean}) applies and yields a finite
+guarded decomposition for \(\Phi\), contradicting the hypothesis.
+\end{proof}
+
+We now perform a complete case analysis over the six ways the FTE premises can
+fail.  For each case we invoke (i) a computability/\emph{axiom compliance}
+lemma that isolates exactly that failure, and (ii) a \emph{hardness} lemma
+exhibiting an explicit, computable embedding of a classical undecidable set
+into a certification language.
+
+\medskip
+\noindent\textbf{Case (I) fails (supertask / Zeno).}
+By Lemma~\ref{lem:zeno‐computability} there is a computable family
+\(x\mapsto\mathcal M_x\) satisfying all axioms except (I).  By
+Lemma~\ref{lem:zeno‐hardness},
+\[
+x\in\mathrm{HALT}\;\Longleftrightarrow\; \mathrm{Outcome}(\mathcal M_x)=1,
+\]
+so the resulting certification language is \(\Sigma_1\)-complete and hence of
+degree \(0'\).
+
+\medskip
+\noindent\textbf{Case (C) fails (non-compactness only).}
+By Lemma~\ref{lem:C-only-compliance} there is a computable family
+$e\mapsto\mathfrak M_e$ satisfying all axioms except (C).
+By Lemma~\ref{lem:C-only-sigma1},
+\[
+e\in \mathrm{HALT}^{\exists}\ \Longleftrightarrow\ e\in L_\Phi,
+\]
+so the certification language is $\Sigma^0_1$-complete (Turing degree $0'$).
+
+
+\medskip
+\noindent\textbf{Case (T) fails (open-preimage / traceability).}
+By Lemma~\ref{lem:pure-T-compliance} there is a computable model
+satisfying all axioms except (T).  Lemma~\ref{lem:pure-T-hardness}
+shows the \emph{compile-time stabilization} language
+$L_{\mathrm{stab}}$ of the standard iterative guarded-decomposition
+procedure is $\Sigma^0_1$-complete.  Whenever the compiler halts, the
+emitted finite guarded program is correct and effective, and run-time
+verification remains within the baseline framework.
+
+
+\medskip
+\noindent\textbf{Case (EM1) fails (effective representation).}
+By Lemma~\ref{lem:EM1-violation-computability} there is a computable family
+that violates exactly (EM1).  Lemma~\ref{lem:EM1-violation-hardness} shows the
+certification language is \(\Sigma_1\)-complete, hence degree \(0'\).
+
+\medskip
+\noindent\textbf{Case (EM2) fails (polynomial modulus of continuity).}
+By Lemma~\ref{lem:EM2-violation-computability} there is a computable family
+that violates exactly (EM2).  Lemma~\ref{lem:EM2-violation-hardness} shows the
+certification language is \(\Sigma_1\)-complete, hence degree \(0'\).
+
+\medskip
+\noindent\textbf{Case (EM3) fails (polynomial guard/basin tests).}
+By Lemma~\ref{lem:EM3-violation-computability} there is a computable family
+that violates exactly (EM3).  Lemma~\ref{lem:EM3-violation-hardness} shows the
+certification language is \(\Sigma_1\)-complete, hence degree \(0'\).
+
+\begin{proposition}[No-guard $\Rightarrow$ hypercomputational degree]
+\label{prop:no-guard-to-degree}
+Assume (F) and (S). If a tail fact $\Phi$ admits no finite guarded
+decomposition, then its certification language $L_\Phi$ has Turing
+degree at least $0'$. In each failure case of
+$(C),(T),(I),(\mathrm{EM1}),(\mathrm{EM2}),(\mathrm{EM3})$ there is a
+computable embedding whose associated language is $\Sigma^0_1$-hard.
+\end{proposition}
+
+
+\begin{proof}
+By Lemma~\ref{lem:exhaustiveness-failure} at least one of
+\((C),(T),(I),(\mathrm{EM1}),(\mathrm{EM2}),(\mathrm{EM3})\) fails.  In each
+respective case, the corresponding pair of lemmas
+\(\{\)\ref{lem:zeno‐computability}–\ref{lem:zeno‐hardness},
+\ref{lem:C-only-compliance}–\ref{lem:C-only-sigma1},
+\ref{lem:pure-T-compliance}–\ref{lem:pure-T-hardness},
+\ref{lem:EM1-violation-computability}–\ref{lem:EM1-violation-hardness},
+\ref{lem:EM2-violation-computability}–\ref{lem:EM2-violation-hardness},
+\ref{lem:EM3-violation-computability}–\ref{lem:EM3-violation-hardness}\(\}\)
+exhibits a computable embedding whose certification language is at least
+\(\Sigma_1\)-hard (and \(\Pi_2\)-hard when (C) fails).  Therefore the degree
+lower bound \(0'\) follows in all cases.
+\end{proof}
+
+
+\section{Corollaries}
+
+\subsection{Hierarchy-Collapse for Type Tests}\label{subsec:hierarchy-collapse}
+
+\begin{proposition}[Hierarchy-Collapse]\label{prop:hierarchy-collapse}
+Assume Axioms \textup{(F)}, \textup{(S)}, \textup{(C)}, \textup{(T)}, \textup{(I)}, and \textup{(EM1)}–\textup{(EM3)}. 
+For any tail measurement fact $\Phi$, its certification language $L_\Phi$ satisfies exactly one of:
+\begin{itemize}[itemsep=2pt]
+  \item $L_\Phi\in\mathbf{NP}$ (hence recursive, Turing degree $0$), or
+  \item $\deg_T(L_\Phi)\ge 0'$ (undecidable; e.g.\ $\Sigma^0_1$- or $\Pi^0_2$-hard via the embeddings).
+\end{itemize}
+No decidable class strictly above NP (e.g.\ $\mathbf{PSPACE}$, $\mathbf{EXP}$) can occur.
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{thm:FDI_refined} and the finite-guard direction, either $\Phi$ is decomposable, in which case the Polytime Verifier Construction Lemma yields $L_\Phi\in\mathbf{NP}$ (hence degree $0$), or $\Phi$ is decomposition-independent, in which case the embedding lemmas force $\deg_T(L_\Phi)\ge 0'$. Since $\mathbf{PSPACE}$, $\mathbf{EXP}$, etc.\ are classes of \emph{decidable} sets (all of Turing degree $0$), they cannot arise on the hypercomputational branch; and when all axioms hold we are already in NP on the decidable branch.
+\end{proof}
+
+\begin{remark}
+Under our axioms, certification languages do not inhabit “intermediate” decidable territory strictly above NP: they are either NP-verifiable or undecidable (at least $0'$). 
+\end{remark}
+
+
+\section{Extension to General Verifier Classes}
+
+\subsection{Parameterized finite-guard vs.\ verifier classes}\label{subsec:extensions-c-v}
+
+We parameterize the effective axioms by a base class $\mathbf C$ (for guard evaluation) and a verifier class $\mathcal V$ (for certification). Replace \textup{(EM1)}–\textup{(EM3)} by:
+
+\begin{itemize}
+  \item \textbf{(EM1$_{\mathbf C}$)} $U,E$ admit uniform, finite descriptions so that evaluations to $k$ bits can be carried out within $\mathbf C$ on input size $n$ and accuracy $k$.
+  \item \textbf{(EM2$_{\mathbf C}$)} Known resource modulus: evaluating $U,E$ to $k$ bits costs $\mathrm{poly}(m(k),n)$ in $\mathbf C$ for some known $m$.
+  \item \textbf{(EM3$_{\mathbf C}$)} Guard/basin membership up to tolerance is decidable within $\mathbf C$.
+\end{itemize}
+
+For verifiers with error (randomized/quantum/interactive), strengthen the Certification Standard to include an explicit gap:
+
+\begin{quote}
+\textbf{(S$_{\mathrm{gap}}$)} There exist fixed $\epsilon_c-\epsilon_s \ge 1/\mathrm{poly}(n)$ such that acceptance is robust to perturbations within the shells, and error can be amplified below the shell tolerance.
+\end{quote}
+
+Witnesses must be finitely encodable. In particular, for quantum verification we assume \emph{either} QCMA witnesses \emph{or} QMA witnesses provided by classical descriptions of uniform, poly-size state-preparation circuits.
+
+Under \textup{(F)}, \textup{(S$_{\mathrm{gap}}$)}, \textup{(C)}, \textup{(T)}, \textup{(I)}, and \textup{(EM1$_{\mathbf C}$)}–\textup{(EM3$_{\mathbf C}$)} we obtain:
+
+\begin{proposition}[Parameterized FDI]\label{prop:param-fdi}
+Let $\Phi$ be a tail fact. Exactly one holds:
+\begin{enumerate}
+  \item \emph{Finite-guard:} $\Phi$ admits a finite guarded decomposition with guard primitives evaluable in $\mathbf C$. Then $L_\Phi\in\mathcal V$ (the verifier for the decomposition runs in $\mathcal V$ with error handled by \textup{(S$_{\mathrm{gap}}$)}).
+  \item \emph{No-guard:} $\Phi$ is decomposition-independent. Then $\deg_T(L_\Phi)\ge 0'$ by the embedding lemmas, independent of $\mathbf C,\mathcal V$.
+\end{enumerate}
+\end{proposition}
+
+\begin{remark}
+Examples: $(\mathbf C,\mathcal V)=(\mathbf P,\mathbf{NP})$ (the baseline), $(\mathbf{BQP},\mathbf{QCMA})$ or $(\mathbf{BQP},\mathbf{QMA_{prep}})$ (QMA with circuit-preparable witnesses), $(\mathbf{PSPACE},\mathbf{IP})$. In each case the decidable branch lies in $\mathcal V$ and the hypercomputational branch jumps to degree $\ge 0'$.
+\end{remark}
+
+\subsection{Robustness under stronger effective verifiers}\label{subsec:robustness}
+
+\begin{proposition}[Verifier-Robustness (effective, uniform)]\label{prop:verifier-robustness}
+Fix effective, uniform classes $\mathbf C$ and $\mathcal V$ without oracles/advice, with finitely encodable witnesses and \textup{(S$_{\mathrm{gap}}$)}. Under \textup{(F)}, \textup{(C)}, \textup{(T)}, \textup{(I)}, \textup{(EM1$_{\mathbf C}$)}–\textup{(EM3$_{\mathbf C}$)}, if $\Phi$ is decomposition-independent then $L_\Phi\notin\mathcal V$ and $\deg_T(L_\Phi)\ge 0'$.
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+If $L_\Phi\in\mathcal V$, fix a verifier $V\in\mathcal V$, amplify its gap to be smaller than the shell tolerance (\textup{(S$_{\mathrm{gap}}$)}), and unroll $V$’s uniform, finite description into a finite set of guard primitives (each evaluable in $\mathbf C$ by \textup{(EM1$_{\mathbf C}$)}–\textup{(EM3$_{\mathbf C}$)}). This yields a finite guarded decomposition, contradicting decomposition-independence. The degree lower bound follows from the embedding lemmas.
+\end{proof}
+
+
+
+
+\end{document}

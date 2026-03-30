@@ -1,0 +1,82 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+\title{\textbf{Chapter 1: The Quest for Deterministic Certification in Metrology}}
+\author{Dmytro Surdu}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{quote}
+\textit{Metrology is the science of confidence. It provides the tools to quantify our uncertainty and to make statements of knowledge with a specified, high degree of belief. But can we ever move beyond confidence to certainty? This chapter introduces the motivation for a theory of absolute, zero-error proof for measurement systems, particularly those driven by non-statistical, or Type B, information. We will explore the formidable logical barriers to such proofs and outline the roadmap our theory will follow to overcome them.}
+\end{quote}
+
+\section{From Confidence to Proof: The Aspiration for $\delta=0$}
+
+The GUM (Guide to the expression of uncertainty in measurement) provides a powerful and internationally accepted framework for quantifying measurement uncertainty. At its heart lies a probabilistic worldview. A typical result from a Type A analysis, derived from statistical methods, might be a confidence interval for a measurand, accompanied by a statement of confidence, $1-\delta$. For example, we might state that "the true value lies in the interval $[1.001, 1.003]$ with 95\% confidence," which corresponds to a probability of error $\delta=0.05$.
+
+This is the language of **statistical confidence**. It is powerful, practical, and honest about the limitations of knowledge derived from finite data.
+
+However, a fundamental theoretical question remains: can we ever achieve **logical certainty**? Is it possible to make a statement about a measurement system that is not merely probable, but provably, absolutely true? Can we, in principle, construct a zero-error guarantee, a state of knowledge where $\delta=0$?
+
+This is the quest that motivates this textbook. We seek to understand the conditions under which it is possible to move from a statement of confidence to a statement of proof. As we will see, this seemingly small leap from a tiny $\delta > 0$ to an absolute $\delta = 0$ is not a simple quantitative step, but a massive qualitative jump that requires a completely different theoretical apparatus. The primary obstacle is the challenge of making claims about the infinite future.
+
+\subsection{The $\Pi^0_2$ Barrier: Why "Forever" is Hard}
+
+Consider a claim about the long-term stability of an instrument, such as:
+\begin{quote}
+"For all future times $t$, the instrument's bias will remain within the bounds $[-\epsilon, \epsilon]$."
+\end{quote}
+This statement contains a universal quantifier ("for all $t$") over an infinite set (the future). In computability theory and logic, such statements belong to high levels of the "arithmetical hierarchy." A statement of the form $\forall x \exists y, R(x,y)$, where $R$ is a decidable relation, is known as a $\Pi^0_2$ predicate.
+
+The crucial fact for our work is that problems defined by such predicates are provably hard. They are not in $\mathbf{NP}$, meaning there is no general way to provide a "short," universally checkable proof for them. A finite witness cannot, in general, certify a claim about an infinite number of future events. This is the logical barrier we face.
+
+\section{The Failure Modes of Naive Certification}
+
+If we attempt to build a deterministic, zero-error certification scheme for a measurement process, we immediately run into two fundamental failure modes that are instances of this $\Pi^0_2$ barrier.
+
+\subsection{Failure Mode 1: Hidden Randomness}
+Consider a model of a dynamic measurand, such as a Kalman filter tracking a moving object, where the system's state $\Theta_t$ is updated with some internal, unobserved process noise $\rho_t$:
+\[
+\Theta_{t+1} = U(\Theta_t, \rho_{t+1})
+\]
+Here, $\rho_t$ represents fresh randomness injected into the system at each step that is \emph{not} part of the observable measurement. To certify a claim about the infinite future of such a system, a prover would need to provide a witness that constrains the entire infinite sequence of hidden random variables $(\rho_1, \rho_2, \dots)$. No finite witness can do this. The uncertainty is ongoing and unresolvable, and the certification problem remains intractably hard.
+
+\subsection{Failure Mode 2: Lossless Updates}
+Now consider a simpler model for a static measurand, where all new randomness arrives via an observable measurement $z_{t+1}$. The belief state is updated via a deterministic function:
+\[
+\Theta_{t+1} = U(\Theta_t, z^{\text{in}}_{t+1})
+\]
+This seems more promising. However, if the update map $U$ is **lossless** (i.e., injective), it preserves all the information from its inputs. The complexity of the belief-state $\Theta_t$ grows with each step, as it accumulates the information from the entire history of measurements $(z_1, \dots, z_t)$. After $n$ steps, the state $\Theta_n$ is a complex object representing $n$ measurements.
+
+Again, no finite-bit witness can fully describe this ever-growing state. Any attempt to certify a tail property will fail because the verifier can never be sure that some un-witnessed detail from the distant past won't affect the distant future. This, too, results in a co-$\mathbf{NP}$ or $\Pi^0_2$-hard problem.
+
+\section{A Roadmap to a New Theory}
+
+The failure of these naive approaches points the way forward. To build a theory of deterministic certification, we must impose structural constraints on our measurement model that explicitly break the $\Pi^0_2$ barrier. Our theory will be built upon three foundational principles.
+
+\begin{enumerate}
+    \item \textbf{Exposing All Randomness.} We will restrict our analysis to systems where all new randomness at each time step enters \emph{only} through the publicly observable input measurement $z^{\text{in}}_t$. There can be no hidden process noise.
+
+    \item \textbf{Forcing Per-Step Information Loss.} We will require that the deterministic update map $U(\Theta_t, z^{\text{in}}_{t+1})$ is \textbf{information-losing}. It must be a non-injective, contractive map that compresses the information from the prior belief $\Theta_t$ and the new input measurement $z^{\text{in}}_{t+1}$ into a new belief-state $\Theta_{t+1}$ that "forgets" some details. This ensures the belief-state remains finite and manageable.
+
+    \item \textbf{Identifying the Absorbing Belief-Set.} We will show that even with the first two conditions, proving an infinite-tail property requires one final ingredient: identifying an **attractor basin**. This is a "safe" region of the belief-space which, once entered, can never be left. A witness that certifies entry into this basin provides the finite proof for the infinite claim.
+\end{enumerate}
+
+\section{Outline of the Book}
+
+This textbook will systematically develop this theory.
+\begin{itemize}
+    \item \textbf{Part I: Tutorial and Motivation.} This chapter and the next, a primer on the Outlier-Robust Kalman Filter, will motivate the theory and introduce its core concepts intuitively.
+    \item \textbf{Part II: Foundations of Type B Certification.} We will build the formal machinery of belief-states, emit/update maps, and information loss, proving that per-step certification is possible if and only if the update map is contractive.
+    \item \textbf{Part III: Attractor Basins and Tail Certification.} We will introduce the attractor basin and prove our main result: the Attractor-Basin Equivalence, which provides the necessary and sufficient conditions for infinite-tail certification.
+\end{itemize}
+
+By the end, we will have constructed a complete and rigorous answer to our initial question, providing a new foundation for understanding and validating Type B measurements.
+
+\end{document}

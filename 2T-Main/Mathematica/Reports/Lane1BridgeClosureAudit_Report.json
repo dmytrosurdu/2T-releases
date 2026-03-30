@@ -1,0 +1,134 @@
+{
+	"Name":"Lane1BridgeClosureAudit",
+	"Date":"2026-03-29 15:38:04",
+	"NotePath":"\/home\/kray-l8\/work\/2T\/UOM\/split_controlled_completion_lift_note.tex",
+	"Claims":{
+		"The audited split family admits a source-compatible unit realization subordinate to the canonical source-side bridge point":{
+			"Status":"exact finite-dimensional certificate",
+			"Certified":true,
+			"Method":"Exact quotient-coordinate and descended-scalar evaluation on the audited unit representative Junit.",
+			"Acceptance":"The explicit split-controlled surrogate family already contains a unit representative whose quotient point is the canonical source-side bridge point."
+		},
+		"Any two audited subordinate realizations differ by Aminus and preserve the quotient point, reduced welded image, and accepted welded boundary image":{
+			"Status":"exact finite-dimensional certificate",
+			"Certified":true,
+			"Method":"Exact affine-family audit on Junit + Aminus . a and Junit + Aminus . b, including accepted-boundary projection.",
+			"Acceptance":"On the audited family, uniqueness modulo Aminus holds and all physically visible bridge invariants are unchanged across subordinate realizations."
+		},
+		"Finite-cutoff canonical representative reconstruction preserves subordinate realization while remaining calibration-dependent":{
+			"Status":"exact finite-dimensional certificate",
+			"Certified":true,
+			"Method":"Exact comparison of two distinct positive calibrations, their Jcan representatives, quotient coordinates, reduced welded images, and accepted welded boundary images.",
+			"Acceptance":"The canonical-representative step can choose different exact vectors under different positive calibrations, but each remains subordinate to the same source-side bridge point and preserves the same visible images."
+		},
+		"Split-threshold alone forces c_Lambda != 0":{
+			"Status":"counterexample found",
+			"Certified":false,
+			"Method":"Imported exact threshold counterexample from the delayed descendant reentry audit.",
+			"Acceptance":"The nondegeneracy input remains on the separate lane-2 theorem path."
+		}
+	},
+	"RawData":{
+		"QuotientCoordinateMatrix":[
+			[
+				0,
+				0,
+				1
+			]
+		],
+		"DescendedFunctionalCoordinates":[
+			1
+		],
+		"UnitRepresentative":[
+			0,
+			0,
+			1
+		],
+		"SourceSideBridgePoint":[
+			1
+		],
+		"UnitReducedImage":[
+			[
+				1,
+				0
+			],
+			[
+				0,
+				0
+			]
+		],
+		"UnitBoundaryImage":[
+			[
+				1,
+				0
+			],
+			[
+				0,
+				0
+			]
+		],
+		"Calibration1Jcan":[
+			0,
+			0,
+			1
+		],
+		"Calibration2Jcan":[
+			-0.5,
+			-0.3333333333333333,
+			1
+		],
+		"Calibration1BridgePoint":[
+			1
+		],
+		"Calibration2BridgePoint":[
+			1
+		],
+		"Calibration1ReducedImage":[
+			[
+				1,
+				0
+			],
+			[
+				0,
+				0
+			]
+		],
+		"Calibration2ReducedImage":[
+			[
+				1,
+				0
+			],
+			[
+				0,
+				0
+			]
+		],
+		"Calibration1BoundaryImage":[
+			[
+				1,
+				0
+			],
+			[
+				0,
+				0
+			]
+		],
+		"Calibration2BoundaryImage":[
+			[
+				1,
+				0
+			],
+			[
+				0,
+				0
+			]
+		],
+		"ImportedBoundaryCalibrationStatus":"exact finite-dimensional certificate",
+		"ImportedThresholdStatus":"counterexample found"
+	},
+	"ResidualBoundary":[
+		"This is an exact finite-dimensional certificate on the current split-controlled surrogate family, not an abstract proof of the full UOM theorem stack.",
+		"The theorem-backed note now reduces the live lane-1 boundary to existence of one source-compatible unit descendant realization subordinate to the canonical source-side bridge point.",
+		"Accepted welded boundary image invariance is exact-family support here; the theorem-backed note controls the quotient point and reduced welded image."
+	]
+}

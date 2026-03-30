@@ -1,0 +1,355 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     17413,        346]
+NotebookOptionsPosition[     12498,        284]
+NotebookOutlinePosition[     12812,        298]
+CellTagsIndexPosition[     12769,        295]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Completion Assumption Discharge", "Title",ExpressionUUID->"d1703663-c57b-4f3e-86d5-db6be19b5907"],
+
+Cell[TextData[{
+ "Date: ",
+ Cell[BoxData[Cell["2026-03-14",
+   Background->None,ExpressionUUID->"02b79bb1-7511-4afa-87e6-505470406159"]], 
+  "InlineCode",ExpressionUUID->"202b168d-571c-4329-8ef0-8410acb197f8"],
+ "Report companion: ",
+ Cell[BoxData[Cell["\<\
+/home/kray-l8/work/2T/Main/Mathematica/Reports/CompletionAssumptionDischarge.\
+md\
+\>",
+   Background->None,ExpressionUUID->"8049e767-f43d-44ba-8f20-656306e311d3"]], 
+  "InlineCode",ExpressionUUID->"6a043e16-29fd-476f-bff2-08fae288db24"]
+}], "Text",ExpressionUUID->"dcf1f783-d59d-40dd-a334-98f1a45529f6"],
+
+Cell["Executive decision", "Section",ExpressionUUID->"f9b2e7a2-c152-4f5d-9525-222ebe0fb3f1"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["split-controlled completion lift",
+   Background->None,ExpressionUUID->"1569297b-ae98-49c8-93b8-e39f86c52ae6"]], 
+  "InlineCode",ExpressionUUID->"be811a0b-65cc-445b-a529-d90811da93a3"],
+ ": ",
+ Cell[BoxData[Cell["upgrade with new note",
+   Background->None,ExpressionUUID->"4a6e924c-3cae-427d-ac22-45b4e549d1a0"]], 
+  "InlineCode",ExpressionUUID->"2a7d2d1b-9b36-49da-9a65-e1b29410559f"]
+}], "Item",ExpressionUUID->"70d4a5fd-4131-4097-9970-faff929869c2"],
+
+Cell["\<\
+  Missing-step type: theorem extraction plus focused bridge theorem. \
+\>", "Text",ExpressionUUID->"94f34dce-c3d9-4266-9354-fbd53b753641"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["derived Gaussian completion contract",
+   Background->None,ExpressionUUID->"bf239e69-bb12-44f8-8c70-097ba1d165d7"]], 
+  "InlineCode",ExpressionUUID->"9ecb4291-b85b-4c26-ab8d-415f4d5f0c60"],
+ ": ",
+ Cell[BoxData[Cell["keep assumption-backed",
+   Background->None,ExpressionUUID->"f2ae86af-bd86-46ad-9c4d-59bd04c082c1"]], 
+  "InlineCode",ExpressionUUID->"ae8bb13c-f7b3-4250-87f4-afb6d6f58fe3"]
+}], "Item",ExpressionUUID->"f8897fd6-4b66-4e90-bb3c-db6202b9041c"],
+
+Cell["\<\
+  Missing-step type: genuine new mathematics / analytic closure. \
+\>", "Text",ExpressionUUID->"f1f0062c-2f5a-4b8a-a60b-5058d495ed07"],
+
+Cell["Evidence rule", "Section",ExpressionUUID->"ef22b11a-f8e4-430f-b535-b45523af6ee9"],
+
+Cell["Every item is separated into three lanes: ", "Text",ExpressionUUID->"f116fa21-48a1-42c0-b64f-7d2a40775b5b"],
+
+Cell["theorem-backed text", "Item",ExpressionUUID->"2d22e2ac-e81c-4f92-a53b-edc96ef5efe3"],
+
+Cell["exact WL certificate", "Item",ExpressionUUID->"2081c5bc-6879-4b7d-8ccd-37a47ac416ee"],
+
+Cell["imported analytic assumptions", "Item",ExpressionUUID->"1e2bd893-4f75-42ee-a624-4e385e88884c"],
+
+Cell["Split-controlled completion lift", "Section",ExpressionUUID->"167213b4-673b-4f46-aadc-c50e12016955"],
+
+Cell["Anchors", "Subsection",ExpressionUUID->"6116486e-5197-4340-9584-6bbbf943704c"],
+
+Cell[TextData[Cell[BoxData[Cell["\<\
+UOM/summability_split_note.tex::subsec:classical-control-split\
+\>",
+  Background->None,ExpressionUUID->
+  "4ededad7-3d96-4b42-acfc-ca9a1dc71269"]], \
+"InlineCode",ExpressionUUID->"578d5e11-cdc2-4702-b39c-4256759f42d9"]], "Item",\
+ExpressionUUID->"68570c21-7cf5-480e-9547-013dda8279fc"],
+
+Cell[TextData[Cell[BoxData[Cell["UOM/summability_split_note.tex::eq:split-\
+controlled",
+  Background->None,ExpressionUUID->
+  "c0e27ed1-f31d-4c46-a9d0-68003754f854"]], \
+"InlineCode",ExpressionUUID->"4f237e20-a5ad-42ba-b45e-e4798789730e"]], "Item",\
+ExpressionUUID->"ca85326d-bd5b-47ba-a4a5-eeae3c57722c"],
+
+Cell[TextData[Cell[BoxData[Cell["UOM/canonical_odd_interface_note.tex::rem:\
+ledger-compat",
+  Background->None,ExpressionUUID->
+  "a97549bb-68a5-4392-833a-57a5b391a925"]], \
+"InlineCode",ExpressionUUID->"2a912e31-7403-4c1b-8e72-374eebbc25ca"]], "Item",\
+ExpressionUUID->"41ffab3e-8eb2-4d08-8336-904f587f8f11"],
+
+Cell[TextData[Cell[BoxData[Cell["\<\
+UOM/active_response_transport_program_note.tex::def:accepted-record-payload\
+\>",
+  Background->None,ExpressionUUID->
+  "f1ea4f7f-526a-4687-9734-2e4197f609a0"]], \
+"InlineCode",ExpressionUUID->"011db145-e7af-4001-aa9b-5732b8a5d1ae"]], "Item",\
+ExpressionUUID->"2c26d672-ff52-4029-ac5e-e70725ce6d66"],
+
+Cell[TextData[Cell[BoxData[Cell["\<\
+UOM/active_response_transport_program_note.tex::def:witness-seam-realization\
+\>",
+  Background->None,ExpressionUUID->
+  "8062819f-5405-47fc-b4f1-a88ca43bbcd5"]], \
+"InlineCode",ExpressionUUID->"f65ba2ee-0888-43eb-8b26-1583b103ca7c"]], "Item",\
+ExpressionUUID->"9c328f1e-c371-4793-bc5c-0ab70105e3bd"],
+
+Cell["Evidence separation", "Subsection",ExpressionUUID->"eb0882e9-38d2-4bfa-82cd-b929d44b95b9"],
+
+Cell["Theorem-backed text:", "Text",ExpressionUUID->"77af981f-c969-479f-9012-4dfec19f5e71"],
+
+Cell[TextData[{
+ "The split note gives the QND classical-control structure and localizes \
+recoherence in ",
+ Cell[BoxData[Cell["B",
+   Background->None,ExpressionUUID->"230166ce-32d8-4ed6-9841-f2afb65158ef"]], 
+  "InlineCode",ExpressionUUID->"f6d94648-37c7-4c8d-8a6f-1c992cc41507"],
+ ". The canonical odd-interface note records ledger compatibility as a live \
+remark. The active-response note already defines accepted-record payload \
+language."
+}], "Text",ExpressionUUID->"fa9559dc-1d25-476c-95cc-5f4e3ffe2195"],
+
+Cell["Exact WL certificate:", "Text",ExpressionUUID->"be306754-52ed-4810-b54d-db80ffcf2feb"],
+
+Cell[TextData[{
+ "The split-faithful completion lane is green in ",
+ Cell[BoxData[Cell["UOMBoundaryExpansion_Ledger.csv",
+   Background->None,ExpressionUUID->"33abc65a-b049-46ae-a78c-bf221b8eada9"]], 
+  "InlineCode",ExpressionUUID->"73c839af-ce83-4aec-b32a-5fedec0e405f"],
+ ", with explicit ",
+ Cell[BoxData[Cell["A|B",
+   Background->None,ExpressionUUID->"042bd809-d080-4792-a573-bddc6b51f25b"]], 
+  "InlineCode",ExpressionUUID->"cb201e28-2944-49ad-86da-0836ed868d35"],
+ " lift checks, QND commutation, boundary compatibility, and lifted \
+accepted-record preservation."
+}], "Text",ExpressionUUID->"8b48a967-edf6-4354-aaee-67a336fe65c0"],
+
+Cell["Imported analytic assumptions:", "Text",ExpressionUUID->"13e32a3e-7769-4f5e-a48b-c88bfd7b24b5"],
+
+Cell["\<\
+There is still no single microscopic theorem proving existence of this \
+controlled lift with exact accepted-record inheritance. The current object \
+remains a contract surrogate. \
+\>", "Text",ExpressionUUID->"9f10d5f0-487b-419f-8638-f734f159db2b"],
+
+Cell["Strongest honest theorem candidate", "Subsection",ExpressionUUID->"d125c78b-6d0d-47b3-90ad-ef87937e4a2c"],
+
+Cell[TextData[{
+ "A focused theorem that the accepted welded branch admits a QND \
+classical-control ",
+ Cell[BoxData[Cell["A|B",
+   Background->None,ExpressionUUID->"92ebd9c4-990e-4895-9527-6af7d9e2f07d"]], 
+  "InlineCode",ExpressionUUID->"94e74ba1-63c8-41e2-ac60-906507a1fb45"],
+ " lift preserving the accepted ledger on ",
+ Cell[BoxData[Cell["A",
+   Background->None,ExpressionUUID->"a1c37e1a-de53-42fb-8962-85ae3a312f08"]], 
+  "InlineCode",ExpressionUUID->"9044078d-2621-44a2-b941-a8e1ce283d6f"],
+ " while localizing recoherence in ",
+ Cell[BoxData[Cell["B",
+   Background->None,ExpressionUUID->"6f7d7a1f-2813-4e8d-b144-9ce33235174e"]], 
+  "InlineCode",ExpressionUUID->"cce8d7c9-2f7f-4423-80a3-0f4098aa2a53"],
+ ". "
+}], "Text",ExpressionUUID->"ecfe5c71-c7db-4be0-a528-7df523247ac7"],
+
+Cell["Missing step", "Subsection",ExpressionUUID->"6a81df44-d09d-409f-a985-cb1d5cf1c62b"],
+
+Cell["\<\
+Bridge the structural split note, the ledger-compatibility remark, and the \
+accepted-record payload language into one theorem-level statement and proof. \
+\
+\>", "Text",ExpressionUUID->"5226bc7f-10f3-41dd-8a78-f403190e70b2"],
+
+Cell["Derived Gaussian completion contract", "Section",ExpressionUUID->"3b2475a0-cca4-4ca0-acfa-5f743fd9bca6"],
+
+Cell["Anchors", "Subsection",ExpressionUUID->"030a669c-b26d-4feb-ad62-cf6314b60479"],
+
+Cell[TextData[Cell[BoxData[Cell["UOM/summability_split_note.tex::ass:gaussian-\
+completion",
+  Background->None,ExpressionUUID->
+  "ea699d0c-9ab4-452e-b987-7ef3ec97d9a3"]], \
+"InlineCode",ExpressionUUID->"70d25d9e-d13b-4e59-a5dc-3c4f2ce61bd6"]], "Item",\
+ExpressionUUID->"178b4fcf-8d96-4f2c-a0df-f29e7910bfbd"],
+
+Cell[TextData[Cell[BoxData[Cell["UOM/summability_split_note.tex::ass:export-\
+selection",
+  Background->None,ExpressionUUID->
+  "7acaaef4-aa92-4beb-9556-42505a50277f"]], \
+"InlineCode",ExpressionUUID->"aba10d3e-2fe0-4ab3-a487-ddd4bee3d5bd"]], "Item",\
+ExpressionUUID->"1713f312-a013-4fee-af35-9f72cfdee766"],
+
+Cell[TextData[Cell[BoxData[Cell["UOM/summability_split_note.tex::prop:\
+projected-affine",
+  Background->None,ExpressionUUID->
+  "35d0f53d-b3b7-4d35-b459-6f25c2cc9c32"]], \
+"InlineCode",ExpressionUUID->"d7ef6e3d-8e4d-43be-bfb4-a7ce08b60dd5"]], "Item",\
+ExpressionUUID->"d8118414-b5a8-4bf6-9a10-962e5f3caf89"],
+
+Cell[TextData[Cell[BoxData[Cell["\<\
+UOM/canonical_odd_interface_note.tex::def:intrinsic-cov-response\
+\>",
+  Background->None,ExpressionUUID->
+  "f8ffee14-c7ea-4d75-ac28-c5b776f13aff"]], \
+"InlineCode",ExpressionUUID->"63188a10-7583-4eb1-b3b3-63ba8f30f08d"]], "Item",\
+ExpressionUUID->"2917b5a8-0151-42ba-ae6a-5b2f57eeeb95"],
+
+Cell["Evidence separation", "Subsection",ExpressionUUID->"83bf10ee-1f57-454b-8177-ade063eccf71"],
+
+Cell["Theorem-backed text:", "Text",ExpressionUUID->"b69a5830-14a0-4fbc-b671-06493f29c6d8"],
+
+Cell[TextData[{
+ "The note stack already contains the intrinsic covariance-tangent response \
+map and the conditional proposition ",
+ Cell[BoxData[Cell["prop:projected-affine",
+   Background->None,ExpressionUUID->"eb15e21e-9a37-46f8-9c34-13f4ddd8304c"]], 
+  "InlineCode",ExpressionUUID->"00fc5cd2-2b80-4e35-8339-482ba8289b7d"],
+ "."
+}], "Text",ExpressionUUID->"988fb5c5-384f-4ae4-96da-5ba9c627675f"],
+
+Cell["Exact WL certificate:", "Text",ExpressionUUID->"a50baf66-b735-4a94-9b37-7c850ba9be1a"],
+
+Cell[TextData[{
+ "The split-faithful completion WL lane is ",
+ Cell[BoxData[Cell["strong-safe",
+   Background->None,ExpressionUUID->"f26c974c-c9c1-4faa-8ce5-fadb8db36b90"]], 
+  "InlineCode",ExpressionUUID->"811531b0-4387-4d50-89f1-3d86500d98dc"],
+ " in the audited finite-dimensional family."
+}], "Text",ExpressionUUID->"72821e87-29b7-453d-b495-b48f2efd5884"],
+
+Cell["Imported analytic assumptions:", "Text",ExpressionUUID->"c0a1edf4-0761-48b0-a925-46e5818f57d5"],
+
+Cell["\<\
+Gaussian completion realization itself is still assumption text, and export \
+selection inside that realization is also assumption-level. \
+\>", "Text",ExpressionUUID->"b09122c8-409d-4073-9b33-353819da4fa2"],
+
+Cell["Strongest honest theorem candidate already present", "Subsection",ExpressionUUID->"25bb9376-1b90-4904-881f-0703441428fa"],
+
+Cell[TextData[{
+ "The existing conditional proposition ",
+ Cell[BoxData[Cell["prop:projected-affine",
+   Background->None,ExpressionUUID->"59ea4ac4-55c3-4105-a62d-fb0dee20331f"]], 
+  "InlineCode",ExpressionUUID->"38d30966-c1f6-4df9-aa74-cbdbcdc325e4"],
+ " under ",
+ Cell[BoxData[Cell["ass:gaussian-completion, ass:export-selection",
+   Background->None,ExpressionUUID->"81b15d6a-9ca5-4ff5-84aa-16b08e9e5961"]], 
+  "InlineCode",ExpressionUUID->"1af6b312-dbfa-4530-b0b3-d8492eb5a4a8"],
+ ". "
+}], "Text",ExpressionUUID->"5bcdc909-b3dd-4367-af8e-2c5aeb83c424"],
+
+Cell["Missing step", "Subsection",ExpressionUUID->"02573411-fa01-4850-a95a-6b2def8cd9a0"],
+
+Cell["\<\
+Derive the Gaussian realization itself from the current UOM/SK note stack \
+rather than postulate it. \
+\>", "Text",ExpressionUUID->"4dfe6ca3-396e-4a67-aa08-ef1ac747f484"],
+
+Cell["Current gate consequence", "Section",ExpressionUUID->"e4ef55d0-804f-4d61-baa0-e0e814c3ace0"],
+
+Cell["Weak export/Jcan remains green.", "Item",ExpressionUUID->"d95fe4be-0be1-4939-a8b1-a5a148263edd"],
+
+Cell["\<\
+The welded boundary corollary remains usable at contract level.\
+\>", "Item",ExpressionUUID->"9013cd43-2147-4102-bb8f-81811940f9cc"],
+
+Cell[TextData[{
+ "Because the completion additions are not yet discharged, the gate remains \
+",
+ Cell[BoxData[Cell["UOM contract corollary only",
+   Background->None,ExpressionUUID->"7aa998c7-4b75-48aa-b707-cc4519fe88f0"]], 
+  "InlineCode",ExpressionUUID->"b0d69084-cc61-4c31-a984-11fae1a06a04"],
+ "."
+}], "Item",ExpressionUUID->"871f3e5b-953b-4710-b08f-0ea1db191b4a"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"964b7e04-34f7-48ec-83dd-b8339417b848"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 103, 0, 70, "Title",ExpressionUUID->"d1703663-c57b-4f3e-86d5-db6be19b5907"],
+Cell[660, 22, 562, 12, 70, "Text",ExpressionUUID->"dcf1f783-d59d-40dd-a334-98f1a45529f6"],
+Cell[1225, 36, 92, 0, 70, "Section",ExpressionUUID->"f9b2e7a2-c152-4f5d-9525-222ebe0fb3f1"],
+Cell[1320, 38, 489, 8, 70, "Item",ExpressionUUID->"70d4a5fd-4131-4097-9970-faff929869c2"],
+Cell[1812, 48, 148, 2, 70, "Text",ExpressionUUID->"94f34dce-c3d9-4266-9354-fbd53b753641"],
+Cell[1963, 52, 494, 8, 70, "Item",ExpressionUUID->"f8897fd6-4b66-4e90-bb3c-db6202b9041c"],
+Cell[2460, 62, 144, 2, 70, "Text",ExpressionUUID->"f1f0062c-2f5a-4b8a-a60b-5058d495ed07"],
+Cell[2607, 66, 87, 0, 70, "Section",ExpressionUUID->"ef22b11a-f8e4-430f-b535-b45523af6ee9"],
+Cell[2697, 68, 113, 0, 70, "Text",ExpressionUUID->"f116fa21-48a1-42c0-b64f-7d2a40775b5b"],
+Cell[2813, 70, 90, 0, 70, "Item",ExpressionUUID->"2d22e2ac-e81c-4f92-a53b-edc96ef5efe3"],
+Cell[2906, 72, 91, 0, 70, "Item",ExpressionUUID->"2081c5bc-6879-4b7d-8ccd-37a47ac416ee"],
+Cell[3000, 74, 100, 0, 70, "Item",ExpressionUUID->"1e2bd893-4f75-42ee-a624-4e385e88884c"],
+Cell[3103, 76, 106, 0, 70, "Section",ExpressionUUID->"167213b4-673b-4f46-aadc-c50e12016955"],
+Cell[3212, 78, 84, 0, 70, "Subsection",ExpressionUUID->"6116486e-5197-4340-9584-6bbbf943704c"],
+Cell[3299, 80, 323, 6, 70, "Item",ExpressionUUID->"68570c21-7cf5-480e-9547-013dda8279fc"],
+Cell[3625, 88, 306, 5, 70, "Item",ExpressionUUID->"ca85326d-bd5b-47ba-a4a5-eeae3c57722c"],
+Cell[3934, 95, 310, 5, 70, "Item",ExpressionUUID->"41ffab3e-8eb2-4d08-8336-904f587f8f11"],
+Cell[4247, 102, 336, 6, 70, "Item",ExpressionUUID->"2c26d672-ff52-4029-ac5e-e70725ce6d66"],
+Cell[4586, 110, 337, 6, 70, "Item",ExpressionUUID->"9c328f1e-c371-4793-bc5c-0ab70105e3bd"],
+Cell[4926, 118, 96, 0, 70, "Subsection",ExpressionUUID->"eb0882e9-38d2-4bfa-82cd-b929d44b95b9"],
+Cell[5025, 120, 91, 0, 70, "Text",ExpressionUUID->"77af981f-c969-479f-9012-4dfec19f5e71"],
+Cell[5119, 122, 514, 9, 70, "Text",ExpressionUUID->"fa9559dc-1d25-476c-95cc-5f4e3ffe2195"],
+Cell[5636, 133, 92, 0, 70, "Text",ExpressionUUID->"be306754-52ed-4810-b54d-db80ffcf2feb"],
+Cell[5731, 135, 638, 11, 70, "Text",ExpressionUUID->"8b48a967-edf6-4354-aaee-67a336fe65c0"],
+Cell[6372, 148, 101, 0, 70, "Text",ExpressionUUID->"13e32a3e-7769-4f5e-a48b-c88bfd7b24b5"],
+Cell[6476, 150, 259, 4, 70, "Text",ExpressionUUID->"9f10d5f0-487b-419f-8638-f734f159db2b"],
+Cell[6738, 156, 111, 0, 70, "Subsection",ExpressionUUID->"d125c78b-6d0d-47b3-90ad-ef87937e4a2c"],
+Cell[6852, 158, 786, 15, 70, "Text",ExpressionUUID->"ecfe5c71-c7db-4be0-a528-7df523247ac7"],
+Cell[7641, 175, 89, 0, 70, "Subsection",ExpressionUUID->"6a81df44-d09d-409f-a985-cb1d5cf1c62b"],
+Cell[7733, 177, 235, 4, 70, "Text",ExpressionUUID->"5226bc7f-10f3-41dd-8a78-f403190e70b2"],
+Cell[7971, 183, 110, 0, 70, "Section",ExpressionUUID->"3b2475a0-cca4-4ca0-acfa-5f743fd9bca6"],
+Cell[8084, 185, 84, 0, 70, "Subsection",ExpressionUUID->"030a669c-b26d-4feb-ad62-cf6314b60479"],
+Cell[8171, 187, 310, 5, 70, "Item",ExpressionUUID->"178b4fcf-8d96-4f2c-a0df-f29e7910bfbd"],
+Cell[8484, 194, 307, 5, 70, "Item",ExpressionUUID->"1713f312-a013-4fee-af35-9f72cfdee766"],
+Cell[8794, 201, 308, 5, 70, "Item",ExpressionUUID->"d8118414-b5a8-4bf6-9a10-962e5f3caf89"],
+Cell[9105, 208, 325, 6, 70, "Item",ExpressionUUID->"2917b5a8-0151-42ba-ae6a-5b2f57eeeb95"],
+Cell[9433, 216, 96, 0, 70, "Subsection",ExpressionUUID->"83bf10ee-1f57-454b-8177-ade063eccf71"],
+Cell[9532, 218, 91, 0, 70, "Text",ExpressionUUID->"b69a5830-14a0-4fbc-b671-06493f29c6d8"],
+Cell[9626, 220, 399, 7, 70, "Text",ExpressionUUID->"988fb5c5-384f-4ae4-96da-5ba9c627675f"],
+Cell[10028, 229, 92, 0, 70, "Text",ExpressionUUID->"a50baf66-b735-4a94-9b37-7c850ba9be1a"],
+Cell[10123, 231, 359, 6, 70, "Text",ExpressionUUID->"72821e87-29b7-453d-b495-b48f2efd5884"],
+Cell[10485, 239, 101, 0, 70, "Text",ExpressionUUID->"c0a1edf4-0761-48b0-a925-46e5818f57d5"],
+Cell[10589, 241, 217, 3, 70, "Text",ExpressionUUID->"b09122c8-409d-4073-9b33-353819da4fa2"],
+Cell[10809, 246, 127, 0, 70, "Subsection",ExpressionUUID->"25bb9376-1b90-4904-881f-0703441428fa"],
+Cell[10939, 248, 556, 10, 70, "Text",ExpressionUUID->"5bcdc909-b3dd-4367-af8e-2c5aeb83c424"],
+Cell[11498, 260, 89, 0, 70, "Subsection",ExpressionUUID->"02573411-fa01-4850-a95a-6b2def8cd9a0"],
+Cell[11590, 262, 181, 3, 70, "Text",ExpressionUUID->"4dfe6ca3-396e-4a67-aa08-ef1ac747f484"],
+Cell[11774, 267, 98, 0, 70, "Section",ExpressionUUID->"e4ef55d0-804f-4d61-baa0-e0e814c3ace0"],
+Cell[11875, 269, 102, 0, 70, "Item",ExpressionUUID->"d95fe4be-0be1-4939-a8b1-a5a148263edd"],
+Cell[11980, 271, 142, 2, 70, "Item",ExpressionUUID->"9013cd43-2147-4102-bb8f-81811940f9cc"],
+Cell[12125, 275, 369, 7, 70, "Item",ExpressionUUID->"871f3e5b-953b-4710-b08f-0ea1db191b4a"]
+}
+]
+*)
+
+(* End of internal cache information *)

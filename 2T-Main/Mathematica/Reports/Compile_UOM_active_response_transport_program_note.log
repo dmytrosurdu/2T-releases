@@ -1,0 +1,36 @@
+Rc files read:
+  /etc/LatexMk
+  latexmkrc
+Latexmk: This is Latexmk, John Collins, 20 November 2021, version: 4.76.
+Latexmk: Changing directory to 'UOM/'
+Latexmk: making output directory 'build'
+Rule 'pdflatex': File changes, etc:
+   Changed files, or newly in use since previous run(s):
+      'active_response_transport_program_note.tex'
+------------
+Run number 1 of rule 'pdflatex'
+------------
+------------
+Running 'pdflatex -interaction=nonstopmode -halt-on-error  -recorder -output-directory="build"  "active_response_transport_program_note.tex"'
+------------
+Latexmk: applying rule 'pdflatex'...
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./active_response_transport_program_note.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-01-21>
+! Undefined control sequence.
+l.1 \section
+            {Companion Note: Finite-Cutoff Active Response Transport Theorem}
+!  ==> Fatal error occurred, no output PDF file produced!
+Transcript written on build/active_response_transport_program_note.log.
+Collected error summary (may duplicate other messages):
+  pdflatex: Command for 'pdflatex' gave return code 1
+      Refer to 'build/active_response_transport_program_note.log' for details
+Latexmk: Undoing directory change
+Latexmk: Use the -f option to force complete processing,
+ unless error was exceeding maximum runs, or warnings treated as errors.
+Latexmk: Examining 'build/active_response_transport_program_note.log'
+=== TeX engine is 'pdfTeX'
+Latexmk: Errors, so I did not complete making targets

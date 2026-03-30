@@ -1,0 +1,191 @@
+\documentclass[10.5pt,a4paper]{article}
+\usepackage{biblatex}
+\usepackage[margin=1in]{geometry}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{physics}
+\usepackage{siunitx}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{subfig}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=magenta}
+
+\newcommand{\AdS}{\mathrm{AdS}}
+\newcommand{\dS}{\mathrm{dS}}
+\newcommand{\BY}{\mathrm{BY}}
+
+\title{\vspace{-1em}\textbf{Universe-originating Measurement:\\
+Operational, finite-step CCC via $\AdS_4\leftrightarrow\dS_4$ bridges}\vspace{0.25em}}
+\author{\normalsize Dmytro Surdu}
+\date{\normalsize 2026}
+
+\begin{document}
+\maketitle
+\vspace{-2.0em}
+
+\section*{Motivation and idea}\label{sec:uom-summary-001}
+Conformal Cyclic Cosmology (CCC) explains the low-entropy start of each aeon by a conformal handover from the previous aeon. This note proposes a \emph{finite-step, operational realization} of that handover: a quantum measurement-like bridge that \emph{creates classical records} and flips an $\AdS_4$ receiver brane into $\dS_4$ aeon brane after finitely many ``ticks'', \emph{without introducing additional free parameters.} 
+
+The starting stance is simple: \emph{Unitarity cannot produce facts.} A purely unitary, invertible channel cannot produce certifiable facts on infinite-time tail. Operationally, the bridge state (AdS side) is \emph{pure}, \emph{factless}, high-energy vacuum.
+
+This pure state $\AdS_4$ brane is built layer by layer from the previous aeon $\dS_4$ brane via pointer-aligned QND (POVM-compatible) channel on the radiative sector and almost-QND gravitational coupling (which produces two-point Diósi-Penrose self-energy scaling) to the canonical commutant KMS bath (hence no spurious heating in $\dS_4$/CFT sector). A Brown–York/anomaly DC rectifier then biases the receiver curvature, driving the $\AdS_4$ brane region to a split that detaches the next $\dS_4$ aeon in a finite number of pulses, “ticks”, that have discharged information to the $\AdS_4$ receiver. 
+
+\vspace{0.55em}
+\noindent\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{
+\textbf{(A) Anomaly DC rectifier (trace sector).}
+Linearised about a maximally symmetric background, the DC trace relation reads
+\[
+\gamma\,\langle R^2\rangle\ -\ \langle R\rangle\ +\ 4\Lambda_4\ =\ 8\pi G_4\,\overline{\tau}\,.
+\]
+For zero-area LoG/LoG ticks the DC component satisfies $\overline{\tau}=0$, but $\gamma\langle R^2\rangle>0$ produces a genuine \emph{bias} of the mean curvature. Hence repeated ticks raise $\langle R\rangle$, with exact feedback $\sum \gamma\langle R_k^2\rangle = |R_0|$, making the final pre-split curvature-resolution step arbitrarily small.%
+}}
+\vspace{0.15em}
+
+\emph{Recoverable information increases from aeon to aeon}, while the cutoff scale and curvature decrease near-geometrically. In late aeons, the newest KR heads (those at the highest cutoff) decouple; as a UV-accumulating sequence they converge, in the limit, to the true $\AdS_5$
+ boundary. The approach to this boundary—and the Lorentzian evolution it induces—is self-caused: a CPTP RG flow along the second $\AdS_5$ (radial) time defines a 5D Universe-originating quantum measurement.
+
+\vspace{0.55em}
+\noindent\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{
+\textbf{(B) Exact exhaustion within an aeon and geometric inheritance across aeons.}
+Let \(C_n:=|R_0^{(n)}|\) be the initial \(\AdS_4\) curvature magnitude inherited by aeon \(n\).
+Along the solvable one-wall receiver evolution, the Brown--York curvature increments are positive and exactly summable,
+\[
+0<\Theta_k<|R_k|,\qquad \sum_{k\ge 0}\Theta_k=C_n,
+\]
+so the receiver curvature is resolved monotonically with an arbitrarily small final step.
+At split, the completion sector carries an inherited share of the exported coherence stock into the newborn \(\dS_4\) brane.
+If that inherited share, measured relative to \(C_n\), remains approximately stable from aeon to aeon, then
+\[
+C_{n+1}\approx q_n\,C_n,\qquad q_n\approx q<1,
+\]
+and the initial \(\AdS_4\) curvature decreases near-geometrically across aeons.
+
+}}
+
+
+
+
+\newpage
+5D Schwinger-Keldysh influence action is minimized, producing the classical worldline across all $\dS_4$ branes as a saddle point, and governing the information transfer structure (\emph{minimized quantum/classical excess} on the source brane, Fisher-quadratic covariances on the receiver, and welded pulse temporal/spatial shapes and locations)
+
+\medskip
+\noindent\small
+\fbox{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{
+\textbf{(C) 5D Universe-originating measurement action (on–shell SK \& holographic HJ).}
+A single on–shell SK influence for the AdS$_5$ bulk (EH\,$+$\,GHY\,$+$ counterterms\,$+$\,GW) with dS source and AdS$_4$ head
+reduces to a boundary variational functional for each tick $k$:
+\[
+\begin{aligned}
+\mathcal A_k
+&=
+\underbrace{\vphantom{\sum}
+F_{\mathrm{dS}}\!\big[\rho_k \,\big\|\, \rho^{\mathrm{BD}}_{\Delta_k}\big]}_{\text{source: loss of recoverable info}}
+\;-\;
+\underbrace{\vphantom{\sum}
+C_k[h_k]}_{\text{exported record }(C_k \propto \Delta I_k[h_k])}
+\\[4pt]
+&\quad +\;
+\underbrace{\vphantom{\sum}
+\Phi^{\mathrm{phys}}_{\partial}\!\big[h_k;\,\Lambda_k\big]}_{\text{receiver: payload packing (incl.\ GW/portal)}}
+\;+\;
+\underbrace{\alpha_{\mathrm W}\,\big\|\Pi_{\mathrm W}\,\delta C_k\big\|^{2}_{F,\Lambda_k}}_{\text{Weyl/Riegert (trace/rectifier from EH$+$ct)}}
+\\[2pt]
+&\quad +\;
+\underbrace{\alpha_{\mathrm{RP}}\,\big\|\Pi_{\mathrm{RP}}\,\delta C_k\big\|^{2}_{F,\Lambda_k}}_{\text{OS–odd monitor (vanishes on healthy heads)}}
+\;+\;
+\underbrace{\alpha_{\mathrm{conf}}\,\big\|\Pi_{\mathrm{conf}}\,\delta C_k\big\|^{2}_{F,\Lambda_k}}_{\text{conformal/Ward–residual monitor}}
+\\[2pt]
+&\quad +\;
+\underbrace{\int_{I_k}\!\frac{1}{2}\,\mu_{\mathrm{RG}}(\Lambda_k)\,\dot\Lambda_k^{2}\,dt}_{\text{cutoff work (radial HJ; EH$+$ct } \Rightarrow \mu_{\mathrm{RG}}(\Lambda)\!\sim\! M_4^2(\Lambda))}
+\end{aligned}
+\]
+Here $h_k$ encodes the (LoG/LoG) \emph{payload profile} and $C_k\!\sim\!\Delta I_k[h_k]$;
+$\delta C_k=\mathsf T_{\Lambda_k}[h_k]$ is the (Gaussian) receiver covariance tangent; $\Pi_{\mathrm W},\Pi_{\mathrm{RP}},
+\Pi_{\mathrm{conf}}$ are the Fisher–orthogonal projectors onto the Weyl/trace (Riegert), OS–odd, and conformal mismatch sectors; $\alpha_\bullet(\Lambda_k)$ are (holographically fixed) spectral weights. The stationarity of $\mathcal A_k$ determines both the exported payload $h_k$ (hence $C_k$) \emph{and} the cutoff history $\Lambda_k(t)$.
+}} 
+
+
+
+\vspace{0.55em}
+\noindent\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{
+\textbf{(D) Higgs portal: constant mass imprint from the anomaly DC.}
+On the receiver brane the heavy brane boundary fluctuation scalar field $\mathcal S$ couples as
+\[
+\mathcal L\supset \tfrac12(\partial\mathcal S)^2-\tfrac12 m_{\mathcal S}^2\mathcal S^2
+\ -\ \lambda_p\,\mathcal S\,H^\dagger H\ +\ \mathcal S\,J_{\rm anom}\,,
+\qquad J_{\rm anom}\ :=\ \kappa\,(\mathcal K_{\rm anom}*R^2)\,.
+\]
+Solving at tree level gives a \emph{constant} post–flip shift
+\[
+\boxed{\quad \Delta\mu_H^2\;=\;-\,\frac{\lambda_p}{m_{\mathcal S}^2}\,J_{\rm DC},\qquad 
+J_{\rm DC}:=\big(\mathcal K_{\rm anom}*R^2\big)_{0}\,,\quad}
+\]
+so that $v^2=\big(\lambda_p J_{\rm DC}/m_{\mathcal S}^2-\mu_{H,0}^2\big)/\lambda_H$.
+For $m_{\mathcal S}\!\gg\!v$ the one–loop threshold $\delta\mu_H^2\!\sim\!(\lambda_p^2/16\pi^2)m_{\mathcal S}^2$ is technically natural; collider and fifth–force signatures remain quiet (\,$\delta\kappa_h\!\ll\!10^{-3}$ from the induced-gravity Robin boundary conditions-suppressed visible overlap\,).%
+}}
+
+\medskip
+
+Two theorems about interaction of Lorentzian and RG times are proven. Exactly-preserved classical information of receiver Weyl anomaly record acts as a ledger with approximately classical points of 5D Universe states at the end of each aeon, connected by aeon-to-aeon RG steps. Square in two times commute on records, yet its two canonical completions differ by one intrinsic bit. That bit is carried by neither time alone; it appears only in their mixing. Physically, time mix in a delayed zig-zag between in-aeon completion sector affine charge $dS_4 \to AdS_4/\textit{Completion sector}$ and inter-aeon morph+export $\textit{Completion sector} \mapsto \textit{next}\; dS_4 \to \textit{next}\; AdS_4$.
+
+\vspace{0.55em}
+\noindent\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{
+\textbf{(E) Two-time theorem consequences.}
+\[
+\mathbf{2T}_{\mathrm{LS}}:\ \text{mixing of Lorentzian and RG time yields an intrinsic one-bit holonomy,}
+\]
+giving theorem-level ``it from bit'' and an objective before/after distinction carried by neither time alone.
+\[
+\mathbf{2T}_{\mathrm{Main}}:\ \text{the same odd bit survives on the UV boundary as a local odd channel,}
+\]
+yielding spinor symmetry and full superconformal symmetry on the boundary.%
+}}
+
+
+
+\begin{figure}
+    \centering
+    \subfloat{{
+    \includegraphics[width=0.45\linewidth]{summary/ads_5_lorentzial_rg.png}
+    
+    }}
+    \qquad
+    \subfloat{{\includegraphics[width=0.45\linewidth]{summary/ads_5_spatial.png}
+    
+    }}
+    \caption[font=small]{a) $\mathrm{AdS}_5$ bulk with the visible $\mathrm{dS}_4$ brane, receiver $\AdS_4$ brane, stack of shadow $\dS_4$ branes, and future heads (shown in $\AdS$ phase). 1D temporal/1D spatial slice and meta-causal RG flow are shown. b) Bulk and spatial slice of branes carrying DC LoG imprints from Brown-York anomaly rectification.}
+    \label{fig:schematics}
+
+\end{figure}
+
+
+\section*{Observational handles}\label{sec:uom-summary-002}
+
+\paragraph{CMB:} A degree-scale \emph{compensated LoG/SMHW} imprint (Cold-Spot-like morphology) with a definite \emph{TE sign} at the core scale.\label{par:uom-summary-001}
+
+\paragraph{LSS/halos:} A \emph{screened low-pass ``mirage'' matter} contribution\label{par:uom-summary-002}
+\[
+\Omega_X(k,a) \sim \Omega_{2,0}\,a^{-3}\times e^{-d(a)\sqrt{k^2+m_\bullet^2}}\times \frac{\sqrt{k^2+m_\bullet^2}}{\sqrt{k^2+m_\bullet^2}+r(\Lambda)k^2}.
+\]
+Core scale $r_{\rm core}\sim \max\{r_{\rm scr},\,m_\bullet^{-1},\,\Lambda^{-1}\}$ matches cluster cores; coupling of cutoff-decreasing shadow brane stack produces log-skew distribution of kpc dwarf cores. Fifth-force bounds are satisfied via curvature-dependent, BC-suppressed visible overlap.
+
+\section*{Falsifiability \& data-aware wedge}\label{sec:uom-summary-003}
+\begin{itemize}[leftmargin=1.1em,itemsep=0.25em]
+\item \textbf{CMB (Planck):} LoG/SMHW core with \emph{TE phase}; ring optional/suppressed.
+\item \textbf{CMB+BAO:} early ``mirage'' fraction $\lesssim$ few \% at $z\sim 1100$, decaying to $\lesssim$1\% today.
+\item \textbf{Full-shape $P(k)$ (BOSS/DESI):} roll-off begins at low $k$; coherent modulation at few-\% at most.
+\item \textbf{Halos:} dwarfs $0.5$--$3$~kpc, log-skew distributed; clusters $\ll 50$~kpc.
+\end{itemize}
+
+
+\section*{Links \& contact}\label{sec:uom-summary-004}
+Full manuscript (derivations, proofs, appendices): \url{https://gitlab.com/lanceoflife/uom/-/raw/master/uom/pdf/UOMT.pdf}\\
+
+\textbf{Contact:} lanceoflife@gmail.com
+
+ORCID: \url{https://orcid.org/0009-0009-9343-1849}
+\end{document}

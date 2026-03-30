@@ -1,0 +1,4357 @@
+% Proof appendix
+
+\section{Guide to the logic}
+\label{sec:appendix-guide}
+This appendix isolates the minimal interfaces and implications needed to reach the
+HLS classification step from the standing interface packages.  The guide below
+follows the proof dependence rather than the raw appendix order: preparatory
+subprograms are listed where they first enter the argument.
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=*,itemsep=0.4em]
+\item \textbf{Standing package bundle.} The standing assumptions are packaged as
+  \(\mathbf{2T}_{\mathrm{Main}}\)
+  \textnormal{(Definition~\ref{def:2T-Main})}, namely
+  \[
+  \mathbf{2T}_{\mathrm{LS}}
+  + \mathbf{2T}_{\mathrm{RG}}
+  + \mathbf{2T}_{\mathrm{Peierls}}
+  + \mathbf{2T}_{\mathrm{EBC}}
+  + \mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}
+  + \mathbf{2T}_{\mathrm{char}}^{\mathrm{act}}
+  + \mathbf{2T}_{\mathrm{sel}}
+  + \mathbf{2T}_{\mathrm{sel}}^{\mathrm{delay}}
+  + \mathbf{2T}_{\mathrm{conf}}.
+  \]
+  The record interface \(\mathbf{2T}_{\mathrm{rec}}\) and detector interface
+  \(\mathbf{2T}_{\mathrm{det}}\) enter only through the LS summand, while the
+  derived BRST package will be added below to form
+  \(\mathbf{2T}_{\mathrm{Main}}^{\mathrm{spine}}\).
+\item \textbf{Subprogram~1a (derived BRST).} Starting from the Lorentzian SK path
+  integral, Subprogram~1a constructs the two-time BRST/bicomplex differentials
+  \(Q_t,Q_u\) and their Ward identities on SK--admissible states, thereby
+  producing the interface \(\mathbf{2T}_{\mathrm{BRST}}\) on the sufficiently
+  local class \(\Fsloc\).  At that point the appendix spine works with
+  \[
+  \mathbf{2T}_{\mathrm{Main}}^{\mathrm{spine}}
+  :=
+  \mathbf{2T}_{\mathrm{Main}}+\mathbf{2T}_{\mathrm{BRST}}.
+  \]
+\item \textbf{Subprogram~2a (Results from the 2T Limited Scope Theorem).}  We import the LS
+  parity cocycle, the nonsplitting \(\mathbb Z_2\)-cover, the detector witness,
+  and the record-process-chain bicomplex identities.  This isolates the
+  abstract two-time obstruction data that later feed the parity-transport step.
+\item \textbf{Subprogram~2b (Cosmology theory Peierls bracket and swap invariance).}  We record
+  the abstract Peierls package on sufficiently local boundary observables, its
+  swap-equivariant Green operators, and the resulting Poisson automorphism
+  property of the boundary swap involution.
+\item \textbf{Subprogram~2c (Parity transport and physical \(\mathbb Z_2\) grading).}  Combining
+  the LS import with the swap-equivariant boundary structures, we identify the
+  physical parity involution \(\Gamma\) on first descendants and transport the
+  LS square-loop sign to the boundary ambiguity sector.
+\item \textbf{Subprogram~3a (selected-line nonvanishing, canonicalization, and characteristic activity).}
+  This subsection packages the finite-cutoff canonical odd representative
+  together with the same-tick obstruction lane, the delayed selected-line lane,
+  the resulting nonvanishing statements, and the characteristic-algebra/activity
+  consequences that follow once the odd descendant class survives.
+\item \textbf{Subprogram~3b (RG monotone and Hamiltonized odd derivation).}
+  The RG package \(\mathbf{2T}_{\mathrm{RG}}\) supplies the monotone and its
+  anomalous descent source, while the Peierls and characterization packages are
+  used to Hamiltonize the canonical odd representative and establish the local
+  physically odd derivation \(\delta_{\Lambda_k}\).
+\item \textbf{Subprogram~1b (local net, GNS reconstruction, and implementation template).}
+  Subprogram~1b supplies the vacuum Wightman/AQFT representation
+  \((\mathcal H,\pi,U,\Omega)\), the net \(O\mapsto\mathfrak A(O)\), and the
+  dense implementation core on the Minkowski boundary.  These Hilbert-space
+  inputs first enter when the argument passes from the local odd derivation to
+  the AQFT/HLS step.
+\item \textbf{Subprogram~3c (AQFT net and HLS on the Minkowski boundary).}
+  Using \(\mathbf{2T}_{\mathrm{EBC}}\) together with the Subprogram~1b vacuum
+  representation, Subprogram~3c extends \(\delta\) to the polynomial core,
+  proves implementability of the odd derivation, verifies the HLS interface
+  \(\mathbf{2T}_{\mathrm{HLS}}\), and identifies the finite-dimensional
+  Weyl-spinor odd charge module on the UV vacuum representation.
+\item \textbf{Subprogram~4a (dilatation weight \(\tfrac12\) of the odd charges on the common UV sector).}
+  Combining the HLS odd module from Subprogram~3c, the HLS completeness
+  statement, and the conformal common-sector package
+  \(\mathbf{2T}_{\mathrm{conf}}\), Subprogram~4a places the odd charges on the
+  common UV sector and forces their dilatation weight to be \(\tfrac12\).
+\item \textbf{Subprogram~4b (same-\(\mathcal H\) conformal closure of the HLS odd sector).}
+  With the weight-\(\tfrac12\) normalization from Subprogram~4a in hand,
+  Subprogram~4b takes the finite conformal closure of the HLS odd seed,
+  proves same-\(\mathcal H\) implementability of that odd conformal closure,
+  recovers the degree-zero internal algebra, and identifies the resulting
+  operator superalgebra with the standard \(4\)D superconformal algebra.
+\item \textbf{Subprogram~4c (optional maximality strengthening).}
+  This final section is not part of the base Main theorem.  It imports the
+  superconformal closure from Subprogram~4b and studies what additional
+  assumptions would force maximal supersymmetry, i.e.\ the optional
+  \(N=4\) conclusion at the UV fixed point.
+\end{enumerate}
+
+\section{Master packages and interface assumptions}
+\label{sec:setup}
+
+\subsection{Master package block}
+
+\subsubsection{Input Interfaces}
+
+\begin{definition}[Record two--time interface $\mathbf{2T}_{\mathrm{rec}}$]
+\label{def:2T-rec}
+A \emph{record two--time interface} consists of:
+\begin{enumerate}[label=\textbf{(R\arabic*)},leftmargin=*,itemsep=0.5em]
+\item \textbf{SK and records.} Sets $\SKstates$ (SK states) and $\Sys$ (record states),
+  a map $\diag:\Sys\to\SKstates$, and an involution $\swap:\SKstates\to\SKstates$ such that
+  $\swap^2=\mathrm{id}_{\SKstates}$ and $\swap\circ\diag=\diag$.
+\item \textbf{Two arrows.} A group $T$ and the additive monoid $(\mathbb R_{\ge 0},+,0)$,
+  with actions $\mathrm{act}_T:T\times\SKstates\to\SKstates$ and
+  $\mathrm{act}_U:\mathbb R_{\ge 0}\times\SKstates\to\SKstates$
+  satisfying the action axioms and \emph{weak commutativity} on $\SKstates$:
+  \[
+  \mathrm{act}_U(u,\mathrm{act}_T(t,x))=\mathrm{act}_T(t,\mathrm{act}_U(u,x)).
+  \]
+\item \textbf{Strict RG diagonalization.} For each $u>0$ a map
+  $\Pi_u:\SKstates\to\Sys$ and a record RG action $R_u:\Sys\to\Sys$ such that
+  \[
+  \mathrm{act}_U(u,x)=\diag(\Pi_u(x)),\qquad
+  \Pi_u(\diag r)=R_u(r)\quad(u>0),
+  \]
+  with $R_0=\mathrm{id}$ and $R_{u_2+u_1}=R_{u_2}\circ R_{u_1}$.
+\item \textbf{Chosen RG sector (reachability).} A section
+  $\mathrm{sec}_\Pi:\Sys\to\SKstates$ with $\Pi_1(\mathrm{sec}_\Pi(r))=r$.
+\item \textbf{No mixed anomaly at the boundary of squares.}
+  A bisimplicial set $\mathcal C^{\mathrm{SK}}_{m,n}$ with horizontal and vertical face maps
+  $d_i^H,d_j^V$ satisfying simplicial relations in each direction and mixed
+  commutation $d_i^H d_j^V=d_j^V d_i^H$~\cite{GoerssJardine1999Simplicial}.
+\item \textbf{Record reflection.} Diagonal cancellation:
+  \[
+  \diag(r)=\diag(r') \Rightarrow r=r'.
+  \]
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+The discrete RG-step case is recovered by restricting $u\in\mathbb N\subset\mathbb R_{\ge 0}$.
+\end{remark}
+
+\begin{definition}[Detector interface $\mathbf{2T}_{\mathrm{det}}$]
+\label{def:2T-det}
+A \emph{detector interface} is any additional structure that implies the
+$\mathbb Z_2$--action on the difference object $\Diff=\mathrm{Cofib}(\diag)$ is
+nontrivial, i.e.\ $\flip\neq \mathrm{id}_{\Diff}$ or equivalently there exists
+$y\in\Diff$ with $\flip(y)\neq y$.
+\end{definition}
+
+\begin{definition}[Limited Scope package $\mathbf{2T}_{\mathrm{LS}}$]
+\label{def:2T-LS}
+Define the \emph{2T Limited Scope package} by
+\[
+\mathbf{2T}_{\mathrm{LS}} := \mathbf{2T}_{\mathrm{rec}} + \mathbf{2T}_{\mathrm{det}}.
+\]
+\end{definition}
+
+\begin{definition}[Two independent $\mathbb Z_2$ gradings]
+\label{def:two-gradings}
+We distinguish:
+\begin{enumerate}[label=\textnormal{(\alph*)},leftmargin=*,itemsep=0.2em]
+\item \emph{Cohomological/BRST parity} $|\cdot|_{\mathrm{ch}}\in\mathbb Z_2$ on the
+  cochain algebra $\Fsloc=(\Fsloc)_{\bar 0}\oplus(\Fsloc)_{\bar 1}$, with
+  $|Q_t|_{\mathrm{ch}}=|Q_u|_{\mathrm{ch}}=1$.
+  Accordingly, $H^0(\Fsloc,Q_t)$ and $H^1(\Fsloc,Q_t)$ denote even/odd cohomology.
+\item \emph{Physical parity} $|\cdot|_{\Gamma}\in\mathbb Z_2$ induced by the involution
+  $\Gamma$ (SK swap), giving a decomposition into $\Gamma$--even/odd parts
+  $\Fsloc={\Fsloc}^{+}\oplus{\Fsloc}^{-}$.
+\end{enumerate}
+Oddness in the AQFT/HLS steps always refers to $|\cdot|_{\Gamma}$.
+\end{definition}
+
+\begin{definition}[RG--monotone interface $\mathbf{2T}_{\mathrm{RG}}$]
+\label{def:2T-RG}
+An \emph{RG--monotone interface} consists of:
+\begin{enumerate}[label=\textbf{(M\arabic*)},leftmargin=*,itemsep=0.5em]
+\item \textbf{Monotone and representative.} A real monotone $M(u)$ near the UV
+  ceiling $u_0$, a family of SK--admissible states $\rho_u$, and a quasi--local
+  family $\mathcal O^{(0)}(u)\in\Fsloc$ with
+  \[
+  M(u)=\langle \mathcal O^{(0)}(u)\rangle_{\rho_u},
+  \qquad
+  Q_t\mathcal O^{(0)}(u)=0,
+  \qquad
+  [\mathcal O^{(0)}(u_0)]\neq 0\in H^0(\Fsloc,Q_t).
+  \]
+\item \textbf{RG Ward identity (odd form, refined).} On the monotone representative
+  $\mathcal O^{(0)}(u)$, decompose the $u$--differential as
+  \[
+  Q_u = Q_u^{\mathrm{phys}} + Q_u^{\mathrm{scheme}},
+  \]
+  where $Q_u^{\mathrm{scheme}}$ encodes scheme/reparametrisation effects
+  (local counterterm and coupling redefinition ambiguities). We assume that
+  $Q_u^{\mathrm{phys}}$ and $Q_u^{\mathrm{scheme}}$ are odd derivations
+  on $\Fsloc$.
+  We additionally assume $Q_u^{\mathrm{phys}}$ and $Q_u^{\mathrm{scheme}}$ are
+  \emph{presheaf derivations}: for every double cone $O$ they restrict to odd
+  derivations
+  \[
+  Q_u^{\mathrm{phys}}:\Fsloc(O)\to\Fsloc(O),\qquad
+  Q_u^{\mathrm{scheme}}:\Fsloc(O)\to\Fsloc(O).
+  \]
+  Finally, we assume they anticommute with $Q_t$ on this class (so
+  $Q_u^{\mathrm{phys}}\mathcal O^{(0)}$ is $Q_t$--closed whenever
+  $Q_t\mathcal O^{(0)}=0$), and that for $u$ near $u_0$,
+  \[
+  \frac{d}{du}M(u)
+  = -\big\langle (Q_u^{\mathrm{phys}}\mathcal O^{(0)})(u)\big\rangle_{\rho_u},
+  \qquad
+  \big\langle (Q_u^{\mathrm{scheme}}\mathcal O^{(0)})(u)\big\rangle_{\rho_u}=0,
+  \]
+  up to expectation values of $Q_t$--exact terms (which vanish for
+  SK--admissible states by $\mathbf{2T}_{\mathrm{BRST}}$-\textbf{(B2)}).
+\par
+  \textbf{Cohomological triviality of scheme terms on the monotone sector.}
+  For every $X\in{\Fsloc}_{\mathrm{mon}}$ with $Q_tX=0$, we assume
+  \[
+  [\,Q_u^{\mathrm{scheme}}X\,]=0\quad\text{in}\quad H^1(\Fsloc,Q_t).
+  \]
+\par
+  (Optional packaging.) Equivalently, one may encode the same information by an
+  even derivation $L_{\rm RG}$ on $\Fsloc$ (Callan--Symanzik plus anomaly/contact
+  terms) with
+  $
+  \tfrac{d}{du}M(u)=\langle (L_{\rm RG}\mathcal O^{(0)})(u)\rangle_{\rho_u}.
+  $
+\item \textbf{Anomalous first descent (no Ward trivialization).}
+  There exist sufficiently local raw first-descendant potentials
+  \(\Xi^{(1)}(u)\in\Fsloc\)
+  and an anomaly insertion $\mathcal A^{(1)}(u)\in(\Fsloc)_{\bar 1}$ such that
+  \begin{equation}
+  \label{eq:anom-descent}
+  Q_u^{\mathrm{phys}}\mathcal O^{(0)}(u)\ +\ Q_t\Xi^{(1)}(u)\ =\ \mathcal A^{(1)}(u),
+  \qquad
+  Q_t\mathcal A^{(1)}(u)=0.
+  \end{equation}
+  We interpret \eqref{eq:anom-descent} as an identity in the locality quotient
+  (Definition~\ref{def:locality-quotient}); in particular, $\mathcal A^{(1)}(u)$
+  represents the $Q_t$--cohomology class
+  $\big[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)}(u)\,\big]\in H^1(\Fsloc,Q_t)$
+  (Definition~\ref{def:A1-class}).
+  For SK--admissible states, $\langle Q_t X\rangle_{\rho_u}=0$ implies
+  $\langle (Q_u^{\mathrm{phys}}\mathcal O^{(0)})(u)\rangle_{\rho_u}
+  =\langle \mathcal A^{(1)}(u)\rangle_{\rho_u}$ and hence
+  $\tfrac{d}{du}M(u)=-\langle \mathcal A^{(1)}(u)\rangle_{\rho_u}$.
+  This replaces an anomaly--free descent
+  $Q_u^{\mathrm{phys}}\mathcal O^{(0)}+Q_t\Xi^{(1)}=0$, which would force
+  $\tfrac{d}{du}M(u)=0$ by the $Q_t$ Ward identity.
+  We furthermore require that the chosen first-descendant potential at the UV ceiling
+  is not a c-number on the vacuum sector (i.e.\ not constant on the connected vacuum
+  component of the reduced phase space).
+\item \textbf{Nontrivial UV slope.} $\partial_u M(u)\rvert_{u_0}<0$ away from fixed
+  points / exactly marginal loci.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Monotone sector of sufficiently local observables]
+\label{def:Fsloc-mon}
+Fix the UV ceiling $u_0$ and choose $\varepsilon>0$.  For each double cone $O$,
+define ${\Fsloc}_{\mathrm{mon}}(O)\subset\Fsloc(O)$ to be the smallest
+$\mathbb R$--subspace such that:
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=*,itemsep=0.2em]
+\item for all $u\in(u_0-\varepsilon,u_0+\varepsilon)$, the chosen monotone representatives
+  $\mathcal O^{(0)}(u)$ restricted to $O$ lie in ${\Fsloc}_{\mathrm{mon}}(O)$;
+\item the associated anomaly insertions $\mathcal A^{(1)}(u)$ and chosen raw first-descendant
+  potentials \(\Xi^{(1)}(u)\) (whenever defined) restricted to $O$ lie in ${\Fsloc}_{\mathrm{mon}}(O)$;
+\item ${\Fsloc}_{\mathrm{mon}}(O)$ is $\Gamma$--invariant and $Q_t$--stable:
+  $\Gamma({\Fsloc}_{\mathrm{mon}}(O))\subset{\Fsloc}_{\mathrm{mon}}(O)$ and
+  $Q_t({\Fsloc}_{\mathrm{mon}}(O))\subset{\Fsloc}_{\mathrm{mon}}(O)$.
+\end{enumerate}
+Here $\Gamma$ denotes the swap-induced involution on $\Fsloc$ introduced in
+Section~\ref{sec:parity-bridge}.
+We write ${\Fsloc}_{\mathrm{mon}}:=\bigcup_O {\Fsloc}_{\mathrm{mon}}(O)$.
+
+\medskip
+\end{definition}
+
+\begin{definition}[Locality quotient relation]
+\label{def:locality-quotient}
+Fix a double cone $O$.  On $\Fsloc(O)$ define an equivalence relation $\simeq$
+generated by the following elementary moves:
+\begin{enumerate}[label=\textnormal{(\alph*)},leftmargin=*,itemsep=0.2em]
+\item $F \mapsto F+Q_t X$ for any $X\in\Fsloc(O)$;
+\item $F \mapsto F+(Q_u^{\mathrm{scheme}}Y)$ for any $Y\in{\Fsloc}_{\mathrm{mon}}(O)$;
+\item $F \mapsto F+\partial_\mu K^\mu$ for any sufficiently local current $K^\mu$
+  supported in $O$ (so the term vanishes after smearing in double cones);
+\item $F \mapsto F+\Delta_{\mathrm{ct}}$ where $\Delta_{\mathrm{ct}}\in\Fsloc(O)$
+  is a local counterterm coboundary (supported in $O$) representing a scheme change.
+\end{enumerate}
+Write $[F]_{\mathrm{loc}}$ for the $\simeq$--class of $F$.
+\end{definition}
+
+\begin{definition}[Anomaly insertion as the $Q_t$--cohomology class]
+\label{def:A1-class}
+Assume $Q_t\mathcal O^{(0)}(u)=0$ and that $\{Q_t,Q_u^{\mathrm{phys}}\}\mathcal O^{(0)}(u)=0$
+for $u$ near $u_0$ (equivalently, $Q_t(Q_u^{\mathrm{phys}}\mathcal O^{(0)}(u))=0$).
+Define the anomaly class
+\[
+[\mathcal A^{(1)}(u)]\ :=\ \big[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)}(u)\,\big]\ \in\ H^1(\Fsloc,Q_t),
+\]
+and choose a sufficiently local representative $\mathcal A^{(1)}(u)\in(\Fsloc)_{\bar 1}$
+of this class.  Scheme/reparametrisation contributions are absorbed into the locality quotient
+$\simeq$ (Definition~\ref{def:locality-quotient}) and are assumed cohomologically
+trivial on ${\Fsloc}_{\mathrm{mon}}$ by Definition~\ref{def:2T-RG}-\textbf{(M2)}.
+\end{definition}
+
+\begin{definition}[Peierls interface $\mathbf{2T}_{\mathrm{Peierls}}$]
+\label{def:2T-cosmo-P}
+A \emph{Peierls interface} consists of the following properties:
+\begin{enumerate}[label=\textbf{(P\arabic*)},leftmargin=*,itemsep=0.5em]
+\item \textbf{Renormalized SK differentiability.} The renormalized SK generating
+  functional $W[J_+,J_-]$ exists and is twice differentiable near $J_a=0$ on a
+  specified space of boundary sources (including the gravitational sources).
+\item \textbf{Causal Green structure.} The gauge--fixed linearized renormalized
+  bulk operator is Green--hyperbolic with the chosen AdS boundary conditions, so
+  advanced/retarded propagators exist. The induced boundary retarded kernel
+  \[
+  G_{\mathrm{ret}}(x,y) := \frac{\delta^2 W}{\delta J_a(x)\,\delta J_r(y)}\Big\rvert_{J_a=0}
+  \]
+  has retarded support, and $G_{\mathrm{adv}}$ is defined analogously.
+\item \textbf{Renormalized symplectic form.} The renormalized covariant
+  symplectic current $\omega_{\mathrm{ren}}$ exists and yields a finite conserved
+  symplectic form $\Omega_{\mathrm{ren}}$ compatible with the causal propagator
+  $\Delta:=G_{\mathrm{ret}}-G_{\mathrm{adv}}$.
+\item \textbf{Gauge reduction and independence on invariants.} Pure gauge
+  directions are exactly the kernel of $\Omega_{\mathrm{ren}}$, so
+  $\Omega_{\mathrm{ren}}$ descends to a symplectic form on the reduced phase
+  space. The induced Peierls bracket on gauge--invariant functionals is
+  independent of the gauge--fixing choice (equivalently, it is canonical on the
+  reduced phase space).
+\item \textbf{Closed locality class.} There exists a specified algebra
+  $\Fsloc$ of gauge--invariant ``sufficiently local'' boundary functionals,
+  together with a locality presheaf $O\mapsto \Fsloc(O)$ (closed under smearing
+  with smooth compact support kernels), such that the Peierls bracket is
+  well-defined and satisfies Leibniz/Jacobi on $\Fsloc$ (and restricts to each
+  $\Fsloc(O)$).
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[Meaning of $\mathbf{2T}_{\mathrm{Peierls}}$]
+The package \(\mathbf{2T}_{\mathrm{Peierls}}\) means that the gauge-fixed
+linearized bulk problem admits the causal Green
+structure needed for advanced and retarded propagators, with admissible
+boundary and junction conditions; that the renormalized symplectic current
+yields a finite reduced symplectic form with no extra degeneracies beyond pure
+gauge; and that the resulting Peierls bracket is well-defined on the
+sufficiently local boundary class. These are the healthiness properties encoded
+abstractly by \textbf{(P2)}--\textbf{(P4)}.
+\end{remark}
+
+\begin{definition}[Energy bounds and covariance interface $\mathbf{2T}_{\mathrm{EBC}}$ (EB1--EB3 + Poincar\'e covariance)]
+\label{def:2T-EBC}
+An \emph{energy bounds and covariance interface} $\mathbf{2T}_{\mathrm{EBC}}$
+consists of the following data and properties on a Minkowski UV chart (uniformly
+in the UV cutoff):
+\begin{enumerate}[label=\textnormal{(0\roman*)},leftmargin=*,itemsep=0.4em]
+\item a vacuum state $\varpi$ on the local Borchers--Uhlmann net generated by
+  $\Fsloc(O)$, with vacuum GNS triple $(\mathcal H,\pi,\Omega)$;
+\item a strongly continuous positive-energy unitary representation $U_g$ of the
+  Poincar\'e group implementing an induced action $\alpha_g$ on $\Fsloc$ and
+  fixing the vacuum vector, $U_g\Omega=\Omega$, with time-translation generator
+  $H:=P^0$.
+\end{enumerate}
+In this vacuum representation, the following estimates and covariance identities
+hold:
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=*,itemsep=0.4em]
+\item \textbf{EB1 (local generators).} For every double cone
+  $O\subset\mathbb R^{1,3}$ and every $F\in\Fsloc(O)$, there exist $s\ge 0$ and
+  $C_{F,O}>0$ such that on the vacuum core $\mathcal D_0$ (Definition~\ref{def:A-fin})
+  one has
+  \[
+  \|\pi(\Phi(F))\psi\|\ \le\ C_{F,O}\,\|(1+H)^s\psi\|
+  \qquad(\psi\in\mathcal D_0).
+  \]
+\item \textbf{EB2 (Sobolev continuity).} The causal operator $\Delta$ extends to a
+  bounded map between the Sobolev spaces controlling functional derivatives on
+  each $O$.
+\item \textbf{EB3 ($\delta$ energy bound; dependence on the generator).}
+  Fix a first-descendant potential $\mathcal J\in\Fsloc(O_{\mathcal J})$ and
+  define $\delta_{\mathcal J}(F):=\{\mathcal J,F\}_{\mathrm P}$ on $\Fsloc$.
+  (We extend $\delta_{\mathcal J}$ to the Borchers--Uhlmann core by
+  $\delta_{\mathcal J}(\Phi(F)):=\Phi(\delta_{\mathcal J}F)$ and the graded Leibniz rule.)
+  Then for every double cone $O$ there exist $s\ge 0$ and a constant
+  $C_{O,\mathcal J}>0$ such that for all
+  $A\in\mathfrak A_{\mathrm{fin}}\cap\mathfrak A_{\mathrm{BU}}(O)$ one has
+  \[
+  \|\pi(\delta_{\mathcal J}(A))\Omega\|\ \le\ C_{O,\mathcal J}\,
+  \|(1+H)^s\,\pi(A)\Omega\|.
+  \]
+\item \textbf{Covariance (Peierls bracket).} In the Minkowski chart, the Peierls
+  bracket is Poincar\'e covariant:
+  \[
+  \alpha_g(\{F,G\}_{\mathrm P})\ =\ \{\alpha_gF,\alpha_gG\}_{\mathrm P}
+  \qquad(F,G\in\Fsloc),
+  \]
+  where $\alpha_g$ is the induced action on $\Fsloc$ by pushforward of test
+  kernels and fields.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[Uniformity in EB3]
+In the proof of EB3, the bound is \emph{uniform in the cutoff} and
+\emph{uniform in the tested observable} once $F\in\Fsloc(O)$ is measured by the
+same family of locality seminorms (then transported to energy norms via EB1/EB2).
+However, the constant depends on the chosen Hamiltonian generator through finitely
+many Sobolev/seminorm controls on its first functional derivative. Accordingly,
+one may either (i) fix $\mathcal J$ once and for all and write $C_{O,\mathcal J}$,
+or (ii) restrict to an admissible class of $\mathcal J$ with uniform seminorm bounds,
+in which case one may choose $C_O$ uniformly within that class.
+\end{remark}
+
+\begin{remark}
+The interface $\mathbf{2T}_{\mathrm{EBC}}$ is formulated on a Minkowski UV chart
+with the cutoff-uniform energy bounds, Poincar\'e covariance, and package theorem
+needed below.
+\end{remark}
+
+\begin{definition}[EB3-admissible first-descendant potentials]
+\label{def:EB3-adm-J}
+Fix $\sigma>\frac52$ and a double cone $O_{\mathcal J}$. A first-descendant potential
+$\mathcal J\in\Fsloc(O_{\mathcal J})$ is called \emph{EB3-admissible} if its first
+functional derivative exists and satisfies a cutoff-uniform Sobolev bound
+\[
+\mathcal J^{(1)}\in H^\sigma_0(O_{\mathcal J}),
+\qquad
+\|\mathcal J^{(1)}\|_{H^\sigma(O_{\mathcal J})}\ \le\ C^{(\sigma)}_{\mathcal J,O_{\mathcal J}},
+\]
+where $C^{(\sigma)}_{\mathcal J,O_{\mathcal J}}$ depends only on the defining locality
+seminorms/kernels of $\mathcal J$ and is independent of the UV cutoff for all
+sufficiently large cutoff.
+\end{definition}
+
+\begin{lemma}[Locality $\Rightarrow$ EB3-admissibility of $\mathcal J$]
+\label{lem:J-EB3-adm}
+Assume $\mathbf{2T}_{\mathrm{Peierls}}$-\textbf{(P5)} and let
+$\mathcal J\in\Fsloc(O_{\mathcal J})$. Then $\mathcal J$ is EB3-admissible in the
+sense of Definition~\ref{def:EB3-adm-J}.
+\end{lemma}
+
+\begin{proof}
+By $\mathbf{2T}_{\mathrm{Peierls}}$-\textbf{(P5)}, the sufficiently local class
+$\Fsloc(O_{\mathcal J})$ is closed under the functional-derivative operations
+used in the Peierls construction (in particular, first functional derivatives
+exist and are supported in the same double cone).
+Thus the first functional derivative $\mathcal J^{(1)}$ exists, is supported in
+$O_{\mathcal J}$, and is controlled by finitely many locality seminorms of
+$\mathcal J$ uniformly in the UV cutoff (this is the locality input used in
+the EB3 estimate).
+Translating these locality seminorm bounds into Sobolev norms yields, for the
+fixed $\sigma>\frac52$ of Definition~\ref{def:EB3-adm-J},
+\[
+\mathcal J^{(1)}\in H^\sigma(O_{\mathcal J}),\qquad
+\|\mathcal J^{(1)}\|_{H^\sigma(O_{\mathcal J})}\le C^{(\sigma)}_{\mathcal J,O_{\mathcal J}},
+\]
+with $C^{(\sigma)}_{\mathcal J,O_{\mathcal J}}$ independent of the cutoff.
+Since $\mathcal J^{(1)}$ is supported in $O_{\mathcal J}$, it lies in
+$H^\sigma_0(O_{\mathcal J})$, proving EB3-admissibility.
+\end{proof}
+
+\begin{definition}[Weak polarized characterization interface \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\)]
+\label{def:2T-char-weak}
+A \emph{weak polarized characterization interface} on the ledger-step skeleton
+\(\{\Lambda_k\}_{k\in K_{\mathrm{acc}}}\) consists, for each ledger step \(k\)
+\textup{(with \(K_{\mathrm{acc}}\) denoting the retained ledger-step index set)},
+of the following data:
+\begin{enumerate}[label=\textbf{(C\arabic*)},leftmargin=*,itemsep=0.5em]
+\item \textbf{Odd generator space.} A real vector space
+  \[
+  E^-_{\Lambda_k}:=\{F\in\Fsloc:\Gamma_{\Lambda_k}F=-F\}
+  \]
+  of physically odd sufficiently local generators.
+\item \textbf{Descendant ambiguity subspace.} A linear subspace
+  \[
+  \mathcal A^-_{\Lambda_k}
+  \subset E^-_{\Lambda_k}.
+  \]
+\item \textbf{Admissible odd descendant class.} An affine odd class
+  \[
+  [\Xi^{(1)}_{\Lambda_k}]
+  =
+  J_{0,\Lambda_k}+\mathcal A^-_{\Lambda_k}
+  \subset E^-_{\Lambda_k},
+  \]
+  where \(J_{0,\Lambda_k}\in E^-_{\Lambda_k}\) is any chosen representative.
+\item \textbf{Orientation functional.} A continuous linear functional
+  \[
+  \chi_{\Lambda_k}:E^-_{\Lambda_k}\to\mathbb R
+  \]
+  such that
+  \[
+  \chi_{\Lambda_k}(A)=0
+  \qquad
+  \forall\,A\in\mathcal A^-_{\Lambda_k},
+  \]
+  and \(\chi_{\Lambda_k}\) is constant and nonzero on the affine class
+  \([\Xi^{(1)}_{\Lambda_k}]\).
+\item \textbf{Orientation sign.} A sign
+  \[
+  \varepsilon_{\Lambda_k}\in\{\pm 1\}
+  \]
+  such that
+  \[
+  \chi_{\Lambda_k}(J)=\varepsilon_{\Lambda_k}
+  \qquad
+  \forall\,J\in[\Xi^{(1)}_{\Lambda_k}].
+  \]
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Calibration supplement \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}\)]
+\label{def:2T-char-cal}
+A \emph{calibration supplement} over
+\(\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\) consists, for each ledger step \(k\),
+of a symmetric positive definite bilinear form
+  \[
+  \mathsf B_{\Lambda_k}:E^-_{\Lambda_k}\times E^-_{\Lambda_k}\to\mathbb R
+  \]
+  whose induced norm Hilbertizes \(E^-_{\Lambda_k}\), and for which
+  \(\mathcal A^-_{\Lambda_k}\) is closed in the induced Hilbert topology. In particular, the affine
+  class \([\Xi^{(1)}_{\Lambda_k}]\) is a closed affine subspace of the associated
+  Hilbert completion.
+\end{definition}
+
+\begin{definition}[Characterization-activity supplement \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{act}}\)]
+\label{def:2T-char-act}
+A \emph{characterization-activity supplement} over
+\(\mathbf{2T}_{\mathrm{Peierls}}+\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\) consists,
+for each ledger step \(k\), of a linear subspace
+\[
+\mathcal P^+_{\Lambda_k}
+\subset
+E^+_{\Lambda_k}
+:=
+\{A\in\Fsloc:\Gamma_{\Lambda_k}A=A\}
+\]
+of physically even sufficiently local probes such that for every
+\(F\in E^-_{\Lambda_k}\),
+\[
+\{F,A\}_{\mathrm P,\Lambda_k}=0
+\qquad
+\forall\,A\in\mathcal P^+_{\Lambda_k}
+\]
+implies
+\[
+\chi_{\Lambda_k}(F)=0.
+\]
+\end{definition}
+
+\begin{remark}[Operational reading of \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{act}}\)]
+\label{rem:2T-char-act-reading}
+Definition~\ref{def:2T-char-act} says that the characterization functional
+\(\chi_{\Lambda_k}\) is not merely an orientation on the odd ambiguity quotient:
+it is detected by a sufficiently local even probe sector.
+Equivalently, if \(F\in E^-_{\Lambda_k}\) satisfies
+\(\chi_{\Lambda_k}(F)\neq 0\), then there exists
+\(A\in\mathcal P^+_{\Lambda_k}\subset\Fsloc\) with
+\[
+\{F,A\}_{\mathrm P,\Lambda_k}\neq 0.
+\]
+This is a targeted activity statement for the distinguished odd direction, not a
+global Poisson-separation axiom on the full reduced phase space.
+\end{remark}
+
+\begin{definition}[Characterization-algebra supplement \(\mathbf{2T}_{\mathrm{alg}}\)]
+\label{def:2T-alg}
+A \emph{characterization-algebra supplement} consists, for each
+ledger step \(k\), of a distinguished subalgebra
+\[
+\mathcal O^{\mathrm{char}}_{\Lambda_k}\subset \Fsloc
+\]
+attached to the derived odd generator.
+\end{definition}
+
+\begin{definition}[Aggregate polarized characterization interface \(\mathbf{2T}_{\mathrm{char}}\)]
+\label{def:2T-char}
+Define the aggregate characterization package by
+\[
+\mathbf{2T}_{\mathrm{char}}
+:=
+\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}
++ \mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}
++ \mathbf{2T}_{\mathrm{alg}}.
+\]
+\end{definition}
+
+\begin{remark}[Scope of \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\)]
+\label{rem:char-cosmo-supplement-separate}
+Definition~\ref{def:2T-char-weak} contains only the weak characterization data
+for the descendant class. Additional ambiguity-control or reduction statements may be
+formulated separately, but they are not part of
+\(\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\) itself.
+\end{remark}
+
+\begin{remark}[Role of the weak characterization interface]
+\label{rem:char-cosmo-realization}
+The weak interface \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\) specifies the
+abstract descendant class
+\[
+[\Xi^{(1)}_{\Lambda_k}]
+=
+J_{0,\Lambda_k}+\mathcal A^-_{\Lambda_k}.
+\]
+It does not identify a preferred odd generator representative. The calibration
+form \(\mathsf B_{\Lambda_k}\) may be any admissible Hilbertizing form on
+\(E^-_{\Lambda_k}\) compatible with this weak interface. At the level of the
+base theorem,
+orientation is introduced canonically only after nonvanishing, via
+Proposition~\ref{prop:char-activity-from-nonzero-class}.
+The characterization algebra \(\mathcal O^{\mathrm{char}}_{\Lambda_k}\) is isolated
+separately as the supplement \(\mathbf{2T}_{\mathrm{alg}}\).
+Stronger identifications among the orientation functional, the characterization
+algebra, and active-generator data belong to an optional stronger supplement, not to
+the base interface.
+\end{remark}
+
+\begin{theorem}[Every weak characterization interface admits a calibration supplement]
+\label{thm:char-weak-to-cal}
+Assume the weak polarized characterization interface
+\(\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\)
+\textnormal{(Definition~\ref{def:2T-char-weak})}. Then the calibration supplement
+\(\mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}\)
+\textnormal{(Definition~\ref{def:2T-char-cal})} holds.
+\end{theorem}
+
+\begin{proof}
+Fix a ledger step \(k\). Since \(\mathcal A^-_{\Lambda_k}\subset E^-_{\Lambda_k}\) is a
+linear subspace, choose an algebraic complement \(C_{\Lambda_k}\) so that
+\[
+E^-_{\Lambda_k}=\mathcal A^-_{\Lambda_k}\oplus C_{\Lambda_k}.
+\]
+Choose Hamel bases of \(\mathcal A^-_{\Lambda_k}\) and \(C_{\Lambda_k}\), declare the union
+of those bases orthonormal, and extend bilinearly. This gives a symmetric positive
+definite bilinear form \(\mathsf B_{\Lambda_k}\) on \(E^-_{\Lambda_k}\).
+
+By construction, the induced norm identifies \(E^-_{\Lambda_k}\) with a pre-Hilbert
+space whose Hilbert completion contains \(\mathcal A^-_{\Lambda_k}\) as a closed subspace,
+because \(\mathcal A^-_{\Lambda_k}\) is orthogonal to \(C_{\Lambda_k}\).
+Therefore the affine class
+\(
+[\Xi^{(1)}_{\Lambda_k}]=J_{0,\Lambda_k}+\mathcal A^-_{\Lambda_k}
+\)
+is a closed affine subspace in the induced Hilbert topology. This is exactly the
+statement of Definition~\ref{def:2T-char-cal}.
+\end{proof}
+
+\begin{definition}[Selected-line supplement package \(\mathbf{2T}_{\mathrm{sel}}\)]
+\label{def:2T-sel}
+Fix a ledger step \(k\), and let \(\mathcal V^1\) be the first-descendant ambiguity group of
+Definition~\ref{def:desc-ambiguity}. The supplementary package
+\[
+\mathbf{2T}_{\mathrm{sel}}
+\]
+consists of:
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=*,itemsep=0.3em]
+\item a nonzero selected odd line
+  \[
+  L^{\mathrm{sel}}_{\Lambda_k}
+  =
+  \mathbb R\,\ell_{\Lambda_k}
+  \subset \mathcal V^1;
+  \]
+\item a selected representative
+  \[
+  J^{\mathrm{sel}}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]\cap E^-_{\Lambda_k};
+  \]
+\item the selected-line compatibility implication
+  \begin{equation}
+  q_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k})=0
+  \quad\Longrightarrow\quad
+  [J^{\mathrm{sel}}_{\Lambda_k}]_{\mathcal V^1}=0.
+  \label{eq:selected-line-compatibility}
+  \end{equation}
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[Same-tick versus delayed role of \(\mathbf{2T}_{\mathrm{sel}}\)]
+\label{rem:Main-sel-two-lanes}
+The package \(\mathbf{2T}_{\mathrm{sel}}\) supplies the same-tick selected-line
+obstruction contract used in the square-loop no-extra-collapse argument.
+It governs the same-tick selected quotient.
+The corresponding delayed passage to the successor step is carried by
+the separate supplement \(\mathbf{2T}_{\mathrm{sel}}^{\mathrm{delay}}\).
+\end{remark}
+
+\begin{remark}[Why \(\mathbf{2T}_{\mathrm{sel}}\) is separate]
+\label{rem:Main-sel-separate}
+The packages \(\mathbf{2T}_{\mathrm{sel}}\) and
+\(\mathbf{2T}_{\mathrm{sel}}^{\mathrm{delay}}\) govern different
+selected-line steps and are therefore kept as separate summands of
+\(\mathbf{2T}_{\mathrm{Main}}\). The former supplies the
+same-tick obstruction input used in
+Theorem~\ref{thm:Main-faithful-LS-desc}; the latter supplies the delayed
+lift to the successor step together with its nondegeneracy
+clause.
+\end{remark}
+
+\begin{definition}[Delayed selected-line supplement package \(\mathbf{2T}_{\mathrm{sel}}^{\mathrm{delay}}\)]
+\label{def:2T-sel-delay}
+Fix consecutive steps \(k\) and \(k+1\).
+The delayed selected-line supplement package consists of:
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=*,itemsep=0.3em]
+\item a delayed selected line
+  \[
+  \widehat L^{\mathrm{sel,delay}}_k
+  =
+  \mathbb R\,\widehat\ell^{\mathrm{delay}}_k
+  \subset
+  \tau^{\mathrm{comp,delay}}_k;
+  \]
+\item a delayed quotient line
+  \[
+  \overline L^{\mathrm{Main}}_{\Lambda_{k+1}}
+  =
+  \mathbb R\,\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}
+  \subset
+  \mathfrak D^-_{\Lambda_{k+1}};
+  \]
+\item a linear delayed split-to-descendant map
+  \[
+  \mathfrak L^{\mathrm{split}}_{k\to k+1}:
+  \widehat L^{\mathrm{sel,delay}}_k
+  \longrightarrow
+  \mathfrak D^-_{\Lambda_{k+1}}
+  \]
+  satisfying
+  \[
+  \mathfrak L^{\mathrm{split}}_{k\to k+1}
+  (\widehat\ell^{\mathrm{delay}}_k)
+  =
+  \overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}};
+  \]
+\item a descendant representative
+  \[
+  J^{\mathrm{split}}_{\Lambda_{k+1}}
+  \in
+  [\Xi^{(1)}_{\Lambda_{k+1}}]\cap E^-_{\Lambda_{k+1}}
+  \]
+  with
+  \[
+  q_{\Lambda_{k+1}}(J^{\mathrm{split}}_{\Lambda_{k+1}})
+  =
+  \overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}};
+  \]
+\item dominant activity / nondegeneracy clause on the delayed image:
+  \[
+  \overline\rho^{\mathrm{dom}}_{\Lambda_{k+1}}
+  (\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}})
+  =
+  c_{\Lambda_{k+1}}
+  \neq 0.
+  \]
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[UV conformal common-sector interface $\mathbf{2T}_{\mathrm{conf}}$]
+\label{def:2T-conf}
+A \emph{UV conformal common-sector interface} on the same vacuum representation
+\((\mathcal H,\pi,\Omega)\) as \(\mathbf{2T}_{\mathrm{EBC}}\) consists of:
+\begin{enumerate}[label=\textbf{(CF\arabic*)},leftmargin=*,itemsep=0.4em]
+\item a dense UV-local conformal core \(\mathcal D_{\mathrm{conf}}\subset\mathcal H\)
+  and UV-local subalgebras
+  \[
+  \mathfrak A_{\mathrm{conf}}(O)\subset \mathfrak A(O)
+  \]
+  for double cones \(O\subset\mathbb R^{1,3}\), with
+  \(\pi(\mathfrak A_{\mathrm{conf}}(O))\Omega\subset\mathcal D_{\mathrm{conf}}\);
+\item a strongly continuous unitary representation
+  \(U_{\mathrm{conf}}(g)\) of the connected conformal group
+  \(\mathrm{Conf}_0(\mathbb R^{1,3})\) on \(\mathcal H\), fixing the vacuum,
+  extending the Poincar\'e representation of
+  \(\mathbf{2T}_{\mathrm{EBC}}\), and acting geometrically on the UV-local core:
+  \[
+  U_{\mathrm{conf}}(g)\,\pi(\mathfrak A_{\mathrm{conf}}(O))\,U_{\mathrm{conf}}(g)^{-1}
+  \;=\;
+  \pi(\mathfrak A_{\mathrm{conf}}(gO));
+  \]
+\item a common Stone core
+  \(\mathcal D_{\mathrm{Stone}}\subset\mathcal D_{\mathrm{conf}}\) for the selfadjoint
+  generators \(P_\mu,M_{\mu\nu},D,K_\mu\) of the translation, Lorentz,
+  dilatation, and special-conformal one-parameter subgroups, satisfying on
+  \(\mathcal D_{\mathrm{Stone}}\) the standard conformal commutation relations,
+  in particular
+  \[
+  [D,P_\mu]=iP_\mu,\qquad
+  [D,K_\mu]=-\,iK_\mu,\qquad
+  [K_\mu,P_\nu]=2i(\eta_{\mu\nu}D-M_{\mu\nu}),
+  \]
+  together with the usual Lorentz commutators of \(M_{\mu\nu}\) with
+  \(P_\rho\), \(K_\rho\), and \(M_{\rho\sigma}\);
+\item on the compactly smeared scalar UV class,
+  the infinitesimal dilatation subgroup in \textnormal{(CF2)} agrees with the
+  physical radial/RG derivation.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[Why $\mathbf{2T}_{\mathrm{conf}}$ is isolated]
+\label{rem:2T-conf-separate}
+The package \(\mathbf{2T}_{\mathrm{conf}}\) isolates the UV
+conformal/common-sector hypothesis. It requires that the conformal
+generators \(P_\mu,M_{\mu\nu},D,K_\mu\) and the odd charges act on the same
+vacuum representation and common core, which is the structural input needed for
+the Lorentz finite-type and superconformal arguments.
+\end{remark}
+
+\begin{remark}[Physical meaning of $\mathbf{2T}_{\mathrm{conf}}$]
+\label{rem:2T-conf-source-role}
+The package \(\mathbf{2T}_{\mathrm{conf}}\) provides an abstract
+same-representation conformal interface on the UV vacuum sector. Its content is
+that the UV-local
+net carries a conformal enhancement whose dilatation subgroup agrees with the
+physical radial/RG action on the scalar UV class.
+\end{remark}
+
+\begin{definition}[Main package $\mathbf{2T}_{\mathrm{Main}}$]
+\label{def:2T-Main}
+Define the \emph{2T Main theorem package} by
+\[
+\mathbf{2T}_{\mathrm{Main}}
+:=
+\mathbf{2T}_{\mathrm{LS}}
++ \mathbf{2T}_{\mathrm{RG}}
++ \mathbf{2T}_{\mathrm{Peierls}}
++ \mathbf{2T}_{\mathrm{EBC}}
++ \mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}
++ \mathbf{2T}_{\mathrm{char}}^{\mathrm{act}}
++ \mathbf{2T}_{\mathrm{sel}}
++ \mathbf{2T}_{\mathrm{sel}}^{\mathrm{delay}}
++ \mathbf{2T}_{\mathrm{conf}}.
+\]
+\end{definition}
+
+\subsubsection{Spine Interface}
+
+\begin{definition}[Local two--time BRST interface $\mathbf{2T}_{\mathrm{BRST}}$]
+\label{def:2T-BRST}
+A \emph{local two--time BRST interface} consists of:
+\begin{enumerate}[label=\textbf{(B\arabic*)},leftmargin=*,itemsep=0.5em]
+\item A net (or presheaf) of sufficiently local observable cochains
+  $\Fsloc(O)$ on the UV boundary, equipped with two (cohomological) differentials
+  $Q_t$ (physical time) and $Q_u$ (RG/radial) such that on each $O$:
+  \[
+  Q_t^2=0,\qquad Q_u^2=0,\qquad Q_t Q_u + Q_u Q_t = 0.
+  \]
+\item A class of \emph{SK--admissible} states $\rho$ such that expectation values
+  of $Q_t$--exact operators vanish:
+  \[
+  \langle Q_t X\rangle_\rho =0.
+  \]
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Main spine package]
+\label{def:2T-Main-spine}
+Define the \emph{Main spine package} by
+\[
+\mathbf{2T}_{\mathrm{Main}}^{\mathrm{spine}}
+:= \mathbf{2T}_{\mathrm{Main}} + \mathbf{2T}_{\mathrm{BRST}}.
+\]
+\end{definition}
+
+\begin{remark}
+The package $\mathbf{2T}_{\mathrm{BRST}}$ is obtained in Subprogram~1a rather
+than taken as an independent standing assumption. Thus
+$\mathbf{2T}_{\mathrm{Main}}^{\mathrm{spine}}$ abbreviates the hypothesis
+$\mathbf{2T}_{\mathrm{Main}}$ together with the derived bicomplex
+$(\Fsloc,Q_t,Q_u)$ on which $\mathbf{2T}_{\mathrm{RG}}$ is interpreted.
+\end{remark}
+
+\begin{remark}[Derived BRST bicomplex]
+Definition~\ref{def:2T-BRST} specifies the local two--time BRST/bicomplex
+structure used in the descent arguments. The package
+\(\mathbf{2T}_{\mathrm{BRST}}\) is not taken as an independent standing
+assumption: Subprogram~1a derives the bicomplex and the \(Q_t\) Ward identity
+from the bulk SK construction.
+\end{remark}
+
+\subsubsection{Internal Interfaces}
+
+\begin{definition}[AQFT interface $\mathbf{2T}_{\mathrm{AQFT}}$]
+\label{def:2T-AQFT}
+An \emph{AQFT interface} on the Minkowski UV boundary consists of:
+\begin{enumerate}[label=\textbf{(Q\arabic*)},leftmargin=*,itemsep=0.5em]
+\item A Haag--Kastler net $O\mapsto\mathfrak A(O)$ of local *-algebras
+  (dense Borchers--Uhlmann core) on $\mathbb R^{1,3}$ with isotony and locality.
+\item A Poincar\'e action $\alpha_{(a,\Lambda)}$ by *-automorphisms with strong
+  continuity on the vacuum representation.
+\item A vacuum state $\varpi$ on $\mathfrak A$ that is Poincar\'e invariant and
+  yields a GNS triple $(\mathcal H,\pi,\Omega)$.
+\item Spectrum condition: the translation generators $P^\mu$ satisfy
+  $\mathrm{spec}(P)\subset\overline V_+$.
+\item \textbf{(H4) OS/positivity input.} The chosen renormalized counterterm scheme yields
+  reflection positivity / temperedness on the boundary theory so that $\varpi$ is
+  positive and the GNS construction applies.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+We use the standard Haag--Kastler/AQFT setup \cite{HaagKastler1964} and treat
+the BU algebra as a dense core for the local algebras.
+\end{remark}
+
+\begin{definition}[HLS interface $\mathbf{2T}_{\mathrm{HLS}}$]
+\label{def:2T-HLS}
+An \emph{HLS interface} consists of a nontrivial local derivation $\delta$ on
+$\mathfrak A_{\mathrm{loc}}$, odd with respect to the physical $\Gamma$--grading, such that:
+\begin{enumerate}[label=\textbf{(H\arabic*)},leftmargin=*,itemsep=0.4em]
+\item $\delta$ is a graded *-derivation (for the $\Gamma$--grading), local, and densely defined.
+\item \textbf{Physical oddness.} $\delta$ is odd with respect to the physical $\Gamma$--grading:
+  \[
+  \Gamma\circ\delta\circ\Gamma^{-1}=-\delta.
+  \]
+\item \textbf{Covariance (translations + Lorentz finite type).}
+  $\delta$ commutes with translations,
+  \[
+  \alpha_a\circ\delta\circ\alpha_a^{-1}=\delta\qquad(a\in\mathbb R^{1,3}),
+  \]
+  and its Lorentz orbit spans a finite-dimensional module: writing
+  $\delta_\Lambda:=\alpha_\Lambda\circ\delta\circ\alpha_\Lambda^{-1}$ for
+  $\Lambda\in SO^+(1,3)$, the real linear span
+  $\mathscr D:=\mathrm{span}_{\mathbb R}\{\delta_\Lambda\}$ is finite-dimensional.
+\item $\varpi\circ\delta=0$ on $\mathfrak A^{+}$ (vacuum invariance on the
+  $\Gamma$--even subalgebra), and $\delta$ is implementable by closable operators
+  on a common invariant core.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[Derived AQFT and HLS input]
+Definitions~\ref{def:2T-AQFT} and~\ref{def:2T-HLS} record the hypotheses needed
+to apply the HLS classification step. They are not taken as independent parts of
+\(\mathbf{2T}_{\mathrm{Main}}\): Subprogram~1b derives the Wightman/AQFT
+representation of the UV boundary theory, and Subprogram~3c verifies the HLS
+admissibility properties for the constructed odd derivation~\(\delta\).
+\end{remark}
+
+\subsection{Boundary interface data}
+At the base level one assumes the weak interface data
+\[
+\bigl(E^-_{\Lambda_k},\mathcal A^-_{\Lambda_k},[\Xi^{(1)}_{\Lambda_k}],\chi_{\Lambda_k},\varepsilon_{\Lambda_k}\bigr)
+\]
+and in particular the transported odd descendant class
+\(
+[\Xi^{(1)}_{\Lambda_k}]
+=
+J_{0,\Lambda_k}+\mathcal A^-_{\Lambda_k}
+\)
+and the ambiguity subspace \(\mathcal A^-_{\Lambda_k}\).
+The full calibration supplement \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}\) is then
+derived abstractly from the weak interface by
+Theorem~\ref{thm:char-weak-to-cal}. The characterization algebra
+\(\mathcal O^{\mathrm{char}}_{\Lambda_k}\) is likewise derived from the canonical
+representative by Theorem~\ref{thm:char-cal-to-alg}.
+A stronger interface may also supply a normalized dominant-response functional
+\(
+\nu_{\Lambda_k}^{-1}\rho^{\mathrm{dom}}_{\Lambda_k}
+\)
+to witness activity directly, but the base package does not require that datum.
+A stronger layer may identify this data with a rank-one active generator
+\(J^{\mathrm{act}}_{\Lambda_k}\), a response functional \(\rho_{\Lambda_k}\), and a one-line
+stiffness \(\widetilde\alpha(\Lambda_k)\).
+Throughout Subprograms~3b and~3c we work on the chosen Minkowski boundary chart on
+which the Peierls and EBC interfaces are assumed.
+
+% ============================================================
+\section{Subprogram 1a: Two--time SK bicomplex and Ward identities}
+\label{sec:subprogram1a}
+
+This subprogram provides the \emph{local two--time descent machinery} used later
+in Subprograms~3a and~3b.  Starting from the Lorentzian Schwinger--Keldysh (SK) path
+integral on a two--time base $(t,u)$ \cite{Schwinger1961,Keldysh1964}, we record
+two odd differentials $Q_t,Q_u$ implementing infinitesimal reparametrisations
+along $t$ (physical time) and $u$ (radial/RG time), and their Ward identities on
+SK--admissible states.
+
+\subsection{Two odd differentials from reparametrisations in $t$ and $u$}
+\label{subsec:two-BRST}
+
+\paragraph{Definition of $Q_t,Q_u$.}
+On local bulk SK fields (doubled on the two SK branches) introduce two
+Grassmann--odd scalar ghosts $c_t,c_u$ and define $Q_t,Q_u$ as Lie derivatives
+along the odd vector fields $c_t\partial_t$ and $c_u\partial_u$:
+\[
+Q_t(\Psi) := \mathcal L_{c_t\partial_t}\Psi,\qquad
+Q_u(\Psi) := \mathcal L_{c_u\partial_u}\Psi,
+\]
+extended by the graded Leibniz rule to local functionals.  We assume the base
+coordinates commute, $[\partial_t,\partial_u]=0$.
+
+\begin{remark}[Translation BRST convention]
+In this appendix, $Q_t,Q_u$ encode the BRST differentials for the \emph{abelian}
+translation symmetries in $t$ and $u$. Accordingly, we take the ghosts $c_t,c_u$
+to be constant odd parameters (so $\partial_t c_t=\partial_u c_u=0$).
+\end{remark}
+
+\begin{lemma}[Nilpotency and anticommutation]
+\label{lem:bi-complex}
+The operators $Q_t$ and $Q_u$ are Grassmann--odd derivations satisfying
+\[
+Q_t^2 = 0,\qquad Q_u^2 = 0,\qquad \{Q_t,Q_u\}:=Q_tQ_u+Q_uQ_t=0.
+\]
+\end{lemma}
+
+\begin{proof}
+By the translation convention above, $c_t,c_u$ are constant odd parameters. Hence
+the odd vector fields $c_t\partial_t$ and $c_u\partial_u$ satisfy
+$(c_t\partial_t)^2=(c_u\partial_u)^2=0$ and
+$[c_t\partial_t,c_u\partial_u]=0$ because $[\partial_t,\partial_u]=0$.
+Taking Lie derivatives along these commuting square-zero odd vector fields gives
+$Q_t^2=Q_u^2=\{Q_t,Q_u\}=0$.
+\end{proof}
+
+\begin{definition}[Total two--time differential]
+\label{def:total-diff}
+Define the total differential
+\[
+\mathbb Q := Q_t+Q_u.
+\]
+Then $\mathbb Q^2=0$ by Lemma~\ref{lem:bi-complex}.
+\end{definition}
+
+\subsection{Ward identities and SK--admissible states}
+\label{subsec:ward}
+
+\begin{definition}[SK--admissible states]
+\label{def:SK-admissible}
+A state is \emph{SK--admissible} if the initial density matrix is vacuum or KMS
+(or a finite-energy perturbation thereof) and the sources on the two SK branches
+are equal (physical SK).
+\end{definition}
+
+\begin{proposition}[Ward identities]
+\label{prop:ward-identities}
+For SK--admissible states, insertions of $Q_t$--exact operators have vanishing
+expectation value on the closed time path:
+\[
+\langle Q_t X\rangle = 0.
+\]
+The $Q_u$ Ward identity holds up to radial boundary/anomaly terms determined by
+the chosen renormalized variational principle (GHY + counterterms):
+\[
+\langle Q_u X\rangle = \textnormal{(radial boundary/anomaly term)}.
+\]
+At the strict UV fixed point on flat boundary data with trivial Weyl factor,
+this radial term vanishes; for controlled Weyl pulses it reduces to the boundary
+Weyl-anomaly density, which is the input for the anomaly-floor monotone in
+Subprogram~3b.
+\end{proposition}
+
+\begin{proof}
+Write the (renormalized) SK expectation value in the physical SK sector as
+\[
+\langle X\rangle
+\;:=\;
+\frac{1}{Z}\int \mathcal D\Psi_+\mathcal D\Psi_-\,e^{iS_{\mathrm{SK,ren}}[\Psi_+,\Psi_-]}\,X,
+\]
+where $S_{\mathrm{SK,ren}}$ includes the renormalized bulk action, the initial
+state insertion (vacuum/KMS), and the renormalized boundary terms determined by
+the variational principle (GHY + counterterms).
+
+\paragraph{$Q_t$ Ward identity.}
+Let $\varepsilon$ be a constant Grassmann--odd parameter and perform the change
+of variables $\Psi_\pm\mapsto \Psi_\pm+\varepsilon\,Q_t\Psi_\pm$ in the SK path
+integral.  For SK--admissible states, the contour is closed and the sources are
+equal on the two branches, so the renormalized SK measure and action are
+invariant under $t$--reparametrisations generated by $Q_t$ (no boundary term is
+picked up on the closed time path).  Therefore the variation of the integral
+vanishes:
+\[
+0
+=
+\varepsilon\int \mathcal D\Psi_+\mathcal D\Psi_-\,e^{iS_{\mathrm{SK,ren}}}\,(Q_t X),
+\]
+which implies $\langle Q_t X\rangle=0$.
+
+\paragraph{$Q_u$ Ward identity.}
+Similarly, perform $\Psi_\pm\mapsto \Psi_\pm+\varepsilon\,Q_u\Psi_\pm$.
+Unlike $t$, the radial/RG direction $u$ has a boundary at the UV cutoff (and
+possibly at an IR regulator), so the variation of the renormalized action
+produces a boundary/anomaly term determined by the renormalized variational
+principle.  Denoting the resulting insertion by $\mathcal A_u(X)$, one obtains
+the Ward identity
+\[
+\langle Q_u X\rangle=\langle \mathcal A_u(X)\rangle.
+\]
+At a strict UV fixed point on flat boundary data with trivial Weyl factor this
+insertion vanishes, whereas for controlled Weyl pulses it reduces to the
+boundary Weyl-anomaly density (the standard radial/Weyl Ward insertion in the
+Hamilton--Jacobi renormalization scheme).
+\end{proof}
+
+\begin{remark}
+The $Q_t$ Ward identity is the usual SK statement that BRST-exact insertions
+decouple for equal sources; the $Q_u$ Ward identity is the radial/Weyl analogue,
+whose nonzero anomaly term is precisely the source of monotonicity away from
+fixed points.
+\end{remark}
+
+\begin{proposition}[Identification of $\mathcal A^{(1)}$ with the renormalized radial/Weyl anomaly insertion]
+\label{prop:A1-from-SK}
+In the physical SK sector ($J_+=J_-$) the renormalized SK functional obeys a radial Ward identity
+\[
+\langle Q_u X\rangle \;=\; \langle \mathcal A_u(X)\rangle,
+\]
+where $\mathcal A_u(X)$ is a local boundary/anomaly insertion determined by the
+renormalized variational principle.  On the monotone representative $\mathcal O^{(0)}(u)$,
+the induced insertion defines a local cochain $\mathcal A^{(1)}(u)\in(\Fsloc)_{\bar 1}$ such that
+\[
+\big[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)}(u)\,\big] \;=\; [\mathcal A^{(1)}(u)]\in H^1(\Fsloc,Q_t),
+\]
+and the descent equation holds in the locality quotient:
+\[
+\big[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)}(u)+Q_t\Xi^{(1)}(u)-\mathcal A^{(1)}(u)\,\big]_{\mathrm{loc}}=0.
+\]
+\end{proposition}
+
+\begin{proof}
+By Proposition~\ref{prop:ward-identities}, the $u$--reparametrisation BRST
+operator $Q_u$ obeys a Ward identity in the physical SK sector:
+\[
+\langle Q_u X\rangle \;=\; \langle \mathcal A_u(X)\rangle,
+\]
+where $\mathcal A_u(X)$ is the boundary/anomaly insertion produced by the
+renormalized variational principle.
+
+Apply this to the monotone representative $X=\mathcal O^{(0)}(u)$.
+Define $\mathcal A^{(1)}(u)$ to be the induced sufficiently local cochain on
+the UV boundary, i.e.\ the restriction of $\mathcal A_u(\mathcal O^{(0)}(u))$ to
+the locality class $\Fsloc$ guaranteed by $\mathbf{2T}_{\mathrm{Peierls}}$-\textbf{(P5)}.
+Since $Q_t\mathcal O^{(0)}(u)=0$ and $\{Q_t,Q_u^{\mathrm{phys}}\}$ vanishes on
+the monotone representative (Definition~\ref{def:A1-class}), the cochain
+$Q_u^{\mathrm{phys}}\mathcal O^{(0)}(u)$ is $Q_t$--closed and defines a class in
+$H^1(\Fsloc,Q_t)$.
+The Ward insertion $\mathcal A^{(1)}(u)$ represents the same class, i.e.
+\[
+\big[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)}(u)\,\big]=[\mathcal A^{(1)}(u)]\in H^1(\Fsloc,Q_t),
+\]
+with scheme/reparametrisation effects absorbed in the locality quotient
+(Definition~\ref{def:locality-quotient}).
+
+Since $\mathcal A^{(1)}(u)$ represents the same $Q_t$--cohomology class as
+$Q_u^{\mathrm{phys}}\mathcal O^{(0)}(u)$, there exists a (sufficiently local)
+raw first-descendant potential \(\Xi^{(1)}(u)\in\Fsloc\) such that
+\[
+\mathcal A^{(1)}(u)-Q_u^{\mathrm{phys}}\mathcal O^{(0)}(u)=Q_t\Xi^{(1)}(u).
+\]
+Interpreting the equality modulo the standard locality ambiguities encoded in
+Definition~\ref{def:locality-quotient} yields the descent equation in the
+locality quotient:
+\[
+\big[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)}(u)+Q_t\Xi^{(1)}(u)-\mathcal A^{(1)}(u)\,\big]_{\mathrm{loc}}=0.
+\]
+\end{proof}
+
+\begin{lemma}[Locality of the anomaly insertion and existence of a sufficiently local potential]
+\label{lem:A1-and-J-local}
+Assume $\mathbf{2T}_{\mathrm{Peierls}}$-\textbf{(P5)}.  Then the anomaly insertion
+$\mathcal A^{(1)}(u)$ extracted from the renormalized radial Ward identity lies in
+$(\Fsloc)_{\bar 1}$, and there exists a first-descendant potential
+\(\Xi^{(1)}(u)\in(\Fsloc)_{\bar 0}\) such that the anomalous descent equation holds in the locality quotient:
+\[
+\big[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)}(u)+Q_t\Xi^{(1)}(u)-\mathcal A^{(1)}(u)\,\big]_{\mathrm{loc}}=0.
+\]
+\end{lemma}
+
+\begin{proof}
+By $\mathbf{2T}_{\mathrm{Peierls}}$-\textbf{(P5)}, the sufficiently local class
+$\Fsloc$ is closed under the locality operations used to define renormalized Ward
+insertions on the UV boundary.  In particular, the radial Ward insertion
+$\mathcal A_u(\mathcal O^{(0)}(u))$ extracted from the renormalized variational
+principle is a gauge-invariant local boundary functional, hence determines a
+sufficiently local cochain $\mathcal A^{(1)}(u)\in\Fsloc$.  Since it is the
+insertion associated to the odd operator $Q_u$, it has cohomological parity
+$|\mathcal A^{(1)}(u)|_{\mathrm{ch}}=1$, i.e.\ $\mathcal A^{(1)}(u)\in(\Fsloc)_{\bar 1}$.
+
+By Proposition~\ref{prop:A1-from-SK} and Definition~\ref{def:A1-class},
+$\mathcal A^{(1)}(u)$ represents the same $Q_t$--cohomology class as
+$Q_u^{\mathrm{phys}}\mathcal O^{(0)}(u)$ in $H^1(\Fsloc,Q_t)$.  Therefore there
+exists a cochain \(\Xi^{(1)}(u)\in\Fsloc\) such that
+\[
+\mathcal A^{(1)}(u)-Q_u^{\mathrm{phys}}\mathcal O^{(0)}(u)=Q_t\Xi^{(1)}(u)
+\qquad\text{in }\Fsloc,
+\]
+and \(\Xi^{(1)}(u)\) necessarily has even cohomological parity
+\(|\Xi^{(1)}(u)|_{\mathrm{ch}}=0\), i.e.\ \(\Xi^{(1)}(u)\in(\Fsloc)_{\bar 0}\).
+Rewriting yields
+\[
+Q_u^{\mathrm{phys}}\mathcal O^{(0)}(u)+Q_t\Xi^{(1)}(u)-\mathcal A^{(1)}(u)=0.
+\]
+Interpreting this identity modulo the standard scheme/contact/counterterm
+ambiguities encoded in the locality quotient (Definition~\ref{def:locality-quotient})
+gives the stated descent equation in $[\,\Fsloc\,]_{\mathrm{loc}}$.
+\end{proof}
+
+\subsection{Restriction to the UV boundary and the BRST interface}
+\label{subsec:restriction-boundary}
+
+\begin{theorem}[Boundary BRST interface]
+\label{thm:subprogram1a-BRST}
+Assume $\mathbf{2T}_{\mathrm{Peierls}}$-\textbf{(P5)} so that the sufficiently
+local observable class $\Fsloc(O)$ is available on the UV boundary.  Then on each
+bounded region $O$ the differentials $Q_t,Q_u$ restrict to $\Fsloc(O)$ and satisfy
+\[
+Q_t^2=Q_u^2=\{Q_t,Q_u\}=0,
+\]
+and on SK--admissible states one has $\langle Q_t X\rangle=0$.  In other words,
+the interface $\mathbf{2T}_{\mathrm{BRST}}$ (Definition~\ref{def:2T-BRST}) holds
+on the locality class used in the later Hamiltonization step.
+\end{theorem}
+
+\begin{proof}
+By $\mathbf{2T}_{\mathrm{Peierls}}$-\textbf{(P5)}, for each bounded region $O$
+on the UV boundary we have a sufficiently local cochain algebra $\Fsloc(O)$.
+The bulk operators $Q_t,Q_u$ are defined on local SK functionals by Lie
+derivatives along $c_t\partial_t$ and $c_u\partial_u$ (Subprogram~1a).  Since
+restriction/pullback to the UV boundary commutes with Lie derivatives along
+$\partial_t$ and $\partial_u$, the operators $Q_t,Q_u$ restrict to odd
+derivations on each $\Fsloc(O)$.
+The relations $Q_t^2=Q_u^2=\{Q_t,Q_u\}=0$ are algebraic consequences of
+Lemma~\ref{lem:bi-complex} and therefore continue to hold after restriction to
+the boundary.
+Finally, the $Q_t$ Ward identity $\langle Q_t X\rangle=0$ on SK--admissible
+states is Proposition~\ref{prop:ward-identities}.
+Thus the conditions of Definition~\ref{def:2T-BRST} are satisfied on the
+locality class used later in the construction.
+\end{proof}
+
+\begin{remark}
+This is the point where the BRST/bicomplex operators
+\(Q_t,Q_u\) are introduced; later sections treat them as fixed structure on the
+chosen locality class.
+\end{remark}
+
+% ============================================================
+\section{Subprogram 1b: Local net, GNS reconstruction, and implementation template}
+\label{sec:subprogram1b}
+
+This subprogram fixes the Minkowski UV boundary setup in which the odd symmetry
+constructed in Subprogram~3b will be represented as an operator and classified by
+HLS.  We keep the classification step itself in Subprogram~3c (after the odd
+derivation is constructed), but we set up the operator-algebraic/Wightman
+infrastructure here.
+
+\subsection{Local net and vacuum state}
+\label{subsec:net-and-state}
+
+\begin{definition}[Dense Borchers--Uhlmann core]
+\label{def:BU-core}
+Let $O\subset\mathbb R^{1,3}$ be a double cone. Define $\mathfrak A_{\mathrm{BU}}(O)$
+to be the *-algebra generated by symbols $\Phi(F)$ with $F\in\Fsloc(O)$, modulo
+locality relations for spacelike separated supports and the *-structure
+$\Phi(F)^*=\Phi(\overline F)$.  Write $\mathfrak A_{\mathrm{loc,BU}}:=\bigcup_O
+\mathfrak A_{\mathrm{BU}}(O)$.
+\end{definition}
+
+\begin{remark}
+The Borchers--Uhlmann net $O\mapsto\mathfrak A_{\mathrm{BU}}(O)$ is the dense
+algebraic core used for GNS reconstruction.  A physically relevant completion
+$\mathfrak A(O)$ will be defined in the vacuum representation obtained below.
+\end{remark}
+
+\begin{definition}[Vacuum state from the SK functional]
+\label{def:omega-SK}
+Assume the SK functional determines a consistent family of vacuum
+correlators on the Minkowski UV boundary (equal sources on the two SK branches),
+and that on this equal-source locus the renormalized SK functional is invariant
+under swapping the two SK branches.
+Define a linear functional $\varpi$ on $\mathfrak A_{\mathrm{loc,BU}}$ by
+declaring its values on products of generators to be the corresponding SK
+vacuum correlators, and extending by linearity.
+\end{definition}
+
+\begin{theorem}[Wightman/GNS net on the Minkowski UV boundary]
+\label{thm:subprogram1b-Wightman}
+Assume $\mathbf{2T}_{\mathrm{Peierls}}$-\textbf{(P5)} so that the locality
+presheaf $O\mapsto\Fsloc(O)$ is available on the Minkowski UV chart, and assume
+the energy bounds and covariance interface $\mathbf{2T}_{\mathrm{EBC}}$
+(Definition~\ref{def:2T-EBC}).  Let $(\mathcal H,\pi,\Omega)$ denote the vacuum
+GNS triple supplied by $\mathbf{2T}_{\mathrm{EBC}}$-\textnormal{(0i)}.
+Defining local algebras by completion in this representation,
+\[
+\mathfrak A(O)\ :=\ C^*\!\big(\pi(\mathfrak A_{\mathrm{BU}}(O))\big)
+\quad(\text{or equivalently the von Neumann closure}),
+\]
+the assignment $O\mapsto\mathfrak A(O)$ is a Haag--Kastler net on $\mathbb R^{1,3}$
+with vacuum vector $\Omega$ and positive-energy Poincar\'e implementation.
+Equivalently, the AQFT interface $\mathbf{2T}_{\mathrm{AQFT}}$
+(Definition~\ref{def:2T-AQFT}) holds.
+\end{theorem}
+
+\begin{proof}
+We split the argument into the state/representation, the net, locality, and
+covariance.
+
+\paragraph{State and GNS representation.}
+By Definition~\ref{def:2T-EBC}-(0i), $\varpi$ is a vacuum state on the algebraic
+inductive limit $*$-algebra
+$
+\mathfrak A_{\mathrm{loc,BU}}:=\bigcup_O \mathfrak A_{\mathrm{BU}}(O)
+$
+and $(\mathcal H,\pi,\Omega)$ is the corresponding vacuum GNS triple. In
+particular,
+\[
+\varpi(A)=\langle\Omega,\pi(A)\Omega\rangle
+\qquad(A\in\mathfrak A_{\mathrm{loc,BU}}).
+\]
+
+\paragraph{Local net and isotony.}
+For each double cone $O$, define the local algebra by completion in the vacuum
+representation:
+\[
+\mathfrak A(O):=C^*\!\big(\pi(\mathfrak A_{\mathrm{BU}}(O))\big).
+\]
+If $O_1\subset O_2$, then by construction
+$\mathfrak A_{\mathrm{BU}}(O_1)\subset\mathfrak A_{\mathrm{BU}}(O_2)$, hence
+$\pi(\mathfrak A_{\mathrm{BU}}(O_1))\subset\pi(\mathfrak A_{\mathrm{BU}}(O_2))$,
+and taking C$^*$-closures yields isotony:
+$\mathfrak A(O_1)\subset\mathfrak A(O_2)$.
+
+\paragraph{Locality.}
+Let $O_1,O_2$ be spacelike separated. Locality holds on the BU core by the
+defining Borchers--Uhlmann relations, i.e.
+$[A_1,A_2]=0$ for all
+$A_i\in \pi(\mathfrak A_{\mathrm{BU}}(O_i))$.
+To pass to the C$^*$-closures, take arbitrary $A_i\in\mathfrak A(O_i)$ and
+choose sequences $A_{i,n}\in\pi(\mathfrak A_{\mathrm{BU}}(O_i))$ with
+$\|A_{i,n}-A_i\|\to 0$.
+Then $[A_{1,n},A_{2,m}]=0$ for all $n,m$, and using the operator norm estimate
+\[
+\|[B,C]\|\le 2\|B\|\,\|C-C'\|+2\|C'\|\,\|B-B'\|
+\]
+with $B=A_1$, $B'=A_{1,n}$, $C=A_2$, $C'=A_{2,m}$, we obtain
+$\|[A_1,A_2]\|\to 0$ as $n,m\to\infty$. Hence $[A_1,A_2]=0$.
+
+\paragraph{Poincar\'e covariance and spectrum.}
+By Definition~\ref{def:2T-EBC}-(0ii), there exists a strongly continuous
+positive-energy unitary representation $U_g$ of the Poincar\'e group implementing
+the induced action $\alpha_g$ on the locality presheaf $O\mapsto\Fsloc(O)$ and
+fixing the vacuum vector, $U_g\Omega=\Omega$.
+The induced action extends to the BU core by
+$\alpha_g(\Phi(F)):=\Phi(\alpha_gF)$ and multiplicativity, and the
+implementation identity
+$
+U_g\,\pi(A)\,U_g^{-1}=\pi(\alpha_g(A))
+$
+holds on $\pi(\mathfrak A_{\mathrm{BU}}(O))$ by construction. Since conjugation
+by $U_g$ is isometric, this identity extends by continuity to the C$^*$-closures
+and yields
+$
+U_g\,\mathfrak A(O)\,U_g^{-1}=\mathfrak A(gO)
+$
+for all double cones $O$.
+Finally, the spectrum condition and strong continuity are part of
+Definition~\ref{def:2T-EBC}-(0ii), completing the verification that
+$O\mapsto\mathfrak A(O)$ satisfies the Haag--Kastler properties with vacuum and
+positive-energy Poincar\'e implementation, i.e.\ the AQFT interface
+$\mathbf{2T}_{\mathrm{AQFT}}$ (Definition~\ref{def:2T-AQFT}) holds.
+\end{proof}
+
+\begin{remark}
+One convenient reference mechanism for positive-energy implementation of
+translations in a vacuum representation is the Borchers--Arveson theorem; in
+this appendix spine we treat the spectrum condition and strong continuity as
+part of the energy bounds and covariance interface (Definition~\ref{def:2T-EBC}).
+\end{remark}
+
+\subsection{Dense core and inner implementation template}
+\label{subsec:inner-implementation-template}
+
+\begin{definition}[Finite polynomial algebra and GNS core]
+\label{def:A-fin}
+Let $\mathfrak A_{\mathrm{fin}}\subset\mathfrak A_{\mathrm{loc,BU}}$ denote the
+*-subalgebra generated by finite polynomials in the local generators
+$\Phi(F)$ (with $F$ compactly supported in a double cone).  Define the common
+GNS core
+\[
+\mathcal D_0 := \pi(\mathfrak A_{\mathrm{fin}})\Omega.
+\]
+\end{definition}
+
+\begin{proposition}[Inner implementation on the GNS core]
+\label{prop:inner}
+Assume Theorem~\ref{thm:subprogram1b-Wightman} and let
+$\delta:\mathfrak A_{\mathrm{fin}}\to \mathfrak A_{\mathrm{fin}}$ be a graded
+*-derivation which is local, Poincar\'e covariant, and vacuum-invariant in the
+sense that $\varpi\circ\delta=0$.  Assume moreover that $\delta$ is implementable
+by closable operators on a common invariant core (as will be verified for the
+constructed $\delta$ in Subprogram~3c). Then there exists a densely defined
+closable operator $Q$ on $\mathcal H$ with $\mathcal D_0\subset\mathcal D(Q)$ such
+that, for all $A\in\mathfrak A_{\mathrm{fin}}$,
+\[
+\delta(A)=i[Q,\pi(A)]_{\mathrm s}\quad\text{on }\mathcal D_0,
+\]
+where $[X,Y]_{\mathrm s}:=XY-(-1)^{|X||Y|}YX$ is the graded commutator.
+\end{proposition}
+
+\begin{proof}
+Define an operator $Q_0$ on the GNS core $\mathcal D_0=\pi(\mathfrak A_{\mathrm{fin}})\Omega$
+by
+\[
+Q_0\,\pi(B)\Omega \;:=\; i\,\pi(\delta(B))\Omega
+\qquad(B\in\mathfrak A_{\mathrm{fin}}).
+\]
+
+\paragraph{Well-definedness.}
+Suppose $\pi(B)\Omega=0$.  For any $A\in\mathfrak A_{\mathrm{fin}}$ one has
+\[
+\langle \pi(A)\Omega,\pi(\delta(B))\Omega\rangle
+\;=\;
+\varpi\!\big(A^*\delta(B)\big).
+\]
+Using the graded Leibniz rule and vacuum invariance $\varpi\circ\delta=0$,
+\[
+0
+=\varpi\!\big(\delta(A^*B)\big)
+=\varpi\!\big(\delta(A^*)B\big)+(-1)^{|A|}\varpi\!\big(A^*\delta(B)\big),
+\]
+so
+$
+\varpi(A^*\delta(B))=-(-1)^{|A|}\varpi(\delta(A^*)B)
+=-(-1)^{|A|}\varpi((\delta(A))^*B).
+$
+Since $\pi(B)\Omega=0$, we have $\varpi(C^*B)=0$ for all $C\in\mathfrak A_{\mathrm{fin}}$,
+and in particular for $C=\delta(A)$; hence $\varpi(A^*\delta(B))=0$ for all $A$.
+Therefore $\pi(\delta(B))\Omega$ is orthogonal to the dense set
+$\pi(\mathfrak A_{\mathrm{fin}})\Omega$, so $\pi(\delta(B))\Omega=0$ and $Q_0$ is well-defined.
+
+\paragraph{Graded commutator identity on the core.}
+For $A,B\in\mathfrak A_{\mathrm{fin}}$, using the definition of $Q_0$ and the graded
+Leibniz rule for $\delta$,
+\[
+\begin{aligned}
+[Q_0,\pi(A)]_{\mathrm s}\,\pi(B)\Omega
+&=Q_0\,\pi(AB)\Omega-(-1)^{|A|}\pi(A)\,Q_0\,\pi(B)\Omega \\
+&=i\,\pi(\delta(AB))\Omega-(-1)^{|A|}i\,\pi(A\delta(B))\Omega \\
+&=i\,\pi(\delta(A)B)\Omega
+\;=\; i\,\pi(\delta(A))\,\pi(B)\Omega,
+\end{aligned}
+\]
+so $\delta(A)=i[Q_0,\pi(A)]_{\mathrm s}$ on $\mathcal D_0$.
+
+\paragraph{Closability.}
+By the implementability hypothesis, $Q_0$ admits a closable extension on a
+common invariant core.  Let $Q$ denote such a densely defined closable
+extension with $\mathcal D_0\subset\mathcal D(Q)$.  Then the graded commutator
+identity continues to hold on $\mathcal D_0$, completing the proof.
+\end{proof}
+
+% ============================================================
+\section{Subprogram 2a: Results from the 2T Limited Scope Theorem}
+\label{sec:limited-scope-import}
+
+\begin{theorem}[Limited Scope import]
+\label{thm:LS-import}
+Assume $\mathbf{2T}_{\mathrm{LS}}$. Then the Limited Scope Theorem provides:
+\begin{enumerate}[label=\textnormal{(LS\arabic*)},leftmargin=*,itemsep=0.4em]
+\item A presented record-process groupoid $\ProcG$ and a parity cocycle
+  $\omegaLS:\ProcG\to B\mathbb Z_2$ with
+  $\omegaLS(\sqLoop(t,u,r))=1$ for the canonical square-loop.
+\item A non-splitting $\mathbb Z_2$-cover
+  $\widetilde{\ProcG}\to\ProcG$ (no global section / no state-label trivialization).
+\item A nontrivial action on $\Diff=\mathrm{Cofib}(\diag)$ witnessed by
+  $y\in\Diff$ with $\flip(y)\neq y$ (detector nontriviality).
+\item Bicomplex identities on free abelian chains generated by the
+  bisimplicial set $\mathcal C^{\mathrm{SK}}_{m,n}$, yielding
+  $(Q_t^{\mathrm{ch}})^2=(Q_u^{\mathrm{ch}})^2=
+  Q_t^{\mathrm{ch}}Q_u^{\mathrm{ch}}+Q_u^{\mathrm{ch}}Q_t^{\mathrm{ch}}=0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}[Two bicomplexes are not identified]
+The LS bicomplex $(Q_t^{\mathrm{ch}},Q_u^{\mathrm{ch}})$ acts on record-process chains
+generated by the bisimplicial set $\mathcal C^{\mathrm{SK}}_{m,n}$ and is used only to
+produce the parity cocycle $\omega_{\mathrm{LS}}$.
+The SK/BRST bicomplex $(Q_t,Q_u)$ acts on sufficiently local boundary cochains $\Fsloc$
+and is used to formulate Ward identities and descent.
+These bicomplexes interact only through the tag-action/parity-transport step
+(Definition~\ref{def:actFill-obs} and Lemma~\ref{lem:parity-transport}); they are not
+identified.
+\end{remark}
+
+% ============================================================
+\section{Subprogram 2b: Cosmology theory Peierls bracket and swap invariance}
+\label{sec:cosmo-peierls-import}
+
+\begin{theorem}[Cosmology theory Peierls bracket]
+\label{thm:cosmo-derived-Peierls}
+Assume $\mathbf{2T}_{\mathrm{Peierls}}$. Then the Peierls bracket
+$\{-,-\}_{\mathrm P}$ is a well-defined graded Poisson bracket on the algebra
+$\Fsloc$ of gauge-invariant sufficiently local
+boundary functionals, satisfying antisymmetry, Leibniz, and Jacobi.  This is
+the cosmology theory Peierls package (P1--P5), recorded here in abstract
+interface form.
+\end{theorem}
+
+\begin{remark}
+For general background on the Peierls bracket and its covariant phase space
+formulation, see \cite{Peierls1952,Khavkine2014Peierls}.
+\end{remark}
+
+\begin{lemma}[Transpose/swap equivariance implies equivariance of $E^\pm$ and $\Delta$]
+\label{lem:GammaStar-commutes-Greens}
+Assume $\mathbf{2T}_{\mathrm{Peierls}}$-\textbf{(P2)} so that the gauge-fixed
+linearized renormalized IBVP $(P_{\mathrm{gf,ren}},B_\Lambda)$ is
+Green--hyperbolic with unique advanced/retarded Green operators $E^\pm$ on the
+chosen test-source space. Let $\Gamma_*$ be an involution on test sources and
+linearized fields (e.g.\ pointer-basis transpose/real structure) such that
+\[
+P_{\mathrm{gf,ren}}\circ\Gamma_*=\Gamma_*\circ P_{\mathrm{gf,ren}},
+\qquad
+B_\Lambda\circ\Gamma_*=\Gamma_*\circ B_\Lambda.
+\]
+Then
+\[
+E^\pm\circ\Gamma_*=\Gamma_*\circ E^\pm,
+\qquad
+\Delta\circ\Gamma_*=\Gamma_*\circ\Delta,
+\quad\text{where}\quad \Delta:=E^- - E^+.
+\]
+\end{lemma}
+
+\begin{proof}
+Fix a test source $f$ and consider
+\[
+\psi^\pm := E^\pm(\Gamma_* f),
+\qquad
+\phi^\pm := \Gamma_*(E^\pm f).
+\]
+By definition, $\psi^\pm$ solves $P_{\mathrm{gf,ren}}\psi^\pm=\Gamma_* f$ with
+$B_\Lambda(\psi^\pm)=0$ and advanced/retarded support. Using the commutation
+assumption,
+\[
+P_{\mathrm{gf,ren}}\phi^\pm
+= P_{\mathrm{gf,ren}}\Gamma_*E^\pm f
+= \Gamma_* P_{\mathrm{gf,ren}}E^\pm f
+= \Gamma_* f,
+\qquad
+B_\Lambda(\phi^\pm)
+= B_\Lambda\Gamma_*E^\pm f
+= \Gamma_* B_\Lambda(E^\pm f)
+= 0.
+\]
+Moreover, $\phi^\pm$ has the same advanced/retarded support property as $E^\pm
+f$ because $\Gamma_*$ is pointwise and does not enlarge support. By uniqueness
+of $E^\pm$, one has $\psi^\pm=\phi^\pm$, i.e.\ $E^\pm\Gamma_*=\Gamma_*E^\pm$.
+Subtracting yields $\Delta\Gamma_*=\Gamma_*\Delta$.
+\end{proof}
+
+\begin{lemma}[Swap induces $\Gamma_*$ on first functional variations]
+\label{lem:Gamma-star-dictionary}
+Let $\Gamma$ act on functionals by pullback along the induced swap on boundary
+data, and let $\Gamma_*$ denote the induced involution on test sources/linearized
+boundary data (the tangent map of the swap). Then for every $F\in\Fsloc$ one has
+\[
+(\Gamma F)^{(1)}=\Gamma_*\big(F^{(1)}\big),
+\]
+and similarly for second variations. In the pointer-basis instantiation,
+$\Gamma_*$ is the transpose/real structure on linearized boundary data.
+\end{lemma}
+
+\begin{proof}
+This is the chain rule for pullback: writing $(\Gamma F)(J):=F(\Gamma_*J)$ for
+boundary data $J$, differentiation gives $(\Gamma F)^{(1)}=\Gamma_* F^{(1)}$.
+\end{proof}
+
+\begin{lemma}[Swap-equivariance and Poisson automorphism]
+\label{lem:Gamma-Poisson}
+Assume $\mathbf{2T}_{\mathrm{Peierls}}$ and the hypotheses of
+Lemma~\ref{lem:GammaStar-commutes-Greens}. Assume moreover that the renormalized
+pairing used in the Peierls formula is $\Gamma_*$--invariant on first
+functional derivatives (equivalently: the quadratic renormalized gauge-fixed
+action pairing is $\Gamma_*$--invariant). Let $\Gamma$ act on functionals by
+pullback along the induced swap on boundary data. Then
+\[
+\Gamma\{F,G\}_{\mathrm P} = \{\Gamma F,\Gamma G\}_{\mathrm P}
+\quad\text{for all }F,G\in\Fsloc.
+\]
+\end{lemma}
+
+\begin{proof}
+By definition, $\{F,G\}_{\mathrm P}=\langle F^{(1)},\Delta\,G^{(1)}\rangle$.
+By Lemma~\ref{lem:Gamma-star-dictionary}, pullback by $\Gamma$ sends first
+functional derivatives by $\Gamma_*$, and by
+Lemma~\ref{lem:GammaStar-commutes-Greens} one has $\Delta\Gamma_*=\Gamma_*\Delta$.
+Using $\Gamma_*$--invariance of the pairing gives the claim.
+\end{proof}
+
+% ============================================================
+\section{Subprogram 2c: Parity transport and physical $\mathbb Z_2$ grading}
+\label{sec:parity-bridge}
+
+\begin{definition}[SK parity candidate]
+\label{def:GammaSK}
+Let $\Gamma_{\mathrm{SK}}$ be the involutive *-automorphism induced by swapping
+SK branches (equivalently: sending difference/$a$-type generators to minus
+themselves and fixing $r$-type ones).
+\end{definition}
+
+\begin{lemma}[Swap invariance of the SK vacuum state]
+\label{lem:varpi-Gamma-invariant}
+Assume the vacuum state $\varpi$ is induced from the physical SK functional with
+equal sources in the sense of Definition~\ref{def:omega-SK}. Then $\varpi$ is
+$\Gamma_{\mathrm{SK}}$-invariant:
+\[
+\varpi\circ\Gamma_{\mathrm{SK}}=\varpi.
+\]
+\end{lemma}
+
+\begin{proof}
+On products of generators $\Phi(F)$ the state $\varpi$ is, by construction,
+given by SK vacuum correlators at equal sources. Swap-invariance of the
+equal-source SK functional implies these correlators are unchanged when every
+insertion is acted on by $\Gamma_{\mathrm{SK}}$. By linearity (and continuity on
+the completion), $\varpi\circ\Gamma_{\mathrm{SK}}=\varpi$ on the net.
+\end{proof}
+
+\begin{lemma}[$\Gamma$ is unitarily implemented in the vacuum GNS representation]
+\label{lem:Gamma-implemented}
+Assume Lemma~\ref{lem:varpi-Gamma-invariant}. Let $(\mathcal H,\pi,\Omega)$ be
+the GNS triple of the vacuum state $\varpi$.
+Then there exists a unitary $U_\Gamma$ on $\mathcal H$ with
+$U_\Gamma\Omega=\Omega$ and
+\[
+U_\Gamma\,\pi(A)\,U_\Gamma^{-1}=\pi(\Gamma A)
+\qquad(A\in\mathfrak A_{\mathrm{loc,BU}}),
+\]
+and $U_\Gamma^2=\mathbf 1$.
+\end{lemma}
+
+\begin{proof}
+Define $U_\Gamma$ on the cyclic subspace $\pi(\mathfrak A_{\mathrm{loc,BU}})\Omega$
+by
+\[
+U_\Gamma\,\pi(A)\Omega := \pi(\Gamma A)\Omega.
+\]
+This is well-defined and isometric because $\varpi\circ\Gamma=\varpi$ implies
+\[
+\|U_\Gamma\pi(A)\Omega\|^2
+=\langle\Omega,\pi((\Gamma A)^*(\Gamma A))\Omega\rangle
+=\varpi(\Gamma(A^*A))=\varpi(A^*A)=\|\pi(A)\Omega\|^2.
+\]
+Hence $U_\Gamma$ extends uniquely to a unitary on $\mathcal H$. The
+implementation identity follows by construction, and $U_\Gamma^2=\mathbf 1$
+because $\Gamma^2=\mathrm{id}$.
+\end{proof}
+
+\begin{lemma}[$\Gamma_{\mathrm{SK}}$ commutes with $Q_t$ and respects the RG decomposition]
+\label{lem:GammaSK-comm}
+On the locality class used in Subprograms~3a and~3b, $\Gamma_{\mathrm{SK}}$ commutes with
+the two odd differentials:
+\[
+\Gamma_{\mathrm{SK}}Q_t = Q_t\Gamma_{\mathrm{SK}},\qquad
+\Gamma_{\mathrm{SK}}Q_u = Q_u\Gamma_{\mathrm{SK}}.
+\]
+Moreover, for the decomposition $Q_u=Q_u^{\mathrm{phys}}+Q_u^{\mathrm{scheme}}$
+used in Definition~\ref{def:2T-RG}, we assume that $\Gamma_{\mathrm{SK}}$
+commutes with $Q_u^{\mathrm{phys}}$ and $Q_u^{\mathrm{scheme}}$ on the monotone sector
+${\Fsloc}_{\mathrm{mon}}$ (Definition~\ref{def:Fsloc-mon}):
+\[
+\Gamma_{\mathrm{SK}}Q_u^{\mathrm{phys}} = Q_u^{\mathrm{phys}}\Gamma_{\mathrm{SK}},
+\qquad
+\Gamma_{\mathrm{SK}}Q_u^{\mathrm{scheme}} = Q_u^{\mathrm{scheme}}\Gamma_{\mathrm{SK}}
+\quad\text{on }{\Fsloc}_{\mathrm{mon}}.
+\]
+\end{lemma}
+
+\begin{proof}
+On SK fields and sources, $\Gamma_{\mathrm{SK}}$ exchanges the two SK branches
+and fixes the base ghosts. The differentials $Q_t,Q_u$ are defined diagonally
+on the two branches (Subprogram~1a) as Lie derivatives along
+$c_t\partial_t$ and $c_u\partial_u$. Since these definitions are symmetric under
+interchanging the branches, $\Gamma_{\mathrm{SK}}$ commutes with $Q_t$ and $Q_u$
+on generators; the graded Leibniz rule then extends the commutation to all
+local cochains in the chosen locality class.
+The additional equivariance for the decomposition $Q_u=Q_u^{\mathrm{phys}}+Q_u^{\mathrm{scheme}}$
+is assumed on the monotone sector ${\Fsloc}_{\mathrm{mon}}$.
+\end{proof}
+
+\begin{lemma}[Parity involution on observables]
+\label{lem:Gamma-def}
+We write $\Gamma:=\Gamma_{\mathrm{SK}}$. Let $F$ be any observable functional on
+$\SKstates$. Define
+\[
+(\Gamma F)(x):=F(\swap x).
+\]
+Then $\Gamma^2=\mathrm{id}$ and for all $r\in\Sys$,
+$(\Gamma F)(\diag r)=F(\diag r)$.
+\end{lemma}
+
+\begin{remark}
+In the pointer basis, $\swap$ acts as transposition on states, so for
+$F(\rho)=\mathrm{Tr}(\rho\,\mathcal O)$ one has
+$(\Gamma F)(\rho)=F(\rho^{\mathsf T})=\mathrm{Tr}(\rho\,\mathcal O^{\mathsf T})$.
+\end{remark}
+
+\begin{lemma}[Detector witness implies $\Gamma\neq \mathrm{id}$ on observables]
+\label{lem:detector-Gamma-nontrivial}
+Assume $\mathbf{2T}_{\mathrm{det}}$ in the pointer-basis instantiation, so there
+exists a swap-odd observable functional $F$ on $\SKstates$ that is constant on
+diagonal record states and is not identically zero. Then
+\[
+\Gamma(F) = -F,
+\]
+and in particular $\Gamma\neq \mathrm{id}$ on observables.
+\end{lemma}
+
+\begin{proof}
+Swap-oddness gives $F(\swap x)=-F(x)$ for some $x\in\SKstates$, hence by
+definition $(\Gamma F)(x)=F(\swap x)=-F(x)\neq F(x)$.
+\end{proof}
+
+\begin{remark}
+By the non-splitting obstruction from the Limited Scope import, this nontrivial
+parity cannot be removed by a relabeling of record states; it is a physical
+grading.
+\end{remark}
+
+\begin{lemma}[$\omega$-action on additive targets]
+\label{lem:omega-action-on-algebra}
+Let $G$ be any abelian group. Define
+\[
+\mathrm{Act}_\omega^G(p)(g):=(-1)^{\omegaLS(p)}g.
+\]
+Then $\mathrm{Act}_\omega^G$ is a functorial action of $\ProcG$ on $G$. If
+$\Gamma$ acts on an algebra $\mathcal A$ of observables, the action
+$\mathrm{Act}(p):=\Gamma^{\omegaLS(p)}$ is a functorial representation of
+$\ProcG$ on $\mathcal A$.
+\end{lemma}
+
+\begin{definition}[Tag action on observables]
+\label{def:actFill-obs}
+Define an action of the two square tags on observables by
+\[
+\mathrm{act}_{\mathrm{fill}}^{\mathrm{obs}}(\mathrm{diag})=\mathrm{id},\qquad
+\mathrm{act}_{\mathrm{fill}}^{\mathrm{obs}}(\mathrm{bridge})=\Gamma,
+\]
+where $\Gamma$ is the swap-induced involution of Lemma~\ref{lem:Gamma-def}.
+\end{definition}
+
+\begin{lemma}[$\Gamma$ preserves the locality quotient]
+\label{lem:Gamma-preserves-quotient}
+For each double cone $O$, if $F\simeq F'$ in $\Fsloc(O)$
+(Definition~\ref{def:locality-quotient}), then $\Gamma(F)\simeq \Gamma(F')$.
+Equivalently, $\Gamma$ induces an involution on $[\,\Fsloc(O)\,]_{\mathrm{loc}}$.
+\end{lemma}
+
+\begin{proof}
+Since $\simeq$ is generated by the elementary moves
+Definition~\ref{def:locality-quotient}\textnormal{(a)}--\textnormal{(d)}, it
+suffices to check stability of each move under $\Gamma$.
+
+\paragraph{Move \textnormal{(a)} ($Q_t$--exact shifts).}
+For $X\in\Fsloc(O)$,
+\[
+\Gamma(F+Q_tX)=\Gamma(F)+\Gamma(Q_tX)=\Gamma(F)+Q_t(\Gamma X),
+\]
+using $\Gamma Q_t=Q_t\Gamma$ (Lemma~\ref{lem:GammaSK-comm}).
+
+\paragraph{Move \textnormal{(b)} (scheme move on the monotone sector).}
+Let $Y\in{\Fsloc}_{\mathrm{mon}}(O)$.  By Definition~\ref{def:Fsloc-mon},
+$\Gamma Y\in{\Fsloc}_{\mathrm{mon}}(O)$, and by Lemma~\ref{lem:GammaSK-comm} (on
+${\Fsloc}_{\mathrm{mon}}$),
+\[
+\Gamma(Q_u^{\mathrm{scheme}}Y)=Q_u^{\mathrm{scheme}}(\Gamma Y).
+\]
+Moreover, $Q_u^{\mathrm{scheme}}$ preserves each $\Fsloc(O)$ by
+Definition~\ref{def:2T-RG}-\textbf{(M2)}, so the shift is well-typed on $\Fsloc(O)$.
+
+\paragraph{Move \textnormal{(c)} (total divergences).}
+Since $\Gamma$ acts on fields/sources and not on the spacetime coordinates,
+\[
+\Gamma(F+\partial_\mu K^\mu)=\Gamma(F)+\partial_\mu(\Gamma K^\mu).
+\]
+
+\paragraph{Move \textnormal{(d)} (counterterm coboundaries).}
+Counterterm coboundaries transform covariantly under the SK swap, so
+$\Gamma(\Delta_{\mathrm{ct}})$ is again a counterterm coboundary.
+
+Thus each generating move is preserved by $\Gamma$, hence $\Gamma$ preserves
+$\simeq$ and induces an involution on $[\,\Fsloc(O)\,]_{\mathrm{loc}}$.
+\end{proof}
+
+\begin{lemma}[$\Gamma$--evenness of the anomaly insertion (modulo contact/counterterm ambiguities)]
+\label{lem:Gamma-even-A1}
+Assume the equal-source SK functional is invariant under SK branch swap, and let
+$\mathcal A^{(1)}(u)$ be the anomaly insertion extracted from the renormalized radial Ward identity
+in the physical SK sector (Proposition~\ref{prop:A1-from-SK}).
+Assume moreover that any swap-odd remainder in the renormalized Ward insertion is a
+contact/counterterm ambiguity (i.e.\ representable by a total divergence or a counterterm
+coboundary). Then
+\[
+\big[\,\Gamma(\mathcal A^{(1)}(u))-\mathcal A^{(1)}(u)\,\big]_{\mathrm{loc}}=0,
+\]
+where the locality quotient is generated by $Q_t$--exact shifts
+(Definition~\ref{def:locality-quotient}\textnormal{(a)}), total divergences
+\textnormal{(c)}, and counterterm coboundaries \textnormal{(d)} (no use of the scheme move
+\textnormal{(b)} is required here).
+\end{lemma}
+
+\begin{proof}
+On the physical SK locus (equal sources), swapping the SK branches leaves the
+renormalized functional invariant by hypothesis.  The corresponding radial/Weyl
+Ward insertion extracted from the renormalized variational principle is
+therefore $\Gamma$--invariant up to the usual local contact and counterterm
+ambiguities of renormalized Ward identities.
+
+By the additional hypothesis of the lemma, the swap-odd remainder
+$\Gamma(\mathcal A^{(1)}(u))-\mathcal A^{(1)}(u)$ can be represented as a total
+divergence $\partial_\mu K^\mu$ plus a counterterm coboundary $\Delta_{\mathrm{ct}}$
+(and, if present, a $Q_t$--exact shift).  Each of these representatives is
+trivial in the locality quotient by
+Definition~\ref{def:locality-quotient}\textnormal{(a)}, \textnormal{(c)}, and
+\textnormal{(d)}.  Hence
+\[
+\big[\,\Gamma(\mathcal A^{(1)}(u))-\mathcal A^{(1)}(u)\,\big]_{\mathrm{loc}}=0.
+\]
+No use of the scheme move \textnormal{(b)} is required.
+\end{proof}
+
+\begin{remark}[Parity of the anomaly insertion]
+\label{rem:anomaly-parity}
+Applying $\Gamma$ to the descent equation sends the anomaly insertion
+$\mathcal A^{(1)}$ to $\Gamma(\mathcal A^{(1)})$. By
+Lemma~\ref{lem:Gamma-even-A1}, the anomaly insertion is $\Gamma$--even in the
+locality quotient, so the $\mathrm{diag}$ and $\mathrm{bridge}$ fillers correspond
+to the same anomaly insertion modulo the standard locality ambiguities.
+\end{remark}
+
+\begin{remark}
+In the parity-transport step we work with the physical radial differential
+$Q_u^{\mathrm{phys}}$; scheme terms $Q_u^{\mathrm{scheme}}$ are treated as
+locality-quotient ambiguities (counterterm reparametrisations) and do not affect
+the transported $\Gamma$--odd sector.
+\end{remark}
+
+\begin{lemma}[Bridge filler acts by $\Gamma$ on first-descendant potentials]
+\label{lem:bridgeActsByGamma}
+Assume Lemma~\ref{lem:GammaSK-comm}. Let $\mathcal O^{(0)}$ be $Q_t$-closed and
+$\Gamma$--even, i.e.\ $\Gamma(\mathcal O^{(0)})=\mathcal O^{(0)}$, and let
+$\mathcal J$ and $\mathcal A^{(1)}$ satisfy the (possibly anomalous) first
+descent equation
+\[
+\big[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)} + Q_t\mathcal J - \mathcal A^{(1)}\,\big]_{\mathrm{loc}}=0,
+\qquad
+\big[\,\Gamma(\mathcal A^{(1)})-\mathcal A^{(1)}\,\big]_{\mathrm{loc}}=0.
+\]
+Define two tag-associated representatives by
+\[
+\mathcal J_{\mathrm{diag}}
+:=\mathrm{act}_{\mathrm{fill}}^{\mathrm{obs}}(\mathrm{diag})(\mathcal J)
+=\mathcal J,
+\qquad
+\mathcal J_{\mathrm{bridge}}
+:=\mathrm{act}_{\mathrm{fill}}^{\mathrm{obs}}(\mathrm{bridge})(\mathcal J)
+=\Gamma(\mathcal J).
+\]
+Then $\mathcal J_{\mathrm{diag}}$ and $\mathcal J_{\mathrm{bridge}}$
+are both valid first-descendant potentials of $\mathcal O^{(0)}$ (for the same
+anomaly insertion), and switching the
+record-level square filler tag from $\mathrm{diag}$ to $\mathrm{bridge}$ induces
+\[
+\mathcal J_{\mathrm{bridge}}=\Gamma(\mathcal J_{\mathrm{diag}}).
+\]
+\end{lemma}
+
+\begin{proof}
+Apply $\Gamma$ to the descent identity in the locality quotient. By
+Lemma~\ref{lem:GammaSK-comm} and Lemma~\ref{lem:Gamma-preserves-quotient},
+\[
+\big[\,Q_u^{\mathrm{phys}}(\Gamma\mathcal O^{(0)}) + Q_t(\Gamma\mathcal J) - \Gamma(\mathcal A^{(1)})\,\big]_{\mathrm{loc}}=0.
+\]
+Since $\Gamma\mathcal O^{(0)}=\mathcal O^{(0)}$ by assumption and
+$[\,\Gamma(\mathcal A^{(1)})-\mathcal A^{(1)}\,]_{\mathrm{loc}}=0$, we obtain
+\[
+\big[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)} + Q_t(\Gamma\mathcal J) - \mathcal A^{(1)}\,\big]_{\mathrm{loc}}=0,
+\]
+so $\Gamma\mathcal J$ is also a valid first-descendant potential (for the same
+anomaly insertion) in the locality quotient. By Definition~\ref{def:actFill-obs}
+it is exactly the $\mathrm{bridge}$-tag representative.
+\end{proof}
+
+\begin{definition}[First-descendant ambiguity group]
+\label{def:desc-ambiguity}
+Let $\mathcal V^1$ be the additive group of first-descendant potentials in the
+chosen locality class, modulo the standard $Q_t$-- and $Q_u$--exact shifts:
+\[
+\mathcal V^1 :=
+\frac{\Fsloc}{Q_t(\Fsloc) + Q_u(\Fsloc)}.
+\]
+We write $[\mathcal J]\in\mathcal V^1$ for the class of a chosen first-descendant
+potential $\mathcal J\in\Fsloc$.
+\end{definition}
+
+\begin{lemma}[$\Gamma$--odd representative choice]
+\label{lem:Gamma-odd-rep}
+Assume Lemma~\ref{lem:GammaSK-comm} and that the locality class is linear over a
+ring in which $2$ is invertible (e.g.\ over $\mathbb R$). Let
+$\mathcal J$ be a representative of a class $[\mathcal J]\in\mathcal V^1$
+satisfying $[\Gamma(\mathcal J)]=-[\mathcal J]$ in $\mathcal V^1$ and
+define
+\[
+\mathcal J_-:=\tfrac12\big(\mathcal J-\Gamma\mathcal J\big).
+\]
+Then $\Gamma(\mathcal J_-)=-\mathcal J_-$ and
+$[\mathcal J_-]=[\mathcal J]$ in $\mathcal V^1$.
+\end{lemma}
+
+\begin{proof}
+The parity identity is immediate from $\Gamma^2=\mathrm{id}$. The class
+condition implies $\Gamma(\mathcal J)+\mathcal J$ lies in the ambiguity subgroup
+$Q_t(\Fsloc) + Q_u(\Fsloc)$. Therefore
+\[
+\mathcal J-\mathcal J_-=\tfrac12\big(\Gamma(\mathcal J)+\mathcal J\big)
+\]
+ lies in the ambiguity subgroup, so $[\mathcal J_-]=[\mathcal J]$ in
+ $\mathcal V^1$.
+\end{proof}
+
+\begin{lemma}[Odd representative choice preserves the descent identity]
+\label{lem:J-odd-choice}
+Assume the setup of Lemma~\ref{lem:bridgeActsByGamma} and that the locality class
+is linear over a ring in which $2$ is invertible (e.g.\ over $\mathbb R$).
+Define
+\[
+\mathcal J_-:=\tfrac12\big(\mathcal J-\Gamma\mathcal J\big).
+\]
+Then $\Gamma(\mathcal J_-)=-\mathcal J_-$ and $\mathcal J_-$ is a valid
+first-descendant potential for the same anomaly insertion, i.e.
+\[
+\big[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)} + Q_t\mathcal J_- - \mathcal A^{(1)}\,\big]_{\mathrm{loc}}=0.
+\]
+Moreover, $\mathcal J_-\in\Fsloc$ and $\mathcal J_-$ is EB3-admissible whenever
+$\mathcal J$ is.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:bridgeActsByGamma}, both $\mathcal J$ and $\Gamma\mathcal J$
+are valid first-descendant potentials for the same anomaly insertion, so
+\[
+\big[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)}+Q_t\mathcal J-\mathcal A^{(1)}\,\big]_{\mathrm{loc}}=0,
+\qquad
+\big[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)}+Q_t(\Gamma\mathcal J)-\mathcal A^{(1)}\,\big]_{\mathrm{loc}}=0.
+\]
+Subtracting gives
+\[
+\big[\,Q_t(\mathcal J-\Gamma\mathcal J)\,\big]_{\mathrm{loc}}=0.
+\]
+Define $\mathcal J_-:=\tfrac12(\mathcal J-\Gamma\mathcal J)$, so $\Gamma(\mathcal J_-)=-\mathcal J_-$.
+Now compute the descent residual for $\mathcal J_-$ in the locality quotient:
+\[
+\begin{aligned}
+\big[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)}+Q_t\mathcal J_- - \mathcal A^{(1)}\,\big]_{\mathrm{loc}}
+&=\Big[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)}-\mathcal A^{(1)}+\tfrac12\big(Q_t\mathcal J-Q_t(\Gamma\mathcal J)\big)\,\Big]_{\mathrm{loc}} \\
+&=\Big[\,-Q_t\mathcal J+\tfrac12\big(Q_t\mathcal J-Q_t(\Gamma\mathcal J)\big)\,\Big]_{\mathrm{loc}}
+\quad\text{(using }\big[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)}+Q_t\mathcal J-\mathcal A^{(1)}\,\big]_{\mathrm{loc}}=0\text{)}\\
+&=\Big[\,-Q_t\!\big(\tfrac12(\mathcal J+\Gamma\mathcal J)\big)\,\Big]_{\mathrm{loc}}
+\;=\;0,
+\end{aligned}
+\]
+because $Q_t$--exact shifts are trivial by Definition~\ref{def:locality-quotient}\textnormal{(a)}.
+Finally, $\Gamma$ preserves $\Fsloc$ and the defining seminorm controls on each $O$,
+so $\mathcal J_-\in\Fsloc$ and inherits EB3-admissibility from $\mathcal J$.
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:J-odd-choice} shows that the $\Gamma$--odd projection
+$\mathcal J_-=\tfrac12(\mathcal J-\Gamma\mathcal J)$ preserves the descent data
+in the locality quotient.
+The involution $\Gamma$ preserves the locality class $\Fsloc(O)$ and its defining
+seminorm controls; hence $\mathcal J_-=\tfrac12(\mathcal J-\Gamma\mathcal J)$ remains
+EB3-admissible whenever $\mathcal J$ is.
+\par
+Because the descent equation is imposed only in the locality quotient, it fixes the
+cohomology class $[\,Q_u^{\mathrm{phys}}\mathcal O^{(0)}\,]\in H^1(\Fsloc,Q_t)$ but does not
+uniquely fix the potential. The LS parity transport identifies the physically relevant
+\(\Gamma\)--odd descendant class, and Theorem~\ref{thm:finite-cutoff-Jcan} then selects its
+canonical representative by calibration minimization.
+\end{remark}
+
+\begin{lemma}[Filler--descent dictionary]
+\label{lem:filler-descent-dictionary}
+Assume the setup of Lemma~\ref{lem:bridgeActsByGamma} so that
+$\mathcal J_{\mathrm{diag}}$ and $\mathcal J_{\mathrm{bridge}}$ are defined from
+a first-descendant potential $\mathcal J$.
+Let $[\mathcal J]\in\mathcal V^1$ denote the class of a first-descendant
+modulo the standard $Q_t$/$Q_u$ ambiguities. By the Limited Scope import,
+the canonical square-loop $\sqLoop(t,u,r)$ satisfies $\omegaLS(\sqLoop(t,u,r))=1$.
+In the sign transport induced by $\omegaLS$ on the additive group $\mathcal V^1$
+(Lemma~\ref{lem:omega-action-on-algebra}), changing the filler tag from
+$\mathrm{diag}$ to $\mathrm{bridge}$ multiplies the descendant class by $-1$:
+\[
+[\,\mathcal J_{\mathrm{bridge}}\,]
+=-\, [\,\mathcal J_{\mathrm{diag}}\,]
+\quad\text{in }\mathcal V^1.
+\]
+Equivalently, the descendant sector is a torsor for the $\omega$-twisted local system.
+\end{lemma}
+
+\begin{proof}
+Apply Lemma~\ref{lem:omega-action-on-algebra} to the abelian group
+$G=\mathcal V^1$. This defines a functorial action of the record-process groupoid
+$\ProcG$ on $\mathcal V^1$ by
+\[
+\mathrm{Act}_\omega^{\mathcal V^1}(p)([\mathcal J])=(-1)^{\omegaLS(p)}[\mathcal J].
+\]
+By the Limited Scope import (Theorem~\ref{thm:LS-import}), the canonical square-loop
+$p:=\sqLoop(t,u,r)$ satisfies $\omegaLS(p)=1$, hence
+\[
+\mathrm{Act}_\omega^{\mathcal V^1}(p)([\mathcal J])=-[\mathcal J].
+\]
+Changing the record-level square filler tag from $\mathrm{diag}$ to $\mathrm{bridge}$
+corresponds to transporting the first-descendant class along this canonical square-loop,
+so $[\mathcal J_{\mathrm{bridge}}]=\mathrm{Act}_\omega^{\mathcal V^1}(p)([\mathcal J_{\mathrm{diag}}])$.
+Therefore $[\mathcal J_{\mathrm{bridge}}]=- [\mathcal J_{\mathrm{diag}}]$ in $\mathcal V^1$.
+\end{proof}
+
+\begin{lemma}[Parity transport: LS square-loop acts as $\Gamma$]
+\label{lem:parity-transport}
+Assume $\mathbf{2T}_{\mathrm{LS}}$ and the tag action
+Definition~\ref{def:actFill-obs}.  On the first-descendant ambiguity group
+$\mathcal V^1$ (Definition~\ref{def:desc-ambiguity}), changing the square filler
+from $\mathrm{diag}$ to $\mathrm{bridge}$ acts by $\Gamma$ on representatives and
+by multiplication by $-1$ on classes:
+\[
+[\Gamma(\mathcal J)]=-[\mathcal J]\quad\text{in }\mathcal V^1.
+\]
+In particular, if $[\mathcal J]\neq 0$ then it lies in the odd sector of
+the $\Gamma$--grading.
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:bridgeActsByGamma},
+$\mathcal J_{\mathrm{bridge}}=\Gamma(\mathcal J_{\mathrm{diag}})$,
+while Lemma~\ref{lem:filler-descent-dictionary} gives
+$[\mathcal J_{\mathrm{bridge}}]=-[\mathcal J_{\mathrm{diag}}]$ in
+$\mathcal V^1$. Thus $[\Gamma(\mathcal J)]=-[\mathcal J]$.
+\end{proof}
+
+% ============================================================
+\section{Subprogram 3: Selected-line nonvanishing, Hamiltonized odd derivation, AQFT and HLS}
+\label{sec:subprogram3}
+
+\subsection{Subprogram 3a: Selected-line nonvanishing, canonicalization, and characteristic activity}
+\label{sec:subprogram3a}
+
+In this subsection we work directly with the two-time bicomplex
+\((\Fsloc,Q_t,Q_u)\) supplied by Subprogram~1a and allow an explicit anomaly
+insertion as in \eqref{eq:anom-descent}. This keeps the mixed-anomaly
+bookkeeping in the full two-ghost complex.
+
+\begin{theorem}[Finite-cutoff canonical odd representative]
+\label{thm:finite-cutoff-Jcan}
+Assume the calibration characterization package
+\(\mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}\), namely
+Definition~\ref{def:2T-char-weak} together with
+Definition~\ref{def:2T-char-cal}. For each ledger step \(k\), let
+\(
+[\Xi^{(1)}_{\Lambda_k}]=J_{0,\Lambda_k}+\mathcal A^-_{\Lambda_k}\subset E^-_{\Lambda_k}
+\)
+be the admissible odd descendant class. Then there exists a unique
+representative
+\[
+\mathcal J^{\mathrm{can}}_{\Lambda_k}\in [\Xi^{(1)}_{\Lambda_k}]
+\]
+such that
+\begin{equation}
+\mathcal J^{\mathrm{can}}_{\Lambda_k}
+=
+\arg\min_{J\in [\Xi^{(1)}_{\Lambda_k}]}
+\mathsf B_{\Lambda_k}(J,J).
+\label{eq:Jcan-min}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+By Definition~\ref{def:2T-char-cal}, the form \(\mathsf B_{\Lambda_k}\) Hilbertizes
+\(E^-_{\Lambda_k}\); write \(H_{\Lambda_k}\) for the resulting Hilbert space with
+inner product still denoted \(\mathsf B_{\Lambda_k}\).
+Since \(\mathcal A^-_{\Lambda_k}\subset E^-_{\Lambda_k}\) is closed, the affine set
+\(
+[\Xi^{(1)}_{\Lambda_k}]=J_{0,\Lambda_k}+\mathcal A^-_{\Lambda_k}
+\)
+is a closed affine subspace of \(H_{\Lambda_k}\). The Hilbert projection theorem
+therefore gives a unique element of this affine subspace of minimal
+\(\mathsf B_{\Lambda_k}\)-norm, which is exactly
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\).
+\end{proof}
+
+\begin{proposition}[Orthogonality characterization of \(\mathcal J^{\mathrm{can}}_{\Lambda_k}\)]
+\label{prop:Jcan-orth}
+Under the hypotheses of Theorem~\ref{thm:finite-cutoff-Jcan}, the unique minimizer
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\) is characterized equivalently by
+\begin{equation}
+\mathsf B_{\Lambda_k}(\mathcal J^{\mathrm{can}}_{\Lambda_k},A)=0
+\qquad
+\forall\,A\in\mathcal A^-_{\Lambda_k}.
+\label{eq:Jcan-orth}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Write \(\mathcal J^{\mathrm{can}}_{\Lambda_k}=J_{0,\Lambda_k}+A_{\ast}\) with
+\(A_{\ast}\in\mathcal A^-_{\Lambda_k}\).
+For any \(A\in\mathcal A^-_{\Lambda_k}\) and \(s\in\mathbb R\), the point
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}+sA\) lies in the same affine class.
+Minimality of \(\mathcal J^{\mathrm{can}}_{\Lambda_k}\) implies
+\[
+0=\frac{d}{ds}\Big\rvert_{s=0}
+\mathsf B_{\Lambda_k}(\mathcal J^{\mathrm{can}}_{\Lambda_k}+sA,\,
+\mathcal J^{\mathrm{can}}_{\Lambda_k}+sA)
+=2\,\mathsf B_{\Lambda_k}(\mathcal J^{\mathrm{can}}_{\Lambda_k},A),
+\]
+which is \eqref{eq:Jcan-orth}. Conversely, if \(J\in[\Xi^{(1)}_{\Lambda_k}]\)
+ satisfies \eqref{eq:Jcan-orth}, then for every \(A\in\mathcal A^-_{\Lambda_k}\),
+\[
+\mathsf B_{\Lambda_k}(J+A,J+A)
+=
+\mathsf B_{\Lambda_k}(J,J)+\mathsf B_{\Lambda_k}(A,A)
+\ge
+\mathsf B_{\Lambda_k}(J,J),
+\]
+so \(J\) is the unique minimizer on the affine class.
+\end{proof}
+
+\begin{remark}[Finite-dimensional projection formula]
+\label{rem:Jcan-finite-dimensional-projector}
+In any finite-dimensional realization of the affine odd descendant class
+\[
+[\Xi^{(1)}_{\Lambda_k}]
+=
+J_{0,\Lambda_k}+\operatorname{im}(U_{\Lambda_k}),
+\]
+where \(U_{\Lambda_k}\) is any full-column-rank basis matrix for
+\(\mathcal A^-_{\Lambda_k}\), let \(B_{\Lambda_k}\) be the matrix of the
+calibration form \(\mathsf B_{\Lambda_k}\).
+Then the \(\mathsf B_{\Lambda_k}\)-orthogonal projector onto the ambiguity
+subspace is
+\[
+P_{\mathcal A^-_{\Lambda_k}}^{\mathsf B_{\Lambda_k}}
+:=
+U_{\Lambda_k}
+\bigl(U_{\Lambda_k}^{\top}B_{\Lambda_k}U_{\Lambda_k}\bigr)^{-1}
+U_{\Lambda_k}^{\top}B_{\Lambda_k},
+\]
+and the canonical representative is
+\[
+\mathcal J^{\mathrm{can}}_{\Lambda_k}
+=
+\bigl(I-P_{\mathcal A^-_{\Lambda_k}}^{\mathsf B_{\Lambda_k}}\bigr)
+J_{0,\Lambda_k}.
+\]
+Equivalently, if
+\[
+a_{\ast}
+:=
+-\bigl(U_{\Lambda_k}^{\top}B_{\Lambda_k}U_{\Lambda_k}\bigr)^{-1}
+U_{\Lambda_k}^{\top}B_{\Lambda_k}J_{0,\Lambda_k},
+\]
+then
+\[
+\mathcal J^{\mathrm{can}}_{\Lambda_k}
+=
+J_{0,\Lambda_k}+U_{\Lambda_k}a_{\ast}.
+\]
+This formula is independent of the chosen basis \(U_{\Lambda_k}\) of
+\(\mathcal A^-_{\Lambda_k}\): replacing \(U_{\Lambda_k}\) by
+\(U_{\Lambda_k}T\) with \(T\in \mathrm{GL}(r,\mathbb R)\) leaves the projector
+\(P_{\mathcal A^-_{\Lambda_k}}^{\mathsf B_{\Lambda_k}}\) unchanged.
+It is also independent of the chosen representative
+\(J_{0,\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]\): replacing \(J_{0,\Lambda_k}\)
+by \(J_{0,\Lambda_k}+U_{\Lambda_k}h\) leaves
+\(
+\bigl(I-P_{\mathcal A^-_{\Lambda_k}}^{\mathsf B_{\Lambda_k}}\bigr)
+J_{0,\Lambda_k}
+\)
+unchanged.
+\end{remark}
+
+\begin{remark}[Proof strategy for same-tick obstruction nonvanishing]
+\label{rem:Main-nonvanishing-strategy}
+The nonvanishing step is purely quotient-theoretic for the same-tick obstruction lane once one has a
+faithful LS-to-descendant intertwiner.
+One first isolates a selected odd descendant line inside the raw first-descendant
+ambiguity group \(\mathcal V^1\) and uses Lemma~\ref{lem:parity-transport} to
+see that the LS square-loop acts there by sign.
+One then maps that line into the characterization quotient
+\(E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}\).
+If this realization map is faithful on the selected line, then the image of a
+nonzero generator is itself nonzero; equivariance therefore upgrades the sign
+transport on the raw line to a nontrivial sign transport on the selected quotient
+point.
+At that stage the conclusion \(0\notin[\Xi^{(1)}_{\Lambda_k}]\) is immediate,
+because \(0\) is the only fixed point of the sign involution on a real vector
+space. This is the abstract same-tick obstruction route; the physically correct
+delayed route is the lift recorded below.
+\end{remark}
+
+\begin{remark}[Proof skeleton for the same-tick LS-to-descendant faithfulness step]
+\label{rem:Main-faithfulness-skeleton}
+Fix a ledger step \(k\).
+The structured proof has four steps:
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=*,itemsep=0.3em]
+\item choose a selected odd descendant line
+  \(L^{\mathrm{sel}}_{\Lambda_k}=\mathbb R\,\ell_{\Lambda_k}\subset\mathcal V^1\)
+  with \(\ell_{\Lambda_k}\neq 0\);
+\item use Lemma~\ref{lem:parity-transport} to identify the LS square-loop action on
+  that line with multiplication by \(-1\);
+\item realize the selected line on the characterization quotient by a linear map
+  \(\mathfrak R_{\Lambda_k}:L^{\mathrm{sel}}_{\Lambda_k}\to
+  E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}\) whose value on
+  \(\ell_{\Lambda_k}\) is the selected quotient point
+  \(\overline{\Xi}^{(1)}_{\Lambda_k}\);
+\item prove faithfulness on the selected line, i.e.\ \(\ker\mathfrak R_{\Lambda_k}=0\).
+\end{enumerate}
+Then \(\overline{\Xi}^{(1)}_{\Lambda_k}=\mathfrak R_{\Lambda_k}(\ell_{\Lambda_k})\neq 0\),
+and equivariance gives
+\[
+\mathrm{Act}^{\mathrm{desc}}_{\sqLoop}(\overline{\Xi}^{(1)}_{\Lambda_k})
+=
+-\,\overline{\Xi}^{(1)}_{\Lambda_k}
+\neq
+\overline{\Xi}^{(1)}_{\Lambda_k}.
+\]
+The theorem below expands this same-tick obstruction skeleton into a full proof.
+\end{remark}
+
+\begin{proposition}[Selected-line compatibility suffices for the same-tick faithfulness hypotheses]
+\label{prop:Main-selected-line-compatibility}
+Assume \(\mathbf{2T}_{\mathrm{LS}}+\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\).
+Fix a ledger step \(k\), and let
+\[
+q_{\Lambda_k}:E^-_{\Lambda_k}\longrightarrow E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}
+\]
+be the quotient map.
+Assume the selected-line supplement package
+\(\mathbf{2T}_{\mathrm{sel}}\) of Definition~\ref{def:2T-sel}, and write
+\[
+\ell_{\Lambda_k}
+:=
+[J^{\mathrm{sel}}_{\Lambda_k}]_{\mathcal V^1}
+\neq 0.
+\]
+Define
+\[
+L^{\mathrm{sel}}_{\Lambda_k}
+:=
+\mathbb R\,\ell_{\Lambda_k},
+\qquad
+\mathfrak R_{\Lambda_k}(a\,\ell_{\Lambda_k})
+:=
+a\,q_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k}).
+\]
+Then hypotheses \textnormal{(a)}--\textnormal{(e)} of
+Theorem~\ref{thm:Main-faithful-LS-desc} hold.
+\end{proposition}
+
+\begin{proof}
+Condition \textnormal{(a)} of Theorem~\ref{thm:Main-faithful-LS-desc} holds by construction:
+\(
+L^{\mathrm{sel}}_{\Lambda_k}=\mathbb R\,\ell_{\Lambda_k}
+\)
+is one-dimensional and nonzero because
+\(
+\ell_{\Lambda_k}\neq 0
+\).
+
+Condition \textnormal{(b)} holds because \(\mathfrak R_{\Lambda_k}\) is defined on a real line by
+scalar multiplication of the fixed quotient element \(q_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k})\).
+
+Condition \textnormal{(c)} holds by direct substitution:
+\[
+\mathfrak R_{\Lambda_k}(\ell_{\Lambda_k})
+=
+q_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k}).
+\]
+
+For condition \textnormal{(d)}, linearity on the one-dimensional real line gives
+\[
+\mathfrak R_{\Lambda_k}(-\ell_{\Lambda_k})
+=
+-\,\mathfrak R_{\Lambda_k}(\ell_{\Lambda_k}).
+\]
+
+It remains to prove faithfulness \textnormal{(e)}.
+Let \(a\,\ell_{\Lambda_k}\in\ker\mathfrak R_{\Lambda_k}\).
+Then
+\[
+a\,q_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k})=0.
+\]
+If \(a\neq 0\), then
+\(
+q_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k})=0
+\),
+so the selected-line compatibility implication
+\eqref{eq:selected-line-compatibility} yields
+\[
+[J^{\mathrm{sel}}_{\Lambda_k}]_{\mathcal V^1}=0,
+\]
+contradicting the definition of \(\ell_{\Lambda_k}\neq 0\).
+Hence \(a=0\), and therefore
+\[
+\ker\mathfrak R_{\Lambda_k}=\{0\}.
+\]
+So condition \textnormal{(e)} holds as well.
+\end{proof}
+
+\begin{definition}[Scheme-refined raw descendant quotient]
+\label{def:Main-Vhat}
+Fix a ledger step \(k\).
+Define the \emph{scheme-refined raw descendant quotient} by
+\[
+\widehat{\mathcal V}^1_{\Lambda_k}
+:=
+\frac{\Fsloc}{Q_t(\Fsloc)+Q_u^{\mathrm{scheme}}(\Fsloc)}.
+\]
+The coarse ambiguity group \(\mathcal V^1\) of
+Definition~\ref{def:desc-ambiguity} is the further quotient obtained by killing the
+remaining \(Q_u^{\mathrm{phys}}\)-exact shifts.  We write
+\[
+\pi_{\Lambda_k}:\widehat{\mathcal V}^1_{\Lambda_k}\twoheadrightarrow \mathcal V^1
+\]
+for that quotient map.
+\end{definition}
+
+\begin{remark}[What the refined quotient isolates]
+\label{rem:Main-Vhat-scope}
+The quotient \(\widehat{\mathcal V}^1_{\Lambda_k}\) is introduced only to separate the genuinely
+physical \(Q_u^{\mathrm{phys}}\)-collapse from the already isolated scheme sector.
+It does not attempt to incorporate boundary-admissible divergences or local counterterm
+coboundaries into the raw descendant group itself.
+Those local improvement directions are already handled separately:
+they appear in the locality quotient relation
+\textnormal{(Definition~\ref{def:locality-quotient})} and, on the characterization side, are
+absorbed into \(\mathcal A^-_{\Lambda_k}\) by the characterization supplement.
+\end{remark}
+
+\begin{theorem}[Scheme-refined same-tick no-extra-collapse yields the selected-line supplement]
+\label{thm:Main-selected-line-contract-refined}
+Assume \(\mathbf{2T}_{\mathrm{LS}}+\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\).
+Fix a ledger step \(k\), and let
+\[
+q_{\Lambda_k}:E^-_{\Lambda_k}\longrightarrow E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}
+\]
+be the quotient map.
+Assume there exist:
+\begin{enumerate}[label=\textnormal{(\alph*)},leftmargin=*,itemsep=0.35em]
+\item a one-dimensional selected odd line
+  \[
+  \widehat L^{\mathrm{sel}}_{\Lambda_k}
+  =
+  \mathbb R\,\widehat\ell_{\Lambda_k}
+  \subset \widehat{\mathcal V}^1_{\Lambda_k};
+  \]
+\item noncollapse under the coarse quotient,
+  \[
+  \pi_{\Lambda_k}(\widehat\ell_{\Lambda_k})\neq 0;
+  \]
+\item a selected representative
+  \[
+  J^{\mathrm{sel}}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]\cap E^-_{\Lambda_k};
+  \]
+\item a linear realization map
+  \[
+  \widehat{\mathfrak R}_{\Lambda_k}:\widehat L^{\mathrm{sel}}_{\Lambda_k}
+  \longrightarrow
+  E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}
+  \]
+  satisfying
+  \[
+  \widehat{\mathfrak R}_{\Lambda_k}(\widehat\ell_{\Lambda_k})
+  =
+  q_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k});
+  \]
+\item exact no-extra-collapse on the selected line,
+  \[
+  \ker\!\bigl(\widehat{\mathfrak R}_{\Lambda_k}\!\mid_{\widehat L^{\mathrm{sel}}_{\Lambda_k}}\bigr)
+  =
+  \ker\!\bigl(\pi_{\Lambda_k}\!\mid_{\widehat L^{\mathrm{sel}}_{\Lambda_k}}\bigr).
+  \]
+\end{enumerate}
+Then the selected-line Main supplement package
+\(\mathbf{2T}_{\mathrm{sel}}\) of Definition~\ref{def:2T-sel} holds with
+\[
+\ell_{\Lambda_k}
+:=
+\pi_{\Lambda_k}(\widehat\ell_{\Lambda_k})
+\in\mathcal V^1.
+\]
+Consequently, Proposition~\ref{prop:Main-selected-line-compatibility} applies.
+\end{theorem}
+
+\begin{proof}
+By assumption \textnormal{(b)}, the class
+\(
+\ell_{\Lambda_k}:=\pi_{\Lambda_k}(\widehat\ell_{\Lambda_k})
+\)
+is nonzero in \(\mathcal V^1\), so the first part of
+Definition~\ref{def:2T-sel} holds with
+\(
+L^{\mathrm{sel}}_{\Lambda_k}=\mathbb R\,\ell_{\Lambda_k}
+\).
+The second part holds by the chosen representative \(J^{\mathrm{sel}}_{\Lambda_k}\).
+
+It remains to verify the selected-line compatibility implication
+\eqref{eq:selected-line-compatibility}.
+Assume
+\[
+q_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k})=0.
+\]
+Using assumption \textnormal{(d)}, this means
+\[
+\widehat{\mathfrak R}_{\Lambda_k}(\widehat\ell_{\Lambda_k})=0,
+\]
+so
+\(
+\widehat\ell_{\Lambda_k}\in
+\ker(\widehat{\mathfrak R}_{\Lambda_k}\!\mid_{\widehat L^{\mathrm{sel}}_{\Lambda_k}})
+\).
+By assumption \textnormal{(e)},
+\[
+\widehat\ell_{\Lambda_k}\in
+\ker(\pi_{\Lambda_k}\!\mid_{\widehat L^{\mathrm{sel}}_{\Lambda_k}}),
+\]
+hence
+\[
+\pi_{\Lambda_k}(\widehat\ell_{\Lambda_k})=0.
+\]
+By definition of \(\ell_{\Lambda_k}\), this is exactly
+\[
+[J^{\mathrm{sel}}_{\Lambda_k}]_{\mathcal V^1}=0.
+\]
+So the selected-line compatibility implication holds, completing the selected-line supplement
+contract.
+
+The final sentence follows by Proposition~\ref{prop:Main-selected-line-compatibility}.
+\end{proof}
+
+\begin{theorem}[Same-tick faithful LS-to-descendant intertwiner yields a nontrivial square-loop witness]
+\label{thm:Main-faithful-LS-desc}
+Assume \(\mathbf{2T}_{\mathrm{LS}}+\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\).
+Fix a ledger step \(k\), and let
+\[
+q_{\Lambda_k}:E^-_{\Lambda_k}\longrightarrow E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}
+\]
+be the quotient map.
+Assume there exist:
+\begin{enumerate}[label=\textnormal{(\alph*)},leftmargin=*,itemsep=0.35em]
+\item a one-dimensional selected odd descendant line
+  \[
+  L^{\mathrm{sel}}_{\Lambda_k}
+  =
+  \mathbb R\,\ell_{\Lambda_k}
+  \subset\mathcal V^1
+  \qquad\text{with}\qquad
+  \ell_{\Lambda_k}\neq 0;
+  \]
+\item a linear realization map
+  \[
+  \mathfrak R_{\Lambda_k}:L^{\mathrm{sel}}_{\Lambda_k}
+  \longrightarrow
+  E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k};
+  \]
+\item a representative \(J_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]\) such that
+  \[
+  \mathfrak R_{\Lambda_k}(\ell_{\Lambda_k})
+  =
+  q_{\Lambda_k}(J_{\Lambda_k});
+  \]
+\item equivariance of the realization map with respect to the LS square-loop:
+  \[
+  \mathfrak R_{\Lambda_k}(-\ell_{\Lambda_k})
+  =
+  -\,\mathfrak R_{\Lambda_k}(\ell_{\Lambda_k});
+  \]
+\item faithfulness on the selected line:
+  \[
+  \ker \mathfrak R_{\Lambda_k}=\{0\}.
+  \]
+\end{enumerate}
+Define
+\[
+\overline{\Xi}^{(1)}_{\Lambda_k}
+:=
+q_{\Lambda_k}(J)
+\qquad
+\bigl(J\in[\Xi^{(1)}_{\Lambda_k}]\bigr),
+\]
+which is well defined because \([\Xi^{(1)}_{\Lambda_k}]\) is an affine class modulo
+\(\mathcal A^-_{\Lambda_k}\).
+Then
+\begin{equation}
+\mathrm{Act}^{\mathrm{desc}}_{\sqLoop}\!\big(\overline{\Xi}^{(1)}_{\Lambda_k}\big)
+=
+-\,\overline{\Xi}^{(1)}_{\Lambda_k}
+\neq
+\overline{\Xi}^{(1)}_{\Lambda_k}.
+\label{eq:Main-faithful-LS-desc}
+\end{equation}
+Consequently the hypotheses of Theorem~\ref{thm:Main-nonvanishing-from-square-loop}
+hold at ledger step \(k\).
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:parity-transport}, the LS square-loop acts by sign on raw
+first-descendant classes in \(\mathcal V^1\):
+\[
+[\Gamma(\mathcal J)] = -[\mathcal J]
+\qquad\text{in }\mathcal V^1.
+\]
+Since \(L^{\mathrm{sel}}_{\Lambda_k}=\mathbb R\,\ell_{\Lambda_k}\subset\mathcal V^1\) is
+assumed to be a selected odd descendant line, this sign transport restricts to
+\[
+\mathrm{Act}^{\mathcal V^1}_{\sqLoop}(\ell_{\Lambda_k})
+=
+-\,\ell_{\Lambda_k}.
+\]
+
+Next, identify the selected quotient point with the image of the chosen generator.
+By assumption \textnormal{(c)},
+\[
+\mathfrak R_{\Lambda_k}(\ell_{\Lambda_k})
+=
+q_{\Lambda_k}(J_{\Lambda_k})
+\]
+for some \(J_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]\).
+But by definition of \(\overline{\Xi}^{(1)}_{\Lambda_k}\), the quotient value
+\(q_{\Lambda_k}(J)\) is independent of the chosen representative
+\(J\in[\Xi^{(1)}_{\Lambda_k}]\). Therefore
+\[
+\mathfrak R_{\Lambda_k}(\ell_{\Lambda_k})
+=
+\overline{\Xi}^{(1)}_{\Lambda_k}.
+\]
+
+We now prove that this quotient point is nonzero.
+Because \(\ell_{\Lambda_k}\neq 0\) by assumption \textnormal{(a)} and
+\(\ker\mathfrak R_{\Lambda_k}=\{0\}\) by assumption \textnormal{(e)}, one has
+\[
+\mathfrak R_{\Lambda_k}(\ell_{\Lambda_k})\neq 0.
+\]
+Using the identification just proved, this gives
+\[
+\overline{\Xi}^{(1)}_{\Lambda_k}\neq 0
+\qquad\text{in}\qquad
+E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}.
+\]
+
+Next, transport the square-loop action to the quotient.
+By assumption \textnormal{(d)},
+\[
+\mathfrak R_{\Lambda_k}(-\ell_{\Lambda_k})
+=
+-\,\mathfrak R_{\Lambda_k}(\ell_{\Lambda_k}).
+\]
+Substituting \(\mathfrak R_{\Lambda_k}(\ell_{\Lambda_k})=\overline{\Xi}^{(1)}_{\Lambda_k}\),
+we obtain
+\[
+\mathrm{Act}^{\mathrm{desc}}_{\sqLoop}\!\big(\overline{\Xi}^{(1)}_{\Lambda_k}\big)
+=
+-\,\overline{\Xi}^{(1)}_{\Lambda_k}.
+\]
+Since \(\overline{\Xi}^{(1)}_{\Lambda_k}\neq 0\) and the quotient
+\(E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}\) is a real vector space, the only fixed
+point of \(x\mapsto -x\) is \(x=0\). Hence
+\[
+-\,\overline{\Xi}^{(1)}_{\Lambda_k}
+\neq
+\overline{\Xi}^{(1)}_{\Lambda_k}.
+\]
+This proves \eqref{eq:Main-faithful-LS-desc}.
+
+Finally, compare with Theorem~\ref{thm:Main-nonvanishing-from-square-loop}.
+That theorem requires exactly two inputs on the selected quotient point:
+sign transport and nontriviality of the square-loop action.
+These are precisely what was established above, namely
+\[
+\mathrm{Act}^{\mathrm{desc}}_{\sqLoop}\!\big(\overline{\Xi}^{(1)}_{\Lambda_k}\big)
+=
+-\,\overline{\Xi}^{(1)}_{\Lambda_k}
+\qquad\text{and}\qquad
+\mathrm{Act}^{\mathrm{desc}}_{\sqLoop}\!\big(\overline{\Xi}^{(1)}_{\Lambda_k}\big)
+\neq
+\overline{\Xi}^{(1)}_{\Lambda_k}.
+\]
+Therefore the hypotheses of Theorem~\ref{thm:Main-nonvanishing-from-square-loop}
+hold at ledger step \(k\).
+\end{proof}
+
+\begin{theorem}[Nonvanishing from a same-tick square-loop witness on the transported descendant quotient]
+\label{thm:Main-nonvanishing-from-square-loop}
+Assume the weak polarized characterization interface
+\(\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\)
+\textnormal{(Definition~\ref{def:2T-char-weak})}. Fix a ledger step \(k\), and let
+\[
+q_{\Lambda_k}:E^-_{\Lambda_k}\longrightarrow E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}
+\]
+be the quotient map.
+Define the transported descendant quotient point by
+\[
+\overline{\Xi}^{(1)}_{\Lambda_k}
+:=
+q_{\Lambda_k}(J)
+\qquad
+\bigl(J\in[\Xi^{(1)}_{\Lambda_k}]\bigr),
+\]
+which is well defined because \([\Xi^{(1)}_{\Lambda_k}]\) is an affine class modulo
+\(\mathcal A^-_{\Lambda_k}\).
+Assume moreover that the abstract LS square-loop transports this selected quotient point by sign:
+\begin{equation}
+\mathrm{Act}^{\mathrm{desc}}_{\sqLoop}\!\big(\overline{\Xi}^{(1)}_{\Lambda_k}\big)
+=
+-\,\overline{\Xi}^{(1)}_{\Lambda_k},
+\label{eq:Main-square-loop-sign}
+\end{equation}
+and that this transport is nontrivial on the selected descendant point:
+\begin{equation}
+\mathrm{Act}^{\mathrm{desc}}_{\sqLoop}\!\big(\overline{\Xi}^{(1)}_{\Lambda_k}\big)
+\neq
+\overline{\Xi}^{(1)}_{\Lambda_k}.
+\label{eq:Main-square-loop-nontrivial}
+\end{equation}
+Then
+\[
+0\notin[\Xi^{(1)}_{\Lambda_k}].
+\]
+\end{theorem}
+
+\begin{proof}
+First note that \(\overline{\Xi}^{(1)}_{\Lambda_k}\) is well defined.
+Indeed, if \(J_1,J_2\in[\Xi^{(1)}_{\Lambda_k}]\), then
+\(
+J_2-J_1\in\mathcal A^-_{\Lambda_k}
+\),
+so
+\(
+q_{\Lambda_k}(J_1)=q_{\Lambda_k}(J_2)
+\)
+in the quotient \(E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}\).
+
+Assume for contradiction that
+\[
+0\in[\Xi^{(1)}_{\Lambda_k}].
+\]
+Then, since \([\Xi^{(1)}_{\Lambda_k}]\) is an affine class modulo \(\mathcal A^-_{\Lambda_k}\), its
+quotient point is the zero class:
+\[
+\overline{\Xi}^{(1)}_{\Lambda_k}
+=
+q_{\Lambda_k}(0)
+=
+0
+\qquad\text{in}\qquad
+E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}.
+\]
+Applying the square-loop transport law \eqref{eq:Main-square-loop-sign} then gives
+\[
+\mathrm{Act}^{\mathrm{desc}}_{\sqLoop}\!\big(\overline{\Xi}^{(1)}_{\Lambda_k}\big)
+=
+-\,\overline{\Xi}^{(1)}_{\Lambda_k}
+=
+-0
+=
+0
+=
+\overline{\Xi}^{(1)}_{\Lambda_k},
+\]
+which contradicts the nontriviality assumption \eqref{eq:Main-square-loop-nontrivial}.
+Therefore the assumption \(0\in[\Xi^{(1)}_{\Lambda_k}]\) is false, proving
+\[
+0\notin[\Xi^{(1)}_{\Lambda_k}].
+\]
+
+\end{proof}
+
+\begin{theorem}[Delayed selected line yields a nonzero quotient point]
+\label{thm:Main-delayed-selected-line-contract}
+Assume \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\).
+Fix consecutive ledger steps \(k\) and \(k+1\).
+Assume there are delayed-lift data
+\(
+\mathfrak L^{\mathrm{split}}_{k\to k+1},
+J^{\mathrm{split}}_{\Lambda_{k+1}},
+\overline\rho^{\mathrm{dom}}_{\Lambda_{k+1}}
+\),
+and a scalar \(c_{\Lambda_{k+1}}\) as displayed below.
+In particular, let
+\[
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}
+:=
+\mathfrak L^{\mathrm{split}}_{k\to k+1}(\widehat\ell^{\mathrm{delay}}_k)
+=
+q_{\Lambda_{k+1}}(J^{\mathrm{split}}_{\Lambda_{k+1}})
+\in
+\mathfrak D^-_{\Lambda_{k+1}},
+\]
+with
+\[
+J^{\mathrm{split}}_{\Lambda_{k+1}}
+\in
+[\Xi^{(1)}_{\Lambda_{k+1}}]\cap E^-_{\Lambda_{k+1}}.
+\]
+Assume moreover that
+\[
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}\neq 0
+\qquad\text{and}\qquad
+\overline\rho^{\mathrm{dom}}_{\Lambda_{k+1}}
+(\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}})
+=
+c_{\Lambda_{k+1}}\neq 0.
+\]
+Then:
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=*,itemsep=0.3em]
+\item
+  \(
+  \overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}\neq 0
+  \);
+\item
+  \[
+  \overline\rho^{\mathrm{dom}}_{\Lambda_{k+1}}
+  (\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}})
+  =
+  c_{\Lambda_{k+1}}\neq 0;
+  \]
+\item the map
+  \(
+  \mathfrak L^{\mathrm{split}}_{k\to k+1}
+  \)
+  is faithful on
+  \(
+  \widehat L^{\mathrm{sel,delay}}_k
+  \);
+\item the delayed selected-line supplement package
+  \(\mathbf{2T}_{\mathrm{sel}}^{\mathrm{delay}}\)
+  of Definition~\ref{def:2T-sel-delay} holds.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Items \textnormal{(i)} and \textnormal{(ii)} are assumed.
+Since \(\widehat L^{\mathrm{sel,delay}}_k\) is one-dimensional and
+\(
+\mathfrak L^{\mathrm{split}}_{k\to k+1}
+(\widehat\ell^{\mathrm{delay}}_k)
+=
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}
+\neq 0,
+\)
+the map \(\mathfrak L^{\mathrm{split}}_{k\to k+1}\) is faithful on
+\(\widehat L^{\mathrm{sel,delay}}_k\), proving
+\textnormal{(iii)}.
+The representative
+\(
+J^{\mathrm{split}}_{\Lambda_{k+1}}
+\)
+there satisfies
+\[
+q_{\Lambda_{k+1}}(J^{\mathrm{split}}_{\Lambda_{k+1}})
+=
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}.
+\]
+So every clause of Definition~\ref{def:2T-sel-delay} is satisfied.
+\end{proof}
+
+\begin{theorem}[Nonvanishing from the delayed lift]
+\label{thm:Main-nonvanishing-from-delayed-lift}
+Assume \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\).
+Fix consecutive ledger steps \(k\) and \(k+1\).
+Assume the delayed selected-line supplement package
+\(\mathbf{2T}_{\mathrm{sel}}^{\mathrm{delay}}\)
+from Definition~\ref{def:2T-sel-delay}.
+Then
+\[
+0\notin[\Xi^{(1)}_{\Lambda_{k+1}}].
+\]
+\end{theorem}
+
+\begin{proof}
+By Definition~\ref{def:2T-sel-delay}, there exists
+\(
+J^{\mathrm{split}}_{\Lambda_{k+1}}
+\in
+[\Xi^{(1)}_{\Lambda_{k+1}}]\cap E^-_{\Lambda_{k+1}}
+\)
+with
+\[
+q_{\Lambda_{k+1}}(J^{\mathrm{split}}_{\Lambda_{k+1}})
+=
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}.
+\]
+The same definition gives
+\(
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}\neq 0
+\).
+Assume for contradiction that
+\(
+0\in[\Xi^{(1)}_{\Lambda_{k+1}}]
+\).
+Then every representative of the affine class has quotient image zero, hence in particular
+\[
+q_{\Lambda_{k+1}}(J^{\mathrm{split}}_{\Lambda_{k+1}})=0,
+\]
+contradicting
+\(
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}\neq 0
+\).
+Therefore
+\(
+0\notin[\Xi^{(1)}_{\Lambda_{k+1}}]
+\).
+\end{proof}
+
+\begin{corollary}[Canonical representative is nonzero on the delayed route]
+\label{cor:Jcan-nonzero-from-delayed-lift}
+Assume \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}\) and the hypotheses of
+Theorem~\ref{thm:Main-nonvanishing-from-delayed-lift}.
+Then
+\[
+\mathcal J^{\mathrm{can}}_{\Lambda_{k+1}}\neq 0.
+\]
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:Main-nonvanishing-from-delayed-lift},
+\(
+0\notin[\Xi^{(1)}_{\Lambda_{k+1}}]
+\).
+If \(\mathcal J^{\mathrm{can}}_{\Lambda_{k+1}}=0\), then since
+\(
+\mathcal J^{\mathrm{can}}_{\Lambda_{k+1}}\in[\Xi^{(1)}_{\Lambda_{k+1}}]
+\)
+by Theorem~\ref{thm:finite-cutoff-Jcan}, one would have
+\(
+0\in[\Xi^{(1)}_{\Lambda_{k+1}}]
+\), contradiction.
+\end{proof}
+
+\begin{corollary}[Canonical dominant-kernel reentry on the delayed selected quotient line]
+\label{cor:Main-delayed-dominant-kernel-reentry}
+Fix consecutive ledger steps \(k\) and \(k+1\).
+Assume the hypotheses of
+Theorem~\ref{thm:Main-delayed-selected-line-contract}.
+Define
+\[
+N^{\mathrm{dom-null}}_{\Lambda_{k+1}}
+:=
+\ker \overline\rho^{\mathrm{dom}}_{\Lambda_{k+1}}
+\subset
+\mathfrak D^-_{\Lambda_{k+1}}.
+\]
+Assume furthermore that \(N^{\mathrm{dom-null}}_{\Lambda_{k+1}}\) is admissible
+as the mod-null datum and satisfies the required transversality condition.
+In particular, the mod-null selected line and its faithful realization map are canonically defined at
+\(\Lambda_{k+1}\).
+\end{corollary}
+
+\begin{proof}
+By the additional hypothesis, the dominant-kernel datum
+\(
+N^{\mathrm{dom-null}}_{\Lambda_{k+1}}
+\)
+is admissible as the mod-null datum, the required transversality holds,
+and the conclusions of the canonical mod-null reentry theorem hold at \(\Lambda_{k+1}\).
+\end{proof}
+
+\begin{remark}[Exact boundary of the delayed selected-line lane]
+\label{rem:Main-delayed-boundary}
+The delayed selected-line lane establishes a quotient-first delayed route:
+there is a delayed selected carrier at step \(k\), a faithful delayed lift to a nonzero dominant-active
+quotient point in
+\(\mathfrak D^-_{\Lambda_{k+1}}\),
+and a canonical dominant-kernel reentry lane.
+What is not yet derived from the delayed quotient data alone is the existence
+of one subordinate unit descendant realization refining that quotient point.
+Accordingly, this lane should not be presented as a
+fully closed microscopic reconstruction theorem.
+\end{remark}
+
+\begin{corollary}[Canonical representative is nonzero once the class is nonzero]
+\label{cor:Jcan-nonzero-from-class}
+Assume \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}\) and the hypotheses of
+Theorem~\ref{thm:Main-nonvanishing-from-square-loop}. Then
+\[
+\mathcal J^{\mathrm{can}}_{\Lambda_k}\neq 0.
+\]
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:Main-nonvanishing-from-square-loop},
+\(
+0\notin[\Xi^{(1)}_{\Lambda_k}]
+\).
+If \(\mathcal J^{\mathrm{can}}_{\Lambda_k}=0\), then since
+\(
+\mathcal J^{\mathrm{can}}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]
+\)
+by Theorem~\ref{thm:finite-cutoff-Jcan}, one would have
+\(
+0\in[\Xi^{(1)}_{\Lambda_k}]
+\), contradiction.
+\end{proof}
+
+\begin{theorem}[The characterization algebra is derived from the canonical representative]
+\label{thm:char-cal-to-alg}
+Assume \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}\). For each ledger step \(k\), let
+\[
+\mathcal O^{\mathrm{char}}_{\Lambda_k}
+:=
+\mathrm{alg}\Bigl\{\mathcal J^{\mathrm{can}}_{\Lambda_k},
+\bigl(\mathcal J^{\mathrm{can}}_{\Lambda_k}\bigr)^2\Bigr\}
+\subset \Fsloc.
+\]
+Then the characterization-algebra supplement
+\(\mathbf{2T}_{\mathrm{alg}}\) \textnormal{(Definition~\ref{def:2T-alg})} holds.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:finite-cutoff-Jcan}, the canonical representative
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\in E^-_{\Lambda_k}\subset\Fsloc\) is defined for each
+ledger step \(k\). Since \(\Fsloc\) is an algebra, the algebra generated by
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\) and its even square
+\(\bigl(\mathcal J^{\mathrm{can}}_{\Lambda_k}\bigr)^2\) is a distinguished subalgebra of
+\(\Fsloc\). This is exactly the datum required in Definition~\ref{def:2T-alg}.
+
+\end{proof}
+
+The nonzero-class input used below may now be supplied either by the same-tick
+obstruction/square-loop route of Theorem~\ref{thm:Main-nonvanishing-from-square-loop}
+or by the delayed lift route of
+Theorem~\ref{thm:Main-nonvanishing-from-delayed-lift}; the latter passes through
+the delayed \(k\to k+1\) step.
+
+\begin{proposition}[Canonical activity functional from a nonzero odd descendant class]
+\label{prop:char-activity-from-nonzero-class}
+Assume \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}\). Fix a ledger step \(k\).
+If \(0\notin[\Xi^{(1)}_{\Lambda_k}]\), equivalently
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\neq 0\), define
+\[
+\chi^{\mathrm{can}}_{\Lambda_k}(F)
+:=
+\frac{\mathsf B_{\Lambda_k}(F,\mathcal J^{\mathrm{can}}_{\Lambda_k})}
+{\mathsf B_{\Lambda_k}(\mathcal J^{\mathrm{can}}_{\Lambda_k},\mathcal J^{\mathrm{can}}_{\Lambda_k})}
+\qquad
+(F\in E^-_{\Lambda_k}).
+\]
+Then \(\chi^{\mathrm{can}}_{\Lambda_k}\) is a continuous nonzero linear functional on
+\(E^-_{\Lambda_k}\) satisfying
+\[
+\chi^{\mathrm{can}}_{\Lambda_k}(A)=0
+\qquad
+\forall\,A\in\mathcal A^-_{\Lambda_k},
+\]
+and
+\[
+\chi^{\mathrm{can}}_{\Lambda_k}(J)=1
+\qquad
+\forall\,J\in[\Xi^{(1)}_{\Lambda_k}].
+\]
+In particular, once the class is known to be nonzero, activity/orientation are
+derived canonically and require no extra weak-interface input.
+\end{proposition}
+
+\begin{proof}
+Continuity and linearity are immediate from the bilinearity of \(\mathsf B_{\Lambda_k}\),
+and the denominator is strictly positive because
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\neq 0\) and \(\mathsf B_{\Lambda_k}\) is positive
+definite.
+For \(A\in\mathcal A^-_{\Lambda_k}\), Proposition~\ref{prop:Jcan-orth} gives
+\[
+\mathsf B_{\Lambda_k}(\mathcal J^{\mathrm{can}}_{\Lambda_k},A)=0,
+\]
+hence \(\chi^{\mathrm{can}}_{\Lambda_k}(A)=0\).
+Now let \(J\in[\Xi^{(1)}_{\Lambda_k}]\). Since
+\(
+J-\mathcal J^{\mathrm{can}}_{\Lambda_k}\in\mathcal A^-_{\Lambda_k},
+\)
+write \(J=\mathcal J^{\mathrm{can}}_{\Lambda_k}+A\) with
+\(A\in\mathcal A^-_{\Lambda_k}\). Then
+\[
+\chi^{\mathrm{can}}_{\Lambda_k}(J)
+=
+\frac{\mathsf B_{\Lambda_k}(\mathcal J^{\mathrm{can}}_{\Lambda_k},\mathcal J^{\mathrm{can}}_{\Lambda_k}+A)}
+{\mathsf B_{\Lambda_k}(\mathcal J^{\mathrm{can}}_{\Lambda_k},\mathcal J^{\mathrm{can}}_{\Lambda_k})}
+=
+1
+\]
+by the orthogonality just proved.  In particular
+\(\chi^{\mathrm{can}}_{\Lambda_k}(\mathcal J^{\mathrm{can}}_{\Lambda_k})=1\), so the functional is
+nonzero.
+\end{proof}
+
+\begin{remark}[Canonicalization lives on the descendant class]
+\label{rem:class-not-whole-space}
+Theorem~\ref{thm:finite-cutoff-Jcan} is intentionally a theorem about the affine
+odd descendant class \([\Xi^{(1)}_{\Lambda_k}]\), not about all of
+\(E^-_{\Lambda_k}\). Once the class is known to be nonzero,
+Proposition~\ref{prop:char-activity-from-nonzero-class} supplies a canonical orientation
+functional, but that functional still lives on the already identified affine class and does not by
+itself pick a unique element of the full odd generator space.
+\end{remark}
+
+\begin{remark}[Selected-line lanes]
+\label{rem:Main-activity-gap}
+There are two selected-line sublanes.
+The same-tick package \(\mathbf{2T}_{\mathrm{sel}}\) is the abstract obstruction lane used
+to transport the square-loop sign and rule out extra collapse on a same-tick selected carrier.
+The delayed package \(\mathbf{2T}_{\mathrm{sel}}^{\mathrm{delay}}\) is the quotient-first
+delayed lane: it yields a nonzero dominant-active quotient point at
+\(\Lambda_{k+1}\), feeds the canonical dominant-kernel reentry theorem, and
+supplies the delayed odd-to-even route.
+Its nondegeneracy clause \(c_{\Lambda_{k+1}}\neq 0\) is built into the delayed package as an
+imported hypothesis; deriving that clause from stronger upstream transport/overlap input remains
+open, and the bridge-closing existence of one subordinate realization remains open.
+\end{remark}
+
+\subsection{Subprogram 3b: RG monotone and Hamiltonized odd derivation}
+\label{sec:subprogram3b}
+
+In this subsection we return to the RG monotone package and combine it with the
+canonicalized odd data obtained above to produce the Hamiltonized local odd
+derivation and its physical consequences on the sufficiently local boundary
+algebra.
+
+\begin{definition}[RG monotone]
+\label{def:RG-monotone}
+Assume $\mathbf{2T}_{\mathrm{RG}}$. We call $\mathcal O^{(0)}(u_0)\in\Fsloc$ a
+\emph{good observable} if it is $Q_t$--closed, represents a nontrivial class in
+$H^0(\Fsloc,Q_t)$, and defines the monotone via
+$M(u)=\langle \mathcal O^{(0)}(u)\rangle_{\rho_u}$.
+\par
+\end{definition}
+
+\begin{lemma}[RG slope equals the anomaly insertion]
+\label{lem:Qu-M}
+Assume $\mathbf{2T}_{\mathrm{RG}}$ and the anomalous descent
+\eqref{eq:anom-descent}. Then at the UV ceiling,
+\[
+\partial_u M(u)\big\rvert_{u_0}
+\;=\;
+-\big\langle \mathcal A^{(1)}(u_0)\big\rangle_{\rho_{u_0}}.
+\]
+In particular, if $\partial_u M(u)\rvert_{u_0}<0$, then
+$\big\langle \mathcal A^{(1)}(u_0)\big\rangle_{\rho_{u_0}}>0$.
+\end{lemma}
+
+\begin{proof}
+By $\mathbf{2T}_{\mathrm{RG}}$-\textbf{(M2)},
+$\partial_u M(u_0)=-\langle (Q_u^{\mathrm{phys}}\mathcal O^{(0)})(u_0)\rangle_{\rho_{u_0}}$.
+Taking the expectation value of \eqref{eq:anom-descent} and using
+$\langle Q_t X\rangle_{\rho_{u_0}}=0$ gives
+$\langle (Q_u^{\mathrm{phys}}\mathcal O^{(0)})(u_0)\rangle_{\rho_{u_0}}
+=\langle \mathcal A^{(1)}(u_0)\rangle_{\rho_{u_0}}$.
+\end{proof}
+
+\begin{proposition}[Nontrivial descendant sector detected by the RG slope]
+\label{prop:Qu-O0-nontrivial}
+Assume $\mathbf{2T}_{\mathrm{BRST}}+\mathbf{2T}_{\mathrm{RG}}$. If the monotone
+has nontrivial UV slope $\partial_u M(u)\rvert_{u_0}<0$, then the degree-one
+cohomology class
+\[
+\big[\, (Q_u^{\mathrm{phys}}\mathcal O^{(0)})(u_0)\,\big]\ \neq\ 0
+\qquad\text{in}\qquad H^1(\Fsloc,Q_t).
+\]
+\end{proposition}
+
+\begin{proof}
+By $\mathbf{2T}_{\mathrm{RG}}$-\textbf{(M2)}, $(Q_u^{\mathrm{phys}}\mathcal O^{(0)})(u_0)$
+is $Q_t$--closed (so it defines a class in $H^1(\Fsloc,Q_t)$).
+Suppose for contradiction that it is $Q_t$--exact:
+$(Q_u^{\mathrm{phys}}\mathcal O^{(0)})(u_0)=Q_tY$ for some $Y\in\Fsloc$.
+Then $\mathbf{2T}_{\mathrm{BRST}}$-\textbf{(B2)} gives
+$\langle (Q_u^{\mathrm{phys}}\mathcal O^{(0)})(u_0)\rangle_{\rho_{u_0}}
+=\langle Q_tY\rangle_{\rho_{u_0}}=0$.
+This contradicts Lemma~\ref{lem:Qu-M} under $\partial_u M(u)\rvert_{u_0}<0$.
+\end{proof}
+
+\begin{theorem}[Good observable from RG monotone]
+\label{thm:good-O0-from-RG}
+Under $\mathbf{2T}_{\mathrm{BRST}}+\mathbf{2T}_{\mathrm{RG}}$, there exists a
+nontrivial $Q_t$--closed representative $\mathcal O^{(0)}$ of the RG monotone and,
+by \eqref{eq:anom-descent}, a raw first-descendant potential \(\Xi^{(1)}\) together
+with an anomaly insertion $\mathcal A^{(1)}$ implementing the anomalous first
+descent.
+Moreover, every sufficiently local representative \(J\in[\Xi^{(1)}]\) is
+EB3-admissible in the sense of Definition~\ref{def:EB3-adm-J}
+(Lemma~\ref{lem:J-EB3-adm}).
+Moreover, if the UV slope is nontrivial ($\partial_u M(u)\rvert_{u_0}<0$), then
+$(Q_u^{\mathrm{phys}}\mathcal O^{(0)})(u_0)$ defines a nonzero class in
+$H^1(\Fsloc,Q_t)$ (Proposition~\ref{prop:Qu-O0-nontrivial}).
+\end{theorem}
+
+\begin{remark}[Cohomological vs.\ physical parity]
+\label{rem:two-gradings}
+Recall Definition~\ref{def:two-gradings}.  In particular, the first-descendant
+data \(\Xi^{(1)}\) have cohomological degree
+\(0\) at representative level, whereas the canonical odd representative
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\) is chosen in the physically odd sector
+\(\Gamma(\mathcal J^{\mathrm{can}}_{\Lambda_k})=-\mathcal J^{\mathrm{can}}_{\Lambda_k}\).
+\end{remark}
+
+\begin{definition}[Hamiltonized odd derivation]
+\label{def:Main-delta}
+Assume \(\mathbf{2T}_{\mathrm{Peierls}}+\mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}\) so the
+Peierls bracket is defined on \(\Fsloc\) and the canonical representative
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\) is available on the ledger-step
+skeleton. For a fixed ledger step \(k\), define
+\[
+\delta_{\Lambda_k}(A) := \{\mathcal J^{\mathrm{can}}_{\Lambda_k},A\}_{\mathrm P,\Lambda_k}
+\]
+for $A\in\Fsloc$.
+\end{definition}
+
+\begin{lemma}[Hamiltonian parity $\Rightarrow$ derivation parity]
+\label{lem:Gamma-parity-of-delta}
+Assume $\Gamma$ is a Poisson automorphism on $\Fsloc$ (Lemma~\ref{lem:Gamma-Poisson}).
+If \(\Gamma(\mathcal J^{\mathrm{can}}_{\Lambda_k})=-\mathcal J^{\mathrm{can}}_{\Lambda_k}\),
+then the Hamiltonian derivation
+\(\delta_{\Lambda_k}:=\{\mathcal J^{\mathrm{can}}_{\Lambda_k},-\}_{\mathrm P,\Lambda_k}\)
+is \(\Gamma\)--odd:
+\[
+\Gamma\delta_{\Lambda_k}\Gamma^{-1}=-\delta_{\Lambda_k}.
+\]
+\end{lemma}
+
+\begin{proof}
+For $F\in\Fsloc$,
+$
+\Gamma\delta_{\Lambda_k}(F)
+=\Gamma\{\mathcal J^{\mathrm{can}}_{\Lambda_k},F\}_{\mathrm P,\Lambda_k}
+=\{\Gamma\mathcal J^{\mathrm{can}}_{\Lambda_k},\Gamma F\}_{\mathrm P,\Lambda_k}
+=-\{\mathcal J^{\mathrm{can}}_{\Lambda_k},\Gamma F\}_{\mathrm P,\Lambda_k}
+=-\delta_{\Lambda_k}(\Gamma F).
+$
+\end{proof}
+
+\begin{remark}[Optional Peierls closure identity]
+\label{lem:Main-closure-target}
+For the chosen first-descendant potential
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\), one may prove the existence of a translation-direction Hamiltonian
+$\mathcal H_\xi\in\Fsloc$ (for some constant Minkowski vector $\xi^\mu$) such
+that, modulo Peierls-central terms and the standard $Q_t$-exact/contact
+ambiguities in the locality quotient,
+\begin{equation}
+\label{eq:Main-closure-selfbracket}
+\{\mathcal J^{\mathrm{can}}_{\Lambda_k},\mathcal J^{\mathrm{can}}_{\Lambda_k}\}_{\mathrm P,\Lambda_k}\ =\ 2\,\mathcal H_\xi.
+\end{equation}
+If \eqref{eq:Main-closure-selfbracket} holds, then for all $F\in\Fsloc$,
+\[
+\delta_{\Lambda_k}^2(F)
+\;=\;\tfrac12\,\big\{\{\mathcal J^{\mathrm{can}}_{\Lambda_k},\mathcal J^{\mathrm{can}}_{\Lambda_k}\}_{\mathrm P,\Lambda_k},\,F\big\}_{\mathrm P,\Lambda_k}
+\;=\;\{\mathcal H_\xi,F\}_{\mathrm P},
+\]
+so \(\delta_{\Lambda_k}^2\) acts as the (inner) translation derivation generated by
+$\mathcal H_\xi\).
+\end{remark}
+
+\begin{proposition}[Characterization activity implies nontriviality of $\delta$ on the BU/AQFT core]
+\label{prop:delta-nontrivial}
+Assume
+\(\mathbf{2T}_{\mathrm{Peierls}}
++\mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}
++\mathbf{2T}_{\mathrm{char}}^{\mathrm{act}}\).
+Fix a ledger step \(k\), and let
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]\)
+be the canonical representative of Theorem~\ref{thm:finite-cutoff-Jcan}.
+Then there exists an even sufficiently local probe
+\[
+A\in\mathcal P^+_{\Lambda_k}\subset\Fsloc
+\]
+such that
+\[
+\{\mathcal J^{\mathrm{can}}_{\Lambda_k},A\}_{\mathrm P,\Lambda_k}\neq 0.
+\]
+Equivalently, the Hamiltonized derivation
+\(\delta_{\Lambda_k}=\{\mathcal J^{\mathrm{can}}_{\Lambda_k},-\}_{\mathrm P,\Lambda_k}\)
+is nontrivial on \(\Fsloc\).  After passage to the Borchers--Uhlmann core
+\textnormal{(Definition~\ref{def:BU-core} and Lemma~\ref{lem:delta-net})}, this gives a
+nontrivial graded *-derivation on \(\mathfrak A_{\mathrm{fin}}\).
+\end{proposition}
+
+\begin{proof}
+Because
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]\),
+Definition~\ref{def:2T-char-weak}\textnormal{\textbf{(C5)}} gives
+\[
+\chi_{\Lambda_k}(\mathcal J^{\mathrm{can}}_{\Lambda_k})
+=
+\varepsilon_{\Lambda_k}\neq 0.
+\]
+If instead
+\[
+\{\mathcal J^{\mathrm{can}}_{\Lambda_k},A\}_{\mathrm P,\Lambda_k}=0
+\qquad
+\forall\,A\in\mathcal P^+_{\Lambda_k},
+\]
+then Definition~\ref{def:2T-char-act} would force
+\[
+\chi_{\Lambda_k}(\mathcal J^{\mathrm{can}}_{\Lambda_k})=0,
+\]
+contradiction. Therefore some
+\(
+A\in\mathcal P^+_{\Lambda_k}\subset\Fsloc
+\)
+satisfies
+\[
+\{\mathcal J^{\mathrm{can}}_{\Lambda_k},A\}_{\mathrm P,\Lambda_k}\neq 0.
+\]
+For that same \(A\), the BU-core extension from Lemma~\ref{lem:delta-net} satisfies
+\[
+\delta_{\Lambda_k}(\Phi(A))
+=
+\Phi\!\bigl(\{\mathcal J^{\mathrm{can}}_{\Lambda_k},A\}_{\mathrm P,\Lambda_k}\bigr).
+\]
+Since the Borchers--Uhlmann core imposes only the linearity, *-structure, and
+locality relations on generator symbols, a nonzero local functional gives a
+nonzero generator symbol. Hence \(\delta_{\Lambda_k}\) is nontrivial on
+\(\mathfrak A_{\mathrm{fin}}\) as well.
+\end{proof}
+
+\begin{lemma}[Derivation and locality of the canonical Hamiltonian action]
+\label{lem:Main-delta-derivation}
+Assume
+\(\mathbf{2T}_{\mathrm{Peierls}}+\mathbf{2T}_{\mathrm{EBC}}+\mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}\),
+and fix the EB3-admissible canonical representative
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\in E^-_{\Lambda_k}\)
+\textnormal{(Theorem~\ref{thm:finite-cutoff-Jcan} and Lemma~\ref{lem:J-EB3-adm})}.
+Then
+\[
+\delta_{\Lambda_k}(F):=\{\mathcal J^{\mathrm{can}}_{\Lambda_k},F\}_{\mathrm P,\Lambda_k}
+\]
+is a graded derivation on \(\Fsloc\). Moreover, for every double cone \(O\),
+\[
+\delta_{\Lambda_k}(\Fsloc(O))\subset\Fsloc(O),
+\]
+so the BU-core assignment
+\(\delta_{\Lambda_k}(\Phi(F)):=\Phi(\delta_{\Lambda_k}F)\) from
+Definition~\ref{def:2T-EBC}\textnormal{(EB3)} is local on generators.
+\end{lemma}
+
+\begin{proof}
+By Theorem~\ref{thm:finite-cutoff-Jcan}, the canonical representative
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\) belongs to the odd sufficiently local class
+\(E^-_{\Lambda_k}\subset\Fsloc\), so it is an admissible input for the Peierls
+bracket.  Theorem~\ref{thm:cosmo-derived-Peierls} identifies the Peierls bracket as
+a graded Poisson bracket on \(\Fsloc\); for fixed
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\), the Leibniz and Jacobi identities therefore
+imply that the Hamiltonian adjoint action
+\(
+F\mapsto\{\mathcal J^{\mathrm{can}}_{\Lambda_k},F\}_{\mathrm P,\Lambda_k}
+\)
+is a graded derivation on \(\Fsloc\).
+
+For locality, let \(F\in\Fsloc(O)\). The sufficiently local class is closed under
+the Peierls construction in the same locality regime used in
+\(\mathbf{2T}_{\mathrm{Peierls}}\)-\textbf{(P5)} and the EB3 estimate, so the
+bracket with the fixed local generator \(\mathcal J^{\mathrm{can}}_{\Lambda_k}\) remains
+supported in the same double cone \(O\). Hence
+\(\delta_{\Lambda_k}(\Fsloc(O))\subset\Fsloc(O)\). The BU-core extension from
+Definition~\ref{def:2T-EBC}\textnormal{(EB3)} is therefore local on generators.
+\end{proof}
+
+\begin{lemma}[$\Gamma$-oddness of the Hamiltonized derivation]
+\label{lem:Main-delta-omega-odd}
+Assume \(\mathbf{2T}_{\mathrm{LS}}+\mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}\) and
+Lemma~\ref{lem:Gamma-Poisson}. For the canonical representative
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\in E^-_{\Lambda_k}\), one has
+\[
+\Gamma\delta_{\Lambda_k}\Gamma^{-1}=-\delta_{\Lambda_k}.
+\]
+\end{lemma}
+
+\begin{proof}
+With \(\Gamma(\mathcal J^{\mathrm{can}}_{\Lambda_k})=-\mathcal J^{\mathrm{can}}_{\Lambda_k}\), Lemma~\ref{lem:Gamma-Poisson} gives for
+all $A\in\Fsloc$:
+\[
+\Gamma\delta_{\Lambda_k}(A)
+=\Gamma\{\mathcal J^{\mathrm{can}}_{\Lambda_k},A\}_{\mathrm P,\Lambda_k}
+=\{\Gamma\mathcal J^{\mathrm{can}}_{\Lambda_k},\Gamma A\}_{\mathrm P,\Lambda_k}
+=-\{\mathcal J^{\mathrm{can}}_{\Lambda_k},\Gamma A\}_{\mathrm P,\Lambda_k}
+=-\delta_{\Lambda_k}(\Gamma A),
+\]
+so \(\Gamma\delta_{\Lambda_k}\Gamma^{-1}=-\delta_{\Lambda_k}\).
+\end{proof}
+
+\begin{theorem}[Peierls Hamiltonization in $\mathbf{2T}_{\mathrm{Main}}^{\mathrm{spine}}$]
+\label{thm:Main-Peierls-Hamiltonization}
+Assume \(\mathbf{2T}_{\mathrm{Main}}^{\mathrm{spine}}\)
+\textnormal{(Definition~\ref{def:2T-Main-spine})}.
+Then for each ledger step \(k\), the canonical odd representative
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\) Hamiltonizes to a well-defined local odd
+\[
+\delta_{\Lambda_k}
+:=
+\{\mathcal J^{\mathrm{can}}_{\Lambda_k},-\}_{\mathrm P,\Lambda_k}
+\]
+on \(\Fsloc\), and \(\delta_{\Lambda_k}\) is physically \(\Gamma\)-odd.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:finite-cutoff-Jcan}, each ledger step \(k\) carries a canonical
+odd representative \(\mathcal J^{\mathrm{can}}_{\Lambda_k}\in E^-_{\Lambda_k}\), and
+Lemma~\ref{lem:J-EB3-adm} shows that this representative is EB3-admissible.  The
+Hamiltonian action
+\(
+\delta_{\Lambda_k}=\{\mathcal J^{\mathrm{can}}_{\Lambda_k},-\}_{\mathrm P,\Lambda_k}
+\)
+is therefore well-defined on \(\Fsloc\), and
+Lemma~\ref{lem:Main-delta-derivation} gives both the graded derivation property and
+locality.  Lemma~\ref{lem:Main-delta-omega-odd} supplies the parity statement
+\(
+\Gamma\delta_{\Lambda_k}\Gamma^{-1}=-\delta_{\Lambda_k}
+\).
+Hence the canonical representative Hamiltonizes to a well-defined local physically
+odd derivation, as claimed.
+\end{proof}
+
+\begin{proposition}[Physical invariance under ambiguity-triviality]
+\label{prop:Main-physical-invariance-ambiguity}
+Fix a ledger step \(k\), and let \(J_1,J_2\in[\Xi^{(1)}_{\Lambda_k}]\), so
+\(J_2-J_1\in\mathcal A^-_{\Lambda_k}\). Define
+\[
+\delta^{(i)}_{\Lambda_k}:=\{J_i,-\}_{\mathrm P,\Lambda_k}
+\qquad (i=1,2).
+\]
+If every ambiguity direction \(A\in\mathcal A^-_{\Lambda_k}\) acts trivially on the
+physical observable sector, then \(\delta^{(1)}_{\Lambda_k}\) and
+\(\delta^{(2)}_{\Lambda_k}\) agree there. More generally, if for every
+\(A\in\mathcal A^-_{\Lambda_k}\) and every physical local observable \(F\) the
+Peierls bracket \(\{A,F\}_{\mathrm P,\Lambda_k}\) vanishes in the physical quotient
+\textnormal{(equivalently: belongs to the physical null ideal)}, then the induced
+physical Peierls derivation is independent of the chosen representative in
+\([\Xi^{(1)}_{\Lambda_k}]\).
+\end{proposition}
+
+\begin{proof}
+Since \(J_2-J_1\in\mathcal A^-_{\Lambda_k}\), bilinearity of the Peierls bracket gives
+\[
+\delta^{(2)}_{\Lambda_k}(F)-\delta^{(1)}_{\Lambda_k}(F)
+=\{J_2-J_1,F\}_{\mathrm P,\Lambda_k}.
+\]
+If every ambiguity direction acts trivially on the physical observable sector, the
+right-hand side vanishes there, so the two derivations agree on physical observables.
+Under the weaker null-ideal hypothesis, the same identity shows that the difference
+vanishes after passage to the physical quotient, hence the induced physical derivation
+depends only on the class \([\Xi^{(1)}_{\Lambda_k}]\).
+\end{proof}
+
+\begin{remark}[Need for the ambiguity-triviality hypothesis]
+The weak package \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\) does not by
+itself imply ambiguity-triviality on physical observables. A separate ambiguity
+supplement may impose ambiguity-triviality on the characterization algebra and
+representative-independence of the induced action of
+\([\Xi^{(1)}_{\Lambda_k}]\) on the relevant reduced sector.
+Proposition~\ref{prop:Main-physical-invariance-ambiguity} is the corresponding
+statement after passage to the AQFT/HLS physical sector.
+\end{remark}
+
+% ============================================================
+\subsection{Subprogram 3c: AQFT net and HLS on the Minkowski boundary}
+\label{sec:subprogram3c}
+
+\paragraph{Minkowski boundary chart.}
+Cosmology theory provides the boundary local algebraic data and the Peierls
+bracket.  For the AQFT/HLS analysis below we work on a chosen Minkowski
+boundary chart on which \(\mathbf{2T}_{\mathrm{EBC}}\) is assumed.  No further
+details of the cosmology construction enter in this part of the argument.
+
+\begin{definition}[Borchers--Uhlmann local net]
+\label{def:BU-net}
+Recall Definition~\ref{def:BU-core}. The assignment $O\mapsto\mathfrak A_{\mathrm{BU}}(O)$
+defines a net of local *-algebras on $\mathbb R^{1,3}$.  We write $\mathfrak A(O)$ for
+the completion in the vacuum representation obtained in Subprogram~1b
+(Theorem~\ref{thm:subprogram1b-Wightman}).
+\end{definition}
+
+\begin{proposition}[Haag--Kastler properties]
+\label{prop:HK}
+Assume Theorem~\ref{thm:subprogram1b-Wightman}. Then the net
+$O\mapsto\mathfrak A(O)$ satisfies isotony and locality and carries a
+Poincar\'e covariant action $\alpha_{(a,\Lambda)}$ with positive-energy
+representation in the vacuum GNS space.
+\end{proposition}
+
+\begin{lemma}[Parity on the net]
+\label{lem:Gamma-net}
+The involution $\Gamma$ extends to a *-automorphism of the net,
+$\Gamma:\mathfrak A(O)\to\mathfrak A(O)$, and defines a $\mathbb Z_2$ grading
+$\mathfrak A=\mathfrak A^{+}\oplus\mathfrak A^{-}$.
+\end{lemma}
+
+\begin{lemma}[Local graded derivation]
+\label{lem:delta-net}
+Assume Theorem~\ref{thm:subprogram1b-Wightman} and
+Theorem~\ref{thm:Main-Peierls-Hamiltonization}. Define \(\delta_{\Lambda_k}\) on BU generators
+by
+\[
+\delta_{\Lambda_k}\big(\Phi(F)\big)\ :=\ \Phi\big(\delta_{\Lambda_k} F\big),
+\qquad
+\delta_{\Lambda_k} F := \{\mathcal J^{\mathrm{can}}_{\Lambda_k},F\}_{\mathrm P,\Lambda_k}.
+\]
+Then \(\delta_{\Lambda_k}\) extends uniquely to a graded *-derivation on the polynomial core
+$\mathfrak A_{\mathrm{fin}}$ (Definition~\ref{def:A-fin}) and is local in the
+sense that \(\delta_{\Lambda_k}(\mathfrak A_{\mathrm{fin}}\cap\mathfrak A_{\mathrm{BU}}(O))
+\subset \mathfrak A_{\mathrm{BU}}(O)$.
+\end{lemma}
+
+\begin{proof}
+The Borchers--Uhlmann algebra $\mathfrak A_{\mathrm{BU}}(O)$ is generated by the
+symbols $\Phi(F)$ with $F\in\Fsloc(O)$, modulo the defining *-structure
+$\Phi(F)^*=\Phi(\overline F)$ and the locality relations for spacelike separated
+supports.  We must check that the assignment on generators is compatible with
+these relations.
+
+\paragraph{Compatibility with the *-structure.}
+Using $\Phi(F)^*=\Phi(\overline F)$ and the definition of $\delta$ on
+generators,
+\[
+\delta_{\Lambda_k}(\Phi(F)^*)
+=\delta_{\Lambda_k}(\Phi(\overline F))
+=\Phi(\delta_{\Lambda_k}(\overline F)).
+\]
+Since \(\delta_{\Lambda_k} F=\{\mathcal J^{\mathrm{can}}_{\Lambda_k},F\}_{\mathrm P,\Lambda_k}\) is defined by the (real)
+Peierls bracket, it respects complex conjugation on sufficiently local
+functionals: \(\delta_{\Lambda_k}(\overline F)=\overline{\delta_{\Lambda_k}F}\).  Therefore
+$
+\delta_{\Lambda_k}(\Phi(F)^*)=\Phi(\overline{\delta_{\Lambda_k}F})=\delta_{\Lambda_k}(\Phi(F))^*,
+$
+so \(\delta_{\Lambda_k}\) is a *-derivation on generators.
+
+\paragraph{Compatibility with locality relations.}
+Let $F_i\in\Fsloc(O_i)$ with $O_1$ spacelike separated from $O_2$, so the defining
+relations impose $[\Phi(F_1),\Phi(F_2)]=0$ in the BU algebra.
+By Lemma~\ref{lem:Main-delta-derivation}, \(\delta_{\Lambda_k}\) preserves locality on \(\Fsloc\),
+so \(\delta_{\Lambda_k} F_i\in\Fsloc(O_i)\).
+Hence \( [\Phi(\delta_{\Lambda_k} F_1),\Phi(F_2)]=[\Phi(F_1),\Phi(\delta_{\Lambda_k} F_2)]=0 \) by the same
+BU locality relations, and applying the graded Leibniz rule to the commutator
+shows \(\delta_{\Lambda_k}([\Phi(F_1),\Phi(F_2)])=0\).  Thus \(\delta_{\Lambda_k}\) descends to the quotient
+defining $\mathfrak A_{\mathrm{BU}}(O)$.
+
+\paragraph{Extension and uniqueness.}
+The polynomial core $\mathfrak A_{\mathrm{fin}}$ is generated by finite
+polynomials in the generators $\Phi(F)$.  Since \(\delta_{\Lambda_k}\) is fixed on generators
+and required to satisfy the graded Leibniz rule, it extends uniquely to a graded
+*-derivation on $\mathfrak A_{\mathrm{fin}}$.  Locality of the extension follows
+from \(\delta_{\Lambda_k}(\Fsloc(O))\subset\Fsloc(O)\).
+\end{proof}
+
+\begin{lemma}[Vacuum invariance on the even subalgebra]
+\label{lem:delta-vacuum-invariant}
+Assume Theorem~\ref{thm:subprogram1b-Wightman} and
+Lemma~\ref{lem:varpi-Gamma-invariant} (so $\varpi\circ\Gamma=\varpi$). Assume
+moreover that \(\delta_{\Lambda_k}\) is \(\Gamma\)-odd in the sense that
+\(\Gamma\delta_{\Lambda_k}\Gamma^{-1}=-\delta_{\Lambda_k}\) (Lemma~\ref{lem:Main-delta-omega-odd}). Then
+\[
+\varpi(\delta_{\Lambda_k}(A))=0\qquad\text{for all }A\in\mathfrak A^{+}.
+\]
+\end{lemma}
+
+\begin{proof}
+If $A\in\mathfrak A^{+}$, then $\Gamma(A)=A$, hence
+\[
+\varpi(\delta_{\Lambda_k}(A))
+=\varpi(\Gamma(\delta_{\Lambda_k}(A)))
+=\varpi\big((\Gamma\delta_{\Lambda_k}\Gamma^{-1})(\Gamma A)\big)
+=\varpi\big(-\delta_{\Lambda_k}(A)\big)
+=-\varpi(\delta_{\Lambda_k}(A)).
+\]
+\end{proof}
+
+\begin{theorem}[Uniform graph bound for the canonical implementer candidate]
+\label{thm:Q0-uniform-graph-bound}
+Assume Theorem~\ref{thm:subprogram1b-Wightman}, Lemma~\ref{lem:delta-net},
+Definition~\ref{def:2T-EBC} \textnormal{(EB3)}, and the fixed-generator
+EB3-admissibility package of Definition~\ref{def:EB3-adm-J} for the canonical
+representative \(\mathcal J^{\mathrm{can}}_{\Lambda_k}\). Define \(Q_0\) on the
+vacuum core \(\mathcal D_0\) by
+\[
+Q_0\,\pi(B)\Omega := i\,\pi(\delta_{\Lambda_k}(B))\Omega
+\qquad(B\in\mathfrak A_{\mathrm{fin}}).
+\]
+Then there exist an integer \(m\ge 0\) and a constant \(C_*>0\), depending only
+on the fixed canonical representative and the vacuum representation, such that
+\[
+\|Q_0\psi\|
+\le
+C_*\,\|(1+H)^m\psi\|
+\qquad(\psi\in\mathcal D_0).
+\]
+Equivalently, \(Q_0\) is graph-bounded on \(\mathcal D_0\) by one fixed power of
+\((1+H)\).
+\end{theorem}
+
+\begin{proof}
+Definition~\ref{def:EB3-adm-J} fixes one Sobolev order
+\(\sigma>\frac52\) for the chosen canonical generator, and
+Lemma~\ref{lem:J-EB3-adm} shows that the corresponding finitely many locality/Sobolev
+seminorms are cutoff-uniform for that fixed
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\). In the cosmology proof of EB3, these
+seminorms are the only source of the graph-bound constants, while the power of
+\((1+H)\) depends only on the fixed Sobolev order. Hence the regionwise EB3 bounds
+for \(\delta_{\Lambda_k}\) may be restated, for this fixed generator, in the form
+\[
+\|\pi(\delta_{\Lambda_k}(B))\Omega\|
+\le
+C_*\,\|(1+H)^m\pi(B)\Omega\|
+\qquad(B\in\mathfrak A_{\mathrm{fin}})
+\]
+with one common exponent \(m\) and one common constant \(C_*\). Writing
+\(\psi=\pi(B)\Omega\) gives the displayed graph bound for \(Q_0\).
+\end{proof}
+
+\begin{proposition}[Implementability from an energy bound]
+\label{prop:delta-implementable}
+Assume the hypotheses of Theorem~\ref{thm:Q0-uniform-graph-bound}. Then there
+exists a densely defined closable operator \(Q\) on \(\mathcal H\) with
+\(\Omega\in\mathcal D(Q)\), \(Q\Omega=0\), such that on the core \(\mathcal D_0\) one has
+\[
+\delta_{\Lambda_k}(A)=i[Q,\pi(A)]_{\mathrm s}\qquad(A\in\mathfrak A_{\mathrm{fin}}).
+\]
+\end{proposition}
+
+\begin{proof}
+Define an operator $Q_0$ on the GNS core $\mathcal D_0=\pi(\mathfrak A_{\mathrm{fin}})\Omega$
+by
+\[
+Q_0\,\pi(B)\Omega \;:=\; i\,\pi(\delta_{\Lambda_k}(B))\Omega
+\qquad(B\in\mathfrak A_{\mathrm{fin}}).
+\]
+
+\paragraph{Well-definedness.}
+If $\pi(B)\Omega=0$, then Theorem~\ref{thm:Q0-uniform-graph-bound} gives
+\[
+\|\pi(\delta_{\Lambda_k}(B))\Omega\|
+\le
+C_*\,\|(1+H)^m\,\pi(B)\Omega\|
+=0,
+\]
+so \(\pi(\delta_{\Lambda_k}(B))\Omega=0\) and $Q_0$ is well-defined.
+
+\paragraph{Implementation identity on $\mathcal D_0$.}
+Let $A,B\in\mathfrak A_{\mathrm{fin}}$.  Using the definition of $Q_0$ and the
+graded Leibniz rule for $\delta$,
+\[
+\begin{aligned}
+[Q_0,\pi(A)]_{\mathrm s}\,\pi(B)\Omega
+&=Q_0\,\pi(AB)\Omega-(-1)^{|A|}\pi(A)\,Q_0\,\pi(B)\Omega \\
+&=i\,\pi(\delta_{\Lambda_k}(AB))\Omega-(-1)^{|A|}i\,\pi(A\delta_{\Lambda_k}(B))\Omega \\
+&=i\,\pi(\delta_{\Lambda_k}(A)B)\Omega
+\;=\;i\,\pi(\delta_{\Lambda_k}(A))\,\pi(B)\Omega,
+\end{aligned}
+\]
+so \(\delta_{\Lambda_k}(A)=i[Q_0,\pi(A)]_{\mathrm s}\) on \(\mathcal D_0\).
+
+\paragraph{Closability and extension.}
+By Theorem~\ref{thm:Q0-uniform-graph-bound},
+\[
+\|Q_0\psi\|
+\le
+C_*\,\|(1+H)^m\psi\|
+\qquad(\psi\in\mathcal D_0).
+\]
+Thus \(Q_0\) is bounded relative to the closed positive selfadjoint operator
+\((1+H)^m\) on the invariant core \(\mathcal D_0\). Relative graph-boundedness
+therefore implies that \(Q_0\) is closable; let \(Q\) be its closure. Then \(Q\)
+is densely defined and closable, contains \(\Omega\) in its domain, and the
+implementation identity remains valid on \(\mathcal D_0\).
+
+Finally, since \(1\in\mathfrak A_{\mathrm{fin}}\) and every derivation annihilates
+the unit,
+\[
+Q_0\Omega
+=
+Q_0\,\pi(1)\Omega
+=
+i\,\pi(\delta_{\Lambda_k}(1))\Omega
+=
+0.
+\]
+Because \(Q\) is the closure of \(Q_0\), it follows that \(\Omega\in\mathcal D(Q)\)
+and \(Q\Omega=0\).
+\end{proof}
+
+\begin{lemma}[Noether current datum for a Peierls-inner odd derivation]
+\label{lem:peierls-noether-current-datum}
+Assume Theorem~\ref{thm:subprogram1b-Wightman},
+Definition~\ref{def:2T-EBC},
+and \(\mathbf{2T}_{\mathrm{Peierls}}\)\textnormal{-(P2)--(P5)}.
+Let \(\mathcal J\in\Fsloc(O_{\mathcal J})\) be physically odd and EB3-admissible, and
+define the local graded *-derivation
+\[
+\delta_{\mathcal J}(F):=\{\mathcal J,F\}_{\mathrm P}
+\qquad(F\in\Fsloc),
+\]
+extended to \(\mathfrak A_{\mathrm{fin}}\) by
+\(\delta_{\mathcal J}(\Phi(F)):=\Phi(\delta_{\mathcal J}F)\) and the graded Leibniz rule.
+Then there exists a local vector-valued operator-valued distribution
+\[
+j^\mu_{\delta_{\mathcal J}}(x)
+\]
+on the vacuum core \(\mathcal D_0\) with the following properties.
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=*,itemsep=0.35em]
+\item \textbf{Locality, *-compatibility, and temperedness.}
+  For every compactly supported smooth test vector \(h_\mu\), the smeared operator
+  \[
+  j_{\delta_{\mathcal J}}(h):=\int d^4x\,h_\mu(x)\,j^\mu_{\delta_{\mathcal J}}(x)
+  \]
+  is localized in \(\operatorname{supp} h\), acts on \(\mathcal D_0\), and satisfies
+  \[
+  j_{\delta_{\mathcal J}}(h)^*=j_{\delta_{\mathcal J}}(\overline h)
+  \]
+  on \(\mathcal D_0\).
+  For every \(\psi,\phi\in\mathcal D_0\), the map
+  \(h\mapsto \langle \psi,j_{\delta_{\mathcal J}}(h)\phi\rangle\)
+  is a tempered distribution of finite order.
+\item \textbf{Conservation.}
+  \[
+  \partial_\mu j^\mu_{\delta_{\mathcal J}}=0
+  \]
+  in the distributional/Wightman sense.
+\item \textbf{Poincar\'e covariance.}
+  Writing \(g=(a,\Lambda)\) and
+  \((g\cdot h)_\mu(x):=\Lambda_\mu{}^\nu h_\nu(g^{-1}x)\),
+  one has on \(\mathcal D_0\)
+  \[
+  U(g)\,j_{\delta_{\mathcal J}}(h)\,U(g)^{-1}
+  =
+  j_{\delta_{\mathcal J}}(g\cdot h).
+  \]
+\item \textbf{Charge-implementation on local vectors.}
+  Fix a standard time mollifier \(\chi_\varepsilon\in C_c^\infty(\mathbb R)\) with
+  \(\int \chi_\varepsilon(s)\,ds=1\), and let \(f_R\in C_c^\infty(\mathbb R^3)\) be an
+  equal-time spatial cutoff family with \(0\le f_R\le 1\) and \(f_R\to 1\) pointwise.
+  Define
+  \[
+  h^\mu_{t,R,\varepsilon}(x):=\delta^\mu_0\,\chi_\varepsilon(x^0-t)\,f_R(\vec x),
+  \qquad
+  Q_{R,\varepsilon}(t):=j_{\delta_{\mathcal J}}(h_{t,R,\varepsilon}).
+  \]
+  After the vacuum normalization \(Q_{R,\varepsilon}(t)\Omega=0\), the following holds:
+  for every double cone \(O\) and every \(\psi=\pi(B)\Omega\in\mathcal D_0(O)\),
+  there exists \(R_0=R_0(O,t,\varepsilon)\) such that for all \(R\ge R_0\),
+  \[
+  Q_{R,\varepsilon}(t)\psi
+  =
+  i\,\pi(\delta_{\mathcal J}(B))\Omega.
+  \]
+  Equivalently, for every local \(A\in\mathfrak A_{\mathrm{fin}}(O)\) and every
+  \(\psi\in\mathcal D_0(O)\),
+  \[
+  i\,[Q_{R,\varepsilon}(t),\pi(A)]_{\mathrm s}\psi
+  =
+  \pi(\delta_{\mathcal J}(A))\psi
+  \qquad(R\gg 1).
+  \]
+\item \textbf{Uniqueness of the datum.}
+  Any other current datum with the same properties differs from
+  \(j^\mu_{\delta_{\mathcal J}}\) by a local improvement
+  \(
+  \partial_\nu B^{[\nu\mu]}
+  \)
+  and a conserved current whose cutoff charges act trivially on the induced
+  derivation.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+The proof has three steps.
+
+\paragraph{Step 1: classical Noether current from the symplectic current.}
+By \(\mathbf{2T}_{\mathrm{Peierls}}\)\textnormal{-(P2)--(P4)}, the causal propagator
+\(\Delta\) is defined on first functional derivatives and is compatible with the
+renormalized symplectic current \(\omega^\mu_{\mathrm{ren}}\) of
+\(\mathbf{2T}_{\mathrm{Peierls}}\)\textnormal{-(P3)}.
+Set
+\[
+X_{\mathcal J}:=\Delta\,\mathcal J^{(1)}.
+\]
+This is the Hamiltonian linearized solution associated with \(\mathcal J\).
+For every compactly supported linearized solution \(\eta\), define the classical current
+density
+\[
+c^\mu_{\mathcal J}[\eta](x)
+:=
+\omega^\mu_{\mathrm{ren}}(X_{\mathcal J},\eta)(x),
+\]
+with the argument order chosen so that the associated Cauchy-surface charge equals
+\(\{\mathcal J,-\}_{\mathrm P}\) rather than \(\{-,\mathcal J\}_{\mathrm P}\).
+
+Because both entries satisfy the linearized equations, conservation of the symplectic
+current gives
+\[
+\partial_\mu c^\mu_{\mathcal J}[\eta]=0.
+\]
+For every Cauchy surface \(\Sigma\),
+\[
+\int_\Sigma d\Sigma_\mu\,c^\mu_{\mathcal J}[\eta]
+=
+\Omega_{\mathrm{ren},\Sigma}(X_{\mathcal J},\eta),
+\]
+and by the compatibility of \(\Omega_{\mathrm{ren}}\) with \(\Delta\),
+\[
+\Omega_{\mathrm{ren},\Sigma}(X_{\mathcal J},\eta_F)
+=
+\{\mathcal J,F\}_{\mathrm P}
+\qquad
+(\eta_F:=\Delta F^{(1)}).
+\]
+Thus the classical Cauchy-surface charge of \(c^\mu_{\mathcal J}\) implements exactly
+the Peierls derivation \(\delta_{\mathcal J}\).
+
+The locality of \(\omega^\mu_{\mathrm{ren}}\), the retarded/advanced support of \(\Delta\),
+and \(\mathcal J\in\Fsloc(O_{\mathcal J})\) imply that \(c^\mu_{\mathcal J}\) is
+sufficiently local. By \(\mathbf{2T}_{\mathrm{Peierls}}\)\textnormal{-(P5)}, compactly
+smearing \(c^\mu_{\mathcal J}\) against a test vector \(h_\mu\) again produces an element
+of \(\Fsloc\).
+
+\paragraph{Step 2: Wightman/GNS realization on the vacuum core.}
+For every test vector \(h_\mu\), let \(C_{\mathcal J}(h)\in\Fsloc\) denote the smeared
+current functional constructed in Step~1. Theorem~\ref{thm:subprogram1b-Wightman}
+realizes every element of \(\Fsloc\) as a local operator on the vacuum GNS core, so set
+\[
+j_{\delta_{\mathcal J}}(h):=\pi(\Phi(C_{\mathcal J}(h))).
+\]
+By Definition~\ref{def:2T-EBC}\textnormal{-(EB1)}, every such smeared local field obeys a
+polynomial \(H\)-bound on \(\mathcal D_0\); hence it is closable and its matrix elements
+against vectors in \(\mathcal D_0\) are tempered distributions of finite order.
+This gives item~\textnormal{(i)}.
+
+The distributional conservation in item~\textnormal{(ii)} is the quantum realization of
+the classical identity \(\partial_\mu c^\mu_{\mathcal J}=0\): for every test scalar
+\(g\in C_c^\infty(\mathbb R^{1,3})\),
+\[
+j_{\delta_{\mathcal J}}(\partial^\mu g)=0
+\]
+on \(\mathcal D_0\).
+Likewise, the covariance clause of Definition~\ref{def:2T-EBC} and the covariance of
+\(\omega^\mu_{\mathrm{ren}}\) imply
+\[
+U(g)\,j_{\delta_{\mathcal J}}(h)\,U(g)^{-1}
+=
+j_{\delta_{\mathcal J}}(g\cdot h),
+\]
+which is item~\textnormal{(iii)}.
+
+\paragraph{Step 3: charge identity on local vectors.}
+Let \(O\) be a double cone and \(\psi=\pi(B)\Omega\in \mathcal D_0(O)\).
+Fix \(t\) and \(\varepsilon\). Choose \(R\) so large that the shell on which
+\(\nabla f_R\) is supported is spacelike to \(O\) after thickening by the time slab
+\(\operatorname{supp}\chi_\varepsilon(\cdot-t)\).
+Conservation of the current then allows one to deform the cutoff charge
+\(Q_{R,\varepsilon}(t)\) to any other Cauchy-surface representative with the same
+interior region but no shell contribution against vectors localized in \(O\).
+Replacing the cutoff surface by a full Cauchy surface and using the Step~1
+surface-charge identity shows that, in vacuum matrix elements against local vectors,
+\[
+\langle \pi(C)\Omega,Q_{R,\varepsilon}(t)\pi(B)\Omega\rangle
+=
+\langle \pi(C)\Omega,\, i\,\pi(\delta_{\mathcal J}(B))\Omega\rangle
+\]
+for every \(\pi(C)\Omega\in\mathcal D_0\).
+Because \(\mathcal D_0\) is dense, this proves
+\[
+Q_{R,\varepsilon}(t)\pi(B)\Omega
+=
+i\,\pi(\delta_{\mathcal J}(B))\Omega
+\qquad(R\gg 1),
+\]
+after the vacuum normalization \(Q_{R,\varepsilon}(t)\Omega=0\).
+Applying the same argument to graded commutators with a local observable \(A\)
+gives
+\[
+i\,[Q_{R,\varepsilon}(t),\pi(A)]_{\mathrm s}\psi
+=
+\pi(\delta_{\mathcal J}(A))\psi
+\qquad(R\gg 1),
+\]
+which is item~\textnormal{(iv)}.
+
+Finally, if \(\widetilde j^\mu\) is another current datum with the same charge action,
+their difference \(k^\mu:=\widetilde j^\mu-j^\mu_{\delta_{\mathcal J}}\) is conserved and
+has vanishing cutoff charges on all local vectors. On each double cone, the local
+Poincar\'e lemma writes a conserved compactly supported current with vanishing Cauchy
+charge as a divergence \(\partial_\nu B^{[\nu\mu]}\), up to a conserved remainder whose
+charges act trivially on the induced derivation. This proves item~\textnormal{(v)}.
+\end{proof}
+
+\begin{theorem}[Conserved-current implementation theorem on the vacuum core]
+\label{thm:odd-derivation-current-reconstruction}
+Assume Theorem~\ref{thm:subprogram1b-Wightman}. Let \(\delta\) be a local graded
+*-derivation on \(\mathfrak A_{\mathrm{fin}}\). Assume there exists a current datum
+\(j^\mu_\delta(x)\) on \(\mathcal D_0\) with the properties listed in
+Lemma~\ref{lem:peierls-noether-current-datum}\textnormal{(i)--(v)} for \(\delta\).
+Then:
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=*,itemsep=0.35em]
+\item for every \(\psi\in\mathcal D_0\) and every time \(t\), the equal-time cutoff
+  charges \(Q_{R,\varepsilon}(t)\) stabilize for \(R\gg 1\) to a value
+  \(Q_\delta(t)\psi\) independent of \(R\) and \(\varepsilon\);
+\item the operator \(Q_\delta(t)\) on \(\mathcal D_0\) is densely defined, odd,
+  and closable;
+\item \(Q_\delta(t)\) is independent of \(t\); we write the common operator simply
+  as \(Q_\delta\);
+\item on \(\mathcal D_0\),
+  \[
+  \delta(A)=i[Q_\delta,\pi(A)]_{\mathrm s}
+  \qquad(A\in\mathfrak A_{\mathrm{fin}});
+  \]
+\item \(j^\mu_\delta\) is unique up to local improvements and currents acting
+  trivially on the induced derivation.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\smallskip\noindent\textit{Step 1: stabilization on local vectors.}
+Let \(\psi=\pi(B)\Omega\in\mathcal D_0(O)\). By the charge-implementation property of
+the current datum, there exists \(R_0\) such that for all \(R\ge R_0\),
+\[
+Q_{R,\varepsilon}(t)\psi=i\,\pi(\delta(B))\Omega.
+\]
+Thus the family stabilizes on every vector of the local core \(\mathcal D_0(O)\), hence
+on all of \(\mathcal D_0=\bigcup_O\mathcal D_0(O)\).
+This proves item~\textnormal{(i)} and defines \(Q_\delta(t)\) on \(\mathcal D_0\).
+
+\smallskip\noindent\textit{Step 2: implementation identity.}
+Let \(A,B\in\mathfrak A_{\mathrm{fin}}\). Choose \(R\) so large that the charge datum
+applies simultaneously to \(B\) and to \(AB\). Using the graded Leibniz rule and the
+vacuum normalization \(Q_{R,\varepsilon}(t)\Omega=0\),
+\[
+\begin{aligned}
+[Q_\delta(t),\pi(A)]_{\mathrm s}\,\pi(B)\Omega
+&=
+Q_\delta(t)\pi(AB)\Omega-(-1)^{|A|}\pi(A)Q_\delta(t)\pi(B)\Omega \\
+&=
+i\,\pi(\delta(AB))\Omega-(-1)^{|A|}i\,\pi(A\,\delta(B))\Omega \\
+&=
+i\,\pi(\delta(A)B)\Omega \\
+&=
+i\,\pi(\delta(A))\,\pi(B)\Omega.
+\end{aligned}
+\]
+Since such vectors span \(\mathcal D_0\), this gives
+\[
+\delta(A)=i[Q_\delta(t),\pi(A)]_{\mathrm s}
+\quad\text{on }\mathcal D_0.
+\]
+This is item~\textnormal{(iv)}.
+
+\smallskip\noindent\textit{Step 3: independence of the time slice.}
+Let \(t_1,t_2\in\mathbb R\) and \(\psi\in\mathcal D_0(O)\). Choose \(R\) so large that the
+shell region of the two cutoffs between the slices \(t_1\) and \(t_2\) is spacelike to
+\(O\). Conservation of the current datum implies that the two cutoff charges have the
+same action on \(\psi\). Hence
+\[
+Q_\delta(t_1)\psi=Q_\delta(t_2)\psi
+\qquad(\psi\in\mathcal D_0),
+\]
+which proves item~\textnormal{(iii)}.
+
+\smallskip\noindent\textit{Step 4: closability.}
+Fix \(t\) and write \(Q_\delta:=Q_\delta(t)\).
+Suppose \(\psi_n\in\mathcal D_0\), \(\psi_n\to 0\), and \(Q_\delta\psi_n\to\eta\) in
+\(\mathcal H\).
+Take any local vector \(\phi=\pi(C)\Omega\in\mathcal D_0(O)\). For \(R\gg 1\), the same
+stabilization argument applied to the adjoint current datum gives a vector
+\(Q_\delta^\sharp\phi\in\mathcal H\) such that
+\[
+\langle \phi,Q_\delta\psi_n\rangle
+=
+\langle Q_\delta^\sharp\phi,\psi_n\rangle
+\]
+for all sufficiently large \(n\).
+Because \(\psi_n\to 0\), the right-hand side tends to \(0\), so
+\[
+\langle \phi,\eta\rangle = 0
+\qquad\forall\,\phi\in\mathcal D_0.
+\]
+Since \(\mathcal D_0\) is dense, \(\eta=0\). Therefore \(Q_\delta\) is closable.
+This proves item~\textnormal{(ii)}.
+
+\smallskip\noindent\textit{Step 5: uniqueness.}
+If \(\widetilde j^\mu_\delta\) is another current datum for the same derivation, then
+\(k^\mu:=\widetilde j^\mu_\delta-j^\mu_\delta\) is conserved and its cutoff charges vanish
+on \(\mathcal D_0\). By the local Poincar\'e lemma on Minkowski space, \(k^\mu\) is a local
+improvement \(\partial_\nu B^{[\nu\mu]}\) plus a conserved current whose charges act
+trivially on the induced derivation. This is item~\textnormal{(v)}.
+\end{proof}
+
+\begin{corollary}[Canonical current reconstruction for the Main Hamiltonized derivation]
+\label{cor:canonical-current-reconstruction}
+Assume \(\mathbf{2T}_{\mathrm{Main}}^{\mathrm{spine}}\),
+Theorem~\ref{thm:subprogram1b-Wightman},
+Theorem~\ref{thm:Main-Peierls-Hamiltonization},
+and Lemma~\ref{lem:J-EB3-adm}.
+Then the Hamiltonized derivation
+\(\delta_{\Lambda_k}=\{\mathcal J^{\mathrm{can}}_{\Lambda_k},-\}_{\mathrm P,\Lambda_k}\)
+admits a Poincar\'e-covariant conserved local current
+\[
+\mathcal J^\mu_{\Lambda_k}(x)
+\]
+on the vacuum core \(\mathcal D_0\), unique up to local improvements and
+derivation-trivial terms, whose equal-time cutoff charges stabilize on \(\mathcal D_0\)
+to a densely defined closable odd operator \(Q_{\Lambda_k}\) satisfying
+\[
+\delta_{\Lambda_k}(A)=i[Q_{\Lambda_k},\pi(A)]_{\mathrm s}
+\qquad(A\in\mathfrak A_{\mathrm{fin}})
+\]
+on \(\mathcal D_0\).
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:Main-Peierls-Hamiltonization}, the canonical representative
+\(\mathcal J^{\mathrm{can}}_{\Lambda_k}\) defines a local odd Peierls-inner derivation
+\[
+\delta_{\Lambda_k}=\{\mathcal J^{\mathrm{can}}_{\Lambda_k},-\}_{\mathrm P,\Lambda_k}.
+\]
+Lemma~\ref{lem:J-EB3-adm} gives the required EB3-admissibility of the fixed canonical
+generator, and \(\mathbf{2T}_{\mathrm{Main}}^{\mathrm{spine}}\) contains both
+\(\mathbf{2T}_{\mathrm{Peierls}}\) and \(\mathbf{2T}_{\mathrm{EBC}}\).
+Therefore Lemma~\ref{lem:peierls-noether-current-datum} applies and supplies a current
+datum \(j^\mu_{\delta_{\Lambda_k}}\) for \(\delta_{\Lambda_k}\).
+Applying Theorem~\ref{thm:odd-derivation-current-reconstruction} to that datum yields
+the current \(\mathcal J^\mu_{\Lambda_k}\) and the closable operator \(Q_{\Lambda_k}\)
+with the stated implementation identity.
+\end{proof}
+
+\begin{theorem}[Translation covariance of the Hamiltonized odd derivation]
+\label{lem:delta-poincare}
+Assume Corollary~\ref{cor:canonical-current-reconstruction} and
+Definition~\ref{def:2T-EBC} \textnormal{(Covariance)}. Then
+\(\delta_{\Lambda_k}\) commutes with translations on
+\(\mathfrak A_{\mathrm{fin}}\):
+\[
+\alpha_a\circ \delta_{\Lambda_k} \circ \alpha_a^{-1} = \delta_{\Lambda_k}.
+\]
+\end{theorem}
+
+\begin{proof}
+Let \(Q_{\Lambda_k,R,\varepsilon}(t)\) be the cutoff charges built from the current
+\(\mathcal J^\mu_{\Lambda_k}\) of
+Corollary~\ref{cor:canonical-current-reconstruction}.
+By the Poincar\'e covariance of that current,
+\[
+U(a)\,Q_{\Lambda_k,R,\varepsilon}(t)\,U(a)^{-1}
+=
+Q_{\Lambda_k,R,\varepsilon}^{(a)}(t+a^0),
+\]
+where the superscript \({}^{(a)}\) means that the spatial cutoff is translated by
+\(\vec a\).
+
+Fix \(\psi\in\mathcal D_0(O)\). Choose \(R\) so large that both the original and
+translated cutoff charges have stabilized on \(\psi\). Since the stabilized charge is
+independent of the precise cutoff representative and of the time slice,
+\[
+U(a)\,Q_{\Lambda_k}\,U(a)^{-1}\psi
+=
+Q_{\Lambda_k}\psi
+\qquad(\psi\in\mathcal D_0).
+\]
+Hence \(U(a)Q_{\Lambda_k}U(a)^{-1}=Q_{\Lambda_k}\) on \(\mathcal D_0\). Therefore, for
+every \(A\in\mathfrak A_{\mathrm{fin}}\),
+\[
+\alpha_a(\delta_{\Lambda_k}(A))
+=
+i[U(a)Q_{\Lambda_k}U(a)^{-1},\alpha_a(\pi(A))]_{\mathrm s}
+=
+i[Q_{\Lambda_k},\alpha_a(\pi(A))]_{\mathrm s}
+=
+\delta_{\Lambda_k}(\alpha_a A).
+\]
+This is exactly
+\(
+\alpha_a\circ\delta_{\Lambda_k}\circ\alpha_a^{-1}=\delta_{\Lambda_k}.
+\)
+\end{proof}
+
+\begin{definition}[Lorentz-covariant family of odd derivations]
+\label{def:delta-family}
+Let $\delta$ be a local derivation on $\mathfrak A_{\mathrm{fin}}$. For each
+proper orthochronous Lorentz transformation $\Lambda\in SO^+(1,3)$ define
+\[
+\delta_\Lambda:=\alpha_\Lambda\circ\delta\circ\alpha_\Lambda^{-1},
+\qquad
+\mathscr D:=\mathrm{span}_{\mathbb R}\{\delta_\Lambda:\Lambda\in SO^+(1,3)\}.
+\]
+We say $\delta$ is \emph{Lorentz-covariant of finite type} if $\mathscr D$ is
+finite-dimensional.
+\end{definition}
+
+\begin{lemma}[Hyperplane realization of the reconstructed charge]
+\label{lem:delta-hyperplane-charge}
+Assume Corollary~\ref{cor:canonical-current-reconstruction}. Let
+\(\Sigma_0:=\{x^0=0\}\), let \(Q_{\Lambda_k}\) be the equal-time reconstructed global
+charge, and let \(\Sigma=g\Sigma_0\) be any oriented affine Cauchy hyperplane
+obtained from \(\Sigma_0\) by a proper orthochronous Poincar\'e transformation
+\(g=(a,\Lambda)\). For a transported cutoff function on \(\Sigma\), let
+\(Q_{R,\Sigma}\) denote the cutoff flux of the conserved current
+\(\mathcal J^\mu_{\Lambda_k}\) through \(\Sigma\). Then:
+\begin{enumerate}[(i)]
+\item \(Q_{R,\Sigma}\) stabilizes on \(\mathcal D_0\) for \(R\gg 1\) to a closable odd
+      operator \(Q_{\Lambda_k}(\Sigma)\);
+\item \(Q_{\Lambda_k}(\Sigma)\) is independent of \(\Sigma\);
+\item \(U(g)Q_{\Lambda_k}(\Sigma_0)U(g)^{-1}=Q_{\Lambda_k}(g\Sigma_0)\) on
+      \(\mathcal D_0\).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Because \(\mathcal J^\mu_{\Lambda_k}\) is Poincar\'e-covariant, the transported
+cutoff flux is related to the standard equal-time cutoff charge by
+\[
+Q_{R,g\Sigma_0}=U(g)\,Q_{R,\Sigma_0}\,U(g)^{-1}
+\]
+on \(\mathcal D_0\). Since the equal-time charges stabilize on \(\mathcal D_0\) by
+Theorem~\ref{thm:odd-derivation-current-reconstruction}, the same is true for the
+transported family, proving~(i) and~(iii).
+
+For~(ii), fix a local vector \(\psi=\pi(B)\Omega\in\mathcal D_0(O)\). Choose \(R\)
+so large that the cutoff shell between \(\Sigma_0\) and \(\Sigma\) lies spacelike to
+\(O\). Exactly the shell argument used in Step~3 of the proof of
+Theorem~\ref{thm:odd-derivation-current-reconstruction} then gives
+\[
+Q_{R,\Sigma}\psi=Q_{R,\Sigma_0}\psi .
+\]
+Passing to the stabilized values yields
+\[
+Q_{\Lambda_k}(\Sigma)\psi=Q_{\Lambda_k}(\Sigma_0)\psi .
+\]
+Since the local vectors span \(\mathcal D_0\), the two operators agree on
+\(\mathcal D_0\). As \(\Sigma\) was arbitrary, the reconstructed global charge is
+hyperplane-independent.
+\end{proof}
+
+\begin{theorem}[Lorentz finite type from the canonical conserved current]
+\label{thm:delta-lorentz-finite-type}
+Assume Corollary~\ref{cor:canonical-current-reconstruction}. Then the Hamiltonized
+odd derivation \(\delta_{\Lambda_k}\) is Lorentz-covariant of finite type in the sense
+of Definition~\ref{def:delta-family}. In fact,
+\[
+\alpha_\Lambda\circ\delta_{\Lambda_k}\circ\alpha_\Lambda^{-1}
+=
+\delta_{\Lambda_k}
+\qquad
+(\Lambda\in SO^+(1,3)).
+\]
+\end{theorem}
+
+\begin{proof}
+Let \(\Sigma_0=\{x^0=0\}\). By Lemma~\ref{lem:delta-hyperplane-charge},
+\[
+U(\Lambda)\,Q_{\Lambda_k}\,U(\Lambda)^{-1}
+=
+Q_{\Lambda_k}(\Lambda\Sigma_0)
+=
+Q_{\Lambda_k}(\Sigma_0)
+=
+Q_{\Lambda_k}
+\]
+on \(\mathcal D_0\). Therefore for every local observable \(A\),
+\[
+\begin{aligned}
+(\alpha_\Lambda\delta_{\Lambda_k}\alpha_\Lambda^{-1})(A)
+&=
+i\,[U(\Lambda)Q_{\Lambda_k}U(\Lambda)^{-1},\pi(A)]_{\mathrm s}\\
+&=
+i\,[Q_{\Lambda_k},\pi(A)]_{\mathrm s}
+=
+\delta_{\Lambda_k}(A).
+\end{aligned}
+\]
+Hence every Lorentz conjugate derivation equals \(\delta_{\Lambda_k}\) itself, so
+\[
+\mathscr D
+=
+\mathrm{span}_{\mathbb R}\{\alpha_\Lambda\delta_{\Lambda_k}\alpha_\Lambda^{-1}\}
+=
+\mathbb R\,\delta_{\Lambda_k}
+\]
+is one-dimensional. This is stronger than finite type.
+\end{proof}
+
+\begin{lemma}[Covariance of the Lorentz orbit]
+\label{lem:delta-lorentz-orbit}
+Assume Theorem~\ref{thm:subprogram1b-Wightman} so the net carries a Poincar\'e
+action $\alpha_g$. Let $\delta$ be a local derivation on $\mathfrak A_{\mathrm{fin}}$ and
+define $\delta_\Lambda$ as in Definition~\ref{def:delta-family}. Then each
+$\delta_\Lambda$ is again a local derivation on $\mathfrak A_{\mathrm{fin}}$, and
+$\Lambda\mapsto\delta_\Lambda$ defines a representation of $SO^+(1,3)$ on $\mathscr D$
+by conjugation.
+\end{lemma}
+
+\begin{proof}
+Since each $\alpha_\Lambda$ is a *-automorphism of the net, conjugation preserves
+the graded Leibniz rule and the *-structure, so $\delta_\Lambda$ is a graded *-derivation.
+If $A$ is localized in a double cone $O$, then $\alpha_\Lambda^{-1}(A)$ is localized
+in $\Lambda^{-1}O$ and locality of $\delta$ gives
+$\delta(\alpha_\Lambda^{-1}(A))$ localized in $\Lambda^{-1}O$; applying $\alpha_\Lambda$
+shows $\delta_\Lambda(A)$ is localized in $O$. Thus $\delta_\Lambda$ is local.
+Finally,
+\[
+\delta_{\Lambda_2\Lambda_1}
+=\alpha_{\Lambda_2\Lambda_1}\delta\alpha_{\Lambda_2\Lambda_1}^{-1}
+=\alpha_{\Lambda_2}\big(\alpha_{\Lambda_1}\delta\alpha_{\Lambda_1}^{-1}\big)\alpha_{\Lambda_2}^{-1}
+=\alpha_{\Lambda_2}\delta_{\Lambda_1}\alpha_{\Lambda_2}^{-1},
+\]
+so $\Lambda\mapsto\delta_\Lambda$ defines a representation by conjugation on the span
+$\mathscr D$.
+\end{proof}
+
+\begin{theorem}[HLS admissibility of \(\delta\)]
+\label{thm:subprogram3b-HLS-hypotheses}
+Assume the Main spine package \(\mathbf{2T}_{\mathrm{Main}}^{\mathrm{spine}}\)
+\textnormal{(Definition~\ref{def:2T-Main-spine})}. Fix a ledger step \(k\) for which
+Subprogram~1b, the Main Hamiltonization chain, the current-reconstruction theorem,
+and the UV conformal/common-sector route have been established, namely
+Theorem~\ref{thm:subprogram1b-Wightman},
+Theorem~\ref{thm:Main-Peierls-Hamiltonization},
+Lemma~\ref{lem:varpi-Gamma-invariant},
+Corollary~\ref{cor:canonical-current-reconstruction},
+Theorem~\ref{lem:delta-poincare},
+and Theorem~\ref{thm:delta-lorentz-finite-type}. Then the derivation
+\(\delta_{\Lambda_k}\) satisfies the HLS interface
+\(\mathbf{2T}_{\mathrm{HLS}}\) \textnormal{(Definition~\ref{def:2T-HLS})}.
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:delta-net} gives a densely defined local graded *-derivation on
+\(\mathfrak A_{\mathrm{fin}}\).
+Proposition~\ref{prop:delta-nontrivial} gives nontriviality of the induced
+derivation.
+Lemma~\ref{lem:Main-delta-omega-odd} gives the required physical \(\Gamma\)-oddness.
+Lemma~\ref{lem:delta-vacuum-invariant} gives vacuum invariance on \(\mathfrak A^{+}\).
+Corollary~\ref{cor:canonical-current-reconstruction} gives implementability by a densely
+defined closable operator on the common invariant core \(\mathcal D_0\).
+Theorem~\ref{lem:delta-poincare} gives translation covariance.
+Theorem~\ref{thm:delta-lorentz-finite-type} gives the finite-dimensional Lorentz
+covariance datum.
+These are exactly the clauses of the HLS interface
+\(\mathbf{2T}_{\mathrm{HLS}}\) of Definition~\ref{def:2T-HLS}.
+\end{proof}
+
+\begin{theorem}[Haag--\L opusza\'nski--Sohnius (invoked under $\mathbf{2T}_{\mathrm{HLS}}$)
+  \cite{HaagLopuszanskiSohnius1975}]
+\label{thm:HLS}
+Assume the HLS classification theorem applies under $\mathbf{2T}_{\mathrm{HLS}}$.
+Let $(\mathcal H,\pi,U,\Omega)$ satisfy the Wightman/AQFT axioms and the spectrum
+condition. Suppose there exists a nontrivial $\Gamma$--odd local derivation
+$\delta$ obeying $\mathbf{2T}_{\mathrm{HLS}}$. Then there exist:
+\begin{itemize}[leftmargin=*,itemsep=0.2em]
+\item a finite-dimensional complex odd charge module \(\mathcal V_Q\),
+\item a nonzero vector \(v_0\in\mathcal V_Q\),
+\item and densely defined operators \(Q_\alpha(v)\), complex-linear in
+      \(v\in\mathcal V_Q\), acting on a common invariant core \(\mathcal D_Q\),
+\end{itemize}
+such that
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=*,itemsep=0.3em]
+\item the original derivation is implemented by one nonzero element of
+  this module:
+  \[
+  \delta=i[Q(v_0),\cdot]_{\mathrm s}\quad\text{on }\mathcal D_Q,
+  \qquad
+  Q(v_0):=(Q_1(v_0),Q_2(v_0));
+  \]
+\item for each \(v\in\mathcal V_Q\), the pair \(Q(v)=(Q_1(v),Q_2(v))\)
+  acts on the common invariant core \(\mathcal D_Q\) as a local odd symmetry
+  generator and transforms as a Weyl spinor doublet under the Lorentz generators;
+\item after choosing any orthonormal basis \(\{e_I\}_{I=1}^N\) of
+  \(\mathcal V_Q\) and writing
+  \[
+  Q_\alpha^I:=Q_\alpha(e_I),\qquad
+  \bar Q_{\dot\alpha I}:=\bigl(Q_\alpha^I\bigr)^\dagger,
+  \]
+  the graded anticommutators close on translations in indexed form:
+  \[
+  \{Q_\alpha^I,\bar Q_{\dot\beta J}\}
+  =2\,\delta^I{}_J\,\sigma^\mu_{\alpha\dot\beta}P_\mu,
+  \qquad
+  \{Q_\alpha^I,Q_\beta^J\}
+  =\{\bar Q_{\dot\alpha I},\bar Q_{\dot\beta J}\}=0;
+  \]
+\item the internal HLS symmetry sector, when present, acts on the odd
+  generators through endomorphisms of \(\mathcal V_Q\); equivalently, in
+  any chosen basis it is represented by matrices acting on the index
+  \(I\).
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Indexed super-Poincar\'e seed at the UV boundary]
+\label{thm:Main-HLS}
+Assume $\mathbf{2T}_{\mathrm{Main}}^{\mathrm{spine}}$, Theorem~\ref{thm:subprogram1b-Wightman},
+and Theorem~\ref{thm:subprogram3b-HLS-hypotheses}. Then, by
+Theorem~\ref{thm:HLS}, the Hamiltonized odd derivation \(\delta_{\Lambda_k}\) extends
+to a finite-dimensional odd charge module \(\mathcal V_Q\) on the
+Minkowski UV boundary.  Choosing a basis \(\{e_I\}_{I=1}^N\) of
+\(\mathcal V_Q\) and writing \(Q_\alpha^I:=Q_\alpha(e_I)\), the UV
+boundary carries densely defined odd generators
+\[
+Q_\alpha^I,\qquad \bar Q_{\dot\alpha I},
+\]
+on a common invariant core \(\mathcal D_Q\) such that
+\[
+\{Q_\alpha^I,\bar Q_{\dot\beta J}\}
+=2\,\delta^I{}_J\,\sigma^\mu_{\alpha\dot\beta}P_\mu,
+\qquad
+\{Q_\alpha^I,Q_\beta^J\}
+=\{\bar Q_{\dot\alpha I},\bar Q_{\dot\beta J}\}=0,
+\qquad
+[P_\mu,Q_\alpha^I]=[P_\mu,\bar Q_{\dot\alpha I}]=0,
+\]
+with \(Q_\alpha^I\) and \(\bar Q_{\dot\alpha I}\) transforming in the
+two Weyl spinor representations under \(M_{\mu\nu}\).  The internal HLS
+symmetry sector acts on this odd
+charge multiplet through endomorphisms of \(\mathcal V_Q\). Every module
+element \(Q(v)\) acts on the same invariant core \(\mathcal D_Q\) as a local odd
+symmetry generator.
+\end{theorem}
+
+\begin{proof}
+Theorem~\ref{thm:subprogram3b-HLS-hypotheses} proves that the Hamiltonized
+derivation \(\delta_{\Lambda_k}\) satisfies the interface
+\(\mathbf{2T}_{\mathrm{HLS}}\). Hence the invoked HLS classification theorem
+\textnormal{(Theorem~\ref{thm:HLS})} applies. Choosing an orthonormal basis
+\(\{e_I\}_{I=1}^N\) of the resulting odd charge module \(\mathcal V_Q\) and writing
+\(Q_\alpha^I:=Q_\alpha(e_I)\) gives the indexed generators on the common invariant
+core \(\mathcal D_Q\), together with the displayed translation anticommutators,
+vanishing same-chirality anticommutators, and Weyl-spinor Lorentz transformation
+law. The final sentence is the corresponding module statement from
+Theorem~\ref{thm:HLS}.
+\end{proof}
+
+\begin{lemma}[Injectivity of the HLS module realization]
+\label{lem:HLS-module-injective}
+Assume Theorem~\ref{thm:Main-HLS}. If \(Q(v)=0\) as a Weyl pair, then \(v=0\).
+\end{lemma}
+
+\begin{proof}
+By the invoked HLS theorem used in Theorem~\ref{thm:Main-HLS}, the original
+nonzero odd derivation is implemented by some nonzero \(v_0\in\mathcal V_Q\); in
+particular \(Q(v_0)\neq 0\) on \(\mathcal D_Q\).
+
+We first show that the translation representation is nontrivial. If all
+translation generators vanished, then \(P_\mu=0\) for all \(\mu\), hence also
+\(P_{\alpha\dot\beta}=0\) for all spinor indices. The HLS anticommutator would
+then give
+\[
+0
+=
+\{Q_\alpha(v_0),Q_\alpha(v_0)^\dagger\}
+\]
+on \(\mathcal D_Q\). Therefore, for every \(\psi\in\mathcal D_Q\),
+\[
+0
+=
+\langle\psi,\{Q_\alpha(v_0),Q_\alpha(v_0)^\dagger\}\psi\rangle
+=
+\|Q_\alpha(v_0)\psi\|^2+\|Q_\alpha(v_0)^\dagger\psi\|^2.
+\]
+Hence \(Q_\alpha(v_0)=0\) for both \(\alpha=1,2\), contradicting that \(Q(v_0)\)
+implements a nontrivial derivation. So not all \(P_\mu\) vanish. Since the
+matrices \(\sigma^\mu_{\alpha\dot\beta}\) span the Hermitian \(2\times2\)
+matrices, some \(P_{\alpha\dot\beta}\) is nonzero.
+
+Now let \(Q(v)=0\). For every \(w\in\mathcal V_Q\), the indexed HLS
+anticommutator gives
+\[
+0
+=
+\{Q_\alpha(v),\bar Q_{\dot\beta}(w)\}
+=
+2\,\langle v,w\rangle_Q\,P_{\alpha\dot\beta}
+\]
+on \(\mathcal D_Q\). Choose \(\alpha,\dot\beta\) such that
+\(P_{\alpha\dot\beta}\neq 0\). Then \(\langle v,w\rangle_Q=0\) for every \(w\),
+and therefore \(v=0\).
+\end{proof}
+
+\begin{theorem}[HLS spinor completeness on the UV vacuum representation]
+\label{thm:HLS-spinor-completeness}
+Assume Theorem~\ref{thm:Main-HLS}, and assume the invoked HLS classification step
+identifies the full translation-invariant local odd Weyl-spinor sector of the
+given chirality with the HLS charge module \(\mathcal V_Q\), in the standard
+indexed supercharge-module presentation and classification picture recorded in
+\cite{Sohnius:1985qm,Nahm1978}. Let
+\(\mathscr Q_+\) be the space of all translation-invariant local odd Weyl-spinor
+symmetry generators of the given chirality on the vacuum representation
+\((\mathcal H,\pi,U,\Omega)\), and define \(\mathscr Q_-\) similarly for the
+conjugate chirality. Then the HLS charge module \(\mathcal V_Q\) is complete in the
+sense that for every \(X_\alpha\in\mathscr Q_+\) there exists a unique
+\(v\in\mathcal V_Q\) with
+\[
+X_\alpha = Q_\alpha(v),
+\]
+and similarly every barred generator in \(\mathscr Q_-\) is a unique linear
+combination of the \(\bar Q_{\dot\alpha}(v)\).
+\end{theorem}
+
+\begin{proof}
+Theorem~\ref{thm:Main-HLS} already identifies a finite-dimensional HLS odd charge
+module \(\mathcal V_Q\) whose elements act as translation-invariant local odd Weyl
+spinor symmetry generators on the same vacuum representation. The invoked HLS
+classification input states that this finite-dimensional odd module
+exhausts the corresponding translation-invariant local odd spinor sector. Hence
+every such generator \(X_\alpha\) lies in the span of the \(Q_\alpha(v)\).
+Uniqueness is not merely basis independence: if \(Q(v)=Q(v')\), then
+\(Q(v-v')=0\), so Lemma~\ref{lem:HLS-module-injective} gives \(v=v'\). The barred
+statement is identical.
+\end{proof}
+
+\begin{theorem}[Optional indexed current reconstruction under separate current data]
+\label{thm:indexed-current-reconstruction}
+Assume Theorem~\ref{thm:Main-HLS}. Choose a basis \(\{e_I\}_{I=1}^N\) of
+\(\mathcal V_Q\) and write
+\(
+Q_\alpha^I:=Q_\alpha(e_I)
+\),
+\(
+\bar Q_{\dot\alpha I}:=(Q_\alpha^I)^\dagger
+\).
+Assume moreover that for every \(I\) and \(\alpha\) there is given a conserved local
+current datum
+\[
+\mathcal J^\mu{}_\alpha{}^I(x)
+\]
+whose equal-time cutoff charges stabilize to \(Q_\alpha^I\) on a dense invariant core
+\(\mathcal D_{\mathrm{curr}}^{I,\alpha}\subset\mathcal D_Q\), and whose ambiguity is only
+by local improvements and derivation-trivial terms. Then, after replacing
+\(\mathcal D_{\mathrm{curr}}^{I,\alpha}\) by the finite intersection over \(I,\alpha\), the
+whole indexed family may be realized on one dense common current domain.
+\end{theorem}
+
+\begin{proof}
+This is exactly the additional datum assumed in the statement. Because the family
+\(\{(I,\alpha)\}\) is finite, intersecting the dense invariant cores
+\(\mathcal D_{\mathrm{curr}}^{I,\alpha}\) again yields a dense invariant domain, and the
+stated ambiguity for each current remains the standard one by improvements and
+derivation-trivial terms.
+\end{proof}
+
+\begin{remark}[Optional indexed current reconstruction]
+Theorem~\ref{thm:indexed-current-reconstruction} is an optional AQFT
+supplement. If separate current data are chosen for the HLS generators, it
+yields a common dense current domain for the indexed family. A separate indexed
+current theorem therefore requires its own current data for those generators.
+\end{remark}
+
+\begin{corollary}[Same-\(\mathcal H\) superconformal closure]
+\label{cor:Main-postHLS-superconf}
+Assume Theorem~\ref{thm:Main-HLS},
+Theorem~\ref{thm:HLS-spinor-completeness},
+the UV conformal common-sector interface \(\mathbf{2T}_{\mathrm{conf}}\), and the
+same-\(\mathcal H\) conformal-closure results of Subprograms~4a/4b. Then on the same UV Hilbert space
+\(\mathcal H\) the generators
+\[
+P_\mu,\ M_{\mu\nu},\ D,\ K_\mu,\ Q_\alpha^I,\ \bar Q_{\dot\alpha I},\
+S^\alpha{}_I,\ \bar S^{\dot\alpha I},\ R^I{}_J
+\]
+close on a dense common invariant core to the full \(4\)D superconformal algebra.
+More precisely, the resulting operator Lie superalgebra is
+\(\mathfrak{su}(2,2|N)\) for \(N\neq 4\), while in the \(N=4\) case the standard
+simple form is obtained after quotienting the central \(\mathfrak u(1)\), giving
+\(\mathfrak{psu}(2,2|4)\).
+\end{corollary}
+
+\begin{proof}
+Combine Theorem~\ref{thm:Main-HLS},
+Theorem~\ref{thm:HLS-spinor-completeness},
+Theorem~\ref{thm:4b-narrow-common-sector}, and
+Theorem~\ref{thm:4d-SConf}.
+\end{proof}

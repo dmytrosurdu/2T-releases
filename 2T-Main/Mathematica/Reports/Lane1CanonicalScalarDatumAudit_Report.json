@@ -1,0 +1,23 @@
+{
+	"ReportDate":"2026-03-29 12:10:11",
+	"Lane":"lane1-canonical-scalar-datum",
+	"NotePath":"\/home\/kray-l8\/work\/2T\/UOM\/split_controlled_completion_lift_note.tex",
+	"TheoremBackedText":[
+		"UOM\/split_controlled_completion_lift_note.tex now theorem-backs a canonical split-to-descendant scalar bridge, a proposition that such a bridge induces canonical scalar datum, and a corollary that the scalar datum and resulting D^- line are canonical once the bridge and c_Lambda != 0 are supplied.",
+		"This remains a conditional theorem package: it exposes the bridge as imported transport data rather than deriving it from split-controlled recoherence alone.",
+		"The update leaves the separate c_Lambda != 0 lane untouched and does not claim automatic promotion beyond D^- or the current Main-visible quotient."
+	],
+	"ExactFiniteDimensionalCertificate":{
+		"SplitThresholdForcesNonzeroC":"counterexample found",
+		"ScalarLiftSurrogate":"exact finite-dimensional certificate",
+		"MainVisibleQuotientSurvival":"exact finite-dimensional certificate",
+		"FurtherReentryAutomatic":"counterexample found"
+	},
+	"StillOpenOrImported":[
+		"Still open\/imported: deriving the scalar bridge from branchwise recoherence in B alone.",
+		"Still open\/imported: the transport-level local intertwiner between the 2T Gamma-odd descendant direction and the compressed UOM-selected odd line.",
+		"Still open\/imported: canonical identification of the energetic stiffness tilde-alpha(Lambda).",
+		"Still separate: c_Lambda != 0 remains an extra input and is not proved by the threshold lane."
+	],
+	"UnderlyingAuditSource":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Kernel\/DelayedDescendantReentryAudit.wl"
+}

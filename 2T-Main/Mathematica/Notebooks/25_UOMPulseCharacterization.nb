@@ -1,0 +1,112 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      4256,        103]
+NotebookOptionsPosition[      3074,         81]
+NotebookOutlinePosition[      3388,         95]
+CellTagsIndexPosition[      3345,         92]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["UOM Pulse Characterization", "Title",ExpressionUUID->"578bf445-d598-48f9-a454-2553edd81fd6"],
+
+Cell["\<\
+This notebook grounds the welded pulse contract used by the boundary \
+canonicalization lane. \
+\>", "Text",ExpressionUUID->"d3614567-1880-45c1-bcb0-29bdbe290d69"],
+
+Cell["Targets", "Section",ExpressionUUID->"69ebec53-9895-4f34-8184-9b96281bc71a"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-welded-log-shape",
+  Background->None,ExpressionUUID->
+  "415a83a1-41f8-4408-a764-d1835df90eb4"]], \
+"InlineCode",ExpressionUUID->"3f2dc601-197c-4f08-891a-50deab37e8b7"]], "Item",\
+ExpressionUUID->"e44e550e-b639-4579-ac04-bd2a395e4e1f"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-co-centering",
+  Background->None,ExpressionUUID->
+  "7133c149-d603-40f8-984c-31f6fa08b7f7"]], \
+"InlineCode",ExpressionUUID->"acb1a91f-dd24-4be4-addc-a963da969c59"]], "Item",\
+ExpressionUUID->"9bcff865-fdec-44cc-add8-a019150c0e30"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-bandlock-to-receiver",
+  Background->None,ExpressionUUID->
+  "183dbf85-6e75-4190-b6e3-6d71115d85fc"]], \
+"InlineCode",ExpressionUUID->"0debb0be-a7c0-4099-9560-805a7e38f400"]], "Item",\
+ExpressionUUID->"b2567b90-9899-4fc6-bb8e-3d17e2e2a1f0"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-compressed-line-rank",
+  Background->None,ExpressionUUID->
+  "b06929f4-fff1-424e-bad7-352b2f556389"]], \
+"InlineCode",ExpressionUUID->"cc79aa52-188e-4c41-92f3-9bcf0994ef08"]], "Item",\
+ExpressionUUID->"b62232ae-8dae-4a93-a85f-f184aaea58c8"],
+
+Cell["Evaluate", "Section",ExpressionUUID->"b9347817-79b3-462d-999e-efa7f0dae8d3"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"audit", "=", 
+   RowBox[{
+   "MainProof`UOMPulseCharacterization`AuditUOMPulseCharacterization", "[", 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"<|", 
+  RowBox[{
+   RowBox[{"\"\<Contract\>\"", "->", 
+    RowBox[{"audit", "[", "\"\<Contract\>\"", "]"}]}], ",", 
+   RowBox[{"\"\<Claims\>\"", "->", 
+    RowBox[{"audit", "[", "\"\<Claims\>\"", "]"}]}]}], "|>"}]}], "Input",Expre\
+ssionUUID->"b4280641-194a-42aa-a917-e20bd64b73e0"],
+
+Cell["Context", "Section",ExpressionUUID->"dd1900b0-79eb-4ec5-8294-e992f9f02952"],
+
+Cell["\<\
+The WL lane certifies the exact finite-cutoff pulse contract: welded LoG \
+shape, co-centering, receiver band-lock, and the rank-one compressed welded \
+image.\
+\>", "Text",ExpressionUUID->"a9301920-c0e4-439d-8c05-73d484420184"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"bacb05d1-7806-4062-9342-ddc6597ae3bd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 98, 0, 70, "Title",ExpressionUUID->"578bf445-d598-48f9-a454-2553edd81fd6"],
+Cell[655, 22, 173, 3, 70, "Text",ExpressionUUID->"d3614567-1880-45c1-bcb0-29bdbe290d69"],
+Cell[831, 27, 81, 0, 70, "Section",ExpressionUUID->"69ebec53-9895-4f34-8184-9b96281bc71a"],
+Cell[915, 29, 278, 4, 70, "Item",ExpressionUUID->"e44e550e-b639-4579-ac04-bd2a395e4e1f"],
+Cell[1196, 35, 274, 4, 70, "Item",ExpressionUUID->"9bcff865-fdec-44cc-add8-a019150c0e30"],
+Cell[1473, 41, 282, 4, 70, "Item",ExpressionUUID->"b2567b90-9899-4fc6-bb8e-3d17e2e2a1f0"],
+Cell[1758, 47, 282, 4, 70, "Item",ExpressionUUID->"b62232ae-8dae-4a93-a85f-f184aaea58c8"],
+Cell[2043, 53, 82, 0, 70, "Section",ExpressionUUID->"b9347817-79b3-462d-999e-efa7f0dae8d3"],
+Cell[2128, 55, 617, 16, 70, "Input",ExpressionUUID->"b4280641-194a-42aa-a917-e20bd64b73e0"],
+Cell[2748, 73, 81, 0, 70, "Section",ExpressionUUID->"dd1900b0-79eb-4ec5-8294-e992f9f02952"],
+Cell[2832, 75, 238, 4, 70, "Text",ExpressionUUID->"a9301920-c0e4-439d-8c05-73d484420184"]
+}
+]
+*)
+
+(* End of internal cache information *)

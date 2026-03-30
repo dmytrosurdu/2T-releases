@@ -1,0 +1,13 @@
+This audit uses the certified polynomial branch model and the exact accepted-channel contract already present in the Main/UOM Mathematica lane.
+
+The detector-factorized seam family is treated here as the exact finite-dimensional surrogate of the theorem-visible delayed seam packet.
+
+Accepted-record-preserving filler toggles are retained upstairs in the microscopic quotient; the exact report separately checks that they remain visible on delayed seam data even though they are current-record invisible.
+
+The packet-level extractor theorem is proved in the manuscript note; this exact report checks it only on the certified branch family.
+
+The quotient-kernel triviality and universal microscopic selected-survival theorems are proved in the manuscript note; this exact report checks them only on the certified branch family.
+
+The selected-witness promoted survival theorem is proved in the manuscript note; this exact report checks it only for the certified selected microscopic witness family.
+
+The downstream post-HLS physical-transfer theorem and the post-HLS Z2 rigidity theorem remain open and are not derived by this report.

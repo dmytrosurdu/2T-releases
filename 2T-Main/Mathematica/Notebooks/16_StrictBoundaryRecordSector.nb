@@ -1,0 +1,278 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     10326,        269]
+NotebookOptionsPosition[      9209,        248]
+NotebookOutlinePosition[      9523,        262]
+CellTagsIndexPosition[      9480,        259]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["16. Strict Boundary Record Sector", "Title",ExpressionUUID->"0a59b369-6db8-4c4e-92dc-24128a70dcee"],
+
+Cell[TextData[{
+ "This notebook studies the smallest boundary algebra ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          StyleBox["O", "TI"], 
+          RowBox[{"\[PartialD]", ",", 
+            StyleBox["rec", FontSlant -> "Plain"]}]], "\[LongEqual]", 
+         SubscriptBox[
+          StyleBox["D", "TI"], 
+          StyleBox["A", "TI"]], "\[CircleTimes]", 
+         SubscriptBox[
+          StyleBox["1", FontSlant -> "Bold"], 
+          StyleBox["B", "TI"]], ","}], TraditionalForm], "errors" -> {}, 
+     "input" -> 
+     "\\mathcal O_{\\partial,\\mathrm{rec}} = \\mathcal D_A \\otimes \\mathbf \
+1_B,", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "b61b30ce-f54f-416e-88cb-b13b69ca4269"],
+ "where ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SubscriptBox[
+        StyleBox["D", "TI"], 
+        StyleBox["A", "TI"]], TraditionalForm], "errors" -> {}, "input" -> 
+     "\\mathcal D_A", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "868a084a-d8a6-44a5-ac3a-040decf57225"],
+ " is the diagonal ledger algebra on the inherited sector ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["A", "TI"], TraditionalForm], "errors" -> {}, "input" -> "A", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "f77224b3-9b7b-487f-b292-93078626af2d"],
+ ". "
+}], "Text",ExpressionUUID->"734f305e-6902-40ca-944e-986d480c0137"],
+
+Cell["Exact theorem", "Section",ExpressionUUID->"d3f4af0e-8808-4247-adf5-9c85b28d36d5"],
+
+Cell[TextData[{
+ "For every operator ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["X", "TI"], TraditionalForm], "errors" -> {}, "input" -> "X", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "baa992b9-3906-476c-8da3-d81c8418cebc"],
+ " on ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["A", "TI"], "\[CircleTimes]", 
+         StyleBox["B", "TI"]}], TraditionalForm], "errors" -> {}, "input" -> 
+     "A \\otimes B", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "9b7c0715-2d7d-41fd-b5e7-55e91c27cfab"],
+ " and every strict record observable ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["O", "TI"], "\[Element]", 
+         SubscriptBox[
+          StyleBox["O", "TI"], 
+          RowBox[{"\[PartialD]", ",", 
+            StyleBox["rec", FontSlant -> "Plain"]}]], ","}], TraditionalForm],
+      "errors" -> {}, "input" -> 
+     "O \\in \\mathcal O_{\\partial,\\mathrm{rec}},", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "8282e761-76aa-4cd2-a3f1-3fa48a4d6704"],
+ "the exact boundary readout ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox["\[CapitalPhi]", "\[PartialD]"], 
+         RowBox[{"(", 
+           StyleBox["X", "TI"], ")"}], "\[LongEqual]", 
+         SubscriptBox[
+          RowBox[{
+            StyleBox["P", "TI"], 
+            StyleBox["i", "TI"], 
+            StyleBox["n", "TI"], 
+            StyleBox["c", "TI"], 
+            StyleBox["h", "TI"]}], 
+          StyleBox["A", "TI"]], "\[NegativeThinSpace]", 
+         RowBox[{"(", 
+           RowBox[{
+             SubscriptBox[
+              RowBox[{
+                StyleBox["T", "TI"], 
+                StyleBox["r", "TI"]}], 
+              StyleBox["B", "TI"]], 
+             StyleBox["X", "TI"]}], ")"}]}], TraditionalForm], "errors" -> {},
+      "input" -> 
+     "\\Phi_\\partial(X) = \
+\\operatorname{Pinch}_A\\!\\bigl(\\operatorname{Tr}_B X\\bigr)", "state" -> 
+     "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "f0a2a86d-3239-4b91-87d5-3c1cf6c6fac2"],
+ "annihilates the commutator: ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox["\[CapitalPhi]", "\[PartialD]"], 
+         RowBox[{"(", 
+           RowBox[{"[", 
+             RowBox[{
+               StyleBox["X", "TI"], ",", 
+               StyleBox["O", "TI"]}], "]"}], ")"}], "\[LongEqual]", "0."}], 
+       TraditionalForm], "errors" -> {}, "input" -> 
+     "\\Phi_\\partial([X,O]) = 0.", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "12fe44e4-290e-4c28-8106-eda7aefcdfb9"],
+ "The WL package certifies this exactly on the dimension triples ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         RowBox[{"(", 
+           RowBox[{"dim", 
+             StyleBox["A", "TI"], ",", "dim", 
+             StyleBox["B", "TI"]}], ")"}], "\[Element]", 
+         RowBox[{"{", 
+           RowBox[{
+             RowBox[{"(", 
+               RowBox[{"2", ",", "2"}], ")"}], ",", 
+             RowBox[{"(", 
+               RowBox[{"2", ",", "3"}], ")"}], ",", 
+             RowBox[{"(", 
+               RowBox[{"3", ",", "2"}], ")"}]}], "}"}]}], TraditionalForm], 
+     "errors" -> {}, "input" -> 
+     "(\\dim A, \\dim B) \\in \\{(2,2),(2,3),(3,2)\\}", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "6139f191-2b70-4206-9e58-f1d904a8f5d5"],
+ "with fully symbolic ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["X", "TI"], TraditionalForm], "errors" -> {}, "input" -> "X", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "ed1238cb-d31b-4b96-b740-25ca58150ba0"],
+ " and symbolic strict-record observables. "
+}], "Text",ExpressionUUID->"87b4aff7-0e5f-4073-bd3e-2d8288bb991a"],
+
+Cell["Trivialization witness", "Section",ExpressionUUID->"5745f349-4123-4c45-9d15-292f0aad3bd9"],
+
+Cell[TextData[{
+ "The same audit also exhibits explicit nonzero commutators ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         RowBox[{"[", 
+           RowBox[{
+             StyleBox["X", "TI"], ",", 
+             StyleBox["O", "TI"]}], "]"}], "\[NotEqual]", "0"}], 
+       TraditionalForm], "errors" -> {}, "input" -> "[X,O] \\neq 0", "state" -> 
+     "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "35b9275f-d435-4e63-924d-e29fcf261377"],
+ " whose boundary readout is still zero. So boundary invariance on pure \
+records is automatic precisely because the induced boundary derivation \
+collapses. "
+}], "Text",ExpressionUUID->"6f15c810-0f61-4940-9c11-1fe0d7af9919"],
+
+Cell["Consequence", "Section",ExpressionUUID->"23651de9-bb27-4834-9a83-b23bfb4ec9b1"],
+
+Cell["\<\
+The strict record sector is too small to answer Main's nontrivial boundary \
+question. It proves automatic representative-independence, but only in a way \
+that trivializes the induced derivation. \
+\>", "Text",ExpressionUUID->"6ba408d6-1369-4328-98a2-55feab3f18e0"],
+
+Cell["Status", "Section",ExpressionUUID->"3b80a9fa-3b08-49f5-acb0-8e57f830af42"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Claim\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm]},
+        {"\<\"Exact theorem Phi_partial([X,O]) = 0\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Automatic class-definedness on strict records\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Explicit strict-record trivialization witness\"\>", \
+"\<\"exact-model-certificate\"\>"},
+        {"\<\"Nontrivial dynamics cannot be read from this lane\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[BoxForm`e$, TableHeadings -> {None, {"Claim", "Status"}}]]], 
+    "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"2b4a5586-a381-4978-9a84-2e5c2913763d"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"a83bd6d1-c378-4ba4-8c49-4f0e587986a8"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 105, 0, 70, "Title",ExpressionUUID->"0a59b369-6db8-4c4e-92dc-24128a70dcee"],
+Cell[662, 22, 1561, 40, 70, "Text",ExpressionUUID->"734f305e-6902-40ca-944e-986d480c0137"],
+Cell[2226, 64, 87, 0, 70, "Section",ExpressionUUID->"d3f4af0e-8808-4247-adf5-9c85b28d36d5"],
+Cell[2316, 66, 4101, 108, 70, "Text",ExpressionUUID->"87b4aff7-0e5f-4073-bd3e-2d8288bb991a"],
+Cell[6420, 176, 96, 0, 70, "Section",ExpressionUUID->"5745f349-4123-4c45-9d15-292f0aad3bd9"],
+Cell[6519, 178, 737, 17, 70, "Text",ExpressionUUID->"6f15c810-0f61-4940-9c11-1fe0d7af9919"],
+Cell[7259, 197, 85, 0, 70, "Section",ExpressionUUID->"23651de9-bb27-4834-9a83-b23bfb4ec9b1"],
+Cell[7347, 199, 276, 4, 70, "Text",ExpressionUUID->"6ba408d6-1369-4328-98a2-55feab3f18e0"],
+Cell[7626, 205, 80, 0, 70, "Section",ExpressionUUID->"3b80a9fa-3b08-49f5-acb0-8e57f830af42"],
+Cell[7709, 207, 1496, 39, 70, "TextTableForm",ExpressionUUID->"2b4a5586-a381-4978-9a84-2e5c2913763d"]
+}
+]
+*)
+
+(* End of internal cache information *)

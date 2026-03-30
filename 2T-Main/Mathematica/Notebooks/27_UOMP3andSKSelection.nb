@@ -1,0 +1,99 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      3674,         90]
+NotebookOptionsPosition[      2583,         69]
+NotebookOutlinePosition[      2897,         83]
+CellTagsIndexPosition[      2854,         80]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["UOM P3 And SK Selection", "Title",ExpressionUUID->"1f8f0fad-1a89-4606-a595-03d39d9ada84"],
+
+Cell["\<\
+This notebook records the exact admissibility contract that selects the \
+welded family used downstream. \
+\>", "Text",ExpressionUUID->"c0af58c8-cc5e-4c86-a5a2-63437354dc08"],
+
+Cell["Targets", "Section",ExpressionUUID->"9e9f5acc-ebf6-4f73-86d5-8c9f4debeae3"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-p3-admissibility",
+  Background->None,ExpressionUUID->
+  "8f36dff8-f773-4fd8-97bc-5963607e3afd"]], \
+"InlineCode",ExpressionUUID->"6eb07bfc-fbd4-40ea-a934-cb81ab4c3ab4"]], "Item",\
+ExpressionUUID->"81d2480f-738e-4bce-ab57-b81c529cdc0c"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-sk-gaussian-selection",
+  Background->None,ExpressionUUID->
+  "3f13b51d-2005-4b2e-b1f4-4dd8e4b35f7c"]], \
+"InlineCode",ExpressionUUID->"54a5265b-03b1-466a-ac39-52d08644b9ec"]], "Item",\
+ExpressionUUID->"1fe094f4-0765-44ad-ad24-6986b424ad24"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-welded-family-selection",
+  Background->None,ExpressionUUID->
+  "26df4723-3b28-4d32-a6bc-73687bd17f24"]], \
+"InlineCode",ExpressionUUID->"4501eb84-d474-4c6f-b82f-b203cd371a75"]], "Item",\
+ExpressionUUID->"ffae947a-c7bb-4bd3-9234-3f7981b316f8"],
+
+Cell["Evaluate", "Section",ExpressionUUID->"1f39a2ed-21fe-4bd7-928f-d2061b9e25d4"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"audit", "=", 
+   RowBox[{
+   "MainProof`UOMActionSelection`AuditUOMActionSelection", "[", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", "audit"}], "Input",ExpressionUUID->"6687fc5a-\
+bf46-4e35-bbbd-46e6d7df6da0"],
+
+Cell["Context", "Section",ExpressionUUID->"067e0c2d-c7f9-446d-ba7d-ce82fdfd89ef"],
+
+Cell["\<\
+The current WL lane is contract-level rather than continuum-level: it \
+certifies which exact finite-cutoff family is selected and which competitors \
+are excluded.\
+\>", "Text",ExpressionUUID->"299a50fd-44b0-42a2-b46d-4f6787bb864e"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"bacb05d1-7806-4062-9342-ddc6597ae3bd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 95, 0, 70, "Title",ExpressionUUID->"1f8f0fad-1a89-4606-a595-03d39d9ada84"],
+Cell[652, 22, 184, 3, 70, "Text",ExpressionUUID->"c0af58c8-cc5e-4c86-a5a2-63437354dc08"],
+Cell[839, 27, 81, 0, 70, "Section",ExpressionUUID->"9e9f5acc-ebf6-4f73-86d5-8c9f4debeae3"],
+Cell[923, 29, 278, 4, 70, "Item",ExpressionUUID->"81d2480f-738e-4bce-ab57-b81c529cdc0c"],
+Cell[1204, 35, 283, 4, 70, "Item",ExpressionUUID->"1fe094f4-0765-44ad-ad24-6986b424ad24"],
+Cell[1490, 41, 285, 4, 70, "Item",ExpressionUUID->"ffae947a-c7bb-4bd3-9234-3f7981b316f8"],
+Cell[1778, 47, 82, 0, 70, "Section",ExpressionUUID->"1f39a2ed-21fe-4bd7-928f-d2061b9e25d4"],
+Cell[1863, 49, 386, 10, 70, "Input",ExpressionUUID->"6687fc5a-bf46-4e35-bbbd-46e6d7df6da0"],
+Cell[2252, 61, 81, 0, 70, "Section",ExpressionUUID->"067e0c2d-c7f9-446d-ba7d-ce82fdfd89ef"],
+Cell[2336, 63, 243, 4, 70, "Text",ExpressionUUID->"299a50fd-44b0-42a2-b46d-4f6787bb864e"]
+}
+]
+*)
+
+(* End of internal cache information *)

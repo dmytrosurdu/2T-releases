@@ -1,0 +1,333 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+% Chapter-specific theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{setup}{Setup}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+
+
+\title{\textbf{Chapter 4: Per-Step Testability and its Equivalence Proof}}
+\author{Dmytro Surdu}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{quote}
+\textit{In Chapter 3, we established the formal machinery of belief-states and defined information loss within a deterministic update step. We now deploy this machinery to prove the first pillar of our theory: the principle of per-step testability. This chapter will demonstrate that the requirement of information loss is both a necessary and sufficient condition for the certification of a single step in a Type B measurement chain to be a computationally tractable problem. We will also formally prove that the five different characterizations of information loss are equivalent for this purpose.}
+\end{quote}
+
+\section{The Per-Step Certification Problem}
+
+The fundamental building block of trust in a measurement chain is the ability to verify each discrete step. The problem is as follows: given a certified belief-state $\Theta_{t-1}$ from the previous step and the new observation $z_t$, can we verify a prover's claim that the new, correct belief-state is $\Theta_t$?
+
+We formalize this by defining a language for each step. We say per-step certification is possible with *short witnesses* if there is a fixed polynomial $p$ and a polynomial-time algorithm $V$ that can verify the update.
+
+\begin{definition}[Per-Step Certification with Short Witnesses]
+A system admits per-step certification if there exists a polynomial $p$ and a verifier $V$ such that for any step $t$, $V(\Theta_{t-1}, z^{\text{in}}_t, w)$ accepts if and only if $w$ is a correct encoding of $\Theta_t = U(\Theta_{t-1}, z^{\text{in}}_t)$, and $|w| \le p(k)$, where $k$ is the number of bits required to represent the model parameters. The witness size must be independent of the step number $t$.
+\end{definition}
+
+\section{Per-Step Testability and the Double-Bound Theorem}
+\subsection{Setup and Definitions}
+
+We retain the basic objects from Chapter 3.  Let \(U:\mathcal{M}\times\mathcal{Z}^{\mathrm{in}}\to\mathcal{M}\) be the per-step update map on compact metric spaces with metric \(d\).  Let \(\Theta_t\in\mathcal{M}\) be the belief state at step \(t\) and \(z_{t+1}^{\mathrm{in}}\in\mathcal{Z}^{\mathrm{in}}\) the new input, producing
+\[
+\Theta_{t+1} = U(\Theta_t, z_{t+1}^{\mathrm{in}}).
+\]
+
+We consider the per-step certification problem: given a finite observed head (sequence of past inputs/outputs up to step \(t\)) together with a purported certificate about the current belief state, can a deterministic polynomial-time verifier decide that the continuation from this step will satisfy a specified tail property?  The fundamental question is what structure on \(U\) makes such a one-step certificate possible (i.e., testability), and what obstruction prevents it.
+
+\paragraph{Per-step certificate format.} At resolution \(\varepsilon>0\), a natural certificate is a coarse label for the current belief-state together with an index resolving its fiber ambiguity (analogous to the ``state witness'' in Book I), or—more generally—any succinct description that disambiguates among inputs that would otherwise be indistinguishable at precision \(\varepsilon\).
+
+\paragraph{Finite-resolution information loss.} Let \(\Delta_I^{(\varepsilon)}\) denote the finite-resolution mutual information drop for the single step as defined in Chapter 3. We say the step has \emph{positive information loss at scale \(\varepsilon\)} if \(\Delta_I^{(\varepsilon)}>0\).  This will serve as the quantitative sufficient condition for per-step testability.
+
+\paragraph{Strict contraction region.} A region \(R\subseteq\mathcal{M}\) is said to admit a \emph{uniform strict contraction} if there is \(\rho\in[0,1)\) such that for all \(\theta,\theta'\in R\) and all \(z^{\mathrm{in}}\), \(d(U(\theta,z^{\mathrm{in}}),U(\theta',z^{\mathrm{in}}))\le \rho\,d(\theta,\theta')\).  Such regions will play a special role in the double-bound analysis below.
+
+\paragraph{Complexity classes.} We adopt the standard interpretation: a language \(L\) of ``good'' heads (or state-descriptions) is in \(\mathbf{NP}\) if there exists a polynomial-size certificate verifiable in deterministic polynomial time; we say the certification problem is at most recursively enumerable (r.e.) if there exists a semi-decision procedure that accepts all positive instances (possibly without halting on negatives).
+
+\paragraph{Reference to Book I.} The sufficiency and necessity statements for per-step testability were first formalized in Book I under a discrete, loss/non-loss dichotomy.  We rephrase and adapt those results here to the present finite-resolution, continuous-ambient setting.  Wherever possible, we invoke the original proofs from Book I, with modifications only to accommodate quantization and continuity; this avoids redundancy and ensures consistency across the work.
+
+\subsection{Per-Step Testability Theorem}
+\label{subsec:per-step-testability}
+
+\begin{theorem}[Per-Step Testability \(\Leftrightarrow\) Information Loss at Resolution \(\varepsilon\)] 
+\label{thm:per-step-testability}
+Let \(U:\mathcal{M}\times\mathcal{Z}^{\mathrm{in}}\to\mathcal{M}\) be a continuous update map on compact metric spaces, and let the current belief state and incoming measurement be denoted \((\Theta_t,z_{t+1}^{\mathrm{in}})\), with next belief \(\Theta_{t+1}=U(\Theta_t,z_{t+1}^{\mathrm{in}})\). Fix a finite resolution parameter \(\varepsilon>0\) and let all relevant quantities be quantized/coarsened to precision \(\varepsilon\) as in Chapter~3 (so that indistinguishability is defined via \(\varepsilon\)-balls). 
+
+Define the per-step certification language \(L_{\mathrm{step}}\) to consist of observed coarse outputs (heads) for which a given tail predicate remains certifiable in the sense of a finite witness for the next-step behavior. Then:
+\begin{enumerate}
+    \item If \(U\) exhibits nontrivial information loss at resolution \(\varepsilon\) (e.g., positive mutual information drop or, equivalently in the finite quantized picture, a fiber over some coarse output has size at least two), then \(L_{\mathrm{step}}\in\mathbf{NP}\). 
+    \item If \(U\) is lossless at resolution \(\varepsilon\) (i.e., no collapse: the coarse observed next state uniquely determines the quantized preimage up to the precision relevant to the predicate), then certifying the tail behavior requires solving a universally quantified continuation, rendering \(L_{\mathrm{step}}\) not in \(\mathbf{NP}\) in general (e.g., \(\Pi^0_2\)-hard as in the lossless reduction from \textsc{TOTAL}).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+We reduce the statement to the framework and theorems of Book~I, Chapter~5 (the “information loss \(\Leftrightarrow\) testability” theorem for discrete/quantized channels) by explicitly matching the Book~II objects to the earlier setup.
+
+\paragraph{Setup alignment with Book I.}  
+In Book~I the measurement channel was described as a deterministic map from a discrete (or finitely quantized) input to an output, and testability was characterized via the existence of short witnesses when the channel was non-invertible at that resolution. Here:
+\begin{itemize}
+    \item The pair \((\Theta_t,z_{t+1}^{\mathrm{in}})\) plays the role of the joint input in Book~I; the next belief \(\Theta_{t+1}=U(\Theta_t,z_{t+1}^{\mathrm{in}})\) is the channel output.
+    \item We impose a finite-resolution quantization of \(\mathcal{M}\) and \(\mathcal{Z}^{\mathrm{in}}\) by covering them with \(\varepsilon\)-balls and identifying any two points within the same ball as indistinguishable. This produces a finite alphabet model identical in spirit to the discrete setting of Book~I. All entropy and mutual information statements are taken with respect to this induced finite partition. 
+    \item The tail predicate under consideration is assumed to be robust to \(\varepsilon\)-perturbations (as in the admissibility definition), so that behavior simulated from any representative of an \(\varepsilon\)-ball yields the same verdict.
+\end{itemize}
+
+Thus the per-step channel
+\[
+(\Theta_t,z_{t+1}^{\mathrm{in}})\longmapsto \Theta_{t+1}
+\]
+with quantization at scale \(\varepsilon\) fits exactly into the Book~I template: the possibility of certification (membership of a “good head”) is governed by whether the channel is information-losing (non-injective or collapsing) at that resolution.
+
+\paragraph{(1) Sufficiency: Information loss \(\Rightarrow\) NP certification.}  
+Assume the channel loses information at resolution \(\varepsilon\): in the finite quantized model, there exists at least one coarse output (i.e., \(\varepsilon\)-ball of \(\Theta_{t+1}\)) whose preimage contains two distinct coarse inputs \((\theta,z^{\mathrm{in}})\) and \((\theta',z^{\mathrm{in}}{}')\) that are separated at the input level but collide after applying \(U\). Equivalently, the mutual information
+\[
+I\bigl((\Theta_t,z_{t+1}^{\mathrm{in}}); \Theta_{t+1}\bigr)
+<
+H\bigl(\Theta_t,z_{t+1}^{\mathrm{in}}\bigr)
+\]
+in the quantized/discrete formulation, so there is a positive information drop. By the sufficiency direction of the Book~I theorem, such non-invertibility provides the combinatorial structure necessary to build a short witness:
+\begin{itemize}
+    \item The witness consists of (a) the coarse label of \(\Theta_{t+1}\) (the observed output cell) and (b) an index identifying which of the indistinguishable cluster/fiber-members the true input belonged to (i.e., a representative within the preimage fiber up to the finite ambiguity). This mirrors the “coarse-label plus fiber index” witness of Book~I, Chapter~5.
+    \item Because the tail predicate is \(\varepsilon\)-robust, simulating the continuation from any state within the \(\varepsilon\)-ball consistent with the witness yields the same predicate value.
+    \item Continuity and compactness guarantee that the number of such clusters is bounded (metric entropy controls the size), so the witness length is \(O(\log(1/\varepsilon))\) (or polynomial in the relevant input size) and can be encoded efficiently.
+    \item The verifier can, in deterministic polynomial time, (i) reconstruct a representative state from the witness, (ii) simulate \(U\) and subsequent dynamics to check consistency with the observed head, and (iii) evaluate the tail predicate on the simulated continuation, accepting exactly the true instances.
+\end{itemize}
+Therefore \(L_{\mathrm{step}}\in\mathbf{NP}\) under information loss, completing the sufficiency direction by invoking the corresponding constructive proof from Book~I with the quantization layer prepended.
+
+\paragraph{(2) Necessity: Losslessness \(\Rightarrow\) hardness beyond \(\mathbf{NP}\).}  
+Suppose instead that at resolution \(\varepsilon\) no information is lost: the coarse output \(\Theta_{t+1}\) uniquely determines the coarse input \((\Theta_t,z_{t+1}^{\mathrm{in}})\) relevant for the tail predicate to within the allowable ambiguity. Equivalently, the finite-resolution channel is injective on the support of interest (or has zero mutual information drop), so there is no nontrivial fiber collapse to exploit. Any candidate finite witness that attempts to certify the tail behavior must, in effect, resolve universal quantification over all possible consistent continuations: since the future behavior is uniquely tied to the current state, and no collapse provides a “shortcut” ambiguity to witness, the verifier cannot reduce the certificate to an existential check without solving a statement of the form “for all possible continuations the tail predicate holds,” which is of the \(\Pi^0_2\)-type in the arithmetic hierarchy. This is exactly the situation analyzed in the hardness direction in Book~I (e.g., the reduction from \textsc{TOTAL} in the lossless model): the certification problem becomes at least \(\Pi^0_2\)-hard, and hence cannot be placed in \(\mathbf{NP}\) unless unlikely collapses occur in the complexity hierarchy. 
+
+\paragraph{Conclusion.}  
+The two directions together yield the claimed equivalence at finite resolution: per-step testability (membership of the certification language in \(\mathbf{NP}\)) holds precisely when there is per-step information loss at that resolution. The formal machinery and reductions are inherited from Book~I after aligning the update map and quantization, as done above.
+\end{proof}
+
+
+\paragraph{Remark.} The theorem separates the numerical (information-theoretic) condition \(\Delta_I^{(\varepsilon)}>0\) from the algorithmic outcome (\(\mathbf{NP}\)-certifiability), emphasizing that the presence of ambiguity at finite resolution is the enabling resource, while its absence yields intractability in the worst case.  
+
+\subsection{Uniform Control of Finite-Resolution Information Loss under Strict Contraction}
+\label{subsec:uniform-control}
+
+The goal of this subsection is to make precise the quantitative statement that on a region where \(U\) acts as a uniform strict contraction, any observable per-step information loss at finite resolution can be driven to zero by refining the resolution.  This provides the ``numerical upper bound'' ingredient used in Theorem~\ref{thm:double-bound}.
+
+\begin{setup}
+Let \((\mathcal{M},d)\) be a compact metric space and \(\mathcal{Z}^{\mathrm{in}}\) another compact metric space.  Suppose the update map \(U:\mathcal{M}\times\mathcal{Z}^{\mathrm{in}}\to\mathcal{M}\) satisfies the following on a subset \(R\subseteq\mathcal{M}\):
+\begin{enumerate}
+    \item \textbf{Uniform strict contraction:} There exists \(\rho\in[0,1)\) such that for all \(\theta,\theta'\in R\) and all \(z^{\mathrm{in}}\in\mathcal{Z}^{\mathrm{in}}\),
+    \[
+    d\!\left(U(\theta,z^{\mathrm{in}}),\,U(\theta',z^{\mathrm{in}})\right) \le \rho\cdot d(\theta,\theta').
+    \]
+    \item \textbf{Uniform continuity in the other arguments:} For each fixed \(\theta\in R\), the map \(z^{\mathrm{in}}\mapsto U(\theta,z^{\mathrm{in}})\) is uniformly continuous on \(\mathcal{Z}^{\mathrm{in}}\) (automatic from continuity on compact sets).
+\end{enumerate}
+\end{setup}
+
+\begin{proposition}[Vanishing Finite-Resolution Information Loss under Contraction]
+\label{prop:vanishing-info-loss}
+Under the above setup, consider the finite-resolution mutual information drop \(\Delta_I^{(\varepsilon)}\) computed by quantizing \(\Theta_t\) and \(z_{t+1}^{\mathrm{in}}\) to precision \(\varepsilon>0\) (as in Chapter~3), and letting \(\Theta_{t+1}=U(\Theta_t,z_{t+1}^{\mathrm{in}})\). Then
+\[
+\lim_{\varepsilon\to 0} \Delta_I^{(\varepsilon)} = 0.
+\]
+In other words, for every \(\delta>0\) there exists \(\varepsilon_0>0\) such that for all \(0<\varepsilon<\varepsilon_0\), the observable mutual information drop is less than \(\delta\).
+\end{proposition}
+
+\begin{proof}
+We sketch the argument in metric-entropy terms; the same intuition carries over to any finite quantization model used to define \(\Delta_I^{(\varepsilon)}\).
+
+Fix \(\delta>0\). Because \(U\) is a strict contraction on \(R\) in the \(\theta\)-coordinate with factor \(\rho<1\), the image under \(U\) of any \(\varepsilon\)-ball in the \(\theta\)-variable is contained in a ball of radius at most \(\rho\varepsilon\). Thus the number of \(\varepsilon\)-balls needed to cover the range of \(U\) (for fixed \(z^{\mathrm{in}}\)) is no more than the number needed to cover \(R\) with \(\varepsilon/\rho\)-balls, which in turn is controlled by its metric entropy.
+
+More concretely: let \(N_{\theta}(\varepsilon)\) be the minimal number of balls of radius \(\varepsilon\) needed to cover \(R\). Then the effective uncertainty in \(\Theta_t\) at resolution \(\varepsilon\) gets compressed to uncertainty of size \(\rho\varepsilon\) in \(\Theta_{t+1}\) (holding \(z^{\mathrm{in}}\) fixed), while uncertainty coming from \(z^{\mathrm{in}}\) enters only through a uniformly continuous map and hence can be controlled separately by refining its quantization. Therefore, the joint uncertainty in \((\Theta_t,z^{\mathrm{in}}_{t+1})\) that survives into \(\Theta_{t+1}\) shrinks as \(\varepsilon\to 0\).
+
+In information-theoretic terms, this means the mutual information \(I((\Theta_t,z^{\mathrm{in}}_{t+1}); \Theta_{t+1})\) approaches the total available information (since the contraction makes the mapping from \(\Theta_t\) to \(\Theta_{t+1}\) increasingly deterministic at fine scales), so the drop
+\[
+\Delta_I^{(\varepsilon)} \;=\; H(\Theta_t,z^{\mathrm{in}}_{t+1}) - I((\Theta_t,z^{\mathrm{in}}_{t+1}); \Theta_{t+1})
+\]
+tends to zero. Formally, because all spaces are compact and \(U\) is uniformly continuous jointly, for any \(\eta>0\) there exists \(\varepsilon_0\) so that for \(\varepsilon<\varepsilon_0\) the distortion induced by quantization and contraction makes the conditional entropy \(H((\Theta_t,z^{\mathrm{in}}_{t+1}) \mid \Theta_{t+1}) < \eta\), implying \(\Delta_I^{(\varepsilon)}<\eta\).
+
+Thus \(\lim_{\varepsilon\to 0} \Delta_I^{(\varepsilon)}=0\), proving the proposition.
+\end{proof}
+
+\paragraph{Remark.} The key ingredients are the uniform shrinkage of uncertainty in the belief-state under contraction and the compactness/uniform continuity that prevent pathological decoupling between input quantization and output behavior.  No global injectivity is assumed or needed for this vanishing bound; only the local contraction property suffices to squeeze finite-resolution loss arbitrarily small.
+
+\section{Double-Bound Theorem: Resolution, Contraction, and Semi-Decidability}
+
+\paragraph{Overview.} 
+In systems with deterministic dynamics that are \emph{injective} in the infinite-precision limit, one might nevertheless observe an \emph{effective loss of distinguishability} at finite resolution due to contraction: nearby initial states produce trajectories that become hard to tell apart over short observation windows. This creates an apparent paradox: contraction both hides differences (numerical vanishing) and, simultaneously, enables stabilization that supports algorithmic refinement of the hidden state. 
+
+The \textbf{Double-Bound Theorem} resolves this tension. It articulates two coexisting phenomena restricted to a contraction basin:
+\begin{enumerate}
+  \item A \emph{numerical bound} (vanishing distinguishability): finite-resolution uncertainty is exponentially damped by contraction, so short prefixes carry little information about initial perturbations.  
+  \item An \emph{algorithmic semi-decision/refinement bound}: despite the temporary indistinguishability, there exists a procedure that progressively certifies ever-finer approximations of the hidden state (digit-by-digit) and detects genuine inconsistency in finite time.  
+\end{enumerate}
+
+Together, these imply that while finite observation depth and coarse resolution mask differences (making the system appear non-injective), appropriate refinement in depth and precision recovers full information (restoring effective injectivity), reconciling the ``information-loss'' intuition with the underlying injective structure.
+
+
+\subsection{Definitions}
+
+\begin{definition}[Numerical Error Propagation]
+Let \(\theta_0\) be the true initial state and \(\widehat\theta_0\) a candidate with \(d(\theta_0,\widehat\theta_0)\le \delta_0\). Define the propagated states \(\theta_t,\widehat\theta_t\) by forward iteration under \(U\) (using the same inputs). Then, by contraction, 
+\[
+d(\theta_t,\widehat\theta_t) \le \rho^t \delta_0.
+\]
+We refer to \(\delta_t := d(\theta_t,\widehat\theta_t)\) as the numerical error at time \(t\).
+\end{definition}
+
+\begin{definition}[Finite-Window Observation Prefix]
+Let \(Z^{(T)}(\theta)\) denote the length-\(T\) observation prefix generated deterministically from initial state \(\theta\), possibly after passing through an output/emission map. The finite-resolution observed prefix \(\widetilde Z^{(T)}\) is a noisy version of \(Z^{(T)}(\theta)\) with per-coordinate distortion at most \(O(\varepsilon)\); more precisely, the distribution of \(\widetilde Z^{(T)}\) conditioned on \(\theta\) is within total variation \(O(\varepsilon)\) of the ideal prefix.
+\end{definition}
+
+\begin{definition}[Distinguishability and Mutual Information]
+For random initial state \(\Theta\) taking values in a finite support \(\mathcal{S}\subseteq B_r(\theta^*)\), the mutual information \(I(\Theta;\widetilde Z^{(T)})\) measures how much of the randomness in \(\Theta\) is retained in the finite-resolution length-\(T\) prefix \(\widetilde Z^{(T)}\). We define the \emph{information gap} as \(H(\Theta)-I(\Theta;\widetilde Z^{(T)})\).
+\end{definition}
+
+\begin{definition}[Refinement / Semi-Decision Procedure]
+A refinement (semi-decision) procedure is an algorithm that, given a sequence of candidate approximations \(\widehat\theta^{(k)}\) with target precisions \(\varepsilon_k\to 0\), and observing longer trajectory prefixes as needed, (i) never accepts an incorrect approximation beyond its claimed precision, and (ii) eventually confirms correct refinements by producing certified digits or approximations. It rejects any candidate whose observable trajectory deviates beyond the tolerance implied by contraction at finite depth.
+\end{definition}
+
+\subsection{Intermediate Lemmas}
+
+\begin{lemma}[Numerical Bound / Error Vanishing]\label{lem:numerical-vanishing}
+Under the local contraction assumption in \(B_r(\theta^*)\), if the true initial state is \(\theta_0\) and the candidate is \(\widehat\theta_0\) with \(d(\theta_0,\widehat\theta_0)\le \delta_0\), then after \(t\) iterations the propagated discrepancy satisfies
+\[
+d(\theta_t,\widehat\theta_t)\le \rho^t \delta_0.
+\]
+Thus small initial uncertainty is exponentially damped in time.
+\end{lemma}
+
+\begin{lemma}[Finite-Window Mutual Information Attenuation]\label{lem:mi-attenuation}
+Let \(\Theta\) be a random variable supported on a finite set \(\mathcal{S}\subset B_r(\theta^*)\) and let \(\widetilde Z^{(T)}\) be the finite-resolution observed length-\(T\) prefix generated from \(\Theta\). Then there exists a function \(g(\rho^T,\varepsilon)=O((\rho^T\varepsilon)^2)\) such that
+\[
+I(\Theta;\widetilde Z^{(T)}) \ge H(\Theta) - g(\rho^T,\varepsilon).
+\]
+Equivalently, the information gap \(H(\Theta)-I(\Theta;\widetilde Z^{(T)})\) vanishes as \(\rho^T\varepsilon\to 0\).
+\end{lemma}
+
+\begin{lemma}[Resolution-to-Injectivity]\label{lem:resolution-injectivity}
+For any two distinct states \(\theta,\theta'\in B_r(\theta^*)\) and any target distinguishability \(\gamma>0\), there exist finite window length \(T\) and resolution \(\varepsilon>0\) such that the corresponding finite-resolution prefixes \(\widetilde Z^{(T)}(\theta)\) and \(\widetilde Z^{(T)}(\theta')\) differ with total variation at least \(\gamma\). In particular, as \(\rho^T\varepsilon\to 0\), the finite-resolution observation map becomes effectively injective on the support.
+\end{lemma}
+
+\subsection{Main Double-Bound Theorem}
+
+\begin{theorem}[Double-Bound Theorem]\label{thm:double-bound}
+Let the system satisfy the assumptions of Section 2 restricted to the contraction basin \(B_r(\theta^*)\). Let \(\Theta\) be a random initial state supported inside the basin, and let \(\widetilde Z^{(T)}\) be the finite-resolution observed trajectory prefix of length \(T\). Then:
+
+\begin{enumerate}
+  \item \textbf{Numerical Bound:} Any finite-resolution uncertainty in the initial condition is exponentially suppressed by contraction: small differences between candidate initials are difficult to distinguish from short prefixes. Quantitatively, if two initials differ by \(\delta_0\), their induced observation distributions over length \(T\) prefixes satisfy divergence bounds of order \(O((\rho^T \delta_0)^2)\), so the mutual information about the initial state satisfies  
+  \[
+  I(\Theta;\widetilde Z^{(T)}) \ge H(\Theta) - g(\rho^T,\varepsilon)
+  \]
+  with \(g(\rho^T,\varepsilon)=O((\rho^T\varepsilon)^2)\).  
+  \item \textbf{Algorithmic Semi-Decision Bound:} There exists a refinement procedure which, given a candidate \(\widehat\theta_0\) at resolution \(\varepsilon\), observes a prefix of sufficient length \(T\) (determined by \(\rho\), \(\varepsilon\), and desired accuracy) and either:
+  \begin{itemize}
+    \item Certifies the approximation to precision \(\varepsilon\) (emitting the corresponding digits) if the observed trajectory is consistent within the contracted tolerance, or  
+    \item Rejects in finite time if the trajectory deviates beyond the allowed error induced by contraction.  
+  \end{itemize}
+  \item \textbf{Coexistence / Recovery:} Despite the temporary attenuation of distinguishability (item 1), injectivity ensures that by appropriate simultaneous refinement of window length \(T\) and resolution \(\varepsilon\) (so that \(\rho^T\varepsilon\to 0\)) the mutual information \(I(\Theta;\widetilde Z^{(T)})\to H(\Theta)\). Hence the refinement procedure converges to the true initial state, achieving effective injectivity in the limit.
+\end{enumerate}
+\end{theorem}
+
+\subsection{Algorithmic Corollary: Digit-by-Digit Refinement}
+
+\begin{corollary}[Refinement Procedure]\label{cor:refinement}
+Under the same assumptions as Theorem~\ref{thm:double-bound}, there is an explicit algorithm that produces a sequence of certified approximations \(\widehat\theta^{(k)}\) converging to the true \(\theta\) as follows:
+\begin{enumerate}
+  \item Fix a decreasing sequence of resolutions \(\varepsilon_1>\varepsilon_2>\cdots\to 0\).  
+  \item For each \(k\), determine a prefix length \(T_k\) large enough that \(\rho^{T_k}\varepsilon_{k-1} < \varepsilon_k\) (with \(\varepsilon_0\) an initial coarse bound).  
+  \item Using the candidate certificate \(\widehat\theta^{(k)}\), simulate the predicted trajectory and compare to the observed finite-resolution prefix \(\widetilde Z^{(T_k)}\).  
+  \item If consistency holds within the contracted tolerance, emit the \(k\)-th chunk/digits corresponding to precision \(\varepsilon_k\); otherwise reject the certificate.  
+\end{enumerate}
+This procedure never certifies an incorrect digit (soundness) and, when run on data generated inside the contraction basin with a correct underlying state, produces a convergent sequence \(\widehat\theta^{(k)} \to \theta\) (completeness).
+\end{corollary}
+
+\subsection{Proofs}
+
+\begin{proof}[Proof of Lemma~\ref{lem:numerical-vanishing}]
+Immediate by induction on \(t\): assume \(d(\theta_{t},\widehat\theta_{t})\le \rho^t \delta_0\). Then using contraction,
+\[
+d(\theta_{t+1},\widehat\theta_{t+1}) = d(U(\theta_t,z_t),U(\widehat\theta_t,z_t)) \le \rho\, d(\theta_t,\widehat\theta_t) \le \rho^{t+1} \delta_0.
+\]
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:mi-attenuation}]
+By contraction and the assumed finite-resolution blur, the conditional distributions of \(\widetilde Z^{(T)}\) given different initials are pairwise close in total variation: for any \(\theta,\theta'\),
+\[
+\mathrm{TV}\bigl(\mathcal{L}(\widetilde Z^{(T)}\mid \theta), \mathcal{L}(\widetilde Z^{(T)}\mid \theta')\bigr)
+= O(\rho^T d(\theta,\theta') + \varepsilon).
+\]
+Then standard bounds (e.g., Pinsker's inequality and Fano-type arguments) imply that the conditional entropy \(H(\Theta \mid \widetilde Z^{(T)})\) is upper-bounded by \(O((\rho^T\varepsilon)^2)\), yielding
+\[
+I(\Theta;\widetilde Z^{(T)}) = H(\Theta) - H(\Theta\mid \widetilde Z^{(T)}) \ge H(\Theta) - g(\rho^T,\varepsilon)
+\]
+with \(g=O((\rho^T\varepsilon)^2)\).
+\end{proof}
+
+\begin{proof}[Proof of Lemma~\ref{lem:resolution-injectivity}]
+Given distinct \(\theta,\theta'\), injectivity ensures their infinite trajectories differ. Contraction implies that at finite depth \(T\), their trajectory prefixes remain separated by at least \(\Delta_T = d(Z^{(T)}(\theta), Z^{(T)}(\theta')) - O(\rho^T d(\theta,\theta'))\). Choosing \(T\) large enough so that \(\rho^T d(\theta,\theta')\) is small relative to the intrinsic divergence, and taking \(\varepsilon\) sufficiently small to not obscure this separation, the finite-resolution observed prefixes differ by at least \(\gamma\). Thus effective injectivity obtains as \(\rho^T\varepsilon\to 0\).
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:double-bound}]
+Item (1) is Lemma~\ref{lem:mi-attenuation}. Item (2) is achieved by using the known contraction rate: the refinement procedure chooses \(T_k\) so that previous uncertainty is damped below the next target precision and tests consistency; failure is detectable because any deviation beyond \(\rho^{T_k}\varepsilon_{k-1}\) will eventually manifest in the observed prefix and trigger rejection. Item (3) follows from Lemma~\ref{lem:resolution-injectivity}: as \(T\to\infty\) and \(\varepsilon\to 0\) in tandem, the mutual information gap vanishes, so the procedure converges to the true underlying state.  
+\end{proof}
+
+\begin{proof}[Proof of Corollary~\ref{cor:refinement}]
+Directly follows from Theorem~\ref{thm:double-bound}: the scheduling \(T_k\) ensures that resolution refinement is supported by sufficient trajectory depth to distinguish, and the contraction-based tolerance guarantees no false-positive certification. Completeness is due to injectivity and vanishing information gap.
+\end{proof}
+
+\subsection{Extensions and Remarks}
+
+\paragraph{Noisy or Approximate Dynamics.} If the update map \(U\) or observation process includes stochastic perturbations, the numerical bound degrades gracefully: one replaces deterministic contraction with expected contraction or probabilistic mixing rates, and the refinement procedure incorporates confidence intervals. The mutual information recovery still holds under appropriate ergodicity/stability conditions.
+
+\paragraph{Connection to Guard-Band and Certification Standards.} The Double-Bound mechanism underpins why guard-band predicates coupled with local contraction yield robust certificates: the numerical bound explains why local uncertainties can be controlled, and the refinement (algorithmic) bound supplies the procedure to verify consistency and progressively tighten the guard-band witness.
+
+\paragraph{Information-Theoretic Interpretation.} The mutual information statement (Lemma~\ref{lem:mi-attenuation}) makes precise the claim that finite-window observations temporarily ``forget'' small differences due to contraction, yet the underlying injectivity ensures no permanent loss: information is recoverable in the limit.
+
+\paragraph{Resolution \(\to\) Injectivity Limit.} As a corollary of Lemma~\ref{lem:resolution-injectivity}, for any fixed finite support prior \(P_\Theta\),  
+\[
+\lim_{\substack{T\to\infty\\ \varepsilon\to 0}} I(\Theta;\widetilde Z^{(T)}) = H(\Theta),
+\]
+i.e., the system behaves as if injective under arbitrarily fine observation and sufficient depth.
+
+
+
+\subsection{Epistemic Losslessness: Definition and Formalization}
+
+The double-bound phenomenon motivates a distinction between \emph{algebraic} information preservation (injectivity in the infinite-precision ideal) and what is observable and certifiable in practice under contraction and finite resolution. We call the latter property \emph{epistemic losslessness}.
+
+\begin{definition}[Epistemic Losslessness]
+Let \(U:\mathcal{M}\times\mathcal{Z}^{\mathrm{in}}\to\mathcal{M}\) be the update map, and suppose \(R\subseteq\mathcal{M}\) is a region on which \(U\) satisfies a local strict contraction with factor \(\rho\in[0,1)\). Fix a random initial state \(\Theta\) supported in \(R\), and for each resolution parameter \(\varepsilon>0\) and prefix length \(T\), let \(\widetilde Z^{(T)}_{\varepsilon}\) denote the finite-resolution observed prefix (as in Section earlier) arising from \(\Theta\). Define the \emph{information gap}
+\[
+\Delta_I^{(T,\varepsilon)} := H(\Theta) - I\!\bigl(\Theta;\widetilde Z^{(T)}_{\varepsilon}\bigr),
+\]
+and write \(\Delta_I^{(\varepsilon)} := \inf_{T} \Delta_I^{(T,\varepsilon)}\) for the best achievable residual uncertainty at resolution \(\varepsilon\).
+
+We say \(U\) is \emph{epistemically lossless} on \(R\) if the following two properties hold:
+\begin{enumerate}
+  \item \textbf{Vanishing Information Gap:} For every \(\delta>0\) there exists \(\varepsilon>0\) sufficiently small and a corresponding window length \(T\) such that \(\Delta_I^{(T,\varepsilon)} < \delta\). Equivalently, \(\lim_{\substack{\varepsilon\to 0\\ T\to\infty}} \Delta_I^{(T,\varepsilon)} = 0\).  
+  \item \textbf{Refinable Semi-Decidable Certification:} Restricted to \(R\), the per-step certification language admits a semi-decision (refinement) procedure that, given a candidate initial state approximation and observing progressively longer prefixes at appropriately increasing precision, (i) never incorrectly accepts a false claim beyond its certified precision, and (ii) eventually confirms true instances by producing arbitrarily fine certified approximations. In particular, true statements are recursively enumerable in the infinite-precision limit.
+\end{enumerate}
+\end{definition}
+
+\paragraph{Discussion.} Epistemic losslessness does \emph{not} assert that \(U\) is globally injective in a naive finite-resolution sense or that there is zero ambiguity at any fixed finite depth. Rather, it formalizes that:
+\begin{itemize}
+  \item Observable ambiguity can be driven below any user-specified threshold by refining resolution and/or extending observation length; the apparent loss induced by contraction is transient and vanishes in the limit (numerical vanishing).  
+  \item Verification of a true hypothesis proceeds via a controlled refinement process (semi-decision) rather than requiring an oracle for a non-recursive predicate; legitimate claims can be corroborated by finite, progressively stronger evidence.
+\end{itemize}
+
+\paragraph{Consequences.}
+\begin{enumerate}
+  \item In epistemically lossless regions, finite-resolution witnesses become \emph{effectively unique} up to any desired precision: once the information gap is below a threshold, further observations produce diminishing \emph{epistemically significant} new information.  
+  \item The transition from regimes with a strictly positive lower bound on \(\Delta_I^{(\varepsilon)}\) (persistent information ambiguity) to epistemically lossless regimes corresponds to moving from settings where only nonrefinable certificates exist to those where one can iteratively refine and certify the hidden state—i.e., from coarse \(\mathbf{NP}\)-style certifiability to a refinement-based semi-decidable confirmation paradigm.
+\end{enumerate}
+
+\end{document}

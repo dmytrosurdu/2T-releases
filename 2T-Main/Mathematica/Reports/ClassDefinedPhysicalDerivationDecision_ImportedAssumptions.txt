@@ -1,0 +1,9 @@
+Closedness of Aminus, continuity of branch data, and Hilbertizability are still represented by finite-dimensional surrogates rather than independent infinite-dimensional constructions.
+
+Source representability is split into an exact algebraic image-membership problem and a still-imported sufficient-locality condition.
+
+The physical quotient and the physical null ideal are represented only by explicit finite-dimensional subspaces in bracket models; no abstract AQFT/HLS construction is attempted.
+
+The new class-defined-derivation lane identifies the exact ambiguity-triviality criterion, but it does not yet derive that criterion from the current Main/UOM hypotheses.
+
+LoG spectral certification and the abstract Main Peierls/AQFT tail remain outside the Mathematica core.

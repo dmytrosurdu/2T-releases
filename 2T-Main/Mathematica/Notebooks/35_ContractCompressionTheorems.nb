@@ -1,0 +1,125 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      5417,        116]
+NotebookOptionsPosition[      3414,         85]
+NotebookOutlinePosition[      3728,         99]
+CellTagsIndexPosition[      3685,         96]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Boundary Contract Compression", "Title",ExpressionUUID->"278c5eb3-0bf9-4697-899d-71f9936c68dd"],
+
+Cell["\<\
+This notebook records the current compression of the five-part strong-safe \
+welded package into a smaller conceptual interface inside the exact audited \
+WL family. \
+\>", "Text",ExpressionUUID->"b6399802-6468-44ed-9fda-bf352a5d73c1"],
+
+Cell["Five-part strong-safe package", "Section",ExpressionUUID->"13c009b6-c687-46d1-b6bc-474fa5d5a605"],
+
+Cell["exact accepted-record preservation", "Item",ExpressionUUID->"89d8d594-1a6e-46b9-a0d4-a16f463e752f"],
+
+Cell["receiver band-lock", "Item",ExpressionUUID->"b5418a8f-ba4a-4f75-8ab7-efe26077e725"],
+
+Cell["one-dimensional compressed welded line", "Item",ExpressionUUID->"558a7fe9-04be-4d87-977c-4029afb88c32"],
+
+Cell["co-centering", "Item",ExpressionUUID->"fc3d8bf7-3fc2-4e35-bdff-24146755ab0b"],
+
+Cell["descended-scalar factorization", "Item",ExpressionUUID->"5862b6ff-38da-4b06-80dd-f47575ecfc5e"],
+
+Cell["Current three-axiom compression", "Section",ExpressionUUID->"488435e4-1ed9-415e-860c-3debc8b0489b"],
+
+Cell["exact accepted-record preservation", "Item",ExpressionUUID->"b5f48d24-b482-43e8-8200-779e02e4009d"],
+
+Cell["\<\
+rank-one active boundary image aligned with the descended scalar\
+\>", "Item",ExpressionUUID->"4d25df55-d4a1-4a3d-a21d-c3e1498641ad"],
+
+Cell["geometric locking", "Item",ExpressionUUID->"6d0e983c-5161-42e7-88de-7854fdcb1067"],
+
+Cell["Current exact result", "Section",ExpressionUUID->"e73e1d17-830a-4dfe-a356-a0a926213bb3"],
+
+Cell[TextData[{
+ "Within the present welded ablation family, the three conceptual axioms are \
+equivalent to the current ",
+ Cell[BoxData[Cell["strong-safe",
+   Background->None,ExpressionUUID->"a3faefc8-bc32-4069-8afe-3bee04e10e12"]], 
+  "InlineCode",ExpressionUUID->"7636c4c9-5226-4728-a6d6-821884558814"],
+ " class."
+}], "Text",ExpressionUUID->"d27a085b-9aef-43b7-b3fa-81726481609d"],
+
+Cell["\<\
+So the compression is exact in the audited family, even though it is not yet \
+a general text-level theorem. \
+\>", "Text",ExpressionUUID->"43aa907c-c745-43b0-bfae-b1e68a883a41"],
+
+Cell["Caution", "Section",ExpressionUUID->"1822d87b-0269-43f3-851a-b5c8f1b3f7c3"],
+
+Cell["\<\
+This is still an exact family-level compression result, not yet a generic \
+cosmology theorem statement. \
+\>", "Text",ExpressionUUID->"377973ff-22dd-4388-90de-c4062cc92628"],
+
+Cell["Report artifact", "Section",ExpressionUUID->"8dd5c86d-30bc-4b7b-ad7f-2ee853cb86de"],
+
+Cell["See: ", "Text",ExpressionUUID->"21328cf1-c4b6-4ddb-adc4-76b6c6251bf2"],
+
+Cell[TextData[Cell[BoxData[Cell["\<\
+Main/Mathematica/Reports/CosmologyInterfaceResearch_Report.json\
+\>",
+  Background->None,ExpressionUUID->
+  "e74e2b60-6933-4492-a0ec-c03ae51a74cd"]], \
+"InlineCode",ExpressionUUID->"d514b7e9-b695-4a71-8024-84442e7d7e8b"]], "Item",\
+ExpressionUUID->"de99c9d2-76d7-41e8-9045-66a866affbd6"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"bacb05d1-7806-4062-9342-ddc6597ae3bd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 101, 0, 70, "Title",ExpressionUUID->"278c5eb3-0bf9-4697-899d-71f9936c68dd"],
+Cell[658, 22, 245, 4, 70, "Text",ExpressionUUID->"b6399802-6468-44ed-9fda-bf352a5d73c1"],
+Cell[906, 28, 103, 0, 70, "Section",ExpressionUUID->"13c009b6-c687-46d1-b6bc-474fa5d5a605"],
+Cell[1012, 30, 105, 0, 70, "Item",ExpressionUUID->"89d8d594-1a6e-46b9-a0d4-a16f463e752f"],
+Cell[1120, 32, 89, 0, 70, "Item",ExpressionUUID->"b5418a8f-ba4a-4f75-8ab7-efe26077e725"],
+Cell[1212, 34, 109, 0, 70, "Item",ExpressionUUID->"558a7fe9-04be-4d87-977c-4029afb88c32"],
+Cell[1324, 36, 83, 0, 70, "Item",ExpressionUUID->"fc3d8bf7-3fc2-4e35-bdff-24146755ab0b"],
+Cell[1410, 38, 101, 0, 70, "Item",ExpressionUUID->"5862b6ff-38da-4b06-80dd-f47575ecfc5e"],
+Cell[1514, 40, 105, 0, 70, "Section",ExpressionUUID->"488435e4-1ed9-415e-860c-3debc8b0489b"],
+Cell[1622, 42, 105, 0, 70, "Item",ExpressionUUID->"b5f48d24-b482-43e8-8200-779e02e4009d"],
+Cell[1730, 44, 143, 2, 70, "Item",ExpressionUUID->"4d25df55-d4a1-4a3d-a21d-c3e1498641ad"],
+Cell[1876, 48, 88, 0, 70, "Item",ExpressionUUID->"6d0e983c-5161-42e7-88de-7854fdcb1067"],
+Cell[1967, 50, 94, 0, 70, "Section",ExpressionUUID->"e73e1d17-830a-4dfe-a356-a0a926213bb3"],
+Cell[2064, 52, 386, 7, 70, "Text",ExpressionUUID->"d27a085b-9aef-43b7-b3fa-81726481609d"],
+Cell[2453, 61, 188, 3, 70, "Text",ExpressionUUID->"43aa907c-c745-43b0-bfae-b1e68a883a41"],
+Cell[2644, 66, 81, 0, 70, "Section",ExpressionUUID->"1822d87b-0269-43f3-851a-b5c8f1b3f7c3"],
+Cell[2728, 68, 184, 3, 70, "Text",ExpressionUUID->"377973ff-22dd-4388-90de-c4062cc92628"],
+Cell[2915, 73, 89, 0, 70, "Section",ExpressionUUID->"8dd5c86d-30bc-4b7b-ad7f-2ee853cb86de"],
+Cell[3007, 75, 76, 0, 70, "Text",ExpressionUUID->"21328cf1-c4b6-4ddb-adc4-76b6c6251bf2"],
+Cell[3086, 77, 324, 6, 70, "Item",ExpressionUUID->"de99c9d2-76d7-41e8-9045-66a866affbd6"]
+}
+]
+*)
+
+(* End of internal cache information *)

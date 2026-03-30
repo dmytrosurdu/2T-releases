@@ -1,0 +1,7 @@
+Closedness of Aminus, continuity of branch data, and Hilbertizability are still represented by finite-dimensional surrogates rather than independent infinite-dimensional constructions.
+
+Source representability is split into an exact algebraic image-membership problem and a still-imported sufficient-locality condition.
+
+The calibration-comparison and bracket lanes certify exact finite-dimensional formulas and conditions, but they do not construct the AQFT/HLS observable sector.
+
+LoG spectral certification and the abstract Main Peierls/AQFT tail remain outside the Mathematica core.

@@ -1,0 +1,557 @@
+\documentclass[12pt]{article}
+\usepackage{xr}
+\externaldocument{"../Book_II/chapter_6"}
+\externaldocument{"../Book_II/chapter_8"}
+\externaldocument{chapter_1}
+\externaldocument{chapter_2}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\algnewcommand\algorithmicforeach{\textbf{for each}}
+\algdef{S}[FOR]{ForEach}[1]{\algorithmicforeach\ #1\ \algorithmicdo}
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, decorations.pathreplacing, calc, backgrounds}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{pdflscape} % For the landscape environment
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist[enumerate]{align=left,labelindent=0pt}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+% Chapter-specific theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+\title{\textbf{Appendix: Details of ATRT proof}}
+\author{Dmytro Surdu}
+\begin{document}
+\maketitle
+
+\section{Adaptive Traceability Resolution Theorem: Algorithm and Lemmas}
+
+\subsection{Promise Verification via Effective Measurability Lemma}
+
+\begin{lemma}[Promise Verification via Effective Measurability]
+\label{lem:promise-verification}
+Let \(\mathfrak T\) satisfy (F), (S), and (C) and (EM1)--(EM3). Fix \(z\in\mathcal Z^{\mathrm{in}}\), threshold \(\varepsilon>0\), and candidate gap \(\gamma>0\). Define
+\[
+f(\Theta):=\operatorname{dist}(U(\Theta,z),\mathcal B),\qquad
+f^*:=\min_{\Theta\in\mathcal M} f(\Theta),
+\]
+and let \(\omega(\cdot)\) be the continuity modulus from Lemma~\ref{lem:modulus-bound}. Then there exists an explicit adaptive procedure that maintains computable lower and upper bounds \(L\le f^*\le U\) such that:
+\begin{enumerate}
+  \item \(U\) is obtained by sampling candidate states and taking \(U := \min_{\Theta_R} f(\Theta_R)\) over representatives \(\Theta_R\);
+  \item \(L\) is obtained by region exclusion via continuity: for each region \(R\) with representative \(\Theta_R\), define \(L_R := f(\Theta_R) - \omega(\operatorname{diam}(R))\), and set \(L := \min_R L_R\);
+  \item The procedure terminates in finite time once one of the following holds:
+    \begin{itemize}
+      \item \(U\le\varepsilon\), certifying \(f^*\le\varepsilon\);
+      \item \(L\ge\varepsilon+\gamma\), certifying \(f^*\ge\varepsilon+\gamma\);
+      \item \(U-L<\gamma\), in which case \(f^*\notin (\varepsilon,\varepsilon+\gamma)\) and the dichotomy ``either \(f^*\le\varepsilon\) or \(f^*\ge\varepsilon+\gamma\)'' is numerically validated.
+    \end{itemize}
+\end{enumerate}
+In particular, whenever the promised gap condition holds, the procedure reaches one of the stopping criteria in finite time and thus does not rely on assuming the dichotomy a priori without evidence.
+\end{lemma}
+
+\begin{proof}
+By (C) the space \(\mathcal M\) is compact and \(U\) is continuous, so \(f(\Theta)=\operatorname{dist}(U(\Theta,z),\mathcal B)\) is continuous and attains its minimum \(f^*\). We initialize a finite cover \(\mathcal R_0\) of \(\mathcal M\) by compact regions (for example, axis-aligned boxes) and associate to each active region \(R\) a representative point \(\Theta_R\in R\). Using (EM1)--(EM3) and the known modulus \(\omega\), we carry out the following at each refinement iteration:
+
+\textbf{Upper bound \(U\):} For each representative \(\Theta_R\) compute \(f(\Theta_R)\) to sufficient precision; since \(f^*\le f(\Theta_R)\), define \(U := \min_{R} f(\Theta_R)\). This is a valid upper bound.
+
+\textbf{Lower bound \(L\):} For each region \(R\), Lemma~\ref{cor:region-lower} gives that
+\[
+\min_{\Theta\in R} f(\Theta) \ge f(\Theta_R) - \omega(\operatorname{diam}(R)) =: L_R.
+\]
+Set \(L := \min_R L_R\); then \(L\le f^*\). Thus \(L\) is a valid lower bound.
+
+\textbf{Refinement:} For any region \(R\) that is not yet resolved (i.e., neither excluded by \(L_R>\varepsilon+\gamma\), nor containing a witness with \(f(\Theta_R)\le \varepsilon\)) subdivide it into smaller-diameter subregions, update their representatives, and recompute the corresponding \(f\)-values and local lower bounds. Because \(\omega(\operatorname{diam}(R))\to 0\) as \(\operatorname{diam}(R)\to 0\), the gap \(U-L\) strictly decreases under sufficient refinement unless already one of the stopping conditions is met.
+
+\textbf{Termination conditions:}
+\begin{itemize}
+  \item If \(U\le \varepsilon\), then there exists a sample \(\Theta_R\) with \(f(\Theta_R)\le\varepsilon\), so \(f^*\le\varepsilon\).
+  \item If \(L\ge \varepsilon+\gamma\), then for all \(\Theta\in\mathcal M\), \(f(\Theta)\ge f^*\ge L\ge \varepsilon+\gamma\), so \(f^*\ge \varepsilon+\gamma\).
+  \item If \(U-L<\gamma\) while neither of the above holds, then \(f^*\) cannot lie in the open interval \((\varepsilon,\varepsilon+\gamma)\), because that would force both \(U>\varepsilon\) and \(L<\varepsilon+\gamma\) with gap at least \(\gamma\); the current enclosures \(L\le f^*\le U\) contradict \(f^*\in(\varepsilon,\varepsilon+\gamma)\). Hence the promise ``either \(f^*\le\varepsilon\) or \(f^*\ge\varepsilon+\gamma\)'' is validated numerically, and a definitive decision follows by testing whether \(U\le\varepsilon\) or \(L\ge\varepsilon+\gamma\).
+\end{itemize}
+
+Because the bounds \(U\) and \(L\) converge to \(f^*\) as regions are refined (compactness + continuity + shrinking modulus), one of the termination conditions is reached in finite time whenever the dichotomy holds. Thus the procedure achieves the claimed promise verification without assuming it silently. \(\blacksquare\)
+\end{proof}
+
+\begin{corollary}[Gating ATRT on Verified Promise]
+\label{cor:promise-gate}
+Before executing the core dichotomous branch of ATRT (deciding traceable vs non-traceable with gap), run the procedure of Lemma~\ref{lem:promise-verification}. Proceed with the corresponding branch only once one of the certified conditions \(U\le\varepsilon\), \(L\ge\varepsilon+\gamma\), or \(U-L<\gamma\) is observed. This guarantees the gap assumption is either confirmed or refuted explicitly and is not used implicitly.
+\end{corollary}
+
+
+\subsection{SMT Encoding Templates for Region-Level Traceability Checks}
+
+Let \(z\in\mathcal Z^{\mathrm{in}}\) be the input under test, and define 
+\[
+f(\Theta)\;:=\;\operatorname{dist}(U(\Theta,z),\mathcal B)
+\]
+with all computations interpreted to finite precision. Let \(R\subseteq\mathcal M\) be a compact region (e.g., a box or cell) represented by constraints \(C_R(\Theta)\).
+
+\paragraph{Existential (traceability) check over region \(R\):}  
+We encode the formula
+\[
+\exists\ \Theta\in R:\ f(\Theta)\le \varepsilon
+\]
+as an SMT/decision problem. A canonical encoding (assuming \(U\) and \(\mathcal B\) are expressible in the logic) is:
+\[
+C_R(\Theta)\;\wedge\;
+\operatorname{EncodeDistance}(U(\Theta,z),\mathcal B) \le \varepsilon,
+\]
+where \(\operatorname{EncodeDistance}(\cdot,\cdot)\) is a formula representing the (approximate) distance of \(U(\Theta,z)\) into \(\mathcal B\), or equivalently membership up to tolerance.  
+A satisfying assignment \(\Theta^*\) is a witness; it certifies \(z\) is traceable via \(\Theta^*\).
+
+\paragraph{Universal (non-traceability) exclusion check over region \(R\):}  
+We encode the negation as
+\[
+\forall\ \Theta\in R:\ f(\Theta) > \varepsilon,
+\]
+which is treated in SMT by proving unsatisfiability of the negated existential:
+\[
+\neg\bigl(\exists\ \Theta\in R:\ f(\Theta)\le \varepsilon\bigr),
+\]
+i.e., the same formula as above is refuted. In practice, for robustness and efficiency, we strengthen by deriving a \emph{lower bound} \(L_R\) on \(f\) over \(R\) using modulus-of-continuity and samples and then encode the proof obligation:
+\[
+C_R(\Theta)\;\wedge\;
+f(\Theta) < L_R \quad \text{is unsatisfiable, with } L_R > \varepsilon.
+\]
+Alternatively, one can encode a symbolic certificate (e.g., via interval arithmetic or invariants) asserting \(\min_{\Theta\in R}f(\Theta)\ge L_R>\varepsilon\).
+
+\paragraph{Implementation notes:}
+\begin{itemize}[itemsep=1pt]
+  \item If \(U\) and \(\mathcal B\) are given by rational arithmetic circuits (EM1), their composition and distance computations can be encoded directly in SMT over reals with rational approximation.  
+  \item The modulus of continuity from (EM2) supplies bounds to convert pointwise samples into sound lower/upper bounds over \(R\); these are embedded as side constraints to support universal proofs.  
+  \item Use incremental solving: cache previous region proofs to avoid redundant work in refined subdivisions.  
+  \item If the solver returns \texttt{sat} for the existential check, extract \(\Theta^*\); if it proves the existential unsatisfiable (or verifies the lower bound certificate), mark \(R\) excluded.  
+\end{itemize}
+
+
+\subsection{Adaptive Traceability Resolution Algorithm}
+
+\begin{remark}[Refinement Fairness]
+\label{rem:refinement-fairness}
+The algorithm assumes a \emph{fair refinement scheduler}: at each iteration every active region that is not yet excluded is either resolved or subdivided further (e.g., a standard ``refine-all-unresolved'' policy). The existence of such a refinement is proved in Refinement Extension of Guarded Decompositions Theorem (Thm.-\ref{thm:refinement-extension}) in Chapter 2.
+
+Combined with the interior stability margins from Lemma~\ref{lem:branch-stability-margin} (Chapter 2), this guarantees that any region containing a true traceability witness will eventually be refined to diameter \(\le d_{\mathrm{target}}\) and exposed. Note that this spatial refinement fairness is logically distinct from axiom (I) (TI/WF), which governs progression along execution trajectories; the current remark controls region-level search, not the dynamic choice of inputs.
+\end{remark}
+
+
+\begin{algorithm}[H]
+\caption{Adaptive Traceability Resolution for input \(z\) with gap \(\gamma>0\)}
+\label{alg:adaptive-trace}
+\begin{algorithmic}[1]
+\Require Input \(z\), certification threshold \(\varepsilon>0\), known gap \(\gamma>0\) such that \(f^*\le \varepsilon\) or \(f^*\ge \varepsilon+\gamma\), initial coarse cover \(\mathcal R_0\) of \(\mathcal M\), basin \(\mathcal B\), modulus of continuity \(\omega(\cdot)\) from Lemma~\ref{lem:modulus-bound}
+\Ensure Either: \texttt{TRACEABLE} with witness \(\Theta^*\), or \texttt{NON-TRACEABLE} with gap certificate
+\State Compute target refinement diameter \(d_{\mathrm{target}}\) such that \(\omega(d_{\mathrm{target}})<\gamma/2\)
+\State \(\mathcal R \gets \mathcal R_0\)
+\While{true}
+  \ForEach{region \(R\in \mathcal R\)}
+    \State Pick representative \(\Theta_0\in R\); compute \(f(\Theta_0)=\operatorname{dist}(U(\Theta_0,z),\mathcal B)\) to required precision via (EM2)/(EM3)
+    \If{\(f(\Theta_0) \le \varepsilon + \frac{\gamma}{2}\)} 
+      \State \textbf{(Existential success)}: run existential region check (SMT or direct witness extraction) to produce \(\Theta^*\in R\) with \(f(\Theta^*)\le \varepsilon + \frac{\gamma}{2}\)
+      \State \Return \texttt{TRACEABLE}, witness \(\Theta^*\)
+    \EndIf
+    \State Compute lower bound over \(R\): \(L_R := f(\Theta_0) - \omega(\operatorname{diam}(R))\)
+    \If{\(L_R > \varepsilon +\frac{\gamma}{2}\)}
+      \State \textbf{(Universal exclusion)}: mark \(R\) as excluded
+    \EndIf
+  \EndFor
+  \If{all regions in \(\mathcal R\) are excluded}
+    \State \Return \texttt{NON-TRACEABLE} with certificate \(\min_{\Theta} f(\Theta) \ge \varepsilon + \frac{\gamma}{2}\)
+  \EndIf
+  \State \textbf{Refine:} Replace each non-excluded region \(R\) with a subdivision of smaller-diameter subregions so that eventually \(\operatorname{diam}(R)\le d_{\mathrm{target}}\)
+  \State Update \(\mathcal R\) to the new cover
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+\textbf{Notes:}
+\begin{itemize}[itemsep=1pt]
+  \item The existential check is lightweight when \(f(\Theta_0)\) already certifiably lies within the acceptance band \(\varepsilon + \gamma/2\); a localized search in \(R\) suffices to produce \(\Theta^*\).  
+  \item Universal exclusion uses the modulus-of-continuity to lift a sample value to a guaranteed lower bound over the whole region.  
+    \item The guarded program provides the logical composition of these region checks: successful existential proofs propagate as accepted branches; excluded regions prune whole subtrees.  
+  \item Refinement continues deterministically until either a traceability witness is extracted or every region is excluded; \(\omega(d_{\mathrm{target}})<\gamma/2\) ensures the dichotomy resolves definitively.  
+  \item All arithmetic, distance, and membership evaluations are carried out with precision controlled according to (EM2) and (EM3), making the bounds sound.  
+  \item Termination and completeness of ATRT rely only on compactness, the gap~$\gamma$, the modulus~$\omega$, and refinement fairness (Remark~\ref{rem:refinement-fairness}); no temporal-input fairness (Axiom (I), TI/WF) is assumed or required.
+
+\end{itemize}
+
+
+\subsection{Continuity-based Lower Bound Machinery and Invariants}
+
+Under (C) and (EM2), \(U\) is continuous and effectively computable with a known modulus of continuity. Define
+\[
+f(\Theta) := \operatorname{dist}(U(\Theta,z), \mathcal B).
+\]
+Since \(U\) is continuous on compact \(\mathcal M\) and \(\mathcal B\) is closed (as a basin shell limit), \(f\) is continuous and attains its minimum.
+
+\begin{lemma}[Effective Local Variation Bound]
+\label{lem:modulus-bound}
+Suppose (EM2) supplies a polynomial modulus function \(m(k)\) for computing \(U\) to \(k\) bits. Then there exists a computable function \(\omega: \mathbb R_{+}\to\mathbb R_{+}\) (derivable from \(m\) and the Lipschitz behavior induced by finite precision) such that for any \(\Theta,\Theta'\in\mathcal M\),
+\[
+|f(\Theta)-f(\Theta')| \le \omega\bigl(\operatorname{dist}(\Theta,\Theta')\bigr).
+\]
+Furthermore, \(\omega\) can be chosen to satisfy \(\omega(r)\to 0\) as \(r\to 0\), and \(\omega\) is computable in time \(\mathrm{poly}(n,\log(1/r))\).
+\end{lemma}
+
+\begin{proof}
+By (EM2a), each primitive map $F_j$ (either an update $U_j$ or an emit $E_j$) comes with an explicit, effectively computable modulus of continuity $\omega_j:\mathbb{Q}_+\to\mathbb{Q}_+$ satisfying $\omega_j(0)=0$ and
+\[
+\|x-y\| \le r \quad\Rightarrow\quad \|F_j(x)-F_j(y)\| \le \omega_j(r).
+\]
+Since $f(\Theta)=\operatorname{dist}(U(\Theta,z),\mathcal{B})$ is obtained by composing finitely many such primitives with each other and with the distance-to-set map, the standard composition rules for moduli of continuity yield an explicit modulus $\omega$ for $f$:
+for all $\Theta,\Theta'\in\mathcal{M}$,
+\[
+\operatorname{dist}(\Theta,\Theta') \le r \quad\Rightarrow\quad |f(\Theta)-f(\Theta')| \le \omega(r).
+\]
+
+To make this explicit, note that $U(\cdot,z)$ is the composition of primitive updates along a fixed finite path determined by~$z$, so if $\operatorname{dist}(\Theta,\Theta')\le r$ then
+\[
+\|U(\Theta,z)-U(\Theta',z)\| \le \omega_U(r)
+\]
+where $\omega_U$ is obtained by chaining the $\omega_j$ of the primitives in the path.  
+The distance function $\operatorname{dist}(\cdot,\mathcal{B})$ is $1$-Lipschitz, hence
+\[
+|f(\Theta)-f(\Theta')| = \big|\operatorname{dist}(U(\Theta,z),\mathcal{B}) - \operatorname{dist}(U(\Theta',z),\mathcal{B})\big| 
+\le \|U(\Theta,z)-U(\Theta',z)\| \le \omega_U(r).
+\]
+Thus we may take $\omega := \omega_U$ as the desired effective modulus for $f$.
+
+Finally, by (EM2b), evaluating each primitive $F_j$ to $k$ bits of precision costs at most $\mathrm{poly}(k+n)$ steps, where $n$ encodes the instance size. Since the composition depth is fixed, $f(\Theta)$ can be evaluated to any accuracy prescribed by $\omega$ within polynomial time in $k+n$. This completes the proof.
+\end{proof}
+
+
+\begin{corollary}[Region Lower Bound]
+\label{cor:region-lower}
+Let \(R\subseteq\mathcal M\) be a region of diameter \(\operatorname{diam}(R)\), and let \(\Theta_0\in R\) be a representative sample with computed value \(f(\Theta_0)\). Then for all \(\Theta\in R\),
+\[
+f(\Theta) \ge f(\Theta_0) - \omega\!\left(\operatorname{diam}(R)\right).
+\]
+Thus if \(f(\Theta_0) - \omega(\operatorname{diam}(R)) > \varepsilon\), we can safely exclude \(R\) for the traceability check at precision \(\varepsilon\).
+\end{corollary}
+
+\section{Appendix to Chapter 5: Deeper analysis of selected theories}
+
+\subsection*{How to read the model audits (template)}
+For each theory we check, in order:
+\begin{enumerate}[leftmargin=1.25em,itemsep=2pt]
+  \item \textbf{In-scope check (ABET availability).} On the laboratory slice $Z^{\mathrm{in}}$ with finite energy/localisation bounds: do (F) Invariant Basin, (S) Certification Standard, and (C) Compact Continuity hold? If not, \emph{Category~1} (FDI out of scope).
+  \item \textbf{Effectivity \& structure.} Verify (T) Traceability (open preimages for basin shells), (EM1)–(EM3) (effective primitives), and (I) (no supertasks).
+  \item \textbf{Guard construction.} If a \emph{finite} family of guard cells $G_1,\dots,G_m\subseteq Z^{\mathrm{in}}$ covers the in-scope slice with per-guard correctness proofs, the fact is FDI-decomposable $\Rightarrow$ \emph{Category~3}; else \emph{Category~2}.
+\end{enumerate}
+We also flag a \emph{Traceability Caveat}: if a theory’s latent variables (e.g., a micro-index) are \emph{not} operational inputs, (T) fails and the verdict can drop from Category~3 to Category~2.
+
+
+%-------------------------------------------------------------
+\subsection{Superdeterministic CAI is
+            \emph{FDI–decomposable}}
+\label{subsec:cai-decomposable}
+
+Let $\Sigma$ be the finite alphabet for a single lattice cell and
+$L\gg1$ the (finite) number of cells.  A micro–state is therefore
+%
+\[
+   s \;\in\; \Sigma^{L}, 
+   \qquad N:=|\Sigma|^{L}<\infty.
+\]
+%
+The global update $F\colon\Sigma^{L}\!\to\Sigma^{L}$ is \emph{reversible},
+so it is a permutation of $\{0,\dots,N-1\}$.  We encode each $s$ by the
+binary index $i(s)\in\{0,\dots,N-1\}$ written in
+$B=\lceil\log_2 N\rceil=O(L)$ bits.
+
+%..............................................................
+\paragraph{Input representation and compact continuity (Gnosis+Structure Axioms).}
+The physically accessible slice
+$Z^{\mathrm{in}}:=\{0,\dots,N-1\}$ is \emph{finite}, hence compact and
+discrete in the product topology used by the FDI framework; guards may
+treat micro–indices as ordinary binary strings.
+
+%..............................................................
+\paragraph{Deterministic outcome map.}
+Fix an apparatus description and time budget $T\!>\!0$.  The pointer
+observable is a computable function
+\[
+    M_T : i(s_0) \;\longmapsto\; a_k \in \{e_1,\dots,e_m\},
+\]
+obtained by iterating the automaton
+$s_t=F^{\,t}(s_0)$ together with the
+detector’s finite control logic for $t\le T$.
+
+%..............................................................
+\paragraph{Finite guarded decomposition.}
+Define \emph{guard sets}
+\[
+    G_k := M_T^{-1}(e_k) \;\subseteq\; \{0,\dots,N-1\}.
+\]
+Because $N<\infty$, the family $\{G_k\}_{k=1}^{m}$ is a finite
+partition of $Z^{\mathrm{in}}$; the \emph{basin} for outcome $e_k$ is
+just $G_k$ itself.  Membership in $G_k$ can be tested in
+$O(T+|s_0|)$ time by simulating $F$ for $T$ steps and checking the
+pointer, hence satisfies the Polynomial Guard/Basin Test axiom~EM3.
+
+%..............................................................
+\paragraph{Certificate and verifier.}
+A succinct witness for the tail fact
+$\Phi_k\!\!:\,$ “\emph{the pointer shows $e_k$}’’ is the binary string
+\[
+     w = i(s_0)\quad\text{of length }B=O(L).
+\]
+Verification algorithm:
+
+\begin{enumerate}[leftmargin=15pt,itemsep=2pt]
+ \item Given $(\psi,\text{detector initial macro}, w)$ convert $w$ to
+       the micro–state $s_0$ by table lookup.
+ \item Simulate $F$ for $T$ steps (reversible CA $\Rightarrow$ each step is local
+       and executes in time $O(L)$).
+ \item Accept iff the simulated pointer equals $e_k$.
+\end{enumerate}
+
+Total runtime is polynomial in $L$; hence
+$L_{\Phi_k}\in\mathrm{NP}$ (indeed in
+$\mathrm{P}^{F\!}$ if $F$ is provided as an oracle).
+
+%..............................................................
+\paragraph{Satisfaction of all FDI axioms.}
+\begin{itemize}[leftmargin=12pt,itemsep=1pt]
+  \item \textbf{Gnosis+Structure Axioms \& EM1–EM3}: \
+        Hold because $Z^{\mathrm{in}}$ is finite and $F$ and $M_T$ are
+        explicit, reversible cellular rules.
+  \item \textbf{Time Irreversibility (I):} \
+        No stochastic branching occurs; simulation halts after $T$
+        deterministic steps, the axiom is trivially satisfied.
+\end{itemize}
+
+%..............................................................
+\paragraph{FDI conclusion.}
+Since all axioms are met \emph{and} the guard partition
+$\{G_k\}$ is finite, the tail fact $\Phi_k$ is
+\emph{decomposable}.  Consequently the certification language sits
+inside the ordinary polynomial hierarchy rather than at oracle degree
+$0'$.  This places the superdeterministic CA Interpretation firmly in
+\textbf{Category~3} as defined in Sec.~\ref{sec:collapse-uncomputable}.
+%-------------------------------------------------------------
+%=============================================================
+\paragraph{Traceability caveat (T).}
+The decomposition above treats the micro-index $i(s_0)$ as an \emph{operational input}. If the CAI posits that $i(s_0)$ exists but cannot be accessed (or approximated by an open set of controls) at tick~0, then (T) fails on $Z^{\mathrm{in}}$ and no finite guard family exists. In that case the same dynamics yields \emph{Category~2}, not~3.
+
+
+\subsection{Certifiability of Convex–Quasi–Linear (CQL) Deterministic
+         Collapse}
+\label{sec:cql-cert}
+%=============================================================
+
+Throughout this section we work in a finite–dimensional truncation
+\(H\!\cong\!\mathbb{C}^{d}\) that captures a laboratory’s
+finite–energy, finite–particle sector; hence the trace–norm unit ball
+\(\mathcal{D}_d\!=\!\{\rho\ge0,\operatorname{Tr}\rho=1\}\) is compact.
+
+%-------------------------------------------------------------
+\subsubsection{The Kraus–normalised flow}
+
+Let \(\{\Lambda_t\}_{t\ge0}\) be a \emph{linear}, completely–positive
+semigroup
+\(\Lambda_t(\rho)=\sum_{\alpha}L_{\alpha}(t)\rho L_{\alpha}^{\dagger}(t)\)
+with rational Kraus coefficients, not necessarily trace preserving.
+Define the \emph{convex–quasi–linear} flow
+\[
+   \Phi_t(\rho)
+   :=\frac{\Lambda_t(\rho)}{\operatorname{Tr}\Lambda_t(\rho)},
+   \qquad 0\le t<\infty .
+\]
+We assume the \textbf{collapse condition}
+
+\[
+   \exists T>0\; \forall\rho\in\mathcal{D}_d:
+   \quad \Phi_T(\rho)\in\{\Pi_1,\dots,\Pi_m\},
+   \tag{CC}
+\]
+where \(\{\Pi_k\}\) are one–dimensional projectors onto an orthonormal
+pointer basis.  (Examples with this property are constructed in
+\cite{RembielinskiCaban2020}.)
+
+The map \(\Phi_T\) is \emph{globally Lipschitz}:
+\[
+   \|\Phi_T(\rho)-\Phi_T(\sigma)\|_1
+   \;\le\; L\,\|\rho-\sigma\|_1,
+   \qquad L:=\frac{\|\Lambda_T\|_{1\to1}}{\lambda_{\min}},
+\]
+where \(\lambda_{\min}:=\min_{\rho}\operatorname{Tr}\Lambda_T(\rho)>0\)
+because \(\Lambda_T\) is CP and finite dimensional.
+
+\paragraph{Uniform positivity (well-defined normalisation).}
+Assume there exists $c>0$ such that $\operatorname{Tr}\Lambda_T(\rho)\ge c$ for all $\rho\in\mathcal{D}_d$. (This follows, e.g., if $\Lambda_T$ is strictly positive on $\mathcal{D}_d$ or under the collapse condition (CC) together with continuity.) Then $\Phi_T$ is well-defined and globally Lipschitz on $\mathcal{D}_d$:
+\[
+\|\Phi_T(\rho)-\Phi_T(\sigma)\|_1
+\;\le\; \frac{\|\Lambda_T\|_{1\to1}}{c}\;\|\rho-\sigma\|_1
+\;=:\; L\;\|\rho-\sigma\|_1.
+\]
+
+\paragraph{Finite guarded decomposition (compact cover).}
+Each basin $B_k=\Phi_T^{-1}(\{\Pi_k\})$ is closed in the compact $\mathcal{D}_d$, hence compact. For any $0<\varepsilon<\frac{1}{2L}$, the open balls
+\[
+U_{\rho} \;:=\; \bigl\{\sigma\in \mathcal{D}_d : \|\sigma-\rho\|_1<\varepsilon\bigr\}
+\quad (\rho\in B_k)
+\]
+satisfy $\Phi_T(U_{\rho})\subset B_{1/2}(\Pi_k)$ and therefore decide the pointer as $e_k$. By compactness of $B_k$, extract a finite subcover $U_{\rho_{k,1}},\dots,U_{\rho_{k,r_k}}$. Taking the finite union over $k=1,\dots,m$ yields a finite guard family that covers $\mathcal{D}_d$.
+
+
+%-------------------------------------------------------------
+\subsubsection{Polynomial certificate scheme}
+
+\paragraph{Witness.}
+A certificate for the fact
+\(\Phi_k:\,“\text{pointer reads }e_k”\) is the triple
+\[
+  w = \bigl(k,\; \rho_c,\; r\bigr),
+\]
+where \(k\in\{1,\dots,m\}\), \(\rho_c\in\mathcal{D}_d(\mathbb{Q}[i])\)
+has rational entries, and \(r\in\mathbb{Q}_{>0}\) obeys
+\(r<\varepsilon_k\) with
+\(\|\rho_0-\rho_c\|_1<r\).  The bit–length of \(w\) is
+\(O(d^2\log 1/r)\).
+
+\paragraph{Polynomial verification.}
+Given a guard label $(k,j)$ and a rational center $\rho_{k,j}$, the verifier checks $\|\rho_0-\rho_{k,j}\|_1<\varepsilon$ and computes $\Phi_T(\rho_{k,j})$ with rational Kraus matrices (EM1), in time polynomial in $d$ and the bit-lengths, then accepts iff $\|\Phi_T(\rho_{k,j})-\Pi_k\|_1<\tfrac{1}{2}$. Hence $L_{\Phi_k}\in\mathbf{NP}$ (and in QCMA with a BQP verifier).
+
+%-------------------------------------------------------------
+\subsubsection{Fragility: a single essential discontinuity drops to
+            Category 1}
+
+If the flow loses global Lipschitz continuity—e.g.\ there exists
+\(\rho^\star\) where \(\Lambda_T(\rho^\star)\) becomes rank-deficient
+so that \(\lambda_{\min}=0\)—then (i) guard balls can no longer be made
+uniform in radius and (ii) the inverse image of a projector need not be
+closed.  Consequently:
+
+\begin{itemize}[leftmargin=12pt,itemsep=1pt]
+  \item Representation axiom \textbf{(C)} (compactness under the norm
+        topology) fails at \(\rho^\star\).
+  \item EM3 is violated because no finite sub–cover can guarantee the
+        map to be constant on each guard.
+\end{itemize}
+
+The theory therefore exits the FDI domain altogether,
+falling to **Category 1** despite being deterministic.
+Hence \emph{small analytical pathologies in the CP semigroup can
+erase the certifiability advantage}.  This illustrates the delicate
+balance required for deterministic collapse models to outperform
+Copenhagen in epistemic value.
+
+%-------------------------------------------------------------
+
+
+%=============================================================
+\subsection{Finite-World Many-Interacting-Worlds (MIW)}
+\label{subsec:miw-finite}
+%=============================================================
+
+We analyse the \emph{finite-$N$} variant of the Hall–Deckert–Wiseman
+Many-Interacting-Worlds model, where the universal configuration is a
+deterministic swarm of $N\!<\!\infty$ classical “world points’’
+$q^{(w)}(t)\in\mathbb R^{3K}$ ($w=1,\dots,N$ for $K$ particles).  The
+ordinary Schrödinger predictions are recovered for large but fixed $N$
+by suitably choosing the inter-world potential
+$V_{N,\gamma}(q^{(1)},\dots,q^{(N)})$ \cite{HallDeckertWiseman2014}.
+
+%-------------------------------------------------------------
+\paragraph{State representation and compact input slice (Gnosis+Structure Axioms).}
+Assume each particle’s coordinate domain is a bounded box
+$[-L,L]^3$ and kinetic energy per particle is $\le E_{\max}$.  Then the
+phase-space cube
+\[
+   Z^{\mathrm{in}}
+   :=\Bigl([-L,L]^3\times[-P,P]^3\Bigr)^{\,K N},
+   \qquad P:=\sqrt{2mE_{\max}},
+\]
+is compact and has a straightforward rational-ball naming, satisfying
+\textbf{Gnosis+Structure Axioms}.  A micro-state is the tuple
+\((q^{(1)},p^{(1)},\dots,q^{(N)},p^{(N)})\) with rational coordinates.
+
+%-------------------------------------------------------------
+\paragraph{Deterministic dynamics.}
+Time evolution follows a Lipschitz ODE system
+\[
+   m\ddot q^{(w)} = -\partial_{q^{(w)}}\!
+   \bigl[\,V_{\mathrm{ext}}(q^{(w)})
+          +V_{N,\gamma}(q^{(1)},\dots,q^{(N)})\bigr]
+   \quad (w=1,\dots,N),
+\]
+whose right-hand side is polynomial if $V_{\mathrm{ext}}$ and
+$V_{N,\gamma}$ use rational parameters.  Thus a rational-time step
+$\Delta t$ can be simulated with polynomial precision and time, meeting
+\textbf{EM1} (effectively computable flow).
+
+%-------------------------------------------------------------
+\paragraph{Pointer observable and world-index guard sets.}
+Suppose the apparatus records a discrete pointer value
+$e_k$ when a configuration $q^{(w)}(T)$ falls inside a rational
+detector cell $D_k\subset[-L,L]^{3K}$.  Because trajectories do not
+cross, each initial world index $w$ produces \emph{exactly one} pointer
+value.  Define
+
+\[
+   G_k := \bigl\{\,w\in\{1,\dots,N\}\,:\,
+               q^{(w)}(T)\in D_k \bigr\}.
+\]
+
+The family $\{G_k\}_{k=1}^{m}$ is a \emph{finite} partition of the
+index set, and membership $w\in G_k$ is decidable in
+$\mathrm{poly}(K,N)$ time by integrating the ODE for world $w$ alone
+(\textbf{EM3}).
+
+%-------------------------------------------------------------
+\paragraph{Certificate and verifier.}
+A witness for the fact ``pointer reads $e_k$’’ is
+
+\[
+   w \;=\; \bigl(k,\; \hat w \in G_k,\;
+               (q^{(\hat w)}_0,p^{(\hat w)}_0)\bigr),
+\]
+
+where $(q^{(\hat w)}_0,p^{(\hat w)}_0)$ are the rational initial
+coordinates of world $\hat w$.  Verification algorithm:
+
+\begin{enumerate}[leftmargin=15pt,itemsep=2pt]
+  \item Re-integrate the ODE for world $\hat w$ up to time $T$ with
+        rational arithmetic.
+  \item Accept iff the resulting $q^{(\hat w)}(T)\in D_k$.
+\end{enumerate}
+
+Both steps run in time $\mathrm{poly}(K,N,\log 1/\epsilon)$, so
+$L_{\Phi_k}\in\mathrm{NP}$ and, by the standard Kitaev embedding,
+$L_{\Phi_k}\in\mathrm{QCMA}$ when a BQP verifier is allowed.
+
+%-------------------------------------------------------------
+\paragraph{FDI verdict.}
+All Gnosis+Structure Axioms, EM1–EM3, and (I) are satisfied and a
+\emph{finite guard} family exists.  Hence every single-outcome fact is
+\textbf{FDI-decomposable}; the theory belongs to
+\emph{Category 3}—epistemically stronger than Copenhagen.
+
+\paragraph{Traceability caveat (T).}
+The guard sets above use the world index $w$ as an operational selector. If the finite-$N$ MIW treats $w$ as a hidden typicality parameter unavailable to the agent at tick~0, then (T) fails (no open preimage in the agent’s input topology), and the theory drops to \emph{Category~2} despite determinism.
+
+
+%-------------------------------------------------------------
+\paragraph{Continuum-world limit drops to Category 2.}
+If one lets $N\!\to\!\infty$ so that world indices form a continuum,
+the guard sets $G_k$ become uncountable; no finite decomposition is
+possible and the model reverts to \textbf{Category 2}.  Thus
+\emph{finiteness of $N$ is crucial for certifiability}.
+%=============================================================
+
+\end{document}

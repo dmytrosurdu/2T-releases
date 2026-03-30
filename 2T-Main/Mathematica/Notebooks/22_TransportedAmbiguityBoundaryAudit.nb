@@ -1,0 +1,194 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      8058,        185]
+NotebookOptionsPosition[      6219,        156]
+NotebookOutlinePosition[      6533,        170]
+CellTagsIndexPosition[      6490,        167]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Transported Ambiguity Boundary Audit", "Title",ExpressionUUID->"14af8929-c35b-4f19-bbe9-6fd78fde304d"],
+
+Cell[TextData[{
+ "This notebook connects the exact split+welded boundary lane to the ",
+ StyleBox["actual",
+  FontWeight->Bold],
+ " weak-interface transport export from the certified active-transport model. "
+}], "Text",ExpressionUUID->"7eff5733-fd42-4c4d-895a-ab3818a67d83"],
+
+Cell["Target", "Section",ExpressionUUID->"26028de9-df28-4837-b666-44fb9448ff2b"],
+
+Cell[TextData[Cell[BoxData[Cell["task:transported-boundary-ambiguity-audit",
+  Background->None,ExpressionUUID->
+  "9809327e-2126-4ecc-a116-6b610a1a9277"]], \
+"InlineCode",ExpressionUUID->"0f0a33f6-ffb3-48eb-9914-ef9c73e455e0"]], "Item",\
+ExpressionUUID->"321dbc3b-a689-438f-ba22-492498f19e52"],
+
+Cell["Input data", "Section",ExpressionUUID->"28ba8ce7-7d06-41f0-b235-2701d931ef14"],
+
+Cell[TextData[{
+ "The weak-interface input is the certified transport export ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{"(", 
+         RowBox[{
+           SubsuperscriptBox[
+            StyleBox["E", "TI"], "\[CapitalLambda]", "-"], ",", 
+           SubsuperscriptBox[
+            StyleBox["A", "TI"], "\[CapitalLambda]", "-"], ",", 
+           RowBox[{"[", 
+             SubsuperscriptBox["\[CapitalXi]", "\[CapitalLambda]", 
+              RowBox[{"(", "1", ")"}]], "]"}], ",", 
+           SubscriptBox["\[Chi]", "\[CapitalLambda]"], ",", 
+           SubscriptBox["\[Epsilon]", "\[CapitalLambda]"]}], ")"}], 
+       TraditionalForm], "errors" -> {}, "input" -> 
+     "(E^-_{\\Lambda},A^-_{\\Lambda},[\\Xi^{(1)}_{\\Lambda}],\\chi_{\\Lambda},\
+\\varepsilon_{\\Lambda})", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "513e2767-f214-48f7-8374-54bd43f364e7"],
+ "built from ",
+ Cell[BoxData[Cell["\<\
+/home/kray-l8/work/2T/Main/Mathematica/Kernel/ActiveTransport.wl\
+\>",
+   Background->None,ExpressionUUID->"ae7fdcf4-8f24-441a-ad8f-3a365cf8a0aa"]], 
+  "InlineCode",ExpressionUUID->"79f27a96-a7b6-400b-8864-cc3dc2ed41c2"],
+ ". "
+}], "Text",ExpressionUUID->"6cf2f73b-93a9-47f0-a2bd-8f2721173301"],
+
+Cell["Exact setup", "Section",ExpressionUUID->"e2aab99d-0fd7-427f-b3db-0dfea06ac422"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"transportedSuite", "=", 
+   RowBox[{
+   "MainProof`TransportedBoundaryAudit`RunTransportedBoundaryAuditSuite", "[",
+     "]"}]}], ";"}]}], "Input",ExpressionUUID->"fbbef14b-6b22-408b-8a46-\
+ad908b111c47"],
+
+Cell["Transported realizations", "Section",ExpressionUUID->"ab45d310-8d51-4a7e-b466-a76aafd5cace"],
+
+Cell[TextData[{
+ "The notebook compares two exact split+welded boundary realizations of the \
+",
+ StyleBox["same exported",
+  FontWeight->Bold],
+ " ambiguity basis: "
+}], "Text",ExpressionUUID->"fd8561f8-be60-4505-9e53-3aca46dbcd8e"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["TransportedSafeFamily",
+   Background->None,ExpressionUUID->"ff336700-3746-47ed-a624-5fc6b8742343"]], 
+  "InlineCode",ExpressionUUID->"e6eb6bd0-9870-49b2-8aca-9931cd385838"],
+ ": the ambiguity basis lands in the ledger-off-diagonal sector and is killed \
+by controlled projection."
+}], "Item",ExpressionUUID->"8bfdfa15-c1b8-480f-96fa-e2b3b6334951"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["TransportedUnsafeFamily",
+   Background->None,ExpressionUUID->"4fcedc3c-15cb-489c-9606-511752f28116"]], 
+  "InlineCode",ExpressionUUID->"64ba3f82-bfbd-4ff8-b2ed-d8133bcf5be0"],
+ ": one ambiguity basis vector lands in a visible diagonal controlled block."
+}], "Item",ExpressionUUID->"8716283c-5b5f-4a8e-8b3c-ffcf89e95996"],
+
+Cell["Exact checks", "Section",ExpressionUUID->"df14049b-e0fb-457d-8cb2-efc6c5092c1d"],
+
+Cell[BoxData[
+ RowBox[{"<|", "\[IndentingNewLine]", "  ", 
+  RowBox[{
+   RowBox[{"\"\<WeakInterface\>\"", "->", 
+    RowBox[{"transportedSuite", "[", "\"\<WeakInterface\>\"", "]"}]}], ",", 
+   "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<TransportedSafeWitness\>\"", "->", 
+    RowBox[{
+    "transportedSuite", "[", "\"\<TransportedSafeWitness\>\"", "]"}]}], ",", 
+   "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<TransportedUnsafeWitness\>\"", "->", 
+    RowBox[{
+    "transportedSuite", "[", "\"\<TransportedUnsafeWitness\>\"", "]"}]}], ",",
+    "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<AuditsByCandidate\>\"", "->", 
+    RowBox[{"transportedSuite", "[", "\"\<AuditsByCandidate\>\"", "]"}]}], ",",
+    "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<WeakestAdditionalHypothesis\>\"", "->", 
+    RowBox[{
+    "transportedSuite", "[", "\"\<WeakestAdditionalHypothesis\>\"", "]"}]}], ",",
+    "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<ForcedByTransportStructureQ\>\"", "->", 
+    RowBox[{
+    "transportedSuite", "[", "\"\<ForcedByTransportStructureQ\>\"", "]"}]}]}],
+   "\[IndentingNewLine]", "|>"}]], "Input",ExpressionUUID->"22277cb3-51f3-\
+478a-9dc2-05d05ec287a3"],
+
+Cell["Expected outcome", "Section",ExpressionUUID->"88affbf5-260c-4d81-9cac-d8146667fb9a"],
+
+Cell["\<\
+The same exported transported ambiguity basis admits an exact safe \
+realization and an exact unsafe realization.\
+\>", "Item",ExpressionUUID->"eda10f59-6fdd-4124-9a4c-a2d8a6ef0350"],
+
+Cell[TextData[{
+ "Therefore boundary safety is ",
+ StyleBox["not",
+  FontWeight->Bold],
+ " forced by the weak-interface transport structure alone."
+}], "Item",ExpressionUUID->"71a8c01c-0ab6-4f92-8b16-8b6998b7aa74"],
+
+Cell["\<\
+Any positive result requires an additional split+welded boundary hypothesis, \
+expressed in block-central or mod-null form.\
+\>", "Item",ExpressionUUID->"725c877f-280b-4552-9200-9c1ef229f3b6"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"a83bd6d1-c378-4ba4-8c49-4f0e587986a8"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 108, 0, 70, "Title",ExpressionUUID->"14af8929-c35b-4f19-bbe9-6fd78fde304d"],
+Cell[665, 22, 275, 5, 70, "Text",ExpressionUUID->"7eff5733-fd42-4c4d-895a-ab3818a67d83"],
+Cell[943, 29, 80, 0, 70, "Section",ExpressionUUID->"26028de9-df28-4837-b666-44fb9448ff2b"],
+Cell[1026, 31, 294, 4, 70, "Item",ExpressionUUID->"321dbc3b-a689-438f-ba22-492498f19e52"],
+Cell[1323, 37, 84, 0, 70, "Section",ExpressionUUID->"28ba8ce7-7d06-41f0-b235-2701d931ef14"],
+Cell[1410, 39, 1271, 28, 70, "Text",ExpressionUUID->"6cf2f73b-93a9-47f0-a2bd-8f2721173301"],
+Cell[2684, 69, 85, 0, 70, "Section",ExpressionUUID->"e2aab99d-0fd7-427f-b3db-0dfea06ac422"],
+Cell[2772, 71, 382, 10, 70, "Input",ExpressionUUID->"fbbef14b-6b22-408b-8a46-ad908b111c47"],
+Cell[3157, 83, 98, 0, 70, "Section",ExpressionUUID->"ab45d310-8d51-4a7e-b466-a76aafd5cace"],
+Cell[3258, 85, 233, 6, 70, "Text",ExpressionUUID->"fd8561f8-be60-4505-9e53-3aca46dbcd8e"],
+Cell[3494, 93, 384, 6, 70, "Item",ExpressionUUID->"8bfdfa15-c1b8-480f-96fa-e2b3b6334951"],
+Cell[3881, 101, 357, 5, 70, "Item",ExpressionUUID->"8716283c-5b5f-4a8e-8b3c-ffcf89e95996"],
+Cell[4241, 108, 86, 0, 70, "Section",ExpressionUUID->"df14049b-e0fb-457d-8cb2-efc6c5092c1d"],
+Cell[4330, 110, 1175, 25, 70, "Input",ExpressionUUID->"22277cb3-51f3-478a-9dc2-05d05ec287a3"],
+Cell[5508, 137, 90, 0, 70, "Section",ExpressionUUID->"88affbf5-260c-4d81-9cac-d8146667fb9a"],
+Cell[5601, 139, 192, 3, 70, "Item",ExpressionUUID->"eda10f59-6fdd-4124-9a4c-a2d8a6ef0350"],
+Cell[5796, 144, 214, 5, 70, "Item",ExpressionUUID->"71a8c01c-0ab6-4f92-8b16-8b6998b7aa74"],
+Cell[6013, 151, 202, 3, 70, "Item",ExpressionUUID->"725c877f-280b-4552-9200-9c1ef229f3b6"]
+}
+]
+*)
+
+(* End of internal cache information *)

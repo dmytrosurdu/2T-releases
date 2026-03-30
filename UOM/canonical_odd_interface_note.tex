@@ -1,0 +1,809 @@
+\ifdefined\UOMTransportFragmentLoaded\else
+\documentclass[11pt]{article}
+\input{UOM/odd_transport_fragment_standalone_preamble.tex}
+\externaldocument{UOM/compressed_log_spectral_selection_note}
+\externaldocument{UOM/odd_selector_note}
+\externaldocument{UOM/active_response_transport_program_note}
+\title{Polarized Characterization Interface}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\fi
+
+\section{Polarized Characterization Interface}
+\label{sec:char-export}
+
+This section records the finite-cutoff characterization data extracted from the split/leak
+construction and used in the 2T Main assumption package
+Definition~\ref{main-def:uom-main-theorem-assumptions}. In this note, an ``accepted tick'' denotes the local
+accepted-branch slice at cutoff \(\Lambda_k\).
+
+For each accepted tick \(k\), write
+\[
+a_{\Lambda_k}:=a_k,
+\qquad
+S_{\Lambda_k}:=a_{\Lambda_k}^2.
+\]
+The variable \(a_{\Lambda_k}\) is the distinguished odd split coordinate identified in
+\cref{subsec:leak-solution,subsec:B-gaussian}; the even quantity \(S_{\Lambda_k}\) is the
+positive stock that enters the leak law and the split threshold.
+
+\begin{definition}[Characterization algebra, operational triviality, and even null ideal]
+\label{def:char-data}
+Fix an accepted tick \(k\) and let \(E^-_{\Lambda_k}\) denote the physically odd sufficiently local
+generator space at cutoff \(\Lambda_k\), i.e.\ the odd sector for the transported physical involution
+\(\Gamma\). Let \(E^+_{\Lambda_k}\) denote the corresponding physically even sufficiently local
+observable space.
+Define the core characterization algebra by
+\begin{equation}
+\mathcal O^{\mathrm{char}}_{\Lambda_k}
+:=
+\mathrm{alg}\{a_{\Lambda_k},\,S_{\Lambda_k}\}.
+\label{eq:Ochar-def}
+\end{equation}
+Define the operationally interface-trivial odd subspace by
+\begin{equation}
+\mathcal T^{\mathrm{op}}_{\Lambda_k}
+:=
+\overline{\left\{
+T\in E^-_{\Lambda_k}:
+\{T,O\}_{\mathrm P,\Lambda_k}=0
+\ \forall O\in\mathcal O^{\mathrm{char}}_{\Lambda_k}
+\right\}}.
+\label{eq:Tchar-def}
+\end{equation}
+Define the even interface-null ideal by
+\begin{equation}
+\mathcal N^{\mathrm{even}}_{\Lambda_k}
+:=
+\overline{\left\{
+E\in E^+_{\Lambda_k}:
+\{E,O\}_{\mathrm P,\Lambda_k}=0
+\ \forall O\in\mathcal O^{\mathrm{char}}_{\Lambda_k}
+\right\}}.
+\label{eq:Neven-def}
+\end{equation}
+\end{definition}
+
+\begin{remark}[Do not identify the characterization observable with the generator]
+\label{rem:a-vs-Jact}
+The odd observable \(a_{\Lambda_k}\) characterizes the active completion-sector channel, but it is
+not itself the odd Hamiltonian generator class appearing in item \textbf{(M4)} of
+Definition~\ref{main-def:uom-main-theorem-assumptions}.
+That generator is denoted \(J^{\mathrm{act}}_{\Lambda_k}\in E^-_{\Lambda_k}\) below.
+The quotient statement belongs to \([J^{\mathrm{act}}_{\Lambda_k}]\), not to
+\([a_{\Lambda_k}]\).
+\end{remark}
+
+\begin{definition}[Intrinsic covariance-tangent response map]
+\label{def:intrinsic-cov-response}
+Fix an accepted tick \(k\). Let \(\mathcal T^{\mathrm{cov}}_{\Lambda_k}\) denote the finite-cutoff
+receiver covariance-tangent space at the UOM reference Gaussian state
+\(\rho_{\ast,\Lambda_k}\), equipped with the Fisher pairing
+\[
+\big\langle\!\big\langle \delta C,\delta C'\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}
+:=
+\tfrac12\,\mathrm{tr}\!\big(
+C_{\ast,\Lambda_k}^{-1}\delta C\,C_{\ast,\Lambda_k}^{-1}\delta C'
+\big).
+\]
+For admissible band-limited receiver probes \(f,g\), let
+\[
+\mathcal Q^{\Lambda_k}_{f,g}\in E^+_{\Lambda_k}
+\]
+denote the corresponding sufficiently local quadratic observable, normalized so that on centered
+Gaussian states with covariance \(C\),
+\[
+\big\langle \mathcal Q^{\Lambda_k}_{f,g}\big\rangle_{\rho(C)}
+=
+\langle f,Cg\rangle.
+\]
+For \(F\in E^-_{\Lambda_k}\), define \(\mathcal R_{\Lambda_k}(F)\in\mathcal T^{\mathrm{cov}}_{\Lambda_k}\)
+by the matrix elements
+\[
+\big\langle f,\mathcal R_{\Lambda_k}(F)g\big\rangle
+:=
+\Big\langle
+\{F,\mathcal Q^{\Lambda_k}_{f,g}\}_{\mathrm P,\Lambda_k}
+\Big\rangle_{\rho_{\ast,\Lambda_k}}.
+\]
+We call
+\[
+\mathcal R_{\Lambda_k}:E^-_{\Lambda_k}\to\mathcal T^{\mathrm{cov}}_{\Lambda_k}
+\]
+the \emph{intrinsic covariance-tangent response map}.
+\end{definition}
+
+\begin{proposition}[Intrinsic definition and completion independence]
+\label{prop:intrinsic-cov-response}
+The map \(\mathcal R_{\Lambda_k}\) of \cref{def:intrinsic-cov-response} is continuous and linear.
+It depends only on the finite-cutoff UOM Peierls package and the UOM covariance/Fisher package.
+If a Gaussian completion realization is chosen, then \(\mathcal R_{\Lambda_k}(F)\) is represented by
+the same completion-sector covariance tangent that one obtains by linearizing the completion
+quadratures. Thus Gaussian completion is a realization of the response map, not extra structure
+required to define it.
+\end{proposition}
+
+\begin{proof}
+For fixed \(F\in E^-_{\Lambda_k}\), the finite-cutoff UOM Peierls package makes
+\[
+\delta_F:=\{F,-\}_{\mathrm P,\Lambda_k}
+\]
+a continuous derivation on the sufficiently local algebra. Applying \(\delta_F\) to the quadratic
+probes \(\mathcal Q^{\Lambda_k}_{f,g}\) and evaluating in the reference Gaussian state produces a
+continuous symmetric bilinear form in \(f,g\). In the UOM Gaussian radiative sector, such bilinear
+forms are exactly covariance tangents at \(C_{\ast,\Lambda_k}\), equipped with the Fisher metric.
+Linearity and continuity in \(F\) are inherited directly from the Peierls bracket. No completion
+coordinates are used in this construction.
+
+If a Gaussian completion is later chosen, the same second moments are encoded by the covariance
+matrix of the completion quadratures. The bilinear form defined above and the completion-sector
+covariance tangent therefore represent the same infinitesimal response object in two different
+coordinate systems.
+\end{proof}
+
+\begin{definition}[Physical intrinsic covariance-response map]
+\label{def:phys-cov-response}
+Fix an accepted tick \(k\). Let
+\[
+\mathcal T^{\mathrm{phys}}_{\Lambda_k}
+:=
+\Pi_{\mathrm{phys},\Lambda_k}\mathcal T^{\mathrm{cov}}_{\Lambda_k}
+\subset \mathcal T^{\mathrm{cov}}_{\Lambda_k}.
+\]
+Define the physical intrinsic covariance-response map by
+\[
+R^{\mathrm{phys}}_{\Lambda_k}
+:=
+\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}
+:
+E^-_{\Lambda_k}\to \mathcal T^{\mathrm{phys}}_{\Lambda_k}.
+\]
+\end{definition}
+
+\begin{proposition}[Physical intrinsic response map]
+\label{prop:phys-cov-response}
+The map \(R^{\mathrm{phys}}_{\Lambda_k}\) of \cref{def:phys-cov-response} is continuous and linear.
+\end{proposition}
+
+\begin{proof}
+This is immediate from \cref{prop:intrinsic-cov-response} and the continuity and linearity of the
+finite-cutoff physical projector \(\Pi_{\mathrm{phys},\Lambda_k}\).
+\end{proof}
+
+\begin{proposition}[Reduction of operational triviality to the active odd coordinate]
+\label{prop:char-op-from-a}
+Fix an accepted tick \(k\). If \(F\in E^-_{\Lambda_k}\) satisfies
+\[
+\{F,a_{\Lambda_k}\}_{\mathrm P,\Lambda_k}=0,
+\]
+then \(F\in\mathcal T^{\mathrm{op}}_{\Lambda_k}\).
+\end{proposition}
+
+\begin{proof}
+Since \(S_{\Lambda_k}=a_{\Lambda_k}^2\) and the Peierls bracket is a derivation,
+\[
+\{F,S_{\Lambda_k}\}_{\mathrm P,\Lambda_k}
+=
+\{F,a_{\Lambda_k}^2\}_{\mathrm P,\Lambda_k}
+=
+2\,a_{\Lambda_k}\,\{F,a_{\Lambda_k}\}_{\mathrm P,\Lambda_k}
+=
+0.
+\]
+The algebra \(\mathcal O^{\mathrm{char}}_{\Lambda_k}=\mathrm{alg}\{a_{\Lambda_k},S_{\Lambda_k}\}\)
+is generated by \(a_{\Lambda_k}\) and \(S_{\Lambda_k}\), and the Peierls bracket acts on it by the
+Leibniz rule. Hence \(\{F,O\}_{\mathrm P,\Lambda_k}=0\) for every
+\(O\in\mathcal O^{\mathrm{char}}_{\Lambda_k}\), proving
+\(F\in\mathcal T^{\mathrm{op}}_{\Lambda_k}\).
+\end{proof}
+
+\begin{assumption}[Active odd generator and intrinsic-response factorization]
+\label{ass:response-factorization}
+For each accepted tick \(k\), there exist a distinguished active odd generator
+\[
+J^{\mathrm{act}}_{\Lambda_k}\in E^-_{\Lambda_k}
+\]
+and a nonzero physical covariance tangent
+\[
+C^{\mathrm{act}}_{\Lambda_k}\in \mathcal T^{\mathrm{phys}}_{\Lambda_k}
+\]
+and a continuous nonzero linear functional
+\[
+\rho_{\Lambda_k}:E^-_{\Lambda_k}\to\mathbb R
+\]
+normalized by
+\[
+\rho_{\Lambda_k}(J^{\mathrm{act}}_{\Lambda_k})=1,
+\]
+such that
+\[
+R^{\mathrm{phys}}_{\Lambda_k}(J^{\mathrm{act}}_{\Lambda_k})
+=
+C^{\mathrm{act}}_{\Lambda_k}
+\neq 0
+\]
+and
+\begin{equation}
+R^{\mathrm{phys}}_{\Lambda_k}(F)
+=
+\rho_{\Lambda_k}(F)\,C^{\mathrm{act}}_{\Lambda_k}
+\qquad
+\forall F\in E^-_{\Lambda_k}
+\label{eq:rho-factorization}
+\end{equation}
+holds on the strong sector under consideration.
+\end{assumption}
+
+\begin{remark}[Strong normalization]
+\label{rem:rho-strong}
+If one further chooses the Fisher-unit normalization
+\(
+\widehat C^{\mathrm{act}}_{\Lambda_k}
+:=
+\|C^{\mathrm{act}}_{\Lambda_k}\|^{-1}_{C_{\ast,\Lambda_k}}\,C^{\mathrm{act}}_{\Lambda_k},
+\)
+then
+\eqref{eq:rho-factorization} sharpens to
+\[
+R^{\mathrm{phys}}_{\Lambda_k}(F)
+=
+\widehat{\rho}_{\Lambda_k}(F)\,\widehat C^{\mathrm{act}}_{\Lambda_k}
+\]
+with
+\(
+\widehat{\rho}_{\Lambda_k}
+:=
+\|C^{\mathrm{act}}_{\Lambda_k}\|_{C_{\ast,\Lambda_k}}\,\rho_{\Lambda_k}.
+\)
+The export below does not require this extra normalization; it only needs the scalar response
+coefficient \(\rho_{\Lambda_k}\) relative to a fixed nonzero active tangent
+\(C^{\mathrm{act}}_{\Lambda_k}\).
+\end{remark}
+
+\begin{assumption}[Physical-response sufficiency]
+\label{ass:response-sufficiency}
+For each accepted tick \(k\), the operationally trivial odd directions are exactly the kernel of the
+physical intrinsic covariance-response map:
+\[
+ \ker R^{\mathrm{phys}}_{\Lambda_k}
+ =
+ \mathcal T^{\mathrm{op}}_{\Lambda_k}.
+\]
+Equivalently, an odd generator has zero physical intrinsic covariance response if and only if it is
+operationally trivial on the full core characterization algebra \(\mathcal O^{\mathrm{char}}_{\Lambda_k}\).
+\end{assumption}
+
+\begin{remark}[Why the strong package must be stated intrinsically]
+\label{rem:response-quotient-obstruction}
+The earlier quotient-valued formulation of the strong package in
+\(
+E^+_{\Lambda_k}/\mathcal N^{\mathrm{even}}_{\Lambda_k}
+\)
+is not stable.
+Because the Peierls bracket here is the ordinary derivation bracket and \(S_{\Lambda_k}=a_{\Lambda_k}^2\),
+the even observable \(\{F,a_{\Lambda_k}\}_{\mathrm P,\Lambda_k}\) already Poisson-commutes with
+both \(a_{\Lambda_k}\) and \(S_{\Lambda_k}\), hence lies automatically in
+\(\mathcal N^{\mathrm{even}}_{\Lambda_k}\).
+The correct codomain for factorization and kernel identification is therefore the intrinsic
+physical covariance-response space \(\mathcal T^{\mathrm{phys}}_{\Lambda_k}\), not the even
+observable quotient.
+\end{remark}
+
+\begin{proposition}[Operational triviality is the kernel of the active response]
+\label{prop:T-kerrho}
+Assume \cref{ass:response-factorization,ass:response-sufficiency}. Then
+\[
+\mathcal T^{\mathrm{op}}_{\Lambda_k}=\ker\rho_{\Lambda_k}.
+\]
+\end{proposition}
+
+\begin{proof}
+Because \(C^{\mathrm{act}}_{\Lambda_k}\neq 0\), the factorization identity
+\eqref{eq:rho-factorization} implies
+\[
+R^{\mathrm{phys}}_{\Lambda_k}(F)=0
+\qquad\Longleftrightarrow\qquad
+\rho_{\Lambda_k}(F)=0
+\]
+for every \(F\in E^-_{\Lambda_k}\).
+Thus
+\(
+\ker R^{\mathrm{phys}}_{\Lambda_k}
+=
+\ker\rho_{\Lambda_k}.
+\)
+Apply \cref{ass:response-sufficiency}.
+\end{proof}
+
+\begin{corollary}[Rank-one active odd quotient]
+\label{cor:rank-one-char}
+Assume \cref{ass:response-factorization,ass:response-sufficiency}. Then
+\[
+E^-_{\Lambda_k}/\mathcal T^{\mathrm{op}}_{\Lambda_k}\cong \mathbb R,
+\]
+and the quotient is generated by the class of the active odd generator
+\([J^{\mathrm{act}}_{\Lambda_k}]\).
+\end{corollary}
+
+\begin{proof}
+By \cref{prop:T-kerrho}, the quotient is canonically isomorphic to the image of the nonzero
+functional \(\rho_{\Lambda_k}\). Since \(\rho_{\Lambda_k}\) is real-valued and
+\(\rho_{\Lambda_k}(J^{\mathrm{act}}_{\Lambda_k})=1\), its image is \(\mathbb R\) and the quotient
+is generated by \([J^{\mathrm{act}}_{\Lambda_k}]\).
+\end{proof}
+
+\begin{proposition}[BRST/gauge-exact compatibility on the characterization layer]
+\label{prop:ambiguity-brst-char}
+For each accepted tick \(k\), the odd parts of the BRST/gauge-exact directions
+\[
+Q_tX+Q_uY
+\]
+lie in \(\mathcal T^{\mathrm{op}}_{\Lambda_k}\).
+\end{proposition}
+
+\begin{proof}
+The exported characterization observables \(a_{\Lambda_k}\) and \(S_{\Lambda_k}\) are physical
+finite-cutoff observables on the characterization layer. The BRST/gauge-exact odd directions
+\(Q_tX+Q_uY\) represent redundancies of that physical layer, so their Peierls action vanishes on
+\(\mathcal O^{\mathrm{char}}_{\Lambda_k}\). By \eqref{eq:Tchar-def}, their odd parts therefore lie
+in \(\mathcal T^{\mathrm{op}}_{\Lambda_k}\).
+\end{proof}
+
+\begin{proposition}[Boundary-admissible divergence compatibility]
+\label{prop:ambiguity-div-char}
+Let \(K^\mu\) be a sufficiently local current whose renormalized boundary flux vanishes on the core
+characterization algebra \(\mathcal O^{\mathrm{char}}_{\Lambda_k}\). Then the odd part of
+\[
+\partial_\mu K^\mu
+\]
+lies in \(\mathcal T^{\mathrm{op}}_{\Lambda_k}\).
+\end{proposition}
+
+\begin{proof}
+For the admissible currents in the statement, the renormalized Stokes reduction of
+\(\partial_\mu K^\mu\) produces no boundary term on the characterization layer. Hence its Peierls
+action on every \(O\in\mathcal O^{\mathrm{char}}_{\Lambda_k}\) vanishes, and the odd part belongs
+to \(\mathcal T^{\mathrm{op}}_{\Lambda_k}\) by \eqref{eq:Tchar-def}.
+\end{proof}
+
+\begin{definition}[Admissible odd counterterms on the characterization layer]
+\label{def:ambiguity-ct-char}
+For each accepted tick \(k\), an odd sufficiently local counterterm ambiguity
+\[
+\Delta_{\rm ct}^{-}\in E^-_{\Lambda_k}
+\]
+is called \emph{admissible on the characterization layer} if its intrinsic covariance response has
+no physical projection:
+\[
+\Pi_{\mathrm{phys},\Lambda_k}\,\mathcal R_{\Lambda_k}(\Delta_{\rm ct}^{-})=0.
+\]
+Equivalently, admissible odd counterterms are precisely those local scheme shifts whose response is
+confined to the RP, Weyl, conformal, or other even-null monitor sectors and does not enter the
+compressed active odd line.
+\end{definition}
+
+\begin{proposition}[Counterterm rigidity on the characterization layer]
+\label{prop:ambiguity-ct-char}
+Assume that the characterization observable \(a_{\Lambda_k}\) is extracted from the physical
+covariance response so that
+\[
+\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}(F)=0
+\quad\Longrightarrow\quad
+\{F,a_{\Lambda_k}\}_{\mathrm P,\Lambda_k}=0
+\qquad
+\forall F\in E^-_{\Lambda_k}.
+\]
+Then every admissible odd counterterm ambiguity in the sense of \cref{def:ambiguity-ct-char} acts
+trivially on the core characterization algebra:
+\[
+\Delta_{\rm ct}^{-}\in \mathcal T^{\mathrm{op}}_{\Lambda_k}.
+\]
+\end{proposition}
+
+\begin{proof}
+If \(F=\Delta_{\rm ct}^{-}\) is admissible, then this physical projection vanishes by definition.
+The displayed hypothesis therefore gives
+\[
+\{\Delta_{\rm ct}^{-},a_{\Lambda_k}\}_{\mathrm P,\Lambda_k}=0,
+\]
+and since \(S_{\Lambda_k}=a_{\Lambda_k}^2\), the derivation property yields
+\[
+\{\Delta_{\rm ct}^{-},S_{\Lambda_k}\}_{\mathrm P,\Lambda_k}=0.
+\]
+By \cref{prop:char-op-from-a}, the first identity already implies
+\(\Delta_{\rm ct}^{-}\in\mathcal T^{\mathrm{op}}_{\Lambda_k}\).
+\end{proof}
+
+\begin{remark}[Active stiffness versus full calibration]
+\label{rem:char-calibration-split}
+The split/leak analysis determines the active stiffness \(\widetilde\alpha(\Lambda_k)\) on the
+distinguished line generated by \(J^{\mathrm{act}}_{\Lambda_k}\), with
+\[
+\widetilde\alpha(\Lambda_k)\asymp \alpha(\Lambda_k)\sim \Lambda_k^{d+2}
+\]
+by \cref{ass:uv-match}. What UOM does \emph{not} determine canonically is a positive bilinear form
+on the whole odd generator space \(E^-_{\Lambda_k}\). That extension is auxiliary interface data,
+not a UOM-dynamical output.
+\end{remark}
+
+\begin{assumption}[Auxiliary coercive core on the operationally trivial sector]
+\label{ass:aux-char-core}
+For each accepted tick \(k\), choose a continuous symmetric coercive bilinear form
+\[
+\langle\cdot,\cdot\rangle^{\mathrm{aux}}_{\Lambda_k}
+:
+\mathcal T^{\mathrm{op}}_{\Lambda_k}\times \mathcal T^{\mathrm{op}}_{\Lambda_k}\to\mathbb R
+\]
+whose induced norm Hilbertizes \(\mathcal T^{\mathrm{op}}_{\Lambda_k}\).
+\end{assumption}
+
+\begin{proposition}[Strong-package calibration extension from active stiffness]
+\label{prop:char-calibration-extension}
+Assume \cref{ass:response-factorization,ass:response-sufficiency,ass:aux-char-core}. Set
+\[
+\chi_{\Lambda_k}:=\rho_{\Lambda_k},
+\qquad
+\mathcal T_{\Lambda_k}:=\mathcal T^{\mathrm{op}}_{\Lambda_k}.
+\]
+Then the formula
+\begin{equation}
+\mathsf B_{\Lambda_k}(F,G)
+:=
+\widetilde\alpha(\Lambda_k)\,\chi_{\Lambda_k}(F)\chi_{\Lambda_k}(G)
++
+\left\langle
+F-\chi_{\Lambda_k}(F)J^{\mathrm{act}}_{\Lambda_k},
+\,G-\chi_{\Lambda_k}(G)J^{\mathrm{act}}_{\Lambda_k}
+\right\rangle^{\mathrm{aux}}_{\Lambda_k}
+\label{eq:B-extension}
+\end{equation}
+defines a continuous symmetric positive definite bilinear form on \(E^-_{\Lambda_k}\) satisfying
+\[
+\mathsf B_{\Lambda_k}(J^{\mathrm{act}}_{\Lambda_k},J^{\mathrm{act}}_{\Lambda_k})
+=
+\widetilde\alpha(\Lambda_k),
+\qquad
+\mathsf B_{\Lambda_k}(J^{\mathrm{act}}_{\Lambda_k},T)=0
+\quad
+\forall T\in\mathcal T_{\Lambda_k}.
+\]
+\end{proposition}
+
+\begin{proof}
+By \cref{prop:T-kerrho}, every \(F\in E^-_{\Lambda_k}\) has a unique decomposition
+\[
+F=\chi_{\Lambda_k}(F)\,J^{\mathrm{act}}_{\Lambda_k}+T_F,
+\qquad
+T_F\in \mathcal T_{\Lambda_k}.
+\]
+Equation \eqref{eq:B-extension} is therefore well-defined, continuous, and symmetric.
+Positivity is immediate from \(\widetilde\alpha(\Lambda_k)>0\) together with coercivity of
+\(\langle\cdot,\cdot\rangle^{\mathrm{aux}}_{\Lambda_k}\) on \(\mathcal T_{\Lambda_k}\).
+If \(\mathsf B_{\Lambda_k}(F,F)=0\), then both \(\chi_{\Lambda_k}(F)=0\) and
+\(\langle T_F,T_F\rangle^{\mathrm{aux}}_{\Lambda_k}=0\), hence \(T_F=0\) and \(F=0\).
+The displayed normalization and orthogonality properties follow by substitution into
+\eqref{eq:B-extension}.
+\end{proof}
+
+\begin{corollary}[Descendant ambiguity compatibility on the characterization layer]
+\label{cor:ambiguity-char}
+For each accepted tick \(k\), the odd-projected ambiguity directions coming from
+\[
+Q_tX+Q_uY,
+\qquad
+\partial_\mu K^\mu,
+\qquad
+\Delta_{\rm ct}^{-}
+\]
+belong to \(\mathcal T^{\mathrm{op}}_{\Lambda_k}\) whenever \(K^\mu\) is taken from the
+boundary-admissible class of \cref{prop:ambiguity-div-char} and \(\Delta_{\rm ct}^{-}\) is
+admissible in the sense of \cref{def:ambiguity-ct-char}.
+\end{corollary}
+
+\begin{proof}
+Combine \cref{prop:ambiguity-brst-char,prop:ambiguity-div-char,prop:ambiguity-ct-char}.
+\end{proof}
+
+\begin{theorem}[Strong rank-one realization of the characterization layer]
+\label{thm:uom-char-export}
+Assume
+\cref{ass:export-selection,ass:centered-odd,ass:uv-match,ass:response-factorization,ass:response-sufficiency,ass:aux-char-core}.
+Then for each accepted tick \(k\), the split/leak construction exports the UOM-side data
+\begin{equation}
+\big(
+a_{\Lambda_k},\,
+S_{\Lambda_k},\,
+J^{\mathrm{act}}_{\Lambda_k},\,
+C^{\mathrm{act}}_{\Lambda_k},\,
+\widetilde\alpha(\Lambda_k),\,
+\rho_{\Lambda_k}
+\big),
+\label{eq:uom-char-realization}
+\end{equation}
+where:
+\begin{enumerate}[leftmargin=2em]
+\item \(\mathcal O^{\mathrm{char}}_{\Lambda_k}=\mathrm{alg}\{a_{\Lambda_k},S_{\Lambda_k}\}\) is the
+  minimal completion-sector characterization algebra;
+\item the operationally trivial subspace satisfies
+  \[
+  \mathcal T_{\Lambda_k}:=\mathcal T^{\mathrm{op}}_{\Lambda_k}
+  =
+  \ker R^{\mathrm{phys}}_{\Lambda_k}
+  =
+  \ker\rho_{\Lambda_k};
+  \]
+\item the intrinsic physical response is one-dimensional on the strong sector:
+  \[
+  R^{\mathrm{phys}}_{\Lambda_k}(F)=\rho_{\Lambda_k}(F)\,C^{\mathrm{act}}_{\Lambda_k},
+  \qquad
+  R^{\mathrm{phys}}_{\Lambda_k}(J^{\mathrm{act}}_{\Lambda_k})=C^{\mathrm{act}}_{\Lambda_k}\neq 0;
+  \]
+\item the active odd quotient is rank one and is generated by
+  \([J^{\mathrm{act}}_{\Lambda_k}]\);
+\item the abstract orientation functional of the transported interface is realized by
+  \[
+  \chi_{\Lambda_k}:=\rho_{\Lambda_k};
+  \]
+\item any admissible calibration form \(\mathsf B_{\Lambda_k}\) in this strong package may be obtained by
+  extending the active stiffness \(\widetilde\alpha(\Lambda_k)\) with
+  \cref{prop:char-calibration-extension}.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\Cref{def:char-data} packages the active completion-sector channel extracted from the split/leak
+construction: \(a_{\Lambda_k}\) is the distinguished odd split coordinate singled out by
+\cref{subsec:leak-solution,subsec:B-gaussian}, while \(S_{\Lambda_k}=a_{\Lambda_k}^2\) is the even
+stock entering \eqref{eq:Qleak-effective} and \eqref{eq:split-threshold-effective}. The active odd
+generator \(J^{\mathrm{act}}_{\Lambda_k}\), active physical covariance tangent
+\(C^{\mathrm{act}}_{\Lambda_k}\), and scalar response coefficient \(\rho_{\Lambda_k}\) are
+exported by \cref{ass:response-factorization}; \cref{prop:T-kerrho,cor:rank-one-char} then identify
+the abstract interface-trivial subspace and the corresponding rank-one quotient.
+The split/leak law fixes the active stiffness \(\widetilde\alpha(\Lambda_k)\), and
+\cref{prop:char-calibration-extension} upgrades that one-line datum to an admissible full
+calibration form once the auxiliary coercive core is chosen.
+Finally, \cref{cor:ambiguity-char} places the odd-projected descendant ambiguities in
+\(\mathcal T_{\Lambda_k}\), yielding the stated ambiguity compatibility on the characterization
+layer.
+\end{proof}
+
+\begin{theorem}[Intrinsic weak transported descendant-class interface]
+\label{thm:char-weak-interface}
+Assume the hypotheses of \cref{thm:active-response-transport-minimal} on a connected accepted-branch
+segment \(I\).
+Then for every \(\Lambda\in I\), the sufficiently local odd generator layer carries the weak
+transported interface data
+\[
+\big(
+E^-_{\Lambda},\,
+\mathcal A^-_{\Lambda},\,
+[\Xi^{(1)}_{\Lambda}],\,
+\chi_{\Lambda},\,
+\varepsilon_{\Lambda}
+\big)
+\]
+with
+\[
+\chi_{\Lambda}
+:=
+\nu_{\Lambda}^{-1}\rho^{\mathrm{dom}}_{\Lambda},
+\]
+and the following conclusions hold.
+\begin{enumerate}[leftmargin=2em]
+\item there exists a representative
+  \[
+  J^{\mathrm{desc}}_{\Lambda}\in[\Xi^{(1)}_{\Lambda}]
+  \]
+  such that
+  \[
+  \rho^{\mathrm{dom}}_{\Lambda}\!\big(J^{\mathrm{desc}}_{\Lambda}\big)\neq 0;
+  \]
+  equivalently, the transported descendant sector has nonzero overlap with the canonically selected
+  compressed dominant odd line;
+\item the orientation functional is realized intrinsically on the sufficiently local generator layer:
+  \[
+  \mathcal A^-_{\Lambda}\subset\ker\chi_{\Lambda},
+  \qquad
+  \chi_{\Lambda}(J)=\varepsilon_{\Lambda}
+  \quad
+  \forall J\in[\Xi^{(1)}_{\Lambda}];
+  \]
+\item along \(I\), the sign \(\varepsilon_{\Lambda}\) is locally constant.
+\end{enumerate}
+In particular, the weak transported interface is realized intrinsically, without appeal to completion
+coordinates, under the stated hypotheses.
+\end{theorem}
+
+\begin{proof}
+The functional \(\rho^{\mathrm{dom}}_{\Lambda}\) is defined intrinsically from the sufficiently local
+generator layer by \cref{def:intrinsic-cov-response} together with the dominant-line prescription of
+\cref{def:dominant-response-functional}.
+Item (1) is exactly the nonzero-overlap conclusion of item (3) in
+\cref{thm:active-response-transport-minimal}, item (2) is exactly item (4) there, and item (3) is
+item (5).
+\end{proof}
+
+\begin{theorem}[Quadratic-probe realization of the weak activity supplement]
+\label{thm:char-weak-activity}
+Assume the hypotheses of \cref{thm:active-response-transport-minimal} on a connected accepted-branch
+segment \(I\).
+For each \(\Lambda\in I\), define the even quadratic probe sector by
+\[
+\mathcal P^+_{\Lambda}
+:=
+\operatorname{span}
+\bigl\{
+\mathcal Q^{\Lambda}_{f,g}
+:
+\text{\(f,g\) admissible band-limited receiver probes}
+\bigr\}
+\subset E^+_{\Lambda}.
+\]
+Then, for every \(F\in E^-_{\Lambda}\),
+\[
+\{F,A\}_{\mathrm P,\Lambda}=0
+\qquad
+\forall A\in\mathcal P^+_{\Lambda}
+\]
+implies
+\[
+\chi_{\Lambda}(F)=0.
+\]
+Equivalently, if \(\chi_{\Lambda}(F)\neq 0\), then there exists a sufficiently local even quadratic
+probe \(A\in\mathcal P^+_{\Lambda}\) such that
+\[
+\{F,A\}_{\mathrm P,\Lambda}\neq 0.
+\]
+In particular, the weak interface data of \cref{thm:char-weak-interface} carry a canonical
+activity witness sector built from the intrinsic quadratic receiver probes.
+\end{theorem}
+
+\begin{proof}
+Assume
+\[
+\{F,A\}_{\mathrm P,\Lambda}=0
+\qquad
+\forall A\in\mathcal P^+_{\Lambda}.
+\]
+In particular,
+\[
+\{F,\mathcal Q^{\Lambda}_{f,g}\}_{\mathrm P,\Lambda}=0
+\]
+for every admissible pair \(f,g\).
+By \cref{def:intrinsic-cov-response}, this means
+\[
+\big\langle f,\mathcal R_{\Lambda}(F)g\big\rangle
+=
+\Big\langle
+\{F,\mathcal Q^{\Lambda}_{f,g}\}_{\mathrm P,\Lambda}
+\Big\rangle_{\rho_{\ast,\Lambda}}
+=
+0
+\]
+for all admissible \(f,g\), hence
+\(
+\mathcal R_{\Lambda}(F)=0
+\).
+Therefore
+\[
+\Pi_{\mathrm{phys},\Lambda}\mathcal R_{\Lambda}(F)=0,
+\]
+and the definition of the raw dominant-response coefficient in
+\cref{def:dominant-response-functional} gives
+\[
+\widetilde\rho^{\mathrm{dom}}_{\Lambda}(F)=0.
+\]
+By item (1) of \cref{thm:active-response-transport-minimal},
+\(
+\delta C^{\mathrm{LoG}}_{\Lambda}\neq 0
+\),
+so dominant-line realization holds and \(\rho^{\mathrm{dom}}_{\Lambda}\) is well defined.
+Hence
+\[
+\rho^{\mathrm{dom}}_{\Lambda}(F)=0.
+\]
+Now apply \cref{thm:char-weak-interface}, which identifies
+\(
+\chi_{\Lambda}
+=
+\nu_{\Lambda}^{-1}\rho^{\mathrm{dom}}_{\Lambda}
+\),
+to obtain
+\[
+\chi_{\Lambda}(F)=0.
+\]
+The contrapositive gives the equivalent detection statement.
+\end{proof}
+
+\begin{remark}[Correct scalar form of representative comparisons]
+\label{rem:char-weak-interface-rho-first}
+The weak export theorem should be read \(\rho^{\mathrm{dom}}\)-first on the ambiguity quotient.
+Because
+\[
+\chi_{\Lambda}
+:=
+\nu_{\Lambda}^{-1}\rho^{\mathrm{dom}}_{\Lambda},
+\]
+any comparison statement that depends only on dominant pairing is naturally a statement about the
+descended scalar
+\[
+\overline{\rho}^{\mathrm{dom}}_{\Lambda}
+:
+E^-_{\Lambda}/\mathcal A^-_{\Lambda}\to\mathbb R
+\]
+or, equivalently, about its value on the transported descendant affine class.
+Such a statement may be rewritten in \(\chi_{\Lambda}\) form only when the normalization is made
+explicit; for example, if \(\nu_{\Lambda}=1\), then the same scalar value is represented by a
+descended \(\bar\chi_{\Lambda}\).
+Without that normalization the stronger unscaled \(\chi\)-compatibility form is false in general.
+\end{remark}
+
+\begin{corollary}[UOM-stiffness specialization of the weak transported calibration]
+\label{cor:char-weak-calibration}
+Assume \cref{ass:uv-match} and fix an accepted tick \(k\) for which the conclusions of
+\cref{thm:char-weak-interface} hold.
+Suppose \(\ker\chi_{\Lambda_k}\) admits a continuous symmetric coercive bilinear form whose induced
+norm Hilbertizes it, and choose any
+\[
+J^\sharp_{\Lambda_k}\in E^-_{\Lambda_k}
+\qquad
+\text{with}
+\qquad
+\chi_{\Lambda_k}(J^\sharp_{\Lambda_k})=1.
+\]
+Then \cref{prop:minimal-transport-calibration} may be applied with
+\[
+\beta_{\Lambda_k}:=\widetilde\alpha(\Lambda_k)
+\]
+to produce a continuous symmetric positive definite bilinear form
+\[
+\mathsf B^{\widetilde\alpha}_{\Lambda_k}
+:
+E^-_{\Lambda_k}\times E^-_{\Lambda_k}\to\mathbb R
+\]
+such that
+\[
+\mathsf B^{\widetilde\alpha}_{\Lambda_k}(J^\sharp_{\Lambda_k},J^\sharp_{\Lambda_k})
+=
+\widetilde\alpha(\Lambda_k),
+\qquad
+\mathsf B^{\widetilde\alpha}_{\Lambda_k}(J^\sharp_{\Lambda_k},K)=0
+\quad
+\forall K\in\ker\chi_{\Lambda_k}.
+\]
+In particular,
+\[
+\mathcal A^-_{\Lambda_k}\subset\ker\chi_{\Lambda_k}
+\]
+implies
+\[
+\mathsf B^{\widetilde\alpha}_{\Lambda_k}(J^\sharp_{\Lambda_k},A)=0
+\qquad
+\forall A\in\mathcal A^-_{\Lambda_k}.
+\]
+\end{corollary}
+
+\begin{proof}
+By \cref{rem:char-calibration-split}, the split/leak package fixes the positive stiffness scale
+\(\widetilde\alpha(\Lambda_k)\), and \cref{ass:uv-match} records its positivity and asymptotic
+size.
+Apply \cref{prop:minimal-transport-calibration} with
+\(\beta_{\Lambda_k}=\widetilde\alpha(\Lambda_k)\).
+The final orthogonality statement follows from item (2) of \cref{thm:char-weak-interface}.
+\end{proof}
+
+\begin{remark}[Inherited ledger compatibility]
+\label{rem:ledger-compat}
+The inherited commutative ledger algebra is intentionally not part of the core characterization
+algebra \(\mathcal O^{\mathrm{char}}_{\Lambda_k}\).
+Its role is separate: the split model requires the active odd representative to be completion-sector
+nontrivial while acting trivially, to leading order, on the inherited classical ledger.
+This is the UOM-side compatibility statement behind the slogan
+``oddness in the completion sector, classicality in the accessible ledger.''
+\end{remark}
+
+\ifdefined\UOMTransportFragmentLoaded\else
+\end{document}
+\fi

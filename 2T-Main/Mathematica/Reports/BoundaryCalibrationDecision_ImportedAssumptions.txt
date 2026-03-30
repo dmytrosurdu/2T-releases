@@ -1,0 +1,9 @@
+Closedness of Aminus, continuity of branch data, and Hilbertizability are still represented by finite-dimensional surrogates rather than independent infinite-dimensional constructions.
+
+Source representability is still split into an exact algebraic image-membership problem and a still-imported sufficient-locality condition.
+
+The boundary null ideal and the controlled boundary sector are modeled exactly but remain explicit finite-dimensional data rather than derived AQFT/HLS structures.
+
+Decision A is conditional: the sprint isolates the diagonal controlled ambiguity criterion but does not derive it from the full transported Main/UOM assumptions.
+
+LoG spectral selection and the abstract AQFT/HLS Hamiltonization tail remain outside the Mathematica core.

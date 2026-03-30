@@ -1,0 +1,334 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     13033,        325]
+NotebookOptionsPosition[     10980,        294]
+NotebookOutlinePosition[     11294,        308]
+CellTagsIndexPosition[     11251,        305]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["14. Ambiguity Triviality on the Physical Sector", "Title",ExpressionUUID->"0bc4b9f8-e0c5-42cd-ab4c-da069c3f5f59"],
+
+Cell[TextData[{
+ "This notebook audits the exact bracket-model identity ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox["\[Delta]", 
+          RowBox[{
+            StyleBox["J", "TI"], "+", 
+            StyleBox["A", "TI"]}]], "-", 
+         SubscriptBox["\[Delta]", 
+          StyleBox["J", "TI"]], "\[LongEqual]", 
+         SubscriptBox[
+          RowBox[{
+            StyleBox["a", "TI"], 
+            StyleBox["d", "TI"]}], 
+          StyleBox["A", "TI"]]}], TraditionalForm], "errors" -> {}, "input" -> 
+     "\\delta_{J + A} - \\delta_J = \\operatorname{ad}_A", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "96b07ad8-16ff-478b-89c7-5c16be00c2bd"],
+ "for ambiguity shifts ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["A", "TI"], "\[Element]", 
+         SuperscriptBox[
+          StyleBox["A", "TI"], "-"]}], TraditionalForm], "errors" -> {}, 
+     "input" -> "A \\in \\mathcal A^-", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "b264af9e-4a76-4a80-9c9b-4da803b18112"],
+ ", and classifies how ambiguity directions act on the physical sector. "
+}], "Text",ExpressionUUID->"beac8d4f-d04e-44ab-817d-af81f24c9823"],
+
+Cell["Common exact model family", "Section",ExpressionUUID->"75343489-cde4-4c85-bc21-e6c4722cde84"],
+
+Cell[TextData[{
+ "All examples use the same five-basis notation ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{"{", 
+         RowBox[{"1", ",", 
+           StyleBox["x", "TI"], ",", 
+           StyleBox["n", "TI"], ",", 
+           StyleBox["a", "TI"], ",", 
+           StyleBox["b", "TI"]}], "}"}], TraditionalForm], "errors" -> {}, 
+     "input" -> "\\{1, x, n, a, b\\}", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "21691a15-8f15-4f97-882c-7e36cc220df8"],
+ "with: "
+}], "Text",ExpressionUUID->"9f383b90-1232-4121-b21e-9ca58263bbca"],
+
+Cell["physical sector basis $\\{1,x\\}$", "Item",ExpressionUUID->"7992e149-fc2c-43f1-970c-2a4ab8c6ca32"],
+
+Cell[TextData[{
+ "ambiguity direction ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["a", "TI"], TraditionalForm], "errors" -> {}, "input" -> "a", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "863daf26-c2c3-4d88-b36d-faba30914c97"]
+}], "Item",ExpressionUUID->"c4664e6f-b5b2-4407-93bc-a8f5d5ef20bd"],
+
+Cell[TextData[{
+ "visible odd generator ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["b", "TI"], TraditionalForm], "errors" -> {}, "input" -> "b", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "5b964de8-40a4-4998-80bc-44f33ad29529"]
+}], "Item",ExpressionUUID->"c2336e56-8898-41ea-a27a-5c5534bb0814"],
+
+Cell[TextData[{
+ "optional physical null-ideal generator ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["n", "TI"], TraditionalForm], "errors" -> {}, "input" -> "n", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "b4ac99ed-d7d5-4d4c-8ad3-82975d9f4377"]
+}], "Item",ExpressionUUID->"3d3f98f4-8a7d-4a37-912d-670757e2538e"],
+
+Cell[TextData[{
+ "The bracket is the exact commutator of an associative product, and the \
+parity involution ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|
+    "boxes" -> FormBox["\[CapitalGamma]", TraditionalForm], "errors" -> {}, 
+     "input" -> "\\Gamma", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "652d0f15-a4b2-4b2c-9e29-48fd97a04d3e"],
+ " is exact. "
+}], "Text",ExpressionUUID->"917a412a-bf41-4fe0-9b05-acf7e534d7e3"],
+
+Cell["Three exact outcomes", "Section",ExpressionUUID->"2d7aca47-6268-4bce-a09a-6a639675c048"],
+
+Cell["On-the-nose ambiguity triviality", "Subsection",ExpressionUUID->"798863c7-9b0a-4106-94b9-2ce9f913a863"],
+
+Cell[TextData[{
+ "In the invisible model, ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          RowBox[{
+            StyleBox["a", "TI"], 
+            StyleBox["d", "TI"]}], 
+          StyleBox["a", "TI"]], 
+         RowBox[{"(", "1", ")"}], "\[LongEqual]", "0", ",    ", 
+         SubscriptBox[
+          RowBox[{
+            StyleBox["a", "TI"], 
+            StyleBox["d", "TI"]}], 
+          StyleBox["a", "TI"]], 
+         RowBox[{"(", 
+           StyleBox["x", "TI"], ")"}], "\[LongEqual]", "0", ","}], 
+       TraditionalForm], "errors" -> {}, "input" -> 
+     "\\operatorname{ad}_a(1)=0,\n\\qquad\n\\operatorname{ad}_a(x)=0,", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "372efa49-5b06-4214-905c-be0281b6ee01"],
+ "so ambiguity directions act trivially on the physical sector itself. "
+}], "Text",ExpressionUUID->"f3333b62-dae1-49ff-9680-786f9077d13d"],
+
+Cell["Null-ideal triviality", "Subsection",ExpressionUUID->"ea04a606-0b25-4867-9d64-3790c92f8081"],
+
+Cell[TextData[{
+ "In the null-ideal model, ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          RowBox[{
+            StyleBox["a", "TI"], 
+            StyleBox["d", "TI"]}], 
+          StyleBox["a", "TI"]], 
+         RowBox[{"(", 
+           StyleBox["x", "TI"], ")"}], "\[LongEqual]", 
+         StyleBox["n", "TI"], ","}], TraditionalForm], "errors" -> {}, 
+     "input" -> "\\operatorname{ad}_a(x)=n,", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "1c96cbfa-1558-40e4-906e-b86dc23a9d87"],
+ "with ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["n", "TI"], TraditionalForm], "errors" -> {}, "input" -> "n", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "9e7318ef-63ab-4180-8575-ba0b78bac5f1"],
+ " spanning the physical null ideal. The ambiguity action is nonzero, but it \
+vanishes after passage to the physical quotient. "
+}], "Text",ExpressionUUID->"dba25d53-291e-4527-a571-f88b1ca10c1f"],
+
+Cell["Physical visibility", "Subsection",ExpressionUUID->"11eb4be3-b102-465e-8747-5b3f093778f3"],
+
+Cell[TextData[{
+ "In the visible model, ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          RowBox[{
+            StyleBox["a", "TI"], 
+            StyleBox["d", "TI"]}], 
+          StyleBox["a", "TI"]], 
+         RowBox[{"(", 
+           StyleBox["x", "TI"], ")"}], "\[LongEqual]", 
+         StyleBox["a", "TI"], ","}], TraditionalForm], "errors" -> {}, 
+     "input" -> "\\operatorname{ad}_a(x)=a,", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "f2b3b5be-58e1-479a-ba1a-de8fd8e4afbd"],
+ "which lies outside the null ideal. This is the minimal exact countermodel \
+showing that ambiguity can remain physically visible. "
+}], "Text",ExpressionUUID->"f815e9b3-45fa-4917-a526-07b43d21bfc5"],
+
+Cell["Broken-model artifact", "Section",ExpressionUUID->"3cf0a1e9-4570-46cf-b38f-c7c539578bcb"],
+
+Cell[TextData[{
+ "A separate exact broken example uses an even generator ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["J", "TI"], "\[LongEqual]", 
+         StyleBox["x", "TI"]}], TraditionalForm], "errors" -> {}, "input" -> 
+     "J=x", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "9f75cfa8-d1d5-452e-8159-e3d6aca594a0"],
+ ". Then ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{"\[CapitalGamma]", 
+         StyleBox["J", "TI"], "\[NotEqual]", "-", 
+         StyleBox["J", "TI"]}], TraditionalForm], "errors" -> {}, "input" -> 
+     "\\Gamma J \\neq -J", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "c26d7f52-64ad-4ef3-81a0-11fc50f7aa5e"],
+ ", and the induced derivation fails the ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|
+    "boxes" -> FormBox["\[CapitalGamma]", TraditionalForm], "errors" -> {}, 
+     "input" -> "\\Gamma", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "a87e4d52-147f-40ad-b533-95e2e88e94c7"],
+ "-oddness test. This is the required counterexample showing that oddness of \
+the generator is genuinely needed. "
+}], "Text",ExpressionUUID->"305661bd-d606-4144-99b2-e5cacd124ac5"],
+
+Cell["Status", "Section",ExpressionUUID->"35a3046b-b63c-4d40-b89f-a3c9c1156e3d"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Claim\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm]},
+        {Cell[TextData[{
+          "Exact identity delta",
+          StyleBox["(J + A) - delta",
+           FontSlant->Italic],
+          "J"
+         }],ExpressionUUID->
+          "28142d09-765c-4455-bfed-cab3fb2c3b83"], \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Ambiguity can be trivial on the nose\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Ambiguity can be null-ideal trivial only\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Ambiguity can remain physically visible\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Even-J countermodel breaks Gamma-oddness\"\>", \
+"\<\"exact-model-certificate\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[BoxForm`e$, TableHeadings -> {None, {"Claim", "Status"}}]]], 
+    "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"2366f91a-3915-4a33-814e-bbafa55ff0db"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"a83bd6d1-c378-4ba4-8c49-4f0e587986a8"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 119, 0, 70, "Title",ExpressionUUID->"0bc4b9f8-e0c5-42cd-ab4c-da069c3f5f59"],
+Cell[676, 22, 1311, 32, 70, "Text",ExpressionUUID->"beac8d4f-d04e-44ab-817d-af81f24c9823"],
+Cell[1990, 56, 99, 0, 70, "Section",ExpressionUUID->"75343489-cde4-4c85-bc21-e6c4722cde84"],
+Cell[2092, 58, 613, 15, 70, "Text",ExpressionUUID->"9f383b90-1232-4121-b21e-9ca58263bbca"],
+Cell[2708, 75, 104, 0, 70, "Item",ExpressionUUID->"7992e149-fc2c-43f1-970c-2a4ab8c6ca32"],
+Cell[2815, 77, 382, 9, 70, "Item",ExpressionUUID->"c4664e6f-b5b2-4407-93bc-a8f5d5ef20bd"],
+Cell[3200, 88, 384, 9, 70, "Item",ExpressionUUID->"c2336e56-8898-41ea-a27a-5c5534bb0814"],
+Cell[3587, 99, 401, 9, 70, "Item",ExpressionUUID->"3d3f98f4-8a7d-4a37-912d-670757e2538e"],
+Cell[3991, 110, 470, 11, 70, "Text",ExpressionUUID->"917a412a-bf41-4fe0-9b05-acf7e534d7e3"],
+Cell[4464, 123, 94, 0, 70, "Section",ExpressionUUID->"2d7aca47-6268-4bce-a09a-6a639675c048"],
+Cell[4561, 125, 109, 0, 70, "Subsection",ExpressionUUID->"798863c7-9b0a-4106-94b9-2ce9f913a863"],
+Cell[4673, 127, 969, 25, 70, "Text",ExpressionUUID->"f3333b62-dae1-49ff-9680-786f9077d13d"],
+Cell[5645, 154, 98, 0, 70, "Subsection",ExpressionUUID->"ea04a606-0b25-4867-9d64-3790c92f8081"],
+Cell[5746, 156, 1078, 27, 70, "Text",ExpressionUUID->"dba25d53-291e-4527-a571-f88b1ca10c1f"],
+Cell[6827, 185, 96, 0, 70, "Subsection",ExpressionUUID->"11eb4be3-b102-465e-8747-5b3f093778f3"],
+Cell[6926, 187, 793, 19, 70, "Text",ExpressionUUID->"f815e9b3-45fa-4917-a526-07b43d21bfc5"],
+Cell[7722, 208, 95, 0, 70, "Section",ExpressionUUID->"3cf0a1e9-4570-46cf-b38f-c7c539578bcb"],
+Cell[7820, 210, 1319, 31, 70, "Text",ExpressionUUID->"305661bd-d606-4144-99b2-e5cacd124ac5"],
+Cell[9142, 243, 80, 0, 70, "Section",ExpressionUUID->"35a3046b-b63c-4d40-b89f-a3c9c1156e3d"],
+Cell[9225, 245, 1751, 47, 70, "TextTableForm",ExpressionUUID->"2366f91a-3915-4a33-814e-bbafa55ff0db"]
+}
+]
+*)
+
+(* End of internal cache information *)

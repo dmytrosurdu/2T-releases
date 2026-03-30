@@ -1,0 +1,241 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{xr-hyper}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\externaldocument[stack-]{odd_characterization_transport_stack_note}
+\externaldocument[delay-]{delayed_odd_control_note}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=blue!60!black,
+  urlcolor=blue!60!black
+}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+
+\title{Selected-Line No-Extra-Collapse Note}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+Fix an accepted tick \(k\).
+This note defines a same-tick selected carrier together with its quotient realization map and
+reduced welded image map, and proves that a selected representative with nonzero dominant response
+survives both the ambiguity quotient and the reduced welded image on that carrier.
+
+\section{Same-Tick Selected Carrier Data}
+
+\begin{definition}[Same-tick selected-line datum and quotient realization]
+\label{def:uom-selected-line-data}
+Fix an accepted tick \(k\), and let
+\[
+\mathfrak D^-_{\Lambda_k}
+:=
+E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k},
+\qquad
+q_{\Lambda_k}:E^-_{\Lambda_k}\to\mathfrak D^-_{\Lambda_k}
+\]
+be the dominant-response quotient and quotient map of
+\cref{stack-def:dominant-response-quotient}.
+A \emph{same-tick selected-line datum} at \(\Lambda_k\) consists of:
+\begin{enumerate}[leftmargin=2em,label=(\alph*)]
+\item a one-dimensional real selected carrier
+  \[
+  \widehat L^{\mathrm{sel}}_{\Lambda_k}
+  =
+  \mathbb R\,\widehat\ell_{\Lambda_k};
+  \]
+\item a selected representative
+  \[
+  J^{\mathrm{sel}}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]\cap E^-_{\Lambda_k}.
+  \]
+\end{enumerate}
+The associated \emph{selected quotient realization map} is
+\[
+\widehat{\mathfrak R}^{\mathrm{sel}}_{\Lambda_k}
+:
+\widehat L^{\mathrm{sel}}_{\Lambda_k}\longrightarrow \mathfrak D^-_{\Lambda_k},
+\qquad
+\widehat{\mathfrak R}^{\mathrm{sel}}_{\Lambda_k}(a\,\widehat\ell_{\Lambda_k})
+:=
+a\,q_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k}).
+\]
+\end{definition}
+
+\begin{definition}[Selected reduced welded image and theorem-trivial selected classes]
+\label{def:uom-selected-line-trivial}
+Fix an accepted tick \(k\) and a same-tick selected-line datum
+\cref{def:uom-selected-line-data}.
+Let
+\[
+P_{-,\Lambda_k}^{\mathrm{LoG}}
+\]
+be the canonical compressed odd projector of
+\cref{stack-cor:compressed-export-selection}.
+Define the \emph{selected reduced welded image map} by
+\[
+\mathsf W^{\mathrm{sel}}_{\Lambda_k}
+:
+\widehat L^{\mathrm{sel}}_{\Lambda_k}\longrightarrow
+\mathbb R\,P_{-,\Lambda_k}^{\mathrm{LoG}},
+\qquad
+\mathsf W^{\mathrm{sel}}_{\Lambda_k}(a\,\widehat\ell_{\Lambda_k})
+:=
+a\,\rho^{\mathrm{dom}}_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k})\,P_{-,\Lambda_k}^{\mathrm{LoG}}.
+\]
+The \emph{theorem-trivial selected classes} are
+\[
+\mathcal T^{\mathrm{inv,sel}}_{\Lambda_k}
+:=
+\ker\mathsf W^{\mathrm{sel}}_{\Lambda_k}.
+\]
+\end{definition}
+
+\section{Same-Tick No-Extra-Collapse}
+
+\begin{theorem}[Same-tick no-extra-collapse on the selected line]
+\label{thm:uom-selected-line-no-extra-collapse}
+Let \(I\) be a connected accepted-branch segment and assume the weak transported descendant-class
+interface of \cref{stack-thm:char-weak-interface} on \(I\).
+Fix an accepted tick \(k\) with \(\Lambda_k\in I\), and assume a same-tick selected-line datum of
+\cref{def:uom-selected-line-data}.
+If
+\[
+\rho^{\mathrm{dom}}_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k})\neq 0,
+\]
+then
+\[
+\ker\widehat{\mathfrak R}^{\mathrm{sel}}_{\Lambda_k}
+=
+\ker\mathsf W^{\mathrm{sel}}_{\Lambda_k}
+=
+\{0\}.
+\]
+Equivalently,
+\[
+\ker\widehat{\mathfrak R}^{\mathrm{sel}}_{\Lambda_k}
+=
+\mathcal T^{\mathrm{inv,sel}}_{\Lambda_k}
+=
+\{0\}.
+\]
+\end{theorem}
+
+\begin{proof}
+By \cref{stack-thm:char-weak-interface}, the normalized orientation functional satisfies
+\[
+\chi_{\Lambda_k}
+:=
+\nu_{\Lambda_k}^{-1}\rho^{\mathrm{dom}}_{\Lambda_k},
+\qquad
+\mathcal A^-_{\Lambda_k}\subset\ker\chi_{\Lambda_k}.
+\]
+Since \(\nu_{\Lambda_k}>0\), this is equivalent to
+\[
+\mathcal A^-_{\Lambda_k}\subset\ker\rho^{\mathrm{dom}}_{\Lambda_k}.
+\]
+
+We first show that the selected quotient point is nonzero.
+Assume for contradiction that
+\[
+q_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k})=0.
+\]
+Then \(J^{\mathrm{sel}}_{\Lambda_k}\in\mathcal A^-_{\Lambda_k}\), so the kernel inclusion above gives
+\[
+\rho^{\mathrm{dom}}_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k})=0,
+\]
+contradicting the nonzero dominant-response hypothesis.
+Hence
+\[
+q_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k})\neq 0.
+\]
+
+Now the selected carrier \(\widehat L^{\mathrm{sel}}_{\Lambda_k}\) is one-dimensional and generated by
+\(\widehat\ell_{\Lambda_k}\).
+The displayed nonvanishing of
+\(
+q_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k})
+\)
+implies
+\[
+\widehat{\mathfrak R}^{\mathrm{sel}}_{\Lambda_k}(\widehat\ell_{\Lambda_k})
+=
+q_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k})
+\neq 0,
+\]
+and therefore
+\[
+\ker\widehat{\mathfrak R}^{\mathrm{sel}}_{\Lambda_k}=\{0\}.
+\]
+
+By \cref{stack-cor:compressed-export-selection}, the projector
+\(
+P_{-,\Lambda_k}^{\mathrm{LoG}}
+\)
+is the canonical rank-one projector onto the compressed odd line and is therefore nonzero.
+Since
+\(
+\rho^{\mathrm{dom}}_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k})\neq 0
+\),
+we have
+\[
+\mathsf W^{\mathrm{sel}}_{\Lambda_k}(\widehat\ell_{\Lambda_k})
+=
+\rho^{\mathrm{dom}}_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k})\,P_{-,\Lambda_k}^{\mathrm{LoG}}
+\neq 0,
+\]
+so
+\[
+\ker\mathsf W^{\mathrm{sel}}_{\Lambda_k}=\{0\}.
+\]
+The two kernels are thus equal, and both are trivial.
+\end{proof}
+
+\begin{corollary}[Selected representative survives the ambiguity quotient]
+\label{cor:uom-selected-line-quotient-nonzero}
+In the setting of \cref{thm:uom-selected-line-no-extra-collapse},
+\[
+q_{\Lambda_k}(J^{\mathrm{sel}}_{\Lambda_k})\neq 0.
+\]
+\end{corollary}
+
+\begin{proof}
+This was proved in the first half of the proof of
+\cref{thm:uom-selected-line-no-extra-collapse}.
+\end{proof}
+
+\begin{remark}[Scope]
+\label{rem:selected-line-no-extra-collapse-scope}
+The theorem does not construct the same-tick selected carrier or the selected representative.
+It says only that once such data are supplied and the selected representative has nonzero dominant
+response, the selected direction survives both the ambiguity quotient and the reduced welded image.
+\end{remark}
+
+\begin{remark}[Relation to the delayed selected-line lane]
+\label{rem:selected-line-no-extra-collapse-delay}
+The same algebraic pattern reappears on the delayed carrier
+\cref{delay-def:delayed-selected-line} with delayed realization map
+\cref{delay-def:delayed-response-map}; selected-line delayed response sufficiency is proved in
+\cref{delay-thm:delayed-response-sufficiency}.
+The present note works on the same-tick selected carrier and the current ambiguity quotient,
+whereas the delayed note works on the delayed quotient and the next-receiver reduced welded line.
+\end{remark}
+
+\end{document}

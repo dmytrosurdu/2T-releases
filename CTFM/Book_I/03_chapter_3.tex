@@ -1,0 +1,139 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+% Chapter-specific theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+
+\title{\textbf{Chapter 3: The Language of Information: A Primer}}
+\author{Dmytro Surdu}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{quote}
+\textit{In the previous chapters, we established that certifying claims about an infinite future requires a "short witness." To construct such a witness, we must first understand how to quantify the knowledge it contains. This chapter introduces the mathematical language designed for this purpose: information theory. We will first explore the intuitive, probabilistic concepts of entropy and mutual information to establish the fundamental link between \textbf{information loss} and functional \textbf{non-invertibility}. We will then introduce a more rigorous, geometric measure of information loss—metric entropy—which will serve as the primary tool for the proofs in the chapters to come.}
+\end{quote}
+
+\section{Probabilistic Information: Entropy and Mutual Information}
+
+At its core, information is the reduction of uncertainty. Before we can measure information, we must first have a way to measure uncertainty. In Shannon's information theory, the uncertainty of a random variable is called its **entropy**.
+
+\begin{remark}[Scope of this Section]
+For the scope of our discussion on Shannon's mutual information, we assume that any continuous random variables have been quantized to a finite alphabet, so that the following definitions for discrete variables apply directly.
+\end{remark}
+
+\begin{definition}[Entropy]
+The entropy $H(X)$ of a discrete random variable $X$ that takes values $\{x_1, \dots, x_n\}$ with probabilities $p_i = P(X=x_i)$ is defined as:
+\[
+H(X) = -\sum_{i=1}^{n} p_i \log_2 p_i
+\]
+The unit of entropy is the "bit." Entropy measures the average number of bits required to optimally encode a message drawn from the distribution of $X$.
+\end{definition}
+
+If we observe another random variable $Y$, the remaining uncertainty about $X$ is the **conditional entropy**, $H(X|Y)$. A key property is that knowledge can only reduce uncertainty on average: $H(X|Y) \le H(X)$. This allows us to define the information that $Y$ provides about $X$.
+
+\begin{definition}[Mutual Information]
+The mutual information $I(X;Y)$ between two random variables $X$ and $Y$ is the reduction in the uncertainty of $X$ due to knowing $Y$:
+\[
+I(X;Y) = H(X) - H(X|Y)
+\]
+\end{definition}
+
+\subsection{Information Loss and Invertibility: The Crucial Link}
+In a measurement system, we are interested in what happens when an ideal reading $X$ is processed by a deterministic function $g$ to produce an output $Y=g(X)$. The Data Processing Inequality tells us that $I(Q; Y) \le I(Q; X)$, meaning information about the original quantity $Q$ can only be lost or preserved, never created.
+
+The most important case for our theory is when information is perfectly preserved. When does $I(Q;X) = I(Q;Y)$? Or, more simply, when does the output $Y$ contain all the information that was in the input $X$? This is equivalent to asking when $I(X;Y) = H(X)$. The answer establishes the fundamental connection between information preservation and functional invertibility.
+
+\begin{theorem}[MI Preservation $\iff$ Injectivity]
+\label{thm:mi_injectivity}
+Let $X$ be a discrete random variable taking values in a finite set $\mathcal{X}$ with distribution $P_X$. Let $g: \mathcal{X} \to \mathcal{Y}$ be any deterministic function, and define the random variable $Y=g(X)$. Then the following are equivalent:
+\[
+I(X;Y) = H(X) \iff g \text{ is injective on the support of } P_X.
+\]
+Injectivity on the support means that for every $y$ with $P_Y(y)>0$, there is exactly one $x \in \mathcal{X}$ such that $g(x)=y$ and $P_X(x)>0$.
+\end{theorem}
+
+\begin{proof}
+\textbf{1. Basic Identities.}
+Since $Y$ is a deterministic function of $X$, the conditional entropy $H(Y|X)=0$. From the chain rule for mutual information, $I(X;Y) = H(Y) - H(Y|X)$, we immediately have:
+\[
+I(X;Y) = H(Y)
+\]
+The condition $I(X;Y) = H(X)$ is therefore equivalent to $H(Y) = H(X)$.
+
+From the chain rule for joint entropy, $H(X,Y) = H(Y) + H(X|Y)$ and also $H(X,Y) = H(X) + H(Y|X) = H(X)$. Equating these gives:
+\[
+H(X|Y) = H(X) - H(Y)
+\]
+Thus, the condition $H(X)=H(Y)$ is equivalent to $H(X|Y)=0$. We have now shown that $I(X;Y)=H(X) \iff H(X|Y)=0$. We will prove the theorem by proving $H(X|Y)=0 \iff g$ is injective on the support.
+
+\textbf{2. ($\Rightarrow$): If $H(X|Y) = 0$, then $g$ is injective on the support.}
+The conditional entropy $H(X|Y)$ is a non-negative weighted average of the entropies of the conditional distributions $P_{X|Y=y}$:
+\[
+H(X|Y) = \sum_{y \in \mathcal{Y}} P_Y(y) H(P_{X|Y=y})
+\]
+Since each term is non-negative, the only way for the sum to be zero is if $H(P_{X|Y=y}) = 0$ for every $y$ in the support of $Y$. The entropy of a discrete distribution is zero if and only if it is a point mass (i.e., one outcome has probability 1 and all others have probability 0). Thus, for each such $y$, there must exist exactly one $x$ with $P(X=x|Y=y)=1$. This is precisely the definition of $g$ being injective on the support of $P_X$.
+
+\textbf{3. ($\Leftarrow$): If $g$ is injective on the support, then $H(X|Y)=0$.}
+Conversely, assume $g$ is injective on the support of $P_X$. Then for any $y$ in the support of $Y$, there is a unique $x_y$ such that $g(x_y)=y$ and $P_X(x_y)>0$. This means that if we observe $Y=y$, we know with certainty that $X$ must have been $x_y$. The conditional distribution $P_{X|Y=y}$ is a point mass at $x_y$. The entropy of any point mass distribution is zero, so $H(P_{X|Y=y})=0$. Since this holds for all $y$ in the support, the average $H(X|Y) = \sum P_Y(y) \cdot 0 = 0$.
+
+This completes the proof.
+\end{proof}
+
+This theorem gives us our core intuition: preserving information is equivalent to preserving distinguishability. Losing information is equivalent to making distinct states indistinguishable—that is, non-invertibility.
+
+\section{Geometric Information Loss: Metric Entropy}
+
+Because Shannon-MI requires a distribution and a discrete (or quantized) space, we now recast the idea of information loss in purely geometric terms that are more suitable for our proofs involving continuous spaces. This tool is **metric entropy**.
+
+Let our measurement map be the composite function $g \circ f: \mathcal{Q} \to \mathcal{Y}$. For any observed output $y \in \mathcal{Y}$, the set of all possible true states $q \in \mathcal{Q}$ that could have produced it is the **fibre** of $y$.
+
+\begin{definition}[Fibre]
+The fibre of an observation $y \in \mathcal{Y}$ is the pre-image set:
+\[
+\mathcal{G}_y = (g \circ f)^{-1}(y) = \{ q \in \mathcal{Q} \mid g(f(q)) = y \}
+\]
+\end{definition}
+If the map $g \circ f$ is invertible, every fibre is a single point. If it is non-invertible, some fibres will contain multiple points. The "information loss" is directly related to the "size" or "complexity" of these fibres. We measure this using covering numbers.
+
+\begin{definition}[$\varepsilon$-Covering Number / Metric Entropy]
+Let $(S, d)$ be a subset of a metric space. The \textbf{$\varepsilon$-covering number} of $S$, denoted $N_\varepsilon(S)$, is the minimum number of closed balls of radius $\varepsilon$ needed to completely cover $S$. The quantity $\log_2 N_\varepsilon(S)$ is often called the metric entropy of $S$.
+\end{definition}
+
+We can now provide our primary, purely geometric definition of information loss.
+
+\begin{definition}[Geometric Information Loss]
+The \textbf{geometric information loss} of the channel $g \circ f$ at scale $\varepsilon$ is the worst-case metric entropy over all possible fibres:
+\[
+\color{blue} \Delta^{\text{ent}}_\varepsilon = \sup_{y \in \mathcal{Y}} \log_2 N_\varepsilon(\mathcal{G}_y)
+\]
+\end{definition}
+
+\subsection{The Power of the Geometric Definition}
+
+This new definition is superior for our theoretical purposes for several key reasons:
+\begin{enumerate}
+    \item \textbf{It is Analyst-Independent:} It depends only on the function $g \circ f$ and the metric $d$ on the space $\mathcal{Q}$. It does not depend on any probability measure $P_Q$ or any artificial quantization of the output space.
+    \item \textbf{It is a Worst-Case Measure:} By using the supremum, $\Delta^{\text{ent}}_\varepsilon$ directly gives us a bound that holds for \emph{every} fibre, which is exactly what we need for the worst-case guarantees of complexity theory.
+    \item \textbf{It Connects Perfectly to Invertibility:}
+        \begin{itemize}
+            \item If $g \circ f$ is **invertible**, every fibre $\mathcal{G}_y$ is a singleton. Thus $N_\varepsilon(\mathcal{G}_y) = 1$ for all $y$, and $\Delta^{\text{ent}}_\varepsilon = \log_2(1) = 0$. This is the **information-lossless** case.
+            \item If $g \circ f$ is **non-invertible**, at least one fibre contains multiple points. If these points have a minimum separation, then for small enough $\varepsilon$, $N_\varepsilon(\mathcal{G}_y) \ge 2$ for some $y$, which implies $\Delta^{\text{ent}}_\varepsilon \ge 1$. This is the **information-losing** case.
+        \end{itemize}
+\end{enumerate}
+
+In the chapters that follow, we will exclusively use this geometric definition, $\Delta^{\text{ent}}_\varepsilon$, to prove our main theorems. It provides the clean, rigorous, and powerful tool we need to build our theory of certifiable measurement.
+
+\end{document}

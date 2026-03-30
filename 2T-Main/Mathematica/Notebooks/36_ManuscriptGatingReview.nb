@@ -1,0 +1,126 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      5378,        117]
+NotebookOptionsPosition[      3560,         88]
+NotebookOutlinePosition[      3874,        102]
+CellTagsIndexPosition[      3831,         99]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Manuscript Gating Review", "Title",ExpressionUUID->"6f1f8cc0-29c3-498e-babf-76a5b424d8db"],
+
+Cell["\<\
+This notebook records the current insertion gate for manuscript-facing \
+claims. \
+\>", "Text",ExpressionUUID->"9d4ce01f-bbb7-429d-bff9-a8a867aa5c44"],
+
+Cell["Allowed insertion level", "Section",ExpressionUUID->"f2da90e5-3ac3-41f4-9aac-c399dae6477c"],
+
+Cell[TextData[Cell[BoxData[Cell["UOM contract corollary only",
+  Background->None,ExpressionUUID->
+  "6393cbdf-0d57-4aac-9b47-f2dd2601f8f4"]], \
+"InlineCode",ExpressionUUID->"76ee62f7-6d49-41af-b8be-cbb493df1f84"]], "Text",\
+ExpressionUUID->"d36ff8b7-60bd-4990-8b2f-5f3efc63fee1"],
+
+Cell["Why the gate stays there", "Section",ExpressionUUID->"87aff838-2e6c-477b-91c7-9ca7fcc17ea7"],
+
+Cell["\<\
+Boundary ingredients are now source-traced and mostly theorem-backed or \
+partially theorem-backed.\
+\>", "Item",ExpressionUUID->"75cdc9f7-3c38-4b4d-946b-da91023d5f73"],
+
+Cell["\<\
+Completion additions remain assumption-backed/contract-level.\
+\>", "Item",ExpressionUUID->"762f3591-3f21-4bae-a788-8d5535f12687"],
+
+Cell["\<\
+The compact-interface search is informative, but the strongest structural \
+compression is still a WL-family result.\
+\>", "Item",ExpressionUUID->"4e9b8c8a-d3f8-448e-bf03-59e646457954"],
+
+Cell[TextData[{
+ "The split-faithful completion lane is improved and ",
+ Cell[BoxData[Cell["strong-safe",
+   Background->None,ExpressionUUID->"2d4292ec-b47b-44bb-971e-cab56a71102a"]], 
+  "InlineCode",ExpressionUUID->"3b5d39f3-f92c-435b-b9d6-8d6beee75230"],
+ ", but it is still not the full microscopic completion theorem."
+}], "Item",ExpressionUUID->"d287f95c-ddcc-4c96-aa49-20938382196e"],
+
+Cell["Blocked wording", "Section",ExpressionUUID->"9d675101-3f18-43cd-ad98-7d3bdc63a71a"],
+
+Cell["Do not yet write this lane as: ", "Text",ExpressionUUID->"90b08149-9c58-4cd6-926a-1701b5b7cafd"],
+
+Cell["a generic cosmology-interface theorem,", "Item",ExpressionUUID->"ea27d27d-c01b-4256-a2eb-9ec593ff4ba1"],
+
+Cell["an abstract Main theorem upgrade,", "Item",ExpressionUUID->"51b6097d-a2a4-48bb-a00e-e6044db77fca"],
+
+Cell["or a full microscopic completion-sector theorem.", "Item",ExpressionUUID->"1a506fe2-504e-4ae5-9cee-fbfc809778d9"],
+
+Cell["Report artifact", "Section",ExpressionUUID->"f4720d49-12d3-4288-baf6-0ac44dcc4fd4"],
+
+Cell["See: ", "Text",ExpressionUUID->"de30db4e-498b-43dd-815a-575b42ee33cd"],
+
+Cell[TextData[Cell[BoxData[Cell["Main/Mathematica/Reports/\
+ManuscriptInsertionGate.md",
+  Background->None,ExpressionUUID->
+  "ae719649-b82e-4206-90d1-98ff056af23d"]], \
+"InlineCode",ExpressionUUID->"44d5fd74-d6e9-46fa-804f-370e8e2dd751"]], "Item",\
+ExpressionUUID->"41a9bd97-2988-43fd-b604-424491aaa824"],
+
+Cell[TextData[Cell[BoxData[Cell["\<\
+Main/Mathematica/Reports/CosmologyInterfaceResearch_Report.json\
+\>",
+  Background->None,ExpressionUUID->
+  "fcdb23c4-ec77-4988-836e-7c49c669243f"]], \
+"InlineCode",ExpressionUUID->"cdeb8331-e245-4f4b-b6b5-9f1091804564"]], "Item",\
+ExpressionUUID->"80bc329d-47e9-4c01-a497-44528b9f7f39"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"bacb05d1-7806-4062-9342-ddc6597ae3bd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 96, 0, 70, "Title",ExpressionUUID->"6f1f8cc0-29c3-498e-babf-76a5b424d8db"],
+Cell[653, 22, 160, 3, 70, "Text",ExpressionUUID->"9d4ce01f-bbb7-429d-bff9-a8a867aa5c44"],
+Cell[816, 27, 97, 0, 70, "Section",ExpressionUUID->"f2da90e5-3ac3-41f4-9aac-c399dae6477c"],
+Cell[916, 29, 280, 4, 70, "Text",ExpressionUUID->"d36ff8b7-60bd-4990-8b2f-5f3efc63fee1"],
+Cell[1199, 35, 98, 0, 70, "Section",ExpressionUUID->"87aff838-2e6c-477b-91c7-9ca7fcc17ea7"],
+Cell[1300, 37, 178, 3, 70, "Item",ExpressionUUID->"75cdc9f7-3c38-4b4d-946b-da91023d5f73"],
+Cell[1481, 42, 140, 2, 70, "Item",ExpressionUUID->"762f3591-3f21-4bae-a788-8d5535f12687"],
+Cell[1624, 46, 195, 3, 70, "Item",ExpressionUUID->"4e9b8c8a-d3f8-448e-bf03-59e646457954"],
+Cell[1822, 51, 389, 6, 70, "Item",ExpressionUUID->"d287f95c-ddcc-4c96-aa49-20938382196e"],
+Cell[2214, 59, 89, 0, 70, "Section",ExpressionUUID->"9d675101-3f18-43cd-ad98-7d3bdc63a71a"],
+Cell[2306, 61, 102, 0, 70, "Text",ExpressionUUID->"90b08149-9c58-4cd6-926a-1701b5b7cafd"],
+Cell[2411, 63, 109, 0, 70, "Item",ExpressionUUID->"ea27d27d-c01b-4256-a2eb-9ec593ff4ba1"],
+Cell[2523, 65, 104, 0, 70, "Item",ExpressionUUID->"51b6097d-a2a4-48bb-a00e-e6044db77fca"],
+Cell[2630, 67, 119, 0, 70, "Item",ExpressionUUID->"1a506fe2-504e-4ae5-9cee-fbfc809778d9"],
+Cell[2752, 69, 89, 0, 70, "Section",ExpressionUUID->"f4720d49-12d3-4288-baf6-0ac44dcc4fd4"],
+Cell[2844, 71, 76, 0, 70, "Text",ExpressionUUID->"de30db4e-498b-43dd-815a-575b42ee33cd"],
+Cell[2923, 73, 306, 5, 70, "Item",ExpressionUUID->"41a9bd97-2988-43fd-b604-424491aaa824"],
+Cell[3232, 80, 324, 6, 70, "Item",ExpressionUUID->"80bc329d-47e9-4c01-a497-44528b9f7f39"]
+}
+]
+*)
+
+(* End of internal cache information *)

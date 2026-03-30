@@ -1,0 +1,102 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      3824,         93]
+NotebookOptionsPosition[      2733,         72]
+NotebookOutlinePosition[      3047,         86]
+CellTagsIndexPosition[      3004,         83]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["SK Completion Sector Audit", "Title",ExpressionUUID->"3dbe0698-cde9-44c5-aaa2-fd571cfa2d81"],
+
+Cell["\<\
+This notebook explores the first exact completion-sector lift beyond the \
+preserved welded boundary image. \
+\>", "Text",ExpressionUUID->"fa10df89-540f-4e55-a1ef-5c277090cb3d"],
+
+Cell["Targets", "Section",ExpressionUUID->"6371c3c5-f70b-41e2-94a1-ac1c1677089e"],
+
+Cell[TextData[Cell[BoxData[Cell["task:sk-minimal-gaussian-completion-\
+reconstruction",
+  Background->None,ExpressionUUID->
+  "1e337328-a9d6-46fa-a59a-9f4d347bce36"]], \
+"InlineCode",ExpressionUUID->"26f104ff-c49d-4a98-bbda-97b9facc948b"]], "Item",\
+ExpressionUUID->"dc2dc789-3147-4726-9d19-cbd6bfe7b1c7"],
+
+Cell[TextData[Cell[BoxData[Cell["task:sk-completion-ambiguity-visibility",
+  Background->None,ExpressionUUID->
+  "234c4118-df19-432f-9115-951e8c2c49d2"]], \
+"InlineCode",ExpressionUUID->"922ff987-cd3f-430f-8081-ff28cf275798"]], "Item",\
+ExpressionUUID->"f8e16743-4c8f-45f1-8245-c8db89f2f527"],
+
+Cell[TextData[Cell[BoxData[Cell["task:sk-completion-boundary-lift",
+  Background->None,ExpressionUUID->
+  "e10dfe65-54de-4c16-ac01-05341435dd45"]], \
+"InlineCode",ExpressionUUID->"6d2b91ce-1de9-4500-8fcb-beec8ca6d8b1"]], "Item",\
+ExpressionUUID->"6f0b2836-af84-4fad-b27e-38629b5dc4ff"],
+
+Cell["Evaluate", "Section",ExpressionUUID->"80e70abd-d995-4f73-9792-694c405194dd"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"audit", "=", 
+   RowBox[{
+   "MainProof`SKCompletionSectorReconstruction`\
+AuditSKCompletionSectorReconstruction", "[", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", "audit"}], "Input",ExpressionUUID->"8188f5a1-\
+e4cd-46af-b34a-2e0f7a29b80e"],
+
+Cell["Context", "Section",ExpressionUUID->"2b283227-5169-44f5-b660-90e85c1af564"],
+
+Cell["\<\
+This is exploratory exact evidence, not a global completion-sector theorem. \
+The current minimal lift is useful precisely because it preserves the welded \
+boundary image while letting us test whether ambiguity can reappear off that \
+image.\
+\>", "Text",ExpressionUUID->"bd0a72d2-045a-4f7e-aaff-a1862232936b"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"bacb05d1-7806-4062-9342-ddc6597ae3bd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 98, 0, 70, "Title",ExpressionUUID->"3dbe0698-cde9-44c5-aaa2-fd571cfa2d81"],
+Cell[655, 22, 187, 3, 70, "Text",ExpressionUUID->"fa10df89-540f-4e55-a1ef-5c277090cb3d"],
+Cell[845, 27, 81, 0, 70, "Section",ExpressionUUID->"6371c3c5-f70b-41e2-94a1-ac1c1677089e"],
+Cell[929, 29, 305, 5, 70, "Item",ExpressionUUID->"dc2dc789-3147-4726-9d19-cbd6bfe7b1c7"],
+Cell[1237, 36, 292, 4, 70, "Item",ExpressionUUID->"f8e16743-4c8f-45f1-8245-c8db89f2f527"],
+Cell[1532, 42, 285, 4, 70, "Item",ExpressionUUID->"6f0b2836-af84-4fad-b27e-38629b5dc4ff"],
+Cell[1820, 48, 82, 0, 70, "Section",ExpressionUUID->"80e70abd-d995-4f73-9792-694c405194dd"],
+Cell[1905, 50, 416, 11, 70, "Input",ExpressionUUID->"8188f5a1-e4cd-46af-b34a-2e0f7a29b80e"],
+Cell[2324, 63, 81, 0, 70, "Section",ExpressionUUID->"2b283227-5169-44f5-b660-90e85c1af564"],
+Cell[2408, 65, 321, 5, 70, "Text",ExpressionUUID->"bd0a72d2-045a-4f7e-aaff-a1862232936b"]
+}
+]
+*)
+
+(* End of internal cache information *)

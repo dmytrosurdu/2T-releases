@@ -1,0 +1,141 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      5712,        132]
+NotebookOptionsPosition[      4525,        110]
+NotebookOutlinePosition[      4839,        124]
+CellTagsIndexPosition[      4796,        121]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Split-Faithful Completion Decision", "Title",ExpressionUUID->"574737ee-7524-4443-8e41-f4a9a8941e46"],
+
+Cell["\<\
+This notebook records the contract-level completion decision after rebuilding \
+the completion lane from the intrinsic response map, controlled split lift, \
+derived Gaussian completion data, and lifted fact-preservation checks. \
+\>", "Text",ExpressionUUID->"578dda60-733a-4dac-bfa9-a4b73885f0bb"],
+
+Cell["Targets", "Section",ExpressionUUID->"f9510237-ac34-4a6b-990e-562829214f10"],
+
+Cell[TextData[Cell[BoxData[Cell["task:sk-intrinsic-response-map-contract",
+  Background->None,ExpressionUUID->
+  "3d3d1698-2dd2-4ff1-b15c-4590523c2229"]], \
+"InlineCode",ExpressionUUID->"601b9fcb-f442-4560-b760-5dd11c6317ad"]], "Item",\
+ExpressionUUID->"0a1466ff-f0a5-4494-9987-1124c2330f26"],
+
+Cell[TextData[Cell[BoxData[Cell["task:sk-split-controlled-lift-contract",
+  Background->None,ExpressionUUID->
+  "a923ba62-3d4f-419d-9a58-c230beaee60d"]], \
+"InlineCode",ExpressionUUID->"6c5f6f56-3ef0-4e66-b9eb-53e982e1bf6d"]], "Item",\
+ExpressionUUID->"66873a9a-e7c2-4e20-80fd-891604af7e72"],
+
+Cell[TextData[Cell[BoxData[Cell["task:sk-gaussian-completion-contract",
+  Background->None,ExpressionUUID->
+  "d0e1d2f3-2203-4f57-99e0-8f0eac1eb9c9"]], \
+"InlineCode",ExpressionUUID->"86ae79ab-d600-4900-ac9f-4ed506c39f1e"]], "Item",\
+ExpressionUUID->"e8ac1431-9257-4477-91d1-53183b274e41"],
+
+Cell[TextData[Cell[BoxData[Cell["task:sk-split-faithful-completion-ambiguity-\
+decision",
+  Background->None,ExpressionUUID->
+  "25234d14-a142-437b-8590-6c98c2b78a60"]], \
+"InlineCode",ExpressionUUID->"93d96726-5656-4345-806b-7f9a8b98e370"]], "Item",\
+ExpressionUUID->"d6ea2dce-b2ce-47f3-996d-26e6545f53cb"],
+
+Cell["Evaluate", "Section",ExpressionUUID->"8a24198b-5fef-4920-9b25-1463ce6af2f0"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"responseAudit", "=", 
+   RowBox[{
+   "MainProof`UOMIntrinsicResponseMap`AuditUOMIntrinsicResponseMap", "[", 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"splitAudit", "=", 
+   RowBox[{
+   "MainProof`UOMSplitControlledLift`AuditUOMSplitControlledLift", "[", 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"gaussianAudit", "=", 
+   RowBox[{
+   "MainProof`UOMSKGaussianCompletion`AuditUOMSKGaussianCompletion", "[", 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"completionAudit", "=", 
+   RowBox[{
+   "MainProof`UOMCompletionAmbiguityAudit`AuditUOMCompletionAmbiguity", "[", 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"decision", "=", 
+   RowBox[{
+   "MainProof`UOMCompletionAmbiguityAudit`SplitFaithfulCompletionDecision", "[",
+     "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"<|", "\[IndentingNewLine]", "  ", 
+  RowBox[{
+   RowBox[{"\"\<IntrinsicResponseAudit\>\"", "->", "responseAudit"}], ",", 
+   "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<SplitControlledLiftAudit\>\"", "->", "splitAudit"}], ",", 
+   "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<GaussianCompletionAudit\>\"", "->", "gaussianAudit"}], ",", 
+   "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<CompletionAmbiguityAudit\>\"", "->", "completionAudit"}], ",",
+    "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<Decision\>\"", "->", "decision"}]}], "\[IndentingNewLine]", 
+  "|>"}]}], "Input",ExpressionUUID->"5ff49068-7ee9-4290-8ddc-b9d2cd8b6146"],
+
+Cell["Interpretation", "Section",ExpressionUUID->"f13366e3-6969-4c83-a590-a422ca6a79dc"],
+
+Cell["\<\
+This is an exact finite-dimensional contract decision, not yet the full \
+microscopic SK completion theorem. It should be read together with the \
+exploratory completion notebook: the old appended-block lift remains a \
+negative probe, while this notebook records what survives after enforcing the \
+split-faithful contract dependencies.\
+\>", "Text",ExpressionUUID->"87ed4804-e5e4-4cb4-9876-15f98c36da19"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"bacb05d1-7806-4062-9342-ddc6597ae3bd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 106, 0, 70, "Title",ExpressionUUID->"574737ee-7524-4443-8e41-f4a9a8941e46"],
+Cell[663, 22, 308, 4, 70, "Text",ExpressionUUID->"578dda60-733a-4dac-bfa9-a4b73885f0bb"],
+Cell[974, 28, 81, 0, 70, "Section",ExpressionUUID->"f9510237-ac34-4a6b-990e-562829214f10"],
+Cell[1058, 30, 292, 4, 70, "Item",ExpressionUUID->"0a1466ff-f0a5-4494-9987-1124c2330f26"],
+Cell[1353, 36, 291, 4, 70, "Item",ExpressionUUID->"66873a9a-e7c2-4e20-80fd-891604af7e72"],
+Cell[1647, 42, 289, 4, 70, "Item",ExpressionUUID->"e8ac1431-9257-4477-91d1-53183b274e41"],
+Cell[1939, 48, 307, 5, 70, "Item",ExpressionUUID->"d6ea2dce-b2ce-47f3-996d-26e6545f53cb"],
+Cell[2249, 55, 82, 0, 70, "Section",ExpressionUUID->"8a24198b-5fef-4920-9b25-1463ce6af2f0"],
+Cell[2334, 57, 1677, 41, 70, "Input",ExpressionUUID->"5ff49068-7ee9-4290-8ddc-b9d2cd8b6146"],
+Cell[4014, 100, 88, 0, 70, "Section",ExpressionUUID->"f13366e3-6969-4c83-a590-a422ca6a79dc"],
+Cell[4105, 102, 416, 6, 70, "Text",ExpressionUUID->"87ed4804-e5e4-4cb4-9876-15f98c36da19"]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,179 @@
+{
+	"ReportDate":"2026-03-19 17:17:06",
+	"BoundaryMinimalCandidate":"I0",
+	"CompletionMinimalCandidate":"I2",
+	"AllowedInsertionLevel":"UOM contract corollary only",
+	"TraceabilitySummary":{
+		"BoundaryIngredientCount":5,
+		"CompletionIngredientCount":2,
+		"CandidateInterfaceIngredients":7,
+		"TextStatusCounts":{
+			"theorem-backed on theorem-visible reduced receiver":1,
+			"theorem-backed":3,
+			"conditional theorem on explicit transport hypotheses":1,
+			"bounded packaging theorem on explicit split data":1,
+			"assumption-backed":1
+		},
+		"InterfaceClassCounts":{
+			"candidate-interface":5,
+			"candidate-interface-completion":2
+		}
+	},
+	"CandidateSummary":{
+		"I0":{
+			"SatisfyingRealizations":[
+				"UOM",
+				"SyntheticBoundary",
+				"SyntheticCompletion"
+			],
+			"NonUOMSatisfyingRealizations":[
+				"SyntheticBoundary",
+				"SyntheticCompletion"
+			],
+			"BoundaryTheoremFollowsQ":true,
+			"CompletionTheoremFollowsQ":false
+		},
+		"I1":{
+			"SatisfyingRealizations":[
+				"UOM",
+				"SyntheticBoundary",
+				"SyntheticCompletion"
+			],
+			"NonUOMSatisfyingRealizations":[
+				"SyntheticBoundary",
+				"SyntheticCompletion"
+			],
+			"BoundaryTheoremFollowsQ":true,
+			"CompletionTheoremFollowsQ":false
+		},
+		"I2":{
+			"SatisfyingRealizations":[
+				"UOM",
+				"SyntheticCompletion"
+			],
+			"NonUOMSatisfyingRealizations":[
+				"SyntheticCompletion"
+			],
+			"BoundaryTheoremFollowsQ":true,
+			"CompletionTheoremFollowsQ":true
+		}
+	},
+	"CompressionClaims":{
+		"Within the exact audited family, the three conceptual axioms are equivalent to the current strong-safe class":{
+			"Status":"exact finite-dimensional certificate",
+			"Certified":true
+		},
+		"The compressed contract keeps exact accepted-record preservation as a separate interface axiom":{
+			"Status":"exact finite-dimensional certificate",
+			"Certified":true
+		},
+		"Band-lock and co-centering compress into a single geometric-locking axiom in the audited family":{
+			"Status":"exact finite-dimensional certificate",
+			"Certified":true
+		}
+	},
+	"GateReasons":[
+		"Boundary ingredients are now well traced with theorem-backed, reduced-theorem-backed, and conditional-theorem-backed statuses; the completion additions remain non-promoted, split across one bounded packaging theorem on explicit split data and one still-assumption-backed Gaussian layer.",
+		"The minimal mock-tested boundary interface candidate is I0, but the stronger structural compression still sits inside the current exact WL family rather than a text-level generic theorem.",
+		"The split-faithful completion result is improved and strong-safe, but it is still contract-level and does not close the full microscopic completion theorem."
+	],
+	"Ledger":[
+		{
+			"TheoremLabel":"task:uom-contract-traceability",
+			"Assumptions":"Current WL contract ingredients for welded boundary safety and split-faithful completion.",
+			"Method":"Exact source\/role classification of the current WL contract ingredients against Main, 2T-LS, and live UOM note labels.",
+			"Status":"exact finite-dimensional certificate",
+			"ScopeClass":"exact-model-certificate",
+			"SurrogateBlindSpots":[
+				"The traceability table is only as fine-grained as the current live theorem\/assumption labels.",
+				"The completion entries are still non-promoted: one is a bounded packaging theorem on explicit split data, while the Gaussian completion layer remains assumption-backed."
+			],
+			"CertificateArtifact":"Missing[\"NotAssigned\"]",
+			"CounterexampleArtifact":"Missing[\"NotAssigned\"]",
+			"RepresentativeModelFamily":"Traceability table for welded boundary and split-faithful completion contracts",
+			"NoApproximationQ":true,
+			"Source":"Main\/appendix_main.tex, UOM live notes, and latex\/limited_scope_theorem_PRL_Supplementary.tex",
+			"Acceptance":"Every current contract ingredient is mapped to live sources, with boundary ingredients separated from completion additions and classified by interface candidacy."
+		},
+		{
+			"TheoremLabel":"task:mock-cosmology-interface-realizations",
+			"Assumptions":"UOM realization, synthetic non-UOM realizations, and a visible-ambiguity negative control.",
+			"Method":"Exact mock-realization audit with one UOM realization, two synthetic non-UOM realizations, and one visible-ambiguity negative control.",
+			"Status":"exact finite-dimensional certificate",
+			"ScopeClass":"exact-model-certificate",
+			"SurrogateBlindSpots":[
+				"Synthetic realizations certify interface shape, not microscopic physics."
+			],
+			"CertificateArtifact":"Missing[\"NotAssigned\"]",
+			"CounterexampleArtifact":"Missing[\"NotAssigned\"]",
+			"RepresentativeModelFamily":"UOM plus synthetic centered-active-line and completion-aware cosmology mocks",
+			"NoApproximationQ":true,
+			"Source":"Main Mathematica interface-search lane plus UOM welded\/completion contracts",
+			"Acceptance":"At least one non-UOM realization satisfies the compact-interface search constraints, and a negative control still reproduces visible ambiguity when those constraints fail."
+		},
+		{
+			"TheoremLabel":"task:cosmology-interface-boundary-minimality",
+			"Assumptions":"Nested boundary-interface candidates I0, I1, I2.",
+			"Method":"Nested candidate search over I0\/I1\/I2 on exact mock realizations.",
+			"Status":"exact finite-dimensional certificate",
+			"ScopeClass":"exact-model-certificate",
+			"SurrogateBlindSpots":[
+				"Minimality is certified only in the current exact mock family."
+			],
+			"CertificateArtifact":"Missing[\"NotAssigned\"]",
+			"CounterexampleArtifact":"Missing[\"NotAssigned\"]",
+			"RepresentativeModelFamily":"I0 versus I1 versus I2 on UOM and non-UOM mocks",
+			"NoApproximationQ":true,
+			"Source":"Main abstract interface lane cross-checked against UOM contract realizations",
+			"Acceptance":"Among the nested candidates, I0 is the smallest theory-neutral boundary interface that still forces the audited boundary canonicalization conclusion on all satisfying mock realizations."
+		},
+		{
+			"TheoremLabel":"task:cosmology-interface-completion-minimality",
+			"Assumptions":"Nested completion-aware interface candidates I0, I1, I2.",
+			"Method":"Nested candidate search over I0\/I1\/I2 for completion-aware safety on exact mock realizations.",
+			"Status":"exact finite-dimensional certificate",
+			"ScopeClass":"exact-model-certificate",
+			"SurrogateBlindSpots":[
+				"Completion-aware minimality remains contract-level and does not close the microscopic SK theorem."
+			],
+			"CertificateArtifact":"Missing[\"NotAssigned\"]",
+			"CounterexampleArtifact":"Missing[\"NotAssigned\"]",
+			"RepresentativeModelFamily":"I0 versus I1 versus I2 on UOM and completion-aware non-UOM mocks",
+			"NoApproximationQ":true,
+			"Source":"Main Mathematica completion-interface search lane",
+			"Acceptance":"Among the nested candidates, I2 is the smallest completion-aware interface that still forces strong-safe completion behavior on all satisfying mock realizations."
+		},
+		{
+			"TheoremLabel":"task:boundary-contract-compression",
+			"Assumptions":"Five-part strong-safe welded package versus a three-axiom conceptual compression.",
+			"Method":"Exact comparison of the five-part strong-safe package against a three-axiom conceptual compression on the welded ablation family.",
+			"Status":"exact finite-dimensional certificate",
+			"ScopeClass":"exact-model-certificate",
+			"SurrogateBlindSpots":[
+				"Compression is certified only inside the present exact ablation family."
+			],
+			"CertificateArtifact":"Missing[\"NotAssigned\"]",
+			"CounterexampleArtifact":"Missing[\"NotAssigned\"]",
+			"RepresentativeModelFamily":"Baseline welded family versus one-at-a-time ablations",
+			"NoApproximationQ":true,
+			"Source":"Main Mathematica welded ablation lane plus UOM compressed welded notes",
+			"Acceptance":"Within the exact audited family, strong-safe is equivalent to exact accepted-record preservation plus a rank-one descended active image plus geometric locking."
+		},
+		{
+			"TheoremLabel":"task:manuscript-insertion-gate",
+			"Assumptions":"Current traceability, compact-interface search, and completion-scope caveats.",
+			"Method":"Joint gate over contract traceability, interface compression, mock realizations, and completion-scope caveats.",
+			"Status":"exact finite-dimensional certificate",
+			"ScopeClass":"exact-model-certificate",
+			"SurrogateBlindSpots":[
+				"This gate is about what the current exact lane honestly licenses, not about the final theorem program."
+			],
+			"CertificateArtifact":"Missing[\"NotAssigned\"]",
+			"CounterexampleArtifact":"Missing[\"NotAssigned\"]",
+			"RepresentativeModelFamily":"Traceability plus compact-interface search plus manuscript gate",
+			"NoApproximationQ":true,
+			"Source":"Main Mathematica report lane plus UOM contract\/completion reports",
+			"Acceptance":"The current Mathematica lane supports insertion only as a UOM contract corollary and keeps generic-interface or microscopic-completion wording gated."
+		}
+	]
+}

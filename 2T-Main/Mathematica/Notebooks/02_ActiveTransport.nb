@@ -1,0 +1,458 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     19452,        449]
+NotebookOptionsPosition[     15170,        394]
+NotebookOutlinePosition[     15484,        408]
+CellTagsIndexPosition[     15441,        405]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["02 Active Transport", "Title",ExpressionUUID->"f10b8e40-83fa-45d9-ba72-081e69b6599f"],
+
+Cell["Scope", "Section",ExpressionUUID->"5f32271e-46ee-4dff-a5eb-53bf4141e8cc"],
+
+Cell[TextData[{
+ "This notebook is the Task 3.5 hardening pass for ",
+ Cell[BoxData[Cell["thm:active-response-transport-minimal",
+   Background->None,ExpressionUUID->"85c06e04-4430-49a9-b080-98c365e4602a"]], 
+  "InlineCode",ExpressionUUID->"942090bf-d13a-4f7c-80a1-f99ad016c010"],
+ " and the weak export ",
+ Cell[BoxData[Cell["thm:char-weak-interface",
+   Background->None,ExpressionUUID->"6ee27481-57ea-4166-b54c-64c802b7d0bd"]], 
+  "InlineCode",ExpressionUUID->"bba75c4f-3120-4adf-b9d3-e7c6cefdab3d"],
+ ". It remains an exact-model audit, not a universal theorem over all \
+admissible branches. "
+}], "Text",ExpressionUUID->"7b6b3e83-00c2-4f1f-9b7c-672e7bb27234"],
+
+Cell["Certified branch model", "Section",ExpressionUUID->"ff5fd5e2-9d29-485b-ac7a-8ecae886cc5c"],
+
+Cell[TextData[{
+ "Use the exact branch family from ",
+ Cell[BoxData[Cell["MainProof`ActiveTransport",
+   Background->None,ExpressionUUID->"4c79d223-6f56-4e66-81f9-bfcb22e1d557"]], 
+  "InlineCode",ExpressionUUID->"3a17a487-1d11-45ac-b809-894f12d86925"],
+ "CertifiedActiveTransportModel[]`: "
+}], "CodeText",ExpressionUUID->"276f6e1c-1fbb-4974-ba8e-0215f9408dc6"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"model", "=", 
+   RowBox[{
+   "MainProof`ActiveTransport`CertifiedActiveTransportModel", "[", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"audit", "=", 
+   RowBox[{
+   "MainProof`ActiveTransport`AuditActiveTransportModel", "[", "model", 
+    "]"}]}], ";"}]}], "Input",ExpressionUUID->"7fbfdbc2-ca40-4411-bda9-\
+c1f67bf1c23c"],
+
+Cell["Certified input data: ", "CodeText",ExpressionUUID->"13552b5a-4e90-4b00-9c66-3d484fb62aa1"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Aminus", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"rhoDom", "=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"1", "+", "lambda"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nu", "=", 
+   RowBox[{"1", "+", "lambda"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Jdesc", "=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"chi", "=", 
+   RowBox[{
+    RowBox[{"rhoDom", "/", "nu"}], "=", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "1"}], "}"}]}]}], ";"}]}], "Input",Expression\
+UUID->"5eff4923-0e2d-49fd-b82c-45dd2d6842a1"],
+
+Cell["Accepted connected component: ", "Text",ExpressionUUID->"9cd1dbbb-8c32-4f32-a6a6-2e29df9de449"],
+
+Cell["1 <= lambda <= 3", "Program",ExpressionUUID->"a3df9dfe-ed4a-4848-b63e-06e33a19e0fe"],
+
+Cell["Sign-defined connected component: ", "Text",ExpressionUUID->"7bdf0348-f8d9-44d6-88db-988878e81dbd"],
+
+Cell["1 <= lambda <= 3", "Program",ExpressionUUID->"cdd88683-05b5-4aca-a510-6cd1858e43a8"],
+
+Cell["Exact consequences on that component: ", "Text",ExpressionUUID->"d128061c-49f5-424a-9379-54cf070bc55d"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["rho^dom",
+   Background->None,ExpressionUUID->"7c8060f8-65ba-46a8-a751-579b4d8b58d1"]], 
+  "InlineCode",ExpressionUUID->"c71ba26d-38c5-4179-a9aa-2eac64a01c78"],
+ " annihilates ",
+ Cell[BoxData[Cell["Aminus",
+   Background->None,ExpressionUUID->"2c88dd1e-9adf-40de-9edc-3c8917434ee4"]], 
+  "InlineCode",ExpressionUUID->"426f107a-3ab3-4075-a7f5-3ecd37a1bb5f"],
+ "."
+}], "Item",ExpressionUUID->"b006d778-59c9-4992-89fc-bd80f1c4d8fb"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["chi = nu^-1 rho^dom",
+   Background->None,ExpressionUUID->"69977c72-f45e-4aa1-869d-028f3721a37b"]], 
+  "InlineCode",ExpressionUUID->"30f7940d-922b-4114-a9a5-99c81ac36896"],
+ " exactly."
+}], "Item",ExpressionUUID->"6f7b5248-4d67-49b0-bdad-901a9f89b75e"],
+
+Cell[TextData[{
+ StyleBox["chi", "TI"],
+ " is constant on the affine class ",
+ Cell[BoxData[Cell["Jdesc + Aminus",
+   Background->None,ExpressionUUID->"0020871c-57d2-4ea0-bb2d-b004ad4dacd5"]], 
+  "InlineCode",ExpressionUUID->"4d3998a6-4e63-4ad2-a5e2-ed8305be979a"],
+ "."
+}], "Item",ExpressionUUID->"7301c21b-f7e9-4b4a-9557-c06ed39cb149"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["epsilon(lambda) = 1",
+   Background->None,ExpressionUUID->"9664ee15-bbdd-4a76-824d-c4abebdbdfee"]], 
+  "InlineCode",ExpressionUUID->"ca84c8e0-6dc3-47b0-b920-0229782a6544"],
+ " on the whole accepted branch."
+}], "Item",ExpressionUUID->"06261655-1e90-4371-93d1-e89143ab5784"],
+
+Cell[TextData[{
+ "The sign can only jump after excluding zeros of ",
+ Cell[BoxData[Cell["rho^dom(Jdesc)",
+   Background->None,ExpressionUUID->"10b2cfda-acd9-4af0-a25b-2ddb027f8d2c"]], 
+  "InlineCode",ExpressionUUID->"9882fbb6-1f23-4432-9bda-a1c6583578d8"],
+ " or ",
+ StyleBox["nu", "TI"],
+ "."
+}], "Item",ExpressionUUID->"ec88fdea-a907-4617-af37-80208d413e98"],
+
+Cell["Broken models", "Section",ExpressionUUID->"a88c765a-ca9e-4ca1-8457-d7dbcff834ee"],
+
+Cell["Nonvanishing removed", "Subsection",ExpressionUUID->"6c77d41e-d5db-489d-a671-e5c40642115c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"broken", "=", 
+   RowBox[{
+    RowBox[{
+    "MainProof`ActiveTransport`BrokenActiveTransportModels", "[", "]"}], "[", 
+    
+    RowBox[{"[", "1", "]"}], "]"}]}], ";"}]], "Input",ExpressionUUID->\
+"cbe573cd-c2d8-4b8c-9162-ab0a34b789b7"],
+
+Cell["Here ", "Text",ExpressionUUID->"9448fe24-f721-4803-b93f-3141be3f5c95"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"rhoDom", "=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", 
+     RowBox[{"lambda", "-", "2"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nu", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Jdesc", "=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], ";"}]}], "Input",ExpressionUUI\
+D->"10373f67-74c6-4862-84cc-4ef4c727b7f5"],
+
+Cell["Exact result: ", "Text",ExpressionUUID->"b1fe1f7e-5a3f-4106-b7ac-94a877e8193e"],
+
+Cell[TextData[{
+ "Accepted component stays ",
+ Cell[BoxData[Cell["1 <= lambda <= 3",
+   Background->None,ExpressionUUID->"aa1326ac-5aa1-43e8-8450-5e6eae363847"]], 
+  "InlineCode",ExpressionUUID->"b4f55ecb-ed0f-413e-b3ed-f429602dcbe9"],
+ "."
+}], "Item",ExpressionUUID->"8832298e-dafa-4579-860f-641779b58c63"],
+
+Cell[TextData[{
+ "Sign-defined components split into ",
+ Cell[BoxData[Cell["1 <= lambda < 2",
+   Background->None,ExpressionUUID->"ce94ee4f-3c75-4119-b873-c2977c6fb9ab"]], 
+  "InlineCode",ExpressionUUID->"8c4873d5-7b96-4533-9628-f3543ff64a29"],
+ " and ",
+ Cell[BoxData[Cell["2 < lambda <= 3",
+   Background->None,ExpressionUUID->"67660f2d-0318-40d5-91d9-38bc7efa596b"]], 
+  "InlineCode",ExpressionUUID->"4cb538bc-502f-4040-a0be-92a86e6d76b7"],
+ "."
+}], "Item",ExpressionUUID->"75c6c73e-4b63-4b04-a3bc-4f707a072c55"],
+
+Cell[TextData[{
+ "The sign is undefined at ",
+ Cell[BoxData[Cell["lambda = 2",
+   Background->None,ExpressionUUID->"ce314425-662b-47b7-a01c-3ea9d2b8de09"]], 
+  "InlineCode",ExpressionUUID->"a927d26e-35f9-4f0b-83e1-890cd484e044"],
+ " because ",
+ Cell[BoxData[Cell["rho^dom(Jdesc) = 0",
+   Background->None,ExpressionUUID->"97657e17-63e9-462e-aa6c-b577d8f5657f"]], 
+  "InlineCode",ExpressionUUID->"3a272cd6-fe98-4aa6-a831-8d19ede927f0"],
+ "."
+}], "Item",ExpressionUUID->"151adc47-004b-4d16-a9be-2b9fe0c23ed7"],
+
+Cell["Continuity removed", "Subsection",ExpressionUUID->"e5a2d6b6-c6c5-4d04-9721-b7642bffd792"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"broken", "=", 
+   RowBox[{
+    RowBox[{
+    "MainProof`ActiveTransport`BrokenActiveTransportModels", "[", "]"}], "[", 
+    
+    RowBox[{"[", "2", "]"}], "]"}]}], ";"}]], "Input",ExpressionUUID->\
+"bb36c787-3fdd-4d05-b65e-42c007a2abcb"],
+
+Cell[TextData[{
+ "Here ",
+ Cell[BoxData[Cell["rho^dom(Jdesc) = 1 + UnitStep[lambda - 2]",
+   Background->None,ExpressionUUID->"43c4f8a2-150c-4283-b1c3-9e4e3ab0cae9"]], 
+  "InlineCode",ExpressionUUID->"a555b5bc-f48b-4f84-89ac-b76f13ded08b"],
+ " has a jump at ",
+ Cell[BoxData[Cell["lambda = 2",
+   Background->None,ExpressionUUID->"13d8948a-7dfc-4fe2-a0be-f4d7fe4e2282"]], 
+  "InlineCode",ExpressionUUID->"9ed5b795-7521-4581-8726-87553f88ba71"],
+ "."
+}], "Text",ExpressionUUID->"68447748-8571-4beb-bfa6-f2e058dee8d1"],
+
+Cell["Exact witness: ", "Text",ExpressionUUID->"7fafa749-2f25-4d5d-af98-3aa042448e44"],
+
+Cell[TextData[{
+ "Left limit at ",
+ Cell[BoxData[Cell["2",
+   Background->None,ExpressionUUID->"547a0123-0bb2-4414-84de-44036cb98b9c"]], 
+  "InlineCode",ExpressionUUID->"dbd167f0-5771-484b-a537-76d96e6d7880"],
+ " is ",
+ Cell[BoxData[Cell["1",
+   Background->None,ExpressionUUID->"b74c6f06-20a9-48a3-8e10-7fd665e2073c"]], 
+  "InlineCode",ExpressionUUID->"09364e76-9235-46db-831e-707b4fcfa8e8"],
+ "."
+}], "Item",ExpressionUUID->"bcd9d667-2568-4853-968f-0d51121e4fb6"],
+
+Cell[TextData[{
+ "Right limit at ",
+ Cell[BoxData[Cell["2",
+   Background->None,ExpressionUUID->"d4351e61-7334-45df-8435-e324d4571722"]], 
+  "InlineCode",ExpressionUUID->"337f5a47-6bc9-41df-8e30-dbbc1a8dea84"],
+ " is ",
+ Cell[BoxData[Cell["2",
+   Background->None,ExpressionUUID->"b2e52f74-e828-4b40-ad46-1f3ef011ec56"]], 
+  "InlineCode",ExpressionUUID->"d9808153-0055-4cb7-9e87-cb502431e549"],
+ "."
+}], "Item",ExpressionUUID->"1fa1e4a4-204f-489e-9032-8e6d3733e0c1"],
+
+Cell["The continuity clause fails exactly.", "Item",ExpressionUUID->"e9688e4f-5bfd-4414-9dc0-499ca898c9bd"],
+
+Cell[TextData[{
+ "Ambiguity not contained in ",
+ Cell[BoxData[Cell["ker chi",
+   Background->None,ExpressionUUID->"252be602-1048-458d-9c89-e7a444372b92"]], 
+  "InlineCode",ExpressionUUID->"6b1f9273-823a-4789-af9d-50dd6bdfc593"]
+}], "Subsection",ExpressionUUID->"a4001065-226e-4cd9-b9cb-46d7a4caec78"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"broken", "=", 
+   RowBox[{
+    RowBox[{
+    "MainProof`ActiveTransport`BrokenActiveTransportModels", "[", "]"}], "[", 
+    
+    RowBox[{"[", "3", "]"}], "]"}]}], ";"}]], "Input",ExpressionUUID->\
+"c01be250-2d31-4754-bc41-18a878aebbd1"],
+
+Cell[TextData[{
+ "Here ",
+ Cell[BoxData[Cell["rhoDom = {1, 0, 1}",
+   Background->None,ExpressionUUID->"2a092fd0-ea8b-4677-8528-d1be8e601c86"]], 
+  "InlineCode",ExpressionUUID->"e0e9fcbc-55a1-4764-ae58-5d16922438d9"],
+ " so ",
+ Cell[BoxData[Cell["chi = {1, 0, 1}",
+   Background->None,ExpressionUUID->"e346dd66-ac37-4310-80dc-5edc72692d6d"]], 
+  "InlineCode",ExpressionUUID->"fc1047df-1a95-4332-a7b9-757f1f5337db"],
+ " does not annihilate ",
+ Cell[BoxData[Cell["Aminus",
+   Background->None,ExpressionUUID->"9817e592-836b-42be-9913-b949f0cad61f"]], 
+  "InlineCode",ExpressionUUID->"82bfb635-397f-4675-be4f-3f699e598aac"],
+ "."
+}], "Text",ExpressionUUID->"152c5aa0-84ea-42a8-aa4c-120ca665cef0"],
+
+Cell["Exact consequence: ", "Text",ExpressionUUID->"ab92760e-b5fe-4ac9-8a88-cda3d9c17959"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["Aminus \[NotSubset] ker chi",
+   Background->None,ExpressionUUID->"29774c07-aba4-4dcc-973e-6d2068aac7f1"]], 
+  "InlineCode",ExpressionUUID->"efa0a0bf-2a05-42ce-819d-7d13eedf6374"],
+ "."
+}], "Item",ExpressionUUID->"69387095-9ab9-4f2f-93be-3d61cc25cc29"],
+
+Cell[TextData[{
+ "Affine constancy fails with an exact witness produced by ",
+ Cell[BoxData[
+  TemplateBox[{
+   "FindInstance", "paclet:ref/FindInstance", 
+    "https://reference.wolfram.com/language/ref/FindInstance.html"},
+   "TextRefLink",
+   DisplayFunction->(TagBox[
+     ButtonBox[
+      StyleBox[#, ShowStringCharacters -> True, FontFamily -> 
+       "Source Sans Pro"], 
+      BaseStyle -> {"Link", FontColor -> LightDarkSwitched[
+          RGBColor[0.02, 0.286, 0.651], 
+          RGBColor[0.2823, 0.6666, 0.949]]}, ButtonData -> #2, ContentPadding -> 
+      False], 
+     MouseAppearanceTag["LinkHand"]]& )]],ExpressionUUID->
+  "56c571df-1690-447b-ad16-6acb7c1e0757"],
+ "."
+}], "Item",ExpressionUUID->"6cb65ee0-8d52-4537-a33a-e8d0c4b37210"],
+
+Cell["Re-run", "Section",ExpressionUUID->"083f1a92-dd2e-431d-b15b-d48f44917c2b"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"MainProof`ActiveTransport`RunActiveTransportExampleSuite", "[", 
+  "]"}]}], "Input",ExpressionUUID->"2c6afb57-9209-4c4f-b2de-23d7b55b01b3"],
+
+Cell["Status", "Section",ExpressionUUID->"39c1ab88-7d46-43e5-8706-9c4b73ae757c"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Claim\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm], 
+         TagBox["\<\"ScopeClass\"\>",
+          HoldForm]},
+        {Cell[TextData[{
+          Cell[BoxData[Cell["thm:active-response-transport-minimal",
+            Background->None,ExpressionUUID->
+            "f2c629a3-33c1-437e-9556-73f810122b69"]], "InlineCode",
+           ExpressionUUID->"dfe5c679-62ef-4d37-bffc-3454779037ee"],
+          " on the certified branch model"
+         }],ExpressionUUID->
+          "395e337e-a539-4f5a-aef6-c558297c967c"], "\<\"exact \
+finite-dimensional certificate\"\>", "\<\"exact-model-certificate\"\>"},
+        {"\<\"Connected-component audit and sign-defined component \
+split\"\>", "\<\"exact finite-dimensional certificate\"\>", \
+"\<\"exact-model-certificate\"\>"},
+        {"\<\"Broken nonvanishing example with undefined sign\"\>", \
+"\<\"counterexample found\"\>", "\<\"exact-model-certificate\"\>"},
+        {"\<\"Broken continuity example\"\>", "\<\"counterexample found\"\>", \
+"\<\"exact-model-certificate\"\>"},
+        {"\<\"Broken ambiguity-kernel example\"\>", "\<\"counterexample found\
+\"\>", "\<\"exact-model-certificate\"\>"},
+        {"\<\"Universal branch theorem beyond the certified model \
+family\"\>", "\<\"deferred\"\>", "\<\"abstract-imported-assumptions\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[
+      BoxForm`e$, 
+       TableHeadings -> {None, {"Claim", "Status", "ScopeClass"}}]]], "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"2150fee8-bd45-415c-a557-d18468fbe176"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9fb98179-9cdd-493e-8616-b4f0b8195a60"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 91, 0, 70, "Title",ExpressionUUID->"f10b8e40-83fa-45d9-ba72-081e69b6599f"],
+Cell[648, 22, 79, 0, 70, "Section",ExpressionUUID->"5f32271e-46ee-4dff-a5eb-53bf4141e8cc"],
+Cell[730, 24, 665, 11, 70, "Text",ExpressionUUID->"7b6b3e83-00c2-4f1f-9b7c-672e7bb27234"],
+Cell[1398, 37, 96, 0, 70, "Section",ExpressionUUID->"ff5fd5e2-9d29-485b-ac7a-8ecae886cc5c"],
+Cell[1497, 39, 361, 6, 70, "CodeText",ExpressionUUID->"276f6e1c-1fbb-4974-ba8e-0215f9408dc6"],
+Cell[1861, 47, 379, 11, 70, "Input",ExpressionUUID->"7fbfdbc2-ca40-4411-bda9-c1f67bf1c23c"],
+Cell[2243, 60, 97, 0, 70, "CodeText",ExpressionUUID->"13552b5a-4e90-4b00-9c66-3d484fb62aa1"],
+Cell[2343, 62, 930, 30, 70, "Input",ExpressionUUID->"5eff4923-0e2d-49fd-b82c-45dd2d6842a1"],
+Cell[3276, 94, 101, 0, 70, "Text",ExpressionUUID->"9cd1dbbb-8c32-4f32-a6a6-2e29df9de449"],
+Cell[3380, 96, 90, 0, 70, "Program",ExpressionUUID->"a3df9dfe-ed4a-4848-b63e-06e33a19e0fe"],
+Cell[3473, 98, 105, 0, 70, "Text",ExpressionUUID->"7bdf0348-f8d9-44d6-88db-988878e81dbd"],
+Cell[3581, 100, 90, 0, 70, "Program",ExpressionUUID->"cdd88683-05b5-4aca-a510-6cd1858e43a8"],
+Cell[3674, 102, 109, 0, 70, "Text",ExpressionUUID->"d128061c-49f5-424a-9379-54cf070bc55d"],
+Cell[3786, 104, 466, 9, 70, "Item",ExpressionUUID->"b006d778-59c9-4992-89fc-bd80f1c4d8fb"],
+Cell[4255, 115, 288, 5, 70, "Item",ExpressionUUID->"6f7b5248-4d67-49b0-bdad-901a9f89b75e"],
+Cell[4546, 122, 337, 7, 70, "Item",ExpressionUUID->"7301c21b-f7e9-4b4a-9557-c06ed39cb149"],
+Cell[4886, 131, 309, 5, 70, "Item",ExpressionUUID->"06261655-1e90-4371-93d1-e89143ab5784"],
+Cell[5198, 138, 360, 8, 70, "Item",ExpressionUUID->"ec88fdea-a907-4617-af37-80208d413e98"],
+Cell[5561, 148, 87, 0, 70, "Section",ExpressionUUID->"a88c765a-ca9e-4ca1-8457-d7dbcff834ee"],
+Cell[5651, 150, 97, 0, 70, "Subsection",ExpressionUUID->"6c77d41e-d5db-489d-a671-e5c40642115c"],
+Cell[5751, 152, 270, 8, 70, "Input",ExpressionUUID->"cbe573cd-c2d8-4b8c-9162-ab0a34b789b7"],
+Cell[6024, 162, 76, 0, 70, "Text",ExpressionUUID->"9448fe24-f721-4803-b93f-3141be3f5c95"],
+Cell[6103, 164, 421, 12, 70, "Input",ExpressionUUID->"10373f67-74c6-4862-84cc-4ef4c727b7f5"],
+Cell[6527, 178, 85, 0, 70, "Text",ExpressionUUID->"b1fe1f7e-5a3f-4106-b7ac-94a877e8193e"],
+Cell[6615, 180, 307, 6, 70, "Item",ExpressionUUID->"8832298e-dafa-4579-860f-641779b58c63"],
+Cell[6925, 188, 515, 10, 70, "Item",ExpressionUUID->"75c6c73e-4b63-4b04-a3bc-4f707a072c55"],
+Cell[7443, 200, 507, 10, 70, "Item",ExpressionUUID->"151adc47-004b-4d16-a9be-2b9fe0c23ed7"],
+Cell[7953, 212, 95, 0, 70, "Subsection",ExpressionUUID->"e5a2d6b6-c6c5-4d04-9721-b7642bffd792"],
+Cell[8051, 214, 270, 8, 70, "Input",ExpressionUUID->"bb36c787-3fdd-4d05-b65e-42c007a2abcb"],
+Cell[8324, 224, 516, 10, 70, "Text",ExpressionUUID->"68447748-8571-4beb-bfa6-f2e058dee8d1"],
+Cell[8843, 236, 86, 0, 70, "Text",ExpressionUUID->"7fafa749-2f25-4d5d-af98-3aa042448e44"],
+Cell[8932, 238, 465, 10, 70, "Item",ExpressionUUID->"bcd9d667-2568-4853-968f-0d51121e4fb6"],
+Cell[9400, 250, 466, 10, 70, "Item",ExpressionUUID->"1fa1e4a4-204f-489e-9032-8e6d3733e0c1"],
+Cell[9869, 262, 107, 0, 70, "Item",ExpressionUUID->"e9688e4f-5bfd-4414-9dc0-499ca898c9bd"],
+Cell[9979, 264, 300, 5, 70, "Subsection",ExpressionUUID->"a4001065-226e-4cd9-b9cb-46d7a4caec78"],
+Cell[10282, 271, 270, 8, 70, "Input",ExpressionUUID->"c01be250-2d31-4754-bc41-18a878aebbd1"],
+Cell[10555, 281, 693, 14, 70, "Text",ExpressionUUID->"152c5aa0-84ea-42a8-aa4c-120ca665cef0"],
+Cell[11251, 297, 90, 0, 70, "Text",ExpressionUUID->"ab92760e-b5fe-4ac9-8a88-cda3d9c17959"],
+Cell[11344, 299, 288, 5, 70, "Item",ExpressionUUID->"69387095-9ab9-4f2f-93be-3d61cc25cc29"],
+Cell[11635, 306, 750, 18, 70, "Item",ExpressionUUID->"6cb65ee0-8d52-4537-a33a-e8d0c4b37210"],
+Cell[12388, 326, 80, 0, 70, "Section",ExpressionUUID->"083f1a92-dd2e-431d-b15b-d48f44917c2b"],
+Cell[12471, 328, 306, 6, 70, "Input",ExpressionUUID->"2c6afb57-9209-4c4f-b2de-23d7b55b01b3"],
+Cell[12780, 336, 80, 0, 70, "Section",ExpressionUUID->"39c1ab88-7d46-43e5-8706-9c4b73ae757c"],
+Cell[12863, 338, 2303, 54, 70, "TextTableForm",ExpressionUUID->"2150fee8-bd45-415c-a557-d18468fbe176"]
+}
+]
+*)
+
+(* End of internal cache information *)

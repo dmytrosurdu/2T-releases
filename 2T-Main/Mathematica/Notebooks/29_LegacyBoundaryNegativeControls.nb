@@ -1,0 +1,93 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      3328,         84]
+NotebookOptionsPosition[      2327,         64]
+NotebookOutlinePosition[      2641,         78]
+CellTagsIndexPosition[      2598,         75]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Legacy Boundary Negative Controls", "Title",ExpressionUUID->"97c6e89c-c7cf-473a-9fb3-8aeb43895e4e"],
+
+Cell["\<\
+This notebook preserves the pre-welded unsafe witnesses as regression tests. \
+\
+\>", "Text",ExpressionUUID->"8a40f9e8-0589-4dda-ab57-93ca9193999f"],
+
+Cell["Targets", "Section",ExpressionUUID->"7ca395cd-81a0-47e2-ad5b-e5793bd6a27f"],
+
+Cell[TextData[Cell[BoxData[Cell["task:legacy-generic-visible-ambiguity",
+  Background->None,ExpressionUUID->
+  "e5de2115-3af1-4fd6-b50c-de7159c6a590"]], \
+"InlineCode",ExpressionUUID->"4ba232a5-bcf9-42d8-9456-5c0d056089c0"]], "Item",\
+ExpressionUUID->"e230eb1d-11f3-4481-a5e1-53b02e91f4d6"],
+
+Cell[TextData[Cell[BoxData[Cell["task:legacy-generic-splitblock-countermodels",
+  Background->None,ExpressionUUID->
+  "8aa88649-cc00-486a-b8f6-7b3c17177133"]], \
+"InlineCode",ExpressionUUID->"f2404a37-2902-48eb-92fc-63b7b2b2f5be"]], "Item",\
+ExpressionUUID->"c6894df2-d73c-4ae3-8cdc-6ee9fe6be119"],
+
+Cell["Evaluate", "Section",ExpressionUUID->"f92e53e0-883a-4e5b-a931-38299b6440aa"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"audit", "=", 
+   RowBox[{
+   "MainProof`LegacyBoundaryNegativeControls`\
+LegacyBoundaryNegativeControlAudit", "[", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", "audit"}], "Input",ExpressionUUID->"bd5ffd2e-\
+0b9b-4af7-9e6b-811be18c10a8"],
+
+Cell["Context", "Section",ExpressionUUID->"4cdd0540-9701-4115-9aea-f9c4280d1b0e"],
+
+Cell["\<\
+These witnesses are deliberately nonphysical control lanes. They protect the \
+ablation audit from silently drifting back toward generic split-block \
+artifacts.\
+\>", "Text",ExpressionUUID->"d4ffb430-4419-4c9b-81a0-68cec977cea2"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"bacb05d1-7806-4062-9342-ddc6597ae3bd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 105, 0, 70, "Title",ExpressionUUID->"97c6e89c-c7cf-473a-9fb3-8aeb43895e4e"],
+Cell[662, 22, 158, 3, 70, "Text",ExpressionUUID->"8a40f9e8-0589-4dda-ab57-93ca9193999f"],
+Cell[823, 27, 81, 0, 70, "Section",ExpressionUUID->"7ca395cd-81a0-47e2-ad5b-e5793bd6a27f"],
+Cell[907, 29, 290, 4, 70, "Item",ExpressionUUID->"e230eb1d-11f3-4481-a5e1-53b02e91f4d6"],
+Cell[1200, 35, 297, 4, 70, "Item",ExpressionUUID->"c6894df2-d73c-4ae3-8cdc-6ee9fe6be119"],
+Cell[1500, 41, 82, 0, 70, "Section",ExpressionUUID->"f92e53e0-883a-4e5b-a931-38299b6440aa"],
+Cell[1585, 43, 411, 11, 70, "Input",ExpressionUUID->"bd5ffd2e-0b9b-4af7-9e6b-811be18c10a8"],
+Cell[1999, 56, 81, 0, 70, "Section",ExpressionUUID->"4cdd0540-9701-4115-9aea-f9c4280d1b0e"],
+Cell[2083, 58, 240, 4, 70, "Text",ExpressionUUID->"d4ffb430-4419-4c9b-81a0-68cec977cea2"]
+}
+]
+*)
+
+(* End of internal cache information *)

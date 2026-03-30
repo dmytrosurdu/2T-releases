@@ -1,0 +1,1021 @@
+\documentclass[aps,prl,reprint]{revtex4-2}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,mathtools,amsthm}
+\usepackage[shortlabels]{enumitem}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{textcomp}
+\usepackage{newunicodechar}
+\usepackage[strings]{underscore}
+
+\newunicodechar{→}{\ensuremath{\to}}
+\newunicodechar{⇒}{\ensuremath{\Rightarrow}}
+\newunicodechar{¬}{\ensuremath{\neg}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{∘}{\ensuremath{\circ}}
+\newunicodechar{⨟}{\ensuremath{\mathbin{\triangleright}}}
+\newunicodechar{₅}{\textsubscript{5}}
+\newunicodechar{²}{\textsuperscript{2}}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{Π}{\ensuremath{\Pi}}
+\newunicodechar{ω}{\ensuremath{\omega}}
+\newunicodechar{̂}{\textasciicircum}
+\newunicodechar{β}{\ensuremath{\beta}}
+% --- Notation macros (readable, non-Agda) ---
+\newcommand{\Sys}{\mathsf{Sys}}
+\newcommand{\SK}{\mathsf{SK}}
+\newcommand{\Time}{\mathsf{T}}
+\newcommand{\RG}{\mathbb{N}}
+\newcommand{\Diff}{\mathsf{Diff}}
+\newcommand{\CSK}{\mathsf{C}}
+
+\newcommand{\diag}{\operatorname{diag}}
+\newcommand{\swap}{\operatorname{swap}}
+\newcommand{\flip}{\operatorname{flip}}
+\newcommand{\obs}{\operatorname{obs}}
+\newcommand{\actT}{\operatorname{act}_t}
+\newcommand{\actU}{\operatorname{act}_u}
+\newcommand{\actomega}{\operatorname{act}_\omega}
+\newcommand{\castR}[2]{\operatorname{cast}_R^{#1}\!\left(#2\right)}
+
+\newcommand{\Ztwo}{\mathbb{Z}_2}
+
+% --- Theorem environments ---
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+\begin{document}
+\title{Two-time descent: bicomplex identities and a $\Ztwo$ obstruction (rigorous translation)}
+\author{Dmytro Surdu}
+\date{\today}
+\maketitle
+
+% This file is a rigorous informal (human-readable) proof translation of the
+% It uses only standard mathematical notation.
+
+\section*{Conventions}\label{sec:limited-scope-theorem-translation-clean-001}
+All sets and maps are in the ordinary category of sets.
+All groupoids are small.
+Composition of morphisms is written left-to-right: for morphisms
+$r\xrightarrow{p}s\xrightarrow{q}t$ we write $p\triangleright q:r\to t$ to mean
+``do $p$ then $q$'', i.e. $q\circ p$ in the usual right-to-left convention.
+
+\section{Assumptions (structural data)}
+\label{sec:assumptions}
+We fix the following abstract data.
+
+\begin{enumerate}[label=\textbf{(A\arabic*)},leftmargin=*,itemsep=0.6em]
+\item \textbf{Core SK data.}
+A set of SK states $\SK$ together with a set of record states $\Sys$ and a map
+\[\diag:\Sys\to\SK.\]
+There is an involution (the SK swap)
+\[\swap:\SK\to\SK,\qquad \swap\circ\swap=\mathrm{id}_{\SK},\qquad \swap\circ\diag=\diag.\]
+
+\item \textbf{Two arrows (time and RG).}
+Let $\Time$ be a group with identity $e_T$, and set $\RG:=\mathbb N$ with identity
+$0$ and composition $+$.
+We assume actions
+\[
+\actT:\Time\times\SK\to\SK,\qquad \actU:\RG\times\SK\to\SK
+\]
+satisfying the action laws
+\[
+\actT(e_T,x)=x,\qquad \actT(t_2t_1,x)=\actT(t_2,\actT(t_1,x)),\qquad
+\actT(t^{-1},\actT(t,x))=x,
+\]
+\[
+\actU(0,x)=x,\qquad \actU(u_2+u_1,x)=\actU(u_2,\actU(u_1,x)).
+\]
+Finally, weak commutativity holds on $\SK$:
+\[
+\actU(u,\actT(t,x))=\actT(t,\actU(u,x)).
+\]
+
+\item \textbf{Strict diagonalization of RG (record projection).}
+For each $u\in\mathbb N$ with $u\ge 1$ there exists a map
+\[
+\Pi_{u}:\SK\to\Sys
+\]
+such that for all $x\in\SK$,
+\[
+\actU(u,x)=\diag(\Pi_{u}(x)).
+\]
+We also assume a record-level RG action
+\[
+R_u:\Sys\to\Sys
+\]
+with monoid laws
+\[
+R_0(r)=r,\qquad R_{u_2+u_1}(r)=R_{u_2}(R_{u_1}(r)),
+\]
+and intertwining on diagonal states:
+\[
+\Pi_{u}(\diag r)=R_{u}(r)\quad (u\ge 1),
+\]
+equivalently,
+\[
+\actU(u,\diag r)=\diag(R_u(r))\quad (u\ge 1).
+\]
+
+\item \textbf{RG-sector reachability (chosen scale).}
+Fix $u_\star=1$ and assume a section
+\[
+\mathrm{sec}_\Pi:\Sys\to\SK
+\]
+such that
+\[
+\Pi_{1}(\mathrm{sec}_\Pi(r))=r.
+\]
+
+\item \textbf{No mixed anomaly (bisimplicial descent laws).}
+There is a bisimplicial set $\CSK_{m,n}$ (for $m,n\ge 0$) equipped with
+horizontal face maps $d^H_i:\CSK_{m+1,n}\to\CSK_{m,n}$ ($0\le i\le m+1$)
+and vertical face maps $d^V_j:\CSK_{m,n+1}\to\CSK_{m,n}$ ($0\le j\le n+1$)
+satisfying:
+\begin{enumerate}[label=\textbf{(A5.\alph*)},leftmargin=*,itemsep=0.4em]
+\item $d^H_i d^H_j = d^H_{j-1} d^H_i$ for $i<j$;
+\item $d^V_i d^V_j = d^V_{j-1} d^V_i$ for $i<j$;
+\item $d^H_i d^V_j = d^V_j d^H_i$ for all $i,j$.
+\end{enumerate}
+
+\item \textbf{Record reflection (diagonal cancellation).}
+If two diagonal SK states agree, then the underlying records agree:
+\[
+  \diag(r) = \diag(r') \Rightarrow r = r'.
+\]
+Equivalently, the diagonal encoding of records has no redundancy.
+
+\begin{remark}
+\label{rem:limited-scope-theorem-translation-clean-001}
+Assumption \textbf{(A5)} constrains only \emph{boundaries} (face maps) and thus
+ensures the two-time square has a well-defined boundary. Assumption \textbf{(A6)}
+is only a cancellation principle; record-level interchange is derived later from
+\textbf{(A2)}, \textbf{(A3)}, \textbf{(A4)}, and \textbf{(A6)} (Lemma~\ref{lem:derived-interchange}). The
+``before/after'' distinction is not encoded as two different equalities in
+$\Sys$ (UIP may collapse them); it is encoded in the process presentation by a
+binary tag $f\in\{\mathrm{diag},\mathrm{bridge}\}$ on square generators. The
+meaning of this tag is fixed canonically by the Diff involution: $\mathrm{diag}$
+acts as the identity and $\mathrm{bridge}$ acts as $\flip$ (Lemma~\ref{lem:canonical-fillers}).
+Nontriviality of this tag is established later once a non-fixed point of $\flip$
+is obtained (Corollary~\ref{cor:canonical-fillers-different}), which is a
+consequence of the detector.
+\end{remark}
+
+\item \textbf{Real structure, universal pointer basis, and two-time mixing (analytic, used to derive a detector).}
+There exists a complex Hilbert space $\mathcal H$ with an orthonormal basis
+$\{\lvert a\rangle\}_{a\in\mathcal I}$ (the \emph{pointer basis}), and we identify
+$\SK$ with a specified subset of trace-class operators on $\mathcal H$.
+
+\medskip
+\noindent
+\textbf{Universality of the pointer basis (record algebra is fixed).}
+Let $\mathsf{Diag}$ denote the set of trace-class operators that are diagonal in the pointer basis.
+We assume that the record embedding is diagonal in this basis:
+\[
+  \diag(\Sys)\subseteq \mathsf{Diag}.
+\]
+Equivalently, for each $r\in\Sys$ there exist coefficients $\{p_a(r)\}_{a\in\mathcal I}$
+such that $\diag(r)=\sum_a p_a(r)\lvert a\rangle\langle a\rvert$.
+Moreover, all RG-diagonalized outputs land in the same diagonal subspace:
+\[
+  \actU(u,x)\in \mathsf{Diag}\qquad(\forall x\in\SK,\ \forall u\ge 1).
+\]
+This packages the scale-stability of records: the ``record basis'' does not depend on
+when (or at which RG depth) diagonalization is applied~\cite{Zurek1981PointerBasis,JoosZeh1985Emergence,Zurek2003Decoherence}.
+
+\medskip
+\noindent
+Let $\mathcal K$ denote the antiunitary complex conjugation in this pointer basis.
+
+In this concrete instantiation we take $\Time=\mathbb R$ (additive group) and
+use microscopic unitary evolution only to derive the detector witness. The
+abstract $\actT$ in the assumptions is the effective evolution on RG-classical
+states and is not assumed to preserve diagonality microscopically.
+
+We assume:
+\begin{enumerate}[label=\textbf{(A7.\alph*)},leftmargin=*,itemsep=0.4em]
+\item (Swap as transpose/conjugation) the swap map is implemented by
+\[\swap(\rho)=\mathcal K\,\rho^{\ast}\,\mathcal K^{-1},\]
+so that in the pointer basis $\swap(\rho)=\rho^{\mathsf T}$.
+
+\item (Time evolution) there is a nonzero bounded self-adjoint operator $H$ such that
+\[\rho(t)=e^{-itH}\,\rho\,e^{itH}.\]
+
+\item (Scale/RG mixing generator; weakmini core) there exists a dense subspace
+$\mathcal D\subseteq\mathcal H$ such that $\mathcal D\subseteq\operatorname{Dom}(D)$,
+$H\mathcal D\subseteq\mathcal D$, $D\mathcal D\subseteq\mathcal D$, $K\mathcal D=\mathcal D$,
+and $KDK^{-1}=D$ on $\mathcal D$. The commutator is defined on $\mathcal D$ and satisfies
+\begin{equation}
+  (DH-HD)\psi=iH\psi \qquad (\forall\psi\in\mathcal D).
+  \label{eq:mixing-comm}
+\end{equation}
+
+\item (Nondegeneracy) there exist indices $a\ne b$ and a record state $r\in\Sys$
+whose diagonal density matrix $\rho:=\diag(r)=\sum_c p_c\lvert c\rangle\langle c\rvert$
+satisfies $p_a\ne p_b$, and such that
+\begin{equation}
+  \Re(H_{ab})\ne 0.
+  \label{eq:nondeg}
+\end{equation}
+\end{enumerate}
+
+\end{enumerate}
+
+\begin{remark}
+\label{rem:limited-scope-theorem-translation-clean-002}
+Assumption \textbf{(A7)} is the physics-motivated bridge used to \emph{derive} the
+swap-odd detector required by the obstruction argument, rather than postulating it.
+The purely combinatorial parts (bicomplex, $\omega$-cover, splitting obstruction)
+use only \textbf{(A1)}--\textbf{(A6)}.
+\end{remark}
+
+\section{No real subgroup lemma and derived detector}
+\label{sec:mixing-detector}
+
+\subsection{Abstract algebraic lemma (formal core)}\label{subsec:limited-scope-theorem-translation-clean-001}
+
+\begin{definition}[Abstract mixing interface]
+\label{def:abstract-mixing}
+Let $(G,+,0)$ be an abelian group. Fix endomorphisms
+\[\mathrm{i}:G\to G,\qquad K:G\to G,\qquad \mathrm{ad}_D:G\to G.\]
+Assume the identities
+\begin{align}
+  K(\mathrm{i}(x)) &= \mathrm{i}(-K(x)), &\text{(anti-linearity)}\\
+  K(\mathrm{ad}_D(x)) &= \mathrm{ad}_D(K(x)), &\text{($K$-equivariance)}\\
+  \mathrm{ad}_D(-x) &= -\mathrm{ad}_D(x), &\text{(oddness)}
+\end{align}
+and the cancellation properties
+\begin{align}
+  x=-x &\Rightarrow x=0, &\text{(no $2$-torsion)}\\
+  \mathrm{i}(x)=0 &\Rightarrow x=0. &\text{(trivial kernel of $\mathrm{i}$)}
+\end{align}
+An element $H\in G$ satisfies the \emph{mixing relation} if $\mathrm{ad}_D(H)=\mathrm{i}(H)$.
+It is \emph{$K$-odd} if $K(H)=-H$.
+
+\end{definition}
+
+\begin{remark}[Domain hygiene for the analytic instantiation]
+In the Hilbert-space setting, we apply Definition~\ref{def:abstract-mixing} to the
+additive group of bounded operators that preserve $\mathcal D$ and for which the
+commutator with $D$ is defined on $\mathcal D$. Under \textbf{(A7.c)}, $\mathrm{ad}_D(H)$
+is defined on $\mathcal D$ and equals $iH$ there.
+\end{remark}
+
+\begin{lemma}[No real subgroup]
+\label{lem:no-real-subgroup}
+Under Definition~\ref{def:abstract-mixing}, if an element $H\in G$ satisfies both
+\[\mathrm{ad}_D(H)=\mathrm{i}(H)\qquad\text{and}\qquad K(H)=-H,\]
+then $H=0$.
+
+\end{lemma}
+
+\begin{proof}
+Using $K$-equivariance and the mixing relation,
+\[\mathrm{ad}_D(KH)=K(\mathrm{ad}_D H)=K(\mathrm{i}H)=\mathrm{i}(-KH).\]
+Substitute $KH=-H$ to obtain $\mathrm{ad}_D(-H)=\mathrm{i}(-(-H))=\mathrm{i}(H)$.
+By oddness, $\mathrm{ad}_D(-H)=-\mathrm{ad}_D(H)$, hence
+$-\mathrm{ad}_D(H)=\mathrm{i}(H)$. Replace $\mathrm{ad}_D(H)$ by $\mathrm{i}(H)$ to get
+$-\mathrm{i}(H)=\mathrm{i}(H)$, i.e. $\mathrm{i}(H)=-\mathrm{i}(H)$.
+No $2$-torsion gives $\mathrm{i}(H)=0$, and the trivial kernel of $\mathrm{i}$ gives $H=0$.
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:no-real-subgroup} is the abstract form of the statement that, under
+the weakmini core relation \eqref{eq:mixing-comm} on a $K$-invariant dense core and
+a $K$-even scale generator $D$ on that core, one cannot have nontrivial dynamics
+entirely in the ``real'' subgroup characterized by $KHK^{-1}=-H$.
+\end{remark}
+
+\subsection{Derived detector in the pointer basis}
+
+\begin{lemma}[Swap-odd observable constant on the diagonal]
+\label{lem:swap-odd-observable}
+Fix distinct indices $a\ne b$ in the pointer basis and define the bounded self-adjoint
+operator
+\[O_{ab}:= i\big(\lvert a\rangle\langle b\rvert-\lvert b\rangle\langle a\rvert\big).\]
+Define
+\[\obs_{ab}(\rho):=\mathrm{Tr}(\rho\,O_{ab}).\]
+Then for every \emph{self-adjoint} trace-class $\rho$:
+\begin{enumerate}[label=\textbf{(\roman*)},leftmargin=*,itemsep=0.4em]
+\item For every diagonal density matrix $\rho$ in the pointer basis,
+$\obs_{ab}(\rho)=0$.
+\item $\obs_{ab}(\swap\rho)=-\obs_{ab}(\rho)$.
+\item Moreover $\obs_{ab}(\rho)=2\,\Im(\rho_{ab})$ where $\rho_{ab}=\langle a\rvert\rho\lvert b\rangle$.
+\end{enumerate}
+
+\end{lemma}
+
+\begin{proof}
+(i) If $\rho$ is diagonal then $\rho_{ab}=0$ for $a\ne b$, so $\mathrm{Tr}(\rho O_{ab})=0$.
+
+(ii) In the pointer basis, $\swap(\rho)=\rho^{\mathsf T}$, hence
+$(\swap\rho)_{ab}=\rho_{ba}=\overline{\rho_{ab}}$ for self-adjoint $\rho$.
+Therefore $\Im((\swap\rho)_{ab})=-\Im(\rho_{ab})$, and (iii) below implies (ii).
+
+(iii) Directly compute
+\[\mathrm{Tr}(\rho O_{ab})= i(\rho_{ba}-\rho_{ab})=2\,\Im(\rho_{ab}),\]
+using $\rho_{ba}=\overline{\rho_{ab}}$ for trace-class $\rho$ when $\rho$ is self-adjoint.
+\end{proof}
+
+\begin{lemma}[Nontriviality of the derived detector]
+\label{lem:derived-detector-nontrivial}
+Under Assumption \textbf{(A7)}, there exist indices $a\ne b$ and a (time-evolved)
+state $\rho(t)$ such that
+\[\obs_{ab}(\rho(t))\ne 0.\]
+Consequently, the map $\obs:=\obs_{ab}$ is constant on diagonal record states and is
+swap-odd, while not being identically zero.
+
+\end{lemma}
+
+\begin{proof}
+Let $r\in\Sys$ and $\rho:=\diag(r)$ be as in \textbf{(A7.d)} and consider its
+unitary time evolution $\rho(t)=e^{-itH}\rho e^{itH}$.
+Differentiate at $t=0$:
+\[\dot\rho(0)=-i[H,\rho].\]
+The $(a,b)$-matrix element satisfies
+\[\dot\rho_{ab}(0)=-iH_{ab}(p_b-p_a).\]
+Write $H_{ab}=\Re(H_{ab})+i\Im(H_{ab})$. Then
+\[\dot\rho_{ab}(0)=(p_b-p_a)\Im(H_{ab}) - i(p_b-p_a)\Re(H_{ab}).\]
+Taking imaginary parts gives
+\[\frac{d}{dt}\Im(\rho_{ab}(t))\Big\rvert_{t=0}=-(p_b-p_a)\Re(H_{ab}).\]
+By \eqref{eq:nondeg}, the right-hand side is nonzero, hence for sufficiently small
+$t$ we have $\Im(\rho_{ab}(t))\ne 0$, and by Lemma~\ref{lem:swap-odd-observable}(iii)
+this implies $\obs_{ab}(\rho(t))\ne 0$.
+
+Finally, Lemma~\ref{lem:swap-odd-observable}(i)--(ii) shows that $\obs_{ab}$ is
+constant on diagonal record states and is swap-odd.
+\end{proof}
+
+\begin{remark}[Where Lemma~\ref{lem:no-real-subgroup} enters]
+The nondegeneracy condition \eqref{eq:nondeg} requires a matrix element with nonzero
+real part. The ``real subgroup loophole'' would allow choosing a pointer basis in
+which $H$ is $K$-odd (hence purely imaginary off-diagonal entries and no real part).
+Lemma~\ref{lem:no-real-subgroup} excludes that loophole when the weakmini core
+relation \eqref{eq:mixing-comm} holds on a $K$-invariant dense core and $H\ne 0$.
+Thus, under mixing, some basis element must have $\Re(H_{ab})\ne 0$ for some pair.
+\emph{By the universality clause in \textbf{(A7)}, the diagonal record algebra is fixed across RG depth, so the indices $a,b$ appearing here label the same record outcomes in any procedure we compare.}
+\end{remark}
+
+\section{Two-time chains and bicomplex}
+\label{sec:bicomplex}
+
+\subsection{Free abelian chains}
+For each $(m,n)$ set
+\[C_{m,n}:=\mathbb Z[\CSK_{m,n}],\]
+the free abelian group on the set $\CSK_{m,n}$. We write $[x]\in C_{m,n}$ for the
+generator corresponding to $x\in\CSK_{m,n}$.
+
+Each face map induces a homomorphism on chains by linear extension, still denoted
+$d^H_i,d^V_j$, so $d^H_i([x])=[d^H_i x]$ and similarly for $d^V_j$.
+
+\subsection{Two boundaries}\label{subsec:limited-scope-theorem-translation-clean-004}
+Define homomorphisms
+\begin{align}
+  Q_t &: C_{m+1,n}\to C_{m,n},
+  &Q_t([x]) &:= \sum_{i=0}^{m+1} (-1)^i\,[d^H_i x],
+  \\
+  Q_u &: C_{m,n+1}\to C_{m,n},
+  &Q_u([y]) &:= \sum_{j=0}^{n+1} (-1)^{m+j}\,[d^V_j y].
+\end{align}
+The factor $(-1)^m$ in $Q_u$ is the Koszul twist by horizontal degree.
+
+\begin{lemma}[Boundary-of-boundary expansion]
+\label{lem:boundary-boundary}
+Let $d_i$ be face maps of a simplicial object and define
+$\partial=\sum_i (-1)^i d_i$. Then on generators,
+\[
+\partial^2
+=\sum_{0\le i<j\le n}(-1)^{i+j}\big(d_i d_j - d_{j-1} d_i\big).
+\]
+\end{lemma}
+
+\begin{proof}
+Write
+\[
+\partial^2=\sum_{i,j}(-1)^{i+j}d_i d_j
+\]
+and split the sum into $i<j$ and $i\ge j$. For the $i\ge j$ part, set $i'=i+1$,
+so $i'>j$ and $(-1)^{i+j}=-(-1)^{i'+j}$, giving
+\[
+\sum_{i\ge j}(-1)^{i+j}d_i d_j
+=-\sum_{j<i'}(-1)^{i'+j}d_{i'-1}d_j.
+\]
+Rename $(i',j)$ as $(j,i)$ to obtain
+\[
+\sum_{i\ge j}(-1)^{i+j}d_i d_j
+=-\sum_{i<j}(-1)^{i+j}d_{j-1}d_i,
+\]
+and combine with the $i<j$ part to get the claimed formula.
+\end{proof}
+
+\begin{theorem}[Bicomplex identities]
+\label{thm:bicomplex}
+For all $m,n\ge 0$ the maps satisfy
+\[Q_t^2 = 0,\qquad Q_u^2=0,\qquad Q_tQ_u + Q_uQ_t = 0.\]
+
+\end{theorem}
+
+\begin{proof}
+We prove each identity on generators.
+
+\smallskip\noindent
+\emph{(1) $Q_t^2=0$.}
+Let $x\in\CSK_{m+2,n}$. Then
+\[
+Q_t^2([x])
+=\sum_{0\le i<j\le m+2}(-1)^{i+j}\big[d^H_i d^H_j x - d^H_{j-1} d^H_i x\big]
+\]
+by Lemma~\ref{lem:boundary-boundary}. The simplicial identity
+$d^H_i d^H_j = d^H_{j-1} d^H_i$ for $i<j$ makes every summand zero.
+
+\smallskip\noindent
+\emph{(2) $Q_u^2=0$.}
+Let $y\in\CSK_{m,n+2}$. Then
+\[
+Q_u^2([y])
+=\sum_{0\le j<k\le n+2}(-1)^{j+k}\big[d^V_j d^V_k y - d^V_{k-1} d^V_j y\big],
+\]
+again by Lemma~\ref{lem:boundary-boundary}; the vertical face law
+$d^V_j d^V_k=d^V_{k-1}d^V_j$ kills each summand.
+
+\smallskip\noindent
+\emph{(3) Anticommutation.}
+Let $z\in\CSK_{m+1,n+1}$. Expand
+\[Q_tQ_u([z])=\sum_{j=0}^{n+1}\sum_{i=0}^{m+1}(-1)^{m+1+j+i}[d^H_i d^V_j z],\]
+\[Q_uQ_t([z])=\sum_{i=0}^{m+1}\sum_{j=0}^{n+1}(-1)^{m+j+i}[d^V_j d^H_i z].\]
+By mixed commutation $d^H_i d^V_j=d^V_j d^H_i$, the terms match, while the
+coefficients differ by a global minus sign because $(-1)^{m+1+j+i}=-(-1)^{m+j+i}$.
+Thus $Q_tQ_u([z])+Q_uQ_t([z])=0$.
+\end{proof}
+
+\section{Record process groupoid and the parity cocycle}
+\label{sec:groupoid}
+This section uses only Assumptions \textbf{(A1)}--\textbf{(A6)}.
+
+\begin{definition}[Record-level maps]
+\label{def:record-level-actions}
+We write $R_u:\Sys\to\Sys$ for the record-level RG action from \textbf{(A3)}.
+The record-level time action is derived from the RG-sector section \textbf{(A4)}:
+\[
+T_t(r):=\Pi_{1}(\actT(t,\mathrm{sec}_\Pi(r))).
+\]
+In particular, $R_0(r)=r$ and $R_{u_2+u_1}(r)=R_{u_2}(R_{u_1}(r))$, and for $u\ge 1$ we have
+\[
+\actU(u,\diag r)=\diag(R_u(r)).
+\]
+
+\end{definition}
+
+\begin{lemma}[Derived diagonal equivariance on the RG sector]
+\label{lem:derived-diag-equiv}
+For all $t\in\Time$ and $r\in\Sys$,
+\[
+\actT(t,\diag r)=\diag(T_t(r)).
+\]
+\end{lemma}
+
+\begin{proof}
+By \textbf{(A4)} and diagonalization, $\diag r=\actU(1,\mathrm{sec}_\Pi(r))$.
+Apply weak commutativity and the factorization of $\actU(1,\cdot)$ through $\diag$
+to obtain the claim.
+\end{proof}
+
+\begin{lemma}[Derived record-time action laws]
+\label{lem:derived-time-laws}
+For all $r\in\Sys$ and $t,t_1,t_2\in\Time$,
+\[
+T_{e_T}(r)=r,\qquad
+T_{t_2t_1}(r)=T_{t_2}(T_{t_1}(r)),\qquad
+T_{t^{-1}}(T_t(r))=r.
+\]
+\end{lemma}
+
+\begin{proof}
+The identity law follows from $\actT(e_T,x)=x$ and the section property
+$\Pi_{1}(\mathrm{sec}_\Pi(r))=r$.
+For composition and inverse, observe that if $\Pi_{1}(x)=\Pi_{1}(y)$ then
+$\Pi_{1}(\actT(t,x))=\Pi_{1}(\actT(t,y))$ by diagonalization, weak commutativity,
+and record reflection. Apply this with
+$x=\actT(t_1,\mathrm{sec}_\Pi(r))$ and $y=\mathrm{sec}_\Pi(T_{t_1}(r))$, and similarly
+for inverses.
+\end{proof}
+
+\begin{lemma}[Derived record-level interchange]
+\label{lem:derived-interchange}
+Under Assumptions \textbf{(A2)}, \textbf{(A3)}, \textbf{(A4)}, and \textbf{(A6)}, for all
+$t\in\Time$, $u\in\RG$, and $r\in\Sys$,
+\[
+  R_u(T_t(r)) = T_t(R_u(r)).
+\]
+
+\end{lemma}
+
+\begin{proof}
+If $u=0$, then $R_0=\mathrm{id}$ and the claim is immediate.
+If $u\ge 1$, apply weak commutativity on $\diag(r)$, rewrite both sides using
+Lemma~\ref{lem:derived-diag-equiv} and diagonalization, and cancel $\diag$ using
+record reflection (A6).
+\end{proof}
+
+\begin{definition}[Typed syntax $\mathrm{Proc}_5$]
+\label{def:Proc5}
+For records $r,s\in\Sys$, define a set of morphisms $\mathrm{Proc}_5(r,s)$
+inductively by the constructors:
+\begin{enumerate}[label=\textbf{(G\arabic*)},leftmargin=*,itemsep=0.4em]
+\item $\mathrm{id}_r : \mathrm{Proc}_5(r,r)$.
+\item $\mathrm{time}(t,r): \mathrm{Proc}_5(r,T_t(r))$ for $t\in\Time$.
+\item $\mathrm{rg}(u,r): \mathrm{Proc}_5(r,R_u(r))$ for $u\in\RG$.
+\item $\mathrm{sq}(f;t,u,r): \mathrm{Proc}_5(R_u(T_t(r)),T_t(R_u(r)))$ for
+$f\in\{\mathrm{diag},\mathrm{bridge}\}$.
+\item Composition: if $p:\mathrm{Proc}_5(r,s)$ and $q:\mathrm{Proc}_5(s,t)$, then
+$p\triangleright q:\mathrm{Proc}_5(r,t)$.
+\item Inverse: if $p:\mathrm{Proc}_5(r,s)$ then $p^{-1}:\mathrm{Proc}_5(s,r)$.
+\item Codomain cast: if $p:\mathrm{Proc}_5(r,s)$ and $e:s=s'$, then
+$\castR{e}{p}:\mathrm{Proc}_5(r,s')$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Presented equality $\approx_5$]
+\label{def:limited-scope-theorem-translation-clean-001}
+Let $\approx_5$ be the smallest relation on $\mathrm{Proc}_5(r,s)$ closed under:
+\begin{enumerate}[label=\textbf{(R\arabic*)},leftmargin=*,itemsep=0.4em]
+\item Equivalence rules (refl/sym/trans) and congruence under
+composition, inverse, and cast.
+\item Groupoid laws: associativity, left/right identity, inverse laws, and
+$(p^{-1})^{-1}=p$, plus
+\[
+(p\triangleright q)^{-1}\approx_5 q^{-1}\triangleright p^{-1},\qquad
+(\mathrm{id}_r)^{-1}\approx_5 \mathrm{id}_r.
+\]
+\item Cast law: $\castR{\mathrm{refl}}{p}\approx_5 p$.
+\item Time laws (with explicit casts):
+\[
+\castR{T_{e_T}(r)=r}{\mathrm{time}(e_T,r)}\approx_5 \mathrm{id}_r,
+\]
+\[
+\castR{T_{t_2t_1}(r)=T_{t_2}(T_{t_1}(r))}{\mathrm{time}(t_2t_1,r)}
+\approx_5 \mathrm{time}(t_1,r)\triangleright \mathrm{time}(t_2,T_{t_1}(r)),
+\]
+\[
+\castR{T_{t^{-1}}(T_t(r))=r}{
+  \mathrm{time}(t,r)\triangleright \mathrm{time}(t^{-1},T_t(r))
+}\approx_5 \mathrm{id}_r.
+\]
+\item RG laws (with explicit casts):
+\[
+\castR{R_0(r)=r}{\mathrm{rg}(0,r)}\approx_5 \mathrm{id}_r,
+\]
+\[
+\castR{R_{u_2+u_1}(r)=R_{u_2}(R_{u_1}(r))}{\mathrm{rg}(u_2+u_1,r)}
+\approx_5 \mathrm{rg}(u_1,r)\triangleright \mathrm{rg}(u_2,R_{u_1}(r)).
+\]
+\end{enumerate}
+\emph{Crucially, there is \textbf{no} relation equating a composite containing
+$\mathrm{sq}(f;t,u,r)$ with a composite that does not contain it.}
+In particular, the two fillers $\mathrm{sq}(\mathrm{diag};t,u,r)$ and
+$\mathrm{sq}(\mathrm{bridge};t,u,r)$ are not identified by any relation.
+The operational meaning of the tag is fixed canonically by
+Lemma~\ref{lem:canonical-fillers} (diag $\mapsto$ id, bridge $\mapsto$ flip on $\Diff$).
+Nontriviality of the tag action is proved later from the detector
+(Corollary~\ref{cor:canonical-fillers-different}).
+
+\end{definition}
+
+\begin{definition}[Presented groupoid $\mathcal G$]
+\label{def:limited-scope-theorem-translation-clean-002}
+Objects are records $r\in\Sys$, and morphisms are $\mathrm{Proc}_5(r,s)$ modulo
+the relation $\approx_5$.
+\end{definition}
+
+\begin{definition}[Corner path and square-loop]
+\label{def:sqloop}
+For $f\in\{\mathrm{diag},\mathrm{bridge}\}$ define the canonical path to the
+"upper-right corner"
+\[
+  \mathrm{toCorner}_f(t,u,r)
+  :=\mathrm{time}(t,r)\triangleright\mathrm{rg}(u,T_t(r))\triangleright\mathrm{sq}(f;t,u,r),
+\]
+a morphism $r\to T_t(R_u(r))$.
+The \emph{square-loop} is the loop at $r$ defined by
+\[
+  \mathrm{sqLoop}(t,u,r):=\mathrm{toCorner}_{\mathrm{diag}}(t,u,r)\triangleright
+  \mathrm{toCorner}_{\mathrm{bridge}}(t,u,r)^{-1}.
+\]
+\end{definition}
+
+\begin{definition}[Parity cocycle $\omega$]
+\label{def:limited-scope-theorem-translation-clean-003}
+Define $\omega$ on generators by
+\[\omega(\mathrm{time})=0,\qquad \omega(\mathrm{rg})=0,\qquad
+\omega(\mathrm{sq}(\mathrm{diag}))=0,\qquad \omega(\mathrm{sq}(\mathrm{bridge}))=1,\]
+and extend by
+\[
+\omega(p\triangleright q)=\omega(p)+\omega(q)\pmod 2,\qquad
+\omega(p^{-1})=\omega(p),\qquad
+\omega(\castR{e}{p})=\omega(p).
+\]
+\end{definition}
+
+\begin{lemma}[$\omega$ is well-defined and detects the square-loop]
+\label{lem:omega}
+The function $\omega$ respects all defining relations of $\mathcal G$ and thus
+defines a functor $\omega:\mathcal G\to B\Ztwo$. Moreover,
+\[\omega(\mathrm{sqLoop}(t,u,r))=1\qquad (t,u,r).\]
+
+\end{lemma}
+
+\begin{proof}
+By definition, $\omega$ is additive under composition, invariant under inverses,
+and ignores casts, so it respects the groupoid and cast laws. It also respects the
+time and RG relations because those are generated entirely by the morphisms
+$\mathrm{time}$ and $\mathrm{rg}$, on which $\omega$ is identically $0$.
+
+Crucially, the presentation of $\mathcal G$ includes \emph{no} relation equating a
+composite that contains a square filler $\mathrm{sq}(f;t,u,r)$ with one that does
+not (Definition~\ref{def:Proc5}). Hence the assignments
+$\omega(\mathrm{sq}(\mathrm{diag}))=0$ and $\omega(\mathrm{sq}(\mathrm{bridge}))=1$ are
+consistent.
+
+Finally, using Definition~\ref{def:sqloop},
+\[
+\omega(\mathrm{sqLoop}(t,u,r))
+=\omega(\mathrm{toCorner}_{\mathrm{diag}}(t,u,r))
++\omega(\mathrm{toCorner}_{\mathrm{bridge}}(t,u,r))
+=0+1=1,
+\]
+because $\omega$ vanishes on $\mathrm{time}$ and $\mathrm{rg}$ and differs only on the
+chosen filler tag.
+\end{proof}
+
+\begin{corollary}[$\omega$ oddness on abelian coefficients]
+\label{cor:omega-odd-abelian}
+Let $G$ be an abelian group and define an action by
+\[
+\mathrm{act}^G_{\omega}(p)(x):=(-1)^{\omega(p)}x.
+\]
+Then for all $t,u,r$ and $x\in G$,
+\[
+\mathrm{act}^G_{\omega}(\mathrm{sqLoop}(t,u,r))(x)=-x.
+\]
+
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:omega}, $\omega(\mathrm{sqLoop})=1$, so $(-1)^{\omega(\mathrm{sqLoop})}=-1$.
+\end{proof}
+
+\section{The $\Ztwo$-cover and splitting obstruction}
+\label{sec:cover}
+This section uses only Assumptions \textbf{(A1)}--\textbf{(A6)}.
+
+\begin{definition}[$\Ztwo$-cover of $\mathcal G$]
+\label{def:limited-scope-theorem-translation-clean-004}
+Objects are pairs $(r,b)$ with $r\in\Sys$ and $b\in\Ztwo$. A morphism
+$(r,b)\to(s,c)$ is a morphism $p:r\to s$ in $\mathcal G$ such that
+\[c=b+\omega(p)\pmod 2.\]
+Composition and inverses are inherited from $\mathcal G$. The projection functor
+$\pi:\widetilde{\mathcal G}\to\mathcal G$ forgets the parity.
+
+\end{definition}
+
+\begin{definition}[Splitting]
+A \emph{splitting} is a functor $s:\mathcal G\to\widetilde{\mathcal G}$ with
+$\pi\circ s=\mathrm{id}_{\mathcal G}$~\cite{Brown2006TopologyGroupoids}.
+
+\end{definition}
+
+\begin{lemma}[Uniqueness of lifts in the $\Ztwo$-cover]
+\label{lem:unique-lift}
+Fix objects $(r,b)$ and $(s,c)$ in $\widetilde{\mathcal G}$.
+For a given base morphism $p:r\to s$ in $\mathcal G$, there exists a morphism
+$(r,b)\to(s,c)$ lying over $p$ if and only if
+\[
+c=b+\omega(p)\pmod 2.
+\]
+When it exists, it is unique.
+
+\end{lemma}
+
+\begin{proof}
+By definition of $\widetilde{\mathcal G}$, a morphism over $p$ is not extra
+structure: it is exactly the datum of the base arrow $p$ together with the
+parity constraint $c=b+\omega(p)$. Since $p$ and $(r,b)$ determine $c$ uniquely,
+there can be at most one lift. Existence is exactly the satisfaction of the
+constraint.
+\end{proof}
+
+\begin{lemma}[Splitting iff $\omega$ is a coboundary]
+\label{lem:split-cob}
+There exists a splitting if and only if there exists a function
+$\sigma:\Sys\to\Ztwo$ such that for every morphism $p:r\to s$ in $\mathcal G$,
+\[\omega(p)=\sigma(r)+\sigma(s)\pmod 2.\]
+
+\end{lemma}
+
+\begin{proof}
+If $s$ is a splitting, define $\sigma(r)$ by $s(r)=(r,\sigma(r))$. The lifted arrow
+$s(p)$ must satisfy $\sigma(s)=\sigma(r)+\omega(p)$ by the defining condition of
+$\widetilde{\mathcal G}$.
+
+Conversely, given $\sigma$ satisfying the displayed equation, lift each object to
+$(r,\sigma(r))$. For each $p:r\to s$ in $\mathcal G$, define $s(p)$ to be the unique lift
+$(r,\sigma(r))\to(s,\sigma(s))$ lying over $p$; this lift exists by the parity
+equation $\sigma(s)=\sigma(r)+\omega(p)$ and is unique by Lemma~\ref{lem:unique-lift}.
+Additivity of $\omega$ implies functoriality.
+\end{proof}
+
+\begin{corollary}[Odd loop obstructs splitting]
+\label{cor:odd-loop}
+If there exists a loop $p:r\to r$ with $\omega(p)=1$, then no splitting exists.
+
+\end{corollary}
+
+\begin{proof}
+If a splitting existed, Lemma~\ref{lem:split-cob} would imply
+$\omega(p)=\sigma(r)+\sigma(r)=0$, contradiction.
+\end{proof}
+
+\begin{theorem}[Non-splitting of the $\Ztwo$-cover]
+\label{thm:non-splitting}
+Under Assumptions \textbf{(A1)}--\textbf{(A6)}, if $\Sys$ is nonempty then the $\Ztwo$-cover
+$\pi:\widetilde{\mathcal G}\to\mathcal G$ does not admit a splitting.
+Equivalently, the cocycle $\omega$ is not a coboundary on $\mathcal G$.
+(If $\Sys=\emptyset$, the claim is trivial.)
+
+\end{theorem}
+
+\begin{proof}
+If $\Sys$ is empty there is nothing to prove. Otherwise fix $r\in\Sys$, take $t=e_T$
+and $u=1$, and set $p=\mathrm{sqLoop}(t,u,r)$. If a splitting existed,
+Lemma~\ref{lem:split-cob} would imply $\omega(p)=0$ for every loop.
+But Lemma~\ref{lem:omega} gives $\omega(p)=1$, a contradiction.
+\end{proof}
+
+\begin{proposition}[Two-way corner-path witness of the splitting obstruction]
+\label{prop:two-way-obstruction}
+Fix any $t\in\Time$, $u\in\RG$, and $r\in\Sys$, and consider the two parallel morphisms
+\[
+p_{\mathrm{diag}}:=\mathrm{toCorner}_{\mathrm{diag}}(t,u,r),\qquad
+p_{\mathrm{bridge}}:=\mathrm{toCorner}_{\mathrm{bridge}}(t,u,r)
+\]
+from $r$ to $T_t(R_u(r))$ in $\mathcal G$.
+Then $\omega(p_{\mathrm{diag}})=0$ and $\omega(p_{\mathrm{bridge}})=1$.
+Consequently, no splitting of $\widetilde{\mathcal G}\to\mathcal G$ exists (as in Theorem~\ref{thm:non-splitting});
+equivalently, the obstruction is already witnessed at this two-way corner configuration.
+
+\end{proposition}
+
+\begin{proof}
+By definition, $\omega$ vanishes on $\mathrm{time}$ and $\mathrm{rg}$ and equals $0$ on $\mathrm{sq}(\mathrm{diag})$
+and $1$ on $\mathrm{sq}(\mathrm{bridge})$, hence the two values are $0$ and $1$.
+
+If a splitting existed, Lemma~\ref{lem:split-cob} would give $\sigma:\Sys\to\Ztwo$ with
+$\omega(p)=\sigma(\mathrm{src}(p))+\sigma(\mathrm{tgt}(p))$. Since $p_{\mathrm{diag}}$ and $p_{\mathrm{bridge}}$
+have the same source and target, this would force $\omega(p_{\mathrm{diag}})=\omega(p_{\mathrm{bridge}})$, contradiction.
+\end{proof}
+
+\begin{corollary}[Three-checkpoint loop witness]
+\label{cor:groundhog-loop}
+Assume there exist a record state $r\in\Sys$, a time step $t\in\Time$, and an RG step
+$u\in\RG$ such that both procedures close at the record level:
+\[
+R_u(T_t(r))=r
+\qquad\text{and}\qquad
+T_t(R_u(r))=r.
+\]
+(Equivalently, it suffices to assume one of these equalities once record-level
+interchange $T_t\!\circ R_u = R_u\!\circ T_t$ has been derived.)
+
+Define the intermediate record checkpoints
+\[
+A:=r,\qquad B:=T_t(r),\qquad C:=R_u(r).
+\]
+Then the two corner procedures of Proposition~\ref{prop:two-way-obstruction},
+\[
+p_{\mathrm{diag}},\ p_{\mathrm{bridge}}:\ A\longrightarrow T_t(R_u(A))=A,
+\]
+are based loops at $A$ whose $\Ztwo$-labels differ:
+\[
+\omega(p_{\mathrm{diag}})=0,\qquad \omega(p_{\mathrm{bridge}})=1.
+\]
+Equivalently, even when the start and end coincide (three checkpoints), the distinction
+between ``forgetting after'' and ``forgetting before'' carries an intrinsic one-bit holonomy
+that cannot be reduced to a state-label on records.
+\end{corollary}
+
+\begin{proof}
+Immediate from Proposition~\ref{prop:two-way-obstruction} after substituting the
+assumption $T_t(R_u(r))=r$, which turns both parallel morphisms into loops based at $r$.
+\end{proof}
+
+\begin{proposition}[Collapsed presentation splits]
+\label{prop:collapsed-splits}
+Let $\mathcal G^{\mathrm{coll}}$ be the quotient of $\mathcal G$ obtained by adding the relations
+\[
+\mathrm{sq}(\mathrm{diag};t,u,r)\approx_5 \mathrm{sq}(\mathrm{bridge};t,u,r)\qquad (t,u,r),
+\]
+equivalently, identifying the two corner paths for each square. Then any functor
+$\mathcal G^{\mathrm{coll}}\to B\Ztwo$ is trivial, and the induced $\Ztwo$-cover splits.
+\end{proposition}
+
+\begin{proof}
+The added relations force the images of the two square generators to agree, so the
+assignment $\omega(\mathrm{sq}(\mathrm{diag}))=0$, $\omega(\mathrm{sq}(\mathrm{bridge}))=1$
+cannot descend. The only parity functor on $\mathcal G^{\mathrm{coll}}$ is therefore the
+trivial one, which is a coboundary (take $\sigma\equiv 0$), so the cover splits.
+\end{proof}
+
+\begin{remark}[Tag collapse vs obstruction]
+\label{rem:limited-scope-theorem-translation-clean-006}
+Theorem~\ref{thm:non-splitting} concerns the non-collapsed pair $(\mathcal G,\omega)$.
+If one collapses the filler tags, one changes the input to $(\mathcal G^{\mathrm{coll}},
+\omega_{\mathrm{triv}})$ as in Proposition~\ref{prop:collapsed-splits}. The semantic
+package in Section~\ref{sec:nontrivial} shows that such a collapse is incompatible with
+the intended interpretation on $\Diff$: the detector supplies a non-fixed point of $\flip$,
+so the induced $\omega$-action is genuinely nontrivial.
+\end{remark}
+
+\section{Difference object, flip, and the $\omega$-action}
+\label{sec:diff}
+This section uses only Assumptions \textbf{(A1)}--\textbf{(A6)}.
+
+\begin{definition}[Set-level cofiber]
+\label{def:limited-scope-theorem-translation-clean-006}
+For a map $f:A\to B$, define $\mathrm{Cofib}(f)$ to be the quotient of
+$B\sqcup\{\ast\}$ by the relation that identifies all points $f(a)$ with the basepoint
+$\ast$. Let $\iota:B\to\mathrm{Cofib}(f)$ denote the induced map.
+
+Define
+\[\Diff:=\mathrm{Cofib}(\diag),\qquad \iota:\SK\to\Diff.\]
+
+\end{definition}
+
+\begin{lemma}[Cofiber universal property]
+\label{lem:cofiber-up}
+Let $f:A\to B$ and let $X$ be a set. If $\phi:B\to X$ is constant on $\mathrm{im}(f)$,
+i.e. $\phi(f(a))=x_0$ for some $x_0\in X$ and all $a\in A$, then there exists a unique
+$\overline\phi:\mathrm{Cofib}(f)\to X$ with $\overline\phi(\iota(b))=\phi(b)$ and
+$\overline\phi(\ast)=x_0$.
+
+\end{lemma}
+
+\begin{proof}
+Define $\overline\phi$ on representatives by $\overline\phi(\iota(b)):=\phi(b)$ and
+$\overline\phi(\ast):=x_0$. The hypothesis ensures this respects the identifying
+relation, hence descends to the quotient; uniqueness is immediate.
+\end{proof}
+
+\begin{definition}[Flip involution]
+The commuting square $\swap\circ\diag=\diag$ induces an endomorphism of the cofiber,
+\[\flip:\Diff\to\Diff,\qquad \flip(\iota(x)):=\iota(\swap x),\qquad \flip(\ast):=\ast.\]
+Then $\flip^2=\mathrm{id}_{\Diff}$.
+
+\end{definition}
+
+\begin{lemma}[Canonical two fillers]
+\label{lem:canonical-fillers}
+Define $\operatorname{toggle}(\mathrm{diag})=\mathrm{bridge}$ and $\operatorname{toggle}(\mathrm{bridge})=\mathrm{diag}$, and
+define the filler action on $\Diff$ by
+\[
+\mathrm{actFill}(\mathrm{diag})=\mathrm{id}_{\Diff},\qquad
+\mathrm{actFill}(\mathrm{bridge})=\flip.
+\]
+Formally, $\mathrm{actFill}$ is defined by composing the tag parity
+$\mathrm{fillParity}:\{\mathrm{diag},\mathrm{bridge}\}\to\{\mathrm{false},\mathrm{true}\}$
+with the Bool-action on $\Diff$ induced by $\flip$.
+Then for all tags $f$ and all $x\in\Diff$,
+\[
+\mathrm{actFill}(\operatorname{toggle} f)(x)=\flip(\mathrm{actFill}(f)(x)),\qquad
+\operatorname{toggle}(\operatorname{toggle} f)=f.
+\]
+In particular, the orbit generated by $\flip$ is contained in $\{\mathrm{id},\flip\}$
+(so there are no further canonical choices; these two may coincide if $\flip=\mathrm{id}$).
+
+\end{lemma}
+
+\begin{definition}[$\omega$-action on $\Diff$]
+\label{def:limited-scope-theorem-translation-clean-008}
+The involution $\flip$ defines a $\Ztwo$-action by $0\cdot y:=y$ and $1\cdot y:=\flip(y)$.
+For each morphism $p$ in $\mathcal G$, define
+\[\actomega(p)(y):=\omega(p)\cdot y.\]
+
+\end{definition}
+
+\begin{lemma}[Square-loop acts by flip]
+\label{lem:sqLoop-flip}
+For all $t,u,r$ and $y\in\Diff$,
+\[\actomega(\mathrm{sqLoop}(t,u,r))(y)=\flip(y).\]
+
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:omega}, $\omega(\mathrm{sqLoop}(t,u,r))=1$, and by definition of the
+$\Ztwo$-action, $1\cdot y=\flip(y)$.
+\end{proof}
+
+\section{Semantic nontriviality from the derived detector}
+\label{sec:nontrivial}
+From here we use Assumption \textbf{(A7)}.
+
+\begin{lemma}[Derived detector gives a non-fixed point in $\Diff$]
+\label{lem:nonfixed}
+Let $\obs:=\obs_{ab}$ be the observable produced by Lemma~\ref{lem:derived-detector-nontrivial}.
+Then there exists $y\in\Diff$ with $\flip(y)\ne y$.
+
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:swap-odd-observable}(i), $\obs$ is constant on diagonal record
+states, so Lemma~\ref{lem:cofiber-up} yields a unique factorization
+$\overline\obs:\Diff\to\mathbb R$ with $\overline\obs(\iota(x))=\obs(x)$.
+Choose $x\in\SK$ such that $\obs(\swap x)\ne \obs(x)$ (exists by
+Lemma~\ref{lem:derived-detector-nontrivial} and swap-oddness). Set $y:=\iota(x)$.
+If $\flip(y)=y$, then applying $\overline\obs$ gives
+$\obs(\swap x)=\obs(x)$, contradiction. Hence $\flip(y)\ne y$.
+\end{proof}
+
+\begin{corollary}[Distinguishability of canonical fillers]
+\label{cor:canonical-fillers-different}
+Under Assumption \textbf{(A7)}, there exists $y\in\Diff$ such that
+\[
+\mathrm{actFill}(\mathrm{bridge})(y)\neq \mathrm{actFill}(\mathrm{diag})(y).
+\]
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:nonfixed} choose $y$ with $\flip(y)\ne y$. By
+Lemma~\ref{lem:canonical-fillers}, $\mathrm{actFill}(\mathrm{diag})=\mathrm{id}$
+and $\mathrm{actFill}(\mathrm{bridge})=\flip$, hence the two values differ at $y$.
+\end{proof}
+
+\begin{theorem}[Semantic nontriviality (detectable holonomy)]
+\label{thm:semantic-nontriviality}
+Under Assumption \textbf{(A7)}, the $\omega$-action on $\Diff$ is nontrivial:
+there exists $y\in\Diff$ with $\flip(y)\neq y$, and the square-loop acts
+nontrivially on $\Diff$. In particular, the canonical fillers are distinguishable.
+
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:nonfixed} gives a non-fixed point of $\flip$, and
+Lemma~\ref{lem:sqLoop-flip} identifies the $\omega$-action of $\mathrm{sqLoop}$
+with $\flip$. Distinguishability follows from Corollary~\ref{cor:canonical-fillers-different}.
+\end{proof}
+
+\begin{remark}[Why $\Diff$ is essential for semantics]
+\label{rem:limited-scope-theorem-translation-clean-007}
+The oddness $\omega(\mathrm{sqLoop})=1$ is already a cohomological obstruction to
+splitting (Theorem~\ref{thm:non-splitting}); $\Diff$ is \emph{not} needed for that.
+What $\Diff$ provides is a concrete $\Ztwo$-action in which $\omega$ is realized as
+monodromy. The detector supplies a non-fixed point of $\flip$, showing that this
+monodromy is genuinely nontrivial and the filler tags are operationally distinguishable.
+\end{remark}
+
+\begin{theorem}[Limited Scope Theorem]
+\label{thm:limited-scope}
+Under Assumptions \textbf{(A1)}--\textbf{(A7)}, the following hold:
+\begin{enumerate}[label=\textbf{(\arabic*)},leftmargin=*,itemsep=0.4em]
+\item \textbf{Cohomological package (uses \textbf{(A1)}--\textbf{(A6)}).}
+The bicomplex identities $Q_t^2=0$, $Q_u^2=0$, and $Q_tQ_u+Q_uQ_t=0$
+(Theorem~\ref{thm:bicomplex}) hold; the presented groupoid $\mathcal G$ and cocycle
+$\omega$ are defined with $\omega(\mathrm{sqLoop})=1$ (Lemma~\ref{lem:omega});
+the $\Ztwo$-cover splits iff $\omega$ is a coboundary (Lemma~\ref{lem:split-cob});
+the cover does not split (Theorem~\ref{thm:non-splitting}); and for any abelian
+group $G$ the induced $\omega$-action satisfies
+$\mathrm{act}^G_{\omega}(\mathrm{sqLoop}(t,u,r))(x)=-x$
+(Corollary~\ref{cor:omega-odd-abelian}).
+\item \textbf{Semantic package (uses \textbf{(A7)}).}
+The $\omega$-action on $\Diff$ is defined and $\mathrm{sqLoop}$ acts by $\flip$
+(Lemma~\ref{lem:sqLoop-flip}); the detector gives a non-fixed point of $\flip$
+and hence distinguishable canonical fillers (Theorem~\ref{thm:semantic-nontriviality}).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Item (1) collects the cited cohomological results; item (2) is the semantic
+nontriviality conclusion.
+\end{proof}
+
+\begin{thebibliography}{9}
+\bibitem{Zurek1981PointerBasis}
+W.~H.~Zurek, Phys.\ Rev.\ D \textbf{24}, 1516 (1981), doi:10.1103/PhysRevD.24.1516.
+
+\bibitem{JoosZeh1985Emergence}
+E.~Joos and H.~D.~Zeh, Z.\ Phys.\ B \textbf{59}, 223 (1985), doi:10.1007/BF01725541.
+
+\bibitem{Zurek2003Decoherence}
+W.~H.~Zurek, Rev.\ Mod.\ Phys.\ \textbf{75}, 715 (2003), doi:10.1103/RevModPhys.75.715.
+
+\bibitem{Brown2006TopologyGroupoids}
+R.~Brown, \emph{Topology and Groupoids} (www.groupoids.org, Deganwy, United Kingdom, 2006).
+\end{thebibliography}
+
+\end{document}

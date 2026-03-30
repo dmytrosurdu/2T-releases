@@ -1,0 +1,74 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+\title{\textbf{A Complexity-Theoretic Foundation for Metrology \\ \large Book II: The Attractor-Basin Program for Type B Certification}}
+\author{Dmytro Surdu}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+This second volume extends the complexity-theoretic framework of Book~I into the domain of \textbf{Type B measurements}—where knowledge arises from models, constraints, and expert judgement rather than statistical sampling. We present the \emph{Attractor Basin Equivalence Theorem (ABET)} as the exact structural criterion for deterministic certifiability of tail properties, unifying the epistemic notion of a short proof with the physical reality of a reachable, invariant basin. Along the way, we establish the \emph{Minimality Theorem} for basin invariance, the per-step \emph{Double-Bound} method for certifying belief-state updates, and the \emph{Minimal Certification Standard} that forces the unique Observation--Adaptation--Restitution anatomy of any certifiable process. This book offers a rigorous bridge between the formal world of complexity theory and the practical challenges of designing measurement systems that meet the strongest possible certification standards.
+\end{abstract}
+
+\section*{Foreword and Guide to This Collection}
+
+The first volume built a new foundation for \textbf{Type A} measurement---statistical sampling---by showing that deterministic certification demands a finite-state, information-losing structure bounded by guard-bands. This second book continues the story in a different landscape: \textbf{Type B} measurements, where the raw randomness of repeated sampling is replaced by the persistent structure of a model.
+
+Here, the key question is: \emph{What physical and algorithmic structure makes a Type B claim certifiable in the same strong sense as in Book~I?} The answer leads us to \emph{basins}---regions of belief-state space that, once entered, guarantee future safety---and to a tight correspondence between such basins and certifiable tail predicates.
+
+As in the first volume, the path to this result is neither linear nor purely theoretical. We begin with a concrete case study, abstract its key components into a formal model, and only then push the theory to its necessary and sufficient conditions. The narrative alternates between \textbf{constructive examples} and \textbf{formal equivalences}, ensuring that each definition earns its keep in proving a major theorem. On its way, developing theory gives rise to the most widely accepted notions and objects in metrology.
+
+The reader is encouraged to follow the chapters in the order presented. Part~I develops per-step certification and its complexity bounds. Part~II establishes the structural machinery of basins and proves the central ABET equivalence. Part~III connects Type B results back to Type A and analyzes the anatomy of a certifiable measurement in its simplest canonical form.
+
+\newpage
+\tableofcontents
+\newpage
+
+\part[From Examples to Per-Step Certification]{From Examples to Per-Step Certification}
+
+\noindent
+This first part lays the groundwork for the Attractor-Basin Program. We start with the motivating problem: how can we hope to deterministically certify the long-term behaviour of a system driven by structured, non-statistical information? The journey begins with a realistic Type~B case study and proceeds to a formal belief-state model. We then prove that per-step testability is equivalent to controlled information loss, and develop the \emph{Double-Bound} method that will anchor the rest of the book.
+
+\section*{Chapter 1: The Quest for Deterministic Certification in Metrology}
+Introduces the challenge of $\delta \to 0$ certainty for Type~B claims, the $\Pi^0_2$ barrier, and the roadmap: per-step certification first, tail certification via structural constraints.
+
+\section*{Chapter 2: The Outlier-Robust Kalman Filter---A Primer on Type B Certification}
+A worked example of a belief-state system with robust, polynomial-time updates that lose information each step. Serves as a touchstone for the general theory.
+
+\section*{Chapter 3: The Formalism of Belief-State Metrology}
+Defines the belief-state $\Theta_t$, its compact state space, and the deterministic \emph{Emit/Update} cycle. Introduces multiple equivalent notions of per-step information loss.
+
+\section*{Chapter 4: Per-Step Testability and its Equivalence Proof}
+Shows that per-step deterministic certification is equivalent to controlled information loss. Presents the \emph{Double-Bound} method: a numerical contraction bound plus a refinement procedure ensuring complexity feasibility. Introduces \emph{epistemic losslessness} for basin interiors.
+
+\part[Basins and Tail Certification]{Basins and Tail Certification}
+
+\noindent
+With per-step certification in hand, we turn to the structural problem: how to make claims about the infinite tail of a measurement sequence. The central objects here are \emph{basins}—regions of the belief-state space that guarantee safety once entered. We establish the minimal geometric condition that makes basins invariant, and then prove the \emph{Attractor Basin Equivalence Theorem}, which characterises exactly when a tail predicate is certifiable.
+
+\section*{Chapter 5: The Minimal Condition for Invariant Basins---Local Contraction}
+Axiomatizes basins and proves the \emph{Minimality Theorem}: uniform strict local contraction is both necessary and sufficient for invariance under mild conditions, making it the minimal geometric regularity for tail safety.
+
+\section*{Chapter 6: The Attractor Basin Equivalence Theorem (ABET)}
+The main result: a tail predicate is deterministically certifiable \emph{iff} there exists a reachable, invariant basin meeting emission safety and verifiability conditions. Establishes the exact bridge between logical certifiability and physical structure.
+
+\part[Unification and Anatomy]{Unification and Anatomy}
+
+\noindent
+The final part unites the Type~A and Type~B worlds and examines the internal anatomy of a certifiable measurement. We show how Type~B dynamics can be cast as guard-band predicates recognisable in the Type~A framework, and how the \emph{Minimal Certification Standard} forces a unique decomposition of any certifiable process into its three canonical aspects. The \emph{Simple Test} emerges as the maximally compressed, canonical form of certifiable behaviour.
+
+\section*{Chapter 7: Unification of Type A and Type B Measurements}
+Introduces the Long-Trajectory Cast to express Type~B dynamics as guard-band predicates, unifying both measurement types in the same logical framework.
+
+\section*{Chapter 8: Analyzing the Testable Measurement}
+Defines the \emph{Minimal Certification Standard} $\{\varepsilon_n\}$, which induces equivalent state, input, and output guard-bands. Proves the unique decomposition into \textbf{Observation}, \textbf{Adaptation}, and \textbf{Restitution}. Shows that, in the \emph{Simple Test}, all post-entry certified outputs collapse to a single epistemic tick.
+
+\vspace{1em}
+\noindent\textit{Welcome to the Attractor-Basin Program---the second step in a unified theory of certifiable measurement.}
+
+\end{document}

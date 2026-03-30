@@ -1,0 +1,680 @@
+\documentclass[12pt]{article}
+\usepackage{xr}
+\externaldocument{chapter_3}
+\externaldocument{chapter_4}
+\externaldocument{chapter_5}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\setlist[enumerate]{align=left,labelindent=0pt}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+% Chapter-specific theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+
+
+\title{\textbf{Chapter 6: The Attractor Basin Equivalence Theorem}}
+\author{Dmytro Surdu}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{quote}
+\textit{With the full machinery of belief-states, per-step testability, and the minimal axiom of contraction in place, we are now ready to prove the central result of our Type B theory. This chapter will demonstrate that the existence of a reachable Attractor Basin is the necessary and sufficient condition for a tail predicate to be deterministically certifiable. This equivalence provides a complete characterization of testability, showing that the abstract logical requirement of having a short proof corresponds perfectly to the concrete structural property of having a stable, invariant "safe region" in the system's belief-space.}
+\end{quote}
+
+\section{The Main Equivalence}
+
+In Chapter 5, we established that a useful theory of tail certification requires an Attractor Basin defined by the properties of contraction, safety, and reachability. We now elevate this concept from a useful tool to the cornerstone of a fundamental equivalence.
+
+Before starting, we clarify the statement we want to certify.
+
+\begin{axiom}[Emission Safety]
+  Let 
+  \[
+    S_{\rm out}
+    =\{\,z^{\text{out}}\in\mathcal Z^{\text{out}} : 
+       \text{the output }z^{\text{out}}\text{ satisfies the terminal condition}\}.
+  \]
+  Then
+  \[
+    \mathcal B \;\subseteq\; 
+      \{\Theta\in\mathcal M : E(\Theta)\in S_{\rm out}\}.
+  \]
+  If invariance is assumed, this immediately extends to
+
+  \[\forall\,t\ge0,\ \forall\,\Theta\in\mathcal B,\ \forall\,z^{\text{in}}_{1:t}\in(\mathcal{Z}^{\text{in}})^t,\ 
+    E\bigl(U^t(\Theta,z^{\text{in}}_{1:t})\bigr)\in S_{\rm out}.\]
+    
+\end{axiom}
+
+\begin{axiom}[Polytime Verifier Axiom]
+\label{ax:polytime-verifier}
+There exist a polynomial $q(\cdot)$ and a deterministic polynomial–time verifier $V$ for $P_{\rm tail}$ with the following properties.
+
+\begin{enumerate}[label=(V\arabic*)]
+  \item \textbf{Polytime verifier.} On input size $n$ (the length of the observed output head), $V$ runs in time $q(n)$.
+
+  \item \textbf{Belief–state encoding and evaluability.} There is a fixed computable encoding $\mathrm{enc}:\mathcal M\to\{0,1\}^\star$ and a decoding/evaluation procedure such that for any $\varepsilon>0$ and $\Theta\in\mathcal M$, from $\mathrm{enc}_\varepsilon(\Theta)$ of length $O(\log(1/\varepsilon))$ the verifier can evaluate $E(\Theta)$ and $U(\Theta,\cdot)$ to accuracy $\varepsilon$ in time $\mathrm{poly}(\log(1/\varepsilon))$. Consequently, along any $T$–step capture certificate, the total state–side encoding length and the evaluation cost are $\mathrm{poly}(T)$.
+
+  \item \textbf{Honest–read on yes–instances.} On every accepting run (i.e., when the provided multi–step capture certificate is correct), $V$ reads the entirety of that certificate, including the binary encoding of $T$ and all per–step subcertificates.
+\end{enumerate}
+\end{axiom}
+
+In other words, our certifiable statement about measurement $S_{\rm out}$ must be true on $\mathcal{B}$.
+
+\begin{definition}[Admissible Safe Predicate]
+Define $P_{\text{tail}}=S_{\rm out}$, a predicate on the infinite output stream in $(\mathcal{Z}^{\text{out}})^\omega$.
+\end{definition}
+
+Then the following theorem holds:
+
+\begin{theorem}[The Attractor Basin Equivalence]
+\label{thm:basin_equivalence}
+A tail predicate $P_{\rm tail}$ over the output stream of a deterministic Type~B model is deterministically certifiable by a polynomial‐time scheme if and only if there exists a compact set $\mathcal B\subset\mathcal M$ (the universal–tail basin) such that:
+
+\begin{enumerate}
+  \item[\textnormal{(R)}] \textbf{Reachability:}
+  $\forall\,\Theta_0\in\mathcal M,\ \exists\,T\in\mathbb N$ and input head $z^{\rm in}_{1:T}$ with $U^T(\Theta_0,z^{\rm in}_{1:T})\in\mathcal B$.
+  \item[\textnormal{(I)}] \textbf{Invariance (over inputs):}
+  $\forall\,\Theta\in\mathcal B,\ \forall\,z^{\rm in}\in\mathcal Z^{\rm in},\ U(\Theta,z^{\rm in})\in\mathcal B$.
+  \item[\textnormal{(S)}] \textbf{Safety (state–only emission):}
+  $\forall\,\Theta\in\mathcal B,\ E(\Theta)\in S_{\rm out}$, hence every tail from $\Theta$ satisfies $P_{\rm tail}$.
+  \item[\textnormal{(C)}] \textbf{Contraction on $\mathcal B$:}
+  There exists $\alpha\in(0,1)$ with
+  \[
+    d\bigl(U(\Theta,z^{\rm in}),U(\Theta',z^{\rm in})\bigr)\le \alpha\,d(\Theta,\Theta')
+    \quad\forall\,\Theta,\Theta'\in\mathcal B,\ \forall\,z^{\rm in}\in\mathcal Z^{\rm in}.
+  \]
+\end{enumerate}
+
+Moreover, in the $\Rightarrow$ direction we first obtain (R), (I), (S); then (C) follows from the Minimality Theorem of Chapter~5 by invoking its Lyapunov–Border axiom for $\mathcal B$ (equivalently, one may prove (C) directly on the compact invariant set). The certificate can be taken as a \emph{capture certificate} $(T,\widehat\Theta,z^{\rm in}_{1:T})$ attesting both reachability $U^T(\Theta_0,z^{\rm in}_{1:T})=\widehat\Theta\in\mathcal B$ and the fact that every tail from $\widehat\Theta$ satisfies $P_{\rm tail}$.
+\end{theorem}
+
+
+This theorem is the direct analogue of the Guard-Band Equivalence for Type A systems. It establishes that the only way to certify an infinite-tail property is to demonstrate that the system's state has entered a region from which failure is impossible. We prove each direction of the equivalence separately.
+
+\section{Proof of Necessity ($\Rightarrow$)}
+We start with the harder and the more profound direction. We assume a certification system exists and deduce that its underlying structure must be equivalent to an attractor basin. This proof "reverse-engineers" testability.
+
+\begin{lemma}[Verifier‐Normalization]
+\label{lem:verifier-normalization}
+Let $V$ be any deterministic Turing machine which, on input
+\[
+  \bigl(z_{1:n},\,w\bigr),
+  \quad
+  z_{1:n}\in(\mathcal Z^{\rm out})^n,\quad
+  w\in\{0,1\}^{\le p(n)},
+\]
+runs in time $\mathrm{poly}(n)$ and accepts exactly those pairs in its language.  Then there exists a deterministic Turing machine $V'$ running in time $\mathrm{poly}(n)$ such that:
+\begin{enumerate}
+  \item On any input $\bigl(z_{1:n},\,w'\bigr)$, $V'$ inspects only the first $n$ symbols of $z_{1:n}$ and only the first $\ell$ bits of $w'$, where $\ell\le p(n)$ is declared in a self‐delimiting prefix of $w'$.
+  \item $V'$ accepts $\bigl(z_{1:n},w'\bigr)$ if and only if $w'$ correctly encodes a witness $w$ of length $\ell\le p(n)$ and $V$ accepts $(z_{1:n},w)$.
+\end{enumerate}
+Hence $V'$ accepts exactly the same set of pairs $(z_{1:n},w)$ as $V$, while guaranteed to ignore any extra input or padding.
+\end{lemma}
+
+\begin{proof}
+We construct $V'$ as follows.  On input $\bigl(z_{1:n},\,w'\bigr)$:
+
+\medskip\noindent\textbf{1. Parse the declared lengths.}
+\begin{itemize}
+  \item Read from the start of $w'$ a self‐delimiting encoding of an integer $\ell$.  If decoding fails or $\ell>p(n)$, \emph{reject}.
+  \item Read the next $\ell$ bits of $w'$ as the \emph{actual} witness $w_{\rm actual}$.  If $w'$ has fewer than $\ell$ bits after the prefix, \emph{reject}.
+\end{itemize}
+
+\medskip\noindent\textbf{2. Enforce head‐length bound.}
+\begin{itemize}
+  \item Check that the input head is at least $n$ symbols long.  (By hypothesis it is exactly $n$.)  
+  \item Record the fact that no simulation step may read beyond symbol $n$ of the head or beyond bit $\ell$ of the witness.
+\end{itemize}
+
+\medskip\noindent\textbf{3. Simulate $V$ under guard.}
+\begin{itemize}
+  \item Initialize a standard simulation of $V$ on input $(z_{1:n},w_{\rm actual})$, but \emph{interpose} the following rule:  
+    Before each simulated transition, if $V$’s tape‐head on the input tape is positioned beyond cell $n$, or if $V$’s tape‐head on the witness tape is positioned beyond cell $\ell$, then \emph{halt and reject} immediately.
+  \item Otherwise, perform exactly the transition that $V$ would perform.
+\end{itemize}
+
+\medskip\noindent\textbf{4. Accept or reject.}
+\begin{itemize}
+  \item If the guarded simulation of $V$ enters an accepting state, then \emph{accept}.
+  \item If it enters a rejecting state (or was forced to reject by an out‐of‐bounds access), then \emph{reject}.
+\end{itemize}
+
+\medskip\noindent\textbf{Time bound.}
+The self‐delimiting decoding of $\ell$ takes $\mathrm{poly}(n)$ time, and the guarded simulation of $V$ adds only a constant‐factor overhead to $V$’s own $\mathrm{poly}(n)$ runtime.  Hence $V'$ runs in $\mathrm{poly}(n)$ time.
+
+\medskip\noindent\textbf{Correctness.}
+On any “honest” input $(z_{1:n},w)$ with $|w|\le p(n)$, we can form $w'=\langle\,|w|,w\rangle$.  Then $V'$ parses $\ell=|w|$, simulates $V$ exactly on the first $n$ symbols and first $\ell$ bits, and cannot be forced to reject by an out‐of‐bounds check.  Thus $V'$ accepts if and only if $V$ accepts.  
+
+Therefore $V'$ meets both requirements of the lemma.
+\end{proof}
+
+
+\begin{lemma}[Suffix Certification]
+\label{lem:suffix-cert}
+Let $V$ be a deterministic verifier which, on input 
+\[
+  (z_{1:n},w),\quad |w|\le p(n),
+\]
+runs in time $\mathrm{poly}(n)$ and accepts exactly those pairs for which the tail predicate holds.  Suppose 
+\[
+  V(z_{1:n},w)=\text{accept}.
+\]
+By Lemma~\ref{lem:verifier-normalization}, we may assume without loss of generality that $V$ inspects only the first $n$ symbols of its head and the first $p(n+m)$ bits of its witness.  Define
+\[
+  w' \;=\; w \;\Vert\; 0^{\,p(n+m)-|w|}\,,
+\]
+so that $|w'|=p(n+m)$.  Then
+\[
+  V\bigl(z_{1:n+m},\,w'\bigr)
+  \;=\;\text{accept}.
+\]
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:verifier-normalization}, replace $V$ with the normalized verifier which cannot read beyond position $n$ of the head or bit $p(n+m)$ of the witness.  Since the original run $V(z_{1:n},w)$ only depends on those first $n$ symbols and $|w|$ bits, feeding $(z_{1:n+m},w')$ reproduces the same computation and accepts.
+\end{proof}
+
+\begin{lemma}[Suffix Universality]\label{lem:suffix-univ}
+Let \(V'(V)\) be a normalized deterministic verifier for the tail‐predicate \(P_{\rm tail}\) on infinite measurement streams, and let \(p:\mathbb{N}\to\mathbb{N}\) bound the witness length.  Assume:
+\begin{enumerate}
+  \item[(i) Soundness\phantom{ity}] 
+    If \(V'(z_{1:N},w)\) accepts, then any infinite extension \(z_{1:\infty}\supset z_{1:N}\) satisfies \(P_{\rm tail}(z_{1:\infty})\).
+  \item[(ii) Completeness] 
+    If \(P_{\rm tail}(z_{1:\infty})\) holds, then for every \(n\) there exists \(w\) with \(\lvert w\rvert \le p(n)\) such that \(V'(z_{1:n},w)\) accepts.
+  \item[(iii) Tail–Invariance] 
+    If \(P_{\rm tail}(z_{1:\infty})\) holds, then for every \(1\le k<n\), the suffix \(z_{k+1:\infty}\) also satisfies \(P_{\rm tail}\).
+\end{enumerate}
+Then for any \(N\ge1\), if there is a witness \(w\) with \(\lvert w\rvert\le p(N)\) such that
+\[
+  V'\bigl(z_{1:N},\,w\bigr)\;=\;\text{``accept,''}
+\]
+then for every \(1 \le k < N\) there exists a witness \(w'\) with \(\lvert w'\rvert \le p(N-k)\) such that
+\[
+  V'\bigl(z_{k+1:N},\,w'\bigr)\;=\;\text{``accept.''}
+\]
+\end{lemma}
+
+\begin{proof}
+Fix \(N\ge1\) and suppose \(w\) of length \(\le p(N)\) certifies the head \(z_{1:N}\):
+\[
+  V'\bigl(z_{1:N},w\bigr)\;=\;\text{accept.}
+\]
+By (i) Soundness, any infinite continuation \(z_{1:\infty}\) extending \(z_{1:N}\) satisfies
+\[
+  P_{\rm tail}(z_{1:\infty}).
+\]
+Then by (iii) Tail–Invariance, for each \(1\le k<N\) the suffix \(z_{k+1:\infty}\) also satisfies the tail predicate:
+\[
+  P_{\rm tail}(z_{k+1:\infty}).
+\]
+By (ii) Completeness, for each such suffix of finite length \(N-k\) there must exist a witness \(w'\) with
+\(\lvert w'\rvert \le p(N-k)\) such that
+\[
+  V'\bigl(z_{k+1:N},\,w'\bigr)\;=\;\text{accept.}
+\]
+Since \(k\) was arbitrary in \(\{1,\dots,N-1\}\), this constructs the required certificate for every suffix of the original head.
+\end{proof}
+
+
+\begin{proof}[Necessity: Certifiability $\Rightarrow$ Existence of a Basin]
+Assume that the tail predicate \(P_{\mathrm{tail}}\) over the output stream in $(\mathcal{Z}^{\text{out}})^\omega$ is deterministically certifiable. Concretely, there exists a polynomial \(p(n)\) and a deterministic, polynomial‑time verifier
+\[
+  V^*:\bigl((\mathcal Z^{\text{out}})^n\times\mathcal M\bigr)\times\{0,1\}^{\le p(n)}
+     \;\longrightarrow\;\{\mathrm{accept},\mathrm{reject}\},
+\]
+with the property that for any initial belief‑state \(\Theta_0\), any finite output measurement prefix \(z^{\text{out}}_{1:n}\), and its corresponding (unobserved) input prefix $z^{\text{in}}_{1:n}$, there is a certificate triple
+\[
+  (n,\widehat\Theta,w),
+  \quad
+  \widehat\Theta\in\mathcal M,\quad |w|\le p(n),
+\]
+such that
+\[
+  V^*\bigl((\,z^{\text{out}}_{1:n},\widehat\Theta),\,w\bigr)
+  = \mathrm{accept}
+  \quad\Longleftrightarrow\quad
+  \begin{cases}
+    U^n(\Theta_0,z^{\text{in}}_{1:n}) = \widehat\Theta,\\[6pt]
+    P_{\mathrm{tail}}\bigl(z^{\text{out}}_{n+1:\infty}(\widehat\Theta)\bigr)
+    \text{ holds},
+  \end{cases}
+\]
+i.e.\ \(V^*\) accepts exactly when the claimed state \(\widehat\Theta\) is reached in \(n\) steps and the infinite continuation from \(\widehat\Theta\) satisfies the tail predicate. The witness $w$ must contain sufficient information (such as the input history $z^{\text{in}}_{1:n}$) to allow the verifier to check the path.  
+
+We must show that this assumption implies the existence of a set $\mathcal{B} \subseteq \mathcal{M}$ that satisfies the three properties of a refined Attractor Basin: Safety, Contraction (implying Invariance), and Reachability.
+
+\paragraph{Step 1: Constructing the Basin Candidate $\mathcal{B}$.}
+Let us define our candidate set $\mathcal{B}$ as the set of all belief-states $\Theta$ for which a valid, accepting witness exists, assuming an empty observation history (i.e., at time $n=0$).
+\begin{definition}[Basin Candidate and Universal–Tail Basin]
+\label{def:basin-candidate-updated}
+Let $(\mathcal M,\mathcal Z^{\rm in},\mathcal Z^{\rm out},U,E)$ be a deterministic Type~B model and let $(V^*,p)$ be a sound and complete polytime tail–certifier for $P_{\rm tail}$. Define:
+
+\medskip
+\noindent\textbf{(i) Basin Candidate (eventual–entry set).}
+\[
+  \mathcal B_{\mathrm{cand}}
+  \;=\;
+  \Bigl\{
+     \Theta_0\in\mathcal M:\ \exists\,T\!\in\!\mathbb N,\,\widehat\Theta\in\mathcal M,\,w\in\{0,1\}^{\le p(T)}
+     \text{ s.t. }V^*((z^{\rm out}_{1:T}(\Theta_0),\widehat\Theta),w)=\mathrm{accept}
+  \Bigr\}.
+\]
+Intuitively, these are the states from which \emph{some} finite prefix admits a valid capture certificate.
+
+\medskip
+\noindent\textbf{(ii) Universal–Tail Basin (already–safe core).}
+\[
+  \mathcal B^{\star}
+  \;=\;
+  \Bigl\{
+     \Theta\in\mathcal M:\ \forall\,z^{\rm in}_{1:\infty}\in(\mathcal Z^{\rm in})^\omega,\ 
+     P_{\rm tail}\bigl(\text{Out}(\Theta;z^{\rm in}_{1:\infty})\bigr)\text{ holds}
+  \Bigr\}.
+\]
+This is the set of states that are safe \emph{now} and remain safe for every admissible input continuation.
+
+\medskip
+\noindent In what follows we write \(\mathcal B := \mathcal B^{\star}\) for the invariant safe region used in ABET; \(\mathcal B_{\mathrm{cand}}\) is only used in reachability arguments.
+\end{definition}
+
+Then, the following lemma holds:
+
+\begin{lemma}[Closedness and Compactness of the Basin Candidate]\label{lem:basin-compact}
+Assume
+\begin{itemize}
+  \item \(\mathcal M\) and \(\mathcal Z\) are compact metric spaces,
+  \item \(U:\mathcal M\times\mathcal Z\to\mathcal M\) is continuous.
+\end{itemize}
+Then the basin candidate
+\[
+  \mathcal{B}_{\mathrm{cand}}
+  =\{\Theta_{0}\in\mathcal M:\exists\,z_{1:T}\in\mathcal Z^T,\,
+    U^T(\Theta_{0},z_{1:T})=\Theta_{T}\}
+\]
+is a compact (hence closed) subset of \(\mathcal M\).
+\end{lemma}
+
+Here $\mathcal{B}_{\mathrm{cand}}$ denotes the candidate set of states that can reach the fixed $\Theta_T$; it is not assumed to satisfy safety.
+
+\begin{proof}
+Define the map
+\[
+  F:\mathcal M \times \mathcal Z^T \;\longrightarrow\;\mathcal M,
+  \qquad
+  F(\Theta_{0},z_{1:T}) = U^T(\Theta_{0},z_{1:T}).
+\]
+\begin{enumerate}
+  \item \textbf{Continuity.}  
+    Since \(U\) is continuous, its \(T\)-fold composition \(F\) is continuous on the product \(\mathcal M\times\mathcal Z^T\).
+
+  \item \textbf{Preimage is closed.}  
+    The singleton \(\{\Theta_{T}\}\subset\mathcal M\) is closed.  
+    By continuity of \(F\), the set
+    \[
+      F^{-1}(\{\Theta_{T}\})
+      = \{\,(\Theta_{0},z_{1:T}) : F(\Theta_{0},z_{1:T})=\Theta_T\}
+    \]
+    is closed in the compact space \(\mathcal M\times\mathcal Z^T\).  Hence \(F^{-1}(\{\Theta_T\})\) is compact.
+
+  \item \textbf{Projection preserves compactness.}  
+    \(\mathcal{B}_{\mathrm{cand}}\) is exactly the image of \(F^{-1}(\{\Theta_T\})\) under the projection
+    \(\pi:\mathcal M\times\mathcal Z^T\to\mathcal M\), \(\pi(\Theta_{0},z_{1:T})=\Theta_{0}\).  
+    Since \(\pi\) is continuous, \(\pi\bigl(F^{-1}(\{\Theta_T\})\bigr)=\mathcal{B}_{\mathrm{cand}}\) is compact.
+
+  \item \textbf{Compact \(\implies\) Closed.}  
+    In any metric space, compactness implies closedness.  Therefore \(\mathcal{B}_{\mathrm{cand}}\) is also closed in \(\mathcal M\).
+\end{enumerate}
+\end{proof}
+
+
+
+\paragraph{Step 2 (Safety $\Rightarrow$ Invariance).}
+Let $\mathcal{B}^\star$ be the set constructed in Step~1.  
+We now show that $\mathcal{B}^\star$ is \emph{invariant} under the update map $U$ from Definition~\ref{def:emit-update-maps}, Chapter 3.  
+Fix any $\Theta \in \mathcal{B}^\star$ and any admissible measurement $z^{\mathrm{in}}\in\mathcal{Z}^{\mathrm{in}}$ (Definition~\ref{def:belief-state-space}, Chapter 3).  
+By the \emph{Safety} property of $\mathcal{B}^\star$, every trajectory starting in $\Theta$ satisfies the tail predicate; in particular, the concatenated infinite sequence formed by $(\Theta, z^{\mathrm{in}})$ followed by any admissible continuation is also safe.  
+Tail-invariance of the predicate (Axiom~\ref{ax:polytime-verifier}) implies that if the tail of a trajectory satisfies the predicate, then so does the entire trajectory starting from the updated belief-state $U(\Theta, z^{\mathrm{in}})$.  
+Thus $U(\Theta, z^{\mathrm{in}}) \in \mathcal{B}^\star$.  
+Since $\Theta$ and $z^{\mathrm{in}}$ were arbitrary, we conclude $\mathcal{B}^\star$ is forward-invariant under $U$, establishing $(\mathrm{I})$.
+
+
+\paragraph{Step 3: The Impasse of Uniform Reachability.}
+Our next goal is to prove that the basin candidate $\mathcal{B}$ is reachable from any initial state $\Theta_0 \in \mathcal{M}$. While the assumption of NP-certifiability guarantees that for any given $\Theta_0$ there exists \textit{some} finite time $n$ at which a certificate can be found, it does not guarantee a \textit{uniform} time bound $T_{\max}$ that works for all initial states. Without such a uniform bound, the basin may not be reachable in any practical or certifiable sense.
+
+This reveals a critical gap in our theory: the verifier $V$ has been treated as a pure algorithm, but to guarantee uniform reachability, we must analyze its properties in the continuous, topological setting of our state-space. We must now resolve this by formalizing the nature of the verifier.
+
+\subsection*{Resolving the Gap: The Certification Standard}
+
+To bridge the gap between per-state certifiability and uniform reachability, we must ensure that the verifier's acceptance is not a "knife-edge" phenomenon. A small perturbation in the measurement stream should not invalidate a correct witness. This leads to a notion of robustness.
+
+\paragraph{A First Attempt: The Robust Verifier Axiom.}
+One could simply posit an axiom that the verifier itself is robust:
+\begin{quote}
+\textit{Axiom (Robust Verifier): The acceptance region of the verifier $V$ is an open set in the product topology of outputs and witnesses.}
+\end{quote}
+While this solves the problem mathematically, it is ontologically unsatisfying. It forces the verifier $V$, a purely epistemic and computational object, to adopt properties of the physical, continuous world, blurring a useful distinction.
+
+\paragraph{An Ontologically Pure Solution: The Certification Standard.}
+A more elegant solution is to keep the verifier as a pure algorithm and introduce a separate, purely epistemic object that codifies the required robustness. This object is the \textbf{Certification Standard}. It acts as a formal contract specifying the tolerance of any certification.
+
+\begin{definition}[Certification Standard]
+\label{def:certification-standard}
+A \textbf{Certification Standard}, denoted $\mathcal{S}$, is a family of guard-band radii $\{\varepsilon_n\}_{n=1}^\infty$, where each $\varepsilon_n \in (0, 1]$ if an \textbf{acceptance by the verifier $V$ on output $(z^{\text{out}}_{1:n}, w)$ under $\mathcal{S}$} makes $V$ also accepting on the entire $\varepsilon_n$-ball around $(z^{\text{out}}_{1:n}, w)$ in the \textbf{product metric} on
+
+$$
+\mathcal Z^{\rm out\,n}\times\mathcal W
+$$
+
+built from:
+\begin{enumerate}
+    \item \textbf{The output‐space metric}
+   a metric $d_{\mathcal Z^{\rm out}}$ on $\mathcal Z^{\rm out}$ built from a usual metric on a compact metric space $\mathcal Z^{\rm out}$ as a standard \textbf{sup} (or $\textit{l}_{\infty}$) metric on length‑$n$ tuples:
+
+   $$
+     d_{\mathcal Z^n}\bigl((z_1,\dots,z_n),(z'_1,\dots,z'_n)\bigr)
+     = \max_{1\le i\le n}\;d_{\mathcal Z^{\rm out}}(z_i,z'_i).
+   $$
+
+    \item \textbf{The witness‐space metric}
+   built from witnesses as finite bit‐strings of bounded (polynomial) length, which equips $\mathcal W$ with the **discrete metric**
+
+   $$
+     d_{\mathcal W}(w,w') =
+     \begin{cases}
+       0, & w = w',\\
+       1, & w \neq w'.
+     \end{cases}
+   $$
+    \item \textbf{As the product metric}
+    on $\mathcal Z^{\rm out\,n}\times\mathcal W$ as the maximum of the two:
+
+   $$
+     d\bigl((z_{1:n},w),(z'_{1:n},w')\bigr)
+     = \max\Bigl\{\,d_{\mathcal Z^n}(z_{1:n},z'_{1:n}),\;d_{\mathcal W}(w,w')\Bigr\}.
+   $$
+
+so a set $W_n\subseteq\mathcal Z^{\rm out\,n}\times\mathcal W$ is **open** in this metric precisely if, whenever $(z^*,w^*)\in W_n$, there is an $\varepsilon>0$ so that
+
+$$
+  d\bigl((z_{1:n},w),(z^*,w^*)\bigr)<\varepsilon
+  \;\Longrightarrow\;
+  (z_{1:n},w)\in W_n.
+$$
+
+and, therefore, for each $n$, the acceptance relation
+$$
+W_n = \{(z_{1:n},w)\mid V(z_{1:n},w)=\text{accept}\}
+$$
+is open in $\mathcal Z^{\rm out\,n}\times\mathcal W$. Such an acceptance relation is said to be \textbf{robustly certified by $\mathcal{S}$}.
+\end{enumerate}
+\end{definition}
+This leads to a more complete definition of the object of our study.
+
+\begin{definition}[The Testable Measurement]
+A non-trivial \textbf{Testable Measurement} is a sextuple $\mathfrak{M} = (\mathcal{M}, \mathcal{Z}^{\text{in}}, \mathcal{Z}^{\text{out}}, E, U, \mathcal{S})$, where $(\mathcal{M}, \mathcal{Z}^{\text{in}}, \mathcal{Z}^{\text{out}})$ are the physical measurement spaces, update and emit maps $(E, U)$ are the physical dynamics and $\mathcal{S}$ is the epistemic Standard under which Testable Measurement properties are certified.
+\end{definition}
+
+Armed with this, we can now rigorously prove the Uniform Reachability property.
+
+
+\begin{lemma}[Uniform Reachability via Compactness]
+\label{lem:reachability-uniform}
+Assume $\mathcal M$, $\mathcal Z^{\rm in}$, $\mathcal Z^{\rm out}$ are compact metric spaces, $U$ and $E$ are continuous, and $(V,p)$ is a sound and complete polytime tail–certifier that is \emph{robust} under the Certification Standard $\mathcal S$ (acceptance sets are open in the product metric for each fixed witness length bound).
+For each $n\ge1$, define
+\[
+  A_n := \Bigl\{\Theta_0\in\mathcal M:\ \exists\,w,\ |w|\le p(n),\ V\bigl(z^{\rm out}_{1:n}(\Theta_0),w\bigr)=\mathrm{accept\; under}\ \mathcal S\Bigr\}.
+\]
+Then:
+\begin{enumerate}
+  \item $\bigcup_{n\ge1}A_n=\mathcal M$.
+  \item Each $A_n$ is open in $\mathcal M$.
+  \item By compactness, there exists $T_{\max}\in\mathbb N$ with $\bigcup_{n\le T_{\max}}A_n=\mathcal M$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) Completeness of $V$ yields, for each $\Theta_0$, some $n$ and witness $w$ with acceptance; hence $\Theta_0\in A_n$.
+
+(2) Fix $n$. For each binary string $w$ with $|w|\le p(n)$, define
+\[
+  W_{n,w} := \{z_{1:n}\in(\mathcal Z^{\rm out})^n: V(z_{1:n},w)=\mathrm{accept\ under}\ \mathcal S\}.
+\]
+By robustness of $\mathcal S$, each $W_{n,w}$ is open in $(\mathcal Z^{\rm out})^n$. Let $\Phi_n:\mathcal M\to(\mathcal Z^{\rm out})^n$, $\Phi_n(\Theta_0)=z^{\rm out}_{1:n}(\Theta_0)$; continuity of $E,U$ implies $\Phi_n$ is continuous. Then
+\[
+  A_n \;=\; \bigcup_{|w|\le p(n)} \Phi_n^{-1}(W_{n,w}),
+\]
+a finite union of open sets; hence $A_n$ is open.
+
+(3) $\{A_n\}_{n\ge1}$ is an open cover of compact $\mathcal M$; extract a finite subcover and define $T_{\max}$ as its maximum index.
+\end{proof}
+
+
+\paragraph{Step 3 (Resumed): Proving Reachability.}
+The \textit{Uniform Reachability via Compactness} lemma, proven above, establishes that our basin candidate $\mathcal{B}$ is reachable from any initial state within the uniform time bound $T_{\max}$. This closes the logical gap.
+
+% Step 4 — Lyapunov–border property via the One–Step Distance construction
+
+\paragraph{Step 4 (Lyapunov–border via one–step distance).}
+Let $\mathcal B^\star\subseteq\mathcal M$ be the universal–tail safe set constructed in Steps~1–3; by definition it is closed and forward–invariant under all inputs. Define the one–step distance functional
+\[
+L(\Theta)\;:=\;\sup_{z\in\mathcal Z}\;{\rm dist}\!\bigl(U(\Theta,z),\,\mathcal M\setminus\mathcal B^\star\bigr),
+\qquad \Theta\in\mathcal B^\star,
+\]
+where ${\rm dist}(x,A):=\inf\{d(x,a):a\in A\}$. We prove that $L$ is a bona fide Lyapunov–border function on $\mathcal B^\star$, i.e. $L$ is continuous, $L(\Theta)=0$ iff $\Theta\in\partial\mathcal B^\star$, and there exists $\alpha\in(0,1)$ such that
+\[
+\boxed{\quad L(\Theta)\ \le\ \alpha\,{\rm dist}\!\bigl(\Theta,\,\mathcal M\setminus\mathcal B^\star\bigr)\quad\forall\,\Theta\in\mathcal B^\star. \quad}
+\tag{$\star$}
+\]
+
+\emph{Continuity.} Since $U$ is continuous and $\mathcal Z$ is compact, the map
+$\Theta\mapsto {\rm dist}\!\bigl(U(\Theta,z),\,\mathcal M\setminus\mathcal B^\star\bigr)$
+is continuous for each fixed $z$, and the supremum over a compact index set preserves upper semicontinuity; joint Lipschitzness of $U$ on the compact domain implies full continuity of $L$ on $\mathcal B^\star$.
+
+\emph{Zero set.} If $\Theta\in\partial\mathcal B^\star$, then $U(\Theta,z)\in\mathcal B^\star$ for all $z$ (forward–invariance) and, by the definition of boundary, ${\rm dist}\bigl(U(\Theta,z),\mathcal M\setminus\mathcal B^\star\bigr)=0$ for arbitrarily close choices of $z$–perturbations; hence $L(\Theta)=0$. Conversely, if $L(\Theta)=0$ then along some sequence $z_n$ we have ${\rm dist}\bigl(U(\Theta,z_n),\mathcal M\setminus\mathcal B^\star\bigr)\to0$, which—by forward–invariance—forces $\Theta$ to be a limit point of $\mathcal M\setminus\mathcal B^\star$; hence $\Theta\in\partial\mathcal B^\star$.
+
+\emph{Strict vanishing only on the boundary.} If $\Theta\in(\mathcal B^\star)^\circ$, compactness and invariance give a neighborhood $B(\Theta,r)$ with $U(B(\Theta,r),\mathcal Z)\subset (\mathcal B^\star)^\circ$; thus $L(\Theta)>0$.
+
+\emph{One–step proportional inwardness.} Fix any $\Theta\in\mathcal B^\star$ and write $\delta(\Theta):={\rm dist}\!\bigl(\Theta,\,\mathcal M\setminus\mathcal B^\star\bigr)$. Let $L_U$ denote a global Lipschitz constant of $U$ in $\Theta$ on $\mathcal B^\star\times\mathcal Z$ (exists by compactness). By Step~3 (Certification Standard) applied at one step and the continuity of $E\circ U$, there exists an \emph{output robustness radius} $\rho>0$ such that: if
+$d\bigl(E(U(\Theta,z)),\,E(U(\Theta',z))\bigr)\le \rho$ for all $z$, then safety persists one step (the acceptance at length $1$ is open). \emph{By compactness of $\mathcal{B}^\star$ (Definition~\ref{def:belief-state-space}, Chapter 3) and openness of the acceptance set under the Certification Standard (Definition~\ref{def:certification-standard}), the local robustness radius $\rho(\Theta)$ can be chosen uniformly over $\Theta\in\partial\mathcal{B}^\star$.  Thus there exists a global $\rho>0$ valid for the entire boundary, ensuring the proportionality factor $\alpha<1$ is uniform.}
+
+
+Using the Lipschitz constant $L_E$ of $E$ and $L_U$ of $U$, we obtain
+\[
+d\bigl(E(U(\Theta,z)),\,E(U(\Theta',z))\bigr)\ \le\ L_E\,L_U\,d(\Theta,\Theta')\qquad\forall z.
+\]
+Take $\Theta'$ on a nearest–point segment from $\Theta$ to $\mathcal M\setminus\mathcal B^\star$ with $d(\Theta,\Theta')=\delta(\Theta)$.
+Choosing $\alpha:=\min\{1-\tfrac{\rho}{L_E L_U\,\delta(\Theta)}\, ,\ 1-\varepsilon\}$ for some fixed $\varepsilon\in(0,1)$ (the minimum taken over finitely many neighborhoods covering $\mathcal B^\star$ by compactness) yields a uniform $\alpha\in(0,1)$ on $\mathcal B^\star$ and enforces
+\[
+{\rm dist}\!\bigl(U(\Theta,z),\,\mathcal M\setminus\mathcal B^\star\bigr)
+\ \le\ \alpha\,\delta(\Theta)\qquad\forall z,
+\]
+i.e. inequality $(\star)$. (Formally: define the local ratio $r(\Theta):=\sup_z \tfrac{{\rm dist}(U(\Theta,z),\,\mathcal M\setminus\mathcal B^\star)}{\delta(\Theta)}$; the openness from the Certification Standard forces $r(\Theta)<1$ on $(\mathcal B^\star)^\circ$, and upper semicontinuity of $r$ plus compactness give $\sup_{\mathcal B^\star} r=: \alpha<1$.) Combining these pieces gives the claimed Lyapunov–border property.
+\qedhere
+
+% Step 5 — From the Lyapunov–border inequality to metric contraction on the basin
+% Step 5 — Contraction via the Minimality Theorem of Chapter 5
+
+\paragraph{Step 5 (Contraction from Minimality).}
+From Steps~1–3 we have constructed a nonempty, compact set $\mathcal B^\star\subseteq\mathcal M$ that is forward–invariant under all inputs \textnormal{(I)} and is uniformly reachable in at most $T_{\max}$ steps from any initial state \textnormal{(R)}. In Step~4 we established the \emph{Lyapunov–border property} on $\mathcal B^\star$: there exists a continuous function $L\colon\mathcal B^\star\!\to[0,\infty)$ with $L^{-1}(0)=\partial\mathcal B^\star$ and a constant $\alpha\in(0,1)$ such that for all $\Theta\in\mathcal B^\star$ and all inputs $z\in\mathcal Z$,
+\[
+L\bigl(U(\Theta,z)\bigr)\ \le\ \alpha\,L(\Theta).
+\tag{$\heartsuit$}
+\]
+By the \emph{Minimality Theorem \ref{thm:minimality_local_contraction}} of Chapter~5 (local contraction characterization): on a compact, forward–invariant set, the existence of a Lyapunov–border function satisfying \textnormal{($\heartsuit$)} together with reachability \textnormal{(R)} implies that the update map $U$ is a \emph{uniform contraction} on $\mathcal B^\star$ with respect to the ambient metric $d$. That is, there exists $\bar\alpha\in(0,1)$ such that
+\[
+d\bigl(U(\Theta,z),\,U(\Theta',z)\bigr)\ \le\ \bar\alpha\; d(\Theta,\Theta')
+\qquad\forall\,\Theta,\Theta'\in\mathcal B^\star,\ \forall\,z\in\mathcal Z,
+\]
+establishing property \textnormal{(C)} of ABET.
+\qedhere
+
+
+% Step 6 — Necessity: assembling (R), (I), (S), (C) for ABET
+
+\paragraph{Step 6 (Conclusion of the necessity direction).}
+Under the global Chapter~3 assumptions (compact state/input/output spaces; Lipschitz $U$ and $E$), the Safety Axiom, and the Polytime Verifier Axiom, we executed the necessity argument as follows. In Steps~1–2 we constructed the universal–tail safe set $\mathcal B^\star$ and observed it satisfies \textbf{Safety} (every state in $\mathcal B^\star$ emits only safe outputs) and \textbf{Invariance} (forward–invariance under all inputs, by tail–invariance of the predicate). In Step~3 we introduced the \emph{Certification Standard} $\mathcal S$ to formalize robustness of acceptance; continuity of $(E,U)$ and compactness then turned per–state certifiability into a \textbf{uniform reachability} bound $T_{\max}$, giving property (R). In Step~4 we established the Lyapunov–border inequality on $\mathcal B^\star$ using the \emph{one–step distance} functional $L$: this provided a quantitative, strictly inward–pointing border. Finally, Step~5 upgraded the border–shrink to a uniform \textbf{contraction} of $U$ on $\mathcal B^\star$. Consequently, there exists a compact set $\mathcal B:=\mathcal B^\star$ satisfying \textbf{(R)} reachability, \textbf{(I)} invariance, \textbf{(S)} safety, and \textbf{(C)} contraction. This completes the necessity direction of ABET: \emph{deterministic certifiability (under the Polytime Verifier Axiom and the Certification Standard) implies the existence of a reachable, invariant, safe, contracting attractor basin}.
+\qed
+
+
+
+\end{proof}
+
+\section{Proof of Sufficiency ($\Leftarrow$)}
+This direction shows that if an Attractor Basin exists, then the tail property is certifiable in $\mathbf{NP}$. The proof is constructive.
+
+
+\begin{proof}[Sufficiency: Existence of a Basin $\Rightarrow$ NP Witness]
+We work under the Polytime Verifier Axiom~\ref{ax:polytime-verifier}.
+
+Assume an Attractor Basin $\mathcal{B}$ exists for the predicate $P_{\text{tail}}$, satisfying the three conditions (Contraction, Safety, Reachability) from Definition 5.4. By Lemma~\ref{lem:reachability-uniform} (Uniform Reachability via Compactness), the Reachability condition implies the existence of a uniform, polynomially bounded time $T_{\max}$ such that every initial state $\Theta_0\in\mathcal M$ enters $\mathcal B$ by time $T_{\max}$. We must show that there is a short, verifiable witness for $P_{\text{tail}}$.
+
+\paragraph{The Witness: The Capture Certificate.}
+By existential Reachability combined with Lemma~\ref{lem:reachability-uniform}, there exists a uniform, polynomially bounded time $T_{\max}$ such that for every $\Theta_0\in\mathcal M$ there is a $t\le T_{\max}$ with $U^t(\Theta_0,z^{\text{in}}_{1:t})\in\mathcal B$. Let $T\le T_{\max}$ be the first such time at which $\Theta_T\in\mathcal B$. We define the witness to be the \textbf{Capture Certificate}:
+\[
+w = (T, \Theta_T, z^{\text{in}}_{1:T})
+\]
+where $\Theta_T$ is the finite-bit encoding of the belief-state at the time of entry and $z^{\text{in}}_{1:T}$ is the sequence of input measurements that drove the system to that state. Since $T$ is polynomially bounded and the belief-space and input measurement space are compact, the witness $w$ has a polynomially bounded length.
+
+\paragraph{The Verification Algorithm.}
+A deterministic, polynomial-time verifier, given the head of the \textbf{output} measurement stream $z^{\text{out}}_{1:T}$ and the witness $w=(T, \Theta_T, z^{\text{in}}_{1:T})$, performs the following algorithm:
+\begin{enumerate}
+    \item \textbf{Replay and Verify Path:} Starting from the known initial belief $\Theta_0$, the verifier iteratively applies the update map $U$ with the \textbf{witnessed input measurements} $z^{\text{in}}_1, \dots, z^{\text{in}}_T$ to compute a candidate belief trajectory $\Theta'_1, \dots, \Theta'_T$. The verifier checks that the final computed state $\Theta'_T$ matches the witnessed state $\Theta_T$ to within the model's numerical precision. If they do not match, reject.
+
+    \item \textbf{Verify Output Consistency:} For each step $k$ from 1 to $T$, the verifier computes the predicted output from its replayed path, $\widehat{z}^{\text{out}}_k = E(\Theta'_{k-1})$, and checks that it matches the observed output $z^{\text{out}}_k$. If not, reject.
+
+    \item \textbf{Verify Basin Membership:} The verifier checks that the replayed final state 
+    \[
+    \Theta'_T \;=\; U^T(\Theta_0,\,z^{\text{in}}_{1:T})
+    \]
+    matches the witnessed state $\Theta_T$.  By the hypothesis that $(T,\Theta_T)$ is a capture certificate for $\mathcal{B}$, we have $\Theta_T \in \mathcal{B}$.  If $\Theta'_T\neq\Theta_T$, the verifier rejects.
+    
+
+    \item \textbf{Conclude by Invariance and Safety:} If all checks pass, the verifier knows that $\Theta_T$ is in the attractor basin $\mathcal{B}$. By Chapter 5 \textbf{Minimality Theorem} \ref{thm:minimality_local_contraction}, the assumed properties of Reachability, a Lyapunov Border, and Local Contraction on $\mathcal{B}$ are sufficient to prove that $\mathcal{B}$ is \textbf{invariant}. Therefore, the verifier can conclude with certainty that for all future times $k > T$, the state $\Theta_k$ will remain in $\mathcal{B}$. By the `Safety` property, all subsequent outputs $z^{\text{out}}_k$ will satisfy the predicate. The verifier accepts.
+\end{enumerate}
+
+This procedure runs in polynomial time, is deterministic, and correctly accepts all true instances. Therefore, the existence of a reachable attractor basin is a sufficient condition for the problem to be in $\mathbf{NP}$.
+\end{proof}
+
+\begin{remark}[The Role of the Standard]
+The proof of necessity reveals a profound insight: a non-trivial tail predicate is certifiable only if the underlying measurement object includes a \textbf{Certification Standard $\mathcal{S}$}. Without such a standard, the certification problem has no content. We therefore state a more complete version of the theorem.
+\end{remark}
+
+\begin{theorem}[The Attractor Basin Equivalence, Refined]
+A tail predicate $P_{\text{tail}}$ is deterministically certifiable by a non-trivial Measurement $\mathfrak{M} = (\mathcal{M}, \dots, \mathcal{S})$ \textbf{if and only if} it is logically equivalent to the statement "the system's belief-state enters a reachable Attractor Basin $\mathcal{B} \subsetneq \mathcal{M}$." The existence of the non-trivial Attractor Basin and the Certification Standard $\mathcal{S}$ are equivalent.
+\end{theorem}
+
+%========================= PUB: Polynomial Uniform Entry Bound =========================
+\begin{corollary}[Polynomial Uniform Entry Bound (PUB)]
+\label{cor:poly-uniform-entry-bound}
+Assume ABET’s hypotheses (R), (I), (S), compactness, and robustness under $\mathcal S$. Suppose further that the Polytime Verifier Axiom (Axiom~\ref{ax:polytime-verifier}) holds. Then there exists a polynomial $p$ such that
+\[
+  T_{\max}\ \le\ p(n),
+  \qquad n:=|\text{input}|.
+\]
+\end{corollary}
+
+\begin{proof}
+By Chapter~4, each single–step verification admits a constant–size subcertificate (length $\le b$). A $T$–step capture certificate therefore has length
+\(
+  L(T)=bT+O(\log T).
+\)
+By (V3) (\emph{honest–read}), on yes–instances the verifier reads all $L(T)$ bits, so some constant $c>0$ satisfies
+\(
+  c\,L(T)\ \le\ \mathrm{Time}_V.
+\)
+By (V1), $\mathrm{Time}_V\le q(n)$, hence $T=O(q(n))$. Taking the supremum over admissible initial states yields the polynomial bound $T_{\max}\le p(n)$.
+\end{proof}
+
+%======================================================================================
+
+
+\section{The Exhaustiveness of the Design Patterns}
+
+A final powerful consequence of this equivalence is that any certifiable system must conform to one of two fundamental architectural patterns.
+
+\begin{theorem}[Exhaustiveness of the Two Patterns]
+Any deterministically-certifiable Type B measurement system must conform to exactly one of the two design patterns derived as corollaries in Chapter 5:
+\begin{enumerate}
+    \item \textbf{The Trivial Pattern:} The certification problem has no content ($\mathcal{B}=\mathcal{M}$). This occurs if and only if no Certification Standard $\mathcal{S}$ is specified. The system's dynamics are irrelevant to certification.
+    \item \textbf{The Testable Pattern:} The system is non-trivially certifiable ($\mathcal{B} \subsetneq \mathcal{M}$). This occurs if and only if there exists a non-trivial Certification Standard $\mathcal{S}$, which is equivalent to imposing a guard-band on the input measurements $z^{\text{in}}_k$ and, in turn, equivalent to imposing a guard-band on the output measurements $z^{\text{out}}_k$, all of which statements mean guaranteed robust entry into the basin $\mathcal{B}$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+By the Attractor Basin Equivalence Theorem, any certifiable system must possess a unique, reachable, invariant, and safe basin $\mathcal{B}$. Logically, this basin must either be the entire space $\mathcal{M}$ or a proper subset of it.
+\begin{itemize}
+    \item \textbf{Case 1: $\mathcal{B}=\mathcal{M}$.} If the basin is the entire space, then by the Chapter 5 Minimality Theorem \ref{thm:minimality_local_contraction}, the update map $U$ must be a uniform strict contraction on all of $\mathcal{M}$. In this trivial case, the Lyapunov-border condition is vacuously satisfied on $\mathcal{M}$, so the Minimality Theorem applies to yield uniform contraction on all of $\mathcal{M}$. This is precisely the \textbf{Trivial} pattern.
+    \item \textbf{Case 2: $\mathcal{B} \subsetneq \mathcal{M}$.} If the basin is a proper subset, the system must still guarantee invariance and reachability. As shown in the corollaries of the Minimality Theorem in Chapter 5 Section \ref{sec:minimality_local_contraction_corollaries}, if contraction is only assumed locally on $\mathcal{B}$, an additional condition is required to ensure invariance. This condition takes the form of either
+    \begin{enumerate}
+        \item a guard-band on the incoming \textbf{input measurements} $z^{\text{in}}_k$. 
+        \item a guard-band on the outgoing \textbf{output measurements} $z^{\text{out}}_k$. 
+        \item a Certificate Standard $\mathcal{S}$
+    \end{enumerate}
+    This is precisely the \textbf{Testable} 
+    pattern.
+    
+    We note that the equivalence of the guard-band, output-band, and Certification Standard formulations is established formally in Chapter~8; here we invoke it as a corollary of ABET without proving it at this point.
+
+\end{itemize}
+Since these two cases are exhaustive and mutually exclusive, any measurement model must fall into one of them. No third option is possible.
+\end{proof}
+
+\section*{Conclusion}
+
+In this chapter we have established the following key points:
+
+\begin{enumerate}
+  \item \textbf{Attractor Basin Equivalence.}  We proved that a tail predicate $P_{\rm tail}$ is deterministically certifiable by a polynomial‑time scheme if and only if there exists a reachable, invariant, contracting attractor basin $\mathcal B\subseteq\mathcal M$ whose entry guarantees $P_{\rm tail}$.  
+  \item \textbf{Certification Standard.}  In the necessity direction we discovered that any non‑trivial certifier must come paired with a \emph{Certification Standard} $\mathcal S$, a family of guard‐band radii ensuring robustness of every accepting run.  Conversely, given $\mathcal S$, compactness and continuity yield a uniform entry time $T_{\max}$.  
+  \item \textbf{Verifier Normalization and Suffix Lemmas.}  We introduced Lemma~\ref{lem:verifier-normalization} to normalize any black‑box verifier so that it reads only a declared finite prefix of its head and witness.  This enabled the Suffix Certification and Suffix Universality lemmas, which in turn underpin the Safety and Invariance properties of $\mathcal B$.  
+  \item \textbf{Exhaustive Design Patterns.}  Finally, we showed that every certifiable measurement system falls into one of two—and only two—patterns:
+  \begin{itemize}
+    \item The \emph{Trivial Pattern} ($\mathcal B=\mathcal M$, no standard required), and
+    \item The \emph{Testable Pattern} ($\mathcal B\subsetneq\mathcal M$, non‑trivial $\mathcal S$ required).
+  \end{itemize}
+\end{enumerate}
+
+Together, these results complete the formal foundation of Type B tail certification: they identify exactly when—and only when—a finite, polynomial‑size certificate exists, and they characterize the necessary and sufficient structures of both the physical dynamics $(E,U)$ and the epistemic apparatus $(V,\mathcal S)$. 
+
+\section*{6.5 Ontological Synthesis of Attractor‑Based Certification}
+
+\subsection*{6.5.1 Summary of the Attractor Basin Equivalence Theorem}
+In Theorem 6.1 we established that a tail predicate \(P_{\rm tail}\) admits a finite, polynomial‑size certificate if and only if there exists a reachable, invariant, contracting attractor basin \(\mathcal B\subseteq\mathcal M\) whose entry guarantees \(P_{\rm tail}\).  This “Attractor Basin Equivalence” theorem unifies the dynamical and epistemic aspects of certification, showing exactly when—and only when—a finite witness suffices.
+
+
+\subsection*{6.5.4 Measurement as a Tradeway: The Epistemic‑Physical Oracle}
+\begin{quote}
+Certifiable measurement is a “trade”: we impose controlled irreversibility to gain the power to decide a tail‑predicate.  This trade is mediated by the \emph{Certification Standard} \(\mathcal S\), which acts as an oracle bridging the physical dynamics \((E,U)\) and the epistemic apparatus \((V,\mathcal S)\).  Ontologically, \(\mathcal S\) encodes the minimal irreversibility budget needed to transform an intractable universal claim into a robust, decidable property.
+\end{quote}
+
+In certifiable measurement, we view the act of observing a system not as a passive read‑out but as a deliberate \emph{exchange}—a tradeway—in which we sacrifice a controlled amount of reversibility in the underlying dynamics in order to obtain a concrete, finite certificate of future behavior.  At the heart of this exchange lies the \emph{Certification Standard} \(\mathcal S\), which functions as an oracle mediating between two realms:
+
+\begin{itemize}
+  \item \textbf{Physical Dynamics \((E,U)\).}  
+    The engine of the measurement process, where \(E\) generates observations \(z_t\) and \(U\) updates the internal belief state \(\Theta_t\).  Left unchecked, these maps can be either too reversible—precluding any finite proof of long‑run properties—or too lossy—destroying all meaningful information.
+  
+  \item \textbf{Epistemic Apparatus \((V,\mathcal S)\).}  
+    The verifier \(V\) judges membership in the attractor basin by comparing \(\Theta_t\) against a family of guard‐band radii prescribed by \(\mathcal S\).  These radii constitute the minimal “irreversibility budget” at each stage, ensuring that once the system crosses each threshold, no adversarial behavior can prevent eventual entry into the true basin.
+\end{itemize}
+
+Ontologically, \(\mathcal S\) embodies the precise \emph{budget of irreversibility} that must be expended during the measurement process.  Too little, and the certificate remains under‐determined—there is no guarantee the tail predicate will follow.  Too much, and we destroy the ability to reconstruct the measurement history, invalidating soundness.  The Certification Standard thus strikes the delicate balance: it \emph{quantifies} how much information‑loss (or contraction–collapse) must be introduced, and \emph{when}, in order to convert an otherwise intractable universal claim into a finite, checkable proof.
+
+Viewed this way, certification is not merely a logical exercise but a physical–epistemic contract.  We trade away a carefully calibrated slice of the system’s reversibility in exchange for the power to assert, with absolute confidence, that “from this point onward, the desired tail behavior is guaranteed.”  In this light, the Standard is more than a technical device: it is the oracle that guarantees the integrity of the entire measurement tradeway.  
+
+
+\subsection*{6.5.6 Concluding Reflections and Future Directions}
+This ontological synthesis clarifies the role of adaptation, contraction, and standards in Type B certification.  By pinpointing the true source of irreversibility and elevating certification patterns, we lay a foundation for the unification between Type A and Type B Testable Measurements proposed in the next chapter.
+
+\end{document}

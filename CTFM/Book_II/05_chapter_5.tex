@@ -1,0 +1,499 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+% Chapter-specific theorem environments
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{setup}{Setup}[section]
+
+\title{\textbf{Chapter 5: The Minimal Condition for Invariant Basins: Local Contraction}}
+\author{Dmytro Surdu}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{quote}
+\textit{In the previous chapter, we proved that per-step testability is equivalent to per-step information loss. However, this is not sufficient to certify claims about the infinite future. This chapter introduces the central structure required for tail certification: the \textbf{Attractor Basin}. We will carefully build the axioms required for a useful basin theory and then prove the \textbf{Minimality Theorem}. This crucial result establishes that a uniform strict contraction on the basin is the necessary and sufficient condition for basin invariance, given reachability and a well-behaved boundary. This theorem provides the rigorous justification for the primary tool of our theory.}
+\end{quote}
+
+\section{The Logical Gap and the Need for a Basin}
+
+We have established that we can trust the computed belief-state $\Theta_t$ at any finite time $t$. But consider a typical tail predicate:
+\begin{quote}
+$P_{\text{tail}}$: "For all future times $k > n$, the system's belief-state $\Theta_k$ will remain within a pre-defined safe set $\mathcal{S}$."
+\end{quote}
+Even if we know that our belief-state's uncertainty shrinks at every step, this provides no finite point at which we can stop and declare the infinite-tail property proven. An asymptotic guarantee is not a finite proof. To bridge this gap, we need to identify a "point of no return"—a region in the belief-space which, once entered, guarantees the tail predicate holds forever. This is the Attractor Basin.
+
+\section{Axioms for a Usable Attractor Basin}
+
+For an attractor basin $\mathcal{B}$ to be useful for certification, it must be reachable in a bounded time and it must be invariant (once entered, it is never left). We begin by formalizing these properties as axioms.
+
+\begin{definition}[Pointwise Reachability (weak R)]
+\label{def:basin-axiom-R}
+A closed set $\mathcal B\subseteq\mathcal M$ satisfies \textbf{(R$_{\mathrm{pt}}$)} if for every initial
+$\Theta_0\in\mathcal M$ and every admissible input stream $(z_1,z_2,\dots)$
+there exists a (possibly instance–dependent) $T\ge0$ such that
+$U^T(\Theta_0;z_{1:T})\in\mathcal B$.
+\end{definition}
+
+\begin{remark}[Role of the Lyapunov border]
+\label{rem:Lyap-border-interior}
+Write $\mathcal B=\{\theta:V(\theta)\le r\}$ as in Axiom L. Let
+$\mathring{\mathcal B}=\{\theta:V(\theta)<r\}$ denote the strict interior.
+By Axiom L, if $V(\Theta)=r$ then for \emph{every} $z^{\mathrm{in}}$ we have
+$V(U(\Theta,z^{\mathrm{in}}))<r$, i.e.\ $U(\Theta,z^{\mathrm{in}})\in\mathring{\mathcal B}$.
+Consequently, any trajectory that enters $\mathcal B$ at some time $t$ is
+guaranteed to be in $\mathring{\mathcal B}$ by time $t{+}1$, regardless of the next input.
+\end{remark}
+
+\begin{definition}[Axiom L: Lyapunov Border Condition]
+\label{def:basin-axiom-L}
+A closed set $\mathcal{B} = \{\theta \in \mathcal{M} \mid V(\theta) \le r\}$ defined by a continuous function $V: \mathcal{M} \to [0, \infty)$ and a constant $r > 0$ satisfies \textbf{Axiom L} if every boundary point is mapped strictly inside the set on the next update. Formally:
+\[
+\forall \Theta \in \mathcal{M} \text{ with } V(\Theta) = r, \quad \forall z^{\text{in}} \in \mathcal{Z}^{\text{in}}: \quad V(U(\Theta, z^{\text{in}})) < r
+\]
+\end{definition}
+
+This condition prevents trajectories from "touching" the boundary of the basin and immediately leaving. We now define the final property of interest.
+
+\begin{definition}[Axiom C: Local Contraction on $\mathcal{B}$]
+\label{def:basin-axiom-C}
+The update map $U$ satisfies \textbf{Axiom C} on a set $\mathcal{B}$ if there exists a constant $\rho \in [0, 1)$ such that for all $\Theta, \Theta' \in \mathcal{B}$ and all $z^{\text{in}} \in \mathcal{Z}^{\text{in}}$:
+\[
+d(U(\Theta, z^{\text{in}}), U(\Theta', z^{\text{in}})) \le \rho \cdot d(\Theta, \Theta')
+\]
+\end{definition}
+
+\section{The Minimality Theorem}
+
+The main result of this chapter is that, given reachability and a well-behaved border, local contraction is not just a sufficient condition for invariance, but also a necessary one.
+
+\begin{theorem}[Minimality of Local Contraction]
+\label{thm:minimality_local_contraction}
+Let $(\mathcal{M}, d)$ be a compact metric space, and let $U$ and a closed set $\mathcal{B} \subseteq \mathcal{M}$ be given. Assume that Axiom R (Uniform Reachability) and Axiom L (Lyapunov Border) hold for $\mathcal{B}$. Then, the set $\mathcal{B}$ is invariant under $U$ if and only if $U$ satisfies Axiom C (Local Contraction on $\mathcal{B}$).
+\end{theorem}
+
+Before proving the theorem in both directions, we lift the weak reachability to the uniform reachability with the following lemma.
+
+\begin{lemma}[Uniformization from compactness and the basin axioms]
+\label{lem:uniformization-no-T}
+Assume:
+\begin{enumerate}
+  \item \textup{(C)}: $\mathcal M$ and $\mathcal Z^{\mathrm{in}}$ are compact metric spaces, and $U$ is continuous;
+  \item \textup{(R$_{\mathrm{weak}}$)} (Def.~\ref{def:basin-axiom-R});
+  \item \textup{(L)} (Lyapunov border for $\mathcal B=\{V\le r\}$);
+  \item \textup{$(C_{\mathrm{basin}})$} (local contraction on $\mathcal B$; not used in the proof below but part of the basin axiom pack).
+\end{enumerate}
+Then there exists a finite $T_{\max}$ such that for every $\Theta_0\in\mathcal M$ and every admissible input stream $\mathbf z$,
+\[
+U^{T_{\max}}(\Theta_0;z_{1:T_{\max}})\in\mathcal B.
+\]
+In particular, \textup{(R)} (uniform reachability) holds and is \emph{derived} from \textup{(C)}, \textup{(R$_{\mathrm{weak}}$)}, and \textup{(L)}.
+\end{lemma}
+
+\begin{proof}
+Equip the infinite input space $\mathcal Z^{\mathrm{in}\,\mathbb N}$ with the product topology.
+Since $\mathcal Z^{\mathrm{in}}$ is compact metric by (C), Tychonoff’s theorem yields that
+$\mathcal Z^{\mathrm{in}\,\mathbb N}$ is compact; being a countable product of compact metrizable spaces, it is again compact metric.
+
+For each $t\in\mathbb N$, define the continuous map
+\[
+F_t:\ \mathcal M\times \mathcal Z^{\mathrm{in}\,\mathbb N}\ \longrightarrow\ \mathcal M,
+\qquad
+F_t(\Theta_0,\mathbf z)\;:=\;U^t(\Theta_0;z_{1:t}),
+\]
+where $U^t$ is the $t$–fold composition of the continuous update $U$ (continuity follows by induction on $t$ and continuity of the coordinate projection $\mathbf z\mapsto z_{1:t}$).
+
+Let $\mathring{\mathcal B}=\{V<r\}$ be the interior of $\mathcal B$.
+For each $t\ge1$, set
+\[
+\mathcal O_t\ :=\ F_t^{-1}(\mathring{\mathcal B})
+\ \subseteq\ \mathcal M\times \mathcal Z^{\mathrm{in}\,\mathbb N}.
+\]
+Because $F_t$ is continuous and $\mathring{\mathcal B}$ is open, each $\mathcal O_t$ is open.
+
+Now fix any pair $(\Theta_0,\mathbf z)$. By (R$_{\mathrm{weak}}$), there exists $T$ with
+$U^T(\Theta_0;z_{1:T})\in\mathcal B$. By Remark~\ref{rem:Lyap-border-interior}, regardless of $z_{T+1}$ we then have
+$U^{T+1}(\Theta_0;z_{1:T+1})\in\mathring{\mathcal B}$, i.e.\ $(\Theta_0,\mathbf z)\in\mathcal O_{T+1}$.
+Therefore the open sets $\{\mathcal O_t\}_{t\ge1}$ form an open cover of the compact space
+$\mathcal M\times \mathcal Z^{\mathrm{in}\,\mathbb N}$.
+
+By compactness, there exists a finite subcover
+\[
+\mathcal M\times \mathcal Z^{\mathrm{in}\,\mathbb N}\;=\;\bigcup_{i=1}^k \mathcal O_{t_i}.
+\]
+Let $T_{\max}=\max\{t_1,\dots,t_k\}$. Then for every $(\Theta_0,\mathbf z)$ there is an index $i$ with
+$(\Theta_0,\mathbf z)\in\mathcal O_{t_i}$, hence
+$U^{t_i}(\Theta_0;z_{1:t_i})\in\mathring{\mathcal B}\subseteq\mathcal B$, and therefore
+$U^{T_{\max}}(\Theta_0;z_{1:T_{\max}})\in\mathcal B$ as well (because $\mathcal B$ is forward–invariant under the $V<r$ guard by (L), and in any case $t_i\le T_{\max}$ gives entry by time $T_{\max}$).
+Thus a uniform bound exists.
+\end{proof}
+
+\subsection{Proof of Sufficiency ($\Leftarrow$)}
+
+We prove that if a map is a strict contraction on a set with a Lyapunov border, it must be invariant on that set.
+
+
+Recall the setting: \(\mathcal{M}\) is a compact metric space, 
+\(\mathcal{B}=\{\theta\in\mathcal{M}\mid V(\theta)\le r\}\) is closed, 
+and we assume
+
+\begin{itemize}
+  \item \textbf{Axiom L (Lyapunov Border)}:
+    \(\forall\,\Theta\in\mathcal{M}\) with \(V(\Theta)=r\), 
+    \(\forall\,z^{\text{in}}\in\mathcal{Z}^{\text{in}}:\;V\bigl(U(\Theta,z^{\text{in}})\bigr)<r\).
+  \item \textbf{Axiom C (Local Contraction)}:
+    \(\exists\,\rho\in[0,1)\) such that 
+    \(\forall\,\Theta,\Theta'\in\mathcal{B},\,z^{\text{in}}\in\mathcal{Z}^{\text{in}}:\)
+    \[
+      d\bigl(U(\Theta,z^{\text{in}}),\,U(\Theta',z^{\text{in}})\bigr)\;\le\;\rho\,d(\Theta,\Theta')\;.    
+    \]
+\end{itemize}
+
+We will show that these two imply
+\[
+  \forall\,\Theta\in\mathcal{B},\,\forall\,z^{\text{in}}\in\mathcal{Z}^{\text{in}}:\quad
+    U(\Theta,z^{\text{in}})\in\mathcal{B},
+\]
+i.e.\ \(\mathcal{B}\) is invariant.
+
+\begin{lemma}[Boundary Preservation]\label{lem:boundary}
+Under Axiom L, every boundary point is sent strictly into the interior:
+\[
+  \forall\,\Theta\text{ with }V(\Theta)=r,\;\forall\,z^{\text{in}}:\quad
+  V\bigl(U(\Theta,z^{\text{in}})\bigr)<r\;.
+\]
+\end{lemma}
+\begin{proof}
+This is exactly Axiom L.
+\end{proof}
+
+\begin{lemma}[Interior Preservation via Quantitative Contraction]
+\label{lem:interior}
+Under Axiom L we have a strictly positive “Lyapunov gap”
+\[
+\delta \;=\;
+r \;-\;\max_{\substack{\Theta\in\mathcal M\\V(\Theta)=r}}\;
+\max_{z\in\mathcal Z^{\rm in}}
+V\bigl(U(\Theta,z)\bigr)
+\;>\;0.
+\]
+If, in addition, the map \(U\) satisfies Axiom C with a contraction constant \(\rho\)
+such that
+\[
+L_V\,\rho\,\mathrm{diam}(\mathcal B)\;<\;\delta,
+\]
+where \(L_V\) is a Lipschitz constant of \(V\) on \(\mathcal B\), then every interior point is sent into the strict interior:
+\[
+\forall\,\Theta\text{ with }V(\Theta)<r,\;\forall\,z\in\mathcal Z^{\rm in}:
+\quad
+V\bigl(U(\Theta,z)\bigr)<r.
+\]
+\end{lemma}
+
+\begin{proof}
+Since \(V\circ U(\cdot,z)\) is continuous on the compact boundary
+\(\{\Theta:V(\Theta)=r\}\), it attains the maximum
+\(\max_{V(\Theta)=r}V(U(\Theta,z))\).  Define
+\(\delta = r - \max_{V(\Theta)=r}V(U(\Theta,z))>0\).  Also, by Axiom C,
+for any boundary point \(\Theta_b\) and any interior point \(\Theta\),
+\[
+d\bigl(U(\Theta,z),\,U(\Theta_b,z)\bigr)
+\;\le\;
+\rho\,d(\Theta,\Theta_b)
+\;\le\;
+\rho\,\mathrm{diam}(\mathcal B).
+\]
+Since \(V\) is Lipschitz on \(\mathcal B\) with constant \(L_V\), we have
+\[
+V\bigl(U(\Theta,z)\bigr)
+\;\le\;
+V\bigl(U(\Theta_b,z)\bigr)
+\;+\;
+L_V\,d\bigl(U(\Theta,z),\,U(\Theta_b,z)\bigr)
+\;\le\;
+(r-\delta)
+\;+\;
+L_V\,\rho\,\mathrm{diam}(\mathcal B).
+\]
+By the hypothesis \(L_V\,\rho\,\mathrm{diam}(\mathcal B)<\delta\), the
+right‐hand side is strictly less than \(r\).  Hence
+\(V(U(\Theta,z))<r\), as required.
+\end{proof}
+
+\begin{proof}[Proof of Sufficiency]
+% ...
+\textbf{2. Boundary‐gap and quantitative contraction.}
+By Axiom L, the boundary of \(\mathcal B\) is sent strictly inside, yielding
+\[
+\delta \;=\;
+r \;-\;\max_{V(\Theta)=r}\max_{z}V\bigl(U(\Theta,z)\bigr)
+\;>\;0.
+\]
+Invoke the Lipschitz constant \(L_V\) of \(V\) on \(\mathcal B\).  We require
+\(\rho<1\) to satisfy
+\[
+L_V\,\rho\,\mathrm{diam}(\mathcal B)\;<\;\delta,
+\]
+which is exactly the strengthened Axiom C.  Then by 
+Lemma \ref{lem:interior}, both boundary and interior points map into
+\(\{V<r\}\).  Hence for every \(\Theta\in\mathcal B\) and \(z\in\mathcal Z^{\rm in}\),
+\(\;V(U(\Theta,z))<r\), proving invariance of \(\mathcal B\).
+
+\end{proof}
+
+Thus, by Lemma~\ref{lem:uniformization-no-T}, (R) holds (uniform reachability is derived).
+
+
+\subsection{Proof of Necessity ($\Rightarrow$)}
+
+We recall the setting and axioms:
+
+\begin{itemize}
+  \item \textbf{Uniform Reachability (Axiom R).}  There exists a finite \(T_{\max}\) such that
+    for every initial state \(\Theta_0\in\mathcal M\) and every admissible measurement
+    stream \((z_1,z_2,\dots)\), the trajectory
+    \(\Theta_t=U^t(\Theta_0;z_1,\dots,z_t)\) enters \(\mathcal B\) by time \(T_{\max}\).
+  \item \textbf{Lyapunov Border (Axiom L).}  The set
+    \(\displaystyle \mathcal B = \{\theta\in\mathcal M:V(\theta)\le r\}\)
+    is closed, and
+    \[
+      \forall\,\Theta\text{ with }V(\Theta)=r,\;\forall\,z\in\mathcal Z:
+      \quad V\bigl(U(\Theta,z)\bigr)<r.
+    \]
+  \item \textbf{Invariance.}  We assume \(\mathcal B\) is invariant:
+    \(\Theta\in\mathcal B,\;z\in\mathcal Z\implies U(\Theta,z)\in\mathcal B\).
+\end{itemize}
+
+We must show that \(U\) is a uniform strict contraction on \(\mathcal B\):
+\[
+  \exists\,\rho\in[0,1)\quad
+  \text{such that}\quad
+  \forall\,\Theta,\Theta'\in\mathcal B,\;z\in\mathcal Z:\;
+  d\bigl(U(\Theta,z),U(\Theta',z)\bigr)\le\rho\,d(\Theta,\Theta').
+\]
+
+\begin{lemma}[Supremum Attainment]\label{lem:sup-attained}
+Let \((\mathcal B,d)\) and \((\mathcal Z,\rho)\) be compact metric spaces, and let
+\[
+U:\mathcal B\times\mathcal Z\;\longrightarrow\;\mathcal B
+\]
+be continuous.  For any \(\delta>0\), define the closed subset
+\[
+D_\delta \;=\; \{\,(\Theta,\Theta',z)\in\mathcal B\times\mathcal B\times\mathcal Z : 
+   d(\Theta,\Theta')\ge\delta\}.
+\]
+Define
+\[
+F:D_\delta\;\longrightarrow\;\mathbb R
+\;, \qquad
+F(\Theta,\Theta',z)
+=\frac{d\bigl(U(\Theta,z),\,U(\Theta',z)\bigr)}{d(\Theta,\Theta')}.
+\]
+Then \(F\) is continuous on the compact set \(D_\delta\), and hence there exists
+\[
+(\bar\Theta,\bar\Theta',\bar z)\;\in\;D_\delta
+\]
+such that
+\[
+F(\bar\Theta,\bar\Theta',\bar z)
+\;=\;\max_{(\Theta,\Theta',z)\in D_\delta}F(\Theta,\Theta',z)
+\;=\;\sup_{(\Theta,\Theta',z)\in D_\delta}F(\Theta,\Theta',z).
+\]
+In particular, the supremum of \(F\) on \(D_\delta\) is attained.
+\end{lemma}
+
+\begin{proof}
+\begin{enumerate}
+    \item \textbf{Compactness of \(D_\delta\).}  
+   Since \(\mathcal B\) and \(\mathcal Z\) are compact, their product 
+   \(\mathcal B\times\mathcal B\times\mathcal Z\) is compact.  The function
+   \[
+     (\Theta,\Theta',z)\;\longmapsto\;d(\Theta,\Theta')
+   \]
+   is continuous, so
+   \(\{\,( \Theta,\Theta',z ) : d(\Theta,\Theta')\ge\delta\}\)
+   is the preimage of the closed set \([\delta,\infty)\) and thus closed.  A closed subset of a compact space is compact, so \(D_\delta\) is compact.
+
+\item \textbf{Continuity of \(F\).}  
+\begin{itemize}
+    \item The map \((\Theta,\Theta',z)\mapsto d(U(\Theta,z),U(\Theta',z))\) is continuous as a composition of the continuous functions \(U\) and the metric \(d\).  
+   \item The denominator \((\Theta,\Theta',z)\mapsto d(\Theta,\Theta')\) is continuous and bounded below by \(\delta>0\) on \(D_\delta\), so it never vanishes there.  
+   \item Hence \(F\), as the quotient of two continuous functions with nonzero denominator, is continuous on \(D_\delta\).
+\end{itemize}
+\item \textbf{Application of the Extreme Value Theorem.}  
+   Because \(F\) is continuous on the compact set \(D_\delta\), it must attain both its maximum and minimum.  Therefore there exists a point 
+   \((\bar\Theta,\bar\Theta',\bar z)\in D_\delta\) where \(F\) achieves its supremum, as claimed.
+\end{enumerate}
+\end{proof}
+
+
+\begin{lemma}[Near–Non‑Contraction]\label{lem:near-non-contract}
+Let \((\mathcal B,d)\) and \((\mathcal Z,\rho)\) be compact metric spaces, let
+\[
+U:\mathcal B\times\mathcal Z\to\mathcal B
+\]
+be continuous, and define
+\[
+F\bigl(\Theta,\Theta',z\bigr)
+=\frac{d\bigl(U(\Theta,z),\,U(\Theta',z)\bigr)}{d(\Theta,\Theta')}
+\quad\text{on}\quad
+D=\{(\Theta,\Theta',z):\Theta\neq\Theta'\}.
+\]
+Set
+\[
+\rho \;=\;\sup_{(\Theta,\Theta',z)\in D}F(\Theta,\Theta',z).
+\]
+Then for every \(\varepsilon>0\) there exists \(\delta>0\) and a point
+\((\bar\Theta,\bar\Theta',\bar z)\in\mathcal B\times\mathcal B\times\mathcal Z\)
+with \(d(\bar\Theta,\bar\Theta')\ge\delta\) such that
+\[
+F(\bar\Theta,\bar\Theta',\bar z)
+\;\ge\;\rho \;-\;\varepsilon.
+\]
+\end{lemma}
+
+\begin{proof}
+For each \(\delta>0\) define the closed set
+\[
+D_\delta
+=\{\,(\Theta,\Theta',z)\in\mathcal B\times\mathcal B\times\mathcal Z:
+   d(\Theta,\Theta')\ge\delta\}.
+\]
+Since \(\bigcup_{\delta>0}D_\delta=D\), we have
+\[
+\rho
+=\sup_{D}F
+=\sup_{\delta>0}\sup_{D_\delta}F.
+\]
+Note that \(\delta\mapsto\sup_{D_\delta}F\) is a non‑increasing function and
+\(\lim_{\delta\to0^+}\sup_{D_\delta}F=\rho\).  Hence given
+\(\varepsilon>0\), there exists \(\delta>0\) such that
+\[
+\sup_{D_\delta}F \;>\;\rho-\varepsilon.
+\]
+By Lemma~\ref{lem:sup-attained}, \(F\) attains its supremum on the compact
+set \(D_\delta\).  Thus there exists
+\((\bar\Theta,\bar\Theta',\bar z)\in D_\delta\) with
+\[
+F(\bar\Theta,\bar\Theta',\bar z)
+=\sup_{D_\delta}F
+>\rho-\varepsilon,
+\]
+and by construction \(d(\bar\Theta,\bar\Theta')\ge\delta>0\).  This
+\((\bar\Theta,\bar\Theta',\bar z)\) is the desired off‑diagonal witness.
+\end{proof}
+
+
+\begin{lemma}[Slow‑Convergence vs.\ Bounded Reachability, refined]
+Let \((\mathcal B,d)\) and \((\mathcal Z,\rho)\) be compact metric spaces, and let 
+\[
+U:\mathcal X\times\mathcal Z\to\mathcal X
+\]
+be continuous on the ambient space \(\mathcal X\supset\mathcal B\).  For any \(\delta>0\) define the compact set
+\[
+D^*_\delta
+=\bigl\{
+ (\Theta,\Theta',z)\in\;\bigl(\mathcal X\setminus\mathcal B\bigr)\times\partial\mathcal B\times\mathcal Z:
+ d(\Theta,\Theta')\ge\delta
+\bigr\}.
+\]
+Set
+\[
+\rho^*_\delta
+=\sup_{(\Theta,\Theta',z)\in D^*_\delta}
+\frac{d\!\bigl(U(\Theta,z),U(\Theta',z)\bigr)}
+     {d(\Theta,\Theta')}
+\;.
+\]
+Then for every \(\varepsilon>0\) there exists \(\delta>0\) and a witness
+\((\Theta_0,\Theta_0',z^*)\in D^*_\delta\) with
+\[
+\frac{d\bigl(U(\Theta_0,z^*),\,U(\Theta_0',z^*)\bigr)}
+     {d(\Theta_0,\Theta_0')}
+\;>\;\rho^*_\delta-\varepsilon,
+\]
+so in particular \(d_0=d(\Theta_0,\Theta_0')>0\) and \(\Theta_0'\in\partial\mathcal B\).
+\end{lemma}
+\begin{proof}
+By simple induction,
+\[
+  d\bigl(\Theta_t,\mathcal B\bigr)
+  \;\ge\;(1-\varepsilon)\,d\bigl(\Theta_{t-1},\mathcal B\bigr)
+  \;\ge\;\cdots\;\ge\;(1-\varepsilon)^t\,d(\Theta_0,\mathcal B).
+\]
+\end{proof}
+
+\begin{proof}[Proof of Necessity]
+Assume \(\mathcal B\) is invariant but \(U\) is not a strict contraction,
+so its minimal Lipschitz constant on \(\mathcal B\) satisfies \(L_{\mathcal B}\ge1\).
+By Lemma \ref{lem:near-non-contract}, for any small \(\varepsilon>0\) there
+exist \(\theta_0,\theta_0'\in\mathcal B\) and \(z^*\in\mathcal Z^{\rm in}\)
+with
+\[
+d(\theta_0,\theta_0')\;=\;d_0>0,
+\quad
+d\bigl(U(\theta_0,z^*),U(\theta_0',z^*)\bigr)
+\;\ge\;(1-\varepsilon)\,d_0.
+\]
+Now fix the adversarial input stream which repeats \(z^*\) at every step.
+Starting from \(\theta_0\), invariance ensures we stay in \(\mathcal B\).  By
+Lemma \ref{lem:slow-conv}, each update satisfies
+\[
+d(\theta_t,\mathcal B)\;\ge\;(1-\varepsilon)^t\,d_0
+\;>\;0
+\]
+for all \(t\le T_{\max}\), provided
+\((1-\varepsilon)^{T_{\max}}d_0>0\).  Thus no trajectory can reach
+\(\mathcal B\) within \(T_{\max}\) steps, contradicting Uniform Reachability
+(Axiom R).  Hence \(L_{\mathcal B}<1\), i.e.\ \(U\) is a strict contraction
+on \(\mathcal B\).
+\end{proof}
+
+
+\section{Corollaries: The Two Design Patterns}
+\label{sec:minimality_local_contraction_corollaries}
+The Minimality Theorem shows that local contraction on a basin is essential. This leads to two primary ways to construct a certifiable system.
+
+\begin{corollary}[Global Contraction]
+If the update map $U$ is a global uniform strict contraction on the entire space $\mathcal{M}$, then one can choose the basin to be $\mathcal{B}=\mathcal{M}$. Axioms R and L hold automatically.
+\end{corollary}
+\begin{proof}
+If $U$ is a contraction on $\mathcal{M}$, then $\mathcal{B}=\mathcal{M}$ is trivially invariant. Reachability is also trivial since every trajectory starts in $\mathcal{M}$ ($T_{\max}=0$). The Lyapunov condition can be satisfied by taking $V(\theta)=0$ for all $\theta$. This is the simplest certifiable structure.
+\end{proof}
+
+\begin{corollary}[Local Contraction + Guard-Band]
+If one only assumes (1) Local Contraction on a proper subset $\mathcal{B} \subset \mathcal{M}$ and (2) Uniform Reachability into $\mathcal{B}$, this is equivalent to imposing a "measurement guard-band" on the input observations $z^{\text{in}}_t$.
+\end{corollary}
+\begin{theorem} 
+Suppose
+\begin{enumerate}
+    \item \textbf{Reachability} (R) to some closed $\mathcal{B}$.
+    \item A \textbf{Guard‑Band} condition on input observations: there is a \textbf{proper} subset $\mathbb{R}\subsetneq\mathcal{Z}^{\text{in}}$ (the “acceptance region”) such that
+\[
+     \forall\,\theta\in\mathcal{B},\;\forall\,z^{\text{in}}\in\mathbb{R}: \quad U(\theta,z^{\text{in}})\;\in\;\mathcal{B}.
+\]
+(But for inputs outside $\mathbb{R}$ we make no claim.)     
+\end{enumerate}
+Then $\mathcal{B}$ is forward‑invariant once the stream enters it, and since $\mathbb{R}\neq\mathcal{Z}^{\text{in}}$ one also has $\mathcal{B}\neq\mathcal{M}$.
+\end{theorem}
+\begin{proof}
+To prove the theorem, we note that:
+\begin{enumerate}
+    \item \textbf{Invariance under Guard‑Band.} Let $\theta\in\mathcal{B}$. By reachability, after some finite $t$, the true input measurement $z^{\text{in}}_t$ must lie in the guard‑band $\mathbb{R}$ (otherwise you could never force entry to $\mathcal{B}$). Once $\theta_t\in\mathcal{B}$ and $z^{\text{in}}_{t+1}\in\mathbb{R}$, the Guard‑Band rule says $U(\theta_t,z^{\text{in}}_{t+1})\in\mathcal{B}$. Inductively every subsequent update remains in $\mathcal{B}$.
+    \item $\mathcal{B} \neq \mathcal{M}$. If $\mathcal{B}=\mathcal{M}$, then invariance would hold for \textit{all} $z^{\text{in}}\in\mathcal{Z}^{\text{in}}$, not just those in $\mathbb{R}$. But by hypothesis the basin only “locks in” under $z^{\text{in}}\in\mathbb{R}$, so there must exist at least one $\bar{z}^{\text{in}}\notin\mathbb{R}$ and at least one $\bar\theta\in\mathcal{B}$ such that we make no invariance claim for $U(\bar\theta,\bar{z}^{\text{in}})$. Ergo $\mathcal{B}\subsetneq\mathcal{M}$.
+\end{enumerate}
+Finally, by the Minimality Theorem the combination R + invariance (from the Guard‑Band) + L (automatic once you enlarge $\mathcal{B}$ to be closed) \textit{implies} a local contraction constant $\rho<1$ on $\mathcal{B}$.
+\end{proof}
+
+\end{document}

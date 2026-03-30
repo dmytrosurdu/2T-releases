@@ -1,0 +1,144 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      6075,        135]
+NotebookOptionsPosition[      4346,        107]
+NotebookOutlinePosition[      4660,        121]
+CellTagsIndexPosition[      4617,        118]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Mock Cosmology Interface Tests", "Title",ExpressionUUID->"60433ff3-413a-47e9-b731-f4c2aff0d197"],
+
+Cell["\<\
+This notebook summarizes the mock-realization family used to test whether the \
+compact interface is genuinely cosmology-theory level rather than only a UOM \
+restatement. \
+\>", "Text",ExpressionUUID->"97c2a17d-3e7f-413a-8d23-b32904b30379"],
+
+Cell["Realizations used", "Section",ExpressionUUID->"e066d25f-61d6-4b82-840a-87cc9b45c5cd"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["UOM",
+   Background->None,ExpressionUUID->"c6ffe656-fe7f-4062-ac49-43cc3fda485b"]], 
+  "InlineCode",ExpressionUUID->"0bfa3a19-a9b0-4c68-b3e1-38397d11f6ad"],
+ ": current split-faithful contract realization."
+}], "Item",ExpressionUUID->"0bcf4592-538a-4552-9659-a2cfa0e79ff3"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["SyntheticBoundary",
+   Background->None,ExpressionUUID->"326f9a25-538d-4619-b31b-08f5b38c0ac6"]], 
+  "InlineCode",ExpressionUUID->"0c2509ed-55f5-4acd-95e0-38e88ba09524"],
+ ": non-UOM centered active-line realization with strong-safe boundary \
+behavior."
+}], "Item",ExpressionUUID->"7ec349de-eb56-4648-8376-b7a4d2520991"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["SyntheticCompletion",
+   Background->None,ExpressionUUID->"62e86502-7a69-4907-b479-ec46897b2be9"]], 
+  "InlineCode",ExpressionUUID->"86a12647-0ca2-4d89-a638-5d39378ccab6"],
+ ": non-UOM completion-aware realization with strong-safe boundary and \
+completion behavior."
+}], "Item",ExpressionUUID->"04697d0f-8aac-42c7-926c-aaaf9fe3d0ad"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["NegativeControl",
+   Background->None,ExpressionUUID->"74bf176c-3f60-4b57-a102-f658c74208ae"]], 
+  "InlineCode",ExpressionUUID->"97272c90-18b3-4880-8f98-ce3525174311"],
+ ": visible-ambiguity countermodel."
+}], "Item",ExpressionUUID->"91f89764-5025-4859-82fb-dd692b34cf48"],
+
+Cell["Current exact conclusions", "Section",ExpressionUUID->"beb686db-7f34-4c0c-b05b-3a5913d3810f"],
+
+Cell["\<\
+A non-UOM realization exists for the boundary interface search.\
+\>", "Item",ExpressionUUID->"85b56edc-ac9f-40dc-85d6-11775c1dadb1"],
+
+Cell[TextData[{
+ "A non-UOM realization also exists for the completion-aware candidate ",
+ Cell[BoxData[Cell["I2",
+   Background->None,ExpressionUUID->"7961558d-7f3e-4b54-b885-ea72845801a4"]], 
+  "InlineCode",ExpressionUUID->"794be86e-a671-4594-89b5-93466a1234a0"],
+ "."
+}], "Item",ExpressionUUID->"5228d85a-edd2-41ac-a5c5-fe1eb74f7e1f"],
+
+Cell["\<\
+The negative control still reproduces visible ambiguity when the key \
+interface axioms fail.\
+\>", "Item",ExpressionUUID->"0d7c6f6e-3de1-4f24-ba77-06b1024235fe"],
+
+Cell["Why this matters", "Section",ExpressionUUID->"74368084-b54c-40f4-b922-b2a27a2e04ae"],
+
+Cell["\<\
+The search is no longer asking only whether UOM can realize the contract. It \
+is also testing whether the candidate interface is abstract enough that a \
+different cosmology theory could, in principle, realize it too. \
+\>", "Text",ExpressionUUID->"4c3e0cc7-d5fe-4c7b-91f7-c22b4268e201"],
+
+Cell["Report artifact", "Section",ExpressionUUID->"485c1053-e9ee-4eba-870a-a9e4a0c1c785"],
+
+Cell["See: ", "Text",ExpressionUUID->"65e5924b-ca06-48aa-8002-eb83ed51ab22"],
+
+Cell[TextData[Cell[BoxData[Cell["\<\
+Main/Mathematica/Reports/CosmologyBoundaryInterfaceCandidates.md\
+\>",
+  Background->None,ExpressionUUID->
+  "f85d3f42-80ff-42c8-be41-5948158b31d7"]], \
+"InlineCode",ExpressionUUID->"b9cca11a-68d9-4843-884d-dc05f85a5bd4"]], "Item",\
+ExpressionUUID->"118c3796-51c0-427a-9956-029a4b220304"],
+
+Cell[TextData[Cell[BoxData[Cell["\<\
+Main/Mathematica/Reports/CosmologyInterfaceResearch_Report.json\
+\>",
+  Background->None,ExpressionUUID->
+  "8539c78b-0515-4ad9-85f8-8b2f668d55cf"]], \
+"InlineCode",ExpressionUUID->"889e4e95-25a3-4b0e-a96e-4d6788056484"]], "Item",\
+ExpressionUUID->"7c3bd293-b1d5-486f-8f40-5f4becf3b350"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"bacb05d1-7806-4062-9342-ddc6597ae3bd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 102, 0, 70, "Title",ExpressionUUID->"60433ff3-413a-47e9-b731-f4c2aff0d197"],
+Cell[659, 22, 251, 4, 70, "Text",ExpressionUUID->"97c2a17d-3e7f-413a-8d23-b32904b30379"],
+Cell[913, 28, 91, 0, 70, "Section",ExpressionUUID->"e066d25f-61d6-4b82-840a-87cc9b45c5cd"],
+Cell[1007, 30, 309, 5, 70, "Item",ExpressionUUID->"0bcf4592-538a-4552-9659-a2cfa0e79ff3"],
+Cell[1319, 37, 357, 6, 70, "Item",ExpressionUUID->"7ec349de-eb56-4648-8376-b7a4d2520991"],
+Cell[1679, 45, 370, 6, 70, "Item",ExpressionUUID->"04697d0f-8aac-42c7-926c-aaaf9fe3d0ad"],
+Cell[2052, 53, 308, 5, 70, "Item",ExpressionUUID->"91f89764-5025-4859-82fb-dd692b34cf48"],
+Cell[2363, 60, 99, 0, 70, "Section",ExpressionUUID->"beb686db-7f34-4c0c-b05b-3a5913d3810f"],
+Cell[2465, 62, 142, 2, 70, "Item",ExpressionUUID->"85b56edc-ac9f-40dc-85d6-11775c1dadb1"],
+Cell[2610, 66, 337, 6, 70, "Item",ExpressionUUID->"5228d85a-edd2-41ac-a5c5-fe1eb74f7e1f"],
+Cell[2950, 74, 172, 3, 70, "Item",ExpressionUUID->"0d7c6f6e-3de1-4f24-ba77-06b1024235fe"],
+Cell[3125, 79, 90, 0, 70, "Section",ExpressionUUID->"74368084-b54c-40f4-b922-b2a27a2e04ae"],
+Cell[3218, 81, 298, 4, 70, "Text",ExpressionUUID->"4c3e0cc7-d5fe-4c7b-91f7-c22b4268e201"],
+Cell[3519, 87, 89, 0, 70, "Section",ExpressionUUID->"485c1053-e9ee-4eba-870a-a9e4a0c1c785"],
+Cell[3611, 89, 76, 0, 70, "Text",ExpressionUUID->"65e5924b-ca06-48aa-8002-eb83ed51ab22"],
+Cell[3690, 91, 325, 6, 70, "Item",ExpressionUUID->"118c3796-51c0-427a-9956-029a4b220304"],
+Cell[4018, 99, 324, 6, 70, "Item",ExpressionUUID->"7c3bd293-b1d5-486f-8f40-5f4becf3b350"]
+}
+]
+*)
+
+(* End of internal cache information *)

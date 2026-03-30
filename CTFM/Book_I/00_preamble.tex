@@ -1,0 +1,119 @@
+\documentclass[12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+\title{\textbf{A Complexity-Theoretic Foundation for Metrology \\ \large Book I: Getting started with Type A Measurements}}
+\author{Dmytro Surdu}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent This textbook presents a novel theoretical framework connecting the physical process of measurement with the epistemological possibility of certifying its properties. It is designed for the theoretical metrologist, physicist, or engineer with a strong mathematical background but who may be new to the formalisms of computational complexity and information theory.
+
+Through a curated cycle of research papers and pedagogical notes, we will embark on a journey to answer a fundamental question: **What properties must a measurement system possess to allow for a finite, deterministic proof about the infinite behavior of its output?**
+
+Our central result is a proof of the necessary and sufficient conditions for such deterministic testability. We will show that for a measurement to be certifiable, the underlying process must be equivalent to a system possessing a **finite state** and a **continuous, finite-to-one model that causes a geometrically measurable information loss**. This work provides a rigorous, complexity-theoretic basis for understanding the structure of validatable measurements, particularly for Type A uncertainty analysis, and establishes the precise class of mathematical models and predicates that permit such validation.
+\end{abstract}
+
+\section*{Foreword and Guide to This Collection}
+
+The structure of this textbook is unconventional. It is not a monolithic narrative but a guided tour through a research project as it unfolded. We will present cleaned and annotated versions of seminal draft papers, interspersed with new tutorial chapters designed to bridge conceptual gaps. This approach has several advantages:
+
+\begin{enumerate}
+    \item \textbf{Intellectual Honesty:} It shows the authentic progression of an idea—from initial intuitions and incomplete formulations to the subsequent refinements needed to make it rigorous.
+    \item \textbf{Pedagogy:} Foundational concepts are introduced precisely when they are needed to solve a problem that has just been posed.
+    \item \textbf{Modularity:} Each chapter and note is self-contained to a large degree, allowing the reader to focus on one piece of the puzzle at a time.
+\end{enumerate}
+
+The reader is encouraged to follow the chapters in the order presented. We begin by establishing the core concepts and motivation (Part I), build to the central synthesis and its proofs (Part II), and conclude by consolidating the new framework and exploring its implications (Part III).
+
+Welcome to the intersection of measurement, information, and computation.
+
+\newpage
+\tableofcontents
+\newpage
+
+\part[Foundational Concepts]{Foundational Concepts}
+
+This first part lays the groundwork for our theory. We begin by translating the core problems of computational complexity into the language of metrology to motivate the central question. We then develop the essential mathematical tools from information theory that will be required for the proof. The goal of this part is to equip the reader with the concepts and the "why" before diving into the formal proofs of the main thesis.
+
+\section*{Chapter 1: An Introduction for the Metrologist}
+\begin{itemize}
+    \item The Foundational Gap: The difficulty of finding a property versus the ease of verifying it.
+    \item A Lexicon of Computational Rigor: The classes $\mathbf{P}$ (Tractable), $\mathbf{NP}$ (Certifiable), and co-$\mathbf{NP}$ (Refutable).
+    \item The Witness: Defining a "short proof" in the context of measurement science.
+    \item The Intractability of "Forever": Why universal claims about infinite streams are generally beyond certification ($\Pi^0_2$-completeness).
+\end{itemize}
+
+\section*{Chapter 2: An Initial, Concrete Exploration}
+\begin{itemize}
+    \item \textbf{Title:} Tractability, Testability, and Tail Restrictions: A Formal Analysis
+    \item A simple algebraic model: analyzing the effect of "clipping" rules on sample statistics.
+    \item \textbf{Key Result:} For a \emph{given} finite stream, verifying such statistical properties is in $\mathbf{P}$.
+    \item \textit{Editor's Note:} This paper demonstrates how fixing the future makes a problem tractable and motivates the search for a truly short witness.
+\end{itemize}
+
+\section*{Chapter 3: The Language of Information: A Primer}
+\begin{itemize}
+    \item Probabilistic Information: Entropy, Mutual Information, and the link to invertibility.
+    \item From Probabilistic to Geometric Loss: Introducing Metric Entropy.
+    \item The Geometric Definition of Information Loss ($\Delta^{\text{ent}}_\varepsilon$) as the primary tool for proofs.
+\end{itemize}
+
+\part{The Core Theory: Necessity and Sufficiency}
+Here we present the heart of the work. We construct a formal model of a measurement system and use the tools from Part I to prove our main results. We will demonstrate that the existence of a finite-state, information-losing model is both sufficient to enable certification and necessary for it.
+
+\section*{Chapter 4: Formalizing the Measurement Process}
+\begin{itemize}
+    \item The Measurement Chain: Mapping the True Quantity ($Q$) to an Internal State ($Y$).
+    \item The Stateful Generator: Evolving the Internal State into an Observable Stream ($Z_{1:\infty}$).
+    \item The Role of Structural Randomness: Contrasting the model with i.i.d. processes.
+\end{itemize}
+
+\section*{Chapter 5: The Geometric Argument: Testability and its Limits}
+\begin{itemize}
+    \item The Model Regularity Assumption (Finite-to-One on a Compact Domain).
+    \item The Sufficiency Proof: Showing that positive, bounded information loss enables NP-certification.
+    \item The Hardness Proof: Showing that zero information loss leads to intractability.
+\end{itemize}
+
+\section*{Chapter 6: The Structure of Certifiable Measurement: The Guard-Band Equivalence}
+\begin{itemize}
+    \item \textbf{Central Concept:} The Guard-Band Predicate as the canonical form of any testable property.
+    \item \textbf{Main Theorem:} A tail predicate admits a universal deterministic witness if and only if it is logically equivalent to a guard-band predicate.
+    \item The necessity of a finite-state, information-losing model for certification.
+\end{itemize}
+
+\part{Framework, Implications, and Future Work}
+
+In this final part, we step back to analyze the completed theory. We clarify its scope by unifying it with the familiar world of statistical uncertainty, and outline the new research questions it opens.
+
+\section*{Chapter 7: From Statistical Confidence to Logical Certainty: A Unification of Frameworks}
+\begin{itemize}
+    \item One Object, Two Intents: Distinguishing between confidence ($\delta > 0$) and certainty ($\delta = 0$).
+    \item The Black-Box vs. The Mechanistic View: How the demand for certainty forces a change in perspective.
+    \item The Guard-Band as the Limit of a Confidence Interval.
+\end{itemize}
+
+\section*{Chapter 8: Conclusion: A New Foundation and Its Open Questions}
+\begin{itemize}
+    \item The Theory in a Nutshell: A recap of the logical chain from testability to model structure.
+    \item Implications for Theoretical Metrology: A new language to define measurand and model validity.
+    \item \textbf{Solved Problem:} The theoretical foundation for Type A analysis and the class of certifiable measurement models.
+    \item \textbf{Open Questions:}
+    \begin{itemize}
+        \item \emph{Type B Uncertainty:} Extending the framework to handle non-statistical information.
+        \item \emph{Constructive Foundations:} Building a practical software architecture based on this theory.
+        \item \emph{Beyond Determinism:} Exploring interactive proofs for richer statistical claims.
+    \end{itemize}
+\end{itemize}
+
+\appendix
+\section*{Appendix A: Detailed Proof of $\Pi^0_2$-Hardness for Lossless Channels}
+A detailed, step-by-step reduction from the `TOTAL` problem to the lossless channel certification problem, formalizing the hardness argument from Chapter 5.
+
+\end{document}

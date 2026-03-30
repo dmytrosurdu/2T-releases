@@ -1,0 +1,164 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+
+\newtheorem{definition}{Definition}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+
+\newcommand{\RMain}{R^{\mathrm{red}}_{\beta,\Lambda,\mathrm{bg}}}
+\newcommand{\MMain}{\mathsf M^{\mathrm{red}}_{\mathrm{Main}}}
+\newcommand{\MOdd}{\mathsf M^{\mathrm{red}}_{\mathrm{odd}}}
+\newcommand{\XiOne}{\Xi^{(1)}}
+\newcommand{\rhobar}{\overline{\rho}^{\mathrm{dom}}}
+
+\title{Basic Lemmas for Main-Visible Equivalence}
+\date{2026-03-18}
+
+\begin{document}
+\maketitle
+
+\section*{Purpose}
+
+This note records the basic formal lemmas for the Main-visible quotient relation on a fixed
+comparison stratum. It does not prove accepted-record factorization and does not assume any
+minimality claim beyond the explicit readout map chosen here.
+
+\begin{definition}[Fixed stratum]
+Fix:
+\begin{enumerate}
+\item an accepted welded branch \(\beta\),
+\item its accepted-tick/cutoff skeleton \(\{\Lambda_k\}_{k\in K_{\mathrm{acc}}(\beta)}\),
+\item a background package \(\mathrm{bg}\) containing the common ambient weak Main-facing data
+  \((E^-_{\Lambda_k},\mathcal A^-_{\Lambda_k},\mathsf B_{\Lambda_k})\), orientation convention, and
+  any normalization convention used to pass between \(\rhobar_{\Lambda_k}\) and \(\chi_{\Lambda_k}\),
+\item a common reduced welded boundary projector / reduced receiver target.
+\end{enumerate}
+Write \(\RMain\) for the set of all live admissible UOM seam/completion realizations \(\tau\) on this
+fixed background.
+\end{definition}
+
+\begin{definition}[Reduced Main-visible readout]
+For \(\tau\in\RMain\), define
+\[
+\MMain(\tau)
+:=
+\Big(
+\mathcal P^{\mathrm{acc}}_{\Lambda_k}[\tau],\,
+[\XiOne_{\Lambda_k}](\tau),\,\rhobar_{\Lambda_k}(\tau),\,\varepsilon_{\Lambda_k}(\tau)
+\Big)_{k\in K_{\mathrm{acc}}(\beta)}.
+\]
+\end{definition}
+
+\begin{definition}[Secondary odd-lane compression]
+For \(\tau\in\RMain\), define
+\[
+\MOdd(\tau)
+:=
+\Big(
+[\XiOne_{\Lambda_k}](\tau),\,\rhobar_{\Lambda_k}(\tau),\,\varepsilon_{\Lambda_k}(\tau)
+\Big)_{k\in K_{\mathrm{acc}}(\beta)}.
+\]
+\end{definition}
+
+\begin{definition}[Main-visible equivalence]
+For \(\tau_1,\tau_2\in\RMain\), define
+\[
+\tau_1 \sim_{\mathrm{Main}} \tau_2
+\qquad\Longleftrightarrow\qquad
+\MMain(\tau_1)=\MMain(\tau_2).
+\]
+\end{definition}
+
+\begin{proposition}[\(\sim_{\mathrm{Main}}\) is an equivalence relation]
+The relation \(\sim_{\mathrm{Main}}\) is an equivalence relation on \(\RMain\).
+\end{proposition}
+
+\begin{proof}
+\textbf{Reflexive.}
+For every \(\tau\in\RMain\), one has \(\MMain(\tau)=\MMain(\tau)\), so
+\(\tau\sim_{\mathrm{Main}}\tau\).
+
+\textbf{Symmetric.}
+If \(\tau_1\sim_{\mathrm{Main}}\tau_2\), then by definition
+\(\MMain(\tau_1)=\MMain(\tau_2)\).
+Equality is symmetric, so \(\MMain(\tau_2)=\MMain(\tau_1)\), hence
+\(\tau_2\sim_{\mathrm{Main}}\tau_1\).
+
+\textbf{Transitive.}
+If \(\tau_1\sim_{\mathrm{Main}}\tau_2\) and \(\tau_2\sim_{\mathrm{Main}}\tau_3\), then
+\[
+\MMain(\tau_1)=\MMain(\tau_2)
+\qquad\text{and}\qquad
+\MMain(\tau_2)=\MMain(\tau_3).
+\]
+By transitivity of equality,
+\(\MMain(\tau_1)=\MMain(\tau_3)\), so \(\tau_1\sim_{\mathrm{Main}}\tau_3\).
+\end{proof}
+
+\begin{lemma}[Equivalent \(\chi\)-presentation under fixed normalization]
+Assume the normalization factors \(\nu_{\Lambda_k}\) are fixed in the background package
+\(\mathrm{bg}\) and that
+\[
+\chi_{\Lambda_k}=\nu_{\Lambda_k}^{-1}\rho^{\mathrm{dom}}_{\Lambda_k}
+\]
+on the fixed stratum.
+Then the relation defined by the tuple
+\[
+\Big(
+\mathcal P^{\mathrm{acc}}_{\Lambda_k},\,
+[\XiOne_{\Lambda_k}],\,\chi_{\Lambda_k},\,\varepsilon_{\Lambda_k}
+\Big)_{k\in K_{\mathrm{acc}}(\beta)}
+\]
+coincides with \(\sim_{\mathrm{Main}}\).
+\end{lemma}
+
+\begin{proof}
+On the fixed stratum, each \(\nu_{\Lambda_k}\) is constant.
+Therefore equality of \(\rhobar_{\Lambda_k}\) is equivalent to equality of \(\chi_{\Lambda_k}\) at
+each accepted tick.
+The other components of the tuple are unchanged.
+So the two readout maps have exactly the same fibers, hence define the same equivalence relation.
+\end{proof}
+
+\begin{corollary}[Accepted-record-history equality and \(\sim_{\mathrm{Main}}\) coincide]
+On the fixed stratum, \(\tau_1\sim_{\mathrm{Main}}\tau_2\) if and only if \(\tau_1\) and \(\tau_2\)
+have the same accepted-record history.
+\end{corollary}
+
+\begin{proof}
+Equality of \(\MMain(\tau_1)\) and \(\MMain(\tau_2)\) includes equality of the first component
+\(\mathcal P^{\mathrm{acc}}_{\Lambda_k}\) at every accepted tick, which is exactly equality of
+accepted-record history.
+Conversely, the accepted-record reduction theorem in the companion source note implies that equal
+accepted-record histories force equality of every theorem-visible reduced receiver datum on the fixed
+stratum, hence of the remaining components of \(\MMain\).
+\end{proof}
+
+\begin{corollary}[Downstream Main odd data descend to the quotient]
+Assume the fixed background package contains the ambient odd spaces, ambiguity subspaces, and
+Hilbertizing forms required by the polarized characterization interface.
+Then any two realizations in the same \(\sim_{\mathrm{Main}}\)-class induce the same downstream odd
+input for the finite-cutoff canonical representative theorem.
+\end{corollary}
+
+\begin{proof}
+By definition of \(\sim_{\mathrm{Main}}\), realizations in the same class have the same descendant
+class, the same descended scalar/orientation data, and the same orientation sign at every accepted
+tick.
+By definition of the fixed stratum, they also share the same ambient odd spaces, ambiguity subspaces,
+and Hilbertizing forms.
+These are exactly the odd-layer inputs used by the downstream Main theorem for the canonical
+representative.
+\end{proof}
+
+\begin{remark}
+The results above are purely formal.
+They do not assert that \(\sim_{\mathrm{Main}}\) is the unique or minimal quotient beyond the fixed
+readout chosen here.
+The further compression from \(\MMain\) to \(\MOdd\) is a separate problem and is not settled by the
+formal lemmas in this note.
+\end{remark}
+
+\end{document}

@@ -1,0 +1,316 @@
+<|"Audit" -> <|"Model" -> <|"TransportModel" ->
+      <|"Name" -> "certified_polynomial_branch", "Parameter" ->
+        MainProof`ActiveTransport`Private`lambda$133913,
+       "Assumptions" ->
+        1 <= MainProof`ActiveTransport`Private`lambda$133913 <= 3,
+       "Aminus" -> {{1, 0}, {0, 1}, {0, 0}}, "RhoDom" ->
+        {0, 0, 1 + MainProof`ActiveTransport`Private`lambda$133913},
+       "Nu" -> 1 + MainProof`ActiveTransport`Private`lambda$133913,
+       "Jdesc" -> {0, 0, 1}, "ContinuityWitnesses" -> {}|>,
+     "AcceptedChannelContract" ->
+      <|"Name" -> "uom_exact_accepted_channel_contract",
+       "ChannelData" -> <|"Name" ->
+          "uom_exact_welded_bandlocked_log_channel",
+         "Lambda" -> MainProof`UOMWeldedChannel`Private`lambda$133915,
+         "vGeom" -> MainProof`UOMWeldedChannel`Private`v$133915,
+         "AlphaTStar" -> MainProof`UOMWeldedChannel`Private`alphaT$133915,
+         "AlphaXStar" -> MainProof`UOMWeldedChannel`Private`alphaX$133915,
+         "Center" -> MainProof`UOMWeldedChannel`Private`center$133915,
+         "Tick" -> MainProof`UOMWeldedChannel`Private`tick$133915,
+         "DimB" -> 2, "Assumptions" ->
+          MainProof`UOMWeldedChannel`Private`lambda$133915 > 0 &&
+           MainProof`UOMWeldedChannel`Private`v$133915 > 0 &&
+           MainProof`UOMWeldedChannel`Private`alphaT$133915 > 0 &&
+           MainProof`UOMWeldedChannel`Private`alphaX$133915 > 0,
+         "TransportModel" -> <|"Name" -> "certified_polynomial_branch",
+           "Parameter" -> MainProof`ActiveTransport`Private`lambda$133916,
+           "Assumptions" -> 1 <=
+             MainProof`ActiveTransport`Private`lambda$133916 <= 3,
+           "Aminus" -> {{1, 0}, {0, 1}, {0, 0}}, "RhoDom" ->
+            {0, 0, 1 + MainProof`ActiveTransport`Private`lambda$133916},
+           "Nu" -> 1 + MainProof`ActiveTransport`Private`lambda$133916,
+           "Jdesc" -> {0, 0, 1}, "ContinuityWitnesses" -> {}|>,
+         "Chi" -> {0, 0, 1}, "Epsilon" -> 1, "BandLockScales" ->
+          <|"s_t" -> MainProof`UOMWeldedChannel`Private`alphaT$133915/
+             MainProof`UOMWeldedChannel`Private`lambda$133915,
+           "s_x" -> MainProof`UOMWeldedChannel`Private`alphaX$133915/
+             (MainProof`UOMWeldedChannel`Private`lambda$133915*
+              MainProof`UOMWeldedChannel`Private`v$133915)|>,
+         "TemporalWeldedForm" -> HoldForm[
+           MainProof`UOMWeldedChannel`Private`gPrime[
+               MainProof`UOMWeldedChannel`Private`CapitalSigma][
+              MainProof`UOMWeldedChannel`Private`t -
+               MainProof`UOMWeldedChannel`Private`tick$133915]*
+             MainProof`UOMWeldedChannel`Private`gPrime[
+               MainProof`UOMWeldedChannel`Private`sigmaT][
+              MainProof`UOMWeldedChannel`Private`t -
+               MainProof`UOMWeldedChannel`Private`tick$133915] ==
+            D[MainProof`UOMWeldedChannel`Private`g[Sqrt[
+                MainProof`UOMWeldedChannel`Private`CapitalSigma^2 +
+                 MainProof`UOMWeldedChannel`Private`sigmaT^2]][
+              MainProof`UOMWeldedChannel`Private`t -
+               MainProof`UOMWeldedChannel`Private`tick$133915],
+             {MainProof`UOMWeldedChannel`Private`t, 2}]],
+         "SpatialWeldedForm" -> HoldForm[
+           MainProof`UOMWeldedChannel`Private`LoG[
+               MainProof`UOMWeldedChannel`Private`rho][
+              MainProof`UOMWeldedChannel`Private`Omega,
+              MainProof`UOMWeldedChannel`Private`center$133915] \
+\[CircleTimes] MainProof`UOMWeldedChannel`Private`Gaussian[
+               MainProof`UOMWeldedChannel`Private`sigmaX][
+              MainProof`UOMWeldedChannel`Private`Omega,
+              MainProof`UOMWeldedChannel`Private`center$133915] ==
+            MainProof`UOMWeldedChannel`Private`LoG[
+              Sqrt[MainProof`UOMWeldedChannel`Private`rho^2 +
+                MainProof`UOMWeldedChannel`Private`sigmaX^2]][
+             MainProof`UOMWeldedChannel`Private`Omega,
+             MainProof`UOMWeldedChannel`Private`center$133915]],
+         "BandLockStatement" -> HoldForm[
+           {MainProof`UOMWeldedChannel`Private`sT ==
+             MainProof`UOMWeldedChannel`Private`alphaT$133915/
+              MainProof`UOMWeldedChannel`Private`lambda$133915,
+            MainProof`UOMWeldedChannel`Private`sX ==
+             MainProof`UOMWeldedChannel`Private`alphaX$133915/
+              (MainProof`UOMWeldedChannel`Private`v$133915*
+               MainProof`UOMWeldedChannel`Private`lambda$133915)}],
+         "CenterLockStatement" -> HoldForm[
+           MainProof`UOMWeldedChannel`Private`OmegaStar ==
+            MainProof`UOMWeldedChannel`Private`center$133915],
+         "WeldedChannelDimension" -> 1, "ProfileProjectorB" -> {{1, 0}, {0,
+          0}}, "ProfileBasisB" -> {{1, 0}}, "CompressedChannelStatement" ->
+          HoldForm[Subscript[MainProof`UOMWeldedChannel`Private`H,
+              MainProof`UOMWeldedChannel`Private`LoG][
+             MainProof`UOMWeldedChannel`Private`lambda$133915] ==
+            Span[{MainProof`UOMWeldedChannel`Private`uLoG[
+               MainProof`UOMWeldedChannel`Private`lambda$133915]}]]|>,
+       "SourceWrite" -> HoldForm[MainProof`UOMAcceptedChannel`Private`Wsrc[
+           MainProof`UOMAcceptedChannel`Private`v] ==
+          MainProof`UOMAcceptedChannel`Private`v], "RetardedTransport" ->
+        HoldForm[MainProof`UOMAcceptedChannel`Private`Gret[
+           MainProof`UOMAcceptedChannel`Private`v] ==
+          MainProof`UOMAcceptedChannel`Private`v], "CompiledScalarMap" ->
+        HoldForm[MainProof`UOMAcceptedChannel`Private`Kcomp[
+           MainProof`UOMAcceptedChannel`Private`v] ==
+          MainProof`UOMAcceptedChannel`Private`chi .
+            MainProof`UOMAcceptedChannel`Private`v/
+           MainProof`UOMAcceptedChannel`Private`epsilon],
+       "WeylCompensator" -> HoldForm[
+         MainProof`UOMAcceptedChannel`Private`Mepsilon[
+           MainProof`UOMAcceptedChannel`Private`s] ==
+          MainProof`UOMAcceptedChannel`Private`epsilon*
+           MainProof`UOMAcceptedChannel`Private`s], "ProfileProjection" ->
+        HoldForm[MainProof`UOMAcceptedChannel`Private`PiL[
+           MainProof`UOMAcceptedChannel`Private`s] ==
+          MainProof`UOMAcceptedChannel`Private`s*
+           MainProof`UOMAcceptedChannel`Private`PLoG],
+       "FactorizationStatement" -> HoldForm[
+         MainProof`UOMAcceptedChannel`Private`TLambda[
+           MainProof`UOMAcceptedChannel`Private`v] ==
+          MainProof`UOMAcceptedChannel`Private`PiL[
+           MainProof`UOMAcceptedChannel`Private`Mepsilon[
+            MainProof`UOMAcceptedChannel`Private`Kcomp[
+             MainProof`UOMAcceptedChannel`Private`Gret[
+              MainProof`UOMAcceptedChannel`Private`Wsrc[
+               MainProof`UOMAcceptedChannel`Private`v]]]]]],
+       "AcceptedTickKrausOperators" -> {{{1, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+         {{0, 0, 0}, {0, 1, 0}, {0, 0, 0}}, {{0, 0, 0}, {0, 0, 0}, {0, 0,
+         1}}}, "UpliftIsometry" -> {{1, 0, 0}, {0, 0, 0}, {0, 1, 0}, {0, 0,
+        0}, {0, 0, 1}, {0, 0, 0}}, "AcceptedTickDimension" -> 3|>,
+     "SelectedGenerator" -> {0, 0, 1}, "AmbiguityBasis" ->
+      {{1, 0, 0}, {0, 1, 0}}, "ProfileProjectorB" -> {{1, 0}, {0, 0}}|>,
+   "SymbolicFamily" -> <|"DetectorFactorizedDiagSource" ->
+      {0, 0, MainProof`DelayedSelectedLinePromotionAudit`Private`s$133912},
+     "DetectorFactorizedBridgeSource" ->
+      {0, 0, -MainProof`DelayedSelectedLinePromotionAudit`Private`s$133912},
+     "VariedDiagSource" ->
+      {MainProof`DelayedSelectedLinePromotionAudit`Private`a1$133912*
+        MainProof`DelayedSelectedLinePromotionAudit`Private`s$133912,
+       MainProof`DelayedSelectedLinePromotionAudit`Private`a2$133912*
+        MainProof`DelayedSelectedLinePromotionAudit`Private`s$133912,
+       MainProof`DelayedSelectedLinePromotionAudit`Private`s$133912},
+     "VariedBridgeSource" ->
+      {-(MainProof`DelayedSelectedLinePromotionAudit`Private`a1$133912*
+         MainProof`DelayedSelectedLinePromotionAudit`Private`s$133912),
+       -(MainProof`DelayedSelectedLinePromotionAudit`Private`a2$133912*
+         MainProof`DelayedSelectedLinePromotionAudit`Private`s$133912),
+       -MainProof`DelayedSelectedLinePromotionAudit`Private`s$133912},
+     "DiagCoordinate" ->
+      {MainProof`DelayedSelectedLinePromotionAudit`Private`s$133912},
+     "BridgeCoordinate" ->
+      {-MainProof`DelayedSelectedLinePromotionAudit`Private`s$133912}|>,
+   "RawNonuniquenessCounterexample" -> <|"SelectedSource" -> {0, 0, 1},
+     "ShiftedRawSource" -> {1, 0, 1}, "SelectedCoordinate" -> {1},
+     "ShiftedCoordinate" -> {1}, "SelectedImage" -> {{1, 0}, {0, 0}},
+     "ShiftedImage" -> {{1, 0}, {0, 0}}|>,
+   "Claims" -> <|"Canonical microscopic-to-seam packet extractor is \
+well-defined on the exact family" ->
+      <|"Status" -> "exact finite-dimensional certificate",
+       "Certified" -> True|>, "Microscopic-to-seam extractor kernel is \
+trivial after quotient on the exact family" ->
+      <|"Status" -> "exact finite-dimensional certificate",
+       "Certified" -> True|>, "Every nonzero microscopic delayed quotient \
+class has nonzero extracted seam image on the exact family" ->
+      <|"Status" -> "exact finite-dimensional certificate",
+       "Certified" -> True|>, "Selected-witness microscopic class survives \
+with nonzero delayed coordinate and welded image on the exact family" ->
+      <|"Status" -> "exact finite-dimensional certificate",
+       "Certified" -> True|>,
+     "Detector-factorized seam family lies on one delayed selected line" ->
+      <|"Status" -> "exact finite-dimensional certificate",
+       "Certified" -> True|>, "Delayed welded image is exactly the delayed \
+coordinate times the LoG projector" ->
+      <|"Status" -> "exact finite-dimensional certificate",
+       "Certified" -> True|>, "Accepted-record-preserving filler toggles \
+remain distinct on the delayed seam readout in the exact family" ->
+      <|"Status" -> "exact finite-dimensional certificate",
+       "Certified" -> True|>, "Pulse-rigid ambiguity directions are invisible \
+to the delayed seam extractor in the exact family" ->
+      <|"Status" -> "exact finite-dimensional certificate",
+       "Certified" -> True|>,
+     "Nonzero raw seam-invisible shifts exist before quotient" ->
+      <|"Status" -> "exact finite-dimensional certificate",
+       "Certified" -> True|>|>, "ResidualBoundary" ->
+    {"This exact audit certifies the packet-level microscopic-to-seam \
+extractor only on the current polynomial branch family.", "It also certifies \
+trivial quotient-kernel and universal microscopic selected-survival only on \
+that exact branch family.", "It separately certifies selected-witness \
+promoted delayed selected-line survival for the exact selected microscopic \
+witness family.", "It separates three microscopic generator roles only at \
+exact branch-family level: retained filler-toggle sign data, pulse-rigid \
+ambiguity invisibility, and raw seam-invisible shifts before quotient.", "It \
+does not replace the manuscript proof of the microscopic delayed equivalence \
+relation or the packet-level extractor theorem.", "It does not theorem-back \
+the downstream post-HLS physical-transfer theorem or the post-HLS Z2 rigidity \
+theorem."}|>, "LedgerRows" ->
+  {<|"TheoremLabel" -> "task:delay-promotion-packet-extractor-exact",
+    "Assumptions" ->
+     "Certified polynomial branch model plus accepted-channel contract",
+    "Method" -> "Exact symbolic audit of the packet-level microscopic-to-seam \
+extractor on the detector-factorized branch family.",
+    "Status" -> "exact finite-dimensional certificate",
+    "ScopeClass" -> "exact-model-certificate", "SurrogateBlindSpots" -> {},
+    "CertificateArtifact" -> Missing["NotAssigned"],
+    "CounterexampleArtifact" -> Missing["NotAssigned"],
+    "RepresentativeModelFamily" -> "certified_polynomial_branch",
+    "NoApproximationQ" -> True, "Source" -> "UOM/delayed_selected_line_promot\
+ion_note.tex::thm:micro-to-seam-extractor", "Acceptance" -> "Detector-admissi\
+ble raw representatives induce one common detector-factorized seam packet \
+after quotienting pulse-rigid ambiguity directions and seam-invisible shifts, \
+while retained filler-toggle sign data can still persist upstairs."|>,
+   <|"TheoremLabel" -> "task:delay-promotion-quotient-kernel-trivial",
+    "Assumptions" ->
+     "Certified polynomial branch model plus accepted-channel contract",
+    "Method" -> "Exact symbolic audit that zero extracted delayed seam image \
+implies zero quotient scalar after ambiguity and seam-invisible shifts are \
+factored out.", "Status" -> "exact finite-dimensional certificate",
+    "ScopeClass" -> "exact-model-certificate", "SurrogateBlindSpots" -> {},
+    "CertificateArtifact" -> Missing["NotAssigned"],
+    "CounterexampleArtifact" -> Missing["NotAssigned"],
+    "RepresentativeModelFamily" -> "certified_polynomial_branch",
+    "NoApproximationQ" -> True, "Source" -> "UOM/delayed_selected_line_promot\
+ion_note.tex::prop:extractor-kernel-characterization",
+    "Acceptance" -> "After quotienting pulse-rigid ambiguity directions and \
+seam-invisible shifts, the detector-factorized branch family has trivial \
+extractor kernel."|>, <|"TheoremLabel" ->
+     "task:delay-promotion-universal-selected-survival",
+    "Assumptions" ->
+     "Certified polynomial branch model plus accepted-channel contract",
+    "Method" -> "Exact symbolic audit that every nonzero quotient scalar in \
+the detector-factorized branch family has nonzero extracted delayed seam \
+image.", "Status" -> "exact finite-dimensional certificate",
+    "ScopeClass" -> "exact-model-certificate", "SurrogateBlindSpots" -> {},
+    "CertificateArtifact" -> Missing["NotAssigned"],
+    "CounterexampleArtifact" -> Missing["NotAssigned"],
+    "RepresentativeModelFamily" -> "certified_polynomial_branch",
+    "NoApproximationQ" -> True, "Source" -> "UOM/delayed_selected_line_promot\
+ion_note.tex::thm:universal-promoted-selected-survival",
+    "Acceptance" -> "Every nonzero microscopic delayed quotient class on the \
+certified branch family survives to a nonzero extracted delayed seam image."|>\
+, <|"TheoremLabel" -> "task:delay-promotion-selected-witness-survival",
+    "Assumptions" ->
+     "Certified polynomial branch model plus accepted-channel contract",
+    "Method" -> "Exact symbolic audit that the selected microscopic branch \
+representative survives through the packet extractor with nonzero delayed \
+coordinate and nonzero delayed welded image.",
+    "Status" -> "exact finite-dimensional certificate",
+    "ScopeClass" -> "exact-model-certificate", "SurrogateBlindSpots" -> {},
+    "CertificateArtifact" -> Missing["NotAssigned"],
+    "CounterexampleArtifact" -> Missing["NotAssigned"],
+    "RepresentativeModelFamily" -> "certified_polynomial_branch",
+    "NoApproximationQ" -> True, "Source" -> "UOM/delayed_selected_line_promot\
+ion_note.tex::thm:promoted-selected-line-survival",
+    "Acceptance" -> "For the exact selected microscopic witness family, the \
+promoted selected datum has nonzero delayed coordinate and nonzero delayed \
+welded image after packet extraction."|>,
+   <|"TheoremLabel" -> "task:delay-promotion-detector-factorized-line",
+    "Assumptions" ->
+     "Certified polynomial branch model plus accepted-channel contract",
+    "Method" -> "Exact symbolic detector-factorized seam family audit on the \
+delayed quotient coordinate.", "Status" ->
+     "exact finite-dimensional certificate", "ScopeClass" ->
+     "exact-model-certificate", "SurrogateBlindSpots" -> {},
+    "CertificateArtifact" -> Missing["NotAssigned"],
+    "CounterexampleArtifact" -> Missing["NotAssigned"],
+    "RepresentativeModelFamily" -> "certified_polynomial_branch",
+    "NoApproximationQ" -> True, "Source" ->
+     "UOM/delayed_odd_control_note.tex::thm:delayed-selected-line",
+    "Acceptance" -> "Every detector-factorized seam source is an exact scalar \
+multiple of the selected generator on the delayed one-dimensional line."|>,
+   <|"TheoremLabel" -> "task:delay-promotion-delayed-image-factorization",
+    "Assumptions" ->
+     "Certified polynomial branch model plus accepted-channel contract",
+    "Method" -> "Exact symbolic audit of AcceptedBoundaryMap on the \
+detector-factorized delayed seam family.",
+    "Status" -> "exact finite-dimensional certificate",
+    "ScopeClass" -> "exact-model-certificate", "SurrogateBlindSpots" -> {},
+    "CertificateArtifact" -> Missing["NotAssigned"],
+    "CounterexampleArtifact" -> Missing["NotAssigned"],
+    "RepresentativeModelFamily" -> "certified_polynomial_branch",
+    "NoApproximationQ" -> True, "Source" ->
+     "UOM/delayed_odd_control_note.tex::prop:delayed-realization-formula",
+    "Acceptance" -> "The delayed welded image is exactly the delayed selected \
+coordinate times the canonical LoG projector."|>,
+   <|"TheoremLabel" -> "task:delay-promotion-ambiguity-collapse-exact",
+    "Assumptions" ->
+     "Certified polynomial branch model plus accepted-channel contract",
+    "Method" -> "Exact symbolic audit showing that accepted-record-preserving \
+filler toggles remain distinct on the delayed seam coordinate and delayed \
+welded image.", "Status" -> "exact finite-dimensional certificate",
+    "ScopeClass" -> "exact-model-certificate", "SurrogateBlindSpots" -> {},
+    "CertificateArtifact" -> Missing["NotAssigned"],
+    "CounterexampleArtifact" -> Missing["NotAssigned"],
+    "RepresentativeModelFamily" -> "certified_polynomial_branch",
+    "NoApproximationQ" -> True, "Source" -> "UOM/active_response_transport_pr\
+ogram_note.tex::def:witness-seam-realization and ::prop:seam-scalar-signs",
+    "Acceptance" -> "Filler toggles are accepted-record-preserving but still \
+change the delayed seam coordinate and welded image in the certified family."\
+|>, <|"TheoremLabel" ->
+     "task:delay-promotion-pulse-rigid-ambiguity-invisibility",
+    "Assumptions" ->
+     "Certified polynomial branch model plus accepted-channel contract",
+    "Method" -> "Exact symbolic audit of pulse-rigid ambiguity-shift \
+invariance for delayed coordinates and delayed welded images.",
+    "Status" -> "exact finite-dimensional certificate",
+    "ScopeClass" -> "exact-model-certificate", "SurrogateBlindSpots" -> {},
+    "CertificateArtifact" -> Missing["NotAssigned"],
+    "CounterexampleArtifact" -> Missing["NotAssigned"],
+    "RepresentativeModelFamily" -> "certified_polynomial_branch",
+    "NoApproximationQ" -> True, "Source" -> "UOM/delayed_selected_line_promot\
+ion_note.tex::thm:micro-to-seam-extractor", "Acceptance" -> "Transport \
+ambiguity directions do not change the delayed seam coordinate or its welded \
+image in the certified family."|>,
+   <|"TheoremLabel" -> "task:delay-promotion-raw-seam-invisible-shift",
+    "Assumptions" ->
+     "Certified polynomial branch model plus accepted-channel contract",
+    "Method" -> "Exact counterexample witness before quotient using a nonzero \
+raw shift of the selected source with unchanged delayed seam image.",
+    "Status" -> "exact finite-dimensional certificate",
+    "ScopeClass" -> "exact-model-certificate", "SurrogateBlindSpots" -> {},
+    "CertificateArtifact" -> Missing["NotAssigned"],
+    "CounterexampleArtifact" -> Missing["NotAssigned"],
+    "RepresentativeModelFamily" -> "certified_polynomial_branch",
+    "NoApproximationQ" -> True, "Source" -> "UOM/odd_selector_note.tex::rem:s\
+elector-handoff and UOM/uom_descendant_note.tex::rem:uomdesc-downstream",
+    "Acceptance" -> "A nonzero raw shift can preserve the delayed seam \
+coordinate and welded image exactly, so raw microscopic uniqueness fails \
+before quotient."|>}|>

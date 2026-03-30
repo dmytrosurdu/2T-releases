@@ -1,0 +1,432 @@
+\ifdefined\UOMTransportFragmentLoaded\else
+\documentclass[11pt]{article}
+\input{UOM/odd_transport_fragment_standalone_preamble.tex}
+\externaldocument{UOM/odd_selector_note}
+\externaldocument{UOM/canonical_odd_interface_note}
+\externaldocument{UOM/active_response_transport_program_note}
+\title{Canonical Odd Spectral Selection on the Compressed Welded LoG Channel}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\fi
+
+\section{Canonical Odd Spectral Selection on the Compressed Welded LoG Channel}
+\label{sec:compressed-log-spectral-selection}
+
+Fix an accepted tick \(k\) on a welded admissible branch. This section isolates the compressed
+welded LoG channel and proves that the continued odd quadratic form canonically selects a negative
+rank-one odd line on that channel. The transport of the descendant class into that line is recorded
+separately in \cref{thm:char-weak-interface}; here it is used only in
+\cref{cor:compressed-transport-hit}.
+
+The macro source-side temporal envelope is DoG, the macro source-side spatial envelope is LoG, the
+micro receiver temporal envelope is DoG, and the micro receiver spatial envelope is Gaussian. By
+Corollary~\ref{main-cor:welded-log}, the welded envelope is LoG in both time and space, with scales
+adding in quadrature.
+
+\begin{definition}[Canonical welded LoG profile]
+\label{def:compressed-log-profile}
+Let \(t_k\) be the accepted tick time and let \(\Omega_\ast\in S^3\) denote the common spatial center
+selected by the co-centering/history-lock mechanism. Let
+\[
+s_{t,k}:=\sqrt{\Sigma_k^2+\sigma_{t,k}^2},
+\qquad
+s_{x,k}:=\sqrt{\rho_k^2+\sigma_{x,k}^2}
+\]
+be the effective welded scales. Define the normalized welded LoG pulse by
+\begin{equation}
+u^{\mathrm{LoG}}_{\Lambda_k}(t,\Omega)
+:=
+\mathcal N_k\,
+\frac{d^2}{dt^2}g_{s_{t,k}}(t-t_k)\,
+\Delta_{S^3}g_{s_{x,k}}(\Omega,\Omega_\ast),
+\label{eq:ulog-def}
+\end{equation}
+where \(\mathcal N_k>0\) is chosen so that
+\(
+\|u^{\mathrm{LoG}}_{\Lambda_k}\|_{L^2(\mathbb R\times S^3)}=1
+\).
+We write
+\begin{equation}
+\mathcal H^{\mathrm{LoG}}_{\Lambda_k}
+:=
+\mathbb R\,u^{\mathrm{LoG}}_{\Lambda_k}
+\label{eq:Hlog-def}
+\end{equation}
+for the compressed welded LoG channel.
+\end{definition}
+
+\begin{proposition}[Exact welded LoG form]
+\label{prop:compressed-log-exact}
+The normalized profile \(u^{\mathrm{LoG}}_{\Lambda_k}\) of
+\cref{def:compressed-log-profile} is exactly the welded macro/micro profile produced by:
+\begin{enumerate}[leftmargin=2em]
+\item macro temporal DoG convolved with micro temporal DoG;
+\item macro spatial LoG convolved with micro spatial Gaussian.
+\end{enumerate}
+In particular the welded profile is LoG in time and LoG in space, with scales adding in quadrature.
+\end{proposition}
+
+\begin{proof}
+The temporal and spatial welded identities are exactly the two statements of
+Corollary~\ref{main-cor:welded-log}. After multiplying the factors and normalizing in \(L^2\), one obtains
+\eqref{eq:ulog-def}.
+\end{proof}
+
+\begin{proposition}[Band-edge locking and unique center]
+\label{prop:compressed-log-lock}
+Assume the accepted tick lies on an admissible band-locked welded branch in the sense of
+Definition~\ref{main-def:eta-bridge-leak}. Then:
+\begin{enumerate}[leftmargin=2em]
+\item the effective welded widths satisfy
+\[
+s_{t,k}=\frac{\alpha_t^\ast}{\Lambda_k},
+\qquad
+s_{x,k}=\frac{\alpha_x^\ast}{v\,\Lambda_k},
+\]
+with \(\alpha_t^\ast,\alpha_x^\ast>0\) independent of \(k\) along a fixed admissible branch;
+\item the macro and micro temporal centers coincide at \(t_k\), and the macro and micro spatial
+  centers coincide at \(\Omega_\ast\);
+\item once the receiver trace sector carries a nonzero inherited LoG background, the absolute center
+\(\Omega_\ast\) is uniquely locked for all subsequent accepted ticks.
+\end{enumerate}
+Consequently, after normalization, the admissible welded pulse space at fixed accepted tick is the
+one-dimensional line \(\mathcal H^{\mathrm{LoG}}_{\Lambda_k}\).
+\end{proposition}
+
+\begin{proof}
+The width lock is the band-locking clause of Definition~\ref{main-def:eta-bridge-leak}. The
+temporal and spatial co-centering statements are \eqref{main-eq:Ct} and \eqref{main-eq:Cx}, and the
+persistence of the spatial center is exactly Proposition~\ref{main-prop:history-center-lock}.
+
+Therefore, at fixed accepted tick, the shape, widths, and center are fixed. The only remaining freedom
+is an overall real amplitude. After \(L^2\)-normalization, that freedom reduces to the sign
+\(\pm u^{\mathrm{LoG}}_{\Lambda_k}\). Hence the admissible welded channel is precisely the
+one-dimensional real line \(\mathcal H^{\mathrm{LoG}}_{\Lambda_k}\).
+\end{proof}
+
+\begin{proposition}[Smooth dependence along a branch]
+\label{prop:compressed-log-smooth}
+Along any admissible branch on which \(\Lambda\mapsto \alpha_t^\ast,\alpha_x^\ast\) are constant and
+the locked center \(\Omega_\ast\) is fixed, the map
+\[
+\Lambda\longmapsto u^{\mathrm{LoG}}_\Lambda
+\]
+is \(C^1\) in \(L^2(\mathbb R\times S^3)\). Consequently the rank-one orthogonal projector
+\begin{equation}
+P^{\mathrm{LoG}}_\Lambda
+:=
+u^{\mathrm{LoG}}_\Lambda\otimes u^{\mathrm{LoG}}_\Lambda
+\label{eq:Plog-def}
+\end{equation}
+is \(C^1\) along the branch.
+\end{proposition}
+
+\begin{proof}
+Along the branch one has
+\(
+s_t(\Lambda)=\alpha_t^\ast/\Lambda
+\)
+and
+\(
+s_x(\Lambda)=\alpha_x^\ast/(v\Lambda)
+\),
+so both scales depend \(C^\infty\)-smoothly on \(\Lambda\). The Gaussian heat kernel and its time and
+spatial derivatives depend smoothly on the scale parameter, hence the unnormalized welded LoG profile
+depends \(C^1\)-smoothly on \(\Lambda\) in \(L^2\). Its \(L^2\)-norm is strictly positive, so
+normalization preserves \(C^1\)-dependence. Formula \eqref{eq:Plog-def} then gives a \(C^1\)
+projector-valued map.
+\end{proof}
+
+\begin{proposition}[Well-defined restriction of the continued quadratic form]
+\label{prop:compressed-form-well-defined}
+Assume the welded linear-response/Gaussian radiative-sector package of
+Paragraph~\ref{main-para:uplift-decomp} and Theorem~\ref{main-thm:tick-fidelity-RP}. Then the
+analytically continued odd quadratic response form is well-defined on the compressed welded channel
+\(\mathcal H^{\mathrm{LoG}}_{\Lambda_k}\).
+\end{proposition}
+
+\begin{proof}
+By Paragraph~\ref{main-para:uplift-decomp}, the welded source enters the Gaussian radiative sector
+through the linear response map \(\mathsf T_\Lambda\), and Theorem~\ref{main-thm:tick-fidelity-RP}
+supplies the finite-cutoff bounded Gaussian response package on the welded envelope class. By
+\cref{prop:compressed-log-lock}, the compressed welded channel is a one-dimensional subspace of that
+admissible class. Restricting any continuous quadratic form to a one-dimensional subspace is
+automatic. Hence the analytically continued odd quadratic response form restricts canonically to
+\(\mathcal H^{\mathrm{LoG}}_{\Lambda_k}\).
+\end{proof}
+
+\begin{definition}[Compressed continued odd quadratic coefficient]
+\label{def:compressed-odd-coeff}
+Fix a witness window \(\mu_{ps}>0\) in the accepted regime. Let
+\[
+\mathfrak q^{\mathrm{cont}}_{\Lambda_k,\mu_{ps}}
+:
+\mathcal H^{\mathrm{LoG}}_{\Lambda_k}\times \mathcal H^{\mathrm{LoG}}_{\Lambda_k}
+\to
+\mathbb R
+\]
+denote the analytically continued odd quadratic response form restricted to the compressed welded LoG
+channel. Since \(\mathcal H^{\mathrm{LoG}}_{\Lambda_k}\) is one-dimensional, there is a unique scalar
+\(\beta_k\in\mathbb R\) such that
+\begin{equation}
+\mathfrak q^{\mathrm{cont}}_{\Lambda_k,\mu_{ps}}(X,Y)
+=
+\beta_k\,
+\langle X,u^{\mathrm{LoG}}_{\Lambda_k}\rangle_{L^2}
+\langle Y,u^{\mathrm{LoG}}_{\Lambda_k}\rangle_{L^2}
+\qquad
+\forall X,Y\in\mathcal H^{\mathrm{LoG}}_{\Lambda_k}.
+\label{eq:qcont-beta}
+\end{equation}
+Equivalently,
+\[
+\beta_k
+=
+\mathfrak q^{\mathrm{cont}}_{\Lambda_k,\mu_{ps}}
+\big(
+u^{\mathrm{LoG}}_{\Lambda_k},
+u^{\mathrm{LoG}}_{\Lambda_k}
+\big).
+\]
+\end{definition}
+
+\begin{proposition}[Rigorous control of the compressed coefficient]
+\label{prop:compressed-beta-estimate}
+Assume:
+\begin{enumerate}[leftmargin=2em]
+\item the smooth RP degradation law of Theorem~\ref{main-thm:smooth-RP};
+\item the approximate intertwiner bound of Lemma~\ref{main-lem:approx-intertwiner-new};
+\item the temporal DoG commutator bound of Lemma~\ref{main-lem:DoG-comm-new};
+\item the exponentially decaying memory-tail package of
+  Lemma~\ref{main-lem:app-exp-backflow} and Proposition~\ref{main-prop:app-tick-progress}.
+\end{enumerate}
+Then there exist constants \(C_{\rm int},C_{\rm DoG},C_{\rm mem},C_4>0\) and \(\eta>0\), depending only on the
+fixed welded family and not on \(k\), such that
+\begin{equation}
+\beta_k
+=
+-\,\alpha(\Lambda_k)\,\mu_{ps}^2
+\;+\;
+r_k,
+\label{eq:beta-splitting}
+\end{equation}
+with remainder bounded by
+\begin{equation}
+|r_k|
+\le
+C_{\rm int}\,\varepsilon_k^{\eta}
+\;+\;
+C_{\rm DoG}\,\Phi(\sigma_{t,k}\Omega_{\rm gap})
+\;+\;
+C_{\rm mem}\,e^{-\Delta_k/\tau_b}
+\;+\;
+C_4\,\mu_{ps}^4.
+\label{eq:beta-remainder}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+By Theorem~\ref{main-thm:smooth-RP}, the ideal analytically continued Gaussian OS problem gives
+\(
+\lambda_{\min}(\mu_{ps},\Lambda_k)
+=
+-\alpha(\Lambda_k)\mu_{ps}^2+O(\mu_{ps}^4)
+\)
+on the welded Gaussian reference kernel. Restricting that quadratic form to the canonical normalized
+welded LoG profile \(u^{\mathrm{LoG}}_{\Lambda_k}\) produces the leading term
+\(-\alpha(\Lambda_k)\mu_{ps}^2\), with the \(O(\mu_{ps}^4)\) correction bounded by
+\(C_4\mu_{ps}^4\).
+
+The regulated intertwiner contribution is bounded by
+Lemma~\ref{main-lem:approx-intertwiner-new}, the temporal DoG contribution is bounded by
+Lemma~\ref{main-lem:DoG-comm-new}, and the intrinsic KMS bath contributes only the
+Born-Nakajima-Zwanzig memory tail controlled by Lemma~\ref{main-lem:app-exp-backflow} and
+Proposition~\ref{main-prop:app-tick-progress}. Since \(u^{\mathrm{LoG}}_{\Lambda_k}\) is
+normalized, each of these operator bounds transfers directly to the scalar quadratic coefficient.
+Summing the four contributions gives \eqref{eq:beta-splitting}--\eqref{eq:beta-remainder}.
+\end{proof}
+
+\begin{definition}[Certified compressed spectral regime]
+\label{def:compressed-spectral-regime}
+We say that an accepted tick \(k\) lies in the \emph{certified compressed spectral regime} if
+\begin{equation}
+\alpha(\Lambda_k)\,\mu_{ps}^2
+>
+2\Big(
+C_{\rm int}\,\varepsilon_k^{\eta}
+\;+\;
+C_{\rm DoG}\,\Phi(\sigma_{t,k}\Omega_{\rm gap})
+\;+\;
+C_{\rm mem}\,e^{-\Delta_k/\tau_b}
+\;+\;
+C_4\,\mu_{ps}^4
+\Big).
+\label{eq:compressed-certified}
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Finite-cutoff canonical odd spectral selection on the compressed welded LoG channel]
+\label{thm:finite-cutoff-canonical-odd-spectral-selection}
+Assume
+\cref{prop:compressed-log-exact,prop:compressed-log-lock,prop:compressed-log-smooth,prop:compressed-form-well-defined,prop:compressed-beta-estimate}.
+Let \(k\) be an accepted tick in the certified compressed spectral regime of
+\cref{def:compressed-spectral-regime}. Then:
+\begin{enumerate}[leftmargin=2em]
+\item the compressed welded channel \(\mathcal H^{\mathrm{LoG}}_{\Lambda_k}\) is a canonical
+one-dimensional odd line;
+\item the compressed continued odd quadratic form is represented by the rank-one self-adjoint operator
+\begin{equation}
+K^{\mathrm{LoG}}_{\Lambda_k}
+:=
+\beta_k\,P^{\mathrm{LoG}}_{\Lambda_k},
+\label{eq:Klog-def}
+\end{equation}
+with \(\beta_k<0\);
+\item the unique negative spectral projector of \(K^{\mathrm{LoG}}_{\Lambda_k}\) is
+\begin{equation}
+P_{-,\Lambda_k}^{\mathrm{LoG}}
+=
+P^{\mathrm{LoG}}_{\Lambda_k}
+=
+u^{\mathrm{LoG}}_{\Lambda_k}\otimes u^{\mathrm{LoG}}_{\Lambda_k};
+\label{eq:Pminus-log}
+\end{equation}
+\item along any admissible branch, the projector \(P_{-,\Lambda}^{\mathrm{LoG}}\) is \(C^1\), hence
+the compressed active odd line is canonically and smoothly transported.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By \cref{prop:compressed-log-lock}, the admissible welded channel at fixed accepted tick is exactly the
+one-dimensional line \(\mathcal H^{\mathrm{LoG}}_{\Lambda_k}\). By
+\cref{def:compressed-odd-coeff}, the compressed continued odd quadratic form on that line is represented
+by the scalar \(\beta_k\), equivalently by the self-adjoint rank-one operator
+\eqref{eq:Klog-def}.
+
+By \cref{prop:compressed-beta-estimate},
+\[
+\beta_k
+\le
+-\,\alpha(\Lambda_k)\mu_{ps}^2
+\;+\;
+\Big(
+C_{\rm int}\,\varepsilon_k^{\eta}
+\;+\;
+C_{\rm DoG}\,\Phi(\sigma_{t,k}\Omega_{\rm gap})
+\;+\;
+C_{\rm mem}\,e^{-\Delta_k/\tau_b}
+\;+\;
+C_4\,\mu_{ps}^4
+\Big).
+\]
+Under the certified regime inequality \eqref{eq:compressed-certified}, the bracketed term is strictly
+smaller than \(\tfrac12\alpha(\Lambda_k)\mu_{ps}^2\). Therefore
+\[
+\beta_k
+<
+-\frac12\,\alpha(\Lambda_k)\mu_{ps}^2
+<
+0.
+\]
+Thus \(K^{\mathrm{LoG}}_{\Lambda_k}\) has exactly one negative eigenvalue, namely \(\beta_k\), and
+its unique negative spectral subspace is the entire line
+\(\mathcal H^{\mathrm{LoG}}_{\Lambda_k}\). Since
+\(
+P^{\mathrm{LoG}}_{\Lambda_k}
+=
+u^{\mathrm{LoG}}_{\Lambda_k}\otimes u^{\mathrm{LoG}}_{\Lambda_k}
+\),
+the negative spectral projector is exactly \eqref{eq:Pminus-log}.
+
+Finally, \cref{prop:compressed-log-smooth} gives \(C^1\)-dependence of
+\(\Lambda\mapsto u^{\mathrm{LoG}}_\Lambda\), hence also of
+\(\Lambda\mapsto P_{-,\Lambda}^{\mathrm{LoG}}\). This proves the canonical branchwise transport of the
+compressed active odd line.
+\end{proof}
+
+\begin{corollary}[Canonical compressed odd projector]
+\label{cor:compressed-export-selection}
+For each accepted tick in the certified compressed spectral regime, the compressed, co-centered,
+band-locked welded LoG channel carries the canonical rank-one projector
+\[
+P_{-,\Lambda_k}^{\mathrm{LoG}}
+\]
+onto its negative odd line. Equivalently,
+\[
+\mathcal H_{\Lambda_k}^{\mathrm{LoG}}
+=
+\operatorname{ran} P_{-,\Lambda_k}^{\mathrm{LoG}}.
+\]
+\end{corollary}
+
+\begin{proof}
+This is exactly \cref{thm:finite-cutoff-canonical-odd-spectral-selection}: the theorem identifies the
+negative spectral projector with the rank-one projector
+\(
+u^{\mathrm{LoG}}_{\Lambda_k}\otimes u^{\mathrm{LoG}}_{\Lambda_k}
+\),
+whose range is \(\mathcal H^{\mathrm{LoG}}_{\Lambda_k}\).
+\end{proof}
+
+\begin{corollary}[Completion-sector realization of the compressed projector]
+\label{cor:compressed-export-selection-completion}
+Assume \cref{ass:gaussian-completion}. Then, for each accepted tick in the certified compressed
+spectral regime, any Gaussian completion realization identifies the compressed projector
+\(
+P_{-,\Lambda_k}^{\mathrm{LoG}}
+\)
+with a unique rank-one active odd line in the completion sector. Equivalently, there exists a unit
+vector
+\[
+u_-(\Lambda_k)
+\]
+spanning that realized line such that
+\[
+P_{-,\Lambda_k}^{\mathrm{LoG}}
+=
+u_-(\Lambda_k)\otimes u_-(\Lambda_k)
+\]
+in the chosen realization.
+\end{corollary}
+
+\begin{proof}
+Under \cref{ass:gaussian-completion}, the finite active completion-mode sector is defined only up to
+symplectic equivalence. A one-dimensional real line is invariant under such equivalences as a subspace,
+even though a basis vector on that line is not canonical before normalization. By
+\cref{thm:finite-cutoff-canonical-odd-spectral-selection}, the compressed odd line is already
+canonically fixed abstractly by the projector \(P_{-,\Lambda_k}^{\mathrm{LoG}}\). Choosing the unique
+unit vector on that line in a given realization yields the stated formula, and changing the completion
+realization changes only the coordinate representative, not the underlying rank-one line.
+\end{proof}
+
+\begin{remark}[Scope of the compressed spectral theorem]
+\label{rem:compressed-spectral-scope}
+Theorem \cref{thm:finite-cutoff-canonical-odd-spectral-selection} determines the odd line only on
+the compressed welded LoG channel. It does not classify the full completion-sector odd subspace, and
+the completion-side statement of \cref{cor:compressed-export-selection-completion} is only a
+realization statement for this rank-one projector.
+\end{remark}
+
+\begin{corollary}[Nontrivial descendant hit of the compressed dominant line]
+\label{cor:compressed-transport-hit}
+Assume \cref{thm:char-weak-interface}. Then for each accepted tick \(k\), there exists a
+representative
+\[
+J^{\mathrm{desc}}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]
+\]
+whose response has nonzero component on the canonically selected compressed dominant odd line.
+Equivalently, the transported descendant sector maps nontrivially into the compressed line fixed by
+\(
+P_{-,\Lambda_k}^{\mathrm{LoG}}
+\).
+\end{corollary}
+
+\begin{proof}
+This is exactly item (1) of \cref{thm:char-weak-interface}.
+\end{proof}
+
+\ifdefined\UOMTransportFragmentLoaded\else
+\end{document}
+\fi

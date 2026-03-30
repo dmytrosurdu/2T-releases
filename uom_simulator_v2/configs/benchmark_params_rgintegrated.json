@@ -1,0 +1,64 @@
+{
+    "physics": {
+        "m5_ell": 1.0,
+        "kappa_ct": 0.01,
+        "M5_cubed": 1.0,
+        "gamma_anomaly": 0.01
+    },
+    "scenario": {
+        "source": {
+            "L4_src": 10.0,
+            "Lambda_src": 10.0,
+            "a_cft_src": 1.0,
+            "m_src": 0.1,
+            "l_max_source": 500,
+            "cost_t_factor": 1.0,
+            "cost_x_factor": 1.0,
+            "deltaL_soft_src": 1.0
+        },
+        "receiver": {
+            "L4_init": 10.0,
+            "a_cft_rec": 20.0,
+            "m_bullet": 0.1,
+            "v_geom": 1.0,
+            "alpha_t": 1.5,
+            "alpha_x": 1.5,
+            "eta_wall_work": 1.0,
+            "lambda_by": 1.0,
+            "lambda_conf": 1.0,
+            "lambda_wall": 1.0,
+            "deltaL_soft": 1.0,
+            "deltaL_taper": 0.2359600013535872
+        },
+        "aeon": {
+            "initial_R0_abs": 0.041522491349481,
+            "initial_Lambda": 8.0,
+            "initial_d_sep": 1.0,
+            "Lambda_star": 1e+40,
+            "max_ticks": 1000,
+            "tick_duration": 0.01,
+            "initial_F_dS_factor": 1.0,
+            "beta_factor": 1.0
+        }
+    },
+    "leak": {
+        "model": "rg_complement",
+        "chi": 1.0,
+        "gamma": 0.0
+    },
+    "multi_aeon": {
+        "n_aeons": 10,
+        "max_ticks_per_aeon": null,
+        "inheritance_model": "v1_residual_pin",
+        "inherit_c": 1.0,
+        "lambda_reset": "carry",
+        "lambda_scale": 1.0,
+        "d_sep_reset": "birth",
+        "d_sep_birth_model": "qstar",
+        "c_d_birth": 1.0,
+        "FdS_model": "rg_integrated_info",
+        "logging_level": "minimal",
+        "save_per_aeon_histories": true,
+        "save_aggregate_history": true
+    }
+}

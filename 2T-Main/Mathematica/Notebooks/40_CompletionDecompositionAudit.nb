@@ -1,0 +1,273 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     12403,        264]
+NotebookOptionsPosition[     10470,        234]
+NotebookOutlinePosition[     10784,        248]
+CellTagsIndexPosition[     10741,        245]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Completion Decomposition Audit", "Title",ExpressionUUID->"c921038a-7d8f-431c-aea6-5a9bddb55a58"],
+
+Cell["\<\
+This notebook wrapper records the exact completion-decomposition report lane \
+for the current split-versus-Gaussian surrogate analysis. \
+\>", "Text",ExpressionUUID->"4ddbc513-d7a1-455a-8939-bff0174c6724"],
+
+Cell["Boundary control package", "Section",ExpressionUUID->"b91dcb46-7e36-46fe-b1b8-8699fd82d46b"],
+
+Cell[TextData[Cell[BoxData[Cell["exact accepted-record preservation",
+  Background->None,ExpressionUUID->
+  "90b6cfd1-772d-4e91-8db6-1a0a1d700964"]], \
+"InlineCode",ExpressionUUID->"d282e59b-f762-4f5d-b841-9a25ad6cf74d"]], "Item",\
+ExpressionUUID->"c0832284-e416-452a-8ec9-a489748828b5"],
+
+Cell[TextData[Cell[BoxData[Cell["receiver band-lock",
+  Background->None,ExpressionUUID->
+  "a71b4e10-fd64-4e0e-8125-ee1952b3d866"]], \
+"InlineCode",ExpressionUUID->"f154237e-fe99-4231-a946-3a2cc97d395c"]], "Item",\
+ExpressionUUID->"1b0f7dc8-5729-4c47-8773-cb323dda4402"],
+
+Cell[TextData[Cell[BoxData[Cell["one-dimensional compressed welded line",
+  Background->None,ExpressionUUID->
+  "2ba039d1-3653-4ede-924c-77c8d636e8e4"]], \
+"InlineCode",ExpressionUUID->"9806070b-0c6c-4501-b88f-fb0d257d16b4"]], "Item",\
+ExpressionUUID->"f5b936d2-dc99-4802-a0ed-27564c32edf7"],
+
+Cell[TextData[Cell[BoxData[Cell["co-centering",
+  Background->None,ExpressionUUID->
+  "e1ca86c0-51d8-4ce8-93f0-0f13f2d968ed"]], \
+"InlineCode",ExpressionUUID->"aa671eda-7392-44bf-89e9-4dad4a98d88d"]], "Item",\
+ExpressionUUID->"16eb6d51-143d-4ce2-ba25-b5edaca60116"],
+
+Cell[TextData[Cell[BoxData[Cell["descended-scalar factorization",
+  Background->None,ExpressionUUID->
+  "ce014b2d-6bb3-4d9a-b7cc-e8de3f83075c"]], \
+"InlineCode",ExpressionUUID->"cef99e26-7422-484c-a618-b137c230c619"]], "Item",\
+ExpressionUUID->"6cacad8c-b135-431b-b489-78ed9042c5ef"],
+
+Cell["Case table", "Section",ExpressionUUID->"10f6caab-cc5f-491c-a52c-c417fdc3cc60"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Case\"\>",
+          HoldForm], 
+         TagBox["\<\"Internal name\"\>",
+          HoldForm], 
+         TagBox["\<\"Classification\"\>",
+          HoldForm], 
+         TagBox["\<\"Structural work\"\>",
+          HoldForm]},
+        {Cell[BoxData[Cell["BoundaryOnlyBaseline",
+           Background->None,ExpressionUUID->
+           "c8189aef-dfdc-48e3-9d0c-cd977e9a76b5"]], "InlineCode",
+          ExpressionUUID->"0666a4d1-68d8-4ade-a54b-341270c14ac0"], Cell[
+         BoxData[Cell["boundary-only",
+           Background->None,ExpressionUUID->
+           "3d993d31-b1c7-4d8f-8b48-bcbe00b61f91"]], "InlineCode",
+          ExpressionUUID->"b1b969b0-6849-49fb-9ea5-22d4c54314a7"], Cell[
+         BoxData[Cell["boundary-only",
+           Background->None,ExpressionUUID->
+           "551270c8-26f3-407e-8128-3239821d9813"]], "InlineCode",
+          ExpressionUUID->
+          "5f0cffed-dd25-483a-aa4b-7e7a1e30b008"], "\<\"Boundary safe lane \
+only; no completion witness lane claimed.\"\>"},
+        {Cell[BoxData[Cell["SplitWithoutGaussian",
+           Background->None,ExpressionUUID->
+           "0c577339-7a77-4de3-83db-8e3d5ed35c03"]], "InlineCode",
+          ExpressionUUID->"f86ffe7b-f2c6-4206-a4a2-e347a41cd560"], Cell[
+         BoxData[Cell["I2_split",
+           Background->None,ExpressionUUID->
+           "ac101bfb-ad5c-4d88-9514-9a01f593d2f8"]], "InlineCode",
+          ExpressionUUID->"ec3e58e8-19b1-431f-a8c6-49005292f89a"], Cell[
+         BoxData[Cell["split-core-safe",
+           Background->None,ExpressionUUID->
+           "3da3ca40-c07e-4fbc-b8ed-86564d172785"]], "InlineCode",
+          ExpressionUUID->
+          "316b0969-c1f7-4ef9-9baf-34cd1050411c"], "\<\"Controlled lift, QND \
+ledger invariance, and lifted accepted-record structure without Gaussian \
+augmentation.\"\>"},
+        {Cell[BoxData[Cell["GaussianWithoutSplit",
+           Background->None,ExpressionUUID->
+           "7a49811e-fdd2-4911-af2b-f72b896cf5b4"]], "InlineCode",
+          ExpressionUUID->"c301413d-8f6f-46e5-b51b-b16d6398b73a"], Cell[
+         BoxData[Cell["I2_gauss",
+           Background->None,ExpressionUUID->
+           "cf37f32a-963b-4a5c-a4c2-9de16a0ec9d2"]], "InlineCode",
+          ExpressionUUID->"b7143c1d-f896-4ff3-8ea8-88f867bbaa11"], Cell[
+         BoxData[Cell["augmentation-only",
+           Background->None,ExpressionUUID->
+           "35ead5a3-0c86-448a-be5d-bd100cefe2ac"]], "InlineCode",
+          ExpressionUUID->
+          "a0f252ab-652c-41fc-8512-d4f154966e9c"], "\<\"Derived \
+quadrature/covariance layer without a split-controlled ledger theorem.\"\>"},
+        {Cell[BoxData[Cell["SplitPlusBoundaryPackage",
+           Background->None,ExpressionUUID->
+           "4a7629dc-0ded-414c-940c-4cdc1d1c8be3"]], "InlineCode",
+          ExpressionUUID->"771b22c9-a73f-405c-a478-e8991a20b95f"], Cell[
+         BoxData[Cell["boundary-plus-split-core",
+           Background->None,ExpressionUUID->
+           "e8e724c2-7a5b-4e50-9611-64496140d7c5"]], "InlineCode",
+          ExpressionUUID->"4ff8030f-1e2b-4c2c-98ea-3e35717e9a30"], Cell[
+         BoxData[Cell["split-core-safe",
+           Background->None,ExpressionUUID->
+           "de588a95-1403-4163-aaf2-0d3b8bed247b"]], "InlineCode",
+          ExpressionUUID->
+          "862866f4-1222-43de-a7f3-3f16577b1dba"], "\<\"Boundary five-piece \
+package plus split-core lift.\"\>"},
+        {Cell[BoxData[Cell["FullCurrentI2",
+           Background->None,ExpressionUUID->
+           "113666ee-2395-4e4c-ba9d-89996e0ab5c6"]], "InlineCode",
+          ExpressionUUID->"060b2e92-aced-4af0-94a7-6cee9ca7b6b0"], Cell[
+         BoxData[Cell["I2",
+           Background->None,ExpressionUUID->
+           "cb93b3bd-e9ce-459f-a54e-ab4410f9d15a"]], "InlineCode",
+          ExpressionUUID->"04eda442-cc92-4666-a64e-7ac49e45d594"], Cell[
+         BoxData[Cell["strong-safe",
+           Background->None,ExpressionUUID->
+           "d1c2cc13-cd4e-469f-9fdc-fc1e7a7495e1"]], "InlineCode",
+          ExpressionUUID->
+          "38b29b36-0c36-4ca6-b27a-e1eb13fc0bce"], "\<\"Split core plus \
+Gaussian augmentation and lifted fact-preservation checks.\"\>"},
+        {Cell[BoxData[Cell["NegativeControlUnsafeLane",
+           Background->None,ExpressionUUID->
+           "3c5441bf-4fd2-48f5-b154-1bfe4b9ae357"]], "InlineCode",
+          ExpressionUUID->"563c6622-6ac1-4953-8e41-b858b4eb46d6"], Cell[
+         BoxData[Cell["legacy-unsafe-negative-control",
+           Background->None,ExpressionUUID->
+           "2db1eb43-fc72-42f0-be72-182b15fc172b"]], "InlineCode",
+          ExpressionUUID->"2ff6e909-c9f3-4f32-a833-ee26881e9f05"], Cell[
+         BoxData[Cell["visible-ambiguity",
+           Background->None,ExpressionUUID->
+           "842e8f60-5e31-423e-b662-ded8cf2a3c7f"]], "InlineCode",
+          ExpressionUUID->
+          "0c0144d3-ca7d-4ce0-95d2-a2a7af51d040"], "\<\"Regression witness \
+that visible ambiguity still persists when the contract is weakened.\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, Center, Center, {Center}}, 
+         "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[
+      BoxForm`e$, 
+       TableHeadings -> {
+        None, {"Case", "Internal name", "Classification", 
+          "Structural work"}}]]], "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"73b51982-c324-4b12-94aa-db8547c5f396"],
+
+Cell["Claim decisions", "Section",ExpressionUUID->"972531b5-d5a2-4609-b8e9-e8a57040d726"],
+
+Cell[TextData[{
+ "explicit five-piece boundary package remains controlling: ",
+ StyleBox["certified", "TI"]
+}], "Item",ExpressionUUID->"90a92f83-bbeb-4034-97e8-3c56a808c3bb"],
+
+Cell[TextData[{
+ "meaningful split-core candidate distinct from Gaussian augmentation: ",
+ StyleBox["yes", "TI"]
+}], "Item",ExpressionUUID->"f72ec99e-ffc2-4dab-bc67-2f8f88c8ae25"],
+
+Cell[TextData[{
+ "Gaussian augmentation structurally necessary for the current strong-safe \
+completion verdict: ",
+ StyleBox["no", "TI"]
+}], "Item",ExpressionUUID->"4baf5b20-b4a0-4fd6-a4b3-13d68ef0f0a3"],
+
+Cell["Interpretation", "Section",ExpressionUUID->"96df0cea-2147-439e-bbf2-e39f0701e19d"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["I0",
+   Background->None,ExpressionUUID->"b5731ec9-5900-4f93-8e39-5a8a581c4588"]], 
+  "InlineCode",ExpressionUUID->"21ab38ee-6cfe-44fb-b155-1870ea64d94a"],
+ " remains the working boundary candidate."
+}], "Item",ExpressionUUID->"2b14370e-3b1f-460c-8a0b-d8fcd402eb96"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["I2",
+   Background->None,ExpressionUUID->"2576dc6c-7bce-4903-b29e-91954e52d200"]], 
+  "InlineCode",ExpressionUUID->"e270bca9-21d3-4ac4-ba46-47476ddcfd2d"],
+ " remains the full family-relative completion-aware candidate."
+}], "Item",ExpressionUUID->"48e634ee-a435-47ad-9d7e-cfdc8e1b7035"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["I2_split",
+   Background->None,ExpressionUUID->"53d0849f-b3fe-4cb6-a25c-5fd548ed0ec5"]], 
+  "InlineCode",ExpressionUUID->"6027af87-4a31-42d3-8d37-1172533ff8b5"],
+ " and ",
+ Cell[BoxData[Cell["I2_gauss",
+   Background->None,ExpressionUUID->"17081806-3e8a-48ea-a63d-0c43d5b25cf4"]], 
+  "InlineCode",ExpressionUUID->"01ee00cf-0646-42fc-a6b4-1150a803a822"],
+ " are report-only internal names in this audit."
+}], "Item",ExpressionUUID->"ad315cb0-1023-45c5-8d12-90722922f405"],
+
+Cell["The unsafe negative-control lane remains preserved.", "Item",ExpressionUUID->"bb43513f-bccb-4c30-a9bd-cb2f9dcd9f99"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"4b4b0335-0fd0-4e3b-8cd7-5e1a8617e3c2"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 102, 0, 70, "Title",ExpressionUUID->"c921038a-7d8f-431c-aea6-5a9bddb55a58"],
+Cell[659, 22, 216, 3, 70, "Text",ExpressionUUID->"4ddbc513-d7a1-455a-8939-bff0174c6724"],
+Cell[878, 27, 98, 0, 70, "Section",ExpressionUUID->"b91dcb46-7e36-46fe-b1b8-8699fd82d46b"],
+Cell[979, 29, 287, 4, 70, "Item",ExpressionUUID->"c0832284-e416-452a-8ec9-a489748828b5"],
+Cell[1269, 35, 271, 4, 70, "Item",ExpressionUUID->"1b0f7dc8-5729-4c47-8773-cb323dda4402"],
+Cell[1543, 41, 291, 4, 70, "Item",ExpressionUUID->"f5b936d2-dc99-4802-a0ed-27564c32edf7"],
+Cell[1837, 47, 265, 4, 70, "Item",ExpressionUUID->"16eb6d51-143d-4ce2-ba25-b5edaca60116"],
+Cell[2105, 53, 283, 4, 70, "Item",ExpressionUUID->"6cacad8c-b135-431b-b489-78ed9042c5ef"],
+Cell[2391, 59, 84, 0, 70, "Section",ExpressionUUID->"10f6caab-cc5f-491c-a52c-c417fdc3cc60"],
+Cell[2478, 61, 5974, 124, 70, "TextTableForm",ExpressionUUID->"73b51982-c324-4b12-94aa-db8547c5f396"],
+Cell[8455, 187, 89, 0, 70, "Section",ExpressionUUID->"972531b5-d5a2-4609-b8e9-e8a57040d726"],
+Cell[8547, 189, 174, 3, 70, "Item",ExpressionUUID->"90a92f83-bbeb-4034-97e8-3c56a808c3bb"],
+Cell[8724, 194, 179, 3, 70, "Item",ExpressionUUID->"f72ec99e-ffc2-4dab-bc67-2f8f88c8ae25"],
+Cell[8906, 199, 204, 4, 70, "Item",ExpressionUUID->"4baf5b20-b4a0-4fd6-a4b3-13d68ef0f0a3"],
+Cell[9113, 205, 88, 0, 70, "Section",ExpressionUUID->"96df0cea-2147-439e-bbf2-e39f0701e19d"],
+Cell[9204, 207, 302, 5, 70, "Item",ExpressionUUID->"2b14370e-3b1f-460c-8a0b-d8fcd402eb96"],
+Cell[9509, 214, 323, 5, 70, "Item",ExpressionUUID->"48e634ee-a435-47ad-9d7e-cfdc8e1b7035"],
+Cell[9835, 221, 506, 9, 70, "Item",ExpressionUUID->"ad315cb0-1023-45c5-8d12-90722922f405"],
+Cell[10344, 232, 122, 0, 70, "Item",ExpressionUUID->"bb43513f-bccb-4c30-a9bd-cb2f9dcd9f99"]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,287 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     11912,        278]
+NotebookOptionsPosition[      9236,        240]
+NotebookOutlinePosition[      9550,        254]
+CellTagsIndexPosition[      9507,        251]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["07 Ambiguity Quotient Descent", "Title",ExpressionUUID->"5cdf857f-26d6-4c03-8786-0077ea2c5783"],
+
+Cell["Scope", "Section",ExpressionUUID->"e33f890b-a493-4238-a263-cd86892c6f0d"],
+
+Cell[TextData[{
+ "This notebook audits the exact finite-dimensional surrogate of ",
+ Cell[BoxData[Cell["thm:dominant-quotient-descent",
+   Background->None,ExpressionUUID->"0e5d03fb-b647-4dd6-bfef-c4f334f6844a"]], 
+  "InlineCode",ExpressionUUID->"d57db6f1-b003-4766-b892-89ca6637220c"],
+ " and ",
+ Cell[BoxData[Cell["cor:dominant-quotient-constancy",
+   Background->None,ExpressionUUID->"a97c582c-21eb-4424-8945-44d76b023a92"]], 
+  "InlineCode",ExpressionUUID->"d342923d-5a61-4ea0-b672-173a0e3e7c4f"],
+ ". "
+}], "Text",ExpressionUUID->"53287b0b-ef64-4e89-8fe8-279123f3873c"],
+
+Cell["Data", "Section",ExpressionUUID->"bb0744b1-8374-4afc-95f5-06f42f66fb4b"],
+
+Cell["Use the exact model ", "Text",ExpressionUUID->"a4cb10bf-1ccc-4f11-8b7a-685e8f83bba5"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"chi", "=", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Aminus", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"J0", "=", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", 
+     RowBox[{"-", "1"}], ",", "1"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nu", "=", "5"}], ";"}]}], "Input",ExpressionUUID->"6e1ca1e5-34cf-\
+45f1-88fc-c425ab9dbb8b"],
+
+Cell[TextData[{
+ "Then the quotient coordinate matrix returned by ",
+ Cell[BoxData[Cell["MainProof`QuotientDescent`",
+   Background->None,ExpressionUUID->"dd50835e-1274-480a-8c1e-ea2bf559a6b2"]], 
+  "InlineCode",ExpressionUUID->"480ee069-96cb-42da-92cd-aa605197549d"],
+ " is "
+}], "Text",ExpressionUUID->"5c8068b7-b6ef-4648-97f2-c9e058915f8c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"W", "=", 
+   RowBox[{"{", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "1"}], "}"}], "}"}]}], ";"}]], "Input",Expres\
+sionUUID->"6c72405b-b85a-4c1a-a03f-ed31e269a6a4"],
+
+Cell["and the descended quotient covector is ", "Text",ExpressionUUID->"4d4d60c6-7dbd-4c3a-87fa-34bc6dab39bd"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"eta", "=", 
+   RowBox[{"{", "1", "}"}]}], ";"}]], "Input",ExpressionUUID->"e4d7a106-fe06-\
+4fb3-be12-37aa51044ece"],
+
+Cell["with exact factorization ", "Text",ExpressionUUID->"9c1a1b68-c67a-4486-acc9-67e0111c7deb"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"chi", 
+   RowBox[{"(", "F", ")"}]}], "=", 
+  RowBox[{"eta", " ", ".", " ", 
+   RowBox[{"(", 
+    RowBox[{"W", ".", "F"}], ")"}], "."}]}]], "Input",ExpressionUUID->\
+"dd749628-d74a-459d-a6ff-53df4b441fde"],
+
+Cell["Certified consequences", "Section",ExpressionUUID->"038b8f3b-8e81-4622-b2e9-7130fae89cf6"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["chi|Aminus = 0",
+   Background->None,ExpressionUUID->"6ebcb64c-5ba4-4219-a20d-e464c7e4c647"]], 
+  "InlineCode",ExpressionUUID->"0f910d8a-7369-4449-8e02-bd6357f5ac2a"],
+ "."
+}], "Item",ExpressionUUID->"b89115b1-59c8-4cb0-94fb-3a0b036c3dad"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["chi(F + A) = chi(F)",
+   Background->None,ExpressionUUID->"d5ff9728-553f-4771-908d-2fd51d9abf3d"]], 
+  "InlineCode",ExpressionUUID->"f4674c9a-9200-44bf-9189-ea8775bd0a2e"],
+ " for every ambiguity move ",
+ Cell[BoxData[Cell["A in im(Aminus)",
+   Background->None,ExpressionUUID->"eadff750-1f13-4443-bd51-fb4310a91bc5"]], 
+  "InlineCode",ExpressionUUID->"a1a9fd93-f215-43b2-908f-6a1d82f09efa"],
+ "."
+}], "Item",ExpressionUUID->"a5d68f5d-e474-48bb-b8f6-ecfe3f956781"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["W",
+   Background->None,ExpressionUUID->"7eab8775-0d9f-4d2d-a2cb-2b53a54b6a91"]], 
+  "InlineCode",ExpressionUUID->"e41a496b-3b67-493c-a6a0-866648f011f3"],
+ " has full row rank and ",
+ Cell[BoxData[Cell["[Transpose[W] | Aminus]",
+   Background->None,ExpressionUUID->"d853453d-dd6a-4639-afbb-995d6e2ff277"]], 
+  "InlineCode",ExpressionUUID->"b8281070-623a-4130-887c-d5482633fec4"],
+ " is invertible, so the finite-dimensional quotient split is exact."
+}], "Item",ExpressionUUID->"a30ff965-755f-4f2a-bf0d-bf88ed0f00b2"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["chi(J0 + A) = chi(J0)",
+   Background->None,ExpressionUUID->"9884f8cd-26b1-4037-b0a6-c62b92954d88"]], 
+  "InlineCode",ExpressionUUID->"f3ff899d-1efe-4340-b931-522bcbc7f32f"],
+ " on the whole affine class."
+}], "Item",ExpressionUUID->"635abd90-d7dd-4d3e-89a5-0a31a4e7db6b"],
+
+Cell["The quotient-point scalar equals the affine-class scalar.", "Item",ExpressionUUID->"547f6237-02b7-4b4c-86ff-9d144ab3b142"],
+
+Cell["\<\
+Representative search at the scalar level reduces to a class scalar equality \
+because the scalar is constant on the class.\
+\>", "Item",ExpressionUUID->"7507b9e7-ad12-4592-be1c-87010b4ceaf2"],
+
+Cell["Broken example", "Section",ExpressionUUID->"82e175b3-1915-4ad4-9460-8d65a0f15ce7"],
+
+Cell["If ", "Text",ExpressionUUID->"347253cd-b1d3-4029-b865-71066cafa53b"],
+
+Cell[BoxData[
+ RowBox[{"chi", "=", 
+  RowBox[{"{", 
+   RowBox[{"1", ",", "0", ",", "1"}], "}"}]}]], "Input",ExpressionUUID->\
+"96bb0ce3-f3c0-4fa8-b9ae-ce933f674b1b"],
+
+Cell[TextData[{
+ "with the same ",
+ Cell[BoxData[Cell["Aminus",
+   Background->None,ExpressionUUID->"16fbf92d-79c2-435b-98e6-75c0363371e7"]], 
+  "InlineCode",ExpressionUUID->"ee823f3a-478b-4db1-9340-3ade86ff44b2"],
+ ", then ",
+ Cell[BoxData[Cell["Aminus \[NotSubset] ker chi",
+   Background->None,ExpressionUUID->"10d7a788-bd48-4591-8038-797bf47b6032"]], 
+  "InlineCode",ExpressionUUID->"3ef5b5af-e8dc-4bb4-bd6b-341b8fa00075"],
+ " and descent fails exactly. "
+}], "Text",ExpressionUUID->"2e4b74d0-7720-40d2-8d9e-f36dffc0a01e"],
+
+Cell["Re-run", "Section",ExpressionUUID->"54770fcf-8e52-444c-8a0f-1aa0826c4a19"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"MainProof`QuotientDescent`RunQuotientDescentExampleSuite", "[", 
+  "]"}]}], "Input",ExpressionUUID->"d0d5288b-4a60-4ed9-a60c-0fff89d20373"],
+
+Cell["Status", "Section",ExpressionUUID->"d7c47ac1-3336-4f0a-b8d5-ef0e2802b0ce"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Claim\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm], 
+         TagBox["\<\"ScopeClass\"\>",
+          HoldForm]},
+        {Cell[BoxData[Cell["thm:dominant-quotient-descent",
+           Background->None,ExpressionUUID->
+           "96969e8d-1f7c-479a-881c-b2074b44c749"]], "InlineCode",
+          ExpressionUUID->
+          "92dfb935-154c-4f6a-bef6-c6f1c46e6087"], \
+"\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {Cell[BoxData[Cell["cor:dominant-quotient-constancy",
+           Background->None,ExpressionUUID->
+           "ea3d266d-aa79-451a-b742-d3fd2b484cd1"]], "InlineCode",
+          ExpressionUUID->
+          "61611ed7-6a25-44d3-9d12-cb5e8184caaa"], \
+"\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {Cell[TextData[{
+          "Minimal countermodel when ",
+          Cell[BoxData[Cell["Aminus \[NotSubset] ker chi",
+            Background->None,ExpressionUUID->
+            "e6a7804c-dc91-4f93-a3fe-217beea2e8f6"]], "InlineCode",
+           ExpressionUUID->"a17d8ece-c652-4d14-96c7-c79a18782bf1"]
+         }],ExpressionUUID->
+          "38e9e57f-78d3-4389-a2b5-9cc7a063568b"], "\<\"counterexample \
+found\"\>", "\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Topological quotient continuity beyond the surrogate\"\>", \
+"\<\"deferred\"\>", "\<\"abstract-imported-assumptions\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[
+      BoxForm`e$, 
+       TableHeadings -> {None, {"Claim", "Status", "ScopeClass"}}]]], "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"9951043d-b0cf-4f9d-bb11-f5e134c0c416"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9fb98179-9cdd-493e-8616-b4f0b8195a60"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 101, 0, 70, "Title",ExpressionUUID->"5cdf857f-26d6-4c03-8786-0077ea2c5783"],
+Cell[658, 22, 79, 0, 70, "Section",ExpressionUUID->"e33f890b-a493-4238-a263-cd86892c6f0d"],
+Cell[740, 24, 574, 10, 70, "Text",ExpressionUUID->"53287b0b-ef64-4e89-8fe8-279123f3873c"],
+Cell[1317, 36, 78, 0, 70, "Section",ExpressionUUID->"bb0744b1-8374-4afc-95f5-06f42f66fb4b"],
+Cell[1398, 38, 91, 0, 70, "Text",ExpressionUUID->"a4cb10bf-1ccc-4f11-8b7a-685e8f83bba5"],
+Cell[1492, 40, 699, 23, 70, "Input",ExpressionUUID->"6e1ca1e5-34cf-45f1-88fc-c425ab9dbb8b"],
+Cell[2194, 65, 343, 6, 70, "Text",ExpressionUUID->"5c8068b7-b6ef-4648-97f2-c9e058915f8c"],
+Cell[2540, 73, 209, 6, 70, "Input",ExpressionUUID->"6c72405b-b85a-4c1a-a03f-ed31e269a6a4"],
+Cell[2752, 81, 110, 0, 70, "Text",ExpressionUUID->"4d4d60c6-7dbd-4c3a-87fa-34bc6dab39bd"],
+Cell[2865, 83, 150, 4, 70, "Input",ExpressionUUID->"e4d7a106-fe06-4fb3-be12-37aa51044ece"],
+Cell[3018, 89, 96, 0, 70, "Text",ExpressionUUID->"9c1a1b68-c67a-4486-acc9-67e0111c7deb"],
+Cell[3117, 91, 239, 7, 70, "Input",ExpressionUUID->"dd749628-d74a-459d-a6ff-53df4b441fde"],
+Cell[3359, 100, 96, 0, 70, "Section",ExpressionUUID->"038b8f3b-8e81-4622-b2e9-7130fae89cf6"],
+Cell[3458, 102, 275, 5, 70, "Item",ExpressionUUID->"b89115b1-59c8-4cb0-94fb-3a0b036c3dad"],
+Cell[3736, 109, 500, 9, 70, "Item",ExpressionUUID->"a5d68f5d-e474-48bb-b8f6-ecfe3f956781"],
+Cell[4239, 120, 552, 9, 70, "Item",ExpressionUUID->"a30ff965-755f-4f2a-bf0d-bf88ed0f00b2"],
+Cell[4794, 131, 308, 5, 70, "Item",ExpressionUUID->"635abd90-d7dd-4d3e-89a5-0a31a4e7db6b"],
+Cell[5105, 138, 128, 0, 70, "Item",ExpressionUUID->"547f6237-02b7-4b4c-86ff-9d144ab3b142"],
+Cell[5236, 140, 202, 3, 70, "Item",ExpressionUUID->"7507b9e7-ad12-4592-be1c-87010b4ceaf2"],
+Cell[5441, 145, 88, 0, 70, "Section",ExpressionUUID->"82e175b3-1915-4ad4-9460-8d65a0f15ce7"],
+Cell[5532, 147, 74, 0, 70, "Text",ExpressionUUID->"347253cd-b1d3-4029-b865-71066cafa53b"],
+Cell[5609, 149, 165, 4, 70, "Input",ExpressionUUID->"96bb0ce3-f3c0-4fa8-b9ae-ce933f674b1b"],
+Cell[5777, 155, 526, 10, 70, "Text",ExpressionUUID->"2e4b74d0-7720-40d2-8d9e-f36dffc0a01e"],
+Cell[6306, 167, 80, 0, 70, "Section",ExpressionUUID->"54770fcf-8e52-444c-8a0f-1aa0826c4a19"],
+Cell[6389, 169, 306, 6, 70, "Input",ExpressionUUID->"d0d5288b-4a60-4ed9-a60c-0fff89d20373"],
+Cell[6698, 177, 80, 0, 70, "Section",ExpressionUUID->"d7c47ac1-3336-4f0a-b8d5-ef0e2802b0ce"],
+Cell[6781, 179, 2451, 59, 70, "TextTableForm",ExpressionUUID->"9951043d-b0cf-4f9d-bb11-f5e134c0c416"]
+}
+]
+*)
+
+(* End of internal cache information *)

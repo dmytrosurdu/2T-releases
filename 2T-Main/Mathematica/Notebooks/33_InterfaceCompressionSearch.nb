@@ -1,0 +1,204 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      9733,        195]
+NotebookOptionsPosition[      6530,        151]
+NotebookOutlinePosition[      6844,        165]
+CellTagsIndexPosition[      6801,        162]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Interface Compression Search", "Title",ExpressionUUID->"c3cab105-81c2-4416-ab6e-c3c68be7096c"],
+
+Cell[TextData[{
+ "This notebook records the current compact-interface search for a generic ",
+ Cell[BoxData[Cell["cosmology theory -> 2T-Main",
+   Background->None,ExpressionUUID->"28088b9f-5f97-4fe5-a8e2-24ddc2fc7693"]], 
+  "InlineCode",ExpressionUUID->"cac9192b-8e6b-4c4b-a0d2-5b702a74562c"],
+ " handoff. "
+}], "Text",ExpressionUUID->"738a5c6d-a607-47fe-8b96-1ad840a0f936"],
+
+Cell["Candidate family", "Section",ExpressionUUID->"628b8237-8854-45a8-aebd-467b335f0520"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["I0",
+   Background->None,ExpressionUUID->"ee40b166-f973-4b15-aed5-f264fc2889df"]], 
+  "InlineCode",ExpressionUUID->"faf504e8-e932-44ed-9211-ff34df6188fe"],
+ " boundary canonicalization interface"
+}], "Subsection",ExpressionUUID->"fcf10ac0-4363-438c-aca0-7f02a35b5c0c"],
+
+Cell["Requires only: ", "Text",ExpressionUUID->"f715109e-760e-4023-83e8-3ddf89e58aa6"],
+
+Cell["boundary map,", "Item",ExpressionUUID->"3110575b-2c1d-40cf-a340-92eb799e4434"],
+
+Cell["transported descendant class,", "Item",ExpressionUUID->"619ed50a-8334-443e-b16f-44b36d532df8"],
+
+Cell["ambiguity subspace,", "Item",ExpressionUUID->"49d861f9-52db-4c79-b903-217a25444e7a"],
+
+Cell["descended active scalar,", "Item",ExpressionUUID->"43cc3399-ce06-4921-bd5a-4760c2e390e5"],
+
+Cell["boundary annihilation of ambiguity,", "Item",ExpressionUUID->"0ac73b64-a03e-476a-94b8-a06207baa61e"],
+
+Cell["nontrivial survival of the representative line.", "Item",ExpressionUUID->"68fa19dc-30c8-4005-bfef-90b42a3527ea"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["I1",
+   Background->None,ExpressionUUID->"c6d6eb76-78c3-4cf6-9939-9d1ff147b60f"]], 
+  "InlineCode",ExpressionUUID->"4eb5ac79-97ca-416b-b1e9-cf4063405467"],
+ " fact-preserving active-line interface"
+}], "Subsection",ExpressionUUID->"b156d000-9d3e-42af-8ab5-0fc95f12f6de"],
+
+Cell["Adds the current structural UOM-flavored boundary package: ", "Text",ExpressionUUID->"74d94468-c3a0-4428-9e61-b64162afb542"],
+
+Cell["exact accepted-record preservation,", "Item",ExpressionUUID->"2f6255bf-34b6-431e-9dc2-d8aca445aeff"],
+
+Cell["rank-one active boundary image,", "Item",ExpressionUUID->"d62ebbac-dce4-42f8-b5e2-7ccd83b00d26"],
+
+Cell["geometric locking.", "Item",ExpressionUUID->"f13cbc38-30cb-4983-947d-e84603f23d58"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["I2",
+   Background->None,ExpressionUUID->"0e9e2c68-292c-46bb-8179-df355615fe9e"]], 
+  "InlineCode",ExpressionUUID->"a5ac24b6-5ef3-4fd4-978b-f01e019f119a"],
+ " completion-aware interface"
+}], "Subsection",ExpressionUUID->"17baa64b-f1ad-4560-8ff6-2a0aa90e7d1f"],
+
+Cell[TextData[{
+ "Adds to ",
+ Cell[BoxData[Cell["I1",
+   Background->None,ExpressionUUID->"316e0a49-9e74-48b6-b116-b9ff0a152d5b"]], 
+  "InlineCode",ExpressionUUID->"b35d8a39-638b-4ed3-bd36-dcb9d9231c53"],
+ ": "
+}], "Text",ExpressionUUID->"bd78c2a0-8dcb-455d-b102-4a2c90aea760"],
+
+Cell["split-controlled lift,", "Item",ExpressionUUID->"0e6480e6-a7a7-4b31-b43b-668794da2590"],
+
+Cell["Gaussian completion realization,", "Item",ExpressionUUID->"f73c62b0-f566-4196-88f6-c8582e3e5c75"],
+
+Cell["lifted fact preservation,", "Item",ExpressionUUID->"4afdcecc-c14c-4a17-bd19-6f170e919552"],
+
+Cell["completion-side ambiguity annihilation.", "Item",ExpressionUUID->"d7158b34-82c8-46ec-a9ae-422da843bb09"],
+
+Cell["Current exact result", "Section",ExpressionUUID->"13203c91-f67b-42b3-bd87-cc53b3387541"],
+
+Cell[TextData[{
+ "Minimal boundary candidate in the mock-tested family: ",
+ Cell[BoxData[Cell["I0",
+   Background->None,ExpressionUUID->"41ed9382-d854-46d1-a076-230731c8ff57"]], 
+  "InlineCode",ExpressionUUID->"ae94b1de-215d-4f15-a437-4a1918377305"]
+}], "Item",ExpressionUUID->"6e597a9d-8454-4776-9df0-2727a9d1cd83"],
+
+Cell[TextData[{
+ "Minimal completion-aware candidate in the mock-tested family: ",
+ Cell[BoxData[Cell["I2",
+   Background->None,ExpressionUUID->"2bca7f06-1ba4-4780-9c0d-c983b344bc69"]], 
+  "InlineCode",ExpressionUUID->"3944310c-50e9-4f95-afa1-4d719d0eceda"]
+}], "Item",ExpressionUUID->"a03bd1e9-cadf-4c36-84da-03fcb2c72ea1"],
+
+Cell["Interpretation: ", "Text",ExpressionUUID->"9cece58a-9c52-4017-a759-796b23d77c32"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["I0",
+   Background->None,ExpressionUUID->"4bd4fe7a-0b57-4aa9-91b7-7b9e44e28252"]], 
+  "InlineCode",ExpressionUUID->"8e149aa6-6b66-41f5-8191-04d1765b1f21"],
+ " is the smallest honest theory-neutral boundary interface."
+}], "Item",ExpressionUUID->"c26b15d0-95e5-4157-9559-5f6a3b1f4afe"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["I1",
+   Background->None,ExpressionUUID->"c119a7fe-486a-436c-b4b9-de1b0a02b45d"]], 
+  "InlineCode",ExpressionUUID->"8abe42a2-ad09-41b6-9fe9-fbd88cb95bfd"],
+ " is the stronger explanatory structural package."
+}], "Item",ExpressionUUID->"57efc4a9-466f-40d7-8400-7dcf1c0f8341"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["I2",
+   Background->None,ExpressionUUID->"0ec33df4-c7b5-49a1-a0f1-c8b32ab7b983"]], 
+  "InlineCode",ExpressionUUID->"6a2d79bb-be54-470d-8ec7-92e8e0df15c5"],
+ " is the smallest completion-aware package that still forces strong-safe \
+completion behavior."
+}], "Item",ExpressionUUID->"ce5003e8-b13e-4773-862c-ad0670de82d9"],
+
+Cell["Report artifact", "Section",ExpressionUUID->"95c317a4-3728-48fe-b60c-594c9e636000"],
+
+Cell["See: ", "Text",ExpressionUUID->"2200ef53-9ced-4d21-9078-b6a524b34d4a"],
+
+Cell[TextData[Cell[BoxData[Cell["\<\
+Main/Mathematica/Reports/CosmologyBoundaryInterfaceCandidates.md\
+\>",
+  Background->None,ExpressionUUID->
+  "9ddab763-ce46-49c0-b53e-47d1a707ab11"]], \
+"InlineCode",ExpressionUUID->"8b80b106-39c9-4b17-98b5-98954b001ae5"]], "Item",\
+ExpressionUUID->"d4415e47-2d51-459f-8160-1ab0de025a0f"],
+
+Cell[TextData[Cell[BoxData[Cell["\<\
+Main/Mathematica/Reports/CosmologyInterfaceResearch_Report.json\
+\>",
+  Background->None,ExpressionUUID->
+  "3e583d38-0342-4056-9711-0de16c9eb301"]], \
+"InlineCode",ExpressionUUID->"bb324b4a-d346-418c-abdc-9bd89b98b1f2"]], "Item",\
+ExpressionUUID->"56579be5-1d9c-4442-b8b2-8fb98b01de04"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"bacb05d1-7806-4062-9342-ddc6597ae3bd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 100, 0, 70, "Title",ExpressionUUID->"c3cab105-81c2-4416-ab6e-c3c68be7096c"],
+Cell[657, 22, 375, 6, 70, "Text",ExpressionUUID->"738a5c6d-a607-47fe-8b96-1ad840a0f936"],
+Cell[1035, 30, 90, 0, 70, "Section",ExpressionUUID->"628b8237-8854-45a8-aebd-467b335f0520"],
+Cell[1128, 32, 304, 5, 70, "Subsection",ExpressionUUID->"fcf10ac0-4363-438c-aca0-7f02a35b5c0c"],
+Cell[1435, 39, 86, 0, 70, "Text",ExpressionUUID->"f715109e-760e-4023-83e8-3ddf89e58aa6"],
+Cell[1524, 41, 84, 0, 70, "Item",ExpressionUUID->"3110575b-2c1d-40cf-a340-92eb799e4434"],
+Cell[1611, 43, 100, 0, 70, "Item",ExpressionUUID->"619ed50a-8334-443e-b16f-44b36d532df8"],
+Cell[1714, 45, 90, 0, 70, "Item",ExpressionUUID->"49d861f9-52db-4c79-b903-217a25444e7a"],
+Cell[1807, 47, 95, 0, 70, "Item",ExpressionUUID->"43cc3399-ce06-4921-bd5a-4760c2e390e5"],
+Cell[1905, 49, 106, 0, 70, "Item",ExpressionUUID->"0ac73b64-a03e-476a-94b8-a06207baa61e"],
+Cell[2014, 51, 118, 0, 70, "Item",ExpressionUUID->"68fa19dc-30c8-4005-bfef-90b42a3527ea"],
+Cell[2135, 53, 306, 5, 70, "Subsection",ExpressionUUID->"b156d000-9d3e-42af-8ab5-0fc95f12f6de"],
+Cell[2444, 60, 130, 0, 70, "Text",ExpressionUUID->"74d94468-c3a0-4428-9e61-b64162afb542"],
+Cell[2577, 62, 106, 0, 70, "Item",ExpressionUUID->"2f6255bf-34b6-431e-9dc2-d8aca445aeff"],
+Cell[2686, 64, 102, 0, 70, "Item",ExpressionUUID->"d62ebbac-dce4-42f8-b5e2-7ccd83b00d26"],
+Cell[2791, 66, 89, 0, 70, "Item",ExpressionUUID->"f13cbc38-30cb-4983-947d-e84603f23d58"],
+Cell[2883, 68, 295, 5, 70, "Subsection",ExpressionUUID->"17baa64b-f1ad-4560-8ff6-2a0aa90e7d1f"],
+Cell[3181, 75, 277, 6, 70, "Text",ExpressionUUID->"bd78c2a0-8dcb-455d-b102-4a2c90aea760"],
+Cell[3461, 83, 93, 0, 70, "Item",ExpressionUUID->"0e6480e6-a7a7-4b31-b43b-668794da2590"],
+Cell[3557, 85, 103, 0, 70, "Item",ExpressionUUID->"f73c62b0-f566-4196-88f6-c8582e3e5c75"],
+Cell[3663, 87, 96, 0, 70, "Item",ExpressionUUID->"4afdcecc-c14c-4a17-bd19-6f170e919552"],
+Cell[3762, 89, 110, 0, 70, "Item",ExpressionUUID->"d7158b34-82c8-46ec-a9ae-422da843bb09"],
+Cell[3875, 91, 94, 0, 70, "Section",ExpressionUUID->"13203c91-f67b-42b3-bd87-cc53b3387541"],
+Cell[3972, 93, 316, 5, 70, "Item",ExpressionUUID->"6e597a9d-8454-4776-9df0-2727a9d1cd83"],
+Cell[4291, 100, 324, 5, 70, "Item",ExpressionUUID->"a03bd1e9-cadf-4c36-84da-03fcb2c72ea1"],
+Cell[4618, 107, 87, 0, 70, "Text",ExpressionUUID->"9cece58a-9c52-4017-a759-796b23d77c32"],
+Cell[4708, 109, 320, 5, 70, "Item",ExpressionUUID->"c26b15d0-95e5-4157-9559-5f6a3b1f4afe"],
+Cell[5031, 116, 310, 5, 70, "Item",ExpressionUUID->"57efc4a9-466f-40d7-8400-7dcf1c0f8341"],
+Cell[5344, 123, 356, 6, 70, "Item",ExpressionUUID->"ce5003e8-b13e-4773-862c-ad0670de82d9"],
+Cell[5703, 131, 89, 0, 70, "Section",ExpressionUUID->"95c317a4-3728-48fe-b60c-594c9e636000"],
+Cell[5795, 133, 76, 0, 70, "Text",ExpressionUUID->"2200ef53-9ced-4d21-9078-b6a524b34d4a"],
+Cell[5874, 135, 325, 6, 70, "Item",ExpressionUUID->"d4415e47-2d51-459f-8160-1ab0de025a0f"],
+Cell[6202, 143, 324, 6, 70, "Item",ExpressionUUID->"56579be5-1d9c-4442-b8b2-8fb98b01de04"]
+}
+]
+*)
+
+(* End of internal cache information *)

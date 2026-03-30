@@ -1,0 +1,24 @@
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+*.venv/
+.env
+
+# IDE and OS files
+.vscode/
+.idea/
+*.DS_Store
+
+# Simulation outputs (data and plots)
+outputs/
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+PyUnusedImportsInspection.xml

@@ -1,0 +1,121 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      4721,        112]
+NotebookOptionsPosition[      3538,         90]
+NotebookOutlinePosition[      3852,        104]
+CellTagsIndexPosition[      3809,        101]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["UOM Welded Boundary Canonicalization", "Title",ExpressionUUID->"21a4a309-a207-4ba2-884b-d9da18b7c06d"],
+
+Cell["\<\
+This notebook promotes the welded-safe audit into a Main-usable exact \
+finite-cutoff corollary on the preserved welded boundary image. \
+\>", "Text",ExpressionUUID->"a7b5d964-f901-4329-a82c-e7ae99757d6a"],
+
+Cell["Targets", "Section",ExpressionUUID->"a7eb0e2e-ddc3-4cf1-89a5-4045fb7e7920"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-welded-boundary-ambiguity-\
+annihilation",
+  Background->None,ExpressionUUID->
+  "309d6d26-efd9-413b-99f9-aef4c0d63282"]], \
+"InlineCode",ExpressionUUID->"e1bd6e59-995b-44e5-964a-6abd52270962"]], "Item",\
+ExpressionUUID->"0aae53a6-b952-4282-81c6-b00f7c3c39f1"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-welded-boundary-class-defined-\
+derivation",
+  Background->None,ExpressionUUID->
+  "769fad35-7050-4c94-8388-1217e105de5e"]], \
+"InlineCode",ExpressionUUID->"b7f0897b-a64d-481c-bb9a-d25ac98fbcb6"]], "Item",\
+ExpressionUUID->"9457fd27-4c60-41e4-aaa5-a0abf01d553b"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-welded-boundary-calibration-\
+invariance",
+  Background->None,ExpressionUUID->
+  "3376efcc-9ad5-44b8-945a-928cfe7f5560"]], \
+"InlineCode",ExpressionUUID->"f3cf17d3-d9f5-4627-a573-4db5ec5eee46"]], "Item",\
+ExpressionUUID->"9a3dc65d-deaa-41b7-9d32-ee353bdbacce"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-welded-boundary-nontriviality",
+  Background->None,ExpressionUUID->
+  "d47c80d3-b442-43d9-8cfe-a67bf5fc73ba"]], \
+"InlineCode",ExpressionUUID->"dcf32ef6-7b28-471e-b225-9deb64f631b6"]], "Item",\
+ExpressionUUID->"eee821dc-5fc5-47a5-b91f-b6d57c321494"],
+
+Cell["Evaluate", "Section",ExpressionUUID->"b7adbaf0-4a38-445a-91b3-dd517cbde2d8"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"audit", "=", 
+   RowBox[{
+   "MainProof`UOMBoundaryCanonicalization`AuditUOMBoundaryCanonicalization", "[",
+     "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"decision", "=", 
+   RowBox[{
+   "MainProof`UOMBoundaryCanonicalization`\
+UOMBoundaryCanonicalizationDecision", "[", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"<|", 
+  RowBox[{
+   RowBox[{"\"\<Decision\>\"", "->", "decision"}], ",", 
+   RowBox[{"\"\<Claims\>\"", "->", 
+    RowBox[{"audit", "[", "\"\<Claims\>\"", "]"}]}], ",", 
+   RowBox[{"\"\<ObservableAction\>\"", "->", 
+    RowBox[{"audit", "[", "\"\<ObservableAction\>\"", "]"}]}]}], 
+  "|>"}]}], "Input",ExpressionUUID->"3ace622b-6d8b-4cca-99df-03acde290996"],
+
+Cell["Context", "Section",ExpressionUUID->"683bd86b-e60e-49f1-a5bc-aa9f69fbd155"],
+
+Cell["\<\
+The legacy transported selector decision is negative-control context only. \
+The exact theorem here is limited to the preserved compiled/welded boundary \
+image and does not yet identify the full completion-sector operator algebra.\
+\>", "Text",ExpressionUUID->"17ce187b-5929-4c12-b105-7098993b317b"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"bacb05d1-7806-4062-9342-ddc6597ae3bd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 108, 0, 70, "Title",ExpressionUUID->"21a4a309-a207-4ba2-884b-d9da18b7c06d"],
+Cell[665, 22, 215, 3, 70, "Text",ExpressionUUID->"a7b5d964-f901-4329-a82c-e7ae99757d6a"],
+Cell[883, 27, 81, 0, 70, "Section",ExpressionUUID->"a7eb0e2e-ddc3-4cf1-89a5-4045fb7e7920"],
+Cell[967, 29, 302, 5, 70, "Item",ExpressionUUID->"0aae53a6-b952-4282-81c6-b00f7c3c39f1"],
+Cell[1272, 36, 304, 5, 70, "Item",ExpressionUUID->"9457fd27-4c60-41e4-aaa5-a0abf01d553b"],
+Cell[1579, 43, 302, 5, 70, "Item",ExpressionUUID->"9a3dc65d-deaa-41b7-9d32-ee353bdbacce"],
+Cell[1884, 50, 291, 4, 70, "Item",ExpressionUUID->"eee821dc-5fc5-47a5-b91f-b6d57c321494"],
+Cell[2178, 56, 82, 0, 70, "Section",ExpressionUUID->"b7adbaf0-4a38-445a-91b3-dd517cbde2d8"],
+Cell[2263, 58, 874, 22, 70, "Input",ExpressionUUID->"3ace622b-6d8b-4cca-99df-03acde290996"],
+Cell[3140, 82, 81, 0, 70, "Section",ExpressionUUID->"683bd86b-e60e-49f1-a5bc-aa9f69fbd155"],
+Cell[3224, 84, 310, 4, 70, "Text",ExpressionUUID->"17ce187b-5929-4c12-b105-7098993b317b"]
+}
+]
+*)
+
+(* End of internal cache information *)

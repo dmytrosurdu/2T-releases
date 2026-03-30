@@ -1,0 +1,7 @@
+Strict boundary record invariance is exact but trivial: the induced derivation collapses after the boundary readout.
+
+Controlled projection isolates the exact source of boundary calibration dependence: only the diagonal controlled ambiguity component can survive; ledger-off-diagonal pieces are killed.
+
+Operator-level invisibility and expectation-level invisibility are now sharply separated. The unsafe controlled model is expectation-invisible on boundary-classical states while remaining operator-visible.
+
+A nontrivial mod-null invisible controlled family exists exactly at finite cutoff, so the boundary split+welded lane supports a conditional Path A rather than only trivial record-level invariance.

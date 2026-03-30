@@ -1,0 +1,345 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     13352,        336]
+NotebookOptionsPosition[     11769,        310]
+NotebookOutlinePosition[     12083,        324]
+CellTagsIndexPosition[     12040,        321]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["17. Controlled Boundary Sector", "Title",ExpressionUUID->"f64dee09-00a1-4d6a-980f-0bda2d64f445"],
+
+Cell[TextData[{
+ "This notebook studies the nontrivial boundary algebra ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          StyleBox["O", "TI"], 
+          RowBox[{"\[PartialD]", ",", 
+            StyleBox["ctrl", FontSlant -> "Plain"]}]], "\[LongEqual]", 
+         RowBox[{"{", 
+           RowBox[{
+             UnderscriptBox["\[Sum]", 
+              StyleBox["i", "TI"], LimitsPositioning -> True], 
+             SubsuperscriptBox["\[CapitalPi]", 
+              StyleBox["i", "TI"], 
+              RowBox[{"(", 
+                StyleBox["A", "TI"], ")"}]], "\[CircleTimes]", 
+             SubsuperscriptBox[
+              StyleBox["O", "TI"], 
+              StyleBox["i", "TI"], 
+              RowBox[{"(", 
+                StyleBox["B", "TI"], ")"}]]}], "}"}], "."}], TraditionalForm],
+      "errors" -> {}, "input" -> 
+     "\\mathcal O_{\\partial,\\mathrm{ctrl}} = \\left\\{ \\sum_i \\Pi_i^{(A)} \
+\\otimes O_i^{(B)} \\right\\}.", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "424accdf-9bdb-48ea-a670-0365258f7d8d"],
+ "It is the exact finite-cutoff realization of classical ledger control on a \
+coherent completion sector. "
+}], "Text",ExpressionUUID->"1f801b01-f0a2-41ea-a812-def748521b66"],
+
+Cell["Exact reduction theorem", "Section",ExpressionUUID->"463c1325-9df4-4708-aed9-b7907476fecd"],
+
+Cell[TextData[{
+ "For a general ambiguity operator ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["K", "TI"], TraditionalForm], "errors" -> {}, "input" -> "K", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "ceb05672-6b07-4dc8-a831-9e856b818b35"],
+ " on ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["A", "TI"], "\[CircleTimes]", 
+         StyleBox["B", "TI"]}], TraditionalForm], "errors" -> {}, "input" -> 
+     "A \\otimes B", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "0d928691-3397-4847-9302-252d8dd8f104"],
+ " and a controlled observable ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["O", "TI"], "\[LongEqual]", 
+         UnderscriptBox["\[Sum]", 
+          StyleBox["i", "TI"], LimitsPositioning -> True], 
+         SubsuperscriptBox["\[CapitalPi]", 
+          StyleBox["i", "TI"], 
+          RowBox[{"(", 
+            StyleBox["A", "TI"], ")"}]], "\[CircleTimes]", 
+         SubsuperscriptBox[
+          StyleBox["O", "TI"], 
+          StyleBox["i", "TI"], 
+          RowBox[{"(", 
+            StyleBox["B", "TI"], ")"}]], ","}], TraditionalForm], 
+     "errors" -> {}, "input" -> 
+     "O = \\sum_i \\Pi_i^{(A)} \\otimes O_i^{(B)},", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "2bebcffa-3437-4178-a273-9ac99f01a039"],
+ "the controlled projection kills the ledger-off-diagonal part of ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["K", "TI"], TraditionalForm], "errors" -> {}, "input" -> "K", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "42edad5b-42c2-42e9-a97d-04ade17dde63"],
+ ", and only the diagonal controlled ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["B", "TI"], TraditionalForm], "errors" -> {}, "input" -> "B", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "30668b1a-c8b5-40e5-8a43-2a2c35356558"],
+ "-blocks survive: ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          StyleBox["P", "TI"], 
+          StyleBox["ctrl", FontSlant -> "Plain"]], 
+         RowBox[{"(", 
+           RowBox[{"[", 
+             RowBox[{
+               StyleBox["K", "TI"], ",", 
+               StyleBox["O", "TI"]}], "]"}], ")"}], "\[LongEqual]", 
+         UnderscriptBox["\[Sum]", 
+          StyleBox["i", "TI"], LimitsPositioning -> True], 
+         SubsuperscriptBox["\[CapitalPi]", 
+          StyleBox["i", "TI"], 
+          RowBox[{"(", 
+            StyleBox["A", "TI"], ")"}]], "\[CircleTimes]", 
+         RowBox[{"[", 
+           RowBox[{
+             SubsuperscriptBox[
+              StyleBox["K", "TI"], 
+              StyleBox["i", "TI"], 
+              RowBox[{"(", 
+                StyleBox["B", "TI"], ")"}]], ",", 
+             SubsuperscriptBox[
+              StyleBox["O", "TI"], 
+              StyleBox["i", "TI"], 
+              RowBox[{"(", 
+                StyleBox["B", "TI"], ")"}]]}], "]"}], "."}], TraditionalForm],
+      "errors" -> {}, "input" -> 
+     "P_{\\mathrm{ctrl}}([K,O])\n=\n\\sum_i \\Pi_i^{(A)} \\otimes [K_i^{(B)}, \
+O_i^{(B)}].", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "a2708b90-5a8d-4982-8061-553f1da276df"],
+ "The WL audit proves this exactly on the dimension triples ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         RowBox[{"(", 
+           RowBox[{"2", ",", "2"}], ")"}], ",", 
+         RowBox[{"(", 
+           RowBox[{"2", ",", "3"}], ")"}], ",", 
+         RowBox[{"(", 
+           RowBox[{"3", ",", "2"}], ")"}]}], TraditionalForm], "errors" -> {},
+      "input" -> "(2,2), (2,3), (3,2)", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "85e5f76c-e525-4c2d-944a-e53a2545d5df"],
+ "with fully symbolic operators. "
+}], "Text",ExpressionUUID->"ba64d358-b355-411b-83c4-3485a11f2753"],
+
+Cell["Boundary criterion", "Section",ExpressionUUID->"8e0f6d5d-46cd-4838-8be4-678bcb0d29b9"],
+
+Cell["\<\
+This gives the exact boundary analogue of the earlier physical-sector result. \
+\>", "Text",ExpressionUUID->"f6355bee-80d5-4fa0-98a7-a1340391795f"],
+
+Cell[TextData[{
+ "Strong version: the induced derivation is class-defined on ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SubscriptBox[
+        StyleBox["O", "TI"], 
+        RowBox[{"\[PartialD]", ",", 
+          StyleBox["ctrl", FontSlant -> "Plain"]}]], TraditionalForm], 
+     "errors" -> {}, "input" -> "\\mathcal O_{\\partial,\\mathrm{ctrl}}", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "f9b00d19-93e3-4f58-bc2e-62dab093d9e8"],
+ " iff the surviving controlled ambiguity component acts trivially there."
+}], "Item",ExpressionUUID->"fb51da23-ebf6-4060-9b4c-eba79c26ba90"],
+
+Cell["\<\
+Mod-null version: it is class-defined on the quotient iff the surviving \
+controlled ambiguity component acts into the chosen boundary null ideal.\
+\>", "Item",ExpressionUUID->"c2a6ffe9-6407-4460-a887-32114b0d3786"],
+
+Cell["Operator versus expectation level", "Section",ExpressionUUID->"8a7330b7-5a6f-41e8-b4c9-1405b7ce3819"],
+
+Cell["This notebook keeps two notions separate. ", "Text",ExpressionUUID->"4e286dc3-ea4b-43e4-bcdd-ad334496bc34"],
+
+Cell[TextData[{
+ "Operator level: ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          StyleBox["P", "TI"], 
+          StyleBox["ctrl", FontSlant -> "Plain"]], 
+         RowBox[{"(", 
+           RowBox[{"[", 
+             RowBox[{
+               StyleBox["K", "TI"], ",", 
+               StyleBox["O", "TI"]}], "]"}], ")"}], "\[LongEqual]", "0"}], 
+       TraditionalForm], "errors" -> {}, "input" -> 
+     "P_{\\mathrm{ctrl}}([K,O]) = 0", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "e9d784f2-9872-40f0-bc06-c9574d8c169c"],
+ " or ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          StyleBox["P", "TI"], 
+          StyleBox["ctrl", FontSlant -> "Plain"]], 
+         RowBox[{"(", 
+           RowBox[{"[", 
+             RowBox[{
+               StyleBox["K", "TI"], ",", 
+               StyleBox["O", "TI"]}], "]"}], ")"}], "\[Element]", 
+         SubscriptBox[
+          StyleBox["N", "TI"], "\[PartialD]"]}], TraditionalForm], 
+     "errors" -> {}, "input" -> 
+     "P_{\\mathrm{ctrl}}([K,O]) \\in \\mathcal N_\\partial", "state" -> 
+     "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "b44fb4a1-4626-476d-8561-a16cc12297e3"],
+ "."
+}], "Item",ExpressionUUID->"e88ab0a4-11d3-4be7-8ccd-c8487d311d2b"],
+
+Cell[TextData[{
+ "Expectation level: ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         RowBox[{
+           StyleBox["T", "TI"], 
+           StyleBox["r", "TI"]}], 
+         RowBox[{"(", 
+           RowBox[{
+             SubscriptBox["\[Rho]", "\[PartialD]"], 
+             RowBox[{"[", 
+               RowBox[{
+                 StyleBox["K", "TI"], ",", 
+                 StyleBox["O", "TI"]}], "]"}]}], ")"}], "\[LongEqual]", "0"}],
+        TraditionalForm], "errors" -> {}, "input" -> 
+     "\\operatorname{Tr}(\\rho_\\partial [K,O]) = 0", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "9af23f07-22bf-4740-ab69-657041ed6d77"],
+ " for all diagonal boundary-classical states."
+}], "Item",ExpressionUUID->"b6fb3a5e-723c-4988-9b17-fb42fd7a0900"],
+
+Cell["\<\
+The unsafe controlled model shows these are not the same: expectation-level \
+invisibility can hold while operator-level visibility still survives. \
+\>", "Text",ExpressionUUID->"19c2cb9f-bc06-4394-9af2-9633f7c5e543"],
+
+Cell["Status", "Section",ExpressionUUID->"c219bf77-85a7-4a45-b152-16d4fd41c3f2"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Claim\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm]},
+        {"\<\"Ledger-off-diagonal ambiguity is killed by controlled \
+pinch\"\>", "\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Exact controlled commutator formula\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Strong class-definedness criterion\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Mod-null class-definedness criterion\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Operator-level and expectation-level notions differ\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[BoxForm`e$, TableHeadings -> {None, {"Claim", "Status"}}]]], 
+    "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"1d32ce81-ee0c-445c-9c8f-f5ad58093278"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"a83bd6d1-c378-4ba4-8c49-4f0e587986a8"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 102, 0, 70, "Title",ExpressionUUID->"f64dee09-00a1-4d6a-980f-0bda2d64f445"],
+Cell[659, 22, 1304, 30, 70, "Text",ExpressionUUID->"1f801b01-f0a2-41ea-a812-def748521b66"],
+Cell[1966, 54, 97, 0, 70, "Section",ExpressionUUID->"463c1325-9df4-4708-aed9-b7907476fecd"],
+Cell[2066, 56, 4165, 107, 70, "Text",ExpressionUUID->"ba64d358-b355-411b-83c4-3485a11f2753"],
+Cell[6234, 165, 92, 0, 70, "Section",ExpressionUUID->"8e0f6d5d-46cd-4838-8be4-678bcb0d29b9"],
+Cell[6329, 167, 157, 2, 70, "Text",ExpressionUUID->"f6355bee-80d5-4fa0-98a7-a1340391795f"],
+Cell[6489, 171, 653, 14, 70, "Item",ExpressionUUID->"fb51da23-ebf6-4060-9b4c-eba79c26ba90"],
+Cell[7145, 187, 225, 3, 70, "Item",ExpressionUUID->"c2a6ffe9-6407-4460-a887-32114b0d3786"],
+Cell[7373, 192, 107, 0, 70, "Section",ExpressionUUID->"8a7330b7-5a6f-41e8-b4c9-1405b7ce3819"],
+Cell[7483, 194, 113, 0, 70, "Text",ExpressionUUID->"4e286dc3-ea4b-43e4-bcdd-ad334496bc34"],
+Cell[7599, 196, 1396, 39, 70, "Item",ExpressionUUID->"e88ab0a4-11d3-4be7-8ccd-c8487d311d2b"],
+Cell[8998, 237, 826, 21, 70, "Item",ExpressionUUID->"b6fb3a5e-723c-4988-9b17-fb42fd7a0900"],
+Cell[9827, 260, 227, 3, 70, "Text",ExpressionUUID->"19c2cb9f-bc06-4394-9af2-9633f7c5e543"],
+Cell[10057, 265, 80, 0, 70, "Section",ExpressionUUID->"c219bf77-85a7-4a45-b152-16d4fd41c3f2"],
+Cell[10140, 267, 1625, 41, 70, "TextTableForm",ExpressionUUID->"1d32ce81-ee0c-445c-9c8f-f5ad58093278"]
+}
+]
+*)
+
+(* End of internal cache information *)

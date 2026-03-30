@@ -1,0 +1,2320 @@
+\section{Subprogram 4a: Dilatation weight \texorpdfstring{$\tfrac12$}{1/2} of the odd charges on the common UV sector}
+\label{sec:subprogram4a}
+
+In this section we determine the scaling weight of the odd charges that appear on
+the Minkowski UV vacuum sector after the Subprogram~1b reconstruction and the
+Subprogram~3c HLS step. The argument uses:
+\begin{itemize}
+  \item the indexed HLS super-Poincare seed on the UV vacuum representation
+        \textnormal{(Theorem~\ref{thm:Main-HLS})},
+  \item the HLS completeness statement
+        \textnormal{(Theorem~\ref{thm:HLS-spinor-completeness})},
+  \item and the conformal common-sector supplement
+        \(\mathbf{2T}_{\mathrm{conf}}\)
+        \textnormal{(Definition~\ref{def:2T-conf})}.
+\end{itemize}
+The logic is:
+\begin{enumerate}[(1)]
+  \item place the conformal even generators \(P_\mu,M_{\mu\nu},D,K_\mu\) on the
+        same UV vacuum representation as the HLS odd module;
+  \item use HLS completeness to prove that the dilation subgroup acts on the
+        finite-dimensional HLS charge module itself;
+  \item run the Jacobi argument against
+        \(\{Q_\alpha^I,\bar Q_{\dot\beta J}\}\propto P_\mu\) to force
+        \(\Delta(Q)=\tfrac12\).
+\end{enumerate}
+
+\subsection{Input from Subprograms 1b and 3c}
+
+We work on the Minkowski UV chart used in Subprogram~3c. The inputs are:
+\begin{itemize}
+  \item the Wightman net and vacuum representation
+        \((\mathcal H,\pi,U,\Omega)\) with positive-energy Poincare covariance
+        from Theorem~\ref{thm:subprogram1b-Wightman};
+  \item the indexed HLS odd charge module \(\mathcal V_Q\) and the operators
+        \(Q_\alpha^I,\bar Q_{\dot\alpha I}\) from
+        Theorem~\ref{thm:Main-HLS};
+  \item the completeness statement that every translation-invariant local odd
+        Weyl-spinor symmetry generator of the given chirality is already of the
+        form \(Q_\alpha(v)\) for a unique \(v\in\mathcal V_Q\), from
+        Theorem~\ref{thm:HLS-spinor-completeness};
+  \item the same-representation conformal package
+        \(\mathbf{2T}_{\mathrm{conf}}\), which places
+        \(P_\mu,M_{\mu\nu},D,K_\mu\) on the same UV Hilbert space.
+\end{itemize}
+In this subsection we also write
+\[
+P_{\alpha\dot\beta}:=(\sigma^\mu)_{\alpha\dot\beta}P_\mu.
+\]
+
+\begin{lemma}[Dilatation and translations on the common UV conformal sector]
+\label{thm:4a-uv-dilatation-ebc}
+Assume the UV conformal common-sector interface
+\(\mathbf{2T}_{\mathrm{conf}}\)
+\textnormal{(Definition~\ref{def:2T-conf})} on the same vacuum representation
+\((\mathcal H,\pi,\Omega)\) used in Theorem~\ref{thm:Main-HLS}. Then the
+selfadjoint generators \(D\) and \(P_\mu\) act on the common Stone core supplied
+by \(\mathbf{2T}_{\mathrm{conf}}\) and satisfy
+\begin{equation}
+\label{eq:4a-conf-relations}
+  [D,P_\mu] = i P_\mu.
+\end{equation}
+In particular, the conformal even sector and the HLS odd charge module act on
+one common UV vacuum representation with a dense common invariant core.
+\end{lemma}
+
+\begin{proof}
+Definition~\ref{def:2T-conf} places the conformal generators
+\(P_\mu,M_{\mu\nu},D,K_\mu\) on the common UV vacuum representation and on a
+common Stone core on which \eqref{eq:4a-conf-relations} holds.
+Theorem~\ref{thm:Main-HLS} places the indexed HLS odd charges on that same vacuum
+representation. Intersecting the HLS invariant core with the Stone core gives the
+claimed common UV vacuum representation and common invariant core.
+\end{proof}
+
+\begin{lemma}[Nontriviality of the HLS translation block]
+\label{lem:4a-HLS-nonzero-translation}
+Assume Theorem~\ref{thm:Main-HLS}. Then some
+\(P_{\alpha\dot\beta}\) is nonzero on the common HLS core.
+\end{lemma}
+
+\begin{proof}
+Let \(E:=\mathcal V_Q\). By the HLS theorem invoked in
+Theorem~\ref{thm:Main-HLS}, the original nonzero odd derivation is implemented by
+some nonzero \(v_0\in E\), so \(Q(v_0)\neq 0\).
+
+Suppose for contradiction that \(P_{\alpha\dot\beta}=0\) for all
+\(\alpha,\dot\beta\). Then the HLS anticommutator gives
+\[
+0
+=
+\{Q_\alpha(v_0),Q_\alpha(v_0)^\dagger\}
+\]
+on the common core. Hence for every core vector \(\psi\),
+\[
+0
+=
+\langle \psi,\{Q_\alpha(v_0),Q_\alpha(v_0)^\dagger\}\psi\rangle
+=
+\|Q_\alpha(v_0)\psi\|^2+\|Q_\alpha(v_0)^\dagger\psi\|^2.
+\]
+Therefore \(Q_\alpha(v_0)=0\) for both \(\alpha=1,2\), contradicting the
+nontriviality of the implementing HLS charge. Thus some
+\(P_{\alpha\dot\beta}\neq 0\).
+\end{proof}
+
+\begin{lemma}[Finite-dimensional odd charge module is stable under \(D\)]
+\label{lem:4a-D-stability}
+Assume Theorem~\ref{thm:Main-HLS},
+Definition~\ref{def:2T-conf}, and
+Theorem~\ref{thm:HLS-spinor-completeness}. Let \(\mathcal V_Q\) be the
+finite-dimensional odd charge module furnished by
+Theorem~\ref{thm:Main-HLS}, and write \(Q_\alpha(v)\) for the
+corresponding odd generators. Then:
+\begin{enumerate}[(a)]
+  \item the dilation one-parameter subgroup acts on \(\mathcal V_Q\) through a
+        finite-dimensional representation \(e^{tA_Q}\) such that on the common UV
+        core
+        \[
+          e^{itD}Q_\alpha(v)e^{-itD}=Q_\alpha(e^{tA_Q}v);
+        \]
+  \item differentiating at \(t=0\) gives
+        \[
+          [D,Q_\alpha(v)] = i\,Q_\alpha(A_Qv);
+        \]
+  \item with respect to the Hermitian form determined by the indexed HLS
+        anticommutator, \(A_Q+A_Q^\dagger=\mathbf 1_{\mathcal V_Q}\). In
+        particular, \(A_Q-\tfrac12\mathbf 1\) is skew-Hermitian.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Set \(E:=\mathcal V_Q\), and let
+\[
+\mathscr Q_+
+:=
+\{\text{translation-invariant local odd Weyl-spinor symmetry generators of the fixed chirality}\}.
+\]
+By Theorem~\ref{thm:HLS-spinor-completeness}, the map
+\[
+J:E\longrightarrow \mathscr Q_+,
+\qquad
+v\longmapsto Q(v):=(Q_1(v),Q_2(v))
+\]
+is a linear isomorphism. In particular, \(\mathscr Q_+\) is finite-dimensional,
+and the full Weyl pair records both spinor components in a single map.
+
+For the dilation subgroup from Definition~\ref{def:2T-conf}, define
+\[
+\Theta_t(X):=e^{itD}Xe^{-itD}
+\qquad(X\in\mathscr Q_+).
+\]
+Because dilations preserve locality, translation-invariance, and Weyl-spinor
+type, \(\Theta_t\) maps \(\mathscr Q_+\) to itself and satisfies
+\[
+\Theta_{t+s}=\Theta_t\Theta_s,
+\qquad
+\Theta_0=\mathbf 1_{\mathscr Q_+}.
+\]
+Transfer this action to \(E\) by
+\[
+T_t:=J^{-1}\Theta_tJ\in\operatorname{GL}(E).
+\]
+Then, by construction,
+\[
+e^{itD}Q_\alpha(v)e^{-itD}=Q_\alpha(T_tv)
+\]
+for both \(\alpha=1,2\).
+
+It remains to prove continuity of \(t\mapsto T_t\). Because \(\mathscr Q_+\) is
+finite-dimensional, it is enough to prove continuity of a separating family of
+linear functionals. Choose a basis \(X^{(1)},\dots,X^{(m)}\) of \(\mathscr Q_+\).
+By finite-dimensionality, one can choose vectors \(\phi_j,\psi_j\) in the common
+UV core and local observables \(A_j\) so that the linear functionals
+\[
+\ell_j(X):=\langle\phi_j,X\,\pi(A_j)\Omega\rangle
+\qquad(1\le j\le m)
+\]
+separate \(\mathscr Q_+\). For fixed \(X\in\mathscr Q_+\),
+\[
+\ell_j(\Theta_tX)
+=
+\big\langle e^{-itD}\phi_j,\,
+X\,e^{-itD}\pi(A_j)\Omega\big\rangle.
+\]
+The conformal representation is strongly continuous, and the conformal local core
+is stable under the dilation subgroup by Definition~\ref{def:2T-conf}; hence each
+\(t\mapsto \ell_j(\Theta_tX)\) is continuous. Therefore \(t\mapsto\Theta_t\) is
+continuous on the finite-dimensional space \(\mathscr Q_+\), and hence
+\(t\mapsto T_t\) is continuous on \(E\).
+
+The standard finite-dimensional one-parameter-group theorem therefore yields a
+unique \(A_Q\in\operatorname{End}(E)\) such that
+\[
+T_t=e^{tA_Q}.
+\]
+This proves item~\textnormal{(a)}. Differentiating the defining identity at
+\(t=0\) on the common UV core gives
+\[
+[D,Q_\alpha(v)] = i\,Q_\alpha(A_Qv),
+\]
+which is item~\textnormal{(b)}.
+
+For item~\textnormal{(c)}, define the HLS Hermitian form on \(E=\mathcal V_Q\) by
+\[
+\{Q_\alpha(v),\bar Q_{\dot\beta}(w)\}
+=
+2\,\langle v,w\rangle_Q\,P_{\alpha\dot\beta}.
+\]
+By item~\textnormal{(b)} and selfadjointness of \(D\), the barred generators obey
+\[
+[D,\bar Q_{\dot\beta}(w)]
+=
+i\,\bar Q_{\dot\beta}(A_Q^\dagger w)
+\]
+under the HLS Hermitian identification. Applying \(D\) to the HLS
+anticommutator and using \([D,P_{\alpha\dot\beta}]=iP_{\alpha\dot\beta}\) gives
+\[
+\begin{aligned}
+i\,2\,\langle v,w\rangle_Q\,P_{\alpha\dot\beta}
+&=
+[D,\{Q_\alpha(v),\bar Q_{\dot\beta}(w)\}] \\
+&=
+\{[D,Q_\alpha(v)],\bar Q_{\dot\beta}(w)\}
++
+\{Q_\alpha(v),[D,\bar Q_{\dot\beta}(w)]\} \\
+&=
+i\,2\,
+\bigl(
+\langle A_Qv,w\rangle_Q
++
+\langle v,A_Q^\dagger w\rangle_Q
+\bigr)
+P_{\alpha\dot\beta}.
+\end{aligned}
+\]
+Hence
+\[
+2i\,\bigl\langle (A_Q+A_Q^\dagger-\mathbf 1_E)v,w\bigr\rangle_Q\,
+P_{\alpha\dot\beta}
+=
+0
+\qquad
+(v,w\in E).
+\]
+By Lemma~\ref{lem:4a-HLS-nonzero-translation}, choose
+\((\alpha_0,\dot\beta_0)\) with \(P_{\alpha_0\dot\beta_0}\neq 0\). Specializing to
+that pair, the scalar coefficient must vanish, so
+\[
+\bigl\langle (A_Q+A_Q^\dagger-\mathbf 1_E)v,w\bigr\rangle_Q=0
+\qquad
+(v,w\in E).
+\]
+Therefore
+\[
+A_Q+A_Q^\dagger=\mathbf 1_E.
+\]
+Equivalently, \(A_Q-\tfrac12\mathbf 1_E\) is skew-Hermitian.
+\end{proof}
+
+\begin{theorem}[Odd-charge dilatation normal form]
+\label{thm:4a-Delta-half}
+\label{thm:4a-D-normal-form}
+Assume Lemma~\ref{lem:4a-D-stability}. Set
+\[
+K_Q:=A_Q-\frac12\mathbf 1_{\mathcal V_Q}.
+\]
+Then \(K_Q^\dagger=-K_Q\), and on the common UV core one has
+\[
+[D,Q_\alpha(v)]
+=
+\frac{i}{2}\,Q_\alpha(v)+i\,Q_\alpha(K_Qv).
+\]
+If the barred generators are viewed through the Hermitian identification
+\(\mathcal V_Q\cong\overline{\mathcal V_Q}^{\,*}\), then likewise
+\[
+[D,\bar Q_{\dot\alpha}(v)]
+=
+\frac{i}{2}\,\bar Q_{\dot\alpha}(v)-i\,\bar Q_{\dot\alpha}(K_Qv).
+\]
+In particular, the only possible obstruction to exact weight~\(\tfrac12\) is a
+commuting skew-Hermitian endomorphism of the internal multiplicity space.
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:4a-D-stability} gives
+\[
+A_Q+A_Q^\dagger=\mathbf 1_{\mathcal V_Q},
+\]
+hence \(K_Q^\dagger=-K_Q\). Substituting
+\(A_Q=\frac12\mathbf 1_{\mathcal V_Q}+K_Q\) into the commutator formula of
+Lemma~\ref{lem:4a-D-stability} immediately gives
+\[
+[D,Q_\alpha(v)]
+=
+i\,Q_\alpha(A_Qv)
+=
+\frac{i}{2}\,Q_\alpha(v)+i\,Q_\alpha(K_Qv).
+\]
+For the barred sector, take Hilbert adjoints and use the selfadjointness of \(D\):
+\[
+[D,\bar Q_{\dot\alpha}(v)]
+=
+-[D,Q_\alpha(v)]^\dagger
+=
+\frac{i}{2}\,\bar Q_{\dot\alpha}(v)-i\,\bar Q_{\dot\alpha}(K_Qv).
+\]
+No further conclusion about \(K_Q\) follows from the stated interfaces alone.
+\end{proof}
+
+\begin{remark}[Meaning of the \(K_Q\) term]
+Theorem~\ref{thm:4a-Delta-half} isolates the most general dilatation normal form
+allowed by the stated interfaces. The endomorphism \(K_Q\) measures the
+internal skew-Hermitian part of the dilatation action on the multiplicity
+space. In Subprogram~4b that term is absorbed into the internal degree-zero
+sector once that sector is realized on the same Hilbert space.
+\end{remark}
+
+\begin{corollary}[Standard half-weight after central internal normalization]
+\label{cor:4b-dilatation-normalization}
+Assume Theorem~\ref{thm:4a-Delta-half},
+Theorem~\ref{thm:QS-conformal-plus-internal},
+Theorem~\ref{thm:internal-action-from-mixed-brackets},
+Lemma~\ref{lem:4b-degree-zero-faithfulness},
+Lemma~\ref{lem:4b-KQ-scalar},
+Lemma~\ref{lem:4b-upper-D-normal-form}, and
+Corollary~\ref{cor:4b-contragredient-internal-action}. Let
+\[
+K_Q=\kappa\,\mathbf 1_E,
+\qquad
+R_{K_Q}:=T_{K_Q},
+\qquad
+D_{\mathrm{std}}:=D-iR_{K_Q}.
+\]
+Then
+\[
+[D_{\mathrm{std}},Q_\alpha(v)]
+=
+\frac{i}{2}\,Q_\alpha(v),
+\qquad
+[D_{\mathrm{std}},\bar Q_{\dot\alpha}(v)]
+=
+\frac{i}{2}\,\bar Q_{\dot\alpha}(v).
+\]
+\[
+[D_{\mathrm{std}},S^\alpha(\lambda)]
+=
+-\frac{i}{2}\,S^\alpha(\lambda),
+\qquad
+[D_{\mathrm{std}},\bar S^{\dot\alpha}(\lambda)]
+=
+-\frac{i}{2}\,\bar S^{\dot\alpha}(\lambda).
+\]
+Moreover, for every \(A\in\operatorname{End}(E)\),
+\[
+  [D_{\mathrm{std}},T_A]=0.
+\]
+Finally,
+\[
+  [D_{\mathrm{std}},P_\mu]=iP_\mu,
+  \qquad
+  [D_{\mathrm{std}},M_{\mu\nu}]=[D,M_{\mu\nu}],
+\]
+\end{corollary}
+
+\begin{proof}
+Choose an orthonormal basis \(\{e_I\}_{I=1}^N\) of \(E\) with dual basis
+\(\{e^I\}_{I=1}^N\), and write
+\[
+R^I{}_J:=T_{e_I,e^J},
+\qquad
+r:=\sum_I R^I{}_I.
+\]
+Since \(K_Q=\kappa\,\mathbf 1_E\), one has
+\[
+R_{K_Q}=\kappa r.
+\]
+By Corollary~\ref{cor:4b-contragredient-internal-action},
+\[
+\bigl[r,Q_\alpha^I\bigr]=Q_\alpha^I,
+\qquad
+\bigl[r,\bar Q_{\dot\alpha I}\bigr]=-\bar Q_{\dot\alpha I},
+\]
+\[
+\bigl[r,S^\alpha{}_I\bigr]=-S^\alpha{}_I,
+\qquad
+\bigl[r,\bar S^{\dot\alpha I}\bigr]=\bar S^{\dot\alpha I}.
+\]
+Hence
+\[
+\bigl[iR_{K_Q},Q_\alpha^I\bigr]=i\kappa\,Q_\alpha^I,
+\qquad
+\bigl[iR_{K_Q},\bar Q_{\dot\alpha I}\bigr]=-i\kappa\,\bar Q_{\dot\alpha I},
+\]
+\[
+\bigl[iR_{K_Q},S^\alpha{}_I\bigr]=-i\kappa\,S^\alpha{}_I,
+\qquad
+\bigl[iR_{K_Q},\bar S^{\dot\alpha I}\bigr]=i\kappa\,\bar S^{\dot\alpha I}.
+\]
+
+On the other hand, Theorem~\ref{thm:4a-Delta-half},
+Lemma~\ref{lem:4b-KQ-scalar}, and
+Lemma~\ref{lem:4b-upper-D-normal-form} give
+\[
+[D,Q_\alpha^I]
+=
+\Bigl(\frac{i}{2}+i\kappa\Bigr)Q_\alpha^I,
+\qquad
+[D,\bar Q_{\dot\alpha I}]
+=
+\Bigl(\frac{i}{2}-i\kappa\Bigr)\bar Q_{\dot\alpha I},
+\]
+\[
+[D,S^\alpha{}_I]
+=
+\Bigl(-\frac{i}{2}-i\kappa\Bigr)S^\alpha{}_I,
+\qquad
+[D,\bar S^{\dot\alpha I}]
+=
+\Bigl(-\frac{i}{2}+i\kappa\Bigr)\bar S^{\dot\alpha I}.
+\]
+Subtracting the \(iR_{K_Q}\)-commutators therefore yields the exact half-weight
+relations for all four odd families.
+
+For the internal block, let \(A\in\operatorname{End}(E)\) and set
+\[
+  U_A:=[R_{K_Q},T_A].
+\]
+Because \(R_{K_Q}\) and \(T_A\) are degree-zero internal operators,
+\(U_A\) is again degree-zero internal. By linearity from
+Theorem~\ref{thm:QS-conformal-plus-internal},
+\[
+[D,T_A]=0,
+\qquad
+[T_A,P_\mu]=[T_A,M_{\mu\nu}]=0.
+\]
+Moreover, for every \(w\in E\),
+\[
+\begin{aligned}
+[U_A,Q_\alpha(w)]
+&=
+[R_{K_Q},Q_\alpha(Aw)]-[T_A,Q_\alpha(K_Qw)]\\
+&=
+Q_\alpha(K_QAw)-Q_\alpha(AK_Qw)\\
+&= 
+0
+\end{aligned}
+\]
+by Lemma~\ref{lem:4b-KQ-scalar}. Hence \(U_A\) is a degree-zero internal
+operator acting trivially on the lower odd layer. By
+Lemma~\ref{lem:4b-degree-zero-faithfulness}, it acts trivially on the entire odd
+closure, so \(U_A=0\). Therefore
+\[
+[R_{K_Q},T_A]=0
+\qquad
+(A\in\operatorname{End}(E)),
+\]
+and thus
+\[
+  [D_{\mathrm{std}},T_A]
+  =
+  [D,T_A]-i[R_{K_Q},T_A]
+  =
+  0.
+\]
+Since \(R_{K_Q}\) is internal, it already commutes with \(P_\mu\) and
+\(M_{\mu\nu}\), so
+\[
+[D_{\mathrm{std}},P_\mu]=[D,P_\mu]=iP_\mu,
+\qquad
+[D_{\mathrm{std}},M_{\mu\nu}]=[D,M_{\mu\nu}].
+\]
+\end{proof}
+
+\begin{remark}[Current-theoretic consequence of \(D_{\mathrm{std}}\)]
+For any conserved local current representative of an HLS charge that is
+conformal-primary with respect to \(D_{\mathrm{std}}\), the relations of
+Corollary~\ref{cor:4b-dilatation-normalization} force engineering dimension
+\(\tfrac72\).
+\end{remark}
+
+
+\section{Subprogram 4b: Same-\texorpdfstring{$\mathcal H$}{H} conformal closure of the HLS odd sector}
+\label{sec:subprogram4b}
+
+In this section the HLS odd sector is closed conformally on the same UV Hilbert
+space. The argument proceeds as follows:
+\begin{enumerate}[(1)]
+  \item strengthen the HLS import once, by using
+        Theorem~\ref{thm:HLS-spinor-completeness};
+  \item take the finite conformal closure of the HLS odd seed;
+  \item prove same-\(\mathcal H\) implementability of that finite closure on a
+        common invariant core;
+  \item recover the internal degree-zero algebra from mixed \(Q\)-\(S\) brackets
+        and prove saturation to \(\mathfrak u(N)\);
+  \item identify the resulting operator superalgebra with the standard \(4\)D
+        superconformal algebra.
+\end{enumerate}
+Theorem~\ref{thm:indexed-current-reconstruction} from the main spine gives a
+separate AQFT result for choosing indexed current representatives, while the
+closure argument below is formulated directly at the
+operator and module level.
+
+\subsection{Representation-theoretic input and odd conformal closure}
+\label{subsec:4b-closure}
+
+\begin{theorem}[Generated conformal prolongation of the HLS seed
+  \cite{Kac1977,Nahm:1977tg}]
+\label{thm:4b-odd-prolongation}
+Assume Theorem~\ref{thm:Main-HLS},
+Definition~\ref{def:2T-conf},
+Theorem~\ref{thm:HLS-spinor-completeness}, and
+Theorem~\ref{thm:4a-Delta-half}. Let \(E:=\mathcal V_Q\), and let \(W_Q\) be the
+translation-invariant HLS odd seed, viewed through the normal form of
+Theorem~\ref{thm:4a-Delta-half} as the tensor product of the standard
+weight-\(\tfrac12\) Weyl module with the internal multiplicity space \(E\). Let
+\[
+W_{\mathrm{sc}}
+:=
+U\!\bigl(\mathfrak{so}(4,2)_\mathbb C\bigr)\cdot W_Q
+\]
+inside the odd local-derivation space on the UV vacuum representation. Then:
+\begin{enumerate}[(i)]
+  \item \(W_{\mathrm{sc}}\) is finite-dimensional.
+  \item \(W_{\mathrm{sc}}\) has exactly two odd weight layers,
+\[
+W_{\mathrm{sc}} = W_Q \oplus W_S.
+\]
+  \item with respect to that normalized conformal part, \(W_Q\) has weight
+        \(+\tfrac12\) and \(W_S\) has weight \(-\tfrac12\).
+  \item \(P_\mu\) annihilates \(W_Q\), and \(K_\mu\) annihilates \(W_S\).
+  \item No further odd layers occur.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+  \mathfrak g:=\mathfrak{so}(4,2)_\mathbb C
+  =
+  \mathfrak g_{-1}\oplus\mathfrak g_0\oplus\mathfrak g_{+1}
+\]
+be the standard conformal \(|1|\)-grading, with
+\[
+  \mathfrak g_{+1}\cong\operatorname{span}\{P_\mu\},
+  \qquad
+  \mathfrak g_{-1}\cong\operatorname{span}\{K_\mu\},
+  \qquad
+  \mathfrak g_0\cong\mathfrak{so}(1,3)_\mathbb C\oplus\mathbb C D.
+\]
+By Theorem~\ref{thm:Main-HLS} and Theorem~\ref{thm:4a-Delta-half}, the HLS seed
+\(W_Q\) carries the Weyl-spinor factor with standard weight \(\tfrac12\), while the
+skew-Hermitian part \(K_Q\) acts only on the multiplicity space \(E\) and commutes
+with the Lorentz-spinor factor. Hence \(W_Q\) may be viewed as a
+finite-dimensional \(\mathfrak g_0\)-module whose conformal part is the standard
+lowest-weight Weyl module, annihilated by \(\mathfrak g_{+1}\) because the HLS
+generators are translation-invariant. Thus \(W_Q\) is naturally a module for the
+parabolic subalgebra
+\[
+  \mathfrak p^+:=\mathfrak g_0\oplus\mathfrak g_{+1}.
+\]
+Form the generalized Verma module
+\[
+  M(W_Q):=U(\mathfrak g)\otimes_{U(\mathfrak p^+)}W_Q.
+\]
+The concrete conformal closure in Definition~\ref{def:odd-conformal-closure} is
+exactly the image of \(M(W_Q)\) in the odd local-derivation space on the UV
+vacuum representation.
+
+Chirality by chirality, the conformal part of \(W_Q\) is \(E\) tensored with the
+lowest-weight Weyl spinor of weight \(\tfrac12\). The imported conformal-spinor
+prolongation classification cited in the appendix (\cite{Kac1977,Nahm:1977tg})
+says that the generated module for such a seed has the standard two-layer
+conformal-spinor quotient and no higher odd prolongation. Therefore the concrete
+image generated by the actual HLS seed factors through a finite-dimensional module
+with exactly the two odd normalized weights \(\pm\tfrac12\). The lowest layer is
+the seed module \(W_Q\), the upper layer is its conformal prolongation \(W_S\),
+\(P_\mu\) kills the lower layer, \(K_\mu\) kills the upper layer, and no further
+odd layers occur.
+\end{proof}
+
+\begin{definition}[Odd conformal closure]
+\label{def:odd-conformal-closure}
+Let \(W_Q\) be the odd derivation module generated by the HLS charges of
+Theorem~\ref{thm:Main-HLS}; equivalently,
+\[
+W_Q
+:=
+\left\{
+A\mapsto i[Q(v),\pi(A)]_{\mathrm s}
+\;:\;
+v\in\mathcal V_Q
+\right\}.
+\]
+Define \(W_{\mathrm{sc}}\) to be the smallest linear space of odd local
+derivations on the UV net that:
+\begin{itemize}
+  \item contains \(W_Q\), and
+  \item is stable under commutator with the even conformal generators
+        \(P_\mu,M_{\mu\nu},D,K_\mu\).
+\end{itemize}
+We call \(W_{\mathrm{sc}}\) the post-HLS odd conformal closure of the HLS seed.
+\end{definition}
+
+\begin{theorem}[Finite-dimensional conformal closure of the HLS odd sector]
+\label{thm:odd-conformal-closure-finite}
+Assume Theorem~\ref{thm:4b-odd-prolongation}. Then \(W_{\mathrm{sc}}\) is
+finite-dimensional and splits as
+\[
+W_{\mathrm{sc}} = W_Q \oplus W_S,
+\]
+where:
+\begin{itemize}
+  \item with respect to the normalized conformal part, \(W_Q\) has weight
+        \(+\tfrac12\),
+  \item with respect to the normalized conformal part, \(W_S\) has weight
+        \(-\tfrac12\),
+  \item \(P_\mu\) annihilates \(W_Q\),
+  \item \(K_\mu\) annihilates \(W_S\),
+  \item and \(W_S\) has exactly the left/right Weyl-spinor chirality pattern of
+        the standard \((S,\bar S)\) layer.
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+This is the content of Theorem~\ref{thm:4b-odd-prolongation}, restated with the
+notation of Definition~\ref{def:odd-conformal-closure}.
+\end{proof}
+
+\subsection{Same-\texorpdfstring{$\mathcal H$}{H} implementability}
+\label{subsec:4b-sameH}
+
+\begin{lemma}[Conformal Nelson smooth domain]
+\label{lem:4b-conformal-nelson-domain}
+Let
+\[
+N_{\mathrm{conf}}
+:=
+1+\sum_\mu P_\mu^2+\sum_{\mu<\nu}M_{\mu\nu}^2+D^2+\sum_\mu K_\mu^2
+\]
+with closure taken on the common Stone core from
+Definition~\ref{def:2T-conf}. Then
+\[
+\mathcal D_\infty(N_{\mathrm{conf}})
+:=
+\bigcap_{r\geq 0}\operatorname{Dom}N_{\mathrm{conf}}^r
+\]
+is dense, invariant under the connected conformal group, and coincides with the
+smooth-vector space for the conformal representation.
+\end{lemma}
+
+\begin{proof}
+This is the standard Nelson theorem for a finite family of essentially
+selfadjoint generators of a strongly continuous unitary representation of a
+finite-dimensional Lie group. Definition~\ref{def:2T-conf} supplies exactly those
+hypotheses for the conformal generator family
+\(\{P_\mu,M_{\mu\nu},D,K_\mu\}\).
+\end{proof}
+
+\begin{lemma}[The indexed HLS seed has a common linear \(H\)-bound]
+\label{lem:4b-HLS-seed-H-bound}
+Assume Theorem~\ref{thm:Main-HLS}. Then, for any chosen norm on the two-component
+Weyl pair \(Q(v)=(Q_1(v),Q_2(v))\), there exists \(C_0>0\) such that
+\[
+\|Q(v)\psi\|
+\le
+C_0\,\|v\|_Q\,\|(1+H)\psi\|
+\qquad
+(v\in\mathcal V_Q,\ \psi\in\mathcal D_Q),
+\]
+where \(H:=P^0\). In particular, the seed polynomial energy bound holds
+with \(m_0=1\).
+\end{lemma}
+
+\begin{proof}
+Choose an orthonormal basis \(\{e_I\}_{I=1}^N\) of \(E:=\mathcal V_Q\), write
+\[
+v=\sum_{I=1}^N v_I e_I,
+\]
+and define
+\[
+Q_\alpha(v):=\sum_{I=1}^N v_I Q_\alpha^I,
+\qquad
+\bar Q_{\dot\beta}(v):=\sum_{I=1}^N \overline{v_I}\,\bar Q_{\dot\beta I}.
+\]
+By bilinearity and the indexed HLS anticommutator from
+Theorem~\ref{thm:Main-HLS},
+\[
+\{Q_\alpha(v),\bar Q_{\dot\beta}(v)\}
+=
+2\,\|v\|_Q^2\,\sigma^\mu_{\alpha\dot\beta}P_\mu
+\]
+on the common invariant core \(\mathcal D_Q\). Summing the diagonal entries
+\(\alpha=\dot\alpha=1,2\) and using \(\sigma^0=\mathbf 1_2\) together with the
+tracelessness of the spatial Pauli matrices gives
+\[
+\sum_{\alpha=1}^2 \{Q_\alpha(v),\bar Q_{\dot\alpha}(v)\}
+=
+4\,\|v\|_Q^2\,H.
+\]
+Therefore, for every \(\psi\in\mathcal D_Q\),
+\[
+\sum_{\alpha=1}^2
+\Bigl(
+\|Q_\alpha(v)\psi\|^2+\|\bar Q_{\dot\alpha}(v)\psi\|^2
+\Bigr)
+=
+4\,\|v\|_Q^2\,\langle\psi,H\psi\rangle.
+\]
+Because Theorem~\ref{thm:Main-HLS} is built on the positive-energy vacuum
+representation from Theorem~\ref{thm:subprogram1b-Wightman}, the spectrum condition
+gives \(H\geq 0\). Hence the spectral theorem yields
+\[
+\langle\psi,H\psi\rangle
+\le
+\|(1+H)\psi\|^2.
+\]
+It follows that
+\[
+\sum_{\alpha=1}^2 \|Q_\alpha(v)\psi\|^2
+\le
+4\,\|v\|_Q^2\,\|(1+H)\psi\|^2.
+\]
+If \(\|\cdot\|_{\mathrm W}\) denotes the chosen norm on the two-component Weyl pair,
+finite-dimensional norm equivalence gives \(c_{\mathrm W}>0\) such that for every
+\((\xi_1,\xi_2)\in\mathcal H\oplus\mathcal H\),
+\[
+\|(\xi_1,\xi_2)\|_{\mathrm W}
+\le
+c_{\mathrm W}\,(\|\xi_1\|^2+\|\xi_2\|^2)^{1/2}
+\]
+Applying this pointwise to
+\((Q_1(v)\psi,Q_2(v)\psi)\) yields
+\[
+\|Q(v)\psi\|
+\le
+2c_{\mathrm W}\,\|v\|_Q\,\|(1+H)\psi\|.
+\]
+Thus the stated bound holds with \(C_0:=2c_{\mathrm W}\), and in particular one may
+take \(m_0=1\).
+\end{proof}
+
+\begin{lemma}[Seed bounds transfer from \(H\) to \(N_{\mathrm{conf}}\)]
+\label{lem:4b-seed-bounds-to-nconf}
+Assume Theorem~\ref{thm:Main-HLS} and Definition~\ref{def:2T-conf}. Then, after
+restricting to
+\(\mathcal D_\infty(N_{\mathrm{conf}})\cap\mathcal D_Q\), there exist \(m_1\geq 0\)
+and \(C_1>0\) such that
+\[
+\|Q(v)\psi\|
+\leq
+C_1\,\|v\|_Q\,\|(1+N_{\mathrm{conf}})^{m_1}\psi\|
+\qquad
+(v\in\mathcal V_Q,\ \psi\in\mathcal D_\infty(N_{\mathrm{conf}})\cap\mathcal D_Q).
+\]
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:4b-HLS-seed-H-bound}, there exists \(C_0>0\) such that
+\[
+\|Q(v)\psi\|
+\le
+C_0\,\|v\|_Q\,\|(1+H)\psi\|
+\qquad
+(v\in\mathcal V_Q,\ \psi\in\mathcal D_Q).
+\]
+Since \(H=P^0\) is one of the conformal generators entering \(N_{\mathrm{conf}}\),
+the conformal Nelson domain carries a polynomial comparison
+\[
+  \|(1+H)\psi\|
+  \leq
+  C\,\|(1+N_{\mathrm{conf}})^{m_1}\psi\|
+\]
+for suitable \(m_1\) and \(C\). Combining the two inequalities gives the claim
+with \(C_1:=CC_0\).
+\end{proof}
+
+\begin{lemma}[One conformal derivative costs one Sobolev order]
+\label{lem:4b-one-conformal-derivative}
+Let \(X\) be a closable operator satisfying
+\[
+\|X\psi\|
+\leq
+C\,\|(1+N_{\mathrm{conf}})^m\psi\|
+\qquad
+(\psi\in\mathcal D_\infty(N_{\mathrm{conf}})).
+\]
+For any one-parameter conformal subgroup with selfadjoint generator \(G\), the
+orbit map
+\[
+t\longmapsto e^{itG}Xe^{-itG}
+\]
+is differentiable as a map
+\[
+\operatorname{Dom}(1+N_{\mathrm{conf}})^{(m+1)/2}\longrightarrow\mathcal H,
+\]
+and its derivative at \(t=0\) is the commutator \([iG,X]\) on
+\(\mathcal D_\infty(N_{\mathrm{conf}})\).
+\end{lemma}
+
+\begin{proof}
+The conformal group acts continuously on each Nelson-Sobolev space built from
+\(N_{\mathrm{conf}}\). Differentiating the conjugation orbit loses one group
+derivative and hence one Sobolev order. This is the standard smooth-vector
+calculus for finite-dimensional unitary Lie-group representations.
+\end{proof}
+
+\begin{theorem}[Uniform orbit energy bounds for the odd conformal closure]
+\label{thm:conformal-orbit-uniform-energy-bounds}
+Assume Theorem~\ref{thm:Main-HLS},
+Definition~\ref{def:2T-conf}, and
+Theorem~\ref{thm:odd-conformal-closure-finite}.
+Then there exist an integer \(M\geq 0\), a constant \(C>0\), and a norm
+\(\|\cdot\|_{\mathrm{sc}}\) on \(W_{\mathrm{sc}}\) such that every odd derivation
+in \(W_{\mathrm{sc}}\) is implemented on
+\(\mathcal D_\infty(N_{\mathrm{conf}})\cap\mathcal D_Q\) by a closable operator
+\(X\) satisfying
+\[
+\|X\psi\|
+\le
+C\,\|X\|_{\mathrm{sc}}\,\|(1+N_{\mathrm{conf}})^M\psi\|
+\qquad
+(\psi\in\mathcal D_\infty(N_{\mathrm{conf}})\cap\mathcal D_Q).
+\]
+In particular, the entire odd conformal closure obeys one common polynomial graph
+bound on the same UV Hilbert space.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{lem:4b-seed-bounds-to-nconf}, the HLS seed implementers satisfy a
+common \(N_{\mathrm{conf}}\)-Sobolev bound on
+\(\mathcal D_\infty(N_{\mathrm{conf}})\cap\mathcal D_Q\). By
+Theorem~\ref{thm:odd-conformal-closure-finite}, the whole odd conformal closure
+has depth one:
+\[
+  W_{\mathrm{sc}}=W_Q\oplus W_S,
+  \qquad
+  W_S=[K,W_Q].
+\]
+The \(W_Q\)-layer already satisfies the transferred Nelson bound. Every element of
+\(W_S\) is obtained by one conformal derivative of a seed implementer, so
+Lemma~\ref{lem:4b-one-conformal-derivative} yields the same kind of bound with one
+additional Sobolev order. Because \(W_{\mathrm{sc}}\) is finite-dimensional, one
+may choose a basis \(\{X_a\}\) of \(W_Q\oplus W_S\), let \(M\) be the maximum of
+the finitely many required Sobolev exponents, and define
+\[
+  \|X\|_{\mathrm{sc}}
+  :=
+  \sum_a |c_a|
+  \qquad
+  \text{for }
+  X=\sum_a c_a X_a.
+\]
+Then one constant \(C\) works for every \(X\in W_{\mathrm{sc}}\), giving the
+displayed bound.
+\end{proof}
+
+\begin{lemma}[G\r{a}rding vectors from a dense Hilbert subspace are smooth-dense]
+\label{lem:4b-garding-dense-from-dense-set}
+Let \(G\) be a finite-dimensional Lie group with strongly continuous unitary
+representation \(U\) on \(\mathcal H\), and let \(\mathcal H^\infty\) be the
+smooth-vector Fr\'echet space. If \(E\subset\mathcal H\) is dense, then
+\[
+\mathcal G(E)
+:=
+\mathrm{span}\{U(f)\eta:f\in C_c^\infty(G),\ \eta\in E\}
+\]
+is Fr\'echet-dense in \(\mathcal H^\infty\).
+\end{lemma}
+
+\begin{proof}
+Fix \(\psi\in\mathcal H^\infty\) and a finite family of Fr\'echet seminorms
+\(p_{Y_1,\dots,Y_m}(\xi):=\|dU(Y_1)\cdots dU(Y_m)\xi\|\). Let \((f_n)\) be a
+standard approximate identity in \(C_c^\infty(G)\). Then
+\[
+U(f_n)\psi\longrightarrow \psi
+\]
+in every smooth-vector seminorm. For each fixed \(n\), the operators
+\(U(L_{Y_1}\cdots L_{Y_m}f_n)\) are bounded on \(\mathcal H\). Since \(E\) is dense in
+\(\mathcal H\), one may choose \(\eta_n\in E\) such that
+\[
+\|U(L_{Y_1}\cdots L_{Y_m}f_n)(\eta_n-\psi)\|
+\]
+is arbitrarily small for the finitely many seminorms under consideration. Then
+\[
+p_{Y_1,\dots,Y_m}\bigl(U(f_n)\eta_n-\psi\bigr)
+\le
+p_{Y_1,\dots,Y_m}\bigl(U(f_n)(\eta_n-\psi)\bigr)
++
+p_{Y_1,\dots,Y_m}\bigl(U(f_n)\psi-\psi\bigr)
+\]
+can be made arbitrarily small. A diagonal argument over a countable defining
+family of seminorms shows that \(\mathcal G(E)\) is Fr\'echet-dense in
+\(\mathcal H^\infty\).
+\end{proof}
+
+\begin{lemma}[Finite conformal operator families preserve conformal smooth vectors]
+\label{lem:4b-smooth-vector-transfer}
+Assume Definition~\ref{def:2T-conf},
+Theorem~\ref{thm:conformal-orbit-uniform-energy-bounds}, and that
+\(W_{\mathrm{sc}}\) is finite-dimensional and stable under the even conformal
+action. Set
+\[
+\mathcal D_{\mathrm{seed}}
+:=
+\mathcal D_\infty(N_{\mathrm{conf}})\cap\mathcal D_Q.
+\]
+Then every \(X\in W_{\mathrm{sc}}\) extends uniquely from
+\(\mathcal D_{\mathrm{seed}}\) to a continuous endomorphism of the Fr\'echet
+space \(\mathcal D_\infty(N_{\mathrm{conf}})\), and the whole family
+\(W_{\mathrm{sc}}\) preserves \(\mathcal D_\infty(N_{\mathrm{conf}})\).
+\end{lemma}
+
+\begin{proof}
+By Lemma~\ref{lem:4b-conformal-nelson-domain},
+\(\mathcal D_\infty(N_{\mathrm{conf}})\) is dense in \(\mathcal H\), and by
+Theorem~\ref{thm:Main-HLS} the HLS core \(\mathcal D_Q\) is dense in \(\mathcal H\).
+Hence their intersection \(\mathcal D_{\mathrm{seed}}\) is dense in \(\mathcal H\).
+
+Let \(G:=\mathrm{Conf}_0(\mathbb R^{1,3})\), let \(U:=U_{\mathrm{conf}}\), and for
+\(X\in W_{\mathrm{sc}}\) write
+\[
+\Theta_g(X):=U(g)XU(g)^{-1}.
+\]
+Choose a basis \(X_1,\dots,X_r\) of the finite-dimensional space \(W_{\mathrm{sc}}\)
+and write
+\[
+\Theta_g(X)=\sum_{a=1}^r c_a(g;X)X_a
+\]
+with smooth coefficient functions \(c_a(g;X)\).
+
+For \(f\in C_c^\infty(G)\) and \(\psi\in\mathcal D_{\mathrm{seed}}\), define
+\[
+X\,U(f)\psi
+:=
+\int_G f(g)\,U(g)\,\Theta_{g^{-1}}(X)\psi\,dg.
+\]
+Because \(\Theta_{g^{-1}}(X)\) stays in the finite-dimensional family
+\(W_{\mathrm{sc}}\), the uniform Sobolev bound from
+Theorem~\ref{thm:conformal-orbit-uniform-energy-bounds} implies that the
+integrand is norm-continuous and compactly supported in \(g\); thus the integral
+is well defined. Expanding \(\Theta_{g^{-1}}(X)\) in the basis gives
+\[
+XU(f)\psi
+=
+\sum_{a=1}^r\int_G f(g)c_a(g^{-1};X)U(g)X_a\psi\,dg,
+\]
+so \(XU(f)\psi\) is a finite sum of conformal smooth vectors.
+
+Now apply any Lie derivative \(dU(Y_1)\cdots dU(Y_m)\) to the above formula.
+Differentiation under the integral is allowed because orbit derivatives of
+\(\Theta_g(X)\) still lie in \(W_{\mathrm{sc}}\), and each such derivative obeys
+the same kind of polynomial Sobolev bound by repeated use of
+Lemma~\ref{lem:4b-one-conformal-derivative} and finite-dimensionality. Hence, for
+each Fr\'echet seminorm \(p_m\) on \(\mathcal D_\infty(N_{\mathrm{conf}})\), there
+exist seminorms \(q_{m,X}\) on \(\mathcal D_{\mathrm{seed}}\) and constants
+\(C_{m,X,f}\) such that
+\[
+p_m\bigl(XU(f)\psi\bigr)
+\le
+C_{m,X,f}\,q_{m,X}(\psi).
+\]
+Therefore \(X\) acts continuously on the G\r{a}rding subspace generated from
+\(\mathcal D_{\mathrm{seed}}\).
+
+By Lemma~\ref{lem:4b-garding-dense-from-dense-set}, the conformal G\r{a}rding
+vectors generated from the dense set \(\mathcal D_{\mathrm{seed}}\) are
+Fr\'echet-dense in
+\(\mathcal D_\infty(N_{\mathrm{conf}})\). The seminorm estimates above therefore
+extend \(X\) uniquely and continuously to all conformal smooth vectors. This
+extension preserves \(\mathcal D_\infty(N_{\mathrm{conf}})\).
+\end{proof}
+
+\begin{theorem}[Same-UV-Hilbert-space odd conformal closure package]
+\label{thm:4b-narrow-common-sector}
+\label{thm:odd-conformal-closure-implementable}
+Assume Theorem~\ref{thm:Main-HLS},
+Definition~\ref{def:2T-conf},
+Theorem~\ref{thm:4a-Delta-half},
+Theorem~\ref{thm:odd-conformal-closure-finite}, and
+Theorem~\ref{thm:conformal-orbit-uniform-energy-bounds}. Then every derivation in
+\(W_{\mathrm{sc}}\) is implemented by a closable operator on the same UV Hilbert
+space \(\mathcal H\), and the dense domain
+\[
+\mathcal D_{\mathrm{sc}}
+:=
+\mathcal D_\infty(N_{\mathrm{conf}})
+\subset\mathcal H
+\]
+is a common invariant core for
+\[
+P_\mu,\ M_{\mu\nu},\ D,\ K_\mu
+\]
+and for all odd implementers belonging to \(W_{\mathrm{sc}}\). After choosing
+bases of the two odd layers furnished by Theorem~\ref{thm:4b-odd-prolongation},
+one obtains operators
+\[
+Q_\alpha^I,\ \bar Q_{\dot\alpha I},\ S^\alpha{}_I,\ \bar S^{\dot\alpha I}
+\]
+on that same common core.
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:4b-conformal-nelson-domain} gives a dense conformal smooth-vector
+space \(\mathcal D_{\mathrm{sc}}\) preserved by the even conformal generators.
+Theorem~\ref{thm:conformal-orbit-uniform-energy-bounds} gives one common
+polynomial \(N_{\mathrm{conf}}\)-Sobolev bound for all
+\(X\in W_{\mathrm{sc}}\) on the seed domain
+\[
+\mathcal D_{\mathrm{seed}}
+:=
+\mathcal D_\infty(N_{\mathrm{conf}})\cap\mathcal D_Q.
+\]
+Lemma~\ref{lem:4b-smooth-vector-transfer} upgrades each
+\(X\in W_{\mathrm{sc}}\) to a continuous endomorphism of
+\(\mathcal D_\infty(N_{\mathrm{conf}})\). In particular, every odd derivation in
+\(W_{\mathrm{sc}}\) is implemented by a closable operator on the same UV Hilbert
+space and preserves \(\mathcal D_\infty(N_{\mathrm{conf}})\).
+
+Therefore \(\mathcal D_{\mathrm{sc}}=\mathcal D_\infty(N_{\mathrm{conf}})\) is a
+dense common invariant core for the full even conformal sector and the entire odd
+conformal closure. Naming the lower and upper odd layers by
+\(Q_\alpha^I,\bar Q_{\dot\alpha I}\) and \(S^\alpha{}_I,\bar S^{\dot\alpha I}\)
+gives the stated same-\(\mathcal H\) realization.
+\end{proof}
+
+\subsection{Mixed brackets and the internal algebra}
+\label{subsec:4b-internal}
+
+Write \(E:=\mathcal V_Q\), with \(\dim_\mathbb C E=N\). The HLS Hermitian form
+from Theorem~\ref{thm:Main-HLS} identifies \(E\) anti-linearly with \(E^*\); write
+\[
+  \flat:E\to E^*,
+  \quad
+  v\mapsto v^\flat,
+  \qquad
+  \sharp:E^*\to E,
+  \quad
+  \lambda\mapsto \lambda^\sharp,
+\]
+so that \(\lambda(v)=\langle v,\lambda^\sharp\rangle_Q\). For
+\(A\in\operatorname{End}(E)\), write
+\[
+  A^\vee:E^*\to E^*,
+  \qquad
+  (A^\vee\lambda)(v):=\lambda(Av),
+\]
+and let \(A^\star\in\operatorname{End}(E)\) be defined by
+\[
+  \langle Av,w\rangle_Q=\langle v,A^\star w\rangle_Q.
+\]
+For rank-one operators one then has
+\[
+  (v\otimes\lambda)^\star=\lambda^\sharp\otimes v^\flat.
+\]
+We write the upper odd
+layer as \(S^\alpha(\lambda)\) and \(\bar S^{\dot\alpha}(\lambda)\) for
+\(\lambda\in E^*\), and we set
+\[
+  P_{\alpha\dot\beta}:=(\sigma^\mu)_{\alpha\dot\beta}P_\mu,
+  \qquad
+  K^{\alpha\dot\beta}:=(\bar\sigma^\mu)^{\alpha\dot\beta}K_\mu.
+\]
+We regard \(Q_\alpha(\cdot)\) and \(S^\alpha(\cdot)\) as linear in their labels.
+For the barred families we state all internal-action formulas in the invariant
+\(A^\star\)-/\(\flat,\sharp\)-form; the component formulas in an orthonormal basis
+are the unambiguous concrete version.
+
+\begin{lemma}[Normalization of the upper odd layer]
+\label{lem:4b-upper-odd-normalization}
+After choosing bases of \(W_S\), one may and shall normalize the \(S\)-operators
+so that on the common core \(\mathcal D_{\mathrm{sc}}\) the unique nonzero
+\(\mathfrak{so}(1,3)\)-intertwiners are
+\[
+  [P_{\alpha\dot\beta},S^\gamma(\lambda)]
+  =
+  2\,\delta_\alpha^\gamma\,\bar Q_{\dot\beta}(\lambda^\sharp),
+  \qquad
+  [P_{\alpha\dot\beta},\bar S^{\dot\gamma}(\lambda)]
+  =
+  2\,\delta_{\dot\beta}^{\dot\gamma}\,Q_\alpha(\lambda^\sharp),
+\]
+\[
+  [K^{\alpha\dot\beta},Q_\gamma(v)]
+  =
+  2\,\delta_\gamma^\alpha\,\bar S^{\dot\beta}(v^\flat),
+  \qquad
+  [K^{\alpha\dot\beta},\bar Q_{\dot\gamma}(v)]
+  =
+  2\,\delta_{\dot\gamma}^{\dot\beta}\,S^\alpha(v^\flat),
+\]
+with
+\[
+  [K,S]=[K,\bar S]=0,
+  \qquad
+  [P,Q]=[P,\bar Q]=0.
+\]
+\end{lemma}
+
+\begin{proof}
+By Theorem~\ref{thm:4b-odd-prolongation}, \(W_S\) is the unique normalized
+weight-\(-\tfrac12\) layer in the conformal prolongation of \(W_Q\). For each chirality,
+the tensor product of the vector representation with \(W_S\) contains the lower
+odd layer with multiplicity one, and likewise \(V\otimes W_Q\) contains \(W_S\)
+with multiplicity one. Therefore the corresponding conformal intertwiners are
+unique up to an overall nonzero scalar, which we fix once and for all by the
+displayed normalization. The annihilation relations by \(P\) and \(K\) are already
+part of Theorem~\ref{thm:4b-odd-prolongation}.
+\end{proof}
+
+\begin{lemma}[Upper-layer basis may be chosen adjointly]
+\label{lem:4b-upper-odd-adjoint-choice}
+Assume Theorem~\ref{thm:4b-narrow-common-sector}. The bases of the two chiral
+pieces of the upper layer \(W_S\) may be chosen so that
+\[
+\bigl(S^\alpha(\lambda)\bigr)^\dagger=\bar S^{\dot\alpha}(\lambda)
+\]
+under the \(\flat/\sharp\) identification, and simultaneously the normalization
+conventions of Lemma~\ref{lem:4b-upper-odd-normalization} hold.
+\end{lemma}
+
+\begin{proof}
+Because \(W_S\) is realized on the same Hilbert space \(\mathcal H\), the Hilbert
+adjoint sends one chiral piece of \(W_S\) to the opposite chiral piece. Choose a
+basis of one chirality and define the basis of the opposite chirality by taking
+adjoints. By Theorem~\ref{thm:odd-conformal-closure-finite}, both chiral pieces
+occur with the standard multiplicity-one Lorentz type. Therefore the bridge
+intertwiners in Lemma~\ref{lem:4b-upper-odd-normalization} are still unique up to a
+common nonzero scalar on each chirality, and that scalar can be fixed once and for
+all so that the displayed normalization continues to hold. This preserves the
+adjoint pairing.
+\end{proof}
+
+\begin{definition}[\texorpdfstring{\(\mathfrak{gl}(2)\oplus\mathfrak{gl}(2)\)}
+  {gl(2)+gl(2)} degree-zero generators]
+\label{def:4b-degree-zero-generators}
+Let
+\[
+  L_\alpha{}^\beta,
+  \qquad
+  \bar L^{\dot\alpha}{}_{\dot\beta}
+\]
+denote the standard complex-linear combinations of \(M_{\mu\nu}\) and \(D\) that
+realize the left and right \(\mathfrak{gl}(2)\) actions inside
+\(\mathfrak{so}(4,2)_\mathbb C\). They are characterized by
+\[
+  [L_\alpha{}^\beta,Q_\gamma(v)]
+  =
+  \delta_\gamma^\beta Q_\alpha(v),
+  \qquad
+  [L_\alpha{}^\beta,S^\gamma(\lambda)]
+  =
+  -\delta_\alpha^\gamma S^\beta(\lambda),
+\]
+\[
+  [\bar L^{\dot\alpha}{}_{\dot\beta},\bar Q_{\dot\gamma}(v)]
+  =
+  \delta_{\dot\gamma}^{\dot\alpha}\bar Q_{\dot\beta}(v),
+  \qquad
+  [\bar L^{\dot\alpha}{}_{\dot\beta},\bar S^{\dot\gamma}(\lambda)]
+  =
+  -\delta_{\dot\beta}^{\dot\gamma}\bar S^{\dot\alpha}(\lambda),
+\]
+and by the analogous tautological action on \(P_{\alpha\dot\beta}\) and
+\(K^{\alpha\dot\beta}\). This is only a repackaging of the already available
+\(M_{\mu\nu}\) and \(D\).
+\end{definition}
+
+\begin{theorem}[Unbarred degree-zero mixed-bracket decomposition]
+\label{thm:QS-conformal-plus-internal}
+\label{thm:QS-unbarred-first}
+\label{lem:QS-conformal-plus-internal}
+Assume Theorem~\ref{thm:4b-narrow-common-sector}. Then for every \(v\in E\) and
+\(\lambda\in E^*\) there exists a unique even operator \(T_{v,\lambda}\) on
+\(\mathcal D_{\mathrm{sc}}\) such that
+\[
+\{Q_\alpha(v),S^\beta(\lambda)\}
+=
+\lambda(v)\,L_\alpha{}^\beta+\delta_\alpha^\beta\,T_{v,\lambda},
+\]
+\[
+\{Q_\alpha(v),\bar S^{\dot\beta}(\lambda)\}=0,
+\qquad
+\{\bar Q_{\dot\alpha}(v),S^\beta(\lambda)\}=0.
+\]
+Moreover,
+\[
+  [T_{v,\lambda},P_\mu]
+  =
+  [T_{v,\lambda},M_{\mu\nu}]
+  =
+  [T_{v,\lambda},D]
+  =0.
+\]
+\end{theorem}
+
+\begin{proof}
+The anticommutator \(\{Q_\alpha(v),S^\beta(\lambda)\}\) is even, has total
+\(D\)-weight zero, and transforms in
+\[
+  S_+\otimes S_+^*
+  \cong
+  \operatorname{End}(S_+)
+  \cong
+  \mathfrak{gl}(S_+).
+\]
+Hence it decomposes uniquely into the tautological \(\mathfrak{gl}(S_+)\) piece
+and a scalar-on-spinors remainder; this defines \(T_{v,\lambda}\) and yields the
+first displayed formula. The cross-chiral mixed anticommutators have weight zero
+and vector Lorentz type, but the degree-zero even conformal algebra contains no
+vector piece, so they vanish.
+
+By construction, the scalar remainder commutes with the degree-zero conformal
+algebra generated by \(L\) and \(\bar L\). To see that it also commutes with
+translations, apply \([P_{\gamma\dot\delta},-]\) to the first mixed-bracket
+formula. Lemma~\ref{lem:4b-upper-odd-normalization} and the HLS anticommutator
+give
+\[
+  [P_{\gamma\dot\delta},\{Q_\alpha(v),S^\beta(\lambda)\}]
+  =
+  4\,\delta_\gamma^\beta\,\lambda(v)\,P_{\alpha\dot\delta}.
+\]
+With the normalization of Definition~\ref{def:4b-degree-zero-generators}, this is
+exactly the translation commutator with
+\(\lambda(v)L_\alpha{}^\beta\), so comparison yields
+\[
+  [P_{\gamma\dot\delta},T_{v,\lambda}]=0.
+\]
+\end{proof}
+
+\smallskip
+
+\begin{theorem}[Bilinear factorization and faithful lower-layer internal action from mixed brackets]
+\label{thm:internal-action-from-mixed-brackets}
+Assume Theorem~\ref{thm:QS-conformal-plus-internal} and
+Lemma~\ref{lem:HLS-module-injective}. Then:
+\begin{enumerate}[(i)]
+  \item the assignment \((v,\lambda)\mapsto T_{v,\lambda}\) is bilinear and
+        therefore factors uniquely through a linear map
+\[
+  \Theta:E\otimes E^*\cong\operatorname{End}(E)\longrightarrow
+  \operatorname{End}(\mathcal D_{\mathrm{sc}}),
+  \qquad
+  A\longmapsto T_A,
+\]
+        with \(T_{v\otimes\lambda}=T_{v,\lambda}\);
+  \item for every \(A\in\operatorname{End}(E)\) and every \(w\in E\),
+\[
+  [T_A,Q_\alpha(w)]
+  =
+  Q_\alpha(Aw);
+\]
+  \item the map \(A\mapsto T_A\) is injective.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The bilinearity of \((v,\lambda)\mapsto T_{v,\lambda}\) is immediate from the
+mixed-bracket formula
+\[
+  \{Q_\alpha(v),S^\beta(\lambda)\}
+  =
+  \lambda(v)L_\alpha{}^\beta+\delta_\alpha^\beta T_{v,\lambda},
+\]
+since both the anticommutator and the scalar coefficient \(\lambda(v)\) are
+bilinear in \((v,\lambda)\). This gives the unique linear factorization through
+\(E\otimes E^*\cong\operatorname{End}(E)\).
+
+For rank-one operators, the same Schur-lemma argument as before shows that
+\(T_{v,\lambda}\) acts on the lower odd layer
+\[
+  W_Q\cong S_+\otimes E.
+\]
+as the identity on the spinor factor tensored with an endomorphism of \(E\).
+Evaluating the super-Jacobi identity on the triple
+\((Q_\alpha(v),S^\beta(\lambda),Q_\gamma(w))\) gives
+\[
+  \lambda(v)\,\delta_\gamma^\beta Q_\alpha(w)
+  +
+  \delta_\alpha^\beta [T_{v,\lambda},Q_\gamma(w)]
+  =
+  \lambda(w)\,\delta_\alpha^\beta Q_\gamma(v)
+  +
+  \delta_\gamma^\beta [T_{w,\lambda},Q_\alpha(v)].
+\]
+Comparing the \(\delta_\alpha^\beta\) and \(\delta_\gamma^\beta\) components yields
+\[
+  [T_{v,\lambda},Q_\alpha(w)]
+  =
+  \lambda(w)\,Q_\alpha(v)
+  =
+  Q_\alpha\bigl((v\otimes\lambda)w\bigr).
+\]
+By linearity, this extends to
+\[
+  [T_A,Q_\alpha(w)]
+  =
+  Q_\alpha(Aw)
+\]
+for every \(A\in\operatorname{End}(E)\).
+
+Finally, if \(T_A=0\), then
+\[
+  0=[T_A,Q_\alpha(w)]=Q_\alpha(Aw)
+\]
+for every \(w\in E\). Lemma~\ref{lem:HLS-module-injective} therefore gives
+\(Aw=0\) for all \(w\), hence \(A=0\).
+\end{proof}
+
+Write
+\[
+  R_{\mathrm{cl},\mathbb C}
+  :=
+  \Theta(\operatorname{End}(E))
+  =
+  \{T_A:A\in\operatorname{End}(E)\}.
+\]
+
+\begin{lemma}[Faithfulness of the degree-zero internal block on the odd closure]
+\label{lem:4b-degree-zero-faithfulness}
+Assume Theorem~\ref{thm:HLS-spinor-completeness},
+Theorem~\ref{thm:4b-odd-prolongation}, and
+Theorem~\ref{thm:4b-narrow-common-sector},
+Lemma~\ref{lem:4b-KQ-scalar}, and
+Lemma~\ref{lem:4b-upper-D-normal-form}. Let \(U\) be an even operator on
+\(\mathcal D_{\mathrm{sc}}\) such that:
+\begin{enumerate}[(i)]
+  \item \(U\) preserves the odd closure \(W_{\mathrm{sc}}=W_Q\oplus W_S\) under
+        commutator;
+  \item \(U\) commutes with \(P_\mu\), \(M_{\mu\nu}\), and \(D\);
+  \item \(U\) acts trivially on the lower odd layer, i.e.
+\[
+  [U,Q_\alpha(v)]
+  =
+  [U,\bar Q_{\dot\alpha}(v)]
+  =
+  0
+  \qquad
+  (v\in E).
+\]
+\end{enumerate}
+Then
+\[
+  [U,S^\alpha(\lambda)]
+  =
+  [U,\bar S^{\dot\alpha}(\lambda)]
+  =
+  0
+  \qquad
+  (\lambda\in E^*).
+\]
+In particular, inside the generated degree-zero block, an operator is determined
+by its action on \(W_Q\).
+\end{lemma}
+
+\begin{proof}
+Let \(X\) belong to one chiral component of \(W_S\). Since \(U\) commutes with
+translations,
+\[
+  [P_\mu,[U,X]]
+  =
+  [[P_\mu,U],X]+[U,[P_\mu,X]]
+  =
+  [U,[P_\mu,X]].
+\]
+By Theorem~\ref{thm:4b-odd-prolongation}, translations map the upper layer into
+the lower layer, and \(U\) annihilates the lower layer by hypothesis. Hence
+\([P_\mu,[U,X]]=0\) for every \(\mu\), so \([U,X]\) is a translation-invariant
+odd generator.
+
+By Theorem~\ref{thm:HLS-spinor-completeness}, every translation-invariant odd
+generator lies in the HLS lower layer \(W_Q\). By Lemma~\ref{lem:4b-KQ-scalar},
+one has \(K_Q=\kappa\,\mathbf 1_E\), so Theorem~\ref{thm:4a-Delta-half} and
+Lemma~\ref{lem:4b-upper-D-normal-form} give exact scalar \(D\)-weights:
+\[
+  [D,Q_\alpha(v)]
+  =
+  \Bigl(\frac{i}{2}+i\kappa\Bigr)Q_\alpha(v),
+  \qquad
+  [D,S^\alpha(\lambda)]
+  =
+  \Bigl(-\frac{i}{2}-i\kappa\Bigr)S^\alpha(\lambda),
+\]
+\[
+  [D,\bar Q_{\dot\alpha}(v)]
+  =
+  \Bigl(\frac{i}{2}-i\kappa\Bigr)\bar Q_{\dot\alpha}(v),
+  \qquad
+  [D,\bar S^{\dot\alpha}(\lambda)]
+  =
+  \Bigl(-\frac{i}{2}+i\kappa\Bigr)\bar S^{\dot\alpha}(\lambda).
+\]
+Because \(U\) commutes with \(D\), the commutator \([U,X]\) has the same
+\(D\)-weight as \(X\). But the lower and upper weights are distinct, so a
+translation-invariant element of \(W_Q\) cannot have the \(D\)-weight of an
+element of \(W_S\). Hence \([U,X]=0\). The barred case is identical.
+\end{proof}
+
+\begin{lemma}[The skew part of the lower-layer \(D\)-action is scalar]
+\label{lem:4b-KQ-scalar}
+Assume Theorem~\ref{thm:4a-Delta-half},
+Theorem~\ref{thm:QS-conformal-plus-internal}, and
+Theorem~\ref{thm:internal-action-from-mixed-brackets}. Then
+\[
+  [K_Q,A]=0
+  \qquad
+  (A\in\operatorname{End}(E)).
+\]
+Consequently,
+\[
+  K_Q=\kappa\,\mathbf 1_E
+  \qquad
+  \text{for a unique }\kappa\in i\mathbb R.
+\]
+\end{lemma}
+
+\begin{proof}
+Fix \(A\in\operatorname{End}(E)\). By linearity,
+Theorem~\ref{thm:QS-conformal-plus-internal} gives
+\[
+  [D,T_A]=0.
+\]
+Apply this commutator identity to \(Q_\alpha(w)\) for arbitrary \(w\in E\):
+\[
+  0
+  =
+  [D,[T_A,Q_\alpha(w)]]-[T_A,[D,Q_\alpha(w)]].
+\]
+Using \([T_A,Q_\alpha(w)]=Q_\alpha(Aw)\) and the lower-layer normal form from
+Theorem~\ref{thm:4a-Delta-half}, one obtains
+\[
+  0
+  =
+  Q_\alpha(K_QAw)-Q_\alpha(AK_Qw).
+\]
+Lemma~\ref{lem:HLS-module-injective} therefore gives
+\[
+  (K_QA-AK_Q)w=0
+  \qquad
+  (w\in E),
+\]
+hence \([K_Q,A]=0\) for every \(A\in\operatorname{End}(E)\). The only
+endomorphisms commuting with all of \(\operatorname{End}(E)\) are the scalars, so
+\(K_Q=\kappa\,\mathbf 1_E\). The skew-Hermiticity of \(K_Q\) from
+Theorem~\ref{thm:4a-Delta-half} forces \(\kappa\in i\mathbb R\).
+\end{proof}
+
+\begin{lemma}[Upper-layer dilatation normal form]
+\label{lem:4b-upper-D-normal-form}
+Assume Theorem~\ref{thm:4b-narrow-common-sector},
+Lemma~\ref{lem:4b-upper-odd-normalization},
+Theorem~\ref{thm:4a-Delta-half}, and
+Lemma~\ref{lem:HLS-module-injective}. Then there exist endomorphisms
+\(B_S,C_S\in\operatorname{End}(E^*)\) such that
+\[
+  [D,S^\alpha(\lambda)]
+  =
+  i\,S^\alpha(B_S\lambda),
+  \qquad
+  [D,\bar S^{\dot\alpha}(\lambda)]
+  =
+  i\,\bar S^{\dot\alpha}(C_S\lambda),
+\]
+and in fact
+\[
+  B_S=-\frac12\mathbf 1_{E^*}-K_Q^\vee,
+  \qquad
+  C_S=-\frac12\mathbf 1_{E^*}+K_Q^\vee.
+\]
+Equivalently,
+\[
+  [D,S^\alpha(\lambda)]
+  =
+  -\frac{i}{2}S^\alpha(\lambda)-iS^\alpha(K_Q^\vee\lambda),
+\]
+\[
+  [D,\bar S^{\dot\alpha}(\lambda)]
+  =
+  -\frac{i}{2}\bar S^{\dot\alpha}(\lambda)+i\bar S^{\dot\alpha}(K_Q^\vee\lambda).
+\]
+\end{lemma}
+
+\begin{proof}
+Because \(W_S\) is finite-dimensional, \(D\) preserves \(W_S\), and \(D\)
+commutes with the Lorentz action, Schur-type reasoning on the spinor factor gives
+endomorphisms \(B_S\) and \(C_S\) with the displayed form.
+
+Apply \(D\) to the bridge relation
+\[
+  [P_{\beta\dot\gamma},S^\alpha(\lambda)]
+  =
+  2\,\delta_\beta^\alpha\,\bar Q_{\dot\gamma}(\lambda^\sharp).
+\]
+Using \([D,P_{\beta\dot\gamma}]=iP_{\beta\dot\gamma}\) and the barred lower-layer
+formula from Theorem~\ref{thm:4a-Delta-half}, one gets
+\[
+\begin{aligned}
+[D,[P_{\beta\dot\gamma},S^\alpha(\lambda)]]
+&=
+[[D,P_{\beta\dot\gamma}],S^\alpha(\lambda)]
++[P_{\beta\dot\gamma},[D,S^\alpha(\lambda)]]\\
+&=
+i[P_{\beta\dot\gamma},S^\alpha(\lambda)]
++i[P_{\beta\dot\gamma},S^\alpha(B_S\lambda)]\\
+&=
+2\,\delta_\beta^\alpha\,i\Bigl(
+\bar Q_{\dot\gamma}(\lambda^\sharp)+
+\bar Q_{\dot\gamma}((B_S\lambda)^\sharp)
+\Bigr),
+\end{aligned}
+\]
+while the left-hand side is also
+\[
+  [D,2\,\delta_\beta^\alpha\,\bar Q_{\dot\gamma}(\lambda^\sharp)]
+  =
+  2\,\delta_\beta^\alpha\Bigl(
+  \frac{i}{2}\bar Q_{\dot\gamma}(\lambda^\sharp)
+  -i\bar Q_{\dot\gamma}(K_Q\lambda^\sharp)
+  \Bigr).
+\]
+Cancelling the common factor and using Lemma~\ref{lem:HLS-module-injective}
+through the \(\flat/\sharp\) identification gives
+\[
+  (B_S\lambda)^\sharp
+  =
+  -\frac12\lambda^\sharp-K_Q\lambda^\sharp,
+\]
+which is exactly \(B_S=-\tfrac12\mathbf 1_{E^*}-K_Q^\vee\).
+
+The barred formula is obtained identically from the bridge
+\[
+  [P_{\beta\dot\gamma},\bar S^{\dot\alpha}(\lambda)]
+  =
+  2\,\delta_{\dot\gamma}^{\dot\alpha}Q_\beta(\lambda^\sharp)
+\]
+and the unbarred lower-layer formula from Theorem~\ref{thm:4a-Delta-half},
+giving \(C_S=-\tfrac12\mathbf 1_{E^*}+K_Q^\vee\).
+\end{proof}
+
+\begin{corollary}[Internal action on all four odd families]
+\label{cor:4b-contragredient-internal-action}
+Assume Theorem~\ref{thm:Main-HLS},
+Theorem~\ref{thm:HLS-spinor-completeness},
+Theorem~\ref{thm:QS-conformal-plus-internal},
+Theorem~\ref{thm:internal-action-from-mixed-brackets},
+Lemma~\ref{lem:4b-upper-odd-normalization},
+Lemma~\ref{lem:4b-KQ-scalar}, and
+Lemma~\ref{lem:4b-upper-D-normal-form}. Then for every
+\(A\in\operatorname{End}(E)\), \(v\in E\), and \(\mu\in E^*\),
+\[
+[T_A,Q_\alpha(v)]
+=
+Q_\alpha(Av),
+\qquad
+[T_A,\bar Q_{\dot\alpha}(v)]
+=
+-\bar Q_{\dot\alpha}(A^\star v),
+\]
+\[
+[T_A,S^\alpha(\mu)]
+=
+-S^\alpha(A^\vee\mu),
+\qquad
+[T_A,\bar S^{\dot\alpha}(\mu)]
+=
+\bar S^{\dot\alpha}\bigl((A\mu^\sharp)^\flat\bigr).
+\]
+In particular, if \(\{e_I\}\) is an orthonormal basis of \(E\), \(\{e^I\}\) its
+dual basis, and \(R^I{}_J:=T_{e_I,e^J}\), then
+\[
+[R^I{}_J,Q_\alpha^K]=\delta_J^K\,Q_\alpha^I,
+\qquad
+[R^I{}_J,\bar Q_{\dot\alpha K}]
+=
+-\delta_K^I\,\bar Q_{\dot\alpha J},
+\]
+\[
+[R^I{}_J,S^\alpha{}_K]
+=
+-\delta_K^I\,S^\alpha{}_J,
+\qquad
+[R^I{}_J,\bar S^{\dot\alpha K}]
+=
+\delta_J^K\,\bar S^{\dot\alpha I}.
+\]
+\end{corollary}
+
+\begin{proof}
+The first formula is exactly
+Theorem~\ref{thm:internal-action-from-mixed-brackets}.
+
+For the barred lower layer, fix \(A\in\operatorname{End}(E)\) and \(w\in E\).
+Because \([T_A,P_\mu]=0\) by linearity from
+Theorem~\ref{thm:QS-conformal-plus-internal}, and because
+\([P_\mu,\bar Q_{\dot\alpha}(w)]=0\), the commutator
+\[
+Y_{\dot\alpha}(w):=[T_A,\bar Q_{\dot\alpha}(w)]
+\]
+is again a translation-invariant barred odd Weyl-spinor symmetry generator.
+By Theorem~\ref{thm:HLS-spinor-completeness}, there exists a unique
+\(B_Aw\in E\) such that
+\[
+Y_{\dot\alpha}(w)=\bar Q_{\dot\alpha}(B_Aw).
+\]
+Now use the HLS anticommutator and \([T_A,P_{\alpha\dot\beta}]=0\):
+\[
+\begin{aligned}
+0
+&=
+[T_A,\{Q_\alpha(v),\bar Q_{\dot\beta}(w)\}] \\
+&=
+\{[T_A,Q_\alpha(v)],\bar Q_{\dot\beta}(w)\}
++
+\{Q_\alpha(v),[T_A,\bar Q_{\dot\beta}(w)]\} \\
+&=
+\{Q_\alpha(Av),\bar Q_{\dot\beta}(w)\}
++
+\{Q_\alpha(v),\bar Q_{\dot\beta}(B_Aw)\} \\
+&=
+2\bigl(
+\langle Av,w\rangle_Q+\langle v,B_Aw\rangle_Q
+\bigr)P_{\alpha\dot\beta}.
+\end{aligned}
+\]
+Choose \((\alpha,\dot\beta)\) with \(P_{\alpha\dot\beta}\neq 0\), using
+Lemma~\ref{lem:4a-HLS-nonzero-translation}. Then
+\[
+\langle Av,w\rangle_Q+\langle v,B_Aw\rangle_Q=0
+\qquad
+(v,w\in E),
+\]
+so by definition of \(A^\star\),
+\[
+B_A=-A^\star.
+\]
+Thus
+\[
+[T_A,\bar Q_{\dot\alpha}(w)]
+=
+-\bar Q_{\dot\alpha}(A^\star w).
+\]
+
+For the unbarred upper layer, fix \(\mu\in E^*\) and define
+\[
+X^\alpha(\mu)
+:=
+[T_A,S^\alpha(\mu)]+S^\alpha(A^\vee\mu).
+\]
+Using \([T_A,P_{\beta\dot\gamma}]=0\) and the bridge relation from
+Lemma~\ref{lem:4b-upper-odd-normalization},
+\[
+[P_{\beta\dot\gamma},S^\alpha(\mu)]
+=
+2\,\delta_\beta^\alpha\,\bar Q_{\dot\gamma}(\mu^\sharp),
+\]
+we compute
+\[
+\begin{aligned}
+[P_{\beta\dot\gamma},X^\alpha(\mu)]
+&=
+[T_A,[P_{\beta\dot\gamma},S^\alpha(\mu)]]
++
+[P_{\beta\dot\gamma},S^\alpha(A^\vee\mu)] \\
+&=
+2\,\delta_\beta^\alpha\,[T_A,\bar Q_{\dot\gamma}(\mu^\sharp)]
++
+2\,\delta_\beta^\alpha\,\bar Q_{\dot\gamma}((A^\vee\mu)^\sharp).
+\end{aligned}
+\]
+But \((A^\vee\mu)^\sharp=A^\star\mu^\sharp\), so the barred lower-layer formula
+just proved gives
+\[
+[T_A,\bar Q_{\dot\gamma}(\mu^\sharp)]
+=
+-\bar Q_{\dot\gamma}(A^\star\mu^\sharp)
+=
+-\bar Q_{\dot\gamma}((A^\vee\mu)^\sharp).
+\]
+Hence
+\[
+[P_{\beta\dot\gamma},X^\alpha(\mu)]=0
+\qquad
+(\beta,\dot\gamma).
+\]
+So \(X^\alpha(\mu)\) is translation-invariant. By
+Theorem~\ref{thm:HLS-spinor-completeness}, there exists a unique \(u\in E\) with
+\[
+X^\alpha(\mu)=Q_\alpha(u).
+\]
+
+Now use Lemma~\ref{lem:4b-KQ-scalar}, writing \(K_Q=\kappa\,\mathbf 1_E\) with
+\(\kappa\in i\mathbb R\). Then
+Theorem~\ref{thm:4a-Delta-half} and
+Lemma~\ref{lem:4b-upper-D-normal-form} give the scalar \(D\)-weights
+\[
+[D,Q_\alpha(u)]
+=
+\Bigl(\frac{i}{2}+i\kappa\Bigr)Q_\alpha(u),
+\qquad
+[D,S^\alpha(\mu)]
+=
+\Bigl(-\frac{i}{2}-i\kappa\Bigr)S^\alpha(\mu).
+\]
+Since \([T_A,D]=0\), we obtain
+\[
+[D,X^\alpha(\mu)]
+=
+\Bigl(-\frac{i}{2}-i\kappa\Bigr)X^\alpha(\mu).
+\]
+But \(X^\alpha(\mu)=Q_\alpha(u)\), so the same operator would have to carry both
+eigenvalues \(\frac{i}{2}+i\kappa\) and \(-\frac{i}{2}-i\kappa\), which differ by
+\(i\). Therefore \(u=0\), hence \(X^\alpha(\mu)=0\). This proves
+\[
+[T_A,S^\alpha(\mu)]
+=
+-S^\alpha(A^\vee\mu).
+\]
+
+For the barred upper layer, fix \(\mu\in E^*\) and define
+\[
+Z^{\dot\alpha}(\mu)
+:=
+[T_A,\bar S^{\dot\alpha}(\mu)]
+-\bar S^{\dot\alpha}\bigl((A\mu^\sharp)^\flat\bigr).
+\]
+Again using \([T_A,P_{\beta\dot\gamma}]=0\) and the second bridge relation from
+Lemma~\ref{lem:4b-upper-odd-normalization},
+\[
+[P_{\beta\dot\gamma},\bar S^{\dot\alpha}(\mu)]
+=
+2\,\delta_{\dot\gamma}^{\dot\alpha}\,Q_\beta(\mu^\sharp),
+\]
+we get
+\[
+\begin{aligned}
+[P_{\beta\dot\gamma},Z^{\dot\alpha}(\mu)]
+&=
+[T_A,[P_{\beta\dot\gamma},\bar S^{\dot\alpha}(\mu)]]
+-
+[P_{\beta\dot\gamma},
+\bar S^{\dot\alpha}((A\mu^\sharp)^\flat)] \\
+&=
+2\,\delta_{\dot\gamma}^{\dot\alpha}\,[T_A,Q_\beta(\mu^\sharp)]
+-
+2\,\delta_{\dot\gamma}^{\dot\alpha}\,Q_\beta(((A\mu^\sharp)^\flat)^\sharp) \\
+&=
+2\,\delta_{\dot\gamma}^{\dot\alpha}\,Q_\beta(A\mu^\sharp)
+-
+2\,\delta_{\dot\gamma}^{\dot\alpha}\,Q_\beta(A\mu^\sharp) \\
+&=
+0.
+\end{aligned}
+\]
+So \(Z^{\dot\alpha}(\mu)\) is translation-invariant. By
+Theorem~\ref{thm:HLS-spinor-completeness}, there exists \(u\in E\) such that
+\[
+Z^{\dot\alpha}(\mu)=\bar Q_{\dot\alpha}(u).
+\]
+Using again the scalar \(D\)-weights,
+\[
+[D,\bar Q_{\dot\alpha}(u)]
+=
+\Bigl(\frac{i}{2}-i\kappa\Bigr)\bar Q_{\dot\alpha}(u),
+\qquad
+[D,\bar S^{\dot\alpha}(\mu)]
+=
+\Bigl(-\frac{i}{2}+i\kappa\Bigr)\bar S^{\dot\alpha}(\mu),
+\]
+and \([T_A,D]=0\), we get
+\[
+[D,Z^{\dot\alpha}(\mu)]
+=
+\Bigl(-\frac{i}{2}+i\kappa\Bigr)Z^{\dot\alpha}(\mu).
+\]
+Again the two eigenvalues differ by \(i\), so \(u=0\). Therefore
+\[
+[T_A,\bar S^{\dot\alpha}(\mu)]
+=
+\bar S^{\dot\alpha}\bigl((A\mu^\sharp)^\flat\bigr).
+\]
+
+Finally, specializing to \(A=e_I\otimes e^J\) gives the displayed basis formulas.
+\end{proof}
+
+\begin{lemma}[Internal \(\star\) on the multiplicity block]
+\label{lem:4b-internal-adjoint}
+The HLS Hermitian form on \(E\) defines an involution
+\[
+  A\longmapsto A^\star
+  \qquad
+  \text{on }\operatorname{End}(E)
+\]
+by
+\[
+  \langle Av,w\rangle_Q=\langle v,A^\star w\rangle_Q.
+\]
+For rank-one operators,
+\[
+  (v\otimes\lambda)^\star=\lambda^\sharp\otimes v^\flat.
+\]
+The \(\star\)-skew part is
+\[
+  \mathfrak u(E)
+  :=
+  \{A\in\operatorname{End}(E):A^\star=-A\}
+  \cong
+  \mathfrak u(N),
+\]
+and its commutator subalgebra is
+\[
+  \mathfrak{su}(E)\cong\mathfrak{su}(N).
+\]
+\end{lemma}
+
+\begin{proof}
+For rank-one operators one computes
+\[
+\langle (v\otimes\lambda)w,x\rangle_Q
+=
+\lambda(w)\,\langle v,x\rangle_Q
+=
+\langle w,(\lambda^\sharp\otimes v^\flat)x\rangle_Q,
+\]
+which gives \((v\otimes\lambda)^\star=\lambda^\sharp\otimes v^\flat\). The final
+two statements are the standard linear algebra of a finite-dimensional Hermitian
+space.
+\end{proof}
+
+\begin{corollary}[Correct barred mixed-bracket formula]
+\label{cor:4b-barred-mixed-formula}
+Assume Theorem~\ref{thm:internal-action-from-mixed-brackets},
+Lemma~\ref{lem:4b-degree-zero-faithfulness},
+Lemma~\ref{lem:4b-upper-odd-adjoint-choice}, and
+Lemma~\ref{lem:4b-internal-adjoint}. Then
+\[
+\{\bar Q_{\dot\alpha}(v),\bar S^{\dot\beta}(\lambda)\}
+=
+\lambda(v)\,\bar L^{\dot\beta}{}_{\dot\alpha}
+-\delta_{\dot\alpha}^{\dot\beta}\,T_{(v\otimes\lambda)^\star}.
+\]
+\end{corollary}
+
+\begin{proof}
+Write the barred same-chirality mixed anticommutator in the form
+\[
+\{\bar Q_{\dot\alpha}(v),\bar S^{\dot\beta}(\lambda)\}
+=
+\lambda(v)\,\bar L^{\dot\beta}{}_{\dot\alpha}
++\delta_{\dot\alpha}^{\dot\beta}\,B_{v,\lambda}.
+\]
+Apply the super-Jacobi identity to the triple
+\((Q_\gamma(w),\bar Q_{\dot\alpha}(v),\bar S^{\dot\beta}(\lambda))\). Because
+\(\{Q,\bar S\}=0\), the right-hand side reduces to the \(P\)--\(\bar S\) bridge
+term; using the HLS anticommutator and the normalized bridge relation of
+Lemma~\ref{lem:4b-upper-odd-normalization} gives
+\[
+  [B_{v,\lambda},Q_\gamma(w)]
+  =
+  Q_\gamma\bigl((v\otimes\lambda)^\star w\bigr).
+\]
+By Theorem~\ref{thm:internal-action-from-mixed-brackets}, the internal operator
+\(T_{(v\otimes\lambda)^\star}\) has the same action on the full lower odd layer.
+Set
+\[
+  U:=B_{v,\lambda}+T_{(v\otimes\lambda)^\star}.
+\]
+Then \(U\) acts trivially on the lower layer. Since \(U\) is degree-zero
+internal, it commutes with translations, Lorentz generators, and \(D\); by
+Lemma~\ref{lem:4b-degree-zero-faithfulness}, it therefore acts trivially on the
+entire odd closure. Thus, inside the generated degree-zero internal block,
+\[
+  B_{v,\lambda}=-\,T_{(v\otimes\lambda)^\star},
+\]
+which is the displayed formula.
+\end{proof}
+
+\begin{theorem}[Closure-generated internal saturation]
+\label{thm:closure-generated-internal-saturation}
+Assume Theorem~\ref{thm:internal-action-from-mixed-brackets},
+Lemma~\ref{lem:4b-degree-zero-faithfulness}, and
+Lemma~\ref{lem:4b-internal-adjoint}. Then the internal degree-zero block is a
+faithful copy of \(\operatorname{End}(E)\): for all
+\(A,B\in\operatorname{End}(E)\),
+\[
+  R_{\mathrm{cl},\mathbb C}
+  =
+  \{T_A:A\in\operatorname{End}(E)\},
+  \qquad
+  [T_A,T_B]=T_{[A,B]}.
+\]
+Under this identification, the \(\star\)-skew part is
+\(\mathfrak u(E)\cong\mathfrak u(N)\), and its commutator subalgebra is
+\(\mathfrak{su}(E)\cong\mathfrak{su}(N)\).
+\end{theorem}
+
+\begin{proof}
+Theorem~\ref{thm:internal-action-from-mixed-brackets} identifies every rank-one
+operator \(v\otimes\lambda\) with \(T_{v,\lambda}\), and such rank-one operators
+span \(\operatorname{End}(E)\). Hence
+\[
+  R_{\mathrm{cl},\mathbb C}
+  =
+  \{T_A:A\in\operatorname{End}(E)\}.
+\]
+For the commutator law, let \(A,B\in\operatorname{End}(E)\). Then for every
+\(w\in E\),
+\[
+  [[T_A,T_B],Q_\alpha(w)]
+  =
+  Q_\alpha([A,B]w)
+  =
+  [T_{[A,B]},Q_\alpha(w)].
+\]
+The difference \([T_A,T_B]-T_{[A,B]}\) is again degree-zero internal, so
+Lemma~\ref{lem:4b-degree-zero-faithfulness} shows that it vanishes on the odd
+closure. Thus \([T_A,T_B]=T_{[A,B]}\) in the generated internal block.
+
+The \(\star\)-skew part and its commutator subalgebra are exactly
+\(\mathfrak u(E)\) and \(\mathfrak{su}(E)\) by
+Lemma~\ref{lem:4b-internal-adjoint}.
+\end{proof}
+
+\begin{theorem}[The \(S\)-\(\bar S\) anticommutator]
+\label{thm:4b-SbarS-anticommutator}
+Assume Theorem~\ref{thm:4b-odd-prolongation},
+Theorem~\ref{thm:QS-conformal-plus-internal},
+Corollary~\ref{cor:4b-barred-mixed-formula},
+Theorem~\ref{thm:internal-action-from-mixed-brackets}, and
+Corollary~\ref{cor:4b-dilatation-normalization}. Then on \(\mathcal D_{\mathrm{sc}}\) one
+has
+\[
+\{S^\alpha(\lambda),\bar S^{\dot\beta}(\mu)\}
+=
+2\,\langle \mu^\sharp,\lambda^\sharp\rangle_Q\,K^{\alpha\dot\beta},
+\]
+with the coefficient fixed by the normalization conventions of
+Lemma~\ref{lem:4b-upper-odd-normalization}. Moreover,
+\[
+\{S,S\}=\{\bar S,\bar S\}=0.
+\]
+\end{theorem}
+
+\begin{proof}
+By Corollary~\ref{cor:4b-dilatation-normalization}, the upper odd generators have
+exact \(D\)-weight \(-\tfrac12\). Therefore
+\(\{S^\alpha(\lambda),\bar S^{\dot\beta}(\mu)\}\) is an even operator of
+\(D\)-weight \(-1\) and Lorentz type \((\tfrac12,\tfrac12)\). The internal block
+has weight \(0\) and no vector piece, so inside the even block there is only one
+possible generator of this type, namely \(K^{\alpha\dot\beta}\). Hence there
+exists a bilinear scalar \(c(\lambda,\mu)\) such that
+\[
+\{S^\alpha(\lambda),\bar S^{\dot\beta}(\mu)\}
+=
+c(\lambda,\mu)\,K^{\alpha\dot\beta}.
+\]
+
+Apply \([P_{\gamma\dot\delta},-]\) to both sides. Using the normalized bridge
+relations of Lemma~\ref{lem:4b-upper-odd-normalization} gives
+\[
+\begin{aligned}
+[P_{\gamma\dot\delta},\{S^\alpha(\lambda),\bar S^{\dot\beta}(\mu)\}]
+&=
+2\delta_\gamma^\alpha
+\{\bar Q_{\dot\delta}(\lambda^\sharp),\bar S^{\dot\beta}(\mu)\}
++
+2\delta_{\dot\delta}^{\dot\beta}
+\{S^\alpha(\lambda),Q_\gamma(\mu^\sharp)\}.
+\end{aligned}
+\]
+Now insert the barred mixed formula and the unbarred mixed formula:
+\[
+\{\bar Q_{\dot\delta}(\lambda^\sharp),\bar S^{\dot\beta}(\mu)\}
+=
+\mu(\lambda^\sharp)\,\bar L^{\dot\beta}{}_{\dot\delta}
+-\delta_{\dot\delta}^{\dot\beta}\,T_{(\lambda^\sharp\otimes\mu)^\star},
+\]
+\[
+\{S^\alpha(\lambda),Q_\gamma(\mu^\sharp)\}
+=
+\mu(\lambda^\sharp)\,L_\gamma{}^\alpha
++\delta_\gamma^\alpha\,T_{\mu^\sharp\otimes\lambda}.
+\]
+But
+\[
+(\lambda^\sharp\otimes\mu)^\star
+=
+\mu^\sharp\otimes\lambda,
+\]
+so the internal terms cancel exactly. Therefore
+\[
+\begin{aligned}
+[P_{\gamma\dot\delta},\{S^\alpha(\lambda),\bar S^{\dot\beta}(\mu)\}]
+&=
+2\,\langle \mu^\sharp,\lambda^\sharp\rangle_Q
+\bigl(
+\delta_\gamma^\alpha\bar L^{\dot\beta}{}_{\dot\delta}
++
+\delta_{\dot\delta}^{\dot\beta}L_\gamma{}^\alpha
+\bigr),
+\end{aligned}
+\]
+and comparison with the conformal commutator
+\([P_{\gamma\dot\delta},K^{\alpha\dot\beta}]\) fixes the scalar and yields the
+displayed formula.
+
+For same-chirality upper anticommutators, \(\{S,S\}\) and \(\{\bar S,\bar S\}\)
+have \(D\)-weight \(-1\) but transform in same-chirality spinor-square
+representations rather than vector type, while the internal block has Lorentz
+type \((0,0)\). Hence both vanish.
+\end{proof}
+
+\begin{corollary}[Internal generators commute with \(K\)]
+\label{cor:4b-internal-K-commutation}
+Under the hypotheses of Theorem~\ref{thm:4b-SbarS-anticommutator},
+\[
+[T_A,K_\mu]=0
+\qquad
+(A\in\operatorname{End}(E)).
+\]
+Hence the internal operators commute with the full even conformal algebra.
+\end{corollary}
+
+\begin{proof}
+Fix a rank-one operator \(A=v\otimes\lambda\). Apply
+\([K^{\gamma\dot\delta},-]\) to the unbarred mixed-bracket formula
+\[
+\{Q_\alpha(v),S^\beta(\lambda)\}
+=
+\lambda(v)L_\alpha{}^\beta+\delta_\alpha^\beta T_A.
+\]
+Since \([K,S]=0\), the left-hand side becomes
+\[
+\{[K^{\gamma\dot\delta},Q_\alpha(v)],S^\beta(\lambda)\}
+=
+2\,\delta_\alpha^\gamma\{\bar S^{\dot\delta}(v^\flat),S^\beta(\lambda)\}.
+\]
+By Theorem~\ref{thm:4b-SbarS-anticommutator}, this is exactly the conformal
+commutator with the \(\lambda(v)L_\alpha{}^\beta\) term, leaving no internal
+remainder. Therefore
+\[
+[K^{\gamma\dot\delta},T_A]=0.
+\]
+Since the rank-one operators span \(\operatorname{End}(E)\), linearity gives
+\([K_\mu,T_A]=0\) for every \(A\in\operatorname{End}(E)\).
+\end{proof}
+
+\begin{corollary}[Normalized dilatation has the standard \(K\)-commutator]
+\label{cor:4b-dstd-K}
+Assume Corollary~\ref{cor:4b-dilatation-normalization} and
+Corollary~\ref{cor:4b-internal-K-commutation}. Then
+\[
+[D_{\mathrm{std}},K_\mu]=-iK_\mu.
+\]
+\end{corollary}
+
+\begin{proof}
+By Definition~\ref{def:2T-conf},
+\[
+[D,K_\mu]=-iK_\mu.
+\]
+Since \(R_{K_Q}=T_{K_Q}\) is internal, Corollary~\ref{cor:4b-internal-K-commutation}
+gives
+\[
+[R_{K_Q},K_\mu]=0.
+\]
+Therefore
+\[
+[D_{\mathrm{std}},K_\mu]
+=
+[D-iR_{K_Q},K_\mu]
+=
+[D,K_\mu]-i[R_{K_Q},K_\mu]
+=
+-iK_\mu.
+\qedhere
+\]
+\end{proof}
+
+\begin{remark}[Basis form of the internal generators]
+Let \(\{e_I\}\) be an orthonormal basis of \(E\), let \(\{e^I\}\) be the dual
+basis, and define
+\[
+  Q_\alpha^I:=Q_\alpha(e_I),
+  \qquad
+  \bar Q_{\dot\alpha I}:=\bar Q_{\dot\alpha}(e_I),
+  \qquad
+  S^\alpha{}_I:=S^\alpha(e^I),
+  \qquad
+  \bar S^{\dot\alpha I}:=\bar S^{\dot\alpha}(e^I),
+\]
+\[
+  R^I{}_J:=T_{e_I,e^J}.
+\]
+Then
+\[
+  [R^I{}_J,Q_\alpha^K]=\delta_J^K\,Q_\alpha^I,
+  \qquad
+  [R^I{}_J,\bar Q_{\dot\alpha K}]=-\delta_K^I\,\bar Q_{\dot\alpha J},
+\]
+\[
+  [R^I{}_J,S^\alpha{}_K]=-\delta_K^I\,S^\alpha{}_J,
+  \qquad
+  [R^I{}_J,\bar S^{\dot\alpha K}]=\delta_J^K\,\bar S^{\dot\alpha I}.
+\]
+The trace part
+\[
+  r:=\sum_I R^I{}_I
+\]
+spans the \(\mathfrak u(1)\) factor of \(\mathfrak u(N)\). By
+Lemma~\ref{lem:4b-KQ-scalar},
+\[
+  T_{K_Q}=\kappa r,
+\]
+so the shift \(D_{\mathrm{std}}-D=-i\kappa r\) lies in the central trace
+direction.
+\end{remark}
+
+\subsection{Full superconformal realization on the same UV Hilbert space}
+\label{subsec:4b-superconf}
+
+\paragraph{Normalized dilatation convention.}
+From this point onward, once Corollary~\ref{cor:4b-dilatation-normalization},
+Corollary~\ref{cor:4b-internal-K-commutation}, and
+Corollary~\ref{cor:4b-dstd-K} are available, we write \(D\) for the normalized
+operator \(D_{\mathrm{std}}\). Because
+\[
+  D_{\mathrm{std}}-D=-i\kappa r
+\]
+is a central internal trace generator, this replacement preserves all conformal
+commutators and all commutators with the internal block. It also changes the
+degree-zero splitting only by a basis change in the abelian span of the
+conformal trace direction and the internal trace direction. Consequently the
+block-matrix identification of the final superalgebra is unchanged.
+
+\begin{theorem}[Explicit bracket table on the common core]
+\label{thm:4d-SConf-brackets}
+Assume Theorem~\ref{thm:4b-odd-prolongation},
+Theorem~\ref{thm:4b-narrow-common-sector},
+Theorem~\ref{thm:QS-conformal-plus-internal},
+Theorem~\ref{thm:internal-action-from-mixed-brackets},
+Corollary~\ref{cor:4b-contragredient-internal-action},
+Corollary~\ref{cor:4b-barred-mixed-formula},
+Theorem~\ref{thm:closure-generated-internal-saturation},
+Corollary~\ref{cor:4b-dilatation-normalization},
+Theorem~\ref{thm:4b-SbarS-anticommutator}, and
+Corollary~\ref{cor:4b-internal-K-commutation},
+and Corollary~\ref{cor:4b-dstd-K}. Then on the common
+invariant core \(\mathcal D_{\mathrm{sc}}\) the generators
+\[
+  P_\mu,\ M_{\mu\nu},\ D,\ K_\mu,\ Q_\alpha(v),\ \bar Q_{\dot\alpha}(v),\
+  S^\alpha(\lambda),\ \bar S^{\dot\alpha}(\lambda),\ T_{v,\lambda}
+\]
+satisfy the following relations:
+\begin{enumerate}[(i)]
+  \item the even conformal generators satisfy the standard conformal relations
+        from Definition~\ref{def:2T-conf}, while the internal generators satisfy
+\[
+  [T_{v,\lambda},T_{w,\mu}]
+  =
+  T_{\lambda(w)v,\mu}-T_{w,\mu(v)\lambda},
+\]
+        which is the faithful \(\operatorname{End}(E)\) commutator of the
+        internal block \(A\mapsto T_A\), and
+\[
+  [T_{v,\lambda},P_\mu]
+  =
+  [T_{v,\lambda},M_{\mu\nu}]
+  =
+  [T_{v,\lambda},D]
+  =
+  [T_{v,\lambda},K_\mu]
+  =
+  0;
+\]
+  \item the even conformal algebra acts on the odd generators by the standard
+        two-layer conformal-spinor representation:
+\[
+  [P,Q]=0,
+  \qquad
+  [K,S]=0,
+  \qquad
+  [D,Q]=\frac{i}{2}Q,
+  \qquad
+  [D,S]=-\frac{i}{2}S,
+\]
+        together with the barred analogues and the normalized bridging relations
+        of Lemma~\ref{lem:4b-upper-odd-normalization}; the internal algebra acts by
+        the rank-one formulas from
+        Theorem~\ref{thm:internal-action-from-mixed-brackets} and
+        Corollary~\ref{cor:4b-contragredient-internal-action};
+  \item the nonzero odd anticommutators are exactly
+\[
+  \{Q_\alpha(v),\bar Q_{\dot\beta}(w)\}
+  =
+  2\,\langle v,w\rangle_Q\,P_{\alpha\dot\beta},
+\]
+\[
+  \{S^\alpha(\lambda),\bar S^{\dot\beta}(\mu)\}
+  =
+  2\,\langle \mu^\sharp,\lambda^\sharp\rangle_Q\,K^{\alpha\dot\beta},
+\]
+\[
+  \{Q_\alpha(v),S^\beta(\lambda)\}
+  =
+  \lambda(v)\,L_\alpha{}^\beta+\delta_\alpha^\beta\,T_{v,\lambda},
+\]
+\[
+  \{\bar Q_{\dot\alpha}(v),\bar S^{\dot\beta}(\lambda)\}
+  =
+  \lambda(v)\,\bar L^{\dot\beta}{}_{\dot\alpha}
+  -\delta_{\dot\alpha}^{\dot\beta}\,T_{(v\otimes\lambda)^\star},
+\]
+        while
+\[
+  \{Q,Q\}=\{\bar Q,\bar Q\}=\{S,S\}=\{\bar S,\bar S\}=0,
+  \qquad
+  \{Q,\bar S\}=\{\bar Q,S\}=0.
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Item~\textnormal{(i)}: the even conformal commutators are those of
+Definition~\ref{def:2T-conf}, now with the normalized generator
+\(D=D_{\mathrm{std}}\), with the \(D\)-\(K\) relation supplied by
+Corollary~\ref{cor:4b-dstd-K}. The internal degree-zero block is the faithful copy
+\(A\mapsto T_A\) of \(\operatorname{End}(E)\) constructed above. For
+\(A,B\in\operatorname{End}(E)\), Jacobi on the lower layer gives
+\[
+  [[T_A,T_B],Q_\alpha(w)]
+  =
+  Q_\alpha([A,B]w).
+\]
+By Theorem~\ref{thm:closure-generated-internal-saturation}, this is exactly the
+commutator law \([T_A,T_B]=T_{[A,B]}\), whose rank-one form is the displayed
+formula. All internal generators commute with \(P_\mu\), \(M_{\mu\nu}\), and the
+normalized \(D\) by construction, and with \(K_\mu\) by
+Corollary~\ref{cor:4b-internal-K-commutation}.
+
+Item~\textnormal{(ii)}: the lower and upper exact half-weight relations are those
+of Corollary~\ref{cor:4b-dilatation-normalization}. The bridge relations are
+those of Lemma~\ref{lem:4b-upper-odd-normalization}. The internal action
+formulas are the faithful \(A\mapsto T_A\) action on the lower layer together
+with the rank-one formulas of
+Corollary~\ref{cor:4b-contragredient-internal-action}.
+
+Item~\textnormal{(iii)}: the \(Q\)-\(\bar Q\) relation is the HLS seed relation.
+The \(S\)-\(\bar S\) relation is Theorem~\ref{thm:4b-SbarS-anticommutator}. The
+unbarred mixed bracket is Theorem~\ref{thm:QS-conformal-plus-internal}, and the
+barred mixed bracket is Corollary~\ref{cor:4b-barred-mixed-formula}. The
+same-chirality upper anticommutators vanish by
+Theorem~\ref{thm:4b-SbarS-anticommutator}, while the cross-chiral mixed
+anticommutators vanish by Theorem~\ref{thm:QS-conformal-plus-internal}. Thus
+every graded bracket closes on \(\mathcal D_{\mathrm{sc}}\) and no extra odd or
+even generators appear.
+\end{proof}
+
+\begin{theorem}[Same-\texorpdfstring{$\mathcal H$}{H} realization of the full \(4\)D superconformal algebra]
+\label{thm:4d-SConf}
+\label{thm:same-H-superconformal-realization}
+Assume Theorem~\ref{thm:4d-SConf-brackets}. Then on the same UV Hilbert space
+\(\mathcal H\) there exist densely defined operators
+\[
+P_\mu,\ M_{\mu\nu},\ D,\ K_\mu,\ Q_\alpha^I,\ \bar Q_{\dot\alpha I},\
+S^\alpha{}_I,\ \bar S^{\dot\alpha I},\ R^I{}_J
+\]
+with common invariant core \(\mathcal D_{\mathrm{sc}}\) such that:
+\begin{enumerate}[(i)]
+  \item the even operators realize the UV conformal algebra together with the
+        internal algebra \(\mathfrak u(N)\);
+  \item the odd operators realize the two weight layers of the standard \(4\)D
+        superconformal odd module, with \(Q,\bar Q\) at weight \(+\tfrac12\) and
+        \(S,\bar S\) at weight \(-\tfrac12\);
+  \item all graded brackets close on \(\mathcal D_{\mathrm{sc}}\);
+  \item the resulting operator Lie superalgebra is the full \(4\)D
+        superconformal algebra.
+\end{enumerate}
+More precisely, by the standard four-dimensional superconformal classification
+picture \cite{Nahm1978,Sohnius:1985qm}, for \(N\neq 4\) the resulting algebra is
+\(\mathfrak{su}(2,2|N)\), while in the \(N=4\) case the standard simple algebra is
+obtained after quotienting the central \(\mathfrak u(1)\), giving
+\(\mathfrak{psu}(2,2|4)\).
+\end{theorem}
+
+\begin{proof}
+Let
+\[
+  V:=S_+\oplus S_-
+  \qquad
+  (\dim_\mathbb C V=4).
+\]
+Let the odd multiplicity space be \(E\). The bracket table gives the
+complexified conformal block as the \(V\)-block
+\(\mathfrak{sl}(V)\cong\mathfrak{sl}(4,\mathbb C)\), the internal block as the
+faithful \(E\)-block \(\operatorname{End}(E)\), and the odd generators as the
+off-diagonal blocks
+\[
+  Q,\bar S\in\operatorname{Hom}(E,V),
+  \qquad
+  S,\bar Q\in\operatorname{Hom}(V,E).
+\]
+With the mixed-bracket formulas, the odd-odd anticommutators are
+exactly the block compositions whose \(\operatorname{End}(V)\) component gives
+the conformal generators and whose \(\operatorname{End}(E)\) component gives the
+internal operators \(T_A\). Therefore the complexified generated superalgebra is
+the standard block-matrix algebra
+\[
+  \mathfrak{sl}(V|E)\cong\mathfrak{sl}(4|N).
+\]
+The real form is the standard one: the conformal block is
+\(\mathfrak{su}(2,2)\) by the Hilbert-space adjoint on the conformal generators,
+the odd generators pair as \(Q^\dagger=\bar Q\) and \(S^\dagger=\bar S\), and
+the internal real block is the \(\star\)-skew part
+\(\mathfrak u(E)\cong\mathfrak u(N)\) supplied by the HLS Hermitian form on
+\(E\). These are exactly the standard reality conditions for
+\(\mathfrak{su}(2,2|N)\). For \(N=4\), the scalar superidentity has zero
+supertrace and is central, so quotienting it gives \(\mathfrak{psu}(2,2|4)\).
+This proves items~\textnormal{(i)}--\textnormal{(iv)}.
+\end{proof}
+
+This establishes the same-\(\mathcal H\) superconformal closure.

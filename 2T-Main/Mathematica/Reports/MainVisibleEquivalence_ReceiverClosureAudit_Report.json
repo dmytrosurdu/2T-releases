@@ -1,0 +1,69 @@
+{
+  "ReportDate": "2026-03-18",
+  "Status": "exact finite-dimensional certificate",
+  "Verdict": "Main-visible quotient survives exact receiver-closure audit in the current family",
+  "TopLineReading": "No reduced exact falsifier was found; the quotient fibers are rank-one/scalar in the current audited family, not richer.",
+  "Scope": "Current audited family only, with corrected reduced receiver semantics and no source-theorem promotion.",
+  "SourceLock": [
+    "UOM/source_internal_control_factorization_note.tex",
+    "Main/appendix_main.tex::def:2T-char",
+    "UOM/canonical_odd_interface_note.tex::thm:char-weak-interface",
+    "UOM/canonical_odd_interface_note.tex::rem:char-weak-interface-rho-first",
+    "UOM/canonical_odd_interface_note.tex::rem:Main-abstract",
+    "Main/Mathematica/Reports/SourceInternalClosureAudit.md"
+  ],
+  "CurrentFamilyData": {
+    "Chi": [0, 0, 1],
+    "Aminus": [
+      [1, 0],
+      [0, 1],
+      [0, 0]
+    ],
+    "AminusStoredAsColumnBasisQ": true,
+    "J0": [0, 0, 1],
+    "Epsilon": 1,
+    "ProfileProjectorB": [
+      [1, 0],
+      [0, 0]
+    ],
+    "QuotientDimension": 1,
+    "AminusEqualsKerChiQ": true
+  },
+  "MainVisibleReadout": {
+    "ReducedImageForm": "R_main(v) = (chi . v) ProfileProjectorB",
+    "ReducedScalarRecoveryQ": true,
+    "SameReducedImageIffSameQuotientCoordinateQ": true
+  },
+  "ClosureCompatibility": {
+    "BookkeepingClosureSameReducedObjectQ": true,
+    "BridgeTargetClosureSameReducedObjectQ": true,
+    "OneBoundaryCovarianceSameReducedObjectQ": true,
+    "RPOSControlSameReducedObjectQ": true,
+    "SingleCutoffGeometrySameReducedObjectQ": true
+  },
+  "CountermodelSearch": {
+    "DifferentQuotientSameReducedImageCounterexample": [],
+    "SameQuotientDifferentReducedImageCounterexample": [],
+    "ReducedExactFalsifierFoundQ": false
+  },
+  "OrbitStructure": {
+    "Classification": "rank-one/scalar with separate branch-orientation sign, not richer in the current audited family",
+    "RankOneScalarQ": true,
+    "Z2OnlyQ": false,
+    "RicherReducedOrbitStructureQ": false
+  },
+  "CollapseStatement": {
+    "BroadUnreducedDifferencesCollapseAfterReductionQ": true,
+    "AllowedExceptions": [
+      "explicit accepted-record failure",
+      "explicit leakage/slack branch"
+    ],
+    "Interpretation": "Broad unreduced seam/source/tangent differences are theorem-invisible to the reduced Main-visible quotient once accepted-record reduction and the common reduced welded projection are imposed."
+  },
+  "NonClaims": [
+    "Not source-internal theorem promotion",
+    "Does not prove full unreduced seam/source/tangent agreement",
+    "Does not enlarge Main beyond the abstract weak-interface data it already consumes",
+    "Does not discharge leakage or accepted-record failure cases"
+  ]
+}

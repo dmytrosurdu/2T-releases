@@ -1,0 +1,7 @@
+Eliminated import: the ambiguity-kernel / quotient-descent closure is now machine-audited exactly at finite cutoff through thm:dominant-quotient-descent and cor:dominant-quotient-constancy.
+
+Reduced import: source-insertion representability is now decomposed into an exact algebraic solver with obstruction and gauge-space reports; only sufficient locality remains imported.
+
+Clarified obstruction: representative-search statements collapse to rho-level scalar compatibility on the affine class. The stronger unscaled chi-level reduction is false in general and requires an extra normalization hypothesis.
+
+Added bonus control: branchwise rational regularity of Jcan is now certified for rational/polynomial finite-cutoff data away from Gram-block degeneracy.

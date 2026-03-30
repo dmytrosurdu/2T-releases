@@ -1,0 +1,307 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     11773,        298]
+NotebookOptionsPosition[      9370,        263]
+NotebookOutlinePosition[      9684,        277]
+CellTagsIndexPosition[      9641,        274]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["10 Jcan Branch Regularity", "Title",ExpressionUUID->"89c25f38-d513-4c84-8789-97df8ae93abb"],
+
+Cell["Scope", "Section",ExpressionUUID->"11945ccd-0f73-47f8-bd65-bfff2d3d42db"],
+
+Cell["\<\
+This notebook audits the cheap branchwise regularity lane enabled by the \
+explicit projector formula. \
+\>", "Text",ExpressionUUID->"063e139a-24f8-42b5-a890-b0556be1f68e"],
+
+Cell["Exact branch formula", "Section",ExpressionUUID->"72fb91d9-8ee1-4cbc-9dac-c5b08e37f9ac"],
+
+Cell[TextData[{
+ "For parametric data ",
+ Cell[BoxData[Cell["U(lambda)",
+   Background->None,ExpressionUUID->"a4ab3a40-67a6-49f1-b66a-0c76ea77022e"]], 
+  "InlineCode",ExpressionUUID->"54a7296a-82c8-45d8-a1ec-cb0d85d9980c"],
+ ", ",
+ Cell[BoxData[Cell["B(lambda)",
+   Background->None,ExpressionUUID->"9a668d3f-6c20-497c-aeba-6dd12c51989e"]], 
+  "InlineCode",ExpressionUUID->"a8facba1-7165-4b63-96d9-0df5cd3743f6"],
+ ", and ",
+ Cell[BoxData[Cell["J0(lambda)",
+   Background->None,ExpressionUUID->"4243566d-1074-48f7-98ef-d3a2f715e371"]], 
+  "InlineCode",ExpressionUUID->"d88627fc-67a2-4d59-9853-87aa541c850a"],
+ ", define "
+}], "Text",ExpressionUUID->"87f856f1-396b-40f2-a608-a525724dffb2"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Jcan", 
+   RowBox[{"(", "lambda", ")"}]}], "=", 
+  RowBox[{"J0", 
+   RowBox[{"(", "lambda", ")"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"  ", 
+  RowBox[{
+   RowBox[{"-", "U"}], 
+   RowBox[{
+    RowBox[{"(", "lambda", ")"}], " ", ".", " ", 
+    RowBox[{"Inverse", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Transpose", "[", 
+        RowBox[{"U", 
+         RowBox[{"(", "lambda", ")"}]}], "]"}], ".", "B"}], 
+      RowBox[{
+       RowBox[{"(", "lambda", ")"}], ".", "U"}], 
+      RowBox[{"(", "lambda", ")"}]}], "]"}]}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"    ", 
+  RowBox[{
+   RowBox[{".", " ", 
+    RowBox[{"Transpose", "[", 
+     RowBox[{"U", 
+      RowBox[{"(", "lambda", ")"}]}], "]"}], ".", "B"}], 
+   RowBox[{
+    RowBox[{"(", "lambda", ")"}], ".", "J0"}], 
+   RowBox[{"(", "lambda", ")"}]}]}]}], "Input",ExpressionUUID->"2604c9cb-648e-\
+416a-9154-622c28a3abb2"],
+
+Cell["whenever the Gram block is invertible. ", "Text",ExpressionUUID->"e5fff970-c466-4f91-9784-e80a36e6e820"],
+
+Cell["Certified example", "Section",ExpressionUUID->"92d26ecb-15b7-4913-aaa5-8ce7a8ee347c"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"U", 
+    RowBox[{"(", "lambda", ")"}]}], "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", "1", "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", "+", "lambda"}], "}"}], ",", 
+     RowBox[{"{", "0", "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"B", 
+    RowBox[{"(", "lambda", ")"}]}], "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"2", "+", "lambda"}], ",", "0", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "3", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1", ",", "4"}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"J0", 
+    RowBox[{"(", "lambda", ")"}]}], "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"1", "+", "lambda"}], ",", 
+     RowBox[{"2", "-", "lambda"}], ",", "1"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"0", "<=", "lambda", "<=", "1."}]}], "Input",ExpressionUUID->\
+"854154a4-7b93-4bf8-b023-73e5e4370cc1"],
+
+Cell["Exact facts: ", "Text",ExpressionUUID->"cd6ac910-dca5-4007-bb00-fc44e2676f3c"],
+
+Cell["every input entry is polynomial or rational;", "Item",ExpressionUUID->"001de31f-d8ba-494c-95b2-76aa735b809f"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["det(U^T B U) = 5 + 7 lambda + 3 lambda^2",
+   Background->None,ExpressionUUID->"8ef8f710-1c01-44f4-9baf-4d4b129578c7"]], 
+  "InlineCode",ExpressionUUID->"4781b7a4-8e3f-4eb3-8bf7-a3456d415e72"],
+ ", so the Gram block is invertible on the branch;"
+}], "Item",ExpressionUUID->"60685c8f-2bb1-4630-8934-780d22b7518b"],
+
+Cell[TextData[{
+ "every entry of ",
+ Cell[BoxData[Cell["Jcan(lambda)",
+   Background->None,ExpressionUUID->"b8dd1923-797e-4751-9c07-8d2adcaf240a"]], 
+  "InlineCode",ExpressionUUID->"0b577f59-18d3-4024-b66a-6011750464bb"],
+ " is rational;"
+}], "Item",ExpressionUUID->"ccade204-5e39-4f3f-b1a8-0eaf93cab5ad"],
+
+Cell[TextData[{
+ Cell[BoxData[Cell["Jcan(lambda)",
+   Background->None,ExpressionUUID->"dce0448c-a6df-49ef-9c6a-e9b4ab179150"]], 
+  "InlineCode",ExpressionUUID->"6df910b4-f6a0-4887-a14a-face0d3ab381"],
+ " is continuous on the branch;"
+}], "Item",ExpressionUUID->"a258f883-39f8-4f01-9601-a950cc3a2d4b"],
+
+Cell[TextData[{
+ "singularities can occur only after imposing ",
+ Cell[BoxData[Cell["det(U^T B U) = 0",
+   Background->None,ExpressionUUID->"248a790c-174e-4e85-be7a-7f9f68450150"]], 
+  "InlineCode",ExpressionUUID->"4b7ede49-bfe3-44f2-89ad-c08437101c44"],
+ "."
+}], "Item",ExpressionUUID->"727b81dd-e55d-4d2f-9579-7f8f7ba74f5b"],
+
+Cell["Degenerate example", "Section",ExpressionUUID->"15b4b9d2-3930-4b20-9102-18c9245657e8"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"U", 
+    RowBox[{"(", "lambda", ")"}]}], "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", "lambda", "}"}], ",", 
+     RowBox[{"{", "0", "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"B", 
+    RowBox[{"(", "lambda", ")"}]}], "=", 
+   RowBox[{"IdentityMatrix", "[", "2", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"J0", 
+    RowBox[{"(", "lambda", ")"}]}], "=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"-", "1"}], "<=", "lambda", "<=", "1."}]}], "Input",ExpressionUUID->\
+"dd07a7cf-b023-450a-8251-73719fe70d39"],
+
+Cell["Here ", "Text",ExpressionUUID->"2145ca5b-4aa8-4c1b-a055-df6bc89f1582"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"det", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{"U", "^", "T"}], " ", "B", " ", "U"}], ")"}]}], "=", 
+  RowBox[{"lambda", "^", "2"}]}]], "Input",ExpressionUUID->"e959e885-975c-\
+4f66-bd6a-05753644155c"],
+
+Cell[TextData[{
+ "so the only singular set allowed by the criterion is ",
+ Cell[BoxData[Cell["lambda = 0",
+   Background->None,ExpressionUUID->"cd8ee9a4-c98d-4407-a3c4-1e8bab4a54d0"]], 
+  "InlineCode",ExpressionUUID->"3db86dc1-46c3-40c4-ae00-64f2637dfb29"],
+ ". "
+}], "Text",ExpressionUUID->"c71030de-d61d-4458-92dc-d7f68e6dcba3"],
+
+Cell["Re-run", "Section",ExpressionUUID->"5ba36183-c9ae-402c-adc7-8cbb5d77ce65"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"MainProof`JcanRegularity`RunJcanRegularityExampleSuite", "[", 
+  "]"}]}], "Input",ExpressionUUID->"46f07100-6925-41be-81d4-68afbbd55dc2"],
+
+Cell["Status", "Section",ExpressionUUID->"072d0c83-5966-4540-95c5-9724c3b77108"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Claim\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm], 
+         TagBox["\<\"ScopeClass\"\>",
+          HoldForm]},
+        {Cell[TextData[{
+          "Rationality of ",
+          Cell[BoxData[Cell["Jcan(lambda)",
+            Background->None,ExpressionUUID->
+            "8edf8db9-fe9d-4094-9e67-1fa5ad030cc9"]], "InlineCode",
+           ExpressionUUID->"df46dcfc-ba1e-4916-bf5e-9c49b43bd271"],
+          " on an invertible Gram branch"
+         }],ExpressionUUID->
+          "472908d3-a6b0-4272-94bc-bc9eac824aef"], \
+"\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Singularities only at Gram-block degeneracy\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Degenerate branch witness\"\>", "\<\"exact finite-dimensional \
+certificate\"\>", "\<\"exact-model-certificate\"\>"},
+        {"\<\"Infinite-dimensional branch regularity\"\>", \
+"\<\"deferred\"\>", "\<\"abstract-imported-assumptions\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[
+      BoxForm`e$, 
+       TableHeadings -> {None, {"Claim", "Status", "ScopeClass"}}]]], "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"aaad9140-53c8-439d-8526-ea4c07ea2fe2"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9fb98179-9cdd-493e-8616-b4f0b8195a60"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 97, 0, 70, "Title",ExpressionUUID->"89c25f38-d513-4c84-8789-97df8ae93abb"],
+Cell[654, 22, 79, 0, 70, "Section",ExpressionUUID->"11945ccd-0f73-47f8-bd65-bfff2d3d42db"],
+Cell[736, 24, 182, 3, 70, "Text",ExpressionUUID->"063e139a-24f8-42b5-a890-b0556be1f68e"],
+Cell[921, 29, 94, 0, 70, "Section",ExpressionUUID->"72fb91d9-8ee1-4cbc-9dac-c5b08e37f9ac"],
+Cell[1018, 31, 688, 14, 70, "Text",ExpressionUUID->"87f856f1-396b-40f2-a608-a525724dffb2"],
+Cell[1709, 47, 914, 29, 70, "Input",ExpressionUUID->"2604c9cb-648e-416a-9154-622c28a3abb2"],
+Cell[2626, 78, 110, 0, 70, "Text",ExpressionUUID->"e5fff970-c466-4f91-9784-e80a36e6e820"],
+Cell[2739, 80, 91, 0, 70, "Section",ExpressionUUID->"92d26ecb-15b7-4913-aaa5-8ce7a8ee347c"],
+Cell[2833, 82, 1049, 33, 70, "Input",ExpressionUUID->"854154a4-7b93-4bf8-b023-73e5e4370cc1"],
+Cell[3885, 117, 84, 0, 70, "Text",ExpressionUUID->"cd6ac910-dca5-4007-bb00-fc44e2676f3c"],
+Cell[3972, 119, 115, 0, 70, "Item",ExpressionUUID->"001de31f-d8ba-494c-95b2-76aa735b809f"],
+Cell[4090, 121, 348, 5, 70, "Item",ExpressionUUID->"60685c8f-2bb1-4630-8934-780d22b7518b"],
+Cell[4441, 128, 305, 6, 70, "Item",ExpressionUUID->"ccade204-5e39-4f3f-b1a8-0eaf93cab5ad"],
+Cell[4749, 136, 301, 5, 70, "Item",ExpressionUUID->"a258f883-39f8-4f01-9601-a950cc3a2d4b"],
+Cell[5053, 143, 326, 6, 70, "Item",ExpressionUUID->"727b81dd-e55d-4d2f-9579-7f8f7ba74f5b"],
+Cell[5382, 151, 92, 0, 70, "Section",ExpressionUUID->"15b4b9d2-3930-4b20-9102-18c9245657e8"],
+Cell[5477, 153, 696, 23, 70, "Input",ExpressionUUID->"dd07a7cf-b023-450a-8251-73719fe70d39"],
+Cell[6176, 178, 76, 0, 70, "Text",ExpressionUUID->"2145ca5b-4aa8-4c1b-a055-df6bc89f1582"],
+Cell[6255, 180, 239, 7, 70, "Input",ExpressionUUID->"e959e885-975c-4f66-bd6a-05753644155c"],
+Cell[6497, 189, 330, 6, 70, "Text",ExpressionUUID->"c71030de-d61d-4458-92dc-d7f68e6dcba3"],
+Cell[6830, 197, 80, 0, 70, "Section",ExpressionUUID->"5ba36183-c9ae-402c-adc7-8cbb5d77ce65"],
+Cell[6913, 199, 304, 6, 70, "Input",ExpressionUUID->"46f07100-6925-41be-81d4-68afbbd55dc2"],
+Cell[7220, 207, 80, 0, 70, "Section",ExpressionUUID->"072d0c83-5966-4540-95c5-9724c3b77108"],
+Cell[7303, 209, 2063, 52, 70, "TextTableForm",ExpressionUUID->"aaad9140-53c8-439d-8526-ea4c07ea2fe2"]
+}
+]
+*)
+
+(* End of internal cache information *)

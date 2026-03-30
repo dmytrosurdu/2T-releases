@@ -1,0 +1,11 @@
+This report stays at exact finite-dimensional certificate level and does not promote the delayed-to-descendant route to an abstract theorem.
+
+The split-threshold check uses the explicit effective inequality from UOM/completion_sector_split_model_body.tex as written, with exact positive symbolic surrogate parameters.
+
+The split-to-descendant bridge is represented here by a model-specific scalar inverse on the exact one-dimensional split response line of the current WL contract.
+
+That scalar inverse should not be confused with a derived microscopic completion-to-descendant lift theorem from the split note.
+
+The current Main-visible quotient is the scalar welded quotient already audited in the Mathematica lane; no distinct V^1 or AQFT/HLS physical quotient object is constructed in this report.
+
+The post-Main-visible obstruction lane is represented by the existing exact physical/null-ideal and controlled boundary countermodels, so it shows conditionality rather than a theorem about the exact delayed witness family itself.

@@ -1,0 +1,894 @@
+\documentclass[
+  aps,
+  prd,
+  onecolumn,
+  notitlepage,
+  nofootinbib,
+  superscriptaddress,
+  10pt
+]{revtex4-2}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+\usepackage{amsmath,amssymb,amsfonts,mathtools,mathrsfs,bm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue
+}
+\usepackage{booktabs}
+\usepackage{pifont}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, decorations.pathreplacing, calc, backgrounds}
+\usepackage{amsthm}
+\usepackage{braket}
+\newcommand{\ketbra}[2]{\mathinner{|{#1}\rangle\,\langle{#2}|}}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage[shortlabels]{enumitem}
+\setlist[enumerate]{align=left,labelindent=0pt}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+\usepackage{subfig}
+\usepackage{physics}
+\usepackage{siunitx}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=magenta,urlcolor=blue}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{statement}{Statement}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{postulate}{Postulate}[section]
+\newtheorem{assumption}{Assumption}[section]
+\newtheorem{conjecture}{Conjecture}[section]
+\newtheorem{example}{Example}[section]
+\newcommand{\AdS}{\mathrm{AdS}}
+\newcommand{\dS}{\mathrm{dS}}
+\newcommand{\Weyl}{\mathrm{Weyl}}
+\newcommand{\IR}{\mathrm{IR}}
+\newcommand{\UV}{\mathrm{UV}}
+\newcommand{\ren}{\mathrm{ren}}
+\newcommand{\SK}{\mathrm{SK}}
+\newcommand{\bulk}{\mathrm{bulk}}
+\IfFileExists{macros_2t.tex}{%
+  \input{macros_2t}%
+}{%
+  \IfFileExists{Main/macros_2t.tex}{%
+    \input{Main/macros_2t}%
+  }{%
+    \input{../Main/macros_2t}%
+  }%
+}
+
+\makeatletter
+\def\do@check@aux{}%
+\AtBeginDocument{\def\do@check@aux{}}
+\def\check@aux{\immediate\closeout\@mainaux}%
+\makeatother
+
+\begin{document}
+
+\title{Emergence of spinor symmetry and supersymmetry from mixing of two bosonic times in generic $AdS_5$}
+\author{Dmytro Surdu}
+\email{lanceoflife@gmail.com}
+\date{\today}
+
+\begin{abstract}
+We study when the \(\mathbb Z_2\) holonomy identified in the limited-scope two-time theorem is realized as a genuine odd symmetry on the \(AdS_5\) boundary. The setting has two bosonic times---physical time and renormalization-group time---and assumes a local Schwinger--Keldysh bicomplex on sufficiently local observables, the limited-scope holonomy package, an RG-monotone/anomalous-descent package, parity transport together with a same-tick selected-line obstruction supplement and a delayed selected-line supplement at the successor step, a Peierls bracket, energy/covariance control, and a UV conformal common sector. Under these hypotheses, RG time produces an odd first-descendant class on the boundary. The limited-scope square-loop is transported to a sign action on a same-tick selected quotient image, while the delayed selected-line supplement furnishes a nonzero quotient point at the successor step. These two selected-line interfaces supply the nonvanishing input needed for canonicalization, so the odd class is nonzero and admits a unique canonical representative \(\mathcal J^{\mathrm{can}}_{\Lambda_k}\). Its Peierls Hamiltonian action defines a nontrivial local \(\Gamma\)-odd derivation \(\delta_{\Lambda_k}=\{\mathcal J^{\mathrm{can}}_{\Lambda_k},-\}_{\mathrm P,\Lambda_k}\). Using AQFT reconstruction together with the Haag--\L opusza\'nski--Sohnius theorem, we obtain a finite-dimensional Weyl-spinor odd charge module on the UV vacuum representation. Combining this odd sector with the common conformal sector yields the full four-dimensional superconformal algebra on the same Hilbert space: \(\mathfrak{su}(2,2|N)\) for \(N\neq4\), and \(\mathfrak{psu}(2,2|4)\) in the \(N=4\) case after the standard central quotient. A separate strengthened set of assumptions provides an optional criterion selecting \(N=4\). The result gives a theorem-level route from bosonic two-time data to boundary spinorial and superconformal structure.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+\label{sec:intro}
+
+We propose a framework in which the questions ``why anything would happen''
+(against the constant von Neumann entropy wall of unitary \(AdS/CFT\)) and
+``why anything (in the sense of matter origin) would exist'' can be considered
+together. This paper should be read together with its companion paper on Two Times Limited Scope Theorem (2T-LS)~\cite{Surdu2TLSLetter2026}, which we recommend reading first.
+
+The common structural theme arises when \(AdS_5/CFT_4\) satisfies the assumptions of Two Times Main Theorem (2T-Main). The theorem then shows that, in such a two-time setting, the assumptions force structural components that induce an intrinsic odd sector whose realization has both dynamical consequences for time and symmetry consequences for matter.
+It is shown in 2T-LS that the classical ledger within broad unitary microscopic dynamics induces both fundamental \(Z_2\)-gradedness with cochain-level \(d^2=0\) and a genuine distinction between ``before'' and ``after''. In this paper, we show that 2T-Main establishes spinor symmetry and superconformal boundary structure and, conjecturally, points toward a microscopic Type IIB realization.  The further layout addresses the theorem-level realization problem inside this broader framework.
+
+At theorem level the proposed 2T program has two stages.  The first asks whether a two-time
+structure carries an intrinsic odd holonomy at all.  The Limited Scope theorem
+answers that question affirmatively: the square-loop has odd parity, the
+induced \(\mathbb Z_2\)-cover does not split, and a detector makes the
+holonomy operationally distinguishable.  The second
+stage asks when that odd holonomy survives the boundary reduction
+steps and becomes a genuine local odd channel with symmetry consequences.  That
+second-stage realization problem is the subject of the present paper.
+
+This distinction is essential.  The Limited Scope theorem is a broad
+obstruction theorem.  By itself it does not produce a sufficiently local odd
+generator, a Hilbert-space odd implementer, a Weyl-spinor transformation law,
+or a superalgebra.  The theorem proved here is more physical: it
+singles out the class of \(AdS_5\) boundary theories in which the LS odd
+holonomy reaches the renormalization-group anomaly sector, survives the local
+descendant quotient, remains visible on local probes, and can therefore be
+promoted to a genuine odd symmetry derivation.
+
+\subsection{Landscape}
+
+The present work sits at the intersection of several literatures that are
+usually discussed separately.  Standard \(AdS/CFT\) and holographic
+renormalization relate radial evolution to boundary renormalization-group
+structure and organize how conformal anomalies, counterterms, and boundary data
+are encoded in the bulk/boundary dictionary
+~\cite{Maldacena1998,GubserKlebanovPolyakov1998,Witten1998AdSCFT,HenningsonSkenderis1998,deHaroSkenderisSolodukhin2001,Skenderis2002HR}.
+Lorentzian holography and Schwinger--Keldysh methods, meanwhile, make precise
+how real-time propagation, contour doubling, and BRST/cohomological structures
+enter holographic calculations
+~\cite{Schwinger1961,Keldysh1964,SkenderisVanRees2008,SkenderisVanRees:2009RealtimeRenorm,HaehlLoganayagamRangamani:2016SKBRST}.
+Local RG work gives a complementary anomaly-based language for Weyl consistency
+and flow data~\cite{Osborn1991LocalRG,Nakayama2015LocalRG}.  These developments
+organize physical time, RG time, and anomaly structure, but they do not relate a multiplicity of physical times to physical symmetries at all.
+
+On the symmetry side, classification results such as
+Coleman--Mandula, Haag--\L opusza\'nski--Sohnius, and Nahm tell us what
+extensions of spacetime and conformal symmetry are allowed once suitable odd
+generators and Hilbert-space hypotheses are already present
+~\cite{ColemanMandula1967,HaagLopuszanskiSohnius1975,Nahm1978}.  Those results
+are indispensable for the endpoint of the present argument, but they are
+endpoint theorems: they do not explain how a relevant odd generator is created
+from bosonic bulk/boundary data, nor how it survives locality, quotient, and
+activity constraints.
+
+There is also a substantial literature on emergent supersymmetry at boundaries
+and quantum critical points~\cite{GroverShengVishwanath2014,FeiGiombiKlebanovTarnopolsky2016,ZhaoLiu2019}.
+That literature is important because it shows that supersymmetry need not be a
+microscopic input and because it exhibits nontrivial obstructions to emergence.
+Its mechanisms are, however, different from the one studied here: they
+typically begin with fermionic degrees of freedom or tuned Yukawa/critical
+systems.  Our starting point is instead a purely bosonic two-time setting
+equipped with the 2T-Limited Scope odd holonomy obstruction.
+
+A distinct earlier program on two-time physics was developed by Bars and
+collaborators, where the second time is controlled by gauge symmetry and
+different one-time systems arise as gauge-fixed or ``holographic'' pictures of
+a higher-dimensional parent theory~\cite{BarsKounnas1997,Bars2001Survey,Bars2000FieldTheory}.
+Within that framework there are explicit field-theoretic, gravitational, and
+supersymmetric constructions, including gauge/gravity backgrounds,
+\(N=1\) supersymmetric field theories, and superconformal/twistor-string
+realizations~\cite{Bars2000GaugeGravityBackgrounds,BarsKuo2007SUSYFieldTheory,BarsKuo2007NOnePRL,Bars2004TwistorSuperstring}.
+This line of work is important context for the present paper because it shows
+that two-time setups can consistently host rich supersymmetric structure.  Its
+mechanism is nevertheless different from ours: the odd or supersymmetric sector
+is built into the microscopic two-time framework from the start, whereas here
+we ask when a purely bosonic two-time setting is forced to realize a local odd boundary channel with
+superconformal closure.
+
+To our knowledge, the missing piece in this landscape is a theorem-level route
+from the LS odd holonomy to a local, physically active boundary odd
+derivation with superconformal closure on a single UV Hilbert space.  The
+companion 2T-LS paper establishes the holonomy side
+~\cite{Surdu2TLSLetter2026}.  The present paper studies the realization side:
+when and how that \(\mathbb{Z}_2\)-gradedness survives the boundary reduction steps and
+becomes symmetry.
+
+\subsection{Our Proposal}
+
+Our proposal is that the LS odd holonomy is not merely a square-loop
+obstruction.  In an admissible two-time \(AdS_5\) setting it can be carried all
+the way to the UV boundary and realized there as a concrete odd symmetry
+channel.  The Main theorem identifies a realization chain with two explicit
+selected-line interfaces: a same-tick obstruction package controlling the
+square-loop no-extra-collapse step, and a delayed selected-line package
+furnishing a nonzero quotient point at the successor ledger step.  RG time
+produces the odd descendant class; these selected-line interfaces and the
+activity package prevent its collapse or darkness; canonicalization and
+Hamiltonization turn it into a local odd derivation; and Hilbert-space plus
+common-sector closure produce
+Weyl-spinor charges and same-\(\mathcal H\) superconformal symmetry.
+
+In plain language, the paper does not say that any theory with two bosonic
+times becomes supersymmetric.  It singles out the narrower class in which RG
+time leaves a genuine odd trace, that trace survives quotienting, remains
+locally visible, and can actually be promoted to symmetry.  The result is
+therefore a criterion for when two bosonic times give rise to a nontrivial odd
+boundary channel with superconformal consequences.
+
+The introduction-level roadmap is summarized in Fig.~\ref{fig:intro-roadmap}.
+Its nodes name the objects the theorem constructs, while its arrows name the
+operations that move from one stage to the next.
+
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[
+  stage/.style={
+    draw,
+    rounded corners,
+    align=center,
+    text width=0.18\textwidth,
+    minimum height=1.55cm,
+    inner sep=6pt
+  },
+  flow/.style={-{Latex[length=2.4mm]}, thick},
+  flowlabel/.style={font=\scriptsize, align=center, text width=0.19\textwidth}
+]
+\node[stage] (ls) at (0,0) {LS oddness\\[2pt]
+  \footnotesize square-loop sign and nonsplitting holonomy};
+\node[stage] (desc) at (4.45,0) {Surviving boundary odd class\\[2pt]
+  \footnotesize first descendant \([\Xi^{(1)}]\)};
+\node[stage] (delta) at (8.90,0) {Canonical local odd derivation\\[2pt]
+  \footnotesize \(\delta=\{\mathcal J^{\mathrm{can}},-\}_{\mathrm P}\)};
+\node[stage] (sym) at (13.35,0) {Same-\(\mathcal H\) superconformal symmetry\\[2pt]
+  \footnotesize Weyl-spinor odd charges plus conformal closure};
+
+\draw[flow] (ls) -- (desc);
+\draw[flow] (desc) -- (delta);
+\draw[flow] (delta) -- (sym);
+
+\node[flowlabel] at ($(ls)!0.5!(desc)+(0,-1.75)$)
+  {RG production,\\parity transport,\\same-tick obstruction / delayed lift};
+\node[flowlabel] at ($(desc)!0.5!(delta)+(0,-1.75)$)
+  {canonical selection,\\activity,\\Hamiltonization};
+\node[flowlabel] at ($(delta)!0.5!(sym)+(0,-1.75)$)
+  {HLS realization\\and common-sector\\closure};
+\end{tikzpicture}
+\caption{Introduction-level roadmap for the Main theorem.  The nodes indicate
+what kind of odd object is available at each stage; the arrows indicate what
+the theorem must still do in order to pass to the next stage.}
+\label{fig:intro-roadmap}
+\end{figure}
+
+Here \([\Xi^{(1)}]\) denotes the odd first-descendant class produced by the RG
+interface, \(\mathcal J^{\mathrm{can}}\) its derived canonical
+representative, and \(\delta\) the resulting Hamiltonized odd derivation.  Only
+this Hamiltonized derivation enters Haag--\L opusza\'nski--Sohnius.
+
+The two bosonic times play fundamentally different roles.  Physical time
+organizes real-time propagation, descent, and Ward identities.  RG time
+organizes coarse-graining and produces the odd anomaly insertion that the
+theorem tracks.  There is no general reason why these two times should yield
+odd boundary symmetry.  The theorem isolates the required mechanism: RG time
+must produce a genuine odd shadow, and that shadow must survive the relevant
+reduction steps and remain active in the even sector.
+
+The theorem excludes theories in which the odd shadow is absent, scheme-trivial, destroyed by the
+relevant quotient, or present only as a dynamically dark sector.  This will be
+unpacked later in Section~\ref{sec:rg-monotone-good}; for now the important
+point is that the theorem identifies a bridge from the LS oddness to
+superconformal symmetry, not a universal statement about every two-time model.
+
+The base theorem stops at same-\(\mathcal H\) superconformal closure.  That
+endpoint is already strong: the odd charges and conformal generators act on one
+and the same UV Hilbert space and close to the full four-dimensional
+superconformal algebra.  The stronger claim forcing \(\mathcal N=4\) belongs to
+a separate optional criterion with additional assumptions.  It should not be
+confused with the base realization theorem.
+
+One further warning already matters at the level of orientation: ghost parity,
+physical \(\Gamma\)-parity, and the LS holonomy character \(\omega\) must not be
+identified.  Their precise roles are fixed in Section~\ref{sec:setup-body}
+before the main statement is given.
+
+Accordingly, the proposal does not assume an initial odd AQFT derivation, a
+Hilbert-space odd implementer supplied at the start, Weyl-spinor generators or
+superalgebra closure inserted by hand, an a priori superconformal multiplet, or
+an identification of the physical-time BRST differential \(Q_t\) with a
+microscopic supercharge.
+
+The paper is organized as follows.  Section~\ref{sec:setup-body} formulates the
+two-time boundary setting, lays out the relevant failure modes, organizes the
+assumption packages by role, and states the main theorem.  Section~\ref{sec:cptp-brst}
+then gives the transport chain itself, from the LS sign action to the
+Hamiltonized odd derivation.  Section~\ref{sec:UV-fixed-point} separates the
+base same-\(\mathcal H\) superconformal closure theorem from the stronger
+optional maximality criterion.  Sections~\ref{sec:rg-monotone-good}
+and~\ref{sec:discussion} are not afterthoughts: they explain what class of
+theories the theorem actually selects, what the LS input contributes inside
+that class, why the ledger question matters, and how a microscopic
+realization is expected to fit into the broader program.
+
+\section{Setting, assumptions, and main theorem}
+\label{sec:setup-body}
+
+We now formulate the theorem as a statement about a generic \(AdS_5\) UV
+boundary equipped with two bosonic times.  The assumptions are presented in
+package form because the theorem is not a one-step implication.  It begins with
+the LS odd holonomy, passes through RG descendant formation and local
+selection, and ends only after Hamiltonization and Hilbert-space symmetry
+closure have been established.
+
+\subsection{Two bosonic times and one local target}
+\label{subsec:two-time-arrows}
+
+We work with a five-dimensional \(AdS_5\) background whose conformal boundary
+admits a four-dimensional Lorentzian local quantum field theory on a Minkowski
+UV chart.  Physical time \(t\) and radial/RG time \(u\) are treated as two
+independent monotonic directions.  Physical time acts through ordinary
+Lorentzian evolution.  RG time acts through the radial/Wilsonian direction.
+The Schwinger--Keldysh completion is assumed to make both time directions visible on the
+same sufficiently local class of boundary observables, so that the analysis can
+be carried out inside one local framework.  This common framework is not a
+convenience.  If physical time and RG time lived only on different
+descriptions, their odd descendants could fail to communicate and the theorem
+would have no coherent local target.
+
+Within this framework the SK construction supplies a two-time BRST bicomplex
+\((Q_t,Q_u)\) on sufficiently local observables.  The operator \(Q_t\) belongs
+to the real-time SK structure and organizes descent and Ward identities.  The
+operator \(Q_u\) belongs to the RG direction and is the source of the odd
+insertion that the theorem tracks.  The two differentials are therefore not
+interchangeable.  The theorem follows the RG-produced odd descendant
+\(Q_u^{\mathrm{phys}}\mathcal O^{(0)}\), not the physical-time differential
+\(Q_t\) itself.
+
+Next point must be kept sharp: the LS chain bicomplex and the boundary BRST
+bicomplex are not identified.  The LS theorem supplies an odd holonomy and a
+sign action; the Main theorem shows how that sign action reaches the local
+boundary descendant quotient.  Only after parity transport, nonvanishing, and
+canonical selection does one obtain the Hamiltonized odd derivation
+\(
+\delta=\{\mathcal J^{\mathrm{can}},-\}_{\mathrm P}
+\)
+that enters the Hilbert-space symmetry theorem.
+
+\subsection{Failure modes and package architecture}
+\label{subsec:failure-modes-main}
+
+At this stage neither supersymmetry nor a local odd charge is assumed.  The
+problem is instead to determine whether the two-time data force a genuine odd
+boundary channel with physical content.  Four obstructions can prevent this
+from happening:
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=*,itemsep=0.25em]
+  \item RG time may fail to produce a genuine odd first descendant once
+  scheme contributions are removed;
+  \item the LS sign action may fail to survive transport into the
+  local descendant quotient;
+  \item a surviving odd class may remain physically dark, acting trivially on
+  all sufficiently local even probes;
+  \item even a nontrivial active odd derivation may fail to satisfy the
+  locality, covariance, energy, or implementability requirements needed for a
+  Hilbert-space symmetry theorem and conformal closure.
+\end{enumerate}
+The package stack is organized exactly around these failure modes.  One part of
+the stack supplies the LS holonomy input, a second part produces and stabilizes the local odd
+descendant class, a third part promotes that class to a genuine derivation, and
+a final part places the resulting derivation inside the Hilbert-space and
+conformal framework where HLS and same-\(\mathcal H\) closure apply.
+
+\subsection{Package synopsis and main statement}
+\label{subsec:assumptions-main}
+
+The assumption packages are best read in four gates rather than as one
+undifferentiated bundle.
+\begin{itemize}
+  \item \textbf{LS oddness.}
+  The package \(\mathbf{2T}_{\mathrm{LS}}\) supplies the parity cocycle, the
+  nonsplitting \(\mathbb Z_2\)-cover, the detector-based distinguishability
+  statement, and the square-loop sign action.  This is the oddness that
+  the Main theorem attempts to realize on the boundary.
+
+  \item \textbf{Descendant formation.}
+  The package \(\mathbf{2T}_{\mathrm{RG}}\) provides an even sufficiently local
+  representative \(\mathcal O^{(0)}\), decomposes the RG odd operator into
+  physical and scheme parts, and isolates the genuine odd insertion
+  \(Q_u^{\mathrm{phys}}\mathcal O^{(0)}\).  Together with
+  \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\), it places the resulting odd
+  data in the affine descendant class \([\Xi^{(1)}_{\Lambda_k}]\) where one can
+  ask whether a genuine odd direction survives.
+
+  \item \textbf{Survival and visibility.}
+  The supplement \(\mathbf{2T}_{\mathrm{sel}}\) provides the same-tick
+  obstruction lane on the abstract selected quotient, while
+  \(\mathbf{2T}_{\mathrm{sel}}^{\mathrm{delay}}\) furnishes the delayed
+  quotient-first route at the successor ledger step.  Together
+  they keep the selected odd channel alive at the right abstract and physical
+  interfaces.  The supplement
+  \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{act}}\) requires this selected odd
+  direction to be visible to at least one sufficiently local even probe, so
+  that the surviving odd channel is not physically dark.  The Peierls package
+  \(\mathbf{2T}_{\mathrm{Peierls}}\) then converts the selected sufficiently
+  local representative into a genuine derivation on observables.
+
+  \item \textbf{Boundary symmetry closure.}
+  The energy-bounds/covariance package \(\mathbf{2T}_{\mathrm{EBC}}\) supplies
+  the UV locality, covariance, vacuum, and energy-control hypotheses needed for
+  AQFT reconstruction and for the verification of the
+  Haag--\L opusza\'nski--Sohnius interface.  The conformal common-sector package
+  \(\mathbf{2T}_{\mathrm{conf}}\) ensures that the conformal generators and the
+  odd charges act on one vacuum representation and one common invariant core,
+  so that the odd symmetry sector closes with the \(SO(4,2)\) generators on a
+  single Hilbert space.
+\end{itemize}
+
+Two structural remarks are crucial.  First,
+\(\mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}\) is not a separate primitive
+assumption.  It is derived from
+\(\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\) and supplies the Hilbertizing
+form used to select the canonical representative
+\(\mathcal J^{\mathrm{can}}\).  Second, the BRST, AQFT, and HLS structures are
+not independent axioms inserted by hand.  The SK construction supplies the BRST
+bicomplex, the UV locality/covariance data supply the AQFT representation, and
+the Hamiltonized odd derivation is then shown to satisfy the HLS hypotheses.
+The odd derivation and the superconformal algebra are therefore derived
+consequences of the package hypotheses.
+
+\begin{remark}[Three \(\mathbb Z_2\) parities (do not mix)]
+\label{rem:three-Z2-main}
+We keep three distinct \(\mathbb Z_2\) parities throughout the analysis:
+\emph{ghost parity} (SK/BRST cohomological degree mod \(2\)),
+\emph{physical parity} \(\Gamma\) (an involutive \( * \)-automorphism on the
+observable net, defining \(\Gamma\)-even and \(\Gamma\)-odd sectors), and the
+\emph{Limited-Scope holonomy} \(\omega\in\mathbb Z_2\) of the procedure cover,
+represented on observables by \(\Gamma^\omega\).  Ghost parity is bookkeeping,
+whereas \(\Gamma\) and \(\omega\) are physical.  The LS chain bicomplex
+\((Q_t^{\mathrm{ch}},Q_u^{\mathrm{ch}})\) and the boundary BRST bicomplex
+\((Q_t,Q_u)\) are not identified; they interact only through the
+parity-transport step described in Appendix~\ref{sec:parity-bridge}.
+\end{remark}
+
+\begin{theorem}[2T-Main theorem, informal]
+\label{thm:main}
+Consider a generic \(AdS_5\) setup whose UV boundary admits a four-dimensional
+local quantum field theory together with the assumption packages
+\[
+\mathbf{2T}_{\mathrm{LS}}
+\;+\;
+\mathbf{2T}_{\mathrm{RG}}
+\;+\;
+\mathbf{2T}_{\mathrm{Peierls}}
+\;+\;
+\mathbf{2T}_{\mathrm{EBC}}
+\;+\;
+\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}
+\;+\;
+\mathbf{2T}_{\mathrm{char}}^{\mathrm{act}}
+\;+\;
+\mathbf{2T}_{\mathrm{sel}}
+\;+\;
+\mathbf{2T}_{\mathrm{sel}}^{\mathrm{delay}}
+\;+\;
+\mathbf{2T}_{\mathrm{conf}},
+\]
+and suppose that the two-time Schwinger--Keldysh construction furnishes the
+corresponding BRST bicomplex on sufficiently local observables.  Then the
+following statements hold.
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=*,itemsep=0.35em]
+  \item The RG package produces a genuine odd first-descendant class
+  \([\Xi^{(1)}_{\Lambda_k}]\), and the LS square-loop is transported by
+  parity to a sign action on its selected quotient image
+  \(\overline{\Xi}^{(1)}_{\Lambda_k}\).
+
+  \item The same-tick selected-line supplement provides the obstruction route on
+  that abstract quotient, while the delayed selected-line supplement supplies a
+  nonzero quotient point at the successor ledger step.  Together
+  they provide the nonvanishing input used by the derived calibration package
+  to select a unique nonzero canonical odd representative
+  \(\mathcal J^{\mathrm{can}}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]\).
+
+  \item The activity supplement shows that this canonical odd line is not
+  locally dark, and the Peierls bracket Hamiltonizes
+  \(\mathcal J^{\mathrm{can}}_{\Lambda_k}\) into a nontrivial local
+  \(\Gamma\)-odd derivation
+  \[
+  \delta_{\Lambda_k}
+  =
+  \{\mathcal J^{\mathrm{can}}_{\Lambda_k},-\}_{\mathrm P,\Lambda_k}.
+  \]
+
+  \item The AQFT and Haag--\L opusza\'nski--Sohnius hypotheses are satisfied by
+  this Hamiltonized derivation.  Hence the UV boundary carries a
+  finite-dimensional Weyl-spinor odd charge module on the same vacuum
+  representation, with indexed generators \(Q_\alpha^I\) and
+  \(\bar Q_{\dot\alpha I}\) satisfying
+  \[
+  \{Q_\alpha^I,\bar Q_{\dot\beta J}\}
+  =
+  2\,\delta^I{}_J\,\sigma^\mu_{\alpha\dot\beta}P_\mu,
+  \qquad
+  \{Q_\alpha^I,Q_\beta^J\}
+  =
+  \{\bar Q_{\dot\alpha I},\bar Q_{\dot\beta J}\}=0;
+  \]
+
+  \item Combining the odd charge module with the common conformal sector yields
+  the full four-dimensional superconformal algebra on the same Hilbert space.
+  More precisely, the resulting operator Lie superalgebra is
+  \(\mathfrak{su}(2,2|N)\) for \(N\neq4\), while in the \(N=4\) case the
+  standard simple form is obtained after quotienting the central
+  \(\mathfrak u(1)\), giving \(\mathfrak{psu}(2,2|4)\).
+\end{enumerate}
+\end{theorem}
+
+The base conclusion of the theorem is therefore same-\(\mathcal H\)
+superconformal closure.  The odd sector is not inserted by hand.  It is
+reconstructed from the RG descendant, stabilized by the same-tick obstruction
+and delayed selected-line supplements, made dynamically meaningful by activity
+and Hamiltonization, and only then promoted to Hilbert-space symmetry by HLS.
+
+This is the natural endpoint of the base realization theorem.  Forcing
+\(N=4\) is a separate strengthening problem.  It uses additional structural
+assumptions on the UV fixed point and should not be folded back into the
+assumption burden of the base theorem.
+
+\begin{proposition}[Strengthened maximality criterion]
+\label{prop:main-optional-4c}
+Assume, in addition to the hypotheses of Theorem~\ref{thm:main}, that the UV
+fixed point is non-gravitational with a unique stress tensor, genuinely
+interacting in the sense that the SK RG monotone has a nondegenerate UV
+extremum and no decoupled free SCFT sector is present, and carries no
+higher-spin enhancement.  Assume also the standard spin-2 saturation input
+that a unitary four-dimensional superconformal theory with \(N>4\) and a
+unique stress tensor must contain a graviton and therefore cannot occur in the
+non-gravitational setting, and assume that interacting non-gravitational
+SCFTs exist for each \(N\in\{1,2,3,4\}\).
+
+Finally impose the following \emph{maximality principle}: among
+SK-admissible UV fixed points compatible with the same macroscopic data
+(dimension, locality, spin range, and the standing two-time structure), the
+RG dynamics selects those with the largest available unbroken symmetry.  In
+particular, once the allowed superconformal algebras have been reduced to
+\(\mathfrak{su}(2,2|N)\) with \(1\le N\le4\), the realized fixed point takes
+the largest admissible \(N\); a smaller value of \(N\) cannot be compensated
+by adding further continuous symmetries without changing the universality
+class.
+
+Then the superconformal multiplicity parameter is forced to be \(N=4\).  This
+yields a separate optional criterion for maximal \(\mathcal N=4\)
+supersymmetry, as summarized in Proposition~\ref{prop:4c-N-equals-4}.
+\end{proposition}
+
+Section~\ref{sec:cptp-brst} now proves the transport-and-realization chain
+announced above.  Section~\ref{sec:UV-fixed-point} establishes the exact closure
+endpoint and keeps it separate from maximality.  Only after that theorem spine
+is in place do Sections~\ref{sec:rg-monotone-good} and~\ref{sec:discussion}
+return to the broader interpretive questions: what class of theories is really
+being selected, what the LS input contributes inside that class, and what a
+concrete ledger realization would have to supply.
+
+\section{From LS holonomy to a boundary odd derivation}
+\label{sec:cptp-brst}
+
+The core logic of the theorem is best read as a transport-and-realization
+chain.  The LS theorem gives an odd sign action.  The Main theorem shows how
+that sign action reaches the selected descendant quotient, forces nonvanishing,
+produces a canonical odd representative, and finally becomes a local odd
+derivation with symmetry consequences.  Each step removes a distinct
+obstruction.
+
+\begin{enumerate}[label=\textnormal{(\arabic*)},leftmargin=*,itemsep=0.55em]
+  \item \textbf{LS parity transport.}  The Limited Scope theorem
+  provides the square-loop sign action at the record/process level.  This is
+  only the beginning.  The Main theorem still has to transport that sign action
+  to the boundary descendant sector.  The parity-transport step identifies the
+  LS square-loop action with physical parity on first descendants, but this
+  transport is meaningful only after one specifies the selected local quotient
+  in which the boundary odd channel is to live.
+
+  \item \textbf{RG time produces the odd descendant class.}  The package
+  \(\mathbf{2T}_{\mathrm{RG}}\) provides an even sufficiently local
+  representative \(\mathcal O^{(0)}\), decomposes the RG odd operator into
+  physical and scheme parts, and isolates the genuine odd insertion
+  \(Q_u^{\mathrm{phys}}\mathcal O^{(0)}\).  The anomalous descent relation
+  \[
+  Q_u^{\mathrm{phys}}\mathcal O^{(0)}+Q_t\Xi^{(1)}=\mathcal A^{(1)}
+  \]
+  is the first place where bosonic RG time produces the odd class
+  \([\Xi^{(1)}_{\Lambda_k}]\) used by the theorem.  This is why the theorem
+  follows the RG anomaly sector rather than treating \(Q_t\) as the symmetry
+  generator.
+
+  \item \textbf{The same-tick obstruction package realizes the LS sign action on
+  the abstract selected quotient.}  The supplement
+  \(\mathbf{2T}_{\mathrm{sel}}\) isolates a nonzero odd line in the descendant
+  ambiguity group and provides the obstruction contract required to transport
+  the LS sign action to the selected quotient image
+  \(\overline{\Xi}^{(1)}_{\Lambda_k}\).  This is the precise abstract
+  bridge from the LS holonomy landscape to the Main descendant quotient.
+
+  \item \textbf{The delayed selected-line package gives the delayed-step
+  nonvanishing route.}  The supplement
+  \(\mathbf{2T}_{\mathrm{sel}}^{\mathrm{delay}}\) furnishes a nonzero
+  quotient point at the successor step together with the
+  delayed split-to-descendant map and the separate dominant-response gate.
+  This is the physically relevant odd-to-even export interface.  With the
+  same-tick obstruction route and the delayed route both present, the odd class
+  cannot collapse away before canonicalization.
+
+  \item \textbf{The nonzero class yields a canonical odd representative and a
+  local odd derivation.}  The derived calibration supplement supplies the
+  Hilbertizing form needed to choose the unique norm-minimizing representative
+  \(\mathcal J^{\mathrm{can}}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]\).  The
+  activity supplement then guarantees that this distinguished odd direction is
+  not locally dark.  The Peierls package Hamiltonizes it to
+  \[
+  \delta_{\Lambda_k}
+  =
+  \{\mathcal J^{\mathrm{can}}_{\Lambda_k},-\}_{\mathrm P,\Lambda_k}.
+  \]
+  This is the point at which the odd content stops being a quotient class and
+  becomes a local odd derivation on observables.
+
+  \item \textbf{HLS promotes the Hamiltonized derivation to a Weyl-spinor odd
+  charge module.}  The energy-bounds/covariance package, together with the UV
+  locality data, places the theory in the setting where AQFT reconstruction and
+  Haag--\L opusza\'nski--Sohnius apply.  HLS does not act on \(Q_t\); it acts on
+  the Hamiltonized derivation \(\delta\).  The conclusion is a
+  finite-dimensional Weyl-spinor odd charge module with indexed generators
+  \(Q_\alpha^I\) and \(\bar Q_{\dot\alpha I}\).
+
+  \item \textbf{The odd charge module closes with the conformal sector on the
+  same Hilbert space.}  The conformal common-sector package ensures that the
+  conformal generators and the odd charges act on one vacuum representation and
+  one common invariant core.  The result is same-\(\mathcal H\)
+  superconformal closure.  Only after this base closure theorem is in place
+  does it make sense to ask whether stronger assumptions force \(N=4\).
+\end{enumerate}
+
+Two remarks summarize the mechanism.  First, the theorem’s central generator is
+not \(Q_t\) but \(\delta\).  The role of \(Q_t\) is to organize descent and Ward
+identities.  Second, the same-tick obstruction supplement, the delayed
+selected-line supplement, and the activity supplement solve different problems.
+The first gives the abstract no-extra-collapse route, the second gives the
+quotient route through the successor ledger step, and the third prevents the surviving odd
+channel from remaining physically dark.  The logic is therefore rigid:
+removing any one of these steps breaks a different part of the chain.
+
+\section{Superconformal closure versus maximality}
+\label{sec:UV-fixed-point}
+
+The intrinsic endpoint of the base theorem is same-\(\mathcal H\)
+superconformal closure.  This means that the conformal generators inherited
+from the \(AdS_5\) boundary geometry and the odd generators obtained from the
+Hamiltonized descendant sector act on one and the same UV Hilbert space.  The
+result is already strong: it is not merely the existence of an odd charge
+module, but the closure of that module with the full four-dimensional
+conformal algebra.
+
+At this stage the theorem yields the precise distinction
+\[
+\mathfrak{su}(2,2|N)\quad (N\neq4),
+\qquad
+\mathfrak{psu}(2,2|4)\quad (N=4).
+\]
+For \(N=4\) the simple superalgebra is obtained only after quotienting the
+central \(\mathfrak u(1)\), which is why the natural final form is
+\(\mathfrak{psu}(2,2|4)\).
+
+This closure theorem is already substantial even before any maximality claim
+is made.  It says that the odd channel reconstructed from the RG descendant is
+not an isolated algebraic artifact; it integrates coherently with the full
+four-dimensional conformal symmetry on the physical UV Hilbert space.
+
+It is mathematically essential to separate this closure theorem from the
+stronger criterion forcing \(N=4\).  The stronger criterion uses additional
+assumptions: non-gravitationality, spin-2 saturation, interaction, absence of
+higher-spin enhancement, and the existence and maximality conditions recorded
+in the strengthening analysis.  These assumptions restrict the UV fixed point in ways that go beyond the
+odd-channel realization problem itself.
+
+For this reason the theorem naturally has two layers of conclusion.
+\begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=*,itemsep=0.35em]
+  \item The base theorem yields same-\(\mathcal H\) superconformal closure and
+  determines the superconformal algebra up to the multiplicity parameter
+  \(N\).
+  \item The strengthened maximality criterion imposes additional structural
+  assumptions and then forces \(N=4\).
+\end{enumerate}
+
+These layers provide clear distinction in assumption burden so the logical structure of the result is transparent.
+
+\section{Physical meaning and scope}
+\label{sec:rg-monotone-good}
+
+\subsection{What class of theories is selected?}
+
+These assumptions do not single out
+``supersymmetric theories'' in any direct or circular way.  What they single
+out is a narrower and more precise class: theories in which the bosonic
+two-time structure supports a nontrivial odd shadow that survives all
+reduction steps and remains physically active on the UV boundary.  The
+restrictive assumptions are therefore concentrated in three places: the RG
+package, the selected-line supplement, and the activity supplement.
+
+\begin{enumerate}[label=\textnormal{(\arabic*)},leftmargin=*,itemsep=0.4em]
+  \item \textbf{The theorem excludes a purely bosonic RG sector.}  If the RG
+  monotone can be
+  described, after removing scheme terms, without a genuine odd insertion
+  \(Q_u^{\mathrm{phys}}\mathcal O^{(0)}\), then the theory lies outside the
+  admissible class.  The point is not that every bosonic theory is ruled out,
+  but that the class treated here must have an odd cohomological shadow
+  attached to its RG time.
+
+  \item \textbf{The theorem excludes a scheme-trivial odd shadow.}  If the odd
+  RG insertion is
+  killed by \(Q_t\)-exactness or can be absorbed entirely into scheme
+  redefinitions, then the odd channel carries no invariant physical content and
+  the theorem does not apply.  Thus the odd descendant must encode more than a
+  bookkeeping artifact of the renormalization scheme.
+
+  \item \textbf{The theorem excludes collapse before the local descendant
+  quotient.}  If a candidate odd line
+  exists only in a coarser raw packet but dies when one passes to the
+  descendant quotient, then the relevant selected-line package fails: either
+  the same-tick obstruction route \(\mathbf{2T}_{\mathrm{sel}}\) is not
+  available on the abstract selected carrier, or the delayed route
+  \(\mathbf{2T}_{\mathrm{sel}}^{\mathrm{delay}}\) does not produce the
+  quotient point at the successor ledger step.  The theorem therefore requires not just
+  abstract odd data, but odd data that survives the precise quotient procedure
+  relevant to the local boundary theory.
+
+  \item \textbf{The theorem excludes a physically dark odd sector.}  If the
+  selected odd line
+  survives abstractly but acts trivially on every even sufficiently local
+  probe, then \(\mathbf{2T}_{\mathrm{char}}^{\mathrm{act}}\) fails and the
+  theory is excluded.  This is a minimal nondegeneracy requirement: the odd
+  direction must be dynamically visible somewhere in the local even sector.
+\end{enumerate}
+
+The physical slogan is therefore the following.  The theorem applies to
+theories in which bosonic RG time produces a genuine odd descendant, one
+selected odd component survives the ambiguity and collapse steps, and that
+surviving component is detectable through local even observables.  This is a
+considerable restriction, but it is still weaker than assuming a fermionic symmetry
+from the outset.
+
+The selected class may therefore be described as proto-fermionic rather than
+supersymmetric in the usual input sense.  These theories are distinguished not
+because they begin with a supercharge, but because their two-time structure is
+rich enough to support an odd sector that remains stable under all the
+physically relevant reductions and can no longer be ignored dynamically.
+
+\subsection{What does the LS input do inside the selected class?}
+
+Entering the admissible class, the LS input supplies the physical picture of two times in our paradigm.  It introduces a \emph{classical ledger of
+records}, a reversible microscopic time evolution between ledger checkpoints,
+and an \emph{RG/coarse-graining operation that forgets fine-grained information} returning the world to the ledger point.  These two times are
+ledger-mediated: one carries microscopic evolution between checkpoint, while the other changes how much of that evolution survives in the
+recorded history.
+
+LS then isolates the key fact about the interaction of these two times.  A
+ledger by itself is not enough: if everything microscopic were already fixed by
+the visible record, then ``live, then forget'' and ``forget, then live'' would
+be the same story in two notations.  But the two-time square to be genuinely
+nontrivial; it means there must be a \emph{completion sector} beyond the ledger, carrying
+microscopic information that is not recorded at the checkpoint.
+
+On the ledger itself, the square still closes: the same endpoint record can be
+reached either way.  But one must also specify how the unrecorded microscopic
+completion data are attached to that common corner.  That completion rule is
+what LS calls a \emph{filler}.  LS singles out two canonical fillers, and their
+difference is exactly the physical point: they agree on the same visible ledger
+step, so they must be invisible there, yet they are not the same microscopic
+realization.  Their mismatch survives in the completion sector as an
+irreducible \(\mathbb Z_2\) sign.  That sign is objective.  It is not a matter
+of notation, state relabeling, or endpoint bookkeeping.
+
+LS does not select the theory class. Instead, it provides the underlying source of oddness: a genuine mismatch
+between two filler-related microscopic completions of one and the same visible
+ledger history.  Main then asks for the narrower class in which this hidden
+completion-sector difference survives the reduction chain and reaches the UV
+boundary as an active odd channel.
+
+\subsection{But what is the ledger?}
+\label{subsec:what-is-ledger}
+The ledger is not the full microscopic state.  It is the accepted classical
+record sector: the commuting facts that survive coarse-graining and define what
+counts as the same visible history at a checkpoint.  Abstractly, what these records are made of can be ignored.  We use only the
+structural claim that such a classical record layer exists and is rich enough so the Universe can perform RG/CPTP coarse-graining step, and that the completion sector carries the microscopic data that the ledger forgets.
+
+These abstract claim level have considerable implications from 2T-LS and 2T-Main. 
+\begin{itemize}
+\item Wheeler's slogan ``it from bit'' becomes theorem-level statement~\cite{Wheeler1990ItFromBit};
+\item $\mathbb{Z}_2$-gradedness surfaces in two deeply linked appearances:
+\begin{itemize}
+  \item objective distinction between before and after \emph{compatible with unitary evolution}; hence the real arrow of time that circumvents the hard wall of the constant von Neumann entropy.
+  \item \emph{spinor symmetry} originating at the UV boundary; hence existence of the matter-rich Universe.
+\end{itemize}
+\item confluence of two appearances at a conformal boundary, conjecturally producing IIb microscopic theory in the standard $AdS_5/CFT_4$ setup.
+\end{itemize}
+
+This is why the ledger question matters so much.  If nature really contains
+such a classical record layer, then the same structure would underwrite the whole chain from highest-level principle to microscopic theory.  
+
+The present article stops one step short of identifying the ledger concretely.  That is a cosmology theory
+question, and it is deferred to the discussion.
+
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Toward a cosmology realization}
+
+A concrete answer to the ledger question requires a source theory that identifies, in one microscopic
+construction, the record sector, the forgetting/coarse-graining operation, and the
+completion data whose mismatch carries the LS sign.  
+
+One proposed theory constructs ledger as a Weyl anomaly floor sector of a pure vacuum Karch-Randall \(AdS_4\) brane, which acts as a receiver that accumulates Brown-York flux from the incoming zero-area repeating pulses so that brane is physically holographically renormalized to a higher cutoff, moving in radial direction. 
+\footnote{The governing principle is the least SK influence action that is uniquely minimized with the information export pulses of the temporally/spatially LoG/LoG shapes and receiver cutoff-bandlocked widths.}
+
+The remaining anomaly floor is (a) classical, in the sense of being a local function on the brane and not an interacting field, and (b) preserves already stored facts due to widths band-locking. \footnote{Notably, \(AdS_5\) with three spatial dimensions is the minimal space which can contain a ledger of this type: even-\(d\) spaces does not contain a Weyl anomaly, while \(AdS_3\) anomaly floor is not a proper physical information storage, but rather a gauge/bookkeeping direction, and it explains how dimension-independent \(\mathbb{Z}_2\)-gradedness is realized in spinor symmetry only at \(d \ge 3\).}
+A Fisher-odd direction feeds complementary sector that carries the odd completion residue not visible in the current
+reduced receiver. Such a split af action into receiver wall-move, anomaly floor influx, and completion sector update makes two latter targets independent: the two filler-related
+realizations in the completion sector remain indistinguishable in the receiver anomaly floor imprint. 
+
+However, unlike the ledger, the completion sector influx is affine and bears increasing cost, so eventually the real wall-moving solution ceases to exist and completion/receiver complex splits.
+In this split, that completion sector becomes the newborn source \(dS_4\) brane. \footnote{\emph{Source} here means that the oddness of completion sector surfaces as a brane coherence stock created by the split that feeds the next receiver due to QND-type leaks to the \(dS_4\) canonical commutant, which is geometrically situated between source and receiver branes along with the new completion sector.}
+
+This sequence is CCC-like: the chain of \(dS_4\) observable Universes with an approximately conformal inheritance. Its ledger step is \emph{aeon}: the period from pre-split to pre-split finals of Universes, when the source coherences is maximally exhausted. So the accumulated \(\mathbb{Z}_2\) difference is eventually read and appears in the
+ledger, but on the \emph{next step}.  This is the \emph{delayed zig-zag} picture: invisible on the current ledger, carried
+through the completion sector, and first readable at the next receiver. Such a picture can be understood as a rough mirror of the 2T-LS ledger requirement: it provides the concrete physical mechanism by which two times mix and create the true holonomy over history.
+
+Readers who want the full implementation package, including the 2T-LS and 2T-Main interface implementations,
+exact audit reports, and 2T-LS formal proof in Agda, should consult the
+archival workspace release~\cite{TwoTimesWorkspace2026}.
+
+\subsection{Outlook}
+
+In the light of 2T-Main results, several directions are proposed.  
+\begin{enumerate}
+  \item Obvious direction is strenghtning of the optional $\mathcal{N}=4$ step. It is expected that one could be resolved on the level of an implementation theory, hence search for such a theory can solidify the vertical chain proposed in Section \ref{subsec:what-is-ledger}.
+  \item Another direction is strengthening of Main proof strategy. Currently, the post-Haag--\L opusza\'nski--Sohnius same-\(\mathcal H\) conformal closure step is existential only. Envisioned post-HLS transfer theorem could show that the package \(Q,\bar Q,S,\bar S\) itself is induced from the reduced data of implemention theory+2T-Main.
+  \item Finaly, and this direction could be partially following from the first one, the post-HLS rigidity theorem could show that after transfer there is no hidden modulus beyond the candidate sign involution.
+\end{enumerate}
+
+If such a program is finished, we could state that the microscopic-level Universe is \(\mathbb{Z}_2\)-lift of its own history, accepted to the ledger.
+
+The main conclusion, however, is already clear.  In the presence of the
+assumption packages described above, two bosonic times can do more than generate an abstract odd holonomy.  They can force that oddness into a
+surviving, locally effective boundary channel, and that channel can be
+promoted to a superconformal symmetry algebra on the UV Hilbert space.
+
+That is the sense in which the result should be read.  It is not a universal
+statement about every theory with two times, and it is not a
+hidden assumption of supersymmetry in alternative language.  It is a
+structural theorem identifying a precise bridge from bosonic two-time data to
+odd boundary symmetry.  Once that bridge exists, the symmetry consequences are
+far more rigid than the microscopic starting point would have suggested.
+
+\appendix
+\IfFileExists{appendix_main.tex}{%
+  \input{appendix_main}%
+}{%
+  \IfFileExists{Main/appendix_main.tex}{%
+    \input{Main/appendix_main}%
+  }{%
+    \input{../Main/appendix_main}%
+  }%
+}
+\clearpage
+\IfFileExists{appendix_subprograms_4a-4b.tex}{%
+  \input{appendix_subprograms_4a-4b}%
+}{%
+  \IfFileExists{Main/appendix_subprograms_4a-4b.tex}{%
+    \input{Main/appendix_subprograms_4a-4b}%
+  }{%
+    \input{../Main/appendix_subprograms_4a-4b}%
+  }%
+}
+\clearpage
+\IfFileExists{appendix_subprograms_4c_discussion.tex}{%
+  \input{appendix_subprograms_4c_discussion}%
+}{%
+  \IfFileExists{Main/appendix_subprograms_4c_discussion.tex}{%
+    \input{Main/appendix_subprograms_4c_discussion}%
+  }{%
+    \input{../Main/appendix_subprograms_4c_discussion}%
+  }%
+}
+
+\bibliographystyle{apsrev4-2}
+\IfFileExists{refs.bib}{%
+  \bibliography{refs}%
+}{%
+  \IfFileExists{Main/refs.bib}{%
+    \bibliography{Main/refs}%
+  }{%
+    \bibliography{../Main/refs}%
+  }%
+}
+
+\end{document}

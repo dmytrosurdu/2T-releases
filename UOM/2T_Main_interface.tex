@@ -1,0 +1,374 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{xr-hyper}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\providecommand{\Fsloc}{\mathcal F_{\rm s.loc}}
+\providecommand{\Qt}{Q_t}
+\providecommand{\Gamma}{\Gamma}
+
+% The exact interface clauses are written in Main/appendix_main.tex.
+% Since appendix_main.tex is a fragment included by Main/main_theorem.tex,
+% xr reads the labels through main_theorem.aux.
+\IfFileExists{build/main_theorem.aux}{%
+  \externaldocument[mainapp-]{build/main_theorem}%
+}{%
+  \IfFileExists{../build/main_theorem.aux}{%
+    \externaldocument[mainapp-]{../build/main_theorem}%
+  }{%
+    \externaldocument[mainapp-]{../Main/main_theorem}%
+  }%
+}
+\IfFileExists{main.aux}{%
+  \externaldocument[uommain-]{main}%
+}{%
+  \externaldocument[uommain-]{UOM/main}%
+}
+\IfFileExists{uom_descendant_note.aux}{%
+  \externaldocument[uomdesc-]{uom_descendant_note}%
+}{%
+  \externaldocument[uomdesc-]{UOM/uom_descendant_note}%
+}
+\IfFileExists{odd_characterization_transport_stack_note.aux}{%
+  \externaldocument[stack-]{odd_characterization_transport_stack_note}%
+}{%
+  \externaldocument[stack-]{UOM/odd_characterization_transport_stack_note}%
+}
+\IfFileExists{source_internal_control_factorization_note.aux}{%
+  \externaldocument[red-]{source_internal_control_factorization_note}%
+}{%
+  \externaldocument[red-]{UOM/source_internal_control_factorization_note}%
+}
+\IfFileExists{selected_line_no_extra_collapse_note.aux}{%
+  \externaldocument[sel-]{selected_line_no_extra_collapse_note}%
+}{%
+  \externaldocument[sel-]{UOM/selected_line_no_extra_collapse_note}%
+}
+\IfFileExists{delayed_odd_control_note.aux}{%
+  \externaldocument[delay-]{delayed_odd_control_note}%
+}{%
+  \externaldocument[delay-]{UOM/delayed_odd_control_note}%
+}
+\IfFileExists{split_controlled_completion_lift_note.aux}{%
+  \externaldocument[splitlift-]{split_controlled_completion_lift_note}%
+}{%
+  \externaldocument[splitlift-]{UOM/split_controlled_completion_lift_note}%
+}
+\IfFileExists{active_response_transport_program_note.aux}{%
+  \externaldocument[transport-]{active_response_transport_program_note}%
+}{%
+  \externaldocument[transport-]{UOM/active_response_transport_program_note}%
+}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=blue!60!black,
+  urlcolor=blue!60!black
+}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+
+\title{2T-Main Interface Note}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+This note assembles, and does not reprove, the UOM-fed interface used in the Main appendix.
+The exact clause statements are those of \texttt{Main/appendix\_main.tex}.
+Because that file is an included fragment rather than a standalone document, the
+\texttt{mainapp-} labels below are read through the auxiliary file exported by
+\texttt{Main/main\_theorem.tex}, which inputs the appendix verbatim.
+
+\section{Authority and Scope}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{Exact downstream clause authority.}
+  The clauses assembled here are exactly the appendix-side interfaces
+  Definition~\ref*{mainapp-def:2T-rec},
+  Definition~\ref*{mainapp-def:2T-det},
+  Definition~\ref*{mainapp-def:2T-LS},
+  Definition~\ref*{mainapp-def:2T-RG},
+  Definition~\ref*{mainapp-def:2T-cosmo-P},
+  Definition~\ref*{mainapp-def:2T-EBC},
+  Definition~\ref*{mainapp-def:2T-char-weak},
+  Definition~\ref*{mainapp-def:2T-char-cal},
+  Definition~\ref*{mainapp-def:2T-char-act},
+  Definition~\ref*{mainapp-def:2T-alg},
+  Definition~\ref*{mainapp-def:2T-char},
+  Definition~\ref*{mainapp-def:2T-sel},
+  Definition~\ref*{mainapp-def:2T-sel-delay},
+  Definition~\ref*{mainapp-def:2T-conf},
+  Definition~\ref*{mainapp-def:2T-Main},
+  Definition~\ref*{mainapp-def:2T-BRST},
+  Definition~\ref*{mainapp-def:2T-AQFT}, and
+  Definition~\ref*{mainapp-def:2T-HLS}.
+
+\item \textbf{Broad-manuscript UOM authority.}
+  The rolled-up UOM manuscript source is
+  Section~\ref*{uommain-sec:two-times-semiclassical} together with
+  Definition~\ref*{uommain-def:uom-main-theorem-assumptions},
+  Definition~\ref*{uommain-def:pointer-algebra-projection},
+  Lemma~\ref*{uommain-lem:tick-fixes-record-algebra},
+  Proposition~\ref*{uommain-prop:semiclassical-diag},
+  Remark~\ref*{uommain-rem:uom-main-004},
+  Proposition~\ref*{uommain-prop:uom-uv-radial-ward},
+  Theorem~\ref*{uommain-thm:uom-peierls-package},
+  Theorem~\ref*{uommain-thm:EB-package},
+  Theorem~\ref*{uommain-thm:uom-uv-dilatation-package},
+  Theorem~\ref*{uommain-thm:uom-uv-conformal-common-sector}, and
+  Corollary~\ref*{uommain-cor:uom-core-implies-2T-conf}.
+
+\item \textbf{UOM note-level authorities.}
+  The finite-cutoff raw descendant authority is
+  Theorem~\ref*{uomdesc-thm:uomdesc-raw-package} and
+  Theorem~\ref*{uomdesc-thm:uomdesc-2trg}.
+  The characterization/export authority is
+  Theorem~\ref*{stack-thm:char-weak-interface},
+  Theorem~\ref*{stack-thm:char-weak-activity},
+  Proposition~\ref*{stack-prop:minimal-transport-calibration},
+  Corollary~\ref*{stack-cor:char-weak-calibration},
+  Proposition~\ref*{stack-prop:char-calibration-extension}, and
+  Theorem~\ref*{stack-thm:uom-char-export}.
+  The accepted-record and selected-line authority is
+  Theorem~\ref*{red-thm:accepted-record-reduction},
+  Theorem~\ref*{sel-thm:uom-selected-line-no-extra-collapse},
+  Corollary~\ref*{sel-cor:uom-selected-line-quotient-nonzero},
+  Definition~\ref*{delay-def:delayed-selected-line},
+  Definition~\ref*{delay-def:delayed-response-map},
+  Theorem~\ref*{delay-thm:delayed-response-sufficiency},
+  Theorem~\ref*{transport-thm:fixed-cutoff-seam-witness},
+  Theorem~\ref*{splitlift-thm:splitlift-canonical-quotient-bridge},
+  Theorem~\ref*{splitlift-thm:splitlift-canonical-unit-realization},
+  Corollary~\ref*{splitlift-cor:splitlift-unit-realization-uniqueness},
+  Theorem~\ref*{splitlift-thm:splitlift-scalar-descendant-lift}, and
+  Corollary~\ref*{transport-cor:dominant-kernel-mod-null-reentry}.
+
+\item \textbf{Selected-line boundary.}
+  The exact downstream same-tick obstruction contract is the appendix-side chain
+  Definition~\ref*{mainapp-def:2T-sel},
+  Equation~\ref*{mainapp-eq:selected-line-compatibility},
+  Proposition~\ref*{mainapp-prop:Main-selected-line-compatibility}, and
+  Theorem~\ref*{mainapp-thm:Main-selected-line-contract-refined}.
+  The exact downstream delayed receiving contract is
+  Definition~\ref*{mainapp-def:2T-sel-delay},
+  Theorem~\ref*{mainapp-thm:Main-delayed-selected-line-contract},
+  Theorem~\ref*{mainapp-thm:Main-nonvanishing-from-delayed-lift}, and
+  Corollary~\ref*{mainapp-cor:Main-delayed-dominant-kernel-reentry}.
+  Upstream UOM provides same-tick no-extra-collapse through
+  Theorem~\ref*{sel-thm:uom-selected-line-no-extra-collapse} and
+  Corollary~\ref*{sel-cor:uom-selected-line-quotient-nonzero},
+  delayed selected-line data through
+  Definition~\ref*{delay-def:delayed-selected-line},
+  Definition~\ref*{delay-def:delayed-response-map}, and
+  Theorem~\ref*{delay-thm:delayed-response-sufficiency},
+  quotient-first lift into \(\mathfrak D^-_{\Lambda_{k+1}}\) and the Main-visible reduced welded
+  image through
+  Theorem~\ref*{splitlift-thm:splitlift-scalar-descendant-lift},
+  and quotient-level dominant-kernel reentry through
+  Corollary~\ref*{transport-cor:dominant-kernel-mod-null-reentry}.
+  The nondegeneracy clause \(c_{\Lambda_{k+1}}\neq 0\) remains an explicit imported hypothesis of
+  the delayed selected-line package.
+  The source-side bridge point is canonical by
+  Theorem~\ref*{splitlift-thm:splitlift-canonical-quotient-bridge}.
+  Theorem~\ref*{splitlift-thm:splitlift-canonical-unit-realization} and
+  Corollary~\ref*{splitlift-cor:splitlift-unit-realization-uniqueness} apply only once one
+  source-compatible subordinate realization exists.
+  No class-level microscopic promotion theorem is used here.
+\end{enumerate}
+
+\section{Exact Main Clause Ledger}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{\(\mathbf{2T}_{\mathrm{rec}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-rec})}.}
+  The UOM source is the record/two-arrow/diagonalization package
+  Definition~\ref*{uommain-def:uom-limited-scope-package},
+  Proposition~\ref*{uommain-prop:uom-limited-scope-realization}, and
+  Theorem~\ref*{uommain-thm:uom-equal-source-swap}.
+  The broad UOM manuscript presents this at finite cutoff in discrete RG-step form; the appendix
+  interface explicitly records that the discrete case is recovered by restriction.
+
+\item \textbf{\(\mathbf{2T}_{\mathrm{det}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-det})}.}
+  This detector/nontriviality clause is not exported by the UOM manuscript or the UOM note corpus.
+  It belongs to the separate 2T-LS lane.
+
+\item \textbf{\(\mathbf{2T}_{\mathrm{LS}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-LS})}.}
+  The appendix definition is
+  \[
+  \mathbf{2T}_{\mathrm{LS}}
+  :=
+  \mathbf{2T}_{\mathrm{rec}}+\mathbf{2T}_{\mathrm{det}}.
+  \]
+  Accordingly, the UOM contribution to \(\mathbf{2T}_{\mathrm{LS}}\) is exactly the
+  \(\mathbf{2T}_{\mathrm{rec}}\) source recorded in item \textup{(1)}, while
+  \(\mathbf{2T}_{\mathrm{det}}\) remains external to UOM.
+
+\item \textbf{\(\mathbf{2T}_{\mathrm{RG}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-RG})}.}
+  The rolled-up manuscript source is item \textbf{(M2)} of
+  Definition~\ref*{uommain-def:uom-main-theorem-assumptions}.
+  The finite-cutoff UOM realization is
+  Theorem~\ref*{uomdesc-thm:uomdesc-2trg}, with the underlying raw descendant package recorded in
+  Theorem~\ref*{uomdesc-thm:uomdesc-raw-package}.
+
+\item \textbf{\(\mathbf{2T}_{\mathrm{Peierls}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-cosmo-P})}.}
+  The rolled-up manuscript source is item \textbf{(M3)} of
+  Definition~\ref*{uommain-def:uom-main-theorem-assumptions}.
+  The exact UOM export is Theorem~\ref*{uommain-thm:uom-peierls-package}.
+
+\item \textbf{\(\mathbf{2T}_{\mathrm{EBC}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-EBC})}.}
+  The exact UOM export is Theorem~\ref*{uommain-thm:EB-package}.
+
+\item \textbf{\(\mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-char-weak})}.}
+  The UOM source is Theorem~\ref*{stack-thm:char-weak-interface}.
+  Its record-sector provenance inside the broad UOM manuscript is
+  Definition~\ref*{uommain-def:pointer-algebra-projection},
+  Lemma~\ref*{uommain-lem:tick-fixes-record-algebra},
+  Proposition~\ref*{uommain-prop:semiclassical-diag},
+  Remark~\ref*{uommain-rem:uom-main-004}, and
+  Theorem~\ref*{red-thm:accepted-record-reduction}.
+  The stronger concrete export
+  Theorem~\ref*{stack-thm:uom-char-export} is a refinement beyond the exact weak clause itself.
+
+\item \textbf{\(\mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-char-cal})}.}
+  The exact appendix-side invocation is the internal packaging theorem
+  Theorem~\ref*{mainapp-thm:char-weak-to-cal} from
+  Definition~\ref*{mainapp-def:2T-char-weak}.
+  Additional UOM note-level calibration data are
+  Proposition~\ref*{stack-prop:minimal-transport-calibration},
+  Corollary~\ref*{stack-cor:char-weak-calibration}, and
+  Proposition~\ref*{stack-prop:char-calibration-extension}.
+
+\item \textbf{\(\mathbf{2T}_{\mathrm{char}}^{\mathrm{act}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-char-act})}.}
+  The UOM source is Theorem~\ref*{stack-thm:char-weak-activity}.
+  This uses the Peierls/locality lane exported by Theorem~\ref*{uommain-thm:uom-peierls-package}.
+
+\item \textbf{\(\mathbf{2T}_{\mathrm{alg}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-alg})}.}
+  The exact appendix-side invocation is the internal packaging theorem
+  Theorem~\ref*{mainapp-thm:char-cal-to-alg}.
+  The UOM export is item \textup{(1)} of
+  Theorem~\ref*{stack-thm:uom-char-export}, which isolates the characterization algebra
+  \[
+  \mathcal O^{\mathrm{char}}_{\Lambda_k}
+  =
+  \mathrm{alg}\{a_{\Lambda_k},S_{\Lambda_k}\}.
+  \]
+
+\item \textbf{\(\mathbf{2T}_{\mathrm{char}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-char})}.}
+  The appendix defines
+  \[
+  \mathbf{2T}_{\mathrm{char}}
+  :=
+  \mathbf{2T}_{\mathrm{char}}^{\mathrm{weak}}
+  + \mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}
+  + \mathbf{2T}_{\mathrm{alg}}.
+  \]
+  Its UOM-side sources are therefore the sources recorded in items \textup{(7)}--\textup{(10)}.
+  This aggregate package is defined in the appendix, but it is not itself a separate summand of
+  Definition~\ref*{mainapp-def:2T-Main}.
+
+\item \textbf{\(\mathbf{2T}_{\mathrm{sel}}\) and the delayed next-receiver lane.}
+  The exact appendix-side same-tick obstruction contract is the chain
+  Definition~\ref*{mainapp-def:2T-sel},
+  Equation~\ref*{mainapp-eq:selected-line-compatibility},
+  Proposition~\ref*{mainapp-prop:Main-selected-line-compatibility}, and
+  Theorem~\ref*{mainapp-thm:Main-selected-line-contract-refined}.
+  The exact appendix-side delayed next-receiver package is
+  Definition~\ref*{mainapp-def:2T-sel-delay},
+  Theorem~\ref*{mainapp-thm:Main-delayed-selected-line-contract},
+  Theorem~\ref*{mainapp-thm:Main-nonvanishing-from-delayed-lift}, and
+  Corollary~\ref*{mainapp-cor:Main-delayed-dominant-kernel-reentry}.
+  Upstream UOM supplies the following theorem-backed pieces:
+  \begin{enumerate}[label=\textnormal{(\alph*)},leftmargin=2em]
+  \item same-tick obstruction through
+    Theorem~\ref*{sel-thm:uom-selected-line-no-extra-collapse} and
+    Corollary~\ref*{sel-cor:uom-selected-line-quotient-nonzero};
+  \item delayed selected-line package through
+    Definition~\ref*{delay-def:delayed-selected-line},
+    Definition~\ref*{delay-def:delayed-response-map}, and
+    Theorem~\ref*{delay-thm:delayed-response-sufficiency}, with explicit imported clause
+    \[
+    c_{\Lambda_{k+1}}\neq 0,
+    \]
+    and quotient-first lift into \(\mathfrak D^-_{\Lambda_{k+1}}\) together with the Main-visible
+    reduced welded image through
+    Theorem~\ref*{splitlift-thm:splitlift-scalar-descendant-lift};
+  \item canonical dominant-kernel reentry through the active-response transport note's
+    Corollary~\ref*{transport-cor:dominant-kernel-mod-null-reentry};
+  \item bridge data through
+    Theorem~\ref*{splitlift-thm:splitlift-canonical-quotient-bridge},
+    Theorem~\ref*{splitlift-thm:splitlift-canonical-unit-realization}, and
+    Corollary~\ref*{splitlift-cor:splitlift-unit-realization-uniqueness}.
+    These canonicalize a source-compatible subordinate realization only once one exists.
+    What remains open is the derivation of such a realization from branchwise
+    \(B\)-localized recoherence alone.
+  \end{enumerate}
+  Thus the same-tick lane is upstream exact only as an obstruction/no-extra-collapse theorem, while
+  the physically correct odd-to-even route is delayed and quotient-first/Main-visible.
+  The delayed package reaches the delayed selected line, the descended quotient
+  \(\mathfrak D^-_{\Lambda_{k+1}}\), and the Main-visible reduced welded image, but it does
+  not by itself identify a canonical microscopic representative on the full source/completion
+  class.
+  Thus the exact refined same-tick selected-line contract of
+  Theorem~\ref*{mainapp-thm:Main-selected-line-contract-refined}
+  is downstream packaging, not an upstream UOM theorem on the full microscopic class.
+
+\item \textbf{\(\mathbf{2T}_{\mathrm{conf}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-conf})}.}
+  The exact broad-manuscript UOM source is Corollary~\ref*{uommain-cor:uom-core-implies-2T-conf}.
+  The ingredients explicitly exported from the semiclassical characterization section are
+  Proposition~\ref*{uommain-prop:uom-uv-radial-ward},
+  Theorem~\ref*{uommain-thm:uom-uv-dilatation-package}, and
+  Theorem~\ref*{uommain-thm:uom-uv-conformal-common-sector}.
+
+\item \textbf{\(\mathbf{2T}_{\mathrm{Main}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-Main})}.}
+  The appendix defines
+  \[
+  \mathbf{2T}_{\mathrm{Main}}
+  := 
+  \mathbf{2T}_{\mathrm{LS}}
+  + \mathbf{2T}_{\mathrm{RG}}
+  + \mathbf{2T}_{\mathrm{Peierls}}
+  + \mathbf{2T}_{\mathrm{EBC}}
+  + \mathbf{2T}_{\mathrm{char}}^{\mathrm{cal}}
+  + \mathbf{2T}_{\mathrm{char}}^{\mathrm{act}}
+  + \mathbf{2T}_{\mathrm{sel}}
+  + \mathbf{2T}_{\mathrm{conf}}.
+  \]
+  Items \textup{(1)}--\textup{(13)} above record the exact UOM-side source of each imported clause.
+  The selected-line clause of item \textup{(12)} is the upstream boundary in that ledger.
+\end{enumerate}
+
+\section{Downstream Output Layers}
+
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{\(\mathbf{2T}_{\mathrm{BRST}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-BRST})}.}
+  This is not a base summand of Definition~\ref*{mainapp-def:2T-Main}.
+  The UOM-side source is the raw descendant bicomplex package
+  Theorem~\ref*{uomdesc-thm:uomdesc-raw-package}.
+
+\item \textbf{\(\mathbf{2T}_{\mathrm{AQFT}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-AQFT})}.}
+  This is a later appendix output layer, not an additional independent UOM input clause.
+  Its UOM contribution is inherited through the base package and the BRST/conformal inputs already recorded above.
+
+\item \textbf{\(\mathbf{2T}_{\mathrm{HLS}}\) \textnormal{(Definition~\ref*{mainapp-def:2T-HLS})}.}
+  This is likewise a later appendix output layer.
+  No separate additional UOM theorem is recorded here beyond the previously assembled
+  \(\mathbf{2T}_{\mathrm{Main}}\), \(\mathbf{2T}_{\mathrm{BRST}}\), and
+  \(\mathbf{2T}_{\mathrm{conf}}\) inputs.
+\end{enumerate}
+
+\end{document}

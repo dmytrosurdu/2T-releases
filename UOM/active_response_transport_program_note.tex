@@ -1,0 +1,3112 @@
+\ifdefined\UOMTransportFragmentLoaded\else
+\documentclass[11pt]{article}
+\input{UOM/odd_transport_fragment_standalone_preamble.tex}
+\externaldocument{UOM/compressed_log_spectral_selection_note}
+\externaldocument{UOM/odd_selector_note}
+\externaldocument{UOM/canonical_odd_interface_note}
+\externaldocument[splitlift-]{UOM/split_controlled_completion_lift_note}
+\title{Finite-Cutoff Active Response Transport Theorem}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\fi
+
+\section{Finite-Cutoff Active Response Transport Theorem}
+\label{sec:active-response-transport-program}
+
+This section assembles a finite-cutoff transport theorem for the odd descendant / Hamiltonization
+lane of the 2T Main assumption package Definition~\ref{main-def:uom-main-theorem-assumptions}.
+Accordingly, the phrase ``accepted tick'' remains literal UOM cutoff language throughout this note:
+the transport theorem is pointwise on the accepted branch at fixed \(\Lambda_k\).
+
+\begin{remark}[Physical odd sector and branchwise ambient-space conventions]
+\label{rem:transport-conventions}
+Throughout this note, the superscript \({}^-\) refers to physical \(\Gamma\)-odd parity on the
+characterization layer, not to cohomological oddness.
+Every ambiguity direction appearing below is therefore understood after passage to the physically
+odd characterization sector \(E^-_{\Lambda_k}\).
+
+All branchwise continuity statements are made after the standard accepted-branch identifications of
+the relevant finite-cutoff source spaces, covariance-tangent spaces, and physical subspaces with
+fixed ambient finite-cutoff spaces.
+Operator-norm and Fisher-norm continuity are always understood with respect to those identifications.
+\end{remark}
+
+\begin{definition}[Odd ambiguity subspace on the characterization layer]
+\label{def:transport-ambiguity-subspace}
+For each accepted tick \(k\), let
+\[
+\mathcal A^-_{\Lambda_k}\subset E^-_{\Lambda_k}
+\]
+denote the closed linear span of the odd characterization-layer projections of the descendant
+ambiguity directions
+\[
+\big(Q_tX+Q_uY\big)^-,\qquad \big(\partial_\mu K^\mu\big)^-,\qquad \Delta_{\rm ct}^{-},
+\]
+where \(K^\mu\) is boundary-admissible on the characterization layer and
+\(\Delta_{\rm ct}^{-}\) is admissible in the sense of \cref{def:ambiguity-ct-char}.
+Equivalently, \(\mathcal A^-_{\Lambda_k}\) is the odd ambiguity space already placed inside
+\(\mathcal T^{\mathrm{op}}_{\Lambda_k}\) by \cref{cor:ambiguity-char}.
+\end{definition}
+
+\begin{definition}[Dominant compressed response line and scalar coefficient]
+\label{def:dominant-response-functional}
+Fix an accepted tick \(k\). Let
+\[
+u^{\mathrm{LoG}}_{\Lambda_k}
+\]
+and
+\[
+P_{-,\Lambda_k}^{\mathrm{LoG}}
+\]
+be the canonically selected compressed odd line and projector furnished by
+\cref{cor:compressed-export-selection}. Define the physical covariance tangent induced by that line by
+\[
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+:=
+\Pi_{\mathrm{phys},\Lambda_k}\,\mathsf T_{\Lambda_k}[u^{\mathrm{LoG}}_{\Lambda_k}],
+\]
+and, whenever this tangent is nonzero, write
+\[
+L^{\mathrm{dom}}_{\Lambda_k}
+:=
+\mathbb R\,\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k}
+\]
+for its Fisher-normalized line.
+The raw dominant-response coefficient is
+\begin{equation}
+\widetilde{\rho}^{\mathrm{dom}}_{\Lambda_k}(F)
+:=
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}(F),\,
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}},
+\qquad
+F\in E^-_{\Lambda_k}.
+\label{eq:rho-dom-raw-def}
+\end{equation}
+Whenever \(\delta C^{\mathrm{LoG}}_{\Lambda_k}\neq 0\), equivalently whenever dominant-line
+realization holds at \(\Lambda_k\), define the normalized dominant-response coefficient by
+\begin{equation}
+\rho^{\mathrm{dom}}_{\Lambda_k}(F)
+:=
+\kappa_{\Lambda_k}^{-1/2}\,
+\widetilde{\rho}^{\mathrm{dom}}_{\Lambda_k}(F),
+\qquad
+F\in E^-_{\Lambda_k}.
+\label{eq:rho-dom-def}
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Well-posedness and continuity of the dominant-response coefficients]
+\label{prop:rho-dom-continuity}
+Fix an accepted tick \(k\).
+Then the raw dominant-response coefficient
+\[
+\widetilde{\rho}^{\mathrm{dom}}_{\Lambda_k}:E^-_{\Lambda_k}\to\mathbb R
+\]
+is continuous and linear.
+If dominant-line realization holds at \(\Lambda_k\), then the normalized dominant-response
+coefficient
+\[
+\rho^{\mathrm{dom}}_{\Lambda_k}:E^-_{\Lambda_k}\to\mathbb R
+\]
+is also continuous and linear.
+\end{proposition}
+
+\begin{proof}
+By \cref{prop:intrinsic-cov-response}, the intrinsic response map
+\(
+\mathcal R_{\Lambda_k}:E^-_{\Lambda_k}\to\mathcal T^{\mathrm{cov}}_{\Lambda_k}
+\)
+is continuous and linear.
+Pairing its physical projection against the fixed covariance tangent
+\(
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\)
+in the Fisher metric therefore gives a continuous linear functional, which is exactly
+\(\widetilde{\rho}^{\mathrm{dom}}_{\Lambda_k}\).
+If dominant-line realization holds, then \(\kappa_{\Lambda_k}>0\) by
+\cref{prop:dominant-line-equivalent}, so \(\rho^{\mathrm{dom}}_{\Lambda_k}\) is obtained from
+\(\widetilde{\rho}^{\mathrm{dom}}_{\Lambda_k}\) by multiplication by the fixed scalar
+\(\kappa_{\Lambda_k}^{-1/2}\).
+\end{proof}
+
+\subsection*{Dominant-line realization}
+\label{subsec:dominant-line-realization}
+
+The compressed spectral-selection note already supplies the one-dimensional source line
+\(\mathcal H^{\mathrm{LoG}}_{\Lambda_k}\).
+The present transport note needs only the nonvanishing and branchwise continuity of its
+\emph{physical} covariance push-forward.
+
+\begin{definition}[Compressed-line transversality]
+\label{def:compressed-line-transversality}
+For an accepted tick \(k\), say that the welded response is \emph{transversely physical on the
+compressed line} if
+\begin{equation}
+\Pi_{\mathrm{phys},\Lambda_k}\,\mathsf T_{\Lambda_k}\!\restriction_{\mathcal H^{\mathrm{LoG}}_{\Lambda_k}}
+\neq 0.
+\label{eq:compressed-transversality}
+\end{equation}
+Equivalently, the unique generator \(u^{\mathrm{LoG}}_{\Lambda_k}\) of the compressed odd line has
+nonzero physical covariance response.
+\end{definition}
+
+\begin{definition}[Dominant-response norm]
+\label{def:dominant-response-norm}
+Whenever \(\delta C^{\mathrm{LoG}}_{\Lambda_k}\) is defined, set
+\begin{equation}
+\kappa_{\Lambda_k}
+:=
+\big\langle\!\big\langle
+\delta C^{\mathrm{LoG}}_{\Lambda_k},\,
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}.
+\label{eq:kappa-dom-def}
+\end{equation}
+This is the Fisher squared norm of the physical covariance tangent induced by the compressed welded
+LoG source line.
+\end{definition}
+
+\begin{proposition}[Equivalent formulations of dominant-line realization]
+\label{prop:dominant-line-equivalent}
+For a fixed accepted tick \(k\), the following are equivalent.
+\begin{enumerate}[leftmargin=2em]
+\item the compressed welded LoG line is transversely physical in the sense of
+  \cref{def:compressed-line-transversality};
+\item the distinguished physical covariance tangent is nonzero,
+  \[
+  \delta C^{\mathrm{LoG}}_{\Lambda_k}\neq 0;
+  \]
+\item the dominant-response norm is strictly positive,
+  \[
+  \kappa_{\Lambda_k}>0;
+  \]
+\item there exists a physical covariance tangent
+  \(
+  B_{\Lambda_k}\in \mathcal T^{\mathrm{phys}}_{\Lambda_k}
+  \)
+  such that
+  \[
+  \big\langle\!\big\langle
+  \delta C^{\mathrm{LoG}}_{\Lambda_k},\,B_{\Lambda_k}
+  \big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}
+  \neq 0;
+  \]
+\item in any Gaussian completion realization of
+  \cref{cor:compressed-export-selection-completion}, the completion-sector covariance tangent
+  representing \(\delta C^{\mathrm{LoG}}_{\Lambda_k}\) is nonzero.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The equivalence of (1) and (2) is immediate from
+\eqref{eq:compressed-transversality} and the definition
+\[
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+=
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}[u^{\mathrm{LoG}}_{\Lambda_k}],
+\]
+because \(\mathcal H^{\mathrm{LoG}}_{\Lambda_k}\) is the one-dimensional line generated by
+\(u^{\mathrm{LoG}}_{\Lambda_k}\).
+
+The equivalence of (2) and (3) follows from positive definiteness of the Fisher metric on the
+covariance tangent space: a vector has positive Fisher norm if and only if it is nonzero.
+
+Statement (3) implies (4) by taking
+\(
+B_{\Lambda_k}:=\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\),
+which belongs to the physical tangent space by construction.
+Conversely, if (4) holds then \(\delta C^{\mathrm{LoG}}_{\Lambda_k}\) cannot vanish, so (2) holds.
+
+Finally, \cref{prop:intrinsic-cov-response,cor:compressed-export-selection-completion} identify the
+abstract covariance tangent with any Gaussian completion representative of the same tangent object.
+Therefore the abstract tangent is nonzero exactly when its completion realization is nonzero, giving
+the equivalence of (2) and (5).
+\end{proof}
+
+\begin{theorem}[Branchwise realization and persistence of the dominant line]
+\label{thm:dominant-line-persistence}
+Let \(I\) be a connected accepted-branch segment in cutoff space.
+Assume that:
+\begin{enumerate}[leftmargin=2em]
+\item the compressed projector \(P_{-,\Lambda}^{\mathrm{LoG}}\) varies continuously on \(I\);
+\item the physical welded response operator
+  \[
+  \Lambda\longmapsto \Pi_{\mathrm{phys},\Lambda}\mathsf T_{\Lambda}
+  \]
+  is continuous on \(I\) in the operator topology induced by the Fisher norm on covariance
+  tangents;
+\item there exists a constant \(c_I>0\) such that
+  \[
+  \kappa_{\Lambda}\ge c_I
+  \qquad
+  \forall \Lambda\in I.
+  \]
+\end{enumerate}
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item \(\delta C^{\mathrm{LoG}}_{\Lambda}\neq 0\) for every \(\Lambda\in I\);
+\item the normalized dominant vector
+  \[
+  \widehat{\delta C}^{\mathrm{LoG}}_{\Lambda}
+  :=
+  \kappa_{\Lambda}^{-1/2}\,\delta C^{\mathrm{LoG}}_{\Lambda}
+  \]
+  is continuous on \(I\);
+\item the dominant physical line
+  \[
+  L^{\mathrm{dom}}_{\Lambda}
+  =
+  \mathbb R\,\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda}
+  \]
+  is canonically transported along \(I\);
+\item the Fisher-orthogonal rank-one projector
+  \[
+  \Pi^{\mathrm{dom}}_{\Lambda}
+  :=
+  \widehat{\delta C}^{\mathrm{LoG}}_{\Lambda}
+  \otimes
+  \widehat{\delta C}^{\mathrm{LoG}}_{\Lambda}
+  \]
+  depends continuously on \(\Lambda\in I\).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By \cref{cor:compressed-export-selection}, the compressed projector
+\(
+P_{-,\Lambda}^{\mathrm{LoG}}
+\)
+and hence the normalized source vector \(u^{\mathrm{LoG}}_{\Lambda}\) vary continuously on the branch.
+By the assumed continuity of \(\Pi_{\mathrm{phys},\Lambda}\mathsf T_{\Lambda}\), the map
+\[
+\Lambda\longmapsto
+\delta C^{\mathrm{LoG}}_{\Lambda}
+=
+\Pi_{\mathrm{phys},\Lambda}\mathsf T_{\Lambda}[u^{\mathrm{LoG}}_{\Lambda}]
+\]
+is continuous in the Fisher norm.
+
+The lower bound \(\kappa_{\Lambda}\ge c_I>0\) implies
+\(
+\delta C^{\mathrm{LoG}}_{\Lambda}\neq 0
+\)
+for every \(\Lambda\in I\), proving item (1).
+Since the normalization map \(v\mapsto v/\|v\|_{C_\ast}\) is continuous on the complement of the
+zero section, continuity of \(\delta C^{\mathrm{LoG}}_{\Lambda}\) and the positive lower bound on its
+norm imply continuity of \(\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda}\), proving item (2).
+Items (3) and (4) are immediate consequences of item (2).
+\end{proof}
+
+\begin{corollary}[Local persistence from one-tick transversality]
+\label{cor:dominant-line-local-persistence}
+Assume the continuity hypotheses of \cref{thm:dominant-line-persistence}.
+If the compressed line is transversely physical at one accepted tick \(\Lambda_{k_0}\), then there
+exists a neighborhood \(I_{k_0}\) of \(\Lambda_{k_0}\) on the same accepted branch such that
+\[
+\delta C^{\mathrm{LoG}}_{\Lambda}\neq 0
+\qquad
+\forall \Lambda\in I_{k_0}.
+\]
+Hence the dominant physical line is locally well defined and continuously transported near
+\(\Lambda_{k_0}\).
+\end{corollary}
+
+\begin{proof}
+By \cref{prop:dominant-line-equivalent}, transversality at \(\Lambda_{k_0}\) is equivalent to
+\(
+\kappa_{\Lambda_{k_0}}>0
+\).
+Continuity of \(\kappa_{\Lambda}\) then gives a neighborhood \(I_{k_0}\) and a constant
+\(c_{k_0}>0\) such that
+\(
+\kappa_{\Lambda}\ge c_{k_0}
+\)
+for all \(\Lambda\in I_{k_0}\).
+Apply \cref{thm:dominant-line-persistence}.
+\end{proof}
+
+\begin{remark}[Practical witness criteria]
+\label{rem:dominant-line-witnesses}
+For applications, any one of the following suffices to discharge dominant-line realization at a fixed
+accepted tick:
+\begin{enumerate}[leftmargin=2em]
+\item a direct lower bound \(\kappa_{\Lambda_k}>0\);
+\item a physical witness tangent \(B_{\Lambda_k}\in\mathcal T^{\mathrm{phys}}_{\Lambda_k}\) with
+  nonzero Fisher pairing against \(\delta C^{\mathrm{LoG}}_{\Lambda_k}\);
+\item a Gaussian completion calculation showing that the completion covariance of the realized active
+  odd mode changes nontrivially under the compressed welded LoG source.
+\end{enumerate}
+Each witness proves the same theorem-level fact by \cref{prop:dominant-line-equivalent}.
+\end{remark}
+
+\subsection*{Descent to the ambiguity quotient}
+\label{subsec:ambiguity-quotient-descent}
+
+Once the dominant line has been realized, the next task is purely structural:
+show that the dominant-response coefficient is insensitive to ambiguity moves.
+This is the exact point at which the transported descendant class becomes an affine class in the
+sense required by Main rather than a collection of representatives.
+
+\begin{definition}[Dominant-response quotient and descended descendant point]
+\label{def:dominant-response-quotient}
+For each accepted tick \(k\), define the dominant-response quotient by
+\[
+\mathfrak D^-_{\Lambda_k}
+:=
+E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k},
+\]
+with quotient map
+\[
+q_{\Lambda_k}:E^-_{\Lambda_k}\to \mathfrak D^-_{\Lambda_k}.
+\]
+If
+\[
+[\Xi^{(1)}_{\Lambda_k}]
+=
+J_{0,\Lambda_k}+\mathcal A^-_{\Lambda_k},
+\]
+then its image in the quotient is a single point,
+\[
+[\![\Xi^{(1)}_{\Lambda_k}]\!]
+:=
+q_{\Lambda_k}\!\big(J_{0,\Lambda_k}\big)
+\in \mathfrak D^-_{\Lambda_k},
+\]
+independent of the chosen representative \(J_{0,\Lambda_k}\).
+\end{definition}
+
+\begin{proposition}[Universal descent criterion for the dominant-response coefficient]
+\label{prop:dominant-quotient-universal}
+Assume dominant-line realization at an accepted tick \(k\), so that
+\(\rho^{\mathrm{dom}}_{\Lambda_k}\) is defined by \eqref{eq:rho-dom-def}.
+Then the following are equivalent.
+\begin{enumerate}[leftmargin=2em]
+\item there exists a unique continuous linear functional
+  \[
+  \overline{\rho}^{\mathrm{dom}}_{\Lambda_k}:\mathfrak D^-_{\Lambda_k}\to\mathbb R
+  \]
+  such that
+  \[
+  \rho^{\mathrm{dom}}_{\Lambda_k}
+  =
+  \overline{\rho}^{\mathrm{dom}}_{\Lambda_k}\circ q_{\Lambda_k};
+  \]
+\item the ambiguity subspace is contained in the kernel:
+  \[
+  \mathcal A^-_{\Lambda_k}\subset \ker\rho^{\mathrm{dom}}_{\Lambda_k};
+  \]
+\item the dominant-response coefficient is constant on each ambiguity coset:
+  \[
+  \rho^{\mathrm{dom}}_{\Lambda_k}(F+A)
+  =
+  \rho^{\mathrm{dom}}_{\Lambda_k}(F)
+  \qquad
+  \forall F\in E^-_{\Lambda_k},\ \forall A\in\mathcal A^-_{\Lambda_k}.
+  \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The equivalence of (2) and (3) is immediate from linearity:
+\[
+\rho^{\mathrm{dom}}_{\Lambda_k}(F+A)-\rho^{\mathrm{dom}}_{\Lambda_k}(F)
+=
+\rho^{\mathrm{dom}}_{\Lambda_k}(A).
+\]
+
+If (2) holds, define
+\[
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}\big(q_{\Lambda_k}(F)\big)
+:=
+\rho^{\mathrm{dom}}_{\Lambda_k}(F).
+\]
+This is well defined precisely because changing representatives by an element of
+\(\mathcal A^-_{\Lambda_k}\) does not change the value of \(\rho^{\mathrm{dom}}_{\Lambda_k}\).
+Linearity and continuity are inherited from \(\rho^{\mathrm{dom}}_{\Lambda_k}\), and uniqueness
+follows because \(q_{\Lambda_k}\) is surjective.
+
+Conversely, if (1) holds and \(A\in\mathcal A^-_{\Lambda_k}\), then \(q_{\Lambda_k}(A)=0\), hence
+\[
+\rho^{\mathrm{dom}}_{\Lambda_k}(A)
+=
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}\!\big(q_{\Lambda_k}(A)\big)
+=
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}(0)
+=
+0.
+\]
+Thus (1) implies (2).
+\end{proof}
+
+\begin{corollary}[Constancy on the transported descendant affine class]
+\label{cor:dominant-quotient-constancy}
+Assume \cref{prop:dominant-quotient-universal}. Then
+\[
+\rho^{\mathrm{dom}}_{\Lambda_k}(J)
+=
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}\big([\![\Xi^{(1)}_{\Lambda_k}]\!]\big)
+\qquad
+\forall J\in[\Xi^{(1)}_{\Lambda_k}].
+\]
+In particular, once the descended quotient functional exists, the descendant affine class carries a
+single unambiguous dominant-response value.
+\end{corollary}
+
+\begin{proof}
+Every \(J\in[\Xi^{(1)}_{\Lambda_k}]\) has the form
+\(
+J=J_{0,\Lambda_k}+A
+\)
+with \(A\in\mathcal A^-_{\Lambda_k}\), so
+\[
+q_{\Lambda_k}(J)=q_{\Lambda_k}(J_{0,\Lambda_k})=[\![\Xi^{(1)}_{\Lambda_k}]\!].
+\]
+Apply the factorization identity of \cref{prop:dominant-quotient-universal}.
+\end{proof}
+
+\begin{remark}[False stronger form and normalized special case]
+\label{rem:dominant-quotient-false-stronger-form}
+The quotient statement above is intrinsically a statement about the descended dominant scalar
+\[
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}\big([\![\Xi^{(1)}_{\Lambda_k}]\!]\big),
+\]
+not about a bare \(\chi\)-compatibility condition.
+At the weak transported-interface layer one has
+\[
+\chi_{\Lambda_k}
+=
+\nu_{\Lambda_k}^{-1}\rho^{\mathrm{dom}}_{\Lambda_k},
+\]
+so a representative-search condition of the form
+\[
+\rho^{\mathrm{dom}}_{\Lambda_k}(J)=s
+\]
+is equivalent to
+\[
+\chi_{\Lambda_k}(J)=\nu_{\Lambda_k}^{-1}s,
+\]
+not in general to \(\chi_{\Lambda_k}(J)=s\).
+Only after an explicit normalization, for example \(\nu_{\Lambda_k}=1\), may the same scalar
+comparison be rewritten in descended \(\bar\chi_{\Lambda_k}\) form without changing the value.
+The finite-cutoff Wolfram audit contains exact countermodels to the stronger unscaled
+\(\chi\)-level claim.
+\end{remark}
+
+\begin{proposition}[Generator-by-generator reduction]
+\label{prop:dominant-quotient-generators}
+Assume dominant-line realization at an accepted tick \(k\).
+Suppose the dominant-response coefficient vanishes on the three generating ambiguity families:
+\begin{enumerate}[leftmargin=2em]
+\item for every odd-projected BRST/gauge-exact direction \(\big(Q_tX+Q_uY\big)^-\),
+  \[
+  \rho^{\mathrm{dom}}_{\Lambda_k}\!\big(\big(Q_tX+Q_uY\big)^-\big)=0;
+  \]
+\item for every odd-projected boundary-admissible divergence \(\big(\partial_\mu K^\mu\big)^-\),
+  \[
+  \rho^{\mathrm{dom}}_{\Lambda_k}\!\big(\big(\partial_\mu K^\mu\big)^-\big)=0;
+  \]
+\item for every admissible odd counterterm \(\Delta^-_{\rm ct}\),
+  \[
+  \rho^{\mathrm{dom}}_{\Lambda_k}(\Delta^-_{\rm ct})=0.
+  \]
+\end{enumerate}
+Then
+\[
+\mathcal A^-_{\Lambda_k}\subset\ker\rho^{\mathrm{dom}}_{\Lambda_k},
+\]
+hence \(\rho^{\mathrm{dom}}_{\Lambda_k}\) descends uniquely to the quotient
+\(\mathfrak D^-_{\Lambda_k}\).
+\end{proposition}
+
+\begin{proof}
+By \cref{def:transport-ambiguity-subspace}, \(\mathcal A^-_{\Lambda_k}\) is the closed linear span of
+the three families listed in the statement. Since \(\rho^{\mathrm{dom}}_{\Lambda_k}\) is linear, it
+vanishes on the algebraic span of those generators. Since it is also continuous, it vanishes on the
+closure of that span. Therefore every element of \(\mathcal A^-_{\Lambda_k}\) lies in the kernel.
+Now apply \cref{prop:dominant-quotient-universal}.
+\end{proof}
+
+\begin{theorem}[Descent to the ambiguity quotient]
+\label{thm:dominant-quotient-descent}
+Fix an accepted tick \(k\) and assume dominant-line realization.
+If the three vanishing statements of \cref{prop:dominant-quotient-generators} hold, then there
+exists a unique descended dominant
+functional
+\[
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}:\mathfrak D^-_{\Lambda_k}\to\mathbb R
+\]
+such that
+\[
+\rho^{\mathrm{dom}}_{\Lambda_k}
+=
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}\circ q_{\Lambda_k},
+\]
+and the transported descendant affine class has a single well-defined quotient value
+\[
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}\big([\![\Xi^{(1)}_{\Lambda_k}]\!]\big).
+\]
+\end{theorem}
+
+\begin{proof}
+Apply \cref{prop:dominant-quotient-generators,cor:dominant-quotient-constancy}.
+\end{proof}
+
+\subsection*{Nonzero overlap on the descendant class}
+\label{subsec:descendant-overlap}
+
+After dominant-line realization and quotient descent, the descendant class defines a single point in
+the ambiguity quotient, and the dominant-response functional descends to that quotient. This
+subsection studies whether that descended descendant point is \emph{active}, i.e.\ not annihilated
+by the descended dominant functional.
+
+\begin{definition}[Dominant covariance projector]
+\label{def:dominant-cov-projector}
+Assume dominant-line realization at an accepted tick \(k\).
+Define the Fisher-orthogonal rank-one projector onto the dominant physical line by
+\begin{equation}
+\Pi^{\mathrm{dom}}_{\Lambda_k}(X)
+:=
+\big\langle\!\big\langle
+X,\,
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}\,
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k},
+\qquad
+X\in\mathcal T^{\mathrm{cov}}_{\Lambda_k}.
+\label{eq:Pi-dom-def}
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Representative-level witness criteria]
+\label{prop:descendant-overlap-witness}
+Assume dominant-line realization at an accepted tick \(k\).
+For any odd generator \(F\in E^-_{\Lambda_k}\), the following are equivalent.
+\begin{enumerate}[leftmargin=2em]
+\item the dominant-response coefficient is nonzero:
+  \[
+  \rho^{\mathrm{dom}}_{\Lambda_k}(F)\neq 0;
+  \]
+\item the dominant projection of the physical covariance response is nonzero:
+  \[
+  \Pi^{\mathrm{dom}}_{\Lambda_k}\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}(F)\neq 0;
+  \]
+\item the physical covariance response has nonzero Fisher pairing with the dominant tangent:
+  \[
+  \big\langle\!\big\langle
+  \Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}(F),\,
+  \delta C^{\mathrm{LoG}}_{\Lambda_k}
+  \big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}
+  \neq 0;
+  \]
+\item in any Gaussian completion realization of
+  \cref{cor:compressed-export-selection-completion}, the completion representative of
+  \(\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}(F)\) has nonzero component on the realized
+  active odd line.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+By \cref{def:dominant-cov-projector},
+\[
+\Pi^{\mathrm{dom}}_{\Lambda_k}\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}(F)
+=
+\rho^{\mathrm{dom}}_{\Lambda_k}(F)\,
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k}.
+\]
+Since \(\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k}\neq 0\), this proves the equivalence of (1)
+and (2).
+
+Statement (3) is equivalent to (1) because
+\[
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}(F),\,
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}
+=
+\|\delta C^{\mathrm{LoG}}_{\Lambda_k}\|_{C_{\ast,\Lambda_k}}\,
+\rho^{\mathrm{dom}}_{\Lambda_k}(F),
+\]
+and the prefactor is strictly positive by dominant-line realization.
+
+Finally, by \cref{prop:intrinsic-cov-response,cor:compressed-export-selection-completion}, the
+abstract covariance tangent and its Gaussian completion representative describe the same physical
+response object in different coordinates. Therefore the abstract dominant projection is nonzero if
+and only if the completion representative has nonzero component on the realized active line,
+proving the equivalence of (2) and (4).
+\end{proof}
+
+\begin{definition}[Descendant overlap margin]
+\label{def:descendant-overlap-margin}
+Assume dominant-line realization and quotient descent at an accepted tick \(k\).
+Define the descendant overlap margin by
+\begin{equation}
+\nu_{\Lambda_k}
+:=
+\left|
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}\big([\![\Xi^{(1)}_{\Lambda_k}]\!]\big)
+\right|.
+\label{eq:descendant-overlap-margin}
+\end{equation}
+We say that the transported descendant class is \emph{dominant-active} if
+\(
+\nu_{\Lambda_k}>0
+\).
+\end{definition}
+
+\begin{proposition}[Equivalent formulations of nonzero overlap on the descendant class]
+\label{prop:descendant-overlap-equivalent}
+Assume dominant-line realization and quotient descent at an accepted tick \(k\).
+Then the following are equivalent.
+\begin{enumerate}[leftmargin=2em]
+\item the transported descendant sector has nonzero overlap with the canonically selected compressed
+  dominant odd line;
+\item there exists one representative \(J^{\mathrm{desc}}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]\)
+  such that
+  \[
+  \Pi^{\mathrm{dom}}_{\Lambda_k}\Pi_{\mathrm{phys},\Lambda_k}
+  \mathcal R_{\Lambda_k}(J^{\mathrm{desc}}_{\Lambda_k})
+  \neq 0;
+  \]
+\item every representative \(J\in[\Xi^{(1)}_{\Lambda_k}]\) has the same nonzero dominant-response
+  value:
+  \[
+  \rho^{\mathrm{dom}}_{\Lambda_k}(J)
+  =
+  \overline{\rho}^{\mathrm{dom}}_{\Lambda_k}\big([\![\Xi^{(1)}_{\Lambda_k}]\!]\big)
+  \neq 0;
+  \]
+\item the descended descendant point is not annihilated by the descended dominant functional:
+  \[
+  [\![\Xi^{(1)}_{\Lambda_k}]\!]\notin \ker\overline{\rho}^{\mathrm{dom}}_{\Lambda_k};
+  \]
+\item the descendant overlap margin is strictly positive:
+  \[
+  \nu_{\Lambda_k}>0.
+  \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The equivalence of (1) and (2) follows immediately from
+\cref{prop:descendant-overlap-witness}.
+
+If (2) holds, then
+\(
+\rho^{\mathrm{dom}}_{\Lambda_k}(J^{\mathrm{desc}}_{\Lambda_k})\neq 0
+\)
+by \cref{prop:descendant-overlap-witness}. By
+\cref{cor:dominant-quotient-constancy}, every other representative of
+\([\Xi^{(1)}_{\Lambda_k}]\) has the same value, proving (3).
+Conversely, (3) obviously implies (1).
+
+The equivalence of (3) and (4) is immediate from the identity
+\[
+\rho^{\mathrm{dom}}_{\Lambda_k}(J)
+=
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}\big([\![\Xi^{(1)}_{\Lambda_k}]\!]\big)
+\qquad
+\forall J\in[\Xi^{(1)}_{\Lambda_k}]
+\]
+of \cref{cor:dominant-quotient-constancy}.
+
+Finally, (4) and (5) are equivalent by the definition of \(\nu_{\Lambda_k}\) in
+\cref{def:descendant-overlap-margin}.
+\end{proof}
+
+\begin{theorem}[Nonzero overlap on the descendant class]
+\label{thm:descendant-overlap}
+Fix an accepted tick \(k\), and assume dominant-line realization together with quotient descent.
+If any one of the equivalent conditions in \cref{prop:descendant-overlap-equivalent} holds, then the
+following conclusions obtain.
+In particular, it is enough to construct a single representative
+\[
+J^{\mathrm{desc}}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]
+\]
+whose dominant projected covariance response is nonzero.
+
+When this holds, the quotient descendant point is dominant-active, the scalar value
+\[
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}\big([\![\Xi^{(1)}_{\Lambda_k}]\!]\big)
+\]
+is nonzero, and the sign
+\begin{equation}
+\varepsilon_{\Lambda_k}
+:=
+\operatorname{sgn}\!\Big(
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}\big([\![\Xi^{(1)}_{\Lambda_k}]\!]\big)
+\Big)
+\in\{\pm1\}
+\label{eq:epsilon-from-overlap}
+\end{equation}
+is well defined.
+Thus the transported descendant sector has nonzero overlap with the canonically selected compressed
+dominant odd line.
+\end{theorem}
+
+\begin{proof}
+The equivalence package is exactly \cref{prop:descendant-overlap-equivalent}.
+Once one representative has nonzero dominant projected response, the same proposition gives the
+nonzero scalar value on the descended descendant point. The sign in \eqref{eq:epsilon-from-overlap}
+is therefore well defined.
+\end{proof}
+
+\subsection*{Conditional mod-null reentry on the selected scalar line}
+\label{subsec:conditional-mod-null-reentry}
+
+\begin{definition}[Parity-stable mod-null subspace transverse to the selected scalar line]
+\label{def:mod-null-transverse-datum}
+Fix an accepted tick \(k\), assume dominant-line realization and quotient descent, and let
+\[
+\overline L^{\mathrm{Main}}_{\Lambda_k}
+=
+\mathbb R\,\overline\ell^{\mathrm{Main}}_{\Lambda_k}
+\subset
+\mathfrak D^-_{\Lambda_k}
+\]
+be a one-dimensional selected scalar line in the ambiguity quotient.
+A \emph{parity-stable mod-null datum transverse to}
+\(
+\overline L^{\mathrm{Main}}_{\Lambda_k}
+\)
+consists of a linear subspace
+\[
+N^{\mathrm{mn}}_{\Lambda_k}\subset \mathfrak D^-_{\Lambda_k}
+\]
+such that:
+\begin{enumerate}[leftmargin=2em,label=(\alph*)]
+\item \(N^{\mathrm{mn}}_{\Lambda_k}\) is stable under the descended physical parity on
+  \(\mathfrak D^-_{\Lambda_k}\);
+\item the selected scalar line is transverse to \(N^{\mathrm{mn}}_{\Lambda_k}\):
+  \[
+  \overline L^{\mathrm{Main}}_{\Lambda_k}\cap N^{\mathrm{mn}}_{\Lambda_k}=\{0\}.
+  \]
+\end{enumerate}
+Define
+\[
+\mathcal V^{1,\mathrm{mn}}_{\Lambda_k}
+:=
+\mathfrak D^-_{\Lambda_k}/N^{\mathrm{mn}}_{\Lambda_k}
+\]
+with quotient map
+\[
+\pi^{\mathrm{mn}}_{\Lambda_k}:
+\mathfrak D^-_{\Lambda_k}\to \mathcal V^{1,\mathrm{mn}}_{\Lambda_k}.
+\]
+Because \(\mathfrak D^-_{\Lambda_k}\) is itself a quotient of the physical \(\Gamma\)-odd sector,
+the descended parity acts on \(\mathfrak D^-_{\Lambda_k}\) by \(-\mathrm{id}\).
+Thus the parity-stability clause yields a descended involution
+\[
+\Gamma^{\mathrm{mn}}_{\Lambda_k}
+\bigl(
+\pi^{\mathrm{mn}}_{\Lambda_k}(x)
+\bigr)
+:=
+\pi^{\mathrm{mn}}_{\Lambda_k}(-x),
+\qquad
+x\in \mathfrak D^-_{\Lambda_k}.
+\]
+\end{definition}
+
+\begin{definition}[Dominant-null parity-stable mod-null datum]
+\label{def:dominant-null-mod-null-datum}
+Fix an accepted tick \(k\), assume dominant-line realization and quotient descent, and let
+\[
+\overline L^{\mathrm{Main}}_{\Lambda_k}
+=
+\mathbb R\,\overline\ell^{\mathrm{Main}}_{\Lambda_k}
+\subset
+\mathfrak D^-_{\Lambda_k}
+\]
+be a one-dimensional selected scalar line in the ambiguity quotient.
+A parity-stable mod-null datum
+\[
+N^{\mathrm{mn}}_{\Lambda_k}\subset \mathfrak D^-_{\Lambda_k}
+\]
+is called \emph{dominant-null} if it is contained in the kernel of the descended dominant
+functional:
+\[
+N^{\mathrm{mn}}_{\Lambda_k}\subset \ker \overline{\rho}^{\mathrm{dom}}_{\Lambda_k}.
+\]
+It is understood that
+\(
+N^{\mathrm{mn}}_{\Lambda_k}
+\)
+is stable under the descended physical parity on
+\(
+\mathfrak D^-_{\Lambda_k}
+\),
+and that the associated quotient
+\(
+\mathfrak D^-_{\Lambda_k}/N^{\mathrm{mn}}_{\Lambda_k}
+\)
+carries the descended involution from \cref{def:mod-null-transverse-datum}.
+The canonical dominant-kernel choice is isolated separately in
+\cref{def:canonical-dominant-null-datum}.
+The transversality lemma below uses only this kernel-subordination property.
+\end{definition}
+
+\begin{definition}[Canonical dominant-null datum]
+\label{def:canonical-dominant-null-datum}
+Fix an accepted tick \(k\) and assume dominant-line realization together with quotient descent.
+Define the \emph{canonical dominant-null datum} by
+\[
+N^{\mathrm{dom-null}}_{\Lambda_k}
+:=
+\ker \overline{\rho}^{\mathrm{dom}}_{\Lambda_k}
+\subset
+\mathfrak D^-_{\Lambda_k}.
+\]
+This datum depends only on the descended dominant functional on the ambiguity quotient.
+No additional reduced-welded or completion-side choice is built into the definition.
+\end{definition}
+
+\begin{lemma}[Dominant-kernel criterion for selected-line transversality]
+\label{lem:dominant-kernel-transversality}
+Fix an accepted tick \(k\), assume dominant-line realization together with quotient descent, and let
+\[
+\overline L^{\mathrm{Main}}_{\Lambda_k}
+=
+\mathbb R\,\overline\ell^{\mathrm{Main}}_{\Lambda_k}
+\subset
+\mathfrak D^-_{\Lambda_k}
+\]
+be a one-dimensional selected scalar line with
+\[
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}
+\!\bigl(
+\overline\ell^{\mathrm{Main}}_{\Lambda_k}
+\bigr)
+\neq 0.
+\]
+If
+\[
+N^{\mathrm{mn}}_{\Lambda_k}\subset \mathfrak D^-_{\Lambda_k}
+\]
+is a dominant-null parity-stable mod-null datum in the sense of
+\cref{def:dominant-null-mod-null-datum},
+then
+\[
+\overline L^{\mathrm{Main}}_{\Lambda_k}\cap N^{\mathrm{mn}}_{\Lambda_k}=\{0\}.
+\]
+So every dominant-null parity-stable mod-null datum is automatically transverse to the selected
+scalar line.
+\end{lemma}
+
+\begin{proof}
+Let
+\(
+x\in \overline L^{\mathrm{Main}}_{\Lambda_k}\cap N^{\mathrm{mn}}_{\Lambda_k}
+\).
+Because
+\(
+\overline L^{\mathrm{Main}}_{\Lambda_k}
+=
+\mathbb R\,\overline\ell^{\mathrm{Main}}_{\Lambda_k}
+\),
+there exists \(a\in\mathbb R\) with
+\(
+x=a\,\overline\ell^{\mathrm{Main}}_{\Lambda_k}
+\).
+Since
+\(
+N^{\mathrm{mn}}_{\Lambda_k}\subset
+\ker \overline{\rho}^{\mathrm{dom}}_{\Lambda_k}
+\),
+we have
+\[
+0
+=
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}(x)
+=
+a\,
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}
+\!\bigl(
+\overline\ell^{\mathrm{Main}}_{\Lambda_k}
+\bigr).
+\]
+The coefficient
+\(
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}
+(\overline\ell^{\mathrm{Main}}_{\Lambda_k})
+\)
+is nonzero by hypothesis, so \(a=0\).
+Therefore \(x=0\), proving
+\(
+\overline L^{\mathrm{Main}}_{\Lambda_k}\cap N^{\mathrm{mn}}_{\Lambda_k}=\{0\}
+\).
+\end{proof}
+
+\begin{theorem}[The dominant kernel is the canonical dominant-null datum]
+\label{thm:canonical-dominant-null-datum}
+Fix an accepted tick \(k\), assume dominant-line realization together with quotient descent, and let
+\[
+\overline L^{\mathrm{Main}}_{\Lambda_k}
+=
+\mathbb R\,\overline\ell^{\mathrm{Main}}_{\Lambda_k}
+\subset
+\mathfrak D^-_{\Lambda_k}
+\]
+be a one-dimensional selected scalar line with
+\[
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}
+\!\bigl(
+\overline\ell^{\mathrm{Main}}_{\Lambda_k}
+\bigr)
+\neq 0.
+\]
+Define
+\[
+N^{\mathrm{dom-null}}_{\Lambda_k}
+:=
+\ker \overline{\rho}^{\mathrm{dom}}_{\Lambda_k}
+\subset
+\mathfrak D^-_{\Lambda_k}.
+\]
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item \(N^{\mathrm{dom-null}}_{\Lambda_k}\) is stable under the descended physical parity on
+  \(\mathfrak D^-_{\Lambda_k}\);
+\item \(N^{\mathrm{dom-null}}_{\Lambda_k}\) is a dominant-null parity-stable mod-null datum in the
+  sense of \cref{def:dominant-null-mod-null-datum};
+\item the selected scalar line is automatically transverse to the canonical dominant-null datum:
+  \[
+  \overline L^{\mathrm{Main}}_{\Lambda_k}
+  \cap
+  N^{\mathrm{dom-null}}_{\Lambda_k}
+  =
+  \{0\}.
+  \]
+\end{enumerate}
+Hence the canonical dominant kernel is admissible as the mod-null datum for the conditional
+reentry theorem.
+\end{theorem}
+
+\begin{proof}
+Let \(x\in N^{\mathrm{dom-null}}_{\Lambda_k}\).
+Because the descended physical parity acts on \(\mathfrak D^-_{\Lambda_k}\) by \(-\mathrm{id}\),
+we have
+\[
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}(-x)
+=
+-\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}(x)
+=
+0.
+\]
+So \(-x\in N^{\mathrm{dom-null}}_{\Lambda_k}\), proving parity stability.
+Item \textnormal{(2)} is then exactly \cref{def:dominant-null-mod-null-datum} with
+\(
+N^{\mathrm{mn}}_{\Lambda_k}=N^{\mathrm{dom-null}}_{\Lambda_k}
+\).
+Item \textnormal{(3)} is \cref{lem:dominant-kernel-transversality} applied to this canonical
+choice.
+\end{proof}
+
+\begin{lemma}[Transversality reduces mod-null reentry to quotient construction]
+\label{lem:mod-null-transversality-reduction}
+Fix an accepted tick \(k\), assume dominant-line realization together with quotient descent, and let
+\[
+\overline L^{\mathrm{Main}}_{\Lambda_k}
+=
+\mathbb R\,\overline\ell^{\mathrm{Main}}_{\Lambda_k}
+\subset
+\mathfrak D^-_{\Lambda_k}
+\]
+be a one-dimensional selected scalar line with
+\[
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}
+\!\bigl(
+\overline\ell^{\mathrm{Main}}_{\Lambda_k}
+\bigr)
+\neq 0.
+\]
+Assume moreover a parity-stable mod-null datum transverse to
+\(
+\overline L^{\mathrm{Main}}_{\Lambda_k}
+\)
+in the sense of \cref{def:mod-null-transverse-datum}.
+Define
+\[
+\ell^{\mathrm{sel,mn}}_{\Lambda_k}
+:=
+\pi^{\mathrm{mn}}_{\Lambda_k}
+\!\bigl(
+\overline\ell^{\mathrm{Main}}_{\Lambda_k}
+\bigr)
+\]
+and
+\[
+L^{\mathrm{sel,mn}}_{\Lambda_k}
+:=
+\mathbb R\,\ell^{\mathrm{sel,mn}}_{\Lambda_k}
+\subset
+\mathcal V^{1,\mathrm{mn}}_{\Lambda_k}.
+\]
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item the restriction of
+  \(
+  \pi^{\mathrm{mn}}_{\Lambda_k}
+  \)
+  to
+  \(
+  \overline L^{\mathrm{Main}}_{\Lambda_k}
+  \)
+  is injective;
+\item \(L^{\mathrm{sel,mn}}_{\Lambda_k}\) is a well-defined one-dimensional line in the mod-null
+  quotient, generated by the nonzero class
+  \(
+  \ell^{\mathrm{sel,mn}}_{\Lambda_k}
+  \);
+\item the mod-null selected realization map
+  \[
+  \mathfrak R^{\mathrm{mn}}_{\Lambda_k}:
+  L^{\mathrm{sel,mn}}_{\Lambda_k}
+  \longrightarrow
+  \mathbb R\,u^{\mathrm{LoG}}_{\Lambda_k},
+  \qquad
+  \mathfrak R^{\mathrm{mn}}_{\Lambda_k}
+  \!\bigl(
+  a\,\ell^{\mathrm{sel,mn}}_{\Lambda_k}
+  \bigr)
+  :=
+  a\,
+  \overline{\rho}^{\mathrm{dom}}_{\Lambda_k}
+  \!\bigl(
+  \overline\ell^{\mathrm{Main}}_{\Lambda_k}
+  \bigr)\,
+  u^{\mathrm{LoG}}_{\Lambda_k}
+  \]
+  is well defined and faithful;
+\item the descended involution acts by sign:
+  \[
+  \Gamma^{\mathrm{mn}}_{\Lambda_k}
+  \!\bigl(
+  \ell^{\mathrm{sel,mn}}_{\Lambda_k}
+  \bigr)
+  =
+  -
+  \ell^{\mathrm{sel,mn}}_{\Lambda_k}.
+  \]
+\end{enumerate}
+In particular, once the transversality condition
+\(
+\overline L^{\mathrm{Main}}_{\Lambda_k}\cap N^{\mathrm{mn}}_{\Lambda_k}=\{0\}
+\)
+is known, the remaining mod-null reentry step reduces to quotient construction plus parity descent.
+\end{lemma}
+
+\begin{proof}
+If
+\(
+x\in \overline L^{\mathrm{Main}}_{\Lambda_k}
+\)
+and
+\(
+\pi^{\mathrm{mn}}_{\Lambda_k}(x)=0
+\),
+then
+\(
+x\in N^{\mathrm{mn}}_{\Lambda_k}
+\)
+by definition of the quotient kernel.
+Hence
+\(
+x\in
+\overline L^{\mathrm{Main}}_{\Lambda_k}\cap N^{\mathrm{mn}}_{\Lambda_k}
+=
+\{0\}
+\),
+which proves injectivity.
+Since
+\(
+\overline\ell^{\mathrm{Main}}_{\Lambda_k}\neq 0
+\),
+its image
+\(
+\ell^{\mathrm{sel,mn}}_{\Lambda_k}
+\)
+is therefore nonzero, and the image of a one-dimensional line under an injective linear map is
+again one-dimensional.
+This proves items \textnormal{(1)} and \textnormal{(2)}.
+
+Injectivity on
+\(
+\overline L^{\mathrm{Main}}_{\Lambda_k}
+\)
+implies that every element of
+\(
+L^{\mathrm{sel,mn}}_{\Lambda_k}
+\)
+has a unique expression
+\(
+a\,\ell^{\mathrm{sel,mn}}_{\Lambda_k}
+\),
+so the displayed formula defines
+\(
+\mathfrak R^{\mathrm{mn}}_{\Lambda_k}
+\)
+unambiguously.
+Its coefficient
+\(
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}
+(\overline\ell^{\mathrm{Main}}_{\Lambda_k})
+\)
+is nonzero by hypothesis, and
+\(
+u^{\mathrm{LoG}}_{\Lambda_k}\neq 0
+\)
+by \cref{cor:compressed-export-selection}.
+Therefore
+\(
+\mathfrak R^{\mathrm{mn}}_{\Lambda_k}
+(a\,\ell^{\mathrm{sel,mn}}_{\Lambda_k})
+=
+0
+\)
+implies
+\(
+a=0
+\),
+so the map is faithful.
+This proves item \textnormal{(3)}.
+
+By construction of the descended involution,
+\[
+\Gamma^{\mathrm{mn}}_{\Lambda_k}
+\!\bigl(
+\ell^{\mathrm{sel,mn}}_{\Lambda_k}
+\bigr)
+=
+\Gamma^{\mathrm{mn}}_{\Lambda_k}
+\!\Bigl(
+\pi^{\mathrm{mn}}_{\Lambda_k}
+\!\bigl(
+\overline\ell^{\mathrm{Main}}_{\Lambda_k}
+\bigr)
+\Bigr)
+=
+\pi^{\mathrm{mn}}_{\Lambda_k}
+\!\bigl(
+-\overline\ell^{\mathrm{Main}}_{\Lambda_k}
+\bigr)
+=
+-\ell^{\mathrm{sel,mn}}_{\Lambda_k},
+\]
+which proves item \textnormal{(4)}.
+\end{proof}
+
+\begin{theorem}[Conditional mod-null reentry on the selected scalar line]
+\label{thm:conditional-mod-null-reentry}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume the hypotheses and notation of
+\cref{splitlift-thm:splitlift-scalar-descendant-lift}.
+In particular, let
+\[
+\overline L^{\mathrm{Main}}_{\Lambda_{k+1}}
+=
+\mathbb R\,\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}
+\subset
+\mathfrak D^-_{\Lambda_{k+1}}
+\]
+be the nonzero selected scalar descendant line supplied there.
+Assume moreover a parity-stable mod-null datum transverse to
+\(
+\overline L^{\mathrm{Main}}_{\Lambda_{k+1}}
+\)
+in the sense of \cref{def:mod-null-transverse-datum}.
+Define
+\[
+\ell^{\mathrm{sel,mn}}_{\Lambda_{k+1}}
+:=
+\pi^{\mathrm{mn}}_{\Lambda_{k+1}}
+\!\bigl(
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}
+\bigr)
+\]
+and
+\[
+L^{\mathrm{sel,mn}}_{\Lambda_{k+1}}
+:=
+\mathbb R\,\ell^{\mathrm{sel,mn}}_{\Lambda_{k+1}}
+\subset
+\mathcal V^{1,\mathrm{mn}}_{\Lambda_{k+1}}.
+\]
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item \(L^{\mathrm{sel,mn}}_{\Lambda_{k+1}}\) is a well-defined one-dimensional selected descendant
+  line in the mod-null quotient;
+\item the induced mod-null selected realization map
+  \[
+  \mathfrak R^{\mathrm{mn}}_{\Lambda_{k+1}}:
+  L^{\mathrm{sel,mn}}_{\Lambda_{k+1}}
+  \longrightarrow
+  \mathbb R\,u^{\mathrm{LoG}}_{\Lambda_{k+1}},
+  \qquad
+  \mathfrak R^{\mathrm{mn}}_{\Lambda_{k+1}}
+  \!\bigl(
+  a\,\ell^{\mathrm{sel,mn}}_{\Lambda_{k+1}}
+  \bigr)
+  :=
+  a\,
+  \overline{\rho}^{\mathrm{dom}}_{\Lambda_{k+1}}
+  \!\bigl(
+  \overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}
+  \bigr)\,
+  u^{\mathrm{LoG}}_{\Lambda_{k+1}}
+  \]
+  is well defined and faithful;
+\item the descended involution acts by sign:
+  \[
+  \Gamma^{\mathrm{mn}}_{\Lambda_{k+1}}
+  \!\bigl(
+  \ell^{\mathrm{sel,mn}}_{\Lambda_{k+1}}
+  \bigr)
+  =
+  -
+  \ell^{\mathrm{sel,mn}}_{\Lambda_{k+1}}.
+  \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By \cref{splitlift-thm:splitlift-scalar-descendant-lift},
+\[
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}\neq 0
+\qquad\text{and}\qquad
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_{k+1}}
+\!\bigl(
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}
+\bigr)
+\neq 0.
+\]
+So every hypothesis of
+\cref{lem:mod-null-transversality-reduction}
+is in force at \(\Lambda_{k+1}\).
+Applying that lemma gives items \textnormal{(1)}--\textnormal{(3)} immediately.
+\end{proof}
+
+\begin{corollary}[Canonical dominant-kernel discharge of the mod-null reentry step]
+\label{cor:dominant-kernel-mod-null-reentry}
+Fix an accepted tick \(k\) and the next accepted receiver step \(k+1\).
+Assume the hypotheses and notation of
+\cref{splitlift-thm:splitlift-scalar-descendant-lift}.
+Define the canonical dominant-null datum
+\[
+N^{\mathrm{dom-null}}_{\Lambda_{k+1}}
+:=
+\ker \overline{\rho}^{\mathrm{dom}}_{\Lambda_{k+1}}
+\subset
+\mathfrak D^-_{\Lambda_{k+1}}.
+\]
+Then \(N^{\mathrm{dom-null}}_{\Lambda_{k+1}}\) is admissible as the mod-null datum of
+\cref{thm:conditional-mod-null-reentry}, the transversality hypothesis of that theorem is
+automatic, and hence the conclusions of that theorem hold with this canonical datum.
+\end{corollary}
+
+\begin{proof}
+By \cref{splitlift-thm:splitlift-scalar-descendant-lift},
+\[
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_{k+1}}
+\!\bigl(
+\overline\ell^{\mathrm{Main}}_{\Lambda_{k+1}}
+\bigr)
+\neq 0.
+\]
+So \cref{thm:canonical-dominant-null-datum} applies at \(\Lambda_{k+1}\).
+It shows that
+\(
+N^{\mathrm{dom-null}}_{\Lambda_{k+1}}
+\)
+is a dominant-null parity-stable mod-null datum and that
+\[
+\overline L^{\mathrm{Main}}_{\Lambda_{k+1}}
+\cap
+N^{\mathrm{dom-null}}_{\Lambda_{k+1}}
+=
+\{0\}.
+\]
+This is exactly the admissibility and transversality clause required by
+\cref{thm:conditional-mod-null-reentry}, so that theorem now applies directly with the canonical
+datum.
+\end{proof}
+
+\begin{remark}[Conditional character of the reentry step]
+\label{rem:conditional-mod-null-reentry}
+\cref{thm:conditional-mod-null-reentry} is a quotient-level reentry statement.
+After
+\cref{lem:dominant-kernel-transversality,thm:canonical-dominant-null-datum,cor:dominant-kernel-mod-null-reentry},
+the canonical dominant-null datum is fixed as
+\(
+\ker\overline{\rho}^{\mathrm{dom}}_{\Lambda_{k+1}}
+\)
+on \(\mathfrak D^-_{\Lambda_{k+1}}\).
+What remains is passage to the mod-null quotient together with parity descent on the odd line.
+Accordingly, the theorem should not be read as a statement on the raw descendant ambiguity quotient
+or on any stronger physical quotient.
+\end{remark}
+
+\subsection*{Branchwise orientation transport}
+\label{subsec:branchwise-orientation}
+
+This subsection studies transport of the descended descendant sign along a connected accepted
+branch. The sign can be transported once the descended descendant value varies continuously with the
+cutoff. The compressed spectral-selection theorem already gives continuity of the dominant
+projector, and \cref{thm:dominant-line-persistence} gives continuity of the dominant physical line.
+We combine those inputs with continuity of the projected descendant response.
+
+\begin{definition}[Branchwise descendant overlap function]
+\label{def:branchwise-overlap-function}
+Let \(I\) be a connected accepted-branch segment.
+Assume dominant-line realization and quotient descent for every \(\Lambda\in I\).
+Suppose there is a branchwise choice of representatives
+\[
+J^{\mathrm{desc}}_{\Lambda}\in[\Xi^{(1)}_{\Lambda}]
+\qquad
+(\Lambda\in I)
+\]
+such that the projected covariance response
+\[
+\Lambda\longmapsto
+\Pi_{\mathrm{phys},\Lambda}\mathcal R_{\Lambda}(J^{\mathrm{desc}}_{\Lambda})
+\]
+is continuous in the Fisher topology.
+Define the associated branchwise descendant overlap function by
+\begin{equation}
+m_I(\Lambda)
+:=
+\rho^{\mathrm{dom}}_{\Lambda}(J^{\mathrm{desc}}_{\Lambda})
+=
+\overline{\rho}^{\mathrm{dom}}_{\Lambda}\big([\![\Xi^{(1)}_{\Lambda}]\!]\big).
+\label{eq:branchwise-overlap-function}
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Continuity of the descended overlap scalar]
+\label{prop:branchwise-overlap-continuity}
+Let \(I\) be a connected accepted-branch segment.
+Assume:
+\begin{enumerate}[leftmargin=2em]
+\item the hypotheses of \cref{thm:dominant-line-persistence} on \(I\);
+\item quotient descent holds for every \(\Lambda\in I\);
+\item the branchwise choice of representatives in
+  \cref{def:branchwise-overlap-function} exists.
+\end{enumerate}
+Then the scalar function \(m_I:I\to\mathbb R\) is well defined, independent of the chosen
+branchwise representatives, and continuous.
+Moreover,
+\begin{equation}
+|m_I(\Lambda)|
+=
+\nu_{\Lambda}
+\qquad
+\forall \Lambda\in I.
+\label{eq:branchwise-overlap-margin}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Independence of the chosen branchwise representatives is exactly the coset constancy proved in
+\cref{cor:dominant-quotient-constancy}: if
+\(
+J'^{\mathrm{desc}}_{\Lambda}-J^{\mathrm{desc}}_{\Lambda}\in\mathcal A^-_{\Lambda}
+\),
+then
+\[
+\rho^{\mathrm{dom}}_{\Lambda}(J'^{\mathrm{desc}}_{\Lambda})
+=
+\rho^{\mathrm{dom}}_{\Lambda}(J^{\mathrm{desc}}_{\Lambda})
+=
+\overline{\rho}^{\mathrm{dom}}_{\Lambda}\big([\![\Xi^{(1)}_{\Lambda}]\!]\big).
+\]
+Thus \(m_I\) is well defined.
+
+By \cref{thm:dominant-line-persistence}, the normalized dominant vector
+\(
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda}
+\)
+and the dominant projector
+\(
+\Pi^{\mathrm{dom}}_{\Lambda}
+\)
+depend continuously on \(\Lambda\in I\).
+By assumption, the response vector
+\[
+X_{\Lambda}
+:=
+\Pi_{\mathrm{phys},\Lambda}\mathcal R_{\Lambda}(J^{\mathrm{desc}}_{\Lambda})
+\]
+is also continuous on \(I\).
+Using \cref{def:dominant-cov-projector}, we have
+\[
+\Pi^{\mathrm{dom}}_{\Lambda}X_{\Lambda}
+=
+m_I(\Lambda)\,\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda}.
+\]
+The left-hand side is continuous because both factors are continuous, while
+\(
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda}\neq 0
+\)
+for all \(\Lambda\in I\) by \cref{thm:dominant-line-persistence}.
+Therefore the scalar coefficient \(m_I(\Lambda)\) is continuous.
+
+Finally, \eqref{eq:branchwise-overlap-margin} is just the definition of \(\nu_{\Lambda}\) from
+\cref{def:descendant-overlap-margin} together with \eqref{eq:branchwise-overlap-function}.
+\end{proof}
+
+\begin{theorem}[Branchwise orientation transport on the descendant class]
+\label{thm:branchwise-orientation-transport}
+Let \(I\) be a connected accepted-branch segment and assume the hypotheses of
+\cref{prop:branchwise-overlap-continuity}.
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item on every connected subsegment \(I'\subset I\) such that
+  \[
+  \nu_{\Lambda}>0
+  \qquad
+  \forall \Lambda\in I',
+  \]
+  the sign
+  \begin{equation}
+  \varepsilon_{\Lambda}
+  :=
+  \operatorname{sgn} m_I(\Lambda)
+  =
+  \operatorname{sgn}\!\Big(
+  \overline{\rho}^{\mathrm{dom}}_{\Lambda}\big([\![\Xi^{(1)}_{\Lambda}]\!]\big)
+  \Big)
+  \in\{\pm1\}
+  \label{eq:branchwise-epsilon}
+  \end{equation}
+  is constant on \(I'\);
+\item if \(\nu_{\Lambda_0}>0\) at one point \(\Lambda_0\in I\), then there exists a neighborhood
+  \(I_0\subset I\) of \(\Lambda_0\) on which \(\varepsilon_{\Lambda}\) is constant and equal to
+  \(\varepsilon_{\Lambda_0}\);
+\item under the present hypotheses, a change of sign can occur only at a cutoff where the
+  descendant overlap closes
+  \(
+  \nu_{\Lambda}=0
+  \).
+\end{enumerate}
+In particular, once dominant-line realization, quotient descent, and nonzero overlap are
+established on an accepted branch segment and the projected descendant response varies continuously
+there, the branchwise sign statement of \cref{thm:active-response-transport-minimal} follows.
+\end{theorem}
+
+\begin{proof}
+By \cref{prop:branchwise-overlap-continuity}, \(m_I(\Lambda)\) is a continuous real-valued function
+on \(I\).
+On any connected subsegment \(I'\) where \(\nu_{\Lambda}=|m_I(\Lambda)|>0\), the function \(m_I\)
+never vanishes.
+A continuous nonvanishing real-valued function on a connected set has constant sign, proving item
+(1).
+
+Item (2) is the local version of the same argument: if \(m_I(\Lambda_0)\neq 0\), continuity gives a
+neighborhood \(I_0\) on which \(m_I\) keeps the sign it has at \(\Lambda_0\).
+
+For item (3), any sign change would force \(m_I\) to pass through zero by the intermediate value
+theorem, hence \(\nu_{\Lambda}=|m_I(\Lambda)|=0\) at some intermediate cutoff.
+\end{proof}
+
+\begin{corollary}[Local orientation persistence from one-tick activity]
+\label{cor:branchwise-orientation-local}
+Let \(I\) be a connected accepted-branch segment and assume the hypotheses of
+\cref{prop:branchwise-overlap-continuity}.
+If the transported descendant class is dominant-active at one cutoff \(\Lambda_0\in I\), i.e.
+\[
+\nu_{\Lambda_0}>0,
+\]
+then there exists a neighborhood \(I_0\subset I\) of \(\Lambda_0\) such that
+\[
+\varepsilon_{\Lambda}=\varepsilon_{\Lambda_0}
+\qquad
+\forall \Lambda\in I_0.
+\]
+\end{corollary}
+
+\begin{proof}
+This is exactly item (2) of \cref{thm:branchwise-orientation-transport}.
+\end{proof}
+
+\subsection*{Witness-indexed seam realization and scalar bridge}
+\label{subsec:witness-seam-bridge}
+
+The bridge used below factors through a common LS witness datum rather than a direct identification
+of a UOM seam source with a descendant representative.
+On the UOM side one realizes a filler tag together with a detector witness by an admissible odd
+welded source, measures the resulting dominant physical pairing, and then compares that scalar with
+the odd representative attached to the same witness.
+
+\begin{definition}[Accepted record payload of a welded odd source]
+\label{def:accepted-record-payload}
+Fix an accepted tick \(k\).
+For an admissible welded odd trace-channel source \(\tau\), let
+\[
+\rho_{\Lambda_k}[\tau]
+\]
+denote the receiver state at cutoff \(\Lambda_k\) produced by that source in the welded UOM channel.
+Define its accepted record payload by
+\begin{equation}
+\mathcal P^{\mathrm{acc}}_{\Lambda_k}[\tau]
+:=
+\Pi_{\Delta(\Lambda_k)}\!\big(\rho_{\Lambda_k}[\tau]\big).
+\label{eq:accepted-record-payload}
+\end{equation}
+This is the diagonal/record part retained by the finite-cutoff acceptance map.
+\end{definition}
+
+\begin{definition}[Witness-indexed seam realization at an accepted tick]
+\label{def:witness-seam-realization}
+Fix an accepted tick \(k\).
+Let \(y\) be a witness on the LS difference object, and write \(\mathrm{flip}(y)\) for the induced
+LS involution.
+A \emph{witness-indexed seam realization} at \(\Lambda_k\) is a choice of admissible welded odd
+trace-channel sources
+\[
+\tau^{f,y}_{\Lambda_k},
+\qquad
+f\in\{\mathrm{diag},\mathrm{bridge}\},
+\]
+such that:
+\begin{enumerate}[leftmargin=2em]
+\item \textbf{filler toggle changes the odd seam sign:}
+  \[
+  \tau^{\mathrm{bridge},y}_{\Lambda_k}
+  =
+  -\,\tau^{\mathrm{diag},y}_{\Lambda_k};
+  \]
+\item \textbf{witness flip changes the odd seam sign:}
+  \[
+  \tau^{f,\mathrm{flip}(y)}_{\Lambda_k}
+  =
+  -\,\tau^{f,y}_{\Lambda_k}
+  \qquad
+  \forall f\in\{\mathrm{diag},\mathrm{bridge}\};
+  \]
+\item \textbf{accepted record payload is unchanged under filler toggle:}
+  \[
+  \mathcal P^{\mathrm{acc}}_{\Lambda_k}\!\big[\tau^{\mathrm{bridge},y}_{\Lambda_k}\big]
+  =
+  \mathcal P^{\mathrm{acc}}_{\Lambda_k}\!\big[\tau^{\mathrm{diag},y}_{\Lambda_k}\big].
+  \]
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[Accepted-record invariance versus seam-scalar use]
+\label{rem:accepted-record-vs-seam}
+The accepted-record invariance clause in \cref{def:witness-seam-realization} encodes the physical
+indistinguishability of filler toggle at the accepted-record layer.
+The seam-scalar theorems below use only the induced odd sign relations in the source channel.
+\end{remark}
+
+\begin{definition}[Raw and normalized seam pairings]
+\label{def:raw-seam-pairing}
+Fix an accepted tick \(k\) and a witness-indexed seam realization as in
+\cref{def:witness-seam-realization}.
+For \(f\in\{\mathrm{diag},\mathrm{bridge}\}\) and witness \(y\), define the \emph{raw seam
+pairing} by
+\begin{equation}
+\widetilde s_{\Lambda_k}(f,y)
+:=
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}\!\big[\tau^{f,y}_{\Lambda_k}\big],\,
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}.
+\label{eq:raw-seam-pairing}
+\end{equation}
+Whenever dominant-line realization holds so that
+\(
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k}
+\)
+is defined, also set
+\begin{equation}
+s_{\Lambda_k}(f,y)
+:=
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}\!\big[\tau^{f,y}_{\Lambda_k}\big],\,
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}.
+\label{eq:normalized-seam-pairing}
+\end{equation}
+\end{definition}
+
+\begin{proposition}[Filler and witness parity of the seam scalar]
+\label{prop:seam-scalar-signs}
+Fix an accepted tick \(k\) and assume a witness-indexed seam realization at \(\Lambda_k\).
+Then the raw seam pairing satisfies
+\begin{equation}
+\widetilde s_{\Lambda_k}(\mathrm{bridge},y)
+=
+-\,\widetilde s_{\Lambda_k}(\mathrm{diag},y),
+\qquad
+\widetilde s_{\Lambda_k}(f,\mathrm{flip}(y))
+=
+-\,\widetilde s_{\Lambda_k}(f,y).
+\label{eq:raw-seam-signs}
+\end{equation}
+If dominant-line realization also holds, then the same identities hold for the normalized seam
+pairing:
+\begin{equation}
+s_{\Lambda_k}(\mathrm{bridge},y)
+=
+-\,s_{\Lambda_k}(\mathrm{diag},y),
+\qquad
+s_{\Lambda_k}(f,\mathrm{flip}(y))
+=
+-\,s_{\Lambda_k}(f,y).
+\label{eq:normalized-seam-signs}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+The map
+\(
+\tau\mapsto \Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}[\tau]
+\)
+is linear because \(\mathsf T_{\Lambda_k}\) and \(\Pi_{\mathrm{phys},\Lambda_k}\) are linear.
+The Fisher pairing is bilinear.
+Applying the sign relations of \cref{def:witness-seam-realization} therefore gives
+\[
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}\!\big[\tau^{\mathrm{bridge},y}_{\Lambda_k}\big]
+=
+-\,\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}\!\big[\tau^{\mathrm{diag},y}_{\Lambda_k}\big]
+\]
+and
+\[
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}\!\big[\tau^{f,\mathrm{flip}(y)}_{\Lambda_k}\big]
+=
+-\,\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}\!\big[\tau^{f,y}_{\Lambda_k}\big].
+\]
+Pairing with \(\delta C^{\mathrm{LoG}}_{\Lambda_k}\) proves \eqref{eq:raw-seam-signs}.
+If dominant-line realization holds, then
+\(
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k}
+\)
+is a fixed nonzero normalization of the same vector, so the same argument proves
+\eqref{eq:normalized-seam-signs}.
+\end{proof}
+
+\begin{definition}[Detector-factorized seam coupling]
+\label{def:detector-factorized-seam}
+Fix an accepted tick \(k\).
+A witness-indexed seam realization is called \emph{detector-factorized} if there exists a single
+admissible welded odd trace-channel source
+\[
+\tau^{\mathrm{unit}}_{\Lambda_k}
+\]
+and the LS detector factor
+\[
+\overline{\mathrm{obs}}
+:
+\text{LS difference object}\to\mathbb R
+\]
+such that, for every filler tag \(f\) and witness \(y\),
+\begin{equation}
+\tau^{f,y}_{\Lambda_k}
+=
+\sigma_{\mathrm{fill}}(f)\,
+\overline{\mathrm{obs}}(y)\,
+\tau^{\mathrm{unit}}_{\Lambda_k},
+\qquad
+\sigma_{\mathrm{fill}}(\mathrm{diag})=+1,\quad
+\sigma_{\mathrm{fill}}(\mathrm{bridge})=-1.
+\label{eq:detector-factorized-seam}
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Seam faithfulness scalar]
+\label{thm:seam-faithfulness-scalar}
+Fix an accepted tick \(k\) and assume a detector-factorized witness-indexed seam realization at
+\(\Lambda_k\).
+Define the fixed-cutoff seam coefficient by
+\begin{equation}
+\widetilde c_{\Lambda_k}
+:=
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}\!\big[\tau^{\mathrm{unit}}_{\Lambda_k}\big],\,
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}.
+\label{eq:seam-faithfulness-coeff}
+\end{equation}
+Then, for every filler tag \(f\) and witness \(y\),
+\begin{equation}
+\widetilde s_{\Lambda_k}(f,y)
+=
+\sigma_{\mathrm{fill}}(f)\,
+\widetilde c_{\Lambda_k}\,
+\overline{\mathrm{obs}}(y).
+\label{eq:raw-seam-factorization}
+\end{equation}
+In particular, if
+\[
+\widetilde c_{\Lambda_k}\neq 0
+\qquad\text{and}\qquad
+\overline{\mathrm{obs}}(y)\neq 0,
+\]
+then the raw seam pairing is nonzero:
+\[
+\widetilde s_{\Lambda_k}(f,y)\neq 0.
+\]
+Consequently the compressed welded LoG line is transversely physical at \(\Lambda_k\), hence
+dominant-line realization holds at that cutoff by \cref{prop:dominant-line-equivalent}.
+When dominant-line realization holds, the normalized seam coefficient
+\begin{equation}
+c_{\Lambda_k}
+:=
+\kappa_{\Lambda_k}^{-1/2}\,\widetilde c_{\Lambda_k}
+\label{eq:normalized-seam-coeff}
+\end{equation}
+is defined and
+\begin{equation}
+s_{\Lambda_k}(f,y)
+=
+\sigma_{\mathrm{fill}}(f)\,
+c_{\Lambda_k}\,
+\overline{\mathrm{obs}}(y).
+\label{eq:normalized-seam-factorization}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Substitute the detector-factorized form \eqref{eq:detector-factorized-seam} into the definition
+\eqref{eq:raw-seam-pairing}.
+Linearity of \(\mathsf T_{\Lambda_k}\) and bilinearity of the Fisher pairing give
+\[
+\widetilde s_{\Lambda_k}(f,y)
+=
+\sigma_{\mathrm{fill}}(f)\,\overline{\mathrm{obs}}(y)\,
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}\!\big[\tau^{\mathrm{unit}}_{\Lambda_k}\big],\,
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}},
+\]
+which is exactly \eqref{eq:raw-seam-factorization}.
+
+If \(\widetilde c_{\Lambda_k}\neq 0\) and \(\overline{\mathrm{obs}}(y)\neq 0\), then
+\(
+\widetilde s_{\Lambda_k}(f,y)\neq 0
+\).
+Set
+\[
+B_{\Lambda_k}
+:=
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}\!\big[\tau^{f,y}_{\Lambda_k}\big].
+\]
+Then
+\[
+\big\langle\!\big\langle
+\delta C^{\mathrm{LoG}}_{\Lambda_k},\,B_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}
+=
+\widetilde s_{\Lambda_k}(f,y)
+\neq 0.
+\]
+By item (4) of \cref{prop:dominant-line-equivalent}, this proves transversality of the compressed
+line and hence dominant-line realization at \(\Lambda_k\).
+
+Once dominant-line realization holds, divide \eqref{eq:raw-seam-factorization} by
+\(
+\|\delta C^{\mathrm{LoG}}_{\Lambda_k}\|_{C_{\ast,\Lambda_k}}
+=
+\kappa_{\Lambda_k}^{1/2}
+\)
+to obtain \eqref{eq:normalized-seam-factorization}.
+\end{proof}
+
+\begin{remark}[Downstream role of the seam-coefficient hypothesis]
+The fixed-cutoff nonvanishing hypothesis
+\(
+\widetilde c_{\Lambda_k}\neq 0
+\)
+is exactly the input that, once dominant-line realization defines
+\(
+c_{\Lambda_k}
+\),
+is imported downstream as the nondegeneracy clause
+\(
+c_{\Lambda_k}\neq 0
+\)
+inside the delayed selected-line package.
+This note does not derive that clause from split-threshold analysis alone.
+\end{remark}
+
+\begin{definition}[Odd source representability on the characterization layer]
+\label{def:odd-source-representability}
+Fix an accepted tick \(k\).
+Let \(\tau\) be an admissible welded odd trace-channel source.
+We say that \(\tau\) is \emph{representable on the characterization layer} if there exists an odd
+sufficiently local generator
+\[
+F_{\tau,\Lambda_k}\in E^-_{\Lambda_k}
+\]
+such that its intrinsic physical covariance response agrees with the UOM welded response:
+\begin{equation}
+\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}\!\big(F_{\tau,\Lambda_k}\big)
+=
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}[\tau].
+\label{eq:odd-source-representability}
+\end{equation}
+This is the strong source-insertion realization statement.
+\end{definition}
+
+\begin{theorem}[UOM source-insertion representability theorem]
+\label{thm:odd-source-representability}
+Fix an accepted tick \(k\).
+Let \(\tau\) be an admissible welded odd trace-channel source at cutoff \(\Lambda_k\), in the
+finite-cutoff UOM sense: its receiver-head profile is band-limited at \(\Lambda_k\) and compactly
+supported inside the accepted slab.
+Then there exists a canonically associated odd sufficiently local generator
+\[
+F_{\tau,\Lambda_k}\in E^-_{\Lambda_k}
+\]
+such that
+\begin{equation}
+\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}\!\big(F_{\tau,\Lambda_k}\big)
+=
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}[\tau].
+\label{eq:odd-source-representability-thm}
+\end{equation}
+In particular, every witness-indexed seam source used in the present note is representable on the
+characterization layer.
+\end{theorem}
+
+\begin{proof}
+By the finite-cutoff UOM Peierls package, admissible receiver-head sources at cutoff \(\Lambda_k\)
+are band-limited boundary test data and the sufficiently local class
+\(\mathcal F_{\rm s.loc}^{\Lambda_k}\) contains all compact smearings of local boundary densities.
+Let
+\[
+F_{\tau,\Lambda_k}
+\]
+be the linear source functional obtained by pairing the odd trace-channel source profile \(\tau\)
+with the corresponding odd trace-channel boundary field on the receiver head.
+Because this is the linear case of the sufficiently local form and \(\tau\) is physically odd,
+\[
+F_{\tau,\Lambda_k}\in E^-_{\Lambda_k}.
+\]
+
+Now apply the UOM source insertion map from the finite-cutoff retarded-kernel package.
+The source \(\tau\) is sent to the bulk forcing term in the linearized equation; the unique
+retarded solution is obtained by the retarded Green operator; and boundary restriction gives the
+retarded covariance variation. By the UOM identification of the induced retarded kernel with the SK
+mixed second derivative, this covariance variation is exactly the welded source-to-covariance
+response
+\[
+\mathsf T_{\Lambda_k}[\tau].
+\]
+
+On the other hand, by the definition of the intrinsic covariance-response map, the matrix elements
+of
+\(
+\mathcal R_{\Lambda_k}(F_{\tau,\Lambda_k})
+\)
+are computed by the Peierls action of \(F_{\tau,\Lambda_k}\) on the sufficiently local quadratic
+probes representing boundary covariance entries.
+That Peierls variation is precisely the same retarded second-moment variation generated by the
+source insertion \(\tau\).
+Therefore
+\[
+\mathcal R_{\Lambda_k}(F_{\tau,\Lambda_k})
+=
+\mathsf T_{\Lambda_k}[\tau]
+\]
+as covariance tangents.
+Applying the physical projector \(\Pi_{\mathrm{phys},\Lambda_k}\) gives
+\eqref{eq:odd-source-representability-thm}.
+
+The witness-indexed seam sources of \cref{def:witness-seam-realization} are, by construction, live
+admissible welded odd trace-channel sources at the accepted tick, so the same argument applies to
+each of them.
+\end{proof}
+
+\begin{proposition}[Dominant pairing for a representable odd source]
+\label{prop:odd-source-pairing}
+Fix an accepted tick \(k\) and let \(\tau\) be an admissible welded odd trace-channel source that is
+representable in the sense of \cref{thm:odd-source-representability}.
+Then
+\begin{equation}
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}\!\big(F_{\tau,\Lambda_k}\big),\,
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}
+=
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}[\tau],\,
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}.
+\label{eq:representable-raw-pairing}
+\end{equation}
+If dominant-line realization also holds, then
+\begin{equation}
+\rho^{\mathrm{dom}}_{\Lambda_k}\!\big(F_{\tau,\Lambda_k}\big)
+=
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}[\tau],\,
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}.
+\label{eq:representable-normalized-pairing}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Equation \eqref{eq:odd-source-representability} identifies the two physical covariance tangents.
+Pairing both sides with \(\delta C^{\mathrm{LoG}}_{\Lambda_k}\) gives
+\eqref{eq:representable-raw-pairing}.
+If dominant-line realization holds, pair with the normalized vector
+\(
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k}
+\)
+instead and use the definition \eqref{eq:rho-dom-def} of
+\(
+\rho^{\mathrm{dom}}_{\Lambda_k}
+\)
+to obtain \eqref{eq:representable-normalized-pairing}.
+\end{proof}
+
+\begin{corollary}[Unit welded odd source representability and scalar identification]
+\label{cor:unit-source-representability}
+Fix an accepted tick \(k\).
+Assume a detector-factorized witness-indexed seam realization at \(\Lambda_k\) in the sense of
+\cref{def:detector-factorized-seam}, and assume dominant-line realization at \(\Lambda_k\).
+Then the unit welded odd source
+\(
+\tau^{\mathrm{unit}}_{\Lambda_k}
+\)
+is representable on the characterization layer, with canonical representable generator
+\[
+F_{\tau^{\mathrm{unit}}_{\Lambda_k},\Lambda_k}\in E^-_{\Lambda_k},
+\]
+and
+\begin{equation}
+\rho^{\mathrm{dom}}_{\Lambda_k}
+\!\bigl(
+F_{\tau^{\mathrm{unit}}_{\Lambda_k},\Lambda_k}
+\bigr)
+=
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}\!\big[\tau^{\mathrm{unit}}_{\Lambda_k}\big],\,
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}
+=
+c_{\Lambda_k}.
+\label{eq:unit-source-representability-scalar}
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Representability of
+\(
+\tau^{\mathrm{unit}}_{\Lambda_k}
+\)
+is the specialization of \cref{thm:odd-source-representability} to the admissible welded odd trace
+source singled out by \cref{def:detector-factorized-seam}.
+Because dominant-line realization holds, \cref{prop:odd-source-pairing} applies to that
+representable source and gives the first equality in \eqref{eq:unit-source-representability-scalar}.
+The second equality is exactly the definition of the normalized seam coefficient
+\(
+c_{\Lambda_k}
+\)
+from \cref{thm:seam-faithfulness-scalar}.
+\end{proof}
+
+\begin{definition}[Scalar comparison shadow of the witness-indexed bridge]
+\label{def:witness-descendant-comparison}
+Fix an accepted tick \(k\).
+Let \(y\) be an LS witness and let
+\(
+\tau^{f,y}_{\Lambda_k}
+\)
+be a witness-indexed seam realization source for a filler tag \(f\).
+A \emph{scalar comparison shadow} for that data is a choice of representative
+\[
+J^{f,y}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]
+\]
+such that the dominant raw pairing of the 2T-side representative agrees with the dominant raw
+pairing of the corresponding representable UOM source:
+\begin{equation}
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}\!\big(J^{f,y}_{\Lambda_k}\big),\,
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}
+=
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}\!\big(F_{\tau^{f,y}_{\Lambda_k},\Lambda_k}\big),\,
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}.
+\label{eq:witness-descendant-comparison}
+\end{equation}
+When dominant-line realization holds, this is equivalently the equality of normalized dominant
+pairings
+\begin{equation}
+\rho^{\mathrm{dom}}_{\Lambda_k}\!\big(J^{f,y}_{\Lambda_k}\big)
+=
+\rho^{\mathrm{dom}}_{\Lambda_k}\!\big(F_{\tau^{f,y}_{\Lambda_k},\Lambda_k}\big).
+\label{eq:witness-descendant-comparison-normalized}
+\end{equation}
+\end{definition}
+
+\begin{definition}[Witness-indexed source-compatible descendant realization]
+\label{def:source-compatible-witness-realization}
+Fix an accepted tick \(k\), a filler tag \(f\), a witness \(y\), and a witness-indexed seam source
+\(
+\tau^{f,y}_{\Lambda_k}
+\).
+A representative
+\[
+J^{f,y}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]
+\]
+is called a \emph{witness-indexed source-compatible descendant realization} if it realizes, on the
+same LS witness datum, the Limited Scope output and odd Hamiltonization clauses from item
+\textbf{(M1)} and item \textbf{(M4)} of Definition~\ref{main-def:uom-main-theorem-assumptions} and differs
+from the source-insertion representative only by an ambiguity direction:
+\begin{equation}
+J^{f,y}_{\Lambda_k}
+-
+F_{\tau^{f,y}_{\Lambda_k},\Lambda_k}
+\in
+\mathcal A^-_{\Lambda_k},
+\label{eq:source-compatible-witness-realization}
+\end{equation}
+where
+\(
+F_{\tau^{f,y}_{\Lambda_k},\Lambda_k}
+\)
+is the representable source generator furnished by
+\cref{thm:odd-source-representability}.
+Equivalently, the witness-indexed transported descendant class and the witness-indexed UOM
+source-insertion realization define the same point of the ambiguity quotient
+\(
+E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}
+\).
+\end{definition}
+\begin{theorem}[Same-witness descended-scalar comparison from a source-compatible descendant realization]
+\label{thm:witness-descended-scalar-comparison}
+Fix an accepted tick \(k\), assume dominant-line realization at \(\Lambda_k\), and let
+\(
+\tau^{f,y}_{\Lambda_k}
+\)
+be a witness-indexed seam realization source.
+Assume:
+\begin{enumerate}[leftmargin=2em]
+\item the source \(\tau^{f,y}_{\Lambda_k}\) is represented by the canonical generator
+  \(
+  F_{\tau^{f,y}_{\Lambda_k},\Lambda_k}
+  \)
+  from \cref{thm:odd-source-representability};
+\item there exists a witness-indexed source-compatible descendant realization
+  \(
+  J^{f,y}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]
+  \)
+  in the sense of \cref{def:source-compatible-witness-realization};
+\item the three vanishing statements of \cref{prop:dominant-quotient-generators} hold at
+  \(\Lambda_k\).
+\end{enumerate}
+Then the raw and normalized comparison identities of
+\cref{def:witness-descendant-comparison} hold:
+\begin{align}
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}\!\big(J^{f,y}_{\Lambda_k}\big),\,
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}
+&=
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}\!\big(F_{\tau^{f,y}_{\Lambda_k},\Lambda_k}\big),\,
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}},
+\label{eq:witness-descendant-comparison-thm-raw}
+\\
+\rho^{\mathrm{dom}}_{\Lambda_k}\!\big(J^{f,y}_{\Lambda_k}\big)
+&=
+\rho^{\mathrm{dom}}_{\Lambda_k}\!\big(F_{\tau^{f,y}_{\Lambda_k},\Lambda_k}\big).
+\label{eq:witness-descendant-comparison-thm-normalized}
+\end{align}
+Moreover,
+\begin{equation}
+\rho^{\mathrm{dom}}_{\Lambda_k}\!\big(F_{\tau^{f,y}_{\Lambda_k},\Lambda_k}\big)
+=
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathsf T_{\Lambda_k}\!\big[\tau^{f,y}_{\Lambda_k}\big],\,
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}.
+\label{eq:witness-descendant-comparison-thm-seam}
+\end{equation}
+If quotient descent also holds at \(\Lambda_k\), then the common value equals the descended
+dominant scalar on the transported descendant affine class:
+\begin{equation}
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}\big([\![\Xi^{(1)}_{\Lambda_k}]\!]\big)
+=
+\rho^{\mathrm{dom}}_{\Lambda_k}\!\big(J^{f,y}_{\Lambda_k}\big)
+=
+\rho^{\mathrm{dom}}_{\Lambda_k}\!\big(F_{\tau^{f,y}_{\Lambda_k},\Lambda_k}\big).
+\label{eq:witness-descendant-comparison-thm-descended}
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Set
+\[
+A^{f,y}_{\Lambda_k}
+:=
+J^{f,y}_{\Lambda_k}
+-
+F_{\tau^{f,y}_{\Lambda_k},\Lambda_k}.
+\]
+By source compatibility,
+\(
+A^{f,y}_{\Lambda_k}\in\mathcal A^-_{\Lambda_k}
+\).
+
+Because dominant-line realization holds and the three vanishing statements of
+\cref{prop:dominant-quotient-generators} are assumed, that proposition gives
+\[
+\mathcal A^-_{\Lambda_k}\subset\ker\rho^{\mathrm{dom}}_{\Lambda_k}.
+\]
+Hence
+\[
+\rho^{\mathrm{dom}}_{\Lambda_k}\!\big(J^{f,y}_{\Lambda_k}\big)
+=
+\rho^{\mathrm{dom}}_{\Lambda_k}\!\big(
+F_{\tau^{f,y}_{\Lambda_k},\Lambda_k}
++
+A^{f,y}_{\Lambda_k}
+\big)
+=
+\rho^{\mathrm{dom}}_{\Lambda_k}\!\big(F_{\tau^{f,y}_{\Lambda_k},\Lambda_k}\big),
+\]
+proving \eqref{eq:witness-descendant-comparison-thm-normalized}.
+
+Since dominant-line realization implies
+\(
+\delta C^{\mathrm{LoG}}_{\Lambda_k}\neq 0
+\)
+and
+\(
+\rho^{\mathrm{dom}}_{\Lambda_k}
+=
+\kappa_{\Lambda_k}^{-1/2}\widetilde{\rho}^{\mathrm{dom}}_{\Lambda_k},
+\)
+the raw pairing equality \eqref{eq:witness-descendant-comparison-thm-raw} is just the same identity
+multiplied by the positive factor \(\kappa_{\Lambda_k}^{1/2}\).
+
+Equation \eqref{eq:witness-descendant-comparison-thm-seam} is exactly the normalized pairing formula
+of \cref{prop:odd-source-pairing} applied to the representable source
+\(
+\tau^{f,y}_{\Lambda_k}
+\).
+
+If quotient descent also holds, then \cref{cor:dominant-quotient-constancy} gives
+\[
+\rho^{\mathrm{dom}}_{\Lambda_k}\!\big(J^{f,y}_{\Lambda_k}\big)
+=
+\overline{\rho}^{\mathrm{dom}}_{\Lambda_k}\big([\![\Xi^{(1)}_{\Lambda_k}]\!]\big)
+\]
+for every representative
+\(
+J^{f,y}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}],
+\)
+which yields \eqref{eq:witness-descendant-comparison-thm-descended} after combining with
+\eqref{eq:witness-descendant-comparison-thm-normalized}.
+\end{proof}
+
+\begin{theorem}[Fixed-cutoff seam witness criterion for descendant overlap]
+\label{thm:fixed-cutoff-seam-witness}
+Fix an accepted tick \(k\).
+Assume:
+\begin{enumerate}[leftmargin=2em]
+\item a detector-factorized witness-indexed seam realization at \(\Lambda_k\);
+\item a witness \(y\) with
+  \[
+  \overline{\mathrm{obs}}(y)\neq 0;
+  \]
+\item the seam coefficient is nonzero,
+  \[
+  \widetilde c_{\Lambda_k}\neq 0;
+  \]
+\item for the chosen filler tag \(f\), the source \(\tau^{f,y}_{\Lambda_k}\) is representable on the
+  characterization layer in the sense of \cref{def:odd-source-representability};
+\item there exists a witness-indexed source-compatible descendant realization in the sense of
+  \cref{def:source-compatible-witness-realization}.
+\end{enumerate}
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item the compressed welded LoG line is transversely physical at \(\Lambda_k\), hence dominant-line
+  realization holds at that cutoff;
+\item the chosen 2T representative satisfies
+  \[
+  \rho^{\mathrm{dom}}_{\Lambda_k}\!\big(J^{f,y}_{\Lambda_k}\big)\neq 0;
+  \]
+\item therefore the transported descendant class has nonzero overlap with the canonically selected
+  compressed dominant odd line at \(\Lambda_k\);
+\item if quotient descent also holds at \(\Lambda_k\), then
+  \cref{thm:descendant-overlap} applies and the transported descendant class is dominant-active with
+  well-defined sign \(\varepsilon_{\Lambda_k}\).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By \cref{thm:seam-faithfulness-scalar},
+\[
+\widetilde s_{\Lambda_k}(f,y)
+=
+\sigma_{\mathrm{fill}}(f)\,
+\widetilde c_{\Lambda_k}\,
+\overline{\mathrm{obs}}(y)
+\neq 0.
+\]
+The same theorem therefore gives item (1): the compressed line is transversely physical, hence
+dominant-line realization holds at \(\Lambda_k\).
+
+By \cref{prop:odd-source-pairing},
+\[
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}\!\big(F_{\tau^{f,y}_{\Lambda_k},\Lambda_k}\big),\,
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}
+=
+\widetilde s_{\Lambda_k}(f,y)
+\neq 0.
+\]
+Applying the comparison identity \eqref{eq:witness-descendant-comparison} now gives
+\[
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}\!\big(J^{f,y}_{\Lambda_k}\big),\,
+\delta C^{\mathrm{LoG}}_{\Lambda_k}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda_k}}
+\neq 0.
+\]
+Because dominant-line realization has already been established, \(\delta C^{\mathrm{LoG}}_{\Lambda_k}\)
+is nonzero and \(\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k}\) is defined.
+By \cref{prop:descendant-overlap-witness}, this is equivalent to
+\(
+\rho^{\mathrm{dom}}_{\Lambda_k}(J^{f,y}_{\Lambda_k})\neq 0
+\),
+proving item (2).
+
+Item (3) is exactly the nonzero-overlap condition from
+\cref{prop:descendant-overlap-equivalent}.
+If quotient descent is also available, apply \cref{thm:descendant-overlap} to obtain item (4).
+\end{proof}
+
+\subsection*{Smooth-taper branch continuity and witness transport}
+\label{subsec:smooth-taper-branch-continuity}
+
+The previous fixed-cutoff theorem isolates the nonzero witness needed for activity.
+To transport that witness along an accepted branch one needs a continuity statement for the welded
+response.
+At theorem level, the clean analytic choice is the smooth receiver taper.
+The hard projector may still be used, but only on branch segments where its rank is constant.
+
+\begin{lemma}[Smooth-taper continuity of the receiver band projector]
+\label{lem:smooth-taper-projector}
+Let \(I\) be a connected accepted-branch segment.
+Suppose the receiver band is implemented by a smooth taper
+\[
+P^{\mathrm{(rec)}}_{\mathrm{band}}(\Lambda)
+=
+\sum_{\ell,m} w_\ell(\Lambda)\,|Y_{\ell m}\rangle\langle Y_{\ell m}|,
+\qquad
+0\le w_\ell(\Lambda)\le 1,
+\]
+on the receiver one-particle space, where
+\[
+\sup_{\ell\ge 0}|w_\ell(\Lambda')-w_\ell(\Lambda)|
+\longrightarrow 0
+\qquad
+\text{as }\Lambda'\to\Lambda
+\]
+for every \(\Lambda\in I\).
+Then
+\[
+\Lambda\longmapsto P^{\mathrm{(rec)}}_{\mathrm{band}}(\Lambda)
+\]
+is continuous on \(I\) in operator norm.
+If instead the hard projector
+\(
+\sum_{\ell\le \ell_\star(\Lambda)}|Y_{\ell m}\rangle\langle Y_{\ell m}|
+\)
+is used, the same conclusion holds on every connected subsegment of \(I\) on which
+\(\ell_\star(\Lambda)\) is constant.
+\end{lemma}
+
+\begin{proof}
+In the spherical-harmonic basis \(\{Y_{\ell m}\}\), the difference
+\[
+P^{\mathrm{(rec)}}_{\mathrm{band}}(\Lambda')
+-
+P^{\mathrm{(rec)}}_{\mathrm{band}}(\Lambda)
+\]
+is diagonal with eigenvalues \(w_\ell(\Lambda')-w_\ell(\Lambda)\).
+Therefore
+\[
+\big\|
+P^{\mathrm{(rec)}}_{\mathrm{band}}(\Lambda')
+-
+P^{\mathrm{(rec)}}_{\mathrm{band}}(\Lambda)
+\big\|_{\mathrm{op}}
+=
+\sup_{\ell\ge 0}|w_\ell(\Lambda')-w_\ell(\Lambda)|.
+\]
+The assumed uniform continuity of the taper coefficients is exactly the statement that this operator
+norm tends to zero as \(\Lambda'\to\Lambda\).
+
+For the hard projector, the coefficients take only the values \(0\) and \(1\), so discontinuities can
+occur only when \(\ell_\star(\Lambda)\) jumps.
+On a subsegment where \(\ell_\star(\Lambda)\) is constant, the projector is constant and therefore
+continuous.
+\end{proof}
+
+\begin{theorem}[Smooth-taper branch continuity of the welded physical response]
+\label{thm:smooth-taper-welded-response}
+Let \(I\) be a connected accepted-branch segment.
+Write the welded source-to-covariance map in the UOM factorized form
+\begin{equation}
+\mathsf T_\Lambda
+=
+\Pi_{L(\Lambda)}M_{\varepsilon,\Lambda}
+\circ
+\mathsf K_{{\rm comp},\Lambda}
+\circ
+\mathsf G_{{\rm ret},\Lambda}
+\circ
+\mathsf W_{{\rm src},\Lambda}.
+\label{eq:factorized-welded-map}
+\end{equation}
+Assume:
+\begin{enumerate}[leftmargin=2em]
+\item the receiver band is implemented by a smooth taper satisfying
+  \cref{lem:smooth-taper-projector};
+\item the operator families
+  \[
+  \Lambda\longmapsto
+  \Pi_{L(\Lambda)}M_{\varepsilon,\Lambda},\qquad
+  \Lambda\longmapsto
+  \mathsf K_{{\rm comp},\Lambda},\qquad
+  \Lambda\longmapsto
+  \mathsf G_{{\rm ret},\Lambda},\qquad
+  \Lambda\longmapsto
+  \mathsf W_{{\rm src},\Lambda},\qquad
+  \Lambda\longmapsto
+  \Pi_{\mathrm{phys},\Lambda}
+  \]
+  are continuous on \(I\) in operator norm on the corresponding band-limited source and covariance
+  tangent spaces;
+\item the source family
+  \[
+  \Lambda\longmapsto \tau_\Lambda
+  \]
+  is continuous on \(I\) in the welded source norm.
+\end{enumerate}
+Then the physical covariance response
+\begin{equation}
+X_\Lambda[\tau_\Lambda]
+:=
+\Pi_{\mathrm{phys},\Lambda}\mathsf T_\Lambda[\tau_\Lambda]
+\label{eq:XLambda-tau-def}
+\end{equation}
+depends continuously on \(\Lambda\in I\) in the Fisher norm.
+If the hard receiver projector is used instead, the same conclusion holds on each connected
+subsegment where \(\ell_\star(\Lambda)\) is constant.
+\end{theorem}
+
+\begin{proof}
+By \cref{lem:smooth-taper-projector}, the first factor
+\(
+\Pi_{L(\Lambda)}M_{\varepsilon,\Lambda}
+\)
+is operator-norm continuous along the branch.
+By assumption, the remaining three UOM factors in \eqref{eq:factorized-welded-map} and the physical
+projector \(\Pi_{\mathrm{phys},\Lambda}\) are also operator-norm continuous.
+Hence the composed operator family
+\[
+\Lambda\longmapsto
+\Pi_{\mathrm{phys},\Lambda}\mathsf T_\Lambda
+\]
+is continuous in operator norm on \(I\).
+Applying this continuous family to the continuous source vector \(\tau_\Lambda\) gives continuity of
+\(
+X_\Lambda[\tau_\Lambda]
+\)
+in the Fisher norm.
+
+For the hard projector, the same argument applies on every connected subsegment where
+\(\ell_\star(\Lambda)\) is constant, because there the first factor is constant.
+\end{proof}
+
+\begin{corollary}[Branchwise continuity of the seam coefficient]
+\label{cor:branchwise-seam-coeff}
+Let \(I\) be a connected accepted-branch segment and assume:
+\begin{enumerate}[leftmargin=2em]
+\item the hypotheses of \cref{thm:dominant-line-persistence} on \(I\);
+\item a detector-factorized branchwise seam realization on \(I\) with continuous unit source
+  \[
+  \Lambda\longmapsto \tau^{\mathrm{unit}}_{\Lambda};
+  \]
+\item the hypotheses of \cref{thm:smooth-taper-welded-response} for that unit source.
+\end{enumerate}
+Define the branchwise normalized seam coefficient by
+\begin{equation}
+c_\Lambda
+:=
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda}\mathsf T_\Lambda\!\big[\tau^{\mathrm{unit}}_{\Lambda}\big],\,
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda}}.
+\label{eq:branchwise-seam-coeff}
+\end{equation}
+Then \(c_\Lambda\) is continuous on \(I\).
+Consequently, for every fixed filler tag \(f\) and witness \(y\), the normalized seam scalar
+\[
+s_\Lambda(f,y)
+=
+\sigma_{\mathrm{fill}}(f)\,
+c_\Lambda\,
+\overline{\mathrm{obs}}(y)
+\]
+is continuous on \(I\).
+\end{corollary}
+
+\begin{proof}
+By \cref{thm:smooth-taper-welded-response}, the response vector
+\[
+\Lambda\longmapsto
+\Pi_{\mathrm{phys},\Lambda}\mathsf T_\Lambda\!\big[\tau^{\mathrm{unit}}_{\Lambda}\big]
+\]
+is continuous in the Fisher norm.
+By \cref{thm:dominant-line-persistence}, the normalized dominant vector
+\(
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda}
+\)
+is also continuous on \(I\).
+Pairing these two continuous vectors in the Fisher metric gives continuity of \(c_\Lambda\).
+The final statement is then immediate from
+\eqref{eq:normalized-seam-factorization}.
+\end{proof}
+
+\begin{theorem}[Branchwise seam witness transport]
+\label{thm:branchwise-seam-witness}
+Let \(I\) be a connected accepted-branch segment.
+Assume:
+\begin{enumerate}[leftmargin=2em]
+\item the hypotheses of \cref{cor:branchwise-seam-coeff};
+\item quotient descent holds for every \(\Lambda\in I\);
+\item there exists a fixed LS witness \(y\) with
+  \[
+  \overline{\mathrm{obs}}(y)\neq 0;
+  \]
+\item for some fixed filler tag \(f\), there is a branchwise family of representatives
+  \[
+  J^{f,y}_{\Lambda}\in[\Xi^{(1)}_{\Lambda}]
+  \qquad
+  (\Lambda\in I)
+  \]
+  such that, for every \(\Lambda\in I\), the corresponding seam source
+  \(\tau^{f,y}_{\Lambda}\) is representable on the characterization layer and the 2T-side
+  witness-to-descendant comparison identity
+  \eqref{eq:witness-descendant-comparison-normalized} holds.
+\end{enumerate}
+Then:
+\begin{enumerate}[leftmargin=2em]
+\item the branchwise dominant-response scalar of the chosen descendant representatives is
+  \begin{equation}
+  \rho^{\mathrm{dom}}_{\Lambda}\!\big(J^{f,y}_{\Lambda}\big)
+  =
+  \sigma_{\mathrm{fill}}(f)\,
+  c_\Lambda\,
+  \overline{\mathrm{obs}}(y);
+  \label{eq:branchwise-seam-descendant-scalar}
+  \end{equation}
+\item the scalar function
+  \(
+  \Lambda\mapsto \rho^{\mathrm{dom}}_{\Lambda}(J^{f,y}_{\Lambda})
+  \)
+  is continuous on \(I\);
+\item on every connected subsegment \(I'\subset I\) on which \(c_\Lambda\neq 0\), the sign
+  \[
+  \operatorname{sgn}\!\big(
+  \rho^{\mathrm{dom}}_{\Lambda}(J^{f,y}_{\Lambda})
+  \big)
+  \]
+  is constant;
+\item because quotient descent holds, the same constant sign is the transported orientation sign of
+  the descendant affine class on \(I'\).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+For each \(\Lambda\in I\), representability of \(\tau^{f,y}_{\Lambda}\) and
+\cref{prop:odd-source-pairing} give
+\[
+\rho^{\mathrm{dom}}_{\Lambda}\!\big(F_{\tau^{f,y}_{\Lambda},\Lambda}\big)
+=
+\big\langle\!\big\langle
+\Pi_{\mathrm{phys},\Lambda}\mathsf T_\Lambda\!\big[\tau^{f,y}_{\Lambda}\big],\,
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda}
+\big\rangle\!\big\rangle_{C_{\ast,\Lambda}}
+=
+s_\Lambda(f,y).
+\]
+Applying the branchwise comparison identity
+\eqref{eq:witness-descendant-comparison-normalized} then yields
+\[
+\rho^{\mathrm{dom}}_{\Lambda}\!\big(J^{f,y}_{\Lambda}\big)
+=
+s_\Lambda(f,y).
+\]
+Now use \cref{cor:branchwise-seam-coeff} to substitute
+\(
+s_\Lambda(f,y)
+=
+\sigma_{\mathrm{fill}}(f)c_\Lambda\overline{\mathrm{obs}}(y)
+\),
+which proves item (1).
+Item (2) follows because \(c_\Lambda\) is continuous and
+\(\overline{\mathrm{obs}}(y)\) is a fixed nonzero scalar.
+On any connected subsegment where \(c_\Lambda\neq 0\), the right-hand side of
+\eqref{eq:branchwise-seam-descendant-scalar} is a continuous nonvanishing real-valued function, so
+its sign is constant.
+This proves item (3).
+
+Finally, quotient descent implies that \(\rho^{\mathrm{dom}}_{\Lambda}\) is constant on
+\([\Xi^{(1)}_{\Lambda}]\), so the sign of one representative is the sign of the whole descendant
+class.
+This gives item (4).
+\end{proof}
+
+\begin{corollary}[Seam package discharge of the minimal scalar transport input]
+\label{cor:branchwise-seam-minimal-input}
+Let \(I\) be a connected accepted-branch segment and assume the hypotheses of
+\cref{thm:branchwise-seam-witness}.
+Then the branchwise family
+\[
+J^{f,y}_{\Lambda}\in[\Xi^{(1)}_{\Lambda}]
+\qquad
+(\Lambda\in I)
+\]
+satisfies
+\[
+\Lambda\longmapsto
+\rho^{\mathrm{dom}}_{\Lambda}\!\big(J^{f,y}_{\Lambda}\big)
+=
+\sigma_{\mathrm{fill}}(f)\,
+c_\Lambda\,
+\overline{\mathrm{obs}}(y)
+\]
+continuously on \(I\).
+On every connected subsegment \(I'\subset I\) such that
+\[
+c_\Lambda\neq 0
+\qquad
+\forall \Lambda\in I',
+\]
+assumption \textup{(3)} of \cref{thm:active-response-transport-minimal} holds in its minimal
+scalar form with
+\[
+J^{\mathrm{desc}}_{\Lambda}:=J^{f,y}_{\Lambda}
+\qquad
+(\Lambda\in I').
+\]
+If, in addition, the three generator-wise vanishing statements of
+\cref{prop:dominant-quotient-generators} hold for every \(\Lambda\in I'\), then
+\cref{thm:active-response-transport-minimal} applies on \(I'\).
+\end{corollary}
+
+\begin{proof}
+Continuity of the displayed scalar function is exactly item (2) of
+\cref{thm:branchwise-seam-witness}, together with the explicit formula of item (1).
+On \(I'\), the hypotheses
+\(
+c_\Lambda\neq 0
+\)
+and
+\(
+\overline{\mathrm{obs}}(y)\neq 0
+\)
+imply
+\[
+\rho^{\mathrm{dom}}_{\Lambda}\!\big(J^{f,y}_{\Lambda}\big)\neq 0
+\qquad
+\forall \Lambda\in I'.
+\]
+Together with the continuity statement already proved above, this is exactly assumption
+\textup{(3)} of \cref{thm:active-response-transport-minimal} in its minimal scalar form.
+The hypotheses of \cref{thm:branchwise-seam-witness} already include those of
+\cref{cor:branchwise-seam-coeff}, and hence the dominant-line persistence input of
+\cref{thm:active-response-transport-minimal}.
+If the three generator-wise vanishing statements also hold on \(I'\), then every hypothesis of
+\cref{thm:active-response-transport-minimal} is in force there.
+\end{proof}
+
+\begin{theorem}[Finite-cutoff Active Response Transport Theorem]
+\label{thm:active-response-transport-minimal}
+Let \(I\) be a connected accepted-branch segment.
+For each \(\Lambda\in I\), let
+\[
+[\Xi^{(1)}_{\Lambda}]
+:=
+J_{0,\Lambda}+\mathcal A^-_{\Lambda}
+\subset E^-_{\Lambda}
+\]
+be the parity-transported odd descendant affine class modulo the ambiguity space of
+\cref{def:transport-ambiguity-subspace}.
+Assume:
+\begin{enumerate}[leftmargin=2em]
+\item the hypotheses of \cref{thm:dominant-line-persistence} hold on \(I\);
+\item for every \(\Lambda\in I\), the three vanishing statements of
+  \cref{prop:dominant-quotient-generators} hold;
+\item there exists a branchwise family of representatives
+  \[
+  J^{\mathrm{desc}}_{\Lambda}\in[\Xi^{(1)}_{\Lambda}]
+  \qquad
+  (\Lambda\in I)
+  \]
+  such that
+  \[
+  \rho^{\mathrm{dom}}_{\Lambda}(J^{\mathrm{desc}}_{\Lambda})
+  \neq 0
+  \qquad
+  \forall \Lambda\in I,
+  \]
+  and such that the dominant-response scalar
+  \[
+  \Lambda\longmapsto
+  \rho^{\mathrm{dom}}_{\Lambda}(J^{\mathrm{desc}}_{\Lambda})
+  \]
+  is continuous on \(I\).
+\end{enumerate}
+Then, for every \(\Lambda\in I\):
+\begin{enumerate}[leftmargin=2em]
+\item the compressed dominant covariance tangent is nonzero,
+  \[
+  \delta C^{\mathrm{LoG}}_{\Lambda}\neq 0,
+  \]
+  so the dominant line \(L^{\mathrm{dom}}_{\Lambda}\) of
+  \cref{def:dominant-response-functional} is canonically defined;
+\item the dominant-response coefficient \(\rho^{\mathrm{dom}}_{\Lambda}\) annihilates the odd
+  ambiguity space,
+  \[
+  \rho^{\mathrm{dom}}_{\Lambda}(A)=0
+  \qquad
+  \forall A\in\mathcal A^-_{\Lambda};
+  \]
+\item the transported descendant affine class carries a unique nonzero dominant-response value
+  \[
+  \rho^{\mathrm{dom}}_{\Lambda}(J)
+  =
+  \overline{\rho}^{\mathrm{dom}}_{\Lambda}\big([\![\Xi^{(1)}_{\Lambda}]\!]\big)
+  \neq 0
+  \qquad
+  \forall J\in[\Xi^{(1)}_{\Lambda}],
+  \]
+  and hence a well-defined sign
+  \[
+  \varepsilon_{\Lambda}
+  :=
+  \operatorname{sgn}\!\Big(
+  \overline{\rho}^{\mathrm{dom}}_{\Lambda}\big([\![\Xi^{(1)}_{\Lambda}]\!]\big)
+  \Big)
+  \in\{\pm1\};
+  \]
+\item the normalized orientation functional
+  \begin{equation}
+  \chi_{\Lambda}
+  :=
+  \nu_{\Lambda}^{-1}\rho^{\mathrm{dom}}_{\Lambda}
+  \label{eq:chi-from-rho-dom}
+  \end{equation}
+  is well defined, annihilates \(\mathcal A^-_{\Lambda}\), and satisfies
+  \[
+  \chi_{\Lambda}(J)=\varepsilon_{\Lambda}
+  \qquad
+  \forall J\in[\Xi^{(1)}_{\Lambda}];
+  \]
+\item along \(I\), the sign \(\varepsilon_{\Lambda}\) is locally constant once an initial
+  orientation is fixed.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Item (1) is exactly the conclusion of \cref{thm:dominant-line-persistence}.
+
+By assumption, the three generator-wise vanishing statements of
+\cref{prop:dominant-quotient-generators} hold for every \(\Lambda\in I\).
+Therefore \cref{prop:dominant-quotient-generators,thm:dominant-quotient-descent} give item (2)
+and the existence of the descended functional
+\(
+\overline{\rho}^{\mathrm{dom}}_{\Lambda}
+\)
+at each cutoff.
+
+Applying \cref{prop:descendant-overlap-equivalent,thm:descendant-overlap} pointwise to the
+nonvanishing scalar assumption
+\(
+\rho^{\mathrm{dom}}_{\Lambda}(J^{\mathrm{desc}}_{\Lambda})\neq 0
+\)
+now yields
+item (3): the entire descendant affine class has one common nonzero dominant-response value, and
+its sign \(\varepsilon_{\Lambda}\) is well defined.
+
+Since \(\nu_{\Lambda}>0\) by item (3), the normalized functional \(\chi_{\Lambda}\) of
+\eqref{eq:chi-from-rho-dom} is well defined.
+Item (2) implies that \(\chi_{\Lambda}\) annihilates \(\mathcal A^-_{\Lambda}\), and item (3)
+gives
+\[
+\chi_{\Lambda}(J)
+=
+\frac{\rho^{\mathrm{dom}}_{\Lambda}(J)}{
+\left|
+\overline{\rho}^{\mathrm{dom}}_{\Lambda}\big([\![\Xi^{(1)}_{\Lambda}]\!]\big)
+\right|
+}
+=
+\varepsilon_{\Lambda}
+\qquad
+\forall J\in[\Xi^{(1)}_{\Lambda}],
+\]
+proving item (4).
+
+Finally, assumption (3) provides a continuous nonvanishing real-valued branchwise descendant scalar,
+while items (1)--(3) above identify that scalar with the transported orientation sign of the full
+descendant affine class.
+Since
+\(
+\Lambda\mapsto \rho^{\mathrm{dom}}_{\Lambda}(J^{\mathrm{desc}}_{\Lambda})
+\)
+is continuous and nonzero on the connected set \(I\), its sign is constant, hence in particular
+locally constant.
+Using item (3), this is exactly the transported orientation sign of the full descendant affine
+class, proving item (5).
+\end{proof}
+
+\begin{proposition}[Ambiguity-triviality on the compressed welded image]
+\label{prop:reduced-welded-ambiguity-trivial}
+Assume the hypotheses of \cref{thm:active-response-transport-minimal} at an accepted tick \(k\).
+Define the reduced welded image of an odd generator \(F\in E^-_{\Lambda_k}\) by
+\[
+\mathsf W^{\mathrm{red}}_{\Lambda_k}(F)
+:=
+\rho^{\mathrm{dom}}_{\Lambda_k}(F)\,P_{-,\Lambda_k}^{\mathrm{LoG}},
+\]
+where \(P_{-,\Lambda_k}^{\mathrm{LoG}}\) is the canonical compressed odd projector of
+\cref{cor:compressed-export-selection}.
+Then
+\[
+\mathsf W^{\mathrm{red}}_{\Lambda_k}(F+A)
+=
+\mathsf W^{\mathrm{red}}_{\Lambda_k}(F)
+\qquad
+\forall F\in E^-_{\Lambda_k},\ \forall A\in\mathcal A^-_{\Lambda_k}.
+\]
+Equivalently, \(\mathsf W^{\mathrm{red}}_{\Lambda_k}\) factors through the ambiguity quotient
+\(E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}\).
+In particular, if \(J_1,J_2\in[\Xi^{(1)}_{\Lambda_k}]\), then
+\[
+\mathsf W^{\mathrm{red}}_{\Lambda_k}(J_1)
+=
+\mathsf W^{\mathrm{red}}_{\Lambda_k}(J_2).
+\]
+\end{proposition}
+
+\begin{proof}
+Item (2) of \cref{thm:active-response-transport-minimal} gives
+\[
+\rho^{\mathrm{dom}}_{\Lambda_k}(A)=0
+\qquad
+\forall A\in\mathcal A^-_{\Lambda_k}.
+\]
+Therefore, for every \(F\in E^-_{\Lambda_k}\) and \(A\in\mathcal A^-_{\Lambda_k}\),
+\[
+\mathsf W^{\mathrm{red}}_{\Lambda_k}(F+A)
+=
+\rho^{\mathrm{dom}}_{\Lambda_k}(F+A)\,P_{-,\Lambda_k}^{\mathrm{LoG}}
+=
+\big(\rho^{\mathrm{dom}}_{\Lambda_k}(F)+\rho^{\mathrm{dom}}_{\Lambda_k}(A)\big)
+P_{-,\Lambda_k}^{\mathrm{LoG}}
+=
+\rho^{\mathrm{dom}}_{\Lambda_k}(F)\,P_{-,\Lambda_k}^{\mathrm{LoG}}.
+\]
+Since \cref{cor:compressed-export-selection} fixes \(P_{-,\Lambda_k}^{\mathrm{LoG}}\) canonically on
+the compressed, co-centered, band-locked welded channel, the right-hand side depends only on the
+ambiguity class of \(F\).
+If \(J_2-J_1\in\mathcal A^-_{\Lambda_k}\), apply the same identity with \(F=J_1\) and
+\(A=J_2-J_1\).
+\end{proof}
+
+\begin{proposition}[Construction of an admissible calibration for the minimal transported interface]
+\label{prop:minimal-transport-calibration}
+Fix an accepted tick \(k\). Suppose a weak transported-interface package is given:
+\[
+\mathcal A^-_{\Lambda_k}\subset E^-_{\Lambda_k},
+\qquad
+[\Xi^{(1)}_{\Lambda_k}]=J_{0,\Lambda_k}+\mathcal A^-_{\Lambda_k},
+\]
+together with a continuous nonzero linear functional
+\[
+\chi_{\Lambda_k}:E^-_{\Lambda_k}\to\mathbb R
+\]
+and a sign
+\(
+\varepsilon_{\Lambda_k}\in\{\pm1\}
+\)
+such that
+\[
+\mathcal A^-_{\Lambda_k}\subset\ker\chi_{\Lambda_k},
+\qquad
+\chi_{\Lambda_k}(J)=\varepsilon_{\Lambda_k}
+\quad
+\forall J\in[\Xi^{(1)}_{\Lambda_k}].
+\]
+Assume in addition that \(\ker\chi_{\Lambda_k}\) admits a continuous symmetric coercive bilinear form
+whose induced norm Hilbertizes it.
+Choose any vector \(J^\sharp_{\Lambda_k}\in E^-_{\Lambda_k}\) satisfying
+\[
+\chi_{\Lambda_k}(J^\sharp_{\Lambda_k})=1,
+\]
+any scale \(\beta_{\Lambda_k}>0\), and any continuous symmetric coercive bilinear form
+\[
+\langle\cdot,\cdot\rangle^{\mathrm{aux},\chi}_{\Lambda_k}
+:
+\ker\chi_{\Lambda_k}\times\ker\chi_{\Lambda_k}\to\mathbb R
+\]
+whose induced norm Hilbertizes \(\ker\chi_{\Lambda_k}\).
+Define
+\begin{equation}
+\mathsf B_{\Lambda_k}(F,G)
+:=
+\beta_{\Lambda_k}\,\chi_{\Lambda_k}(F)\chi_{\Lambda_k}(G)
++
+\left\langle
+F-\chi_{\Lambda_k}(F)J^\sharp_{\Lambda_k},
+\,
+G-\chi_{\Lambda_k}(G)J^\sharp_{\Lambda_k}
+\right\rangle^{\mathrm{aux},\chi}_{\Lambda_k}.
+\label{eq:B-minimal-transport}
+\end{equation}
+Then \(\mathsf B_{\Lambda_k}\) is a continuous symmetric positive definite bilinear form on
+\(E^-_{\Lambda_k}\) whose induced norm Hilbertizes \(E^-_{\Lambda_k}\), and
+\[
+\mathsf B_{\Lambda_k}(J^\sharp_{\Lambda_k},K)=0
+\qquad
+\forall K\in\ker\chi_{\Lambda_k}.
+\]
+Hence \(\mathsf B_{\Lambda_k}(J^\sharp_{\Lambda_k},K)=0\) in particular for every
+\(K\in\mathcal A^-_{\Lambda_k}\), and
+\[
+\mathsf B_{\Lambda_k}(J^\sharp_{\Lambda_k},J^\sharp_{\Lambda_k})
+=
+\beta_{\Lambda_k}.
+\]
+Moreover, for any representative \(J^\Xi_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]\), the choice
+\[
+J^\sharp_{\Lambda_k}:=\varepsilon_{\Lambda_k}J^\Xi_{\Lambda_k}
+\]
+is admissible.
+\end{proposition}
+
+\begin{proof}
+Because \(\chi_{\Lambda_k}(J^\sharp_{\Lambda_k})=1\), the linear map
+\[
+P^\chi_{\Lambda_k}(F)
+:=
+F-\chi_{\Lambda_k}(F)J^\sharp_{\Lambda_k}
+\]
+takes values in \(\ker\chi_{\Lambda_k}\):
+\[
+\chi_{\Lambda_k}\!\big(P^\chi_{\Lambda_k}(F)\big)
+=
+\chi_{\Lambda_k}(F)-\chi_{\Lambda_k}(F)\chi_{\Lambda_k}(J^\sharp_{\Lambda_k})
+=
+0.
+\]
+Thus every \(F\in E^-_{\Lambda_k}\) has the decomposition
+\[
+F=\chi_{\Lambda_k}(F)J^\sharp_{\Lambda_k}+P^\chi_{\Lambda_k}(F),
+\qquad
+P^\chi_{\Lambda_k}(F)\in\ker\chi_{\Lambda_k}.
+\]
+This decomposition is unique: if \(F=aJ^\sharp_{\Lambda_k}+K\) with \(K\in\ker\chi_{\Lambda_k}\),
+applying \(\chi_{\Lambda_k}\) gives \(a=\chi_{\Lambda_k}(F)\).
+
+Equation \eqref{eq:B-minimal-transport} is therefore well defined, continuous, and symmetric.
+If \(\mathsf B_{\Lambda_k}(F,F)=0\), then
+\[
+\beta_{\Lambda_k}\chi_{\Lambda_k}(F)^2=0
+\]
+and
+\[
+\left\langle
+P^\chi_{\Lambda_k}(F),P^\chi_{\Lambda_k}(F)
+\right\rangle^{\mathrm{aux},\chi}_{\Lambda_k}
+=
+0.
+\]
+Since \(\beta_{\Lambda_k}>0\), we get \(\chi_{\Lambda_k}(F)=0\), hence
+\(P^\chi_{\Lambda_k}(F)=F\). Coercivity on \(\ker\chi_{\Lambda_k}\) then implies \(F=0\), proving
+positive definiteness.
+
+The map
+\[
+F\longmapsto
+\big(
+\chi_{\Lambda_k}(F),P^\chi_{\Lambda_k}(F)
+\big)
+\]
+is a continuous linear isomorphism from \(E^-_{\Lambda_k}\) onto
+\(
+\mathbb R\oplus\ker\chi_{\Lambda_k}
+\),
+with inverse
+\[
+(a,K)\longmapsto aJ^\sharp_{\Lambda_k}+K.
+\]
+Under this isomorphism, \(\mathsf B_{\Lambda_k}\) becomes the product Hilbert form
+\[
+(a,K),(b,L)\longmapsto
+\beta_{\Lambda_k}ab+\langle K,L\rangle^{\mathrm{aux},\chi}_{\Lambda_k},
+\]
+so its induced norm Hilbertizes \(E^-_{\Lambda_k}\).
+
+Finally, if \(K\in\ker\chi_{\Lambda_k}\), then \(P^\chi_{\Lambda_k}(J^\sharp_{\Lambda_k})=0\) and
+\(\chi_{\Lambda_k}(K)=0\), hence
+\[
+\mathsf B_{\Lambda_k}(J^\sharp_{\Lambda_k},K)=0.
+\]
+Setting \(K=J^\sharp_{\Lambda_k}\) gives
+\(
+\mathsf B_{\Lambda_k}(J^\sharp_{\Lambda_k},J^\sharp_{\Lambda_k})=\beta_{\Lambda_k}
+\).
+If \(J^\Xi_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]\), then
+\(
+\chi_{\Lambda_k}(J^\Xi_{\Lambda_k})=\varepsilon_{\Lambda_k}
+\),
+so
+\(
+J^\sharp_{\Lambda_k}:=\varepsilon_{\Lambda_k}J^\Xi_{\Lambda_k}
+\)
+satisfies
+\(
+\chi_{\Lambda_k}(J^\sharp_{\Lambda_k})=1
+\).
+\end{proof}
+
+\begin{remark}[Calibration existence versus stiffness matching]
+\label{rem:minimal-transport-calibration-scope}
+\Cref{prop:minimal-transport-calibration} is a construction theorem, not an unconditional existence
+theorem: it extends a previously chosen Hilbertizing form on \(\ker\chi_{\Lambda_k}\) to an
+admissible bilinear form on the whole weak transported interface.
+It does \emph{not} identify the scale
+\(\beta_{\Lambda_k}\) with the split/leak stiffness \(\widetilde\alpha(\Lambda_k)\).
+That physical identification belongs to a later strong or physical layer.
+\end{remark}
+
+\begin{theorem}[Rank-one descendant-sector upgrade]
+\label{thm:active-response-transport-strong}
+Assume \cref{thm:active-response-transport-minimal}, and fix an accepted tick \(k\) on the branch.
+Suppose in addition that on the transported
+descendant sector the projected response map
+\[
+F\longmapsto
+\Pi^{\mathrm{dom}}_{\Lambda_k}\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}(F),
+\qquad
+\Pi^{\mathrm{dom}}_{\Lambda_k}
+:=
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k}\otimes
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k},
+\]
+has kernel exactly \(\mathcal A^-_{\Lambda_k}\).
+Then the stronger conclusions follow:
+\begin{enumerate}[leftmargin=2em]
+\item the descendant quotient is rank one,
+  \[
+  E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}\cong \mathbb R;
+  \]
+\item the orientation kernel is exactly the ambiguity space,
+  \[
+  \ker\chi_{\Lambda_k}
+  =
+  \ker\rho^{\mathrm{dom}}_{\Lambda_k}
+  =
+  \mathcal A^-_{\Lambda_k},
+  \]
+  so the descendant sector satisfies the rank-one kernel-identification package with quotient
+  generated by any vector \(J^{\mathrm{act}}_{\Lambda_k}\) satisfying
+  \(\chi_{\Lambda_k}(J^{\mathrm{act}}_{\Lambda_k})=1\);
+  \item after choosing any such \(J^{\mathrm{act}}_{\Lambda_k}\), any positive scale
+  \(\beta_{\Lambda_k}\), and any auxiliary coercive Hilbertizing form on
+  \(\ker\chi_{\Lambda_k}\), \cref{prop:minimal-transport-calibration} yields an admissible
+  calibration form.
+  Recovering the stiffness-matched formula of \cref{prop:char-calibration-extension} requires
+  additional physical identifications, namely
+  \(\chi_{\Lambda_k}=\rho_{\Lambda_k}\), \(\ker\chi_{\Lambda_k}=\mathcal T^{\mathrm{op}}_{\Lambda_k}\),
+  agreement of the chosen normalized generator with the split/leak active generator, and
+  \(\beta_{\Lambda_k}=\widetilde\alpha(\Lambda_k)\).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By \cref{thm:active-response-transport-minimal}, the dominant line is defined at \(\Lambda_k\), the
+scalar \(\nu_{\Lambda_k}\) is positive, and
+\[
+\chi_{\Lambda_k}
+=
+\nu_{\Lambda_k}^{-1}\rho^{\mathrm{dom}}_{\Lambda_k}.
+\]
+Hence
+\(
+\ker\chi_{\Lambda_k}=\ker\rho^{\mathrm{dom}}_{\Lambda_k}
+\).
+
+For every \(F\in E^-_{\Lambda_k}\), the definition of \(\rho^{\mathrm{dom}}_{\Lambda_k}\) gives
+\[
+\Pi^{\mathrm{dom}}_{\Lambda_k}\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}(F)
+=
+\rho^{\mathrm{dom}}_{\Lambda_k}(F)\,
+\widehat{\delta C}^{\mathrm{LoG}}_{\Lambda_k}.
+\]
+Therefore the kernel of the projected response map is exactly
+\(
+\ker\rho^{\mathrm{dom}}_{\Lambda_k}
+\).
+By the additional hypothesis, that kernel is \(\mathcal A^-_{\Lambda_k}\), proving item (2).
+
+By \cref{thm:active-response-transport-minimal}, there exists
+\(
+J^{\mathrm{desc}}_{\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]
+\)
+with
+\(
+\rho^{\mathrm{dom}}_{\Lambda_k}(J^{\mathrm{desc}}_{\Lambda_k})\neq 0
+\),
+hence the projected response map is nonzero.
+Its image is automatically contained in the one-dimensional line
+\(
+L^{\mathrm{dom}}_{\Lambda_k}
+\),
+so the first isomorphism theorem gives
+\[
+E^-_{\Lambda_k}/\mathcal A^-_{\Lambda_k}
+\cong
+\operatorname{im}\!\big(
+\Pi^{\mathrm{dom}}_{\Lambda_k}\Pi_{\mathrm{phys},\Lambda_k}\mathcal R_{\Lambda_k}
+\big)
+\cong
+\mathbb R,
+\]
+which is item (1).
+Any vector \(J^{\mathrm{act}}_{\Lambda_k}\) with \(\chi_{\Lambda_k}(J^{\mathrm{act}}_{\Lambda_k})=1\)
+lies outside \(\ker\chi_{\Lambda_k}=\mathcal A^-_{\Lambda_k}\), so its quotient class generates this
+one-dimensional quotient, completing item (2).
+
+Item (3) is now an application of \cref{prop:minimal-transport-calibration} with the weak-interface
+data supplied by \cref{thm:active-response-transport-minimal} and the chosen normalized vector
+\(J^{\mathrm{act}}_{\Lambda_k}\).
+The final sentence identifies when this weak calibration construction coincides with the
+stiffness-matched formula of \cref{prop:char-calibration-extension}.
+\end{proof}
+
+\ifdefined\UOMTransportFragmentLoaded\else
+\end{document}
+\fi

@@ -1,0 +1,285 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     10773,        276]
+NotebookOptionsPosition[      9653,        255]
+NotebookOutlinePosition[      9967,        269]
+CellTagsIndexPosition[      9924,        266]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ "13. Calibration Sensitivity of ",
+ StyleBox["delta", "TI"]
+}], "Title",ExpressionUUID->"1ee951f3-4646-4891-9ff7-5bc76474250b"],
+
+Cell[TextData[{
+ "This notebook compares ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox["\[Delta]", 
+          SubscriptBox[
+           StyleBox["B", "TI"], "1"]], "-", 
+         SubscriptBox["\[Delta]", 
+          SubscriptBox[
+           StyleBox["B", "TI"], "2"]], "\[LongEqual]", 
+         SubscriptBox[
+          RowBox[{"{", 
+            RowBox[{
+              SubsuperscriptBox[
+               StyleBox["J", "TI"], 
+               SubscriptBox[
+                StyleBox["B", "TI"], "1"], 
+               StyleBox["can", FontSlant -> "Plain"]], "-", 
+              SubsuperscriptBox[
+               StyleBox["J", "TI"], 
+               SubscriptBox[
+                StyleBox["B", "TI"], "2"], 
+               StyleBox["can", FontSlant -> "Plain"]], ", ", "\[CenterDot]"}],
+             "}"}], 
+          StyleBox["P", FontSlant -> "Plain"]], "."}], TraditionalForm], 
+     "errors" -> {}, "input" -> 
+     "\\delta_{B_1} - \\delta_{B_2}\n=\n\\{J^{\\mathrm{can}}_{B_1} - \
+J^{\\mathrm{can}}_{B_2},\\,\\cdot\\}_{\\mathrm P}.", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "1df416ca-48e5-4ca8-8563-89e861b1e785"],
+ "The exact WL package proves the difference formula at the operator level: \
+",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox["\[Delta]", 
+          SubscriptBox[
+           StyleBox["J", "TI"], "1"]], "-", 
+         SubscriptBox["\[Delta]", 
+          SubscriptBox[
+           StyleBox["J", "TI"], "2"]], "\[LongEqual]", 
+         SubscriptBox["\[Delta]", 
+          RowBox[{
+            SubscriptBox[
+             StyleBox["J", "TI"], "1"], "-", 
+            SubscriptBox[
+             StyleBox["J", "TI"], "2"]}]], "."}], TraditionalForm], 
+     "errors" -> {}, "input" -> 
+     "\\delta_{J_1} - \\delta_{J_2} = \\delta_{J_1-J_2}.", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "39c5b632-50ed-4527-946e-52f9000122e1"]
+}], "Text",ExpressionUUID->"b801f077-5ddc-45bc-9c6a-cc9f7e892a42"],
+
+Cell["Exact sufficient condition for physical invariance", "Section",ExpressionUUID->"811e7335-0315-41c0-9819-e53d64453c11"],
+
+Cell[TextData[{
+ "The key structural fact from the calibration-comparison notebook is ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubsuperscriptBox[
+          StyleBox["J", "TI"], 
+          SubscriptBox[
+           StyleBox["B", "TI"], "1"], 
+          StyleBox["can", FontSlant -> "Plain"]], "-", 
+         SubsuperscriptBox[
+          StyleBox["J", "TI"], 
+          SubscriptBox[
+           StyleBox["B", "TI"], "2"], 
+          StyleBox["can", FontSlant -> "Plain"]], "\[Element]", 
+         SuperscriptBox[
+          StyleBox["A", "TI"], "-"], "."}], TraditionalForm], "errors" -> {}, 
+     "input" -> 
+     "J^{\\mathrm{can}}_{B_1} - J^{\\mathrm{can}}_{B_2} \\in \\mathcal A^-.", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "af4630e5-2251-4ff5-8bf8-a411645f58e9"],
+ "The present notebook then shows, on an explicit bracket model, that if \
+every ambiguity direction brackets trivially with the physical observable \
+sector, then ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         RowBox[{"(", 
+           RowBox[{
+             SubscriptBox["\[Delta]", 
+              SubscriptBox[
+               StyleBox["B", "TI"], "1"]], "-", 
+             SubscriptBox["\[Delta]", 
+              SubscriptBox[
+               StyleBox["B", "TI"], "2"]]}], ")"}], 
+         SubscriptBox["|", 
+          SubscriptBox[
+           StyleBox["O", "TI"], 
+           StyleBox["phys", FontSlant -> "Plain"]]], "\[LongEqual]", "0."}], 
+       TraditionalForm], "errors" -> {}, "input" -> 
+     "(\\delta_{B_1} - \\delta_{B_2})\\big|_{\\mathcal O_{\\mathrm{phys}}} = \
+0.", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "088c8c16-ceb3-4cef-9d21-f603d9d040aa"],
+ "In that regime the admissible calibration dependence is representational \
+rather than physical. "
+}], "Text",ExpressionUUID->"52871df5-a0b6-430c-adde-d16bf6f0c380"],
+
+Cell["Exact visible countermodel", "Section",ExpressionUUID->"ef874662-52d2-443a-9663-344d5fc1e2fd"],
+
+Cell[TextData[{
+ "A second exact bracket model keeps the same algebraic setup but lets the \
+ambiguity direction act nontrivially on the physical sector. In that model, \
+",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         RowBox[{"(", 
+           RowBox[{
+             SubscriptBox["\[Delta]", 
+              SubscriptBox[
+               StyleBox["B", "TI"], "1"]], "-", 
+             SubscriptBox["\[Delta]", 
+              SubscriptBox[
+               StyleBox["B", "TI"], "2"]]}], ")"}], 
+         SubscriptBox["|", 
+          SubscriptBox[
+           StyleBox["O", "TI"], 
+           StyleBox["phys", FontSlant -> "Plain"]]], "\[NotEqual]", "0", 
+         ","}], TraditionalForm], "errors" -> {}, "input" -> 
+     "(\\delta_{B_1} - \\delta_{B_2})\\big|_{\\mathcal O_{\\mathrm{phys}}} \
+\\neq 0,", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "be008500-407f-4efa-a7cc-794b3a7744cc"],
+ "so physical invisibility is not automatic. "
+}], "Text",ExpressionUUID->"7e2dc5ea-821a-4c44-9b18-60c007e705aa"],
+
+Cell["Conclusion", "Section",ExpressionUUID->"761dd2e3-c944-4330-bda8-d2338b675bf3"],
+
+Cell[TextData[{
+ "The calibration choice matters for ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SuperscriptBox[
+        StyleBox["J", "TI"], 
+        StyleBox["can", FontSlant -> "Plain"]], TraditionalForm], 
+     "errors" -> {}, "input" -> "J^{\\mathrm{can}}", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "a1f116dd-ce33-400a-a02e-1b681043c073"],
+ " in general. It matters for ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|
+    "boxes" -> FormBox["\[Delta]", TraditionalForm], "errors" -> {}, "input" -> 
+     "\\delta", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "343d1fa5-bf69-4f3d-9f8a-e6f511d4eeeb"],
+ " only representationally under an exact bracket-triviality hypothesis on \
+the ambiguity sector; otherwise the dependence can be physically visible \
+already at finite cutoff. "
+}], "Text",ExpressionUUID->"96ab2346-7f86-4403-8082-b19e92fea4f1"],
+
+Cell["Status", "Section",ExpressionUUID->"70e757f5-a20a-4702-894d-66adaf09d9a9"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Claim\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm]},
+        {Cell[TextData[{
+          "Exact operator identity ",
+          Cell[BoxData[
+           FormBox[
+            TemplateBox[<|"boxes" -> FormBox[
+                RowBox[{
+                  SubscriptBox["\[Delta]", 
+                   SubscriptBox[
+                    StyleBox["J", "TI"], "1"]], "-", 
+                  SubscriptBox["\[Delta]", 
+                   SubscriptBox[
+                    StyleBox["J", "TI"], "2"]], "\[LongEqual]", 
+                  SubscriptBox["\[Delta]", 
+                   RowBox[{
+                    SubscriptBox[
+                    StyleBox["J", "TI"], "1"], "-", 
+                    SubscriptBox[
+                    StyleBox["J", "TI"], "2"]}]]}], TraditionalForm], 
+              "errors" -> {}, "input" -> 
+              "\\delta_{J_1} - \\delta_{J_2} = \\delta_{J_1-J_2}", "state" -> 
+              "Boxes"|>,
+             "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+           "98891860-a1e8-4022-9d15-5cc3a7153f98"]
+         }],ExpressionUUID->
+          "2767bbd1-c171-4222-bd45-e498b3c0653a"], \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Exact bracket-triviality criterion for physical \
+invariance\"\>", "\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Exact visible countermodel\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[BoxForm`e$, TableHeadings -> {None, {"Claim", "Status"}}]]], 
+    "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"ff51eaa0-46ad-45d7-83db-d97d2b77aebc"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9fb98179-9cdd-493e-8616-b4f0b8195a60"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 144, 3, 70, "Title",ExpressionUUID->"1ee951f3-4646-4891-9ff7-5bc76474250b"],
+Cell[701, 25, 2103, 54, 70, "Text",ExpressionUUID->"b801f077-5ddc-45bc-9c6a-cc9f7e892a42"],
+Cell[2807, 81, 124, 0, 70, "Section",ExpressionUUID->"811e7335-0315-41c0-9819-e53d64453c11"],
+Cell[2934, 83, 1990, 49, 70, "Text",ExpressionUUID->"52871df5-a0b6-430c-adde-d16bf6f0c380"],
+Cell[4927, 134, 100, 0, 70, "Section",ExpressionUUID->"ef874662-52d2-443a-9663-344d5fc1e2fd"],
+Cell[5030, 136, 1083, 26, 70, "Text",ExpressionUUID->"7e2dc5ea-821a-4c44-9b18-60c007e705aa"],
+Cell[6116, 164, 84, 0, 70, "Section",ExpressionUUID->"761dd2e3-c944-4330-bda8-d2338b675bf3"],
+Cell[6203, 166, 970, 22, 70, "Text",ExpressionUUID->"96ab2346-7f86-4403-8082-b19e92fea4f1"],
+Cell[7176, 190, 80, 0, 70, "Section",ExpressionUUID->"70e757f5-a20a-4702-894d-66adaf09d9a9"],
+Cell[7259, 192, 2390, 61, 70, "TextTableForm",ExpressionUUID->"ff51eaa0-46ad-45d7-83db-d97d2b77aebc"]
+}
+]
+*)
+
+(* End of internal cache information *)

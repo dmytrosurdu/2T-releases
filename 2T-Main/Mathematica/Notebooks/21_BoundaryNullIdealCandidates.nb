@@ -1,0 +1,159 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      6406,        150]
+NotebookOptionsPosition[      4758,        123]
+NotebookOutlinePosition[      5072,        137]
+CellTagsIndexPosition[      5029,        134]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["Boundary Null Ideal Candidates", "Title",ExpressionUUID->"db24a964-eb57-406e-9c7e-f191cc45534d"],
+
+Cell["\<\
+This notebook compares exact natural candidates for the boundary null ideal, \
+using the split+welded controlled-sector models. \
+\>", "Text",ExpressionUUID->"2ca08122-4c17-4b04-b6ab-8214f8f32401"],
+
+Cell["Targets", "Section",ExpressionUUID->"dab4077a-0313-4bb3-b898-31305faf2958"],
+
+Cell[TextData[Cell[BoxData[Cell["task:boundary-null-ideal-candidates",
+  Background->None,ExpressionUUID->
+  "d1aa8b1a-757e-4279-a682-2247da2c7cf4"]], \
+"InlineCode",ExpressionUUID->"77357af9-1d2e-412b-88b2-fb24be388e64"]], "Item",\
+ExpressionUUID->"d9ff6855-1b3b-44d2-9701-1508ab422cdc"],
+
+Cell["Candidates", "Section",ExpressionUUID->"6529ad06-02cb-497f-8507-0e586940a0ed"],
+
+Cell["1. Readout-kernel candidate:", "Text",ExpressionUUID->"bc86d128-4e44-4c35-ac59-c1674c7d0ade"],
+
+Cell[TextData[{
+ "   ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubsuperscriptBox[
+          StyleBox["N", "TI"], "\[PartialD]", 
+          StyleBox["read", FontSlant -> "Plain"]], "\[LongEqual]", "ker", 
+         RowBox[{"(", 
+           SubscriptBox["\[CapitalPhi]", "\[PartialD]"], ")"}], 
+         "\[Intersection]", 
+         SubscriptBox[
+          StyleBox["O", "TI"], 
+          RowBox[{"\[PartialD]", ",", 
+            StyleBox["ctrl", FontSlant -> "Plain"]}]], "."}], 
+       TraditionalForm], "errors" -> {}, "input" -> 
+     "\\mathcal N_{\\partial}^{\\mathrm{read}}=\\ker(\\Phi_{\\partial})\\cap \
+\\mathcal O_{\\partial,\\mathrm{ctrl}}.", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "949e6cda-ce41-449e-80a7-963d0ba66510"],
+ "2. Block-trace-zero candidate."
+}], "Text",ExpressionUUID->"45431eda-b516-45eb-adec-35f1b3864902"],
+
+Cell["\<\
+3. State-invisible candidate on the boundary-classical state family. \
+\>", "Text",ExpressionUUID->"85d7bb17-eb2a-4170-aefb-ff796c41bc49"],
+
+Cell["Exact setup", "Section",ExpressionUUID->"11f92f18-89c6-4da8-9d0a-ce13d0b10cc3"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nullSuite", "=", 
+   RowBox[{
+   "MainProof`BoundaryNullIdealCandidates`RunBoundaryNullIdealCandidateSuite",
+     "[", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"recommended", "=", 
+   RowBox[{
+   "MainProof`BoundaryNullIdealCandidates`\
+RecommendedBoundaryNullIdealCandidate", "[", "nullSuite", "]"}]}], 
+  ";"}]}], "Input",ExpressionUUID->"d5c66b35-c667-4dd4-b57c-9e4cf3ed12ba"],
+
+Cell["Exact checks", "Section",ExpressionUUID->"764d81ef-0890-477c-8bc6-deca2050a1ee"],
+
+Cell[BoxData[
+ RowBox[{"<|", "\[IndentingNewLine]", "  ", 
+  RowBox[{
+   RowBox[{"\"\<CandidateAudits\>\"", "->", 
+    RowBox[{"nullSuite", "[", "\"\<CandidateAudits\>\"", "]"}]}], ",", 
+   "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<CandidateSummaries\>\"", "->", 
+    RowBox[{"nullSuite", "[", "\"\<CandidateSummaries\>\"", "]"}]}], ",", 
+   "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<ReadoutKernelEqualsBlockTraceZeroQ\>\"", "->", 
+    RowBox[{
+    "nullSuite", "[", "\"\<ReadoutKernelEqualsBlockTraceZeroQ\>\"", "]"}]}], ",",
+    "\[IndentingNewLine]", "  ", 
+   RowBox[{"\"\<RecommendedCandidate\>\"", "->", "recommended"}]}], 
+  "\[IndentingNewLine]", "|>"}]], "Input",ExpressionUUID->"fa8f2f09-76c1-47b0-\
+8860-96e3944596cd"],
+
+Cell["Expected outcome", "Section",ExpressionUUID->"0b2d4f3e-de2a-4621-bc13-9319288a963c"],
+
+Cell["\<\
+The readout-kernel and block-trace-zero candidates are exact but overlarge: \
+they absorb all audited controlled derivation images and therefore trivialize \
+the dynamics.\
+\>", "Item",ExpressionUUID->"e5e00901-5101-454a-841d-1e69eb3758f2"],
+
+Cell["\<\
+The state-invisible candidate is nontrivial but fails the exact stability \
+test under the controlled derivation action.\
+\>", "Item",ExpressionUUID->"903e3b71-3f68-4ee4-807a-5518612a1ebb"],
+
+Cell["\<\
+No tested natural candidate is simultaneously stable, nontrivial, and able to \
+absorb the borderline safe family.\
+\>", "Item",ExpressionUUID->"da9ca88b-f53b-4a6d-83ff-5cdf9d5d77a5"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"a83bd6d1-c378-4ba4-8c49-4f0e587986a8"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 102, 0, 70, "Title",ExpressionUUID->"db24a964-eb57-406e-9c7e-f191cc45534d"],
+Cell[659, 22, 207, 3, 70, "Text",ExpressionUUID->"2ca08122-4c17-4b04-b6ab-8214f8f32401"],
+Cell[869, 27, 81, 0, 70, "Section",ExpressionUUID->"dab4077a-0313-4bb3-b898-31305faf2958"],
+Cell[953, 29, 288, 4, 70, "Item",ExpressionUUID->"d9ff6855-1b3b-44d2-9701-1508ab422cdc"],
+Cell[1244, 35, 84, 0, 70, "Section",ExpressionUUID->"6529ad06-02cb-497f-8507-0e586940a0ed"],
+Cell[1331, 37, 99, 0, 70, "Text",ExpressionUUID->"bc86d128-4e44-4c35-ac59-c1674c7d0ade"],
+Cell[1433, 39, 930, 22, 70, "Text",ExpressionUUID->"45431eda-b516-45eb-adec-35f1b3864902"],
+Cell[2366, 63, 148, 2, 70, "Text",ExpressionUUID->"85d7bb17-eb2a-4170-aefb-ff796c41bc49"],
+Cell[2517, 67, 85, 0, 70, "Section",ExpressionUUID->"11f92f18-89c6-4da8-9d0a-ce13d0b10cc3"],
+Cell[2605, 69, 576, 15, 70, "Input",ExpressionUUID->"d5c66b35-c667-4dd4-b57c-9e4cf3ed12ba"],
+Cell[3184, 86, 86, 0, 70, "Section",ExpressionUUID->"764d81ef-0890-477c-8bc6-deca2050a1ee"],
+Cell[3273, 88, 737, 15, 70, "Input",ExpressionUUID->"fa8f2f09-76c1-47b0-8860-96e3944596cd"],
+Cell[4013, 105, 90, 0, 70, "Section",ExpressionUUID->"0b2d4f3e-de2a-4621-bc13-9319288a963c"],
+Cell[4106, 107, 250, 4, 70, "Item",ExpressionUUID->"e5e00901-5101-454a-841d-1e69eb3758f2"],
+Cell[4359, 113, 199, 3, 70, "Item",ExpressionUUID->"903e3b71-3f68-4ee4-807a-5518612a1ebb"],
+Cell[4561, 118, 193, 3, 70, "Item",ExpressionUUID->"da9ca88b-f53b-4a6d-83ff-5cdf9d5d77a5"]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,53 @@
+--- a/Main/appendix_main.tex
++++ b/Main/appendix_main.tex
+@@
+-\begin{theorem}[Finite-cutoff canonical odd Hamiltonian representative]
++\begin{theorem}[Finite-cutoff canonical odd representative]
+ \label{thm:finite-cutoff-Jcan}
+@@
+ \end{proof}
++
++\begin{remark}[Finite-dimensional projection formula]
++\label{rem:Jcan-finite-dimensional-projector}
++In any finite-dimensional realization of the affine odd descendant class
++\[
++[\Xi^{(1)}_{\Lambda_k}]
++=
++J_{0,\Lambda_k}+\operatorname{im}(U_{\Lambda_k}),
++\]
++where \(U_{\Lambda_k}\) is any full-column-rank basis matrix for
++\(\mathcal A^-_{\Lambda_k}\), let \(B_{\Lambda_k}\) be the matrix of the
++calibration form \(\mathsf B_{\Lambda_k}\).
++Then the \(\mathsf B_{\Lambda_k}\)-orthogonal projector onto the ambiguity
++subspace is
++\[
++P_{\mathcal A^-_{\Lambda_k}}^{\mathsf B_{\Lambda_k}}
++:=
++U_{\Lambda_k}
++\bigl(U_{\Lambda_k}^{\top}B_{\Lambda_k}U_{\Lambda_k}\bigr)^{-1}
++U_{\Lambda_k}^{\top}B_{\Lambda_k},
++\]
++and the canonical representative is
++\[
++\mathcal J^{\mathrm{can}}_{\Lambda_k}
++=
++\bigl(I-P_{\mathcal A^-_{\Lambda_k}}^{\mathsf B_{\Lambda_k}}\bigr)
++J_{0,\Lambda_k}.
++\]
++Equivalently, if
++\[
++a_{\ast}
++:=
++-\bigl(U_{\Lambda_k}^{\top}B_{\Lambda_k}U_{\Lambda_k}\bigr)^{-1}
++U_{\Lambda_k}^{\top}B_{\Lambda_k}J_{0,\Lambda_k},
++\]
++then
++\[
++\mathcal J^{\mathrm{can}}_{\Lambda_k}
++=
++J_{0,\Lambda_k}+U_{\Lambda_k}a_{\ast}.
++\]
++This formula is independent of the chosen basis \(U_{\Lambda_k}\) of
++\(\mathcal A^-_{\Lambda_k}\) and of the chosen representative
++\(J_{0,\Lambda_k}\in[\Xi^{(1)}_{\Lambda_k}]\).
++\end{remark}

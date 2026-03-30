@@ -1,0 +1,9 @@
+Closedness of Aminus, continuity of branch data, and Hilbertizability are still represented only by finite-dimensional surrogates rather than independent infinite-dimensional constructions.
+
+The transported ambiguity audit uses exact split+welded boundary realizations of the exported weak-interface data; it does not derive a unique boundary operator realization from the abstract transport theorem alone.
+
+No tested natural boundary null ideal yields a nontrivial, stable quotient that simultaneously absorbs the transported unsafe witness.
+
+Expectation-level invisibility on boundary-classical states remains weaker than operator-level or mod-null class-definedness.
+
+LoG selector data and the AQFT/HLS tail remain outside the Mathematica core, so the selector-necessity decision is finite-cutoff and boundary-restricted.

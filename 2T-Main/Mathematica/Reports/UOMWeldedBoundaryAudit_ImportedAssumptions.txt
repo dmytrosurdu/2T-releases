@@ -1,0 +1,5 @@
+The welded-channel lane uses the exact compressed welded LoG line and exact accepted-record projection as the physical boundary image; it does not yet reconstruct the full unreduced completion-sector operator algebra from the Gaussian SK kernels.
+
+Band-lock, co-centering, and one-dimensional compressed-channel structure are imported from the proved UOM welded-shape/locking notes and then used exactly in the finite-dimensional boundary realization.
+
+The reworked boundary decision supersedes the generic splitBlock-based unsafe witness only on the exact welded/fact-preserving channel; it does not by itself settle full microscopic selector-independence away from that channel.

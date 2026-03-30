@@ -1,0 +1,127 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      5130,        118]
+NotebookOptionsPosition[      3766,         94]
+NotebookOutlinePosition[      4080,        108]
+CellTagsIndexPosition[      4037,        105]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["UOM Welded Ablation Audit", "Title",ExpressionUUID->"a410b051-e9da-429e-b85c-78da7c301220"],
+
+Cell["\<\
+This notebook runs the one-at-a-time ablation sweep around the welded-safe \
+boundary theorem. \
+\>", "Text",ExpressionUUID->"c44c97f2-4da7-44c6-921e-fd3fdda869d7"],
+
+Cell["Targets", "Section",ExpressionUUID->"15b72b2e-1d21-4e59-96d7-1cac266dbff8"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-ablation-fact-preservation",
+  Background->None,ExpressionUUID->
+  "e87343c7-4015-4872-afda-43c66c1dbb65"]], \
+"InlineCode",ExpressionUUID->"8f7fa9a1-47b4-47df-82fc-8957d7de807f"]], "Item",\
+ExpressionUUID->"32991782-25f5-46e3-92a1-df9d6bc4ee1e"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-ablation-bandlock",
+  Background->None,ExpressionUUID->
+  "19d15f8a-8e8d-4fb8-8b51-c8919cf2b798"]], \
+"InlineCode",ExpressionUUID->"6172903d-f757-4d2e-8fda-444f91c769d2"]], "Item",\
+ExpressionUUID->"4529f1bd-35d3-4cb5-b7b8-be2f42c2fb7b"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-ablation-compressed-rank",
+  Background->None,ExpressionUUID->
+  "3cae1708-4cb7-482b-b2aa-2693ec75f8b3"]], \
+"InlineCode",ExpressionUUID->"88e13b5e-30eb-4ac6-9d79-65e651a846ff"]], "Item",\
+ExpressionUUID->"34dc6bc6-9846-45e4-9489-d4cac02b41d7"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-ablation-co-centering",
+  Background->None,ExpressionUUID->
+  "95523a85-8084-4c7a-802c-4ffadc8f8f03"]], \
+"InlineCode",ExpressionUUID->"c9eb8f6b-dce6-4ca3-9f4a-11369c91a233"]], "Item",\
+ExpressionUUID->"1b83a0b5-242c-4a5a-88d2-f67d020a0dc9"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-ablation-descended-scalar-\
+factorization",
+  Background->None,ExpressionUUID->
+  "1a0aebab-7acf-4b44-a143-9cc2a0e2f4c7"]], \
+"InlineCode",ExpressionUUID->"861ad37e-76d0-4498-82f5-6628048c5d99"]], "Item",\
+ExpressionUUID->"b4348831-b2d0-4114-bc20-0aaf36d207ce"],
+
+Cell[TextData[Cell[BoxData[Cell["task:uom-minimal-boundary-safe-hypothesis-\
+set",
+  Background->None,ExpressionUUID->
+  "9987e976-fe47-4753-acea-c803c8b4dc8e"]], \
+"InlineCode",ExpressionUUID->"1f5b7468-bd6a-420b-ab5a-985d9d248a07"]], "Item",\
+ExpressionUUID->"1072927a-8766-476d-a177-4a0581855a17"],
+
+Cell["Evaluate", "Section",ExpressionUUID->"8421f958-c23e-4f9e-a54d-bd0aa78b8f96"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+  "Get", "[", "\"\</home/kray-l8/work/2T/Main/Mathematica/Kernel/Init.wl\>\"",
+    "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"audit", "=", 
+   RowBox[{"MainProof`UOMWeldedAblation`AuditUOMWeldedAblation", "[", "]"}]}],
+   ";"}], "\[IndentingNewLine]", 
+ RowBox[{"<|", 
+  RowBox[{
+   RowBox[{"\"\<Cases\>\"", "->", 
+    RowBox[{"audit", "[", "\"\<Cases\>\"", "]"}]}], ",", 
+   RowBox[{"\"\<MinimalStrongSafeHypothesisSet\>\"", "->", 
+    RowBox[{"audit", "[", "\"\<MinimalStrongSafeHypothesisSet\>\"", "]"}]}]}],
+   "|>"}]}], "Input",ExpressionUUID->"179af613-06f5-46cd-9316-4a6b950c0a4b"],
+
+Cell["Context", "Section",ExpressionUUID->"6673312e-4b89-4e31-962e-ba1135407256"],
+
+Cell["\<\
+The exact family is intentionally narrow: it answers which assumptions are \
+essential inside the audited finite-dimensional welded channel family, not in \
+every possible microscopic reconstruction.\
+\>", "Text",ExpressionUUID->"6a8d0c64-6d46-42db-9792-d3df41074bd4"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"bacb05d1-7806-4062-9342-ddc6597ae3bd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 97, 0, 70, "Title",ExpressionUUID->"a410b051-e9da-429e-b85c-78da7c301220"],
+Cell[654, 22, 174, 3, 70, "Text",ExpressionUUID->"c44c97f2-4da7-44c6-921e-fd3fdda869d7"],
+Cell[831, 27, 81, 0, 70, "Section",ExpressionUUID->"15b72b2e-1d21-4e59-96d7-1cac266dbff8"],
+Cell[915, 29, 288, 4, 70, "Item",ExpressionUUID->"32991782-25f5-46e3-92a1-df9d6bc4ee1e"],
+Cell[1206, 35, 279, 4, 70, "Item",ExpressionUUID->"4529f1bd-35d3-4cb5-b7b8-be2f42c2fb7b"],
+Cell[1488, 41, 286, 4, 70, "Item",ExpressionUUID->"34dc6bc6-9846-45e4-9489-d4cac02b41d7"],
+Cell[1777, 47, 283, 4, 70, "Item",ExpressionUUID->"1b83a0b5-242c-4a5a-88d2-f67d020a0dc9"],
+Cell[2063, 53, 303, 5, 70, "Item",ExpressionUUID->"b4348831-b2d0-4114-bc20-0aaf36d207ce"],
+Cell[2369, 60, 300, 5, 70, "Item",ExpressionUUID->"1072927a-8766-476d-a177-4a0581855a17"],
+Cell[2672, 67, 82, 0, 70, "Section",ExpressionUUID->"8421f958-c23e-4f9e-a54d-bd0aa78b8f96"],
+Cell[2757, 69, 640, 15, 70, "Input",ExpressionUUID->"179af613-06f5-46cd-9316-4a6b950c0a4b"],
+Cell[3400, 86, 81, 0, 70, "Section",ExpressionUUID->"6673312e-4b89-4e31-962e-ba1135407256"],
+Cell[3484, 88, 278, 4, 70, "Text",ExpressionUUID->"6a8d0c64-6d46-42db-9792-d3df41074bd4"]
+}
+]
+*)
+
+(* End of internal cache information *)

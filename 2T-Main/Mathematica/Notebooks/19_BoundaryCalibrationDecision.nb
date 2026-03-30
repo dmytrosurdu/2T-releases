@@ -1,0 +1,163 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      6742,        154]
+NotebookOptionsPosition[      5086,        127]
+NotebookOutlinePosition[      5400,        141]
+CellTagsIndexPosition[      5357,        138]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["19. Boundary Calibration Decision", "Title",ExpressionUUID->"4143023f-a268-4ad3-a0eb-dd3d1fa94bb0"],
+
+Cell["Decision", "Section",ExpressionUUID->"235be2f1-2e86-43f9-b067-525774bf98b3"],
+
+Cell[TextData[{
+ StyleBox["Decision A:",
+  FontWeight->Bold],
+ " boundary class-defined derivation is recovered on the controlled \
+split+welded sector under the hypothesis that the diagonal controlled \
+ambiguity component acts trivially modulo the chosen boundary null ideal."
+}], "Text",ExpressionUUID->"49d0d6cf-b8d7-41ad-833e-1a6fd15f9c30"],
+
+Cell["\<\
+This is the strongest conclusion supported by the exact finite-cutoff WL \
+lane. \
+\>", "Text",ExpressionUUID->"c1168d7a-6556-4920-bb59-6d8919b6e1c4"],
+
+Cell["Why the answer is not stronger", "Section",ExpressionUUID->"c0e6f899-9b52-4780-9395-003046cbcdb4"],
+
+Cell["The sprint also certifies two limitations. ", "Text",ExpressionUUID->"5b2f82da-1d4d-4b97-84ac-3834c3a408e4"],
+
+Cell["\<\
+The strict record sector is automatically invariant, but only because the \
+induced derivation collapses there.\
+\>", "Item",ExpressionUUID->"ea2005c6-97b2-439e-b234-d7a3328df593"],
+
+Cell["\<\
+Unsafe controlled families remain operator-visible, so classical ledger \
+endpoints alone do not imply full microscopic calibration invariance.\
+\>", "Item",ExpressionUUID->"0b1dedee-3efc-4203-b875-f529aedc6b55"],
+
+Cell["What split+welded restriction actually buys", "Section",ExpressionUUID->"3929bb23-6d07-4d22-9c6d-f2d1694aa231"],
+
+Cell["\<\
+The exact controlled projection proves that only the diagonal controlled \
+ambiguity component can survive on the boundary controlled sector. This is \
+the precise gain from the split-note structure. \
+\>", "Text",ExpressionUUID->"19023bc8-7636-4869-b7cd-0b4222fe92be"],
+
+Cell["What remains conditional", "Section",ExpressionUUID->"92522924-4b7b-47df-81a8-a64413d4ea23"],
+
+Cell[TextData[{
+ "The WL sprint does ",
+ StyleBox["not",
+  FontWeight->Bold],
+ " prove that the transported Main/UOM ambiguity subspace automatically \
+satisfies the boundary null-ideal condition. It proves that if the diagonal \
+controlled ambiguity blocks are null-ideal valued, then calibration \
+dependence becomes representational on the controlled boundary quotient while \
+the induced derivation can remain nontrivial. "
+}], "Text",ExpressionUUID->"d87d669c-6d57-4dec-8771-a82ee344da80"],
+
+Cell["Main-facing sentence", "Section",ExpressionUUID->"51f2518d-a641-4262-992a-c69fd59da968"],
+
+Cell["\<\
+Boundary class-defined derivation is recovered on the controlled split+welded \
+sector under a diagonal-controlled-ambiguity null-ideal hypothesis; without \
+that hypothesis, visible controlled countermodels remain, so selector \
+pressure is still real. \
+\>", "Text",ExpressionUUID->"1d12fa20-21c9-4712-93a1-a1b723438d9a"],
+
+Cell["Status", "Section",ExpressionUUID->"28525c6f-59d4-456c-a17f-eb6be0f9d421"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Decision lane\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm]},
+        {"\<\"Exact strict-record trivialization theorem\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Exact controlled reduction theorem\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Exact nontrivial mod-null invisible controlled family\"\>", "\<\
+\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Exact visible controlled countermodel\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Final sprint decision: conditional Path A, not automatic \
+invariance\"\>", "\<\"finite-dimensional-theorem-certificate\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[
+      BoxForm`e$, TableHeadings -> {None, {"Decision lane", "Status"}}]]], 
+    "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"ce3afc8f-2f12-4f2d-9e40-e62ff35a8b41"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"a83bd6d1-c378-4ba4-8c49-4f0e587986a8"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 105, 0, 70, "Title",ExpressionUUID->"4143023f-a268-4ad3-a0eb-dd3d1fa94bb0"],
+Cell[662, 22, 82, 0, 70, "Section",ExpressionUUID->"235be2f1-2e86-43f9-b067-525774bf98b3"],
+Cell[747, 24, 345, 6, 70, "Text",ExpressionUUID->"49d0d6cf-b8d7-41ad-833e-1a6fd15f9c30"],
+Cell[1095, 32, 160, 3, 70, "Text",ExpressionUUID->"c1168d7a-6556-4920-bb59-6d8919b6e1c4"],
+Cell[1258, 37, 104, 0, 70, "Section",ExpressionUUID->"c0e6f899-9b52-4780-9395-003046cbcdb4"],
+Cell[1365, 39, 114, 0, 70, "Text",ExpressionUUID->"5b2f82da-1d4d-4b97-84ac-3834c3a408e4"],
+Cell[1482, 41, 190, 3, 70, "Item",ExpressionUUID->"ea2005c6-97b2-439e-b234-d7a3328df593"],
+Cell[1675, 46, 222, 3, 70, "Item",ExpressionUUID->"0b1dedee-3efc-4203-b875-f529aedc6b55"],
+Cell[1900, 51, 117, 0, 70, "Section",ExpressionUUID->"3929bb23-6d07-4d22-9c6d-f2d1694aa231"],
+Cell[2020, 53, 279, 4, 70, "Text",ExpressionUUID->"19023bc8-7636-4869-b7cd-0b4222fe92be"],
+Cell[2302, 59, 98, 0, 70, "Section",ExpressionUUID->"92522924-4b7b-47df-81a8-a64413d4ea23"],
+Cell[2403, 61, 494, 9, 70, "Text",ExpressionUUID->"d87d669c-6d57-4dec-8771-a82ee344da80"],
+Cell[2900, 72, 94, 0, 70, "Section",ExpressionUUID->"51f2518d-a641-4262-992a-c69fd59da968"],
+Cell[2997, 74, 333, 5, 70, "Text",ExpressionUUID->"1d12fa20-21c9-4712-93a1-a1b723438d9a"],
+Cell[3333, 81, 80, 0, 70, "Section",ExpressionUUID->"28525c6f-59d4-456c-a17f-eb6be0f9d421"],
+Cell[3416, 83, 1666, 42, 70, "TextTableForm",ExpressionUUID->"ce3afc8f-2f12-4f2d-9e40-e62ff35a8b41"]
+}
+]
+*)
+
+(* End of internal cache information *)

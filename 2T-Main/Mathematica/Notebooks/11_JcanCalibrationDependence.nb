@@ -1,0 +1,465 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     17781,        456]
+NotebookOptionsPosition[     15541,        423]
+NotebookOutlinePosition[     15855,        437]
+CellTagsIndexPosition[     15812,        434]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ "11. Calibration Dependence of ",
+ Cell[BoxData[Cell["Jcan",
+   Background->None,ExpressionUUID->"c7974f1a-0099-4f3d-b148-2c1dbe863ad1"]], 
+  "InlineCode",ExpressionUUID->"c28670c9-ce16-472c-97e7-56cad295be7f"]
+}], "Title",ExpressionUUID->"1fb91863-ffda-4c67-87d5-c03634194275"],
+
+Cell[TextData[{
+ "This notebook audits the exact finite-cutoff comparison ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubsuperscriptBox[
+          StyleBox["J", "TI"], 
+          StyleBox["B", "TI"], 
+          StyleBox["can", FontSlant -> "Plain"]], "\[LongEqual]", 
+         RowBox[{"(", 
+           RowBox[{
+             StyleBox["I", "TI"], "-", 
+             SubsuperscriptBox[
+              StyleBox["P", "TI"], 
+              SuperscriptBox[
+               StyleBox["A", "TI"], "-"], 
+              StyleBox["B", "TI"]]}], ")"}], 
+         SubscriptBox[
+          StyleBox["J", "TI"], "0"], ",    ", 
+         SubsuperscriptBox[
+          StyleBox["P", "TI"], 
+          SuperscriptBox[
+           StyleBox["A", "TI"], "-"], 
+          StyleBox["B", "TI"]], "\[LongEqual]", 
+         StyleBox["U", "TI"], 
+         SuperscriptBox[
+          RowBox[{"(", 
+            RowBox[{
+              SuperscriptBox[
+               StyleBox["U", "TI"], 
+               StyleBox["B", "TI"]], 
+              StyleBox["U", "TI"]}], ")"}], "-1"], 
+         SuperscriptBox[
+          StyleBox["U", "TI"], 
+          StyleBox["B", "TI"]], "."}], TraditionalForm], "errors" -> {}, 
+     "input" -> 
+     "J^{\\mathrm{can}}_{B} = (I - P^{B}_{\\mathcal A^-}) J_0,\n\\qquad\n\
+P^{B}_{\\mathcal A^-} = U (U^\\top B U)^{-1} U^\\top B.", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "ddb9ecf6-d718-4edd-904d-46fb1e311e31"]
+}], "Text",ExpressionUUID->"6703fa76-c9ca-41cd-b3bb-464eaae11cee"],
+
+Cell["Exact comparison formula", "Section",ExpressionUUID->"2c4c09f0-368b-4ae8-9685-140b1d2c0a68"],
+
+Cell[TextData[{
+ "For two admissible calibrations $B",
+ StyleBox["1,B",
+  FontSlant->Italic],
+ "2$ on the same affine class ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubscriptBox[
+          StyleBox["J", "TI"], "0"], "+", 
+         RowBox[{
+           StyleBox["i", "TI"], 
+           StyleBox["m", "TI"]}], 
+         RowBox[{"(", 
+           StyleBox["U", "TI"], ")"}]}], TraditionalForm], "errors" -> {}, 
+     "input" -> "J_0 + \\operatorname{im}(U)", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "34465b6b-191c-4567-a36b-ee5d94b53227"],
+ ", ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubsuperscriptBox[
+          StyleBox["J", "TI"], 
+          SubscriptBox[
+           StyleBox["B", "TI"], "1"], 
+          StyleBox["can", FontSlant -> "Plain"]], "-", 
+         SubsuperscriptBox[
+          StyleBox["J", "TI"], 
+          SubscriptBox[
+           StyleBox["B", "TI"], "2"], 
+          StyleBox["can", FontSlant -> "Plain"]], "\[LongEqual]", 
+         RowBox[{"(", 
+           RowBox[{
+             SubsuperscriptBox[
+              StyleBox["P", "TI"], 
+              SuperscriptBox[
+               StyleBox["A", "TI"], "-"], 
+              SubscriptBox[
+               StyleBox["B", "TI"], "2"]], "-", 
+             SubsuperscriptBox[
+              StyleBox["P", "TI"], 
+              SuperscriptBox[
+               StyleBox["A", "TI"], "-"], 
+              SubscriptBox[
+               StyleBox["B", "TI"], "1"]]}], ")"}], 
+         SubscriptBox[
+          StyleBox["J", "TI"], "0"], "."}], TraditionalForm], "errors" -> {}, 
+     "input" -> 
+     "J^{\\mathrm{can}}_{B_1} - J^{\\mathrm{can}}_{B_2}\n=\n\
+\\bigl(P^{B_2}_{\\mathcal A^-} - P^{B_1}_{\\mathcal A^-}\\bigr) J_0.", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "2f48bff9-358f-4718-b814-5416497a753e"],
+ "The WL package also certifies that this difference always lies in ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SuperscriptBox[
+        StyleBox["A", "TI"], "-"], TraditionalForm], "errors" -> {}, "input" -> 
+     "\\mathcal A^-", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "3a33944f-418d-4e7f-8270-b06b6949d14f"],
+ ". "
+}], "Text",ExpressionUUID->"c7bf4bac-93ae-48c1-9f6d-086446700bb5"],
+
+Cell["Equality criterion", "Section",ExpressionUUID->"4678a0b8-1fae-40f0-a639-fed4e4197bac"],
+
+Cell[TextData[{
+ "The notebook proves the exact criterion ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubsuperscriptBox[
+          StyleBox["J", "TI"], 
+          SubscriptBox[
+           StyleBox["B", "TI"], "1"], 
+          StyleBox["can", FontSlant -> "Plain"]], "\[LongEqual]", 
+         SubsuperscriptBox[
+          StyleBox["J", "TI"], 
+          SubscriptBox[
+           StyleBox["B", "TI"], "2"], 
+          StyleBox["can", FontSlant -> "Plain"]], " ", 
+         "\[DoubleLongLeftRightArrow] ", 
+         RowBox[{"(", 
+           RowBox[{
+             SubsuperscriptBox[
+              StyleBox["P", "TI"], 
+              SuperscriptBox[
+               StyleBox["A", "TI"], "-"], 
+              SubscriptBox[
+               StyleBox["B", "TI"], "2"]], "-", 
+             SubsuperscriptBox[
+              StyleBox["P", "TI"], 
+              SuperscriptBox[
+               StyleBox["A", "TI"], "-"], 
+              SubscriptBox[
+               StyleBox["B", "TI"], "1"]]}], ")"}], 
+         SubscriptBox[
+          StyleBox["J", "TI"], "0"], "\[LongEqual]", "0."}], TraditionalForm],
+      "errors" -> {}, "input" -> 
+     "J^{\\mathrm{can}}_{B_1} = J^{\\mathrm{can}}_{B_2}\n\\iff\n\
+\\bigl(P^{B_2}_{\\mathcal A^-} - P^{B_1}_{\\mathcal A^-}\\bigr) J_0 = 0.", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "9e73bf28-9284-4e61-a2b6-395c6bbc6b1a"],
+ "A second exact example shows that distinct admissible calibrations can \
+still give the same ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       SuperscriptBox[
+        StyleBox["J", "TI"], 
+        StyleBox["can", FontSlant -> "Plain"]], TraditionalForm], 
+     "errors" -> {}, "input" -> "J^{\\mathrm{can}}", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "6acfcb58-16a8-4823-b633-4b174b8eb792"],
+ " when the induced projector action on $J_0$ agrees. "
+}], "Text",ExpressionUUID->"6778c964-8e8b-4187-9d88-32524d702d57"],
+
+Cell["Exact countermodel", "Section",ExpressionUUID->"d7ade1fd-4251-4312-a482-e3d0e2397dc7"],
+
+Cell["The non-invariant example uses a fixed weak interface with ", "Text",ExpressionUUID->"edbf0c99-4598-49df-afa5-90259f19143b"],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[
+  TemplateBox[<|"boxes" -> FormBox[
+      RowBox[{"\[Chi]", "\[LongEqual]", 
+        RowBox[{"(", 
+          RowBox[{"1", ",", "0", ",", "0"}], ")"}]}], TraditionalForm], 
+    "errors" -> {}, "input" -> "\\chi = (1,0,0)", "state" -> "Boxes"|>,
+   "TeXAssistantTemplate"], 
+  TraditionalForm]],ExpressionUUID->"ede80a03-feca-4a2d-8b8a-c48468ba46ac"]], \
+"Item",ExpressionUUID->"c39b2dda-fe66-4473-b44e-346a0216d258"],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[
+  TemplateBox[<|"boxes" -> FormBox[
+      RowBox[{
+        SuperscriptBox[
+         StyleBox["A", "TI"], "-"], "\[LongEqual]", 
+        RowBox[{
+          StyleBox["s", "TI"], 
+          StyleBox["p", "TI"], 
+          StyleBox["a", "TI"], 
+          StyleBox["n", "TI"]}], 
+        RowBox[{"(", 
+          SubscriptBox[
+           StyleBox["e", "TI"], "2"], ")"}]}], TraditionalForm], 
+    "errors" -> {}, "input" -> "\\mathcal A^- = \\operatorname{span}(e_2)", 
+    "state" -> "Boxes"|>,
+   "TeXAssistantTemplate"], 
+  TraditionalForm]],ExpressionUUID->"0c7e0d05-e47a-4794-9aa6-2c43e22501fd"]], \
+"Item",ExpressionUUID->"31744bca-b5ae-4854-a884-46f78967f33c"],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[
+  TemplateBox[<|"boxes" -> FormBox[
+      RowBox[{
+        SubscriptBox[
+         StyleBox["J", "TI"], "0"], "\[LongEqual]", 
+        RowBox[{"(", 
+          RowBox[{"1", ",", "1", ",", "1"}], ")"}]}], TraditionalForm], 
+    "errors" -> {}, "input" -> "J_0 = (1,1,1)", "state" -> "Boxes"|>,
+   "TeXAssistantTemplate"], 
+  TraditionalForm]],ExpressionUUID->"4f3eec87-b3cf-4dc5-8eeb-7bc246b0e007"]], \
+"Item",ExpressionUUID->"23b5b14e-a5f1-4064-82c7-f33e3bed0e67"],
+
+Cell[TextData[{
+ "and two admissible calibrations built from the same normalized ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SuperscriptBox[
+          StyleBox["j", "TI"], "\[Sharp]"], "\[LongEqual]", 
+         SubscriptBox[
+          StyleBox["e", "TI"], "1"]}], TraditionalForm], "errors" -> {}, 
+     "input" -> "j^\\sharp = e_1", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "237945f2-2fb0-4173-927d-f53bf3f63785"],
+ " but different kernel metrics. The resulting canonical representatives are \
+"
+}], "Text",ExpressionUUID->"f3202ea2-5be2-47f6-8b4b-91483d9cbff9"],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[
+  TemplateBox[<|"boxes" -> FormBox[
+      RowBox[{
+        SubsuperscriptBox[
+         StyleBox["J", "TI"], 
+         SubscriptBox[
+          StyleBox["B", "TI"], "1"], 
+         StyleBox["can", FontSlant -> "Plain"]], "\[LongEqual]", 
+        RowBox[{"(", 
+          RowBox[{"1", ",", "0", ",", "1"}], ")"}]}], TraditionalForm], 
+    "errors" -> {}, "input" -> "J^{\\mathrm{can}}_{B_1} = (1,0,1)", "state" -> 
+    "Boxes"|>,
+   "TeXAssistantTemplate"], 
+  TraditionalForm]],ExpressionUUID->"bb538293-6424-4f48-bb96-bed96919f88f"]], \
+"Item",ExpressionUUID->"d565b6fc-76a7-41f9-b186-120acafe125f"],
+
+Cell[TextData[Cell[BoxData[
+ FormBox[
+  TemplateBox[<|"boxes" -> FormBox[
+      RowBox[{
+        SubsuperscriptBox[
+         StyleBox["J", "TI"], 
+         SubscriptBox[
+          StyleBox["B", "TI"], "2"], 
+         StyleBox["can", FontSlant -> "Plain"]], "\[LongEqual]", 
+        RowBox[{"(", 
+          FractionBox[
+           RowBox[{"1", ",", "-1"}], 
+           RowBox[{"2", ",", "1"}]], ")"}]}], TraditionalForm], 
+    "errors" -> {}, "input" -> "J^{\\mathrm{can}}_{B_2} = (1,-\\tfrac12,1)", 
+    "state" -> "Boxes"|>,
+   "TeXAssistantTemplate"], 
+  TraditionalForm]],ExpressionUUID->"5b34a2a5-0d5c-4123-933b-1c2e088baf4e"]], \
+"Item",ExpressionUUID->"0e3f5100-0f74-4ef0-82e0-f5b7033ed45c"],
+
+Cell["\<\
+so admissible calibration dependence is real at finite cutoff. \
+\>", "Text",ExpressionUUID->"6a9b5a61-4d47-4708-a78e-0c9903bb1d50"],
+
+Cell["Invariants", "Section",ExpressionUUID->"e1daaab5-511c-49bf-a94a-dc62230278a9"],
+
+Cell["Two exact invariants are isolated. ", "Text",ExpressionUUID->"31870edb-37eb-4c8a-9041-728e953856bb"],
+
+Cell[TextData[{
+ "Quotient-level scalars are fixed because ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         SubsuperscriptBox[
+          StyleBox["J", "TI"], 
+          SubscriptBox[
+           StyleBox["B", "TI"], "1"], 
+          StyleBox["can", FontSlant -> "Plain"]], "-", 
+         SubsuperscriptBox[
+          StyleBox["J", "TI"], 
+          SubscriptBox[
+           StyleBox["B", "TI"], "2"], 
+          StyleBox["can", FontSlant -> "Plain"]], "\[Element]", 
+         SuperscriptBox[
+          StyleBox["A", "TI"], "-"], "\[Subset]", "ker", "\[Chi]"}], 
+       TraditionalForm], "errors" -> {}, "input" -> 
+     "J^{\\mathrm{can}}_{B_1} - J^{\\mathrm{can}}_{B_2} \\in \\mathcal A^- \
+\\subset \\ker \\chi", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "ea2d8da4-1d72-4e21-a072-a76885a84164"],
+ "."
+}], "Item",ExpressionUUID->"d107f7dc-0a34-4afb-96ce-96d6a00cc1ac"],
+
+Cell[TextData[{
+ "Any visible map ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       StyleBox["V", "TI"], TraditionalForm], "errors" -> {}, "input" -> "V", 
+     "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "f1d77cf4-b196-4bed-ac78-857deca2bf22"],
+ " with ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["V", "TI"], 
+         SuperscriptBox[
+          StyleBox["A", "TI"], "-"], "\[LongEqual]", "0"}], TraditionalForm], 
+     "errors" -> {}, "input" -> "V\\mathcal A^- = 0", "state" -> "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "0ddc35b0-8829-4294-b8b4-bee6b6267ed6"],
+ " gives ",
+ Cell[BoxData[
+  FormBox[
+   TemplateBox[<|"boxes" -> FormBox[
+       RowBox[{
+         StyleBox["V", "TI"], 
+         SubsuperscriptBox[
+          StyleBox["J", "TI"], 
+          SubscriptBox[
+           StyleBox["B", "TI"], "1"], 
+          StyleBox["can", FontSlant -> "Plain"]], "\[LongEqual]", 
+         StyleBox["V", "TI"], 
+         SubsuperscriptBox[
+          StyleBox["J", "TI"], 
+          SubscriptBox[
+           StyleBox["B", "TI"], "2"], 
+          StyleBox["can", FontSlant -> "Plain"]]}], TraditionalForm], 
+     "errors" -> {}, "input" -> 
+     "V J^{\\mathrm{can}}_{B_1} = V J^{\\mathrm{can}}_{B_2}", "state" -> 
+     "Boxes"|>,
+    "TeXAssistantTemplate"], TraditionalForm]],ExpressionUUID->
+  "a11b14f2-904f-45ed-a583-f899e4e39fcd"],
+ "."
+}], "Item",ExpressionUUID->"c6c6f9af-cf04-4cba-a81c-95e6727057f4"],
+
+Cell["\<\
+This is the useful nontrivial invariance criterion carried into the bracket \
+lane. \
+\>", "Text",ExpressionUUID->"e7cfa486-0b50-48c7-943c-7c2bcf400eb9"],
+
+Cell["Status", "Section",ExpressionUUID->"e63e8fce-df1e-4133-a51f-f6126499c91f"],
+
+Cell[BoxData[
+ PaneBox[
+  PaneBox[
+   StyleBox[
+    TagBox[
+     TagBox[GridBox[{
+        {
+         TagBox["\<\"Claim\"\>",
+          HoldForm], 
+         TagBox["\<\"Status\"\>",
+          HoldForm]},
+        {"\<\"Exact projector-difference formula\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Exact equality criterion\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Exact non-invariance counterexample\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"},
+        {"\<\"Exact visibility-map invariance criterion\"\>", \
+"\<\"finite-dimensional-theorem-certificate\"\>"}
+       },
+       GridBoxAlignment->{
+        "Columns" -> {Center, {Center}}, "Rows" -> {{Baseline}}},
+       GridBoxDividers->{
+        "Columns" -> {{False}}, "Rows" -> {False, True, {False}, False}},
+       GridBoxSpacings->{"Columns" -> {
+           Offset[0.27999999999999997`], {
+            Offset[2.0999999999999996`]}, 
+           Offset[0.27999999999999997`]}, "Rows" -> {
+           Offset[0.2], {
+            Offset[0.4]}, 
+           Offset[0.2]}}],
+      {None, OutputFormsDump`HeadedColumns}],
+     Function[BoxForm`e$, 
+      TableForm[BoxForm`e$, TableHeadings -> {None, {"Claim", "Status"}}]]], 
+    "Text",
+    StripOnInput->False,
+    ShowStringCharacters->False],
+   ImageMargins->{{0, 0}, {5, 5}}],
+  ImageMargins->{{0, 0}, {5, 5}}]], "TextTableForm", \
+"Text",ExpressionUUID->"5893cab8-27fd-4abf-bfdb-f095b637c726"]
+},
+FrontEndVersion->"14.3 for Linux x86 (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"9fb98179-9cdd-493e-8616-b4f0b8195a60"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 295, 5, 70, "Title",ExpressionUUID->"1fb91863-ffda-4c67-87d5-c03634194275"],
+Cell[852, 27, 1562, 41, 70, "Text",ExpressionUUID->"6703fa76-c9ca-41cd-b3bb-464eaae11cee"],
+Cell[2417, 70, 98, 0, 70, "Section",ExpressionUUID->"2c4c09f0-368b-4ae8-9685-140b1d2c0a68"],
+Cell[2518, 72, 2419, 66, 70, "Text",ExpressionUUID->"c7bf4bac-93ae-48c1-9f6d-086446700bb5"],
+Cell[4940, 140, 92, 0, 70, "Section",ExpressionUUID->"4678a0b8-1fae-40f0-a639-fed4e4197bac"],
+Cell[5035, 142, 2031, 51, 70, "Text",ExpressionUUID->"6778c964-8e8b-4187-9d88-32524d702d57"],
+Cell[7069, 195, 92, 0, 70, "Section",ExpressionUUID->"d7ade1fd-4251-4312-a482-e3d0e2397dc7"],
+Cell[7164, 197, 130, 0, 70, "Text",ExpressionUUID->"edbf0c99-4598-49df-afa5-90259f19143b"],
+Cell[7297, 199, 453, 9, 70, "Item",ExpressionUUID->"c39b2dda-fe66-4473-b44e-346a0216d258"],
+Cell[7753, 210, 699, 18, 70, "Item",ExpressionUUID->"31744bca-b5ae-4854-a884-46f78967f33c"],
+Cell[8455, 230, 500, 11, 70, "Item",ExpressionUUID->"23b5b14e-a5f1-4064-82c7-f33e3bed0e67"],
+Cell[8958, 243, 657, 15, 70, "Text",ExpressionUUID->"f3202ea2-5be2-47f6-8b4b-91483d9cbff9"],
+Cell[9618, 260, 635, 15, 70, "Item",ExpressionUUID->"d565b6fc-76a7-41f9-b186-120acafe125f"],
+Cell[10256, 277, 697, 17, 70, "Item",ExpressionUUID->"0e3f5100-0f74-4ef0-82e0-f5b7033ed45c"],
+Cell[10956, 296, 142, 2, 70, "Text",ExpressionUUID->"6a9b5a61-4d47-4708-a78e-0c9903bb1d50"],
+Cell[11101, 300, 84, 0, 70, "Section",ExpressionUUID->"e1daaab5-511c-49bf-a94a-dc62230278a9"],
+Cell[11188, 302, 106, 0, 70, "Text",ExpressionUUID->"31870edb-37eb-4c8a-9041-728e953856bb"],
+Cell[11297, 304, 956, 24, 70, "Item",ExpressionUUID->"d107f7dc-0a34-4afb-96ce-96d6a00cc1ac"],
+Cell[12256, 330, 1559, 43, 70, "Item",ExpressionUUID->"c6c6f9af-cf04-4cba-a81c-95e6727057f4"],
+Cell[13818, 375, 163, 3, 70, "Text",ExpressionUUID->"e7cfa486-0b50-48c7-943c-7c2bcf400eb9"],
+Cell[13984, 380, 80, 0, 70, "Section",ExpressionUUID->"e63e8fce-df1e-4133-a51f-f6126499c91f"],
+Cell[14067, 382, 1470, 39, 70, "TextTableForm",ExpressionUUID->"5893cab8-27fd-4abf-bfdb-f095b637c726"]
+}
+]
+*)
+
+(* End of internal cache information *)

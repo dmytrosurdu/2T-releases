@@ -1,0 +1,213 @@
+{
+	"GeneratedAt":"2026-03-12 17:14:23",
+	"SprintScope":"Boundary-reduction sprint: manuscript cleanup, quotient descent, source representability, witness-comparison reduction, and branchwise Jcan regularity.",
+	"Milestone":"shrink imported transport boundary",
+	"MilestoneStatus":"green",
+	"Ledger":[
+		{
+			"TheoremLabel":"def:2T-char",
+			"Assumptions":"Finite-dimensional surrogate for the seven Main-facing interface clauses.",
+			"Method":"Exact association validation plus 3 valid and 3 invalid synthetic examples.",
+			"Status":"exact finite-dimensional certificate",
+			"ScopeClass":"schema-validator",
+			"SurrogateBlindSpots":[
+				"Closedness is automatic\/invisible at finite dimension.",
+				"Continuity of chi is automatic for finite-dimensional linear maps.",
+				"Hilbertizability is reduced to positive-definite matrix data, not the abstract completion statement."
+			],
+			"CertificateArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task2Schema.ValidExamples",
+			"CounterexampleArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task2Schema.InvalidExamples",
+			"RepresentativeModelFamily":"valid_basic_identity, valid_nontrivial_gram, valid_zero_ambiguity; invalid_parity_tag, invalid_chi_on_ambiguity, invalid_positive_form",
+			"NoApproximationQ":true,
+			"Source":"Main\/appendix_main.tex:535-586",
+			"Acceptance":"3 valid accepted; 3 invalid rejected for the expected reason."
+		},
+		{
+			"TheoremLabel":"thm:active-response-transport-minimal",
+			"Assumptions":"Branchwise rho^dom, nu, Aminus, and Jdesc family on an accepted interval.",
+			"Method":"Resolve\/Reduce on an exact polynomial branch model, connected-component audit, and broken-model hypothesis drops.",
+			"Status":"exact finite-dimensional certificate",
+			"ScopeClass":"exact-model-certificate",
+			"SurrogateBlindSpots":[
+				"Continuity is certified only for the chosen exact model family.",
+				"The theorem is not universally proved for all admissible branches."
+			],
+			"CertificateArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task3_5ActiveTransport.CertifiedModel",
+			"CounterexampleArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task3_5ActiveTransport.BrokenModels",
+			"RepresentativeModelFamily":"certified_polynomial_branch, broken_zero_sign_undefined, broken_jump_discontinuity, broken_ambiguity_not_in_kernel",
+			"NoApproximationQ":true,
+			"Source":"UOM\/active_response_transport_program_note.tex:1821-1907"
+		},
+		{
+			"TheoremLabel":"thm:char-weak-interface",
+			"Assumptions":"Transport theorem discharged; chi = nu^-1 rho^dom defines the weak Main export.",
+			"Method":"Exact export chi = nu^-1 rho^dom with affine constancy, sign-defined components, and ambiguity-leak counterexample.",
+			"Status":"exact finite-dimensional certificate",
+			"ScopeClass":"exact-model-certificate",
+			"SurrogateBlindSpots":[
+				"The weak export is checked on exact branch models rather than universally."
+			],
+			"CertificateArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task3_5ActiveTransport.CertifiedModel",
+			"CounterexampleArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task3_5ActiveTransport.BrokenModels",
+			"RepresentativeModelFamily":"certified_polynomial_branch with explicit broken hypothesis models",
+			"NoApproximationQ":true,
+			"Source":"UOM\/canonical_odd_interface_note.tex:699-744"
+		},
+		{
+			"TheoremLabel":"prop:minimal-transport-calibration",
+			"Assumptions":"chi, Jsharp, beta > 0, and a coercive form on ker chi.",
+			"Method":"Exact basis-aware ambient construction B = M^-T G M^-1 with coercive kernel metric.",
+			"Status":"finite-dimensional-theorem-certificate",
+			"ScopeClass":"finite-dimensional-theorem-certificate",
+			"SurrogateBlindSpots":[
+				"Coercivity and Hilbertizability are represented by positive-definite finite matrices.",
+				"No infinite-dimensional completion is constructed."
+			],
+			"CertificateArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task4Calibration.ValidExample",
+			"CounterexampleArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task4Calibration.BrokenExamples",
+			"RepresentativeModelFamily":"Exact basis-aware ambient calibration examples with broken-input countermodels",
+			"NoApproximationQ":true,
+			"Source":"UOM\/active_response_transport_program_note.tex:1987-2056"
+		},
+		{
+			"TheoremLabel":"thm:finite-cutoff-Jcan",
+			"Assumptions":"Weak 2T_char interface and a positive symmetric B on the affine class.",
+			"Method":"Exact affine projection with GA = U^T B U and Jcan = J0 + U a*.",
+			"Status":"finite-dimensional-theorem-certificate",
+			"ScopeClass":"finite-dimensional-theorem-certificate",
+			"SurrogateBlindSpots":[
+				"Closed affine subspace and Hilbert projection are realized by finite-dimensional matrix algebra."
+			],
+			"CertificateArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task5CanonicalRepresentative.ValidExample",
+			"CounterexampleArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task5CanonicalRepresentative.BrokenExamples",
+			"RepresentativeModelFamily":"Exact full-column-rank affine examples with rank\/B\/chi countermodels",
+			"NoApproximationQ":true,
+			"Source":"Main\/appendix_main.tex:1787-1811"
+		},
+		{
+			"TheoremLabel":"prop:Jcan-orth",
+			"Assumptions":"Finite-dimensional affine class and positive B.",
+			"Method":"Exact orthogonality, projector formula, and minimality-difference identity.",
+			"Status":"finite-dimensional-theorem-certificate",
+			"ScopeClass":"finite-dimensional-theorem-certificate",
+			"SurrogateBlindSpots":[
+				"The proof is finite-dimensional and does not replace the abstract Hilbert-space statement."
+			],
+			"CertificateArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task5CanonicalRepresentative.ValidExample",
+			"CounterexampleArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task5CanonicalRepresentative.BrokenExamples",
+			"RepresentativeModelFamily":"Exact projector-model family with representative-shift checks",
+			"NoApproximationQ":true,
+			"Source":"Main\/appendix_main.tex:1838-1870 (working sprint label)"
+		},
+		{
+			"TheoremLabel":"thm:dominant-quotient-descent",
+			"Assumptions":"Dominant-response functional and ambiguity subspace on the finite-cutoff odd layer.",
+			"Method":"Exact quotient coordinates W, descended covector eta, and universal descent equivalences via Resolve.",
+			"Status":"finite-dimensional-theorem-certificate",
+			"ScopeClass":"finite-dimensional-theorem-certificate",
+			"SurrogateBlindSpots":[
+				"Topological quotient continuity is represented by exact finite-dimensional linear maps.",
+				"Closure of the ambiguity span is not separately audited beyond the surrogate."
+			],
+			"CertificateArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task6QuotientDescent.ValidExample",
+			"CounterexampleArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task6QuotientDescent.BrokenExamples",
+			"RepresentativeModelFamily":"Exact quotient-descent valid\/broken model pair with nu != 1 obstruction witness",
+			"NoApproximationQ":true,
+			"Source":"UOM\/active_response_transport_program_note.tex:504-525"
+		},
+		{
+			"TheoremLabel":"cor:dominant-quotient-constancy",
+			"Assumptions":"Descended dominant functional on the ambiguity quotient and the affine descendant class.",
+			"Method":"Exact affine-class constancy and quotient-value reduction on J0 + Aminus.",
+			"Status":"finite-dimensional-theorem-certificate",
+			"ScopeClass":"finite-dimensional-theorem-certificate",
+			"SurrogateBlindSpots":[
+				"The quotient point [![Xi^(1)]!] is represented by exact coordinates rather than an abstract completion object."
+			],
+			"CertificateArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task6QuotientDescent.ValidExample",
+			"CounterexampleArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task6QuotientDescent.BrokenExamples",
+			"RepresentativeModelFamily":"Exact affine descendant class with quotient-point scalar reduction",
+			"NoApproximationQ":true,
+			"Source":"UOM\/active_response_transport_program_note.tex:444-468"
+		},
+		{
+			"TheoremLabel":"task:source-insertion-representability",
+			"Assumptions":"Fixed-cutoff image-membership problem Pi_phys R(F_tau) = Pi_phys T[tau].",
+			"Method":"Exact image-membership solver for Pi_phys R(F_tau) = Pi_phys T[tau], with obstruction and gauge-space extraction.",
+			"Status":"finite-dimensional-theorem-certificate",
+			"ScopeClass":"finite-dimensional-theorem-certificate",
+			"SurrogateBlindSpots":[
+				"Sufficient locality remains imported and is not identified with algebraic image membership.",
+				"Only fixed-cutoff linear realizability is audited here."
+			],
+			"CertificateArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task7Representability.ValidExamples",
+			"CounterexampleArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task7Representability.BrokenExamples",
+			"RepresentativeModelFamily":"Exact representable unique\/family examples plus an explicit obstruction example",
+			"NoApproximationQ":true,
+			"Source":"UOM\/active_response_transport_program_note.tex:1260-1310"
+		},
+		{
+			"TheoremLabel":"task:witness-comparison-reduction",
+			"Assumptions":"Representative search on J0 + Aminus versus scalar compatibility of dominant pairings.",
+			"Method":"Exact representative-search reduction to rho-level scalar compatibility, plus obstruction witness for the unscaled chi-level claim when nu != 1.",
+			"Status":"counterexample found",
+			"ScopeClass":"finite-dimensional-theorem-certificate",
+			"SurrogateBlindSpots":[
+				"The notebook certifies the scalar reduction at fixed cutoff only.",
+				"The unscaled chi-compatibility claim fails unless an extra normalization hypothesis is added."
+			],
+			"CertificateArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task8WitnessComparison",
+			"CounterexampleArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task8WitnessComparison.UnscaledChiCompatibilityWitness",
+			"RepresentativeModelFamily":"Exact nu != 1 witness-comparison obstruction family",
+			"NoApproximationQ":true,
+			"Source":"UOM\/active_response_transport_program_note.tex:1323-1371"
+		},
+		{
+			"TheoremLabel":"task:Jcan-branch-regularity",
+			"Assumptions":"Rational or polynomial branch data U(lambda), B(lambda), J0(lambda) with invertible Gram block.",
+			"Method":"Exact projector formula with rational-function continuity certified away from Gram-block degeneracy.",
+			"Status":"finite-dimensional-theorem-certificate",
+			"ScopeClass":"finite-dimensional-theorem-certificate",
+			"SurrogateBlindSpots":[
+				"Only rational\/polynomial finite-cutoff branch data are audited.",
+				"The statement does not address infinite-dimensional branch regularity."
+			],
+			"CertificateArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task9JcanBranchRegularity.ValidExample",
+			"CounterexampleArtifact":"\/home\/kray-l8\/work\/2T\/Main\/Mathematica\/Certificates\/TransportBoundaryReduction_Certificates.wl::Task9JcanBranchRegularity.DegenerateExample",
+			"RepresentativeModelFamily":"Exact valid and Gram-degenerate branch examples",
+			"NoApproximationQ":true,
+			"Source":"Main\/appendix_main.tex:1837-1870 plus finite-dimensional projector formula remark"
+		},
+		{
+			"TheoremLabel":"thm:finite-cutoff-canonical-odd-spectral-selection",
+			"Assumptions":"Certified compressed spectral regime and rank-one LoG operator.",
+			"Method":"Exact eigenvalue\/projector certificates.",
+			"Status":"deferred",
+			"ScopeClass":"deferred",
+			"SurrogateBlindSpots":[
+				"Branchwise smooth transport of the projector may remain an imported input."
+			],
+			"CertificateArtifact":"Deferred",
+			"CounterexampleArtifact":"Deferred",
+			"RepresentativeModelFamily":"To be assigned",
+			"NoApproximationQ":true,
+			"Source":"UOM\/compressed_log_spectral_selection_note.tex:259-288"
+		},
+		{
+			"TheoremLabel":"thm:Main-Peierls-Hamiltonization",
+			"Assumptions":"Canonical representative plus imported bracket axioms on a concrete model.",
+			"Method":"Formal rewrite + exact model checks.",
+			"Status":"deferred",
+			"ScopeClass":"abstract-imported-assumptions",
+			"SurrogateBlindSpots":[
+				"Bracket locality and AQFT\/HLS semantics stay imported.",
+				"Only explicit concrete models can be machine-audited here."
+			],
+			"CertificateArtifact":"Deferred",
+			"CounterexampleArtifact":"Deferred",
+			"RepresentativeModelFamily":"Explicit bracket models only",
+			"NoApproximationQ":true,
+			"Source":"Main\/appendix_main.tex:2072-2084"
+		}
+	]
+}
