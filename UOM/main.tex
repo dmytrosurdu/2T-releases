@@ -4836,7 +4836,7 @@ all receiver–side locks and orthogonality relations established in Sec.~\ref{s
 \paragraph{Purpose and crosswalk.}
 This subsection isolates the abstract two-time data extracted from UOM and states the assumption sets used in the
 2T Limited Scope and 2T Main theorems. The rest of this section proves the semiclassical realization and the
-renormalized Peierls package (UOM-P1--P5) from the SK/HJ structure.
+renormalized Peierls package (UOM-P1--P6) from the SK/HJ structure.
 
 \begin{definition}[2T Limited Scope structural package (UOM form)]
 \label{def:uom-limited-scope-package}
@@ -4932,7 +4932,7 @@ The receiver RG monotone (Subprogram~3; anomaly/Wess--Zumino sector) defines fun
 $\mathcal F_{\rm s.loc}^\Lambda$ and is strictly monotone along the RG arrow.
 
 \item \textbf{(M3) Renormalized Peierls package.}
-The UOM-P1--P5 package holds, providing a gauge-independent, renormalized Peierls bracket on
+The UOM-P1--P6 package holds, providing a gauge-independent, renormalized Peierls bracket on
 $\mathcal F_{\rm s.loc}^\Lambda$ (Subsec.~\ref{subsec:uom-peierls-package}).
 
 \item \textbf{(M4) Odd Hamiltonization.}
@@ -4948,7 +4948,7 @@ Peierls bracket, so the odd derivation is compatible with the two-time dynamics.
 
 \begin{remark}
 Assumption \textbf{(M3)} is precisely where the Peierls bracket is derived within the scope of the 2T Main Theorem,
-and it is supplied in UOM by the renormalized causal/Peierls package (UOM-P1--P5) below.
+and it is supplied in UOM by the renormalized causal/Peierls package (UOM-P1--P6) below.
 \end{remark}
 
 \subsection{Semiclassical extraction: two arrows, acceptance, and flatness}
@@ -5269,7 +5269,7 @@ head-observable consequence needed for the UV dilatation package.
 % immediately after the existing material of that section.
 % ------------------------------------------------------------------
 
-\subsection{Renormalized causal structure and Peierls bracket on the receiver head (UOM-P1--P5)}
+\subsection{Renormalized causal structure, Peierls bracket, and pointer-real swap equivariance on the receiver head (UOM-P1--P6)}
 \label{subsec:uom-peierls-package}
 
 \paragraph{Purpose and position in the logic.}
@@ -5302,6 +5302,11 @@ gauge-fixed Peierls computation agrees with the reduced bracket on gauge-invaria
 There is a precisely defined class $\mathcal F_{\rm s.loc}^\Lambda$ of gauge-invariant, sufficiently local
 boundary/brane functionals at finite cutoff $\Lambda$ that is closed under the Peierls bracket and contains
 the quasi-local observables used in Subprogram~3 (e.g.\ anomaly/Wess--Zumino densities smeared by compact kernels).
+\item \textbf{(P6) Pointer-real swap equivariance.}
+At fixed finite cutoff there is a pointer-real involution $\Gamma_{*,\Lambda}$ on the admissible linearized
+field, source, and boundary-data spaces, induced by the finite-band pointer basis, such that the gauge-fixed
+linearized renormalized IBVP, the source insertion / observable extraction maps, and the pairing used in the
+Peierls formula are $\Gamma_{*,\Lambda}$--equivariant.
 \end{enumerate}
 Together these yield a \emph{renormalized} Peierls bracket on the receiver head that is canonical, causal,
 and ready to be imported into the two--time construction.
@@ -5379,10 +5384,10 @@ J_r:=\frac{J_++J_-}{2},\qquad J_a:=J_+-J_-,
 The diagonal sector is $J_a=0$ (physical sources), and the physical background corresponds to $J_r=0$.
 
 \paragraph{Main statement (Peierls package).}
-The following theorem summarizes what is proved in the five subsubsections below and is the only object imported
+The following theorem summarizes what is proved in the six subsubsections below and is the only object imported
 by the two--time program.
 
-\begin{theorem}[UOM Peierls package at finite cutoff (UOM-P1--P5)]
+\begin{theorem}[UOM Peierls package at finite cutoff (UOM-P1--P6)]
 \label{thm:uom-peierls-package}
 Fix a healthy receiver cell $\mathcal M^{(\Lambda)}$ with finite cutoff $\Lambda<\infty$ and the renormalized action
 $S_{\rm ren}$ as above.  Then, for a specified space of admissible compactly supported sources $J$ and a specified
@@ -5413,14 +5418,23 @@ is gauge independent on $\mathcal F_{\rm s.loc}^\Lambda$.
 is well-defined on $\mathcal F_{\rm s.loc}^\Lambda$, takes values in $\mathcal F_{\rm s.loc}^\Lambda$, and satisfies
 antisymmetry, Leibniz, and Jacobi there.  Moreover, $\mathcal F_{\rm s.loc}^\Lambda$ contains the quasi-local
 observables used to represent RG monotones (e.g.\ the Wess--Zumino/anomaly densities smeared by compact kernels).
+\item \textbf{(UOM-P6)} There exists a finite-cutoff pointer-real involution $\Gamma_{*,\Lambda}$ on the admissible
+linearized field, source, and boundary-data spaces such that
+\[
+P_{\rm gf,ren}\Gamma_{*,\Lambda}=\Gamma_{*,\Lambda}P_{\rm gf,ren},
+\qquad
+B_\Lambda\Gamma_{*,\Lambda}=\Gamma_{*,\Lambda}B_\Lambda,
+\]
+the source insertion and observable extraction maps commute with $\Gamma_{*,\Lambda}$, and the pairing used in the
+Peierls formula is $\Gamma_{*,\Lambda}$--invariant.
 \end{enumerate}
 \end{theorem}
 
 \paragraph{Roadmap.}
-Theorem~\ref{thm:uom-peierls-package} is proved by the five subsubsections below, in order:
+Theorem~\ref{thm:uom-peierls-package} is proved by the six subsubsections below, in order:
 (UOM-P1) differentiability of $W_{\rm ren}$; (UOM-P2) Green-hyperbolicity and identification of $G_R$; (UOM-P3) renormalized
 symplectic form and compatibility with $\Delta$; (UOM-P4) gauge independence by presymplectic reduction; (UOM-P5) definition of
-$\mathcal F_{\rm s.loc}^\Lambda$ and closure under the bracket.
+$\mathcal F_{\rm s.loc}^\Lambda$ and closure under the bracket; (UOM-P6) exact finite-cutoff pointer-real swap equivariance.
 
 % ============================================================
 % (2) UOM-P1 subsubsection snippet
@@ -6261,10 +6275,208 @@ Definitions~\ref{def:Floc} and \eqref{eq:Peierls-FG} together with Lemmas~\ref{l
 Theorem~\ref{thm:Peierls-P5} establish \textbf{UOM-P5}: a closed sufficiently local gauge-invariant functional class at finite cutoff $\Lambda$
 supporting a canonical Peierls bracket, suitable for import into the two--time Hamiltonization step.
 
+\subsubsection{UOM-P6: finite-cutoff pointer-real swap equivariance}
+\label{subsubsec:uom-P6}
+
+This subsubsection establishes \textbf{UOM-P6}: the exact finite-cutoff pointer-real involution behind the boundary swap action, its
+commutation with the gauge-fixed linearized renormalized IBVP, invariance of the Peierls pairing, and the resulting Poisson automorphism
+property on the sufficiently local boundary class.
+
+\begin{definition}[Finite-cutoff pointer-real involution]
+\label{def:uom-gamma-star}
+Fix the same finite cutoff $\Lambda$ and bandlimit $\Delta(\Lambda)$ as above.  Using the pointer basis supplied by
+Definition~\ref{def:uom-limited-scope-package}\textnormal{\textbf{(A7)}} and Definition~\ref{def:pointer-algebra-projection}, define
+\[
+\Gamma_{*,\Lambda}:\mathcal X_\Lambda^s\to\mathcal X_\Lambda^s
+\]
+to be the transpose / real involution in that pointer basis, applied componentwise to the finite family of band-limited bosonic
+boundary-data components.  We use the same notation for the induced involution on admissible linearized bulk+brane perturbations,
+their boundary traces, and the admissible source space
+\(
+\mathcal J^s(\mathscr X)
+\),
+with the same componentwise transpose / real action on each finite bosonic field component, and define the pullback involution on
+sufficiently local functionals by
+\[
+(\Gamma F)(\varphi):=F(\Gamma_{*,\Lambda}\varphi)
+\qquad
+(F\in\mathcal F_{\rm s.loc}^\Lambda).
+\]
+\end{definition}
+
+\begin{theorem}[Finite-cutoff pointer-real equivariance of the linearized UOM IBVP]
+\label{thm:uom-pointer-real-ibvp}
+For any admissible even gauge fixing as in \eqref{eq:even-gauge-fixing}, the gauge-fixed linearized renormalized operator, the
+boundary/junction operator, the source insertion map, and the boundary observable-extraction map are $\Gamma_{*,\Lambda}$--equivariant:
+\[
+P_{\rm gf,ren}\Gamma_{*,\Lambda}=\Gamma_{*,\Lambda}P_{\rm gf,ren},
+\qquad
+B_\Lambda\Gamma_{*,\Lambda}=\Gamma_{*,\Lambda}B_\Lambda,
+\]
+\[
+\mathcal R\Gamma_{*,\Lambda}=\Gamma_{*,\Lambda}\mathcal R,
+\qquad
+\mathcal R^\ast\Gamma_{*,\Lambda}=\Gamma_{*,\Lambda}\mathcal R^\ast.
+\]
+\end{theorem}
+
+\begin{proof}
+The background $\bar\Phi$ is real, the admissible even gauge-fixing term \eqref{eq:even-gauge-fixing} is built from a real quadratic norm,
+and the linearized principal part of $P_{\rm gf,ren}$ is normally hyperbolic / Klein--Gordon type with real coefficients around that real
+background.  The boundary and junction conditions encoded in $B_\Lambda$ are likewise real: the cutoff-surface condition is fixed by the
+renormalized variational principle, the KR head is on the positive induced-gravity Robin branch, and the interior brane conditions are
+linearized Israel/GW conditions with real coefficients.  Therefore the differential and boundary operators commute with the transpose / real
+involution in the pointer basis.
+
+The finite-cutoff spectral projector, the canonical record projection \eqref{eq:PiDelta}, and the QND dephasing channel of
+Lemma~\ref{lem:tick-fixes-record-algebra} are pointer-diagonal, hence commute exactly with the same involution.  The admissible temporal
+windowing and test kernels are real scalar weights on the receiver head, so they introduce no additional commutator defect.  Finally,
+the sourced coupling \eqref{eq:uom-sourced-action} pairs real boundary densities with real source components, so the corresponding source
+insertion and boundary extraction maps inherit the same pointer-real equivariance.  Thus all displayed commutators vanish identically at
+fixed finite cutoff.
+\end{proof}
+
+\begin{corollary}[Pointer-real equivariance of Green operators and induced boundary causal operators]
+\label{cor:uom-pointer-real-greens}
+Assume Theorem~\ref{thm:uom-P2-green} and Theorem~\ref{thm:uom-pointer-real-ibvp}.  Then the advanced/retarded Green operators satisfy
+\[
+E^\pm\Gamma_{*,\Lambda}=\Gamma_{*,\Lambda}E^\pm,
+\qquad
+E\Gamma_{*,\Lambda}=\Gamma_{*,\Lambda}E,
+\]
+and the induced boundary retarded/advanced and causal operators satisfy
+\[
+G_R\Gamma_{*,\Lambda}=\Gamma_{*,\Lambda}G_R,
+\qquad
+G_A\Gamma_{*,\Lambda}=\Gamma_{*,\Lambda}G_A,
+\qquad
+\Delta\Gamma_{*,\Lambda}=\Gamma_{*,\Lambda}\Delta.
+\]
+\end{corollary}
+
+\begin{proof}
+Let $f$ be a compactly supported admissible source and set
+\(
+\psi^\pm:=E^\pm(\Gamma_{*,\Lambda}f)
+\)
+and
+\(
+\phi^\pm:=\Gamma_{*,\Lambda}(E^\pm f)
+\).
+By Theorem~\ref{thm:uom-pointer-real-ibvp},
+\[
+P_{\rm gf,ren}\phi^\pm
+=
+\Gamma_{*,\Lambda}P_{\rm gf,ren}E^\pm f
+=
+\Gamma_{*,\Lambda}f,
+\qquad
+B_\Lambda(\phi^\pm)
+=
+\Gamma_{*,\Lambda}B_\Lambda(E^\pm f)
+=
+0.
+\]
+Because $\Gamma_{*,\Lambda}$ acts pointwise in the fixed finite-band pointer basis, it preserves support.  Thus $\phi^\pm$ has the same
+advanced/retarded support property as $E^\pm f$.  By uniqueness in Theorem~\ref{thm:uom-P2-green},
+\(
+\psi^\pm=\phi^\pm
+\),
+so
+\(
+E^\pm\Gamma_{*,\Lambda}=\Gamma_{*,\Lambda}E^\pm
+\)
+and hence
+\(
+E\Gamma_{*,\Lambda}=\Gamma_{*,\Lambda}E
+\).
+Composing with the $\Gamma_{*,\Lambda}$--equivariant source insertion and observable extraction maps from
+Theorem~\ref{thm:uom-pointer-real-ibvp} and using \eqref{eq:GR-from-E} gives the corresponding identities for
+$G_R$, $G_A$, and $\Delta$.
+\end{proof}
+
+\begin{lemma}[Pointer-real invariance of the Peierls pairing]
+\label{lem:uom-pointer-real-pairing}
+The pairings used in the Peierls construction are $\Gamma_{*,\Lambda}$--invariant.  In particular, for admissible sources and linearized
+boundary data one has
+\[
+\langle \Gamma_{*,\Lambda}f,\Gamma_{*,\Lambda}\delta\Phi\rangle
+=
+\langle f,\delta\Phi\rangle,
+\qquad
+\langle \Gamma_{*,\Lambda}u,\Gamma_{*,\Lambda}v\rangle
+=
+\langle u,v\rangle,
+\]
+where the first pairing is the bulk/source pairing induced by the quadratic part of $S_{\rm ren}^{\rm gf}$ and the second is the boundary
+pairing used in the Peierls formula on $\mathcal F_{\rm s.loc}^\Lambda$.
+\end{lemma}
+
+\begin{proof}
+The bulk/source pairing in UOM-P3 is induced by the quadratic part of the gauge-fixed renormalized action, while the boundary Peierls pairing
+is the ordinary real $L^2/H^s$ pairing from the receiver-head volume form and the finite family of boundary components; see
+\eqref{eq:W-keldysh-expansion}, \eqref{eq:Omega-inverse}, and Lemma~\ref{lem:pairing-cont}.  In the fixed pointer basis, the involution
+$\Gamma_{*,\Lambda}$ is transpose / real conjugation, so it is orthogonal for the fiber metric and preserves the real background volume form.
+Therefore both pairings are unchanged when both entries are acted on by $\Gamma_{*,\Lambda}$.
+\end{proof}
+
+\begin{theorem}[Finite-cutoff pointer-real Poisson automorphism]
+\label{thm:uom-pointer-real-poisson}
+Assume UOM-P2--P5 and Definition~\ref{def:uom-gamma-star}.  Then the pullback involution $\Gamma$ acts by Poisson automorphisms on the
+sufficiently local boundary class:
+\[
+\Gamma\{F,G\}_{\rm P}
+=
+\{\Gamma F,\Gamma G\}_{\rm P}
+\qquad
+\forall\,F,G\in\mathcal F_{\rm s.loc}^\Lambda.
+\]
+\end{theorem}
+
+\begin{proof}
+By the chain rule for pullback along the linear involution $\Gamma_{*,\Lambda}$,
+\[
+\bigl(\Gamma F\bigr)^{(1)}(\varphi)
+=
+\Gamma_{*,\Lambda}\bigl(F^{(1)}(\Gamma_{*,\Lambda}\varphi)\bigr),
+\qquad
+\bigl(\Gamma G\bigr)^{(1)}(\varphi)
+=
+\Gamma_{*,\Lambda}\bigl(G^{(1)}(\Gamma_{*,\Lambda}\varphi)\bigr).
+\]
+By Corollary~\ref{cor:uom-pointer-real-greens},
+\(
+\Delta\Gamma_{*,\Lambda}=\Gamma_{*,\Lambda}\Delta
+\),
+and by Lemma~\ref{lem:uom-pointer-real-pairing} the Peierls pairing is $\Gamma_{*,\Lambda}$--invariant.
+Fix \(\varphi\in\mathcal X_\Lambda^s\). Then
+\[
+\{\Gamma F,\Gamma G\}_{\rm P}(\varphi)
+=
+\big\langle (\Gamma F)^{(1)}(\varphi),\,\Delta\,(\Gamma G)^{(1)}(\varphi)\big\rangle
+=
+\big\langle \Gamma_{*,\Lambda}F^{(1)}(\Gamma_{*,\Lambda}\varphi),\,
+\Gamma_{*,\Lambda}\Delta G^{(1)}(\Gamma_{*,\Lambda}\varphi)\big\rangle
+=
+\big\langle F^{(1)}(\Gamma_{*,\Lambda}\varphi),\,\Delta G^{(1)}(\Gamma_{*,\Lambda}\varphi)\big\rangle
+=
+\{F,G\}_{\rm P}(\Gamma_{*,\Lambda}\varphi)
+=
+(\Gamma\{F,G\}_{\rm P})(\varphi).
+\]
+Hence \(\Gamma\{F,G\}_{\rm P}=\{\Gamma F,\Gamma G\}_{\rm P}\).
+\end{proof}
+
+\paragraph{Conclusion of UOM-P6.}
+Definition~\ref{def:uom-gamma-star}, Theorem~\ref{thm:uom-pointer-real-ibvp}, Corollary~\ref{cor:uom-pointer-real-greens},
+Lemma~\ref{lem:uom-pointer-real-pairing}, and Theorem~\ref{thm:uom-pointer-real-poisson} establish \textbf{UOM-P6}: the fixed finite-cutoff
+pointer-real involution, the exact equivariance of the gauge-fixed linearized renormalized IBVP, and the resulting swap-equivariant Peierls
+structure on the sufficiently local boundary class.
+
 % ======================================================================
 % Energy bounds + Poincar\'e covariance package (EB1--EB3 + covariance)
-% Place this subsection after the UOM-P1--P5 package subsection
-% (e.g. after \subsubsection{UOM-P5: ...}) inside the promoted section
+% Place this subsection after the UOM-P1--P6 package subsection
+% (e.g. after \subsubsection{UOM-P6: ...}) inside the promoted section
 % \section{Two--times semiclassical characterization: acceptance, diagonalization, and flatness}
 % ======================================================================
 
@@ -6285,12 +6497,13 @@ This subsection supplies, \emph{from UOM data}, the exact analytic inputs:
 in a form that isolates precisely what must be uniform in the cutoff
 \(\Lambda\to\infty\).
 
-\paragraph{Relationship to UOM-P1--P5.}
+\paragraph{Relationship to UOM-P1--P6.}
 We assume the UOM Peierls package at finite cutoff (Theorem~\ref{thm:uom-peierls-package}):
 existence of the renormalized SK functional $W_{\rm ren}$ (UOM-P1),
 existence of the causal operator $\Delta_\Lambda$ on the receiver head (UOM-P2),
 existence of the renormalized covariant symplectic structure and gauge independence on invariants (UOM-P3--P4),
-and the sufficiently local class $\mathcal F_{\rm s.loc}^\Lambda$ closed under Peierls (UOM-P5).
+the sufficiently local class $\mathcal F_{\rm s.loc}^\Lambda$ closed under Peierls (UOM-P5),
+and the exact finite-cutoff pointer-real swap-equivariance package (UOM-P6).
 The new content here is \emph{uniformity} in $\Lambda$ and its translation into energy bounds
 on the vacuum representation.
 
@@ -7069,7 +7282,7 @@ as claimed.
 
 \begin{theorem}[Uniform energy bounds and covariance package (EB1--EB3 + Poincar\'e covariance)]
 \label{thm:EB-package}
-Assume the UOM Peierls package (UOM-P1--P5) at finite cutoff, the uniformity inputs
+Assume the UOM Peierls package (UOM-P1--P6) at finite cutoff, the uniformity inputs
 Theorems~\ref{thm:uom-OS-inductive}, \ref{thm:uom-H-limit}, \ref{thm:uom-U-Delta}, \ref{thm:uom-U-SD}, and~\ref{thm:uom-Poincare-IBVP}.  Then, on the Minkowski UV chart, the inductive-limit
 vacuum representation $(\mathcal H,\pi,\Omega,H)$ satisfies:
 \begin{enumerate}[label=\textnormal{(\roman*)},leftmargin=2.2em,itemsep=1pt]

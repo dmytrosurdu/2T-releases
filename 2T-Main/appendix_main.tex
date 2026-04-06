@@ -327,6 +327,15 @@ A \emph{Peierls interface} consists of the following properties:
   with smooth compact support kernels), such that the Peierls bracket is
   well-defined and satisfies Leibniz/Jacobi on $\Fsloc$ (and restricts to each
   $\Fsloc(O)$).
+\item \textbf{Pointer-real swap equivariance.} There exists a swap-induced involution
+  $\Gamma_*$ on the chosen linearized field, test-source, and boundary-data spaces such that
+  \[
+  P_{\mathrm{gf,ren}}\Gamma_*=\Gamma_*P_{\mathrm{gf,ren}},
+  \qquad
+  B_\Lambda\Gamma_*=\Gamma_*B_\Lambda,
+  \]
+  the source insertion and boundary extraction maps are $\Gamma_*$--equivariant,
+  and the pairing used in the Peierls formula is $\Gamma_*$--invariant.
 \end{enumerate}
 \end{definition}
 
@@ -336,9 +345,11 @@ linearized bulk problem admits the causal Green
 structure needed for advanced and retarded propagators, with admissible
 boundary and junction conditions; that the renormalized symplectic current
 yields a finite reduced symplectic form with no extra degeneracies beyond pure
-gauge; and that the resulting Peierls bracket is well-defined on the
-sufficiently local boundary class. These are the healthiness properties encoded
-abstractly by \textbf{(P2)}--\textbf{(P4)}.
+gauge; that the resulting Peierls bracket is well-defined on the
+sufficiently local boundary class; and that the pointer-real swap involution
+acts equivariantly on the linearized renormalized IBVP and its Peierls pairing.
+These are the healthiness and symmetry properties encoded abstractly by
+\textbf{(P2)}--\textbf{(P6)}.
 \end{remark}
 
 \begin{definition}[Energy bounds and covariance interface $\mathbf{2T}_{\mathrm{EBC}}$ (EB1--EB3 + Poincar\'e covariance)]
@@ -1480,7 +1491,7 @@ Assume $\mathbf{2T}_{\mathrm{Peierls}}$. Then the Peierls bracket
 $\{-,-\}_{\mathrm P}$ is a well-defined graded Poisson bracket on the algebra
 $\Fsloc$ of gauge-invariant sufficiently local
 boundary functionals, satisfying antisymmetry, Leibniz, and Jacobi.  This is
-the cosmology theory Peierls package (P1--P5), recorded here in abstract
+the cosmology theory Peierls package (P1--P6), recorded here in abstract
 interface form.
 \end{theorem}
 
@@ -1491,16 +1502,9 @@ formulation, see \cite{Peierls1952,Khavkine2014Peierls}.
 
 \begin{lemma}[Transpose/swap equivariance implies equivariance of $E^\pm$ and $\Delta$]
 \label{lem:GammaStar-commutes-Greens}
-Assume $\mathbf{2T}_{\mathrm{Peierls}}$-\textbf{(P2)} so that the gauge-fixed
-linearized renormalized IBVP $(P_{\mathrm{gf,ren}},B_\Lambda)$ is
-Green--hyperbolic with unique advanced/retarded Green operators $E^\pm$ on the
-chosen test-source space. Let $\Gamma_*$ be an involution on test sources and
-linearized fields (e.g.\ pointer-basis transpose/real structure) such that
-\[
-P_{\mathrm{gf,ren}}\circ\Gamma_*=\Gamma_*\circ P_{\mathrm{gf,ren}},
-\qquad
-B_\Lambda\circ\Gamma_*=\Gamma_*\circ B_\Lambda.
-\]
+Assume $\mathbf{2T}_{\mathrm{Peierls}}$-\textbf{(P2)} and
+\textbf{(P6)}, and let $\Gamma_*$ be the involution supplied by
+\textbf{(P6)}.
 Then
 \[
 E^\pm\circ\Gamma_*=\Gamma_*\circ E^\pm,
@@ -1519,7 +1523,7 @@ Fix a test source $f$ and consider
 \]
 By definition, $\psi^\pm$ solves $P_{\mathrm{gf,ren}}\psi^\pm=\Gamma_* f$ with
 $B_\Lambda(\psi^\pm)=0$ and advanced/retarded support. Using the commutation
-assumption,
+assumption from $\mathbf{2T}_{\mathrm{Peierls}}$-\textbf{(P6)},
 \[
 P_{\mathrm{gf,ren}}\phi^\pm
 = P_{\mathrm{gf,ren}}\Gamma_*E^\pm f
@@ -1556,12 +1560,9 @@ boundary data $J$, differentiation gives $(\Gamma F)^{(1)}=\Gamma_* F^{(1)}$.
 
 \begin{lemma}[Swap-equivariance and Poisson automorphism]
 \label{lem:Gamma-Poisson}
-Assume $\mathbf{2T}_{\mathrm{Peierls}}$ and the hypotheses of
-Lemma~\ref{lem:GammaStar-commutes-Greens}. Assume moreover that the renormalized
-pairing used in the Peierls formula is $\Gamma_*$--invariant on first
-functional derivatives (equivalently: the quadratic renormalized gauge-fixed
-action pairing is $\Gamma_*$--invariant). Let $\Gamma$ act on functionals by
-pullback along the induced swap on boundary data. Then
+Assume $\mathbf{2T}_{\mathrm{Peierls}}$, let $\Gamma_*$ be the involution of
+\textbf{(P6)}, and let $\Gamma$ act on functionals by pullback along the
+induced swap on boundary data. Then
 \[
 \Gamma\{F,G\}_{\mathrm P} = \{\Gamma F,\Gamma G\}_{\mathrm P}
 \quad\text{for all }F,G\in\Fsloc.
@@ -1573,7 +1574,8 @@ By definition, $\{F,G\}_{\mathrm P}=\langle F^{(1)},\Delta\,G^{(1)}\rangle$.
 By Lemma~\ref{lem:Gamma-star-dictionary}, pullback by $\Gamma$ sends first
 functional derivatives by $\Gamma_*$, and by
 Lemma~\ref{lem:GammaStar-commutes-Greens} one has $\Delta\Gamma_*=\Gamma_*\Delta$.
-Using $\Gamma_*$--invariance of the pairing gives the claim.
+Using the $\Gamma_*$--invariance of the pairing from
+$\mathbf{2T}_{\mathrm{Peierls}}$-\textbf{(P6)} gives the claim.
 \end{proof}
 
 % ============================================================
